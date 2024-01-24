@@ -1,3 +1,4 @@
 *.json
 *.btf
-*.c
+*.h
+*.txt
