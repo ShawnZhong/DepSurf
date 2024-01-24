@@ -9,14 +9,14 @@
 
 #include "ebpf.skel.h"
 
-static int libbpf_print_fn(enum libbpf_print_level level, const char *format,
-                           va_list args) {
-  return vfprintf(stderr, format, args);
-}
-
 class BPF {
  public:
   BPF() {
+    libbpf_set_print(
+        [](enum libbpf_print_level level, const char *format, va_list args) {
+          return vfprintf(stderr, format, args);
+        });
+
     skel = ebpf_bpf__open();
     if (!skel) throw std::runtime_error("Failed to open BPF skeleton");
 
@@ -32,7 +32,7 @@ class BPF {
   struct ebpf_bpf *skel;
 };
 
-__attribute__((noinline)) extern "C" int uprobed_sub(int a, int b) {
+extern "C" __attribute__((noinline)) int uprobed_sub(int a, int b) {
   asm volatile("");
   return a - b;
 }
@@ -50,27 +50,15 @@ void print_output() {
   }
 }
 
-extern "C" void run_sub() {
-  for (int i = 0;; i++) {
-    /* trigger our BPF programs */
-    fprintf(stderr, ".");
-    // uprobed_add(i, i + 1);
-    uprobed_sub(i * i, i);
-    sleep(1);
-  }
-}
-
 int main() {
   if (getuid() != 0) throw std::runtime_error("Run as root");
 
-  /* Set up libbpf errors and debug info callback */
-  libbpf_set_print(libbpf_print_fn);
-
   BPF bpf;
 
-  // create a background thread to print the output
-  std::thread t(print_output);
-  t.detach();
+  // std::thread t(print_output);
 
-  run_sub();
+  for (int i = 0;; i++) {
+    uprobed_sub(i * i, i);
+    sleep(1);
+  }
 }
