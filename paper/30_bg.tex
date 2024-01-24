@@ -1,0 +1,120 @@
+\section{Background}
+
+\subsection{eBPF Introduction}
+eBPF is a new technology that allows users to write programs that run inside the Linux kernel. It is a safe, fast, and programmable way to extend the kernel's functionality. eBPF programs can be used to implement a variety of functionality, including tracing, security, and networking.
+
+
+eBPF programs are mostly written in high-level languages, such as C, and compiled into eBPF bytecode that can be loaded into the kernel.
+The kernel's verifier checks the bytecode for safety and then JIT compiles it into native code for fast execution.
+
+\minisec{Hooks}
+eBPF programs are attached to hooks and are executed whenever the hooks are triggered. 
+The types of hooks include tracepoints, kprobes, kretprobes, uprobes, and uretprobes.
+Tracepoints are static hooks placed at specific locations in the kernel code.
+kprobes are dynamic hooks that can be placed at almost any kernel code location~\footnote{A few kernel code locations are blacklisted because they are not safe to probe.}.
+kretprobes are dynamic hooks placed at the return of any kernel functions.
+Similarly, uprobes and uretprobes are dynamic hooks for user-space functions.
+
+
+
+\minisec{Maps}
+eBPF maps are data structures stored in the kernel that can be accessed from both userspace and eBPF programs.
+They are used to maintain state among invocations of eBPF programs, and to pass data between the eBPF programs and userspace applications. 
+The types of eBPF maps include hash maps, array, stack trace, and ring buffer.
+% eBPF programs can access eBPF maps stored in the kernel.
+% eBPF maps are data structures that can be accessed from both userspace and eBPF programs. eBPF maps are used to pass data between the eBPF programs and userspace applications, and maintain state among invocations of eBPF programs.
+
+\minisec{Helpers}
+The Linux kernel provides a set of helper functions that can be called from eBPF programs. 
+These helper functions can be used to interact with the kernel and userspace applications.
+For example, they can be used to read data from kernel addresses, update eBPF maps, and get the current timestamp.
+% For example, the \texttt{bpf\_probe\_read\_kernel} helper reads data from the kernel, and the \texttt{bpf\_map\_update\_elem} helper updates an element in an eBPF map.
+
+
+\minisec{Usage}
+
+\subsection{eBPF Toolchain}
+The eBPF toolchain is a set of tools that can be used to write, compile and load eBPF programs.
+
+\minisec{No toolchain}
+An eBPF program can be manually written in bytecode, and a userspace process loads it into the kernel with the \texttt{bpf(BPF\_PROG\_LOAD, ...)} system call. This is when the kernel's verifier checks the bytecode for safety and JIT compiles it into native code.
+To attach the program to a hook, the userspace process opens the hook via \texttt{perf\_event\_open} and attaches to the hook using \texttt{ioctl}.
+Modifying eBPF maps from userspace is done by \texttt{bpf(BPF\_MAP\_*, ...)}.
+Overall, this approach is very low-level and cumbersome, so most users use one of the toolchains described below.
+
+\minisec{libbpf}
+libbpf is a low-level C library for interacting with eBPF programs.
+It is part of the Linux kernel source tree under \texttt{tools/lib/bpf}.
+With libbpf, eBPF programs can be written in restricted C and compiled into eBPF bytecode using the LLVM compiler. \todo{}
+
+
+
+% libbpf provides a set of helper functions that make it easy to write eBPF programs. It also provides a set of tools that can be used to compile eBPF programs from C code, and generate skeleton code for eBPF programs.
+
+\begin{listing}[t]
+\begin{minted}{c}
+
+struct {
+    __uint(type, BPF_MAP_TYPE_HASH);
+    __type(key, u32);
+    __type(value, long);
+    __uint(max_entries, 1024);
+} hash_map SEC(".maps");
+
+SEC("kprobe/close_fd") 
+int enter_close_fd(struct pt_regs *ctx) {
+    u32 key = 0;
+    long ts = bpf_ktime_get_ns();
+    bpf_map_update_elem(&hash_map, &key, &ts, BPF_ANY);
+}
+
+SEC("kretprobe/close_fd") 
+int exit_close_fd(struct pt_regs *ctx) {
+    u32 key = 0;
+    long *ts = bpf_map_lookup_elem(&hash_map, &key);
+    if (ts) {
+        bpf_trace_printk("close fd: %d takes %d ns", 
+            PT_REGS_PARM1(ctx), bpf_ktime_get_ns() - *ts);
+        bpf_map_delete_elem(&hash_map, &key);
+    }
+}
+\end{minted}
+\caption{libbpf Example}
+\label{fig:libbpf_example}
+\end{listing}
+
+% #include <linux/ptrace.h> 
+% #include <bpf/bpf_tracing.h>
+
+% char LICENSE[] SEC("license") = "Dual BSD/GPL";
+
+% \begin{figure}[t]
+% \begin{minted}{python}
+% from bcc import BPF
+
+% text = """
+% #include <linux/ptrace.h>
+% int trace(struct pt_regs *ctx) {
+%     bpf_trace_printk("close fd: %d", PT_REGS_PARM1(ctx));
+%     return 0;
+% }"""
+% b = BPF(text=text)
+% b.attach_kprobe(event="close_fd", fn_name="trace")
+% b.trace_print()
+% \end{minted}
+% \caption{BCC Example}
+% \label{fig:bcc_example}
+% \end{figure}
+
+\minisec{BCC} \todo{}
+
+\minisec{bpftrace} \todo{}
+
+
+
+\subsection{BPF Compiler Collection (BCC)}
+BPF Compiler Collection (BCC) is a set of tools and libraries for creating efficient kernel tracing and manipulation programs. 
+
+The BCC Python library provides a set of high-level APIs for compiling, loading, and attaching eBPF programs to hooks, as well as for reading and processing the data that is collected by the programs.
+
+BCC also includes a set of tools that can be used to trace and analyze the performance of the kernel and user-space applications. 

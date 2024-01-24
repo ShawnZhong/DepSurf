@@ -1,0 +1,373 @@
+\section{Methodology}
+
+We now describe our methodology for analyzing bugs in eBPF programs.
+
+\subsection{Target Programs}
+
+We analyze bugs in eBPF programs from the following sources:
+\begin{itemize}
+    \item \textbf{linux}: The Linux kernel source tree \todo{}.
+    \item \textbf{BCC/Python}: BCC tools written in Python.
+    \item \textbf{BCC/libpf}: BCC tools written in C using the libbpf library. \todo{}
+    \item \textbf{bpftrace}: The bpftrace tool \todo{}.
+    \item \todo{other sources}
+\end{itemize}
+
+\subsection{Program Characterization}
+For each program, we record the type of the program, the number of lines of code, the hook it is attached to, and the type of eBPF maps it uses. 
+
+We also review the commit history of each program to gain insight into the development process of eBPF programs. Specifically, we record all the bug fixes that were made to the program. 
+
+\subsection{Bug Analysis}
+For each bug, we record the following information:
+\begin{itemize}
+    \item The type of bug.
+    \item The root cause of the bug.
+    \item The fix for the bug.
+    \item The commit that introduced the bug and the date it was introduced.
+    \item The commit that fixed the bug and the date it was fixed.
+    \item The programs affected by the bug.
+\end{itemize}
+
+With the above information, we can answer the following questions:
+\begin{itemize}
+    \item What types of bugs are common in eBPF programs?
+    \item What are the root causes of bugs in eBPF programs?
+    \item How long does it take to fix bugs in eBPF programs?
+    \item How many programs are affected by a bug?
+\end{itemize}
+
+\section{Program Characterization}
+
+\subsection{Program Types}
+\minisec{BCC/Python}
+Among the 97 BCC/python programs we analyzed, 27 are for filesystem, 19 are for network, 13 are for CPU/scheduler, 8 are multi-purpose, 7 are for block devices, 7 are for process, 4 are for userspace programs, and the rest 7 are for miscellaneous purposes.
+The majority of the programs are for filesystem and network. 
+For filesystem usage, a tool is typically used to gather statistics (e.g., latency, count, number of bytes) of file operations (e.g., open, close, read, write, sync) for each file/directory/process/thread.
+
+\subsection{Program Size}
+\minisec{BCC/Python}
+The number of lines of code in the programs ranges from 10 to 485, with a median of 85 and a mean of 101.
+
+\subsection{Hook Types}
+\minisec{BCC/Python}
+The programs use the following hooks: kprobe (37), kretprobe (10), tracepoint (22), raw tracepoint (1), perf event (1), and socket filter (1). \todo{This is not accurate.}
+
+
+\subsection{Map Types}
+\minisec{BCC/Python}
+\todo{}
+
+\section{Bug Analysis}
+In this section, we analyze the bugs in the programs we studied. 
+We first describe the types of bugs we found. 
+We then describe each type of bugs in detail, including the root cause of the bugs and the fixes for the bugs.
+\todo{Finally, we describe the fixes for the bugs.}
+
+\subsection{Bug Types}
+We classify the bugs into the following types:
+\begin{itemize}
+    \item \textbf{Kernel source code changes}: The bug is caused by a change in kernel source code, such as a semantic change in the kernel data structure or a rename of a kernel function.
+    \item \textbf{Insufficient eBPF infrastructure}: The bug is caused by the lack of support for certain eBPF features (e.g., synchronization primitives, helper functions).
+    \item \textbf{Kernel compiler issues}: The bug is caused by either the compiler of the eBPF program or the compiler of the kernel. For example, the compiler may generate incorrect code for the eBPF program, or the kernel compiler may perform inlining on the kernel functions, which breaks the eBPF program.
+    \item \textbf{Assumptions on kernel configuration}: The program assumes that the kernel is always configured in a certain way, which is not always true. For example, a program may assume that it is always running on a x86 machine, and thus uses x86-specific definitions.
+    \item \textbf{Generic programming errors}: The cause of the bug is not unique to eBPF programs.
+\end{itemize}
+
+% create a table for each type of bug with the following columns:
+% bug type, fix, consequence, difficulty of fix, number of programs affected, average time to fix
+\begin{table*}
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c}
+        \multirow{2}{*}{Type} &
+        \multirow{2}{*}{Subtype} &
+        \multirow{2}{*}{Cause} &
+        \multirow{2}{*}{Consequence} &
+        \multicolumn{3}{c}{Fix} \\ \cline{5-7}
+
+        & & & & Method & Difficulty & Time \\
+
+        \hline\hline
+
+        \multirow{7}{*}{Kernel}
+        & Function renamed & new feature, refactor & fail to attach & attach to new func& Easy & \\ \cline{2-7}
+        & Function removed & deprecation, inline & fail to attach & do not attach & Medium & \\ \cline{2-7}
+        & Function hidden & inline, static & fail to attach & find another func & Hard & \\ \cline{2-7}
+        & Function args changed & refactor & incorrect data & read correct arg & Easy & \\ \cline{2-7}
+        & Data structure changed & new feature, refactor & incorrect data & read correct version & Medium & \\ \cline{2-7}
+        & Macro changed & refactor & compiler error & used new macro & Easy & \\ \cline{2-7}
+        & Semantics changed & refactor & incorrect data & adopt new semantic & Easy & \\
+
+        \hline
+        \multirow{2}{*}{Infra} 
+        & Synchronization & lack initial support & race condition & use atomic & Easy & \\ \cline{2-7}
+        & PID/TGID confusion & confusing naming & various & seperate PID\&TGID & Easy & \\
+        \hline
+        \multirow{3}{*}{Config} 
+        & Program trace registers & arch-dependent struct & compiler error & use \texttt{PT\_REG\_*} macro & Easy & \\ \cline{2-7}
+        & Syscall prefix & arch-dependent prefix & fail to attach & use util functions & Easy & \\ \cline{2-7}
+        & Syscall availability & arch-dependent syscall &  fail to attach & attach to correct syscall & Medium & \\
+        \hline
+        \multirow{2}{*}{Compiler} 
+        & Function renaming & optimization & incorrect data & ? & Hard & \\ \cline{2-7}
+        & Function inlining & optimization & incorrect data & ? & Hard & \\
+        \hline
+        Generic & & & & & & \\
+    \end{tabular}
+    \caption{Summary of bug types}
+    \label{tab:bug_types}
+\end{table*}
+
+
+% https://github.com/dagwieers/pygments/blob/master/pygments/lexers/diff.py
+\begin{listing}[t]
+\begin{minted}{diff}
+= Function renamed
+- void account_page_dirtied(struct page *, ...);
++ void folio_account_dirtied(struct folio *, ...);
+
+= Function removed
+- void blk_start_request(struct request *);
+
+= Function hidden
+- void __blk_account_io_start(struct request *);
++ static void __blk_account_io_start(struct request *);
+
+= Function args changed
+- int vfs_rename(struct inode *, struct dentry *, ...);
++ int vfs_rename(struct renamedata *);
+
+= Data structure changed
+// Before Linux 4.14
+- struct gendisk *bi_disk = bio->bi_bdev->bd_disk
+// Before Linux 5.12
+- struct gendisk *bi_disk = bio->bi_disk
+// After Linux 5.12
++ struct gendisk *bi_disk = bio->bi_bdev->bd_disk
+
+= Macro changed
+// Before Linux 4.7
+- if (req->cmd_flags & REQ_WRITE)
+// Before Linux 4.10
+- if ((req->cmd_flags >> REQ_OP_SHIFT) == REQ_OP_WRITE)
+// After Linux 4.10
++ if ((req->cmd_flags & REQ_OP_MASK) == REQ_OP_WRITE)
+
+= Semantics changed
+- utime_ns = task->utime * (NSEC_PER_SEC / CONFIG_HZ);
++ utime_ns = task->utime;
+\end{minted}
+\caption{Example of kernel source code changes}
+\label{fig:kernel_source_code_changes}
+\end{listing}
+
+
+\subsection{Kernel Source Code Changes}
+The Linux kernel is a large and complex software system.
+The kernel developers are constantly adding new features and improving the existing features.
+Thus, the kernel source code is constantly changing, with function names being renamed, data structures being modified, and semantics being changed.
+As a downstream user of the kernel, eBPF programs are affected by these changes, and may (silently) break when the kernel is updated.
+
+We found that 18 out of 57 bugs (31\%) are caused by changes in the kernel source code.
+Among the cause of these bugs, 15 are due to change in function definitions (including name, arguments, and modifiers), 3 are due to change in data structures, 2 are due to change in macro definitions, and 1 is due to change in semantics. \todo{update number}
+
+\minisec{Function renamed}
+A kernel function may be renamed when the kernel developers refactor the kernel source code to add new features or to improve the code quality.
+For example, Linux 5.16 introduced folios, which are a new type of data structure that represents one or more contiguous pages to allow for more efficient memory management.
+With the introduction of folios, the kernel developers converted many functions to take folios as arguments instead of pages, and renamed the functions to reflect the change (e.g., \texttt{account\_page\_dirtied} changed to \texttt{folio\_account\_dirtied}).
+\todo{talk about the case of do\_page\_cache\_ra}
+The rename of functions caused many eBPF programs to break, because the programs were still using the old function names.
+Bugs caused by function rename are easy to spot, since the eBPF programs will fail to attach with an error message indicating that the kernel function is not found. 
+The fix for the bugs is also relatively easy. The eBPF programs can be updated to first check the existence of the function name, and then use the new function name if the old function name is not found. 
+If the arguments of the function are used, the eBPF programs also need to be updated accordingly.
+
+\minisec{Function removed}
+The removal of kernel functions usually happens when the kernel developers remove legacy code or manually inline the functions.
+For example, \texttt{blk\_start\_request} is removed in Linux 5.0, since all the users of the function have been converted to use \texttt{blk\_mq\_start\_request} with the introduction of multi-queue block layer.
+As another example, \texttt{\_\_vfs\_\{read, write\}} is manually inlined into \texttt{vfs\_\{read, write\}} in Linux 5.8, which caused eBPF attached to the inlined functions to break.
+Same as the case of function rename, the bugs caused by function removal are easy to spot. 
+Fixing the bugs is easy for programs that use the legacy functions, since the programs can skip the legacy functions if the functions are not found.
+For program that attach to a manually inlined function, the fix can be attaching to the caller instead, but this may not always be possible, which we will discuss in the next section.
+
+\minisec{Function hidden}
+A kernel function may not be exported to the kernel symbol table if it is marked as inline or static.
+Kernel developers usually mark short function inline to improve the performance of the kernel, and mark functions as static if the functions are only used within the same file. 
+As an example, \texttt{\_\_blk\_account\_io\_\{start, done\}} are two functions for accounting block I/O operations, and are used by 4 bio-monitoring programs in BCC. However, the two functions are marked as static in Linux 5.17, which caused the programs to fail to attach.
+It would be attempted to attach to the caller of the functions, but there are multiple callers, and one of the callers is also marked as static.
+If we keep going up the call chain, we will eventually reach a function that is not marked as static, but the function is too high-level to be used for monitoring block I/O operations.
+The actual fix for the bug is to add a tracepoint for block I/O operations to the kernel, and attach to the tracepoint instead of the functions.
+This fix takes a lot of effort with 610 days between the introduction of the bug and the fix. 
+The patch to add a tracepoint was submitted 319 days after the bug was introduced, and the patch was merged 222 days later. Finally, the fix to the BCC programs was merged yet another 69 days later.
+Even with all the effort, the programs will not work on older kernels that do not have the tracepoint.
+
+\minisec{Function arguments changed}
+During a kernel refactoring, the kernel developers may change the arguments of a function to improve the code quality.
+For example, \texttt{vfs\_rename} used to take 5 arguments to describe the rename operation, but in Linux 5.12, the function is changed to take a single argument of type \texttt{struct rename\_at\_data *}. 
+In eBPF programs, the arguments of the function are accessed using the \texttt{PT\_REGS\_PARM*} macros, and the macros read the arguments from the \texttt{ctx} structure, which contains a copy of the registers when the eBPF program is invoked.
+The change in function arguments caused the eBPF programs to read the wrong registers, and thus fail to work correctly.
+What's worse, the eBPF verifier does not catch this type of bugs, since the verifier does not check the arguments of the kernel functions because the programs are not attached to the functions at the time of verification.
+
+\minisec{Kernel data structure changed}
+Changes in data structures are common in the Linux kernel.
+As an interesting example, to get the disk from a bio request, one would use \texttt{bio->bi\_bdev->bd\_disk} before Linux 4.14. Then it was changed to \texttt{bio->bi\_disk} since Linux 4.14. Later in Linux 5.12, it is changed back to \texttt{bio->bi\_bdev->bd\_disk}. 
+The change in data structures caused many trouble for eBPF programs that access the data structures.
+The programs need to be updated to check the kernel version or the existence of the fields to determine how to access the data structures.
+This kind of bugs can be reported by the eBPF compiler, or in the case of CO-RE, by the loader. \todo{check!}
+
+\minisec{Kernel macro changed}
+Kernel macros are used to define constants throughout the kernel.
+Change of macro definitions can cause eBPF programs to break. 
+For example, \texttt{REQ\_WRITE} is changed to \texttt{REQ\_OP\_WRITE} in Linux 5.14, which caused the bio-monitoring programs in BCC to fail to compile.
+eBPF program written with \texttt{vmlinuz.h} has a different problem of macro not being defined in the header file.
+
+
+\minisec{Kernel semantics changed}
+In Linux 4.11, the semantic of \texttt{utime} and \texttt{stime} in the task struct is changed. They used to represent the time spent in user and system mode in jiffies, but now they represent the time spent in user and system mode in nanoseconds. This requries eBPF programs to be updated to use the correct semantics based on the kernel version. Otherwise, the programs will read the wrong values.
+
+
+
+\subsection{Insufficient eBPF Infrastructure}
+
+\minisec{Lack of initial support for synchronization primitives}
+eBPF programs lack support for synchronization primitives at the beginning. 
+% BPF_XADD: https://github.com/torvalds/linux/commit/bd4cf0ed331a275e9bf5a49e6d0fd55dffc551b8
+% Per-CPU hash: https://github.com/torvalds/linux/commit/824bd0ce6c7c43a9e1e210abf124958e54d88342
+% Per-CPU arr: https://github.com/torvalds/linux/commit/a10423b87a7eae75da79ce80a8d9475047a674ee
+% Spinlock: https://github.com/torvalds/linux/commit/d83525ca62cf8ebe3271d14c36fb900c294274a2
+% Atomic: https://github.com/torvalds/linux/commit/7064a7341a0d2fcfeff56be7e3917421fbb8b024
+
+The initial support for eBPF map is added to Linux 3.18 in September 2014.
+The first per-cpu data structure, per-cpu hash, is added to Linux 4.6 in February 2016. 
+but the support for the first synchronization primitive, spinlock, is not added until Linux 5.1 in February 2019. And the more commonly used atomic operations is added to Linux 5.12 in January 2021.
+This leaves a long period of time where eBPF programs have no support for synchronization primitives.
+Therefore, race condition is very common in eBPF programs. \todo{In the BCC tools, XX out of XX have race conditions. }
+
+\minisec{Confusing eBPF helper functions}
+eBPF helper functions are used to interact with the kernel and userspace applications.
+Some of the helper functions are very easy to misuse, and thus can cause bugs in eBPF programs.
+The eBPF helper function \texttt{bpf\_get\_current\_pid\_tgid} returns the pid and tgid of the current process.
+The two values are packed into a single 64-bit integer, with the lower 32 bits being the pid and the higher 32 bits being the tgid.
+Some could already be confused by the order of the two values, since the pid comes before the tgid in the function name, but the pid is actually at the lower part. 
+What's more confusing is that the meaning of pid is different in the kernel and userspace.
+The pid returned here is what is commonly referred to as thread id (tid) in userspace, and the tgid is what is commonly referred to as process id (pid) in userspace.
+Getting the pid and tid are very common operations in eBPF programs, and thus the misuse of this helper function is also very common. \todo{how many}
+
+\minisec{Bad code generation}
+
+\minisec{Lose of perf events}
+
+\subsection{Assumptions on Kernel Configuration}
+Some eBPF programs assume that the kernel is always configured in a certain way, or that the kernel is always running on a certain architecture.
+These assumptions are not always true, and thus can cause bugs in eBPF programs.
+
+\minisec{Program trace registers} 
+eBPF programs attached to kprobes takes a \texttt{struct pt\_regs *} as the first argument, which is a pointer to the \texttt{pt\_regs} structure that contains the registers when the kprobe is triggered.
+However, the \texttt{pt\_regs} structure is architecture-specific. For example, to access the first argument of a function, one would use \texttt{ctx->di} on x86, but \texttt{ctx->regs[0]} on arm64.
+The perferred way to access the registers is to use the \texttt{PT\_REGS*} macros, which resolve to the correct register access based on the architecture.
+In the case above, one would use \texttt{PT\_REGS\_PARM1(ctx)} to access the first argument.
+
+\minisec{Syscall prefix}
+Linux system calls have different prefixes on different architectures. For example, the \texttt{close} system call is named \texttt{\_\_x64\_sys\_close} on x86 and \texttt{\_\_arm64\_sys\_close} on arm64.
+It is important to use the correct name when attaching to system calls, otherwise the programs will fail to attach.
+For BCC, the correct name can be obtained with \texttt{get\_syscall\_fnname}.
+For libbpf, \texttt{SEC("ksyscall/foo")} can be used to attach to the \texttt{foo} system call with the prefix handled automatically.
+
+% https://marcin.juszkiewicz.com.pl/download/tables/syscalls.html
+\minisec{Syscall availability}
+Some system calls are not available on all architectures.
+For example, \texttt{open} is not available on arm64, and \texttt{openat} is used instead. 
+As a matter of fact, arm64 lacks many common system calls that are available on x86, including \texttt{fork}, \texttt{execv}, \texttt{chmod}, \texttt{stat}, \texttt{send}, \texttt{recv}, and many more.
+In order to write portable eBPF programs, one needs to check the availability of the system calls before attaching to them.
+
+% \minisec{Byte order}
+
+% \minisec{Page offset}
+
+% \minisec{Other configurations}
+
+\subsection{Kernel Compiler Issues}
+
+\begin{listing}[t]
+\begin{minted}{c}
+static int f(int a, int* b) { return a + *b; }
+int g(int x, int y) { return f(1, &x) + f(1, &y); }
+\end{minted}
+\caption{Function \texttt{f} renamed to \texttt{f.constprop.0.isra.0} with compiler flag \texttt{-O2 -fno-inline}}
+\label{fig:compiler_renaming}
+\end{listing}
+
+
+
+\minisec{Function renaming}
+Some compiler optimizations can rename functions, which breaks eBPF programs that attach to the functions.
+Take the example in Listing~\ref{fig:compiler_renaming}, the function \texttt{f} is renamed to \texttt{f.constprop.0.isra.0} with compiler flag \texttt{-O2 -fno-inline}.
+
+The compiler first performs constant propagation for the first argument of \texttt{f} since the argument is a constant at all call sites. 
+The result of this optimization roughly corresponds to:
+\begin{minted}{c}
+int f.constprop.0(int* b) { return 1 + *b; }
+\end{minted}
+
+Then the compiler performs interprocedural scalar replacement of aggregates (ISRA).
+In this case, the compiler replaces the second argument of \texttt{f} from passed by pointer to passed by value. 
+The final result roughly corresponds to the following:
+\begin{minted}{c}
+int f.constprop.0.isra.0(int b) { return 1 + b; }
+\end{minted}
+
+% https://github.com/iovisor/bcc/issues/1754
+The two optimizations performed above not only change the name of the function, but also change the function arguments: constant propagation removes the constant argument, and ISRA replaces the pointer arguments with value arguments.
+This makes it very difficult to fix the eBPF programs.
+If the programs are only updated to attach to the new function name, the programs will still fail to work correctly, since the programs may read the wrong arguments with the assumption on the original function arguments.
+Furthermore, obtaining the correct arguments is very difficult and subject to change with compiler optimizations. One may need to gather information from the optmization passes and the final assembly code to determine the correct arguments. 
+Note that the debug information is not helpful here, since the debug information only contains the original function name and arguments, but not the optimized ones.
+
+Other compiler optimizations can also rename functions, such as function spliting (with suffix \texttt{.part.*}), hot/cold function partitioning (with suffix \texttt{.cold}), function cloning (with suffix \texttt{.clone.*}).
+
+
+
+
+
+\minisec{Function inlining}
+The compiler can choose to inline a function if the compiler thinks it is beneficial to do so, even if the function is not marked as inline.
+This is a problem for eBPF programs, since the programs attach to the function, and the inlining breaks the programs.
+There are three ways functions inlining can break eBPF programs.
+
+First, if the function completely disappears after inlining, then the function does not exist in the kernel symbol table, and thus the eBPF programs cannot attach to the function.
+
+Second, if the function is inlined at all the call sites, but the function still exists in the kernel symbol table, then the eBPF programs will attach to the function, but the programs will never be invoked. Inlined function can appear in the kernel symbol table if the address of the function is taken or if the function is exported by \texttt{EXPORT\_SYMBOL}.
+
+Third, there exists a third case where the function is inlined at some of the call sites, but not all of them. In this case, the eBPF programs will attach to the function, but the programs will miss some of the invocations. This is the most dangerous case, since the eBPF programs will seem to work correctly. 
+
+GCC generates debug infomation about the inlined function, which can be used to determine if the function is inlined. But LLVM does not. 
+
+
+\begin{listing}[t]
+\begin{minted}{c}
+extern int g(int x);
+int f(int x) { return g(g(x)); }
+__attribute__((cold)) int foo(int x) { return f(x); }
+__attribute__((hot))  int bar(int x) { return f(x); }
+\end{minted}
+\caption{Example of selective inlining: \texttt{f} is inlined in \texttt{bar} but not in \texttt{foo} with compiler flag \texttt{-O2}}
+\label{fig:compiler_selective_inlining}
+\end{listing}
+
+\begin{listing}[t]
+\begin{minted}{c}
+static int add(int a, int b) { return a + b; };
+int (*ptr)(int, int) = &add;
+int foo() { return add(2, 3); }
+\end{minted}
+\caption{Example of inlined function appearing in kernel symbol table: \texttt{add} is inlined in \texttt{foo} with compiler flag \texttt{-O2 -fno-inline}}
+\label{fig:compiler_inlined_in_symbol_table}
+\end{listing}
+
+\subsection{Generic Programming Errors}
+eBPF verifier prevents many generic programming errors, such as buffer overflow, use-after-free, null pointer dereference, and deadlock.
+However, there are still many other generic programming errors that are not caught by the verifier, and thus can be found in eBPF programs.
+
+\minisec{Forgetting to check return value} 
+\todo{There are some cases where the return value of a helper function is not checked, but not that interesting.}
+
+\section{Discussion}
