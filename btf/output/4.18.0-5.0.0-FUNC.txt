@@ -644,7 +644,7 @@ Kind.FUNC   __bpf_trace_ext4_ext_remove_space_done
                                   partial: {'kind': 'INT', 'name': 'long long int'}
 Kind.FUNC   __locks_insert_block
                      Added params:
-                                 conflict: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'name': '(anon)', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                                 conflict: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
 Kind.FUNC   security_task_kill
                      Param type changed:
                                      info: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'siginfo'}}
@@ -1834,7 +1834,7 @@ Kind.FUNC   store_max_perf_pct
                                          ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kobj_attribute'}}
 Kind.FUNC   locks_insert_block
                      Added params:
-                                 conflict: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'name': '(anon)', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                                 conflict: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
 Kind.FUNC   trace_event_raw_event_signal_deliver
                      Param type changed:
                                      info: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'siginfo'}}
@@ -2652,8 +2652,8 @@ Kind.FUNC   rtc_timer_init
                      Removed params:
                                      data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
                      Param type changed:
-                                        f: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'name': '(anon)', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'name': '(anon)', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rtc_device'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                        f: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rtc_device'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.FUNC   sit_ip6ip6_gro_receive
                      Param type changed:
                                      head: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}
