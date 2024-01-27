@@ -1,0 +1,11 @@
+Old Kind.UNION (113): ['fpregs_state', 'sigval', '__sifields', 'kernfs_node_id', 'thread_union', 'key_payload', 'perf_mem_data_src', 'bpf_attr', 'flowi_uli', 'ethtool_flow_union']
+New Kind.UNION (126): ['fpregs_state', 'sigval', '__sifields', 'kernfs_node_id', 'thread_union', 'key_payload', 'perf_mem_data_src', 'bpf_attr', 'flowi_uli', 'ethtool_flow_union']
+Removed Kind.UNION (2): ['fuse_dentry', 'ipmi_smi_info_union']
+Added Kind.UNION (15): ['uvh_rh_gam_alias210_redirect_config_2_mmr_u', 'uvh_apicid', 'uvh_node_id_u', 'bau_payload_header', 'uvh_rh_gam_mmioh_overlay_config_mmr_u', 'uvh_rh_gam_config_mmr_u', 'fscrypt_policy', 'fscrypt_context', 'uv1h_lb_target_physical_apic_id_mask_u', 'uvh_rh_gam_gru_overlay_config_mmr_u']
+Common Kind.UNION (111): ['tpacket_req_u', 'sidtab_entry_inner', 'mon_data_bits', 'ec_response_get_next_data_v1', 'acpi_descriptor', 'tls_crypto_context', 'irte_ga_lo', 'entry_union', 'hsw_tsx_tuning', 'l2_cache']
+Changed Kind.UNION (1): ['security_list_options']
+Kind.UNION  security_list_options
+                     Added fields:
+                         lock_kernel_down: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'name': '(anon)', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'lockdown_reason', 'size': 4}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                              locked_down: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'name': '(anon)', 'params': [{'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'lockdown_reason', 'size': 4}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                              path_notify: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'name': '(anon)', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
