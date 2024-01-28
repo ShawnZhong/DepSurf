@@ -1,4 +1,2 @@
-*.json
-*.btf
-*.h
-*.txt
+**/*
+!*.tar.xz
