@@ -1,0 +1,2191 @@
+Old Kind.STRUCT (6482): ['list_head', 'hlist_head', 'hlist_node', 'callback_head', 'static_key', 'jump_entry', 'timespec', 'restart_block', 'pt_regs', 'desc_struct']
+New Kind.STRUCT (6660): ['list_head', 'hlist_head', 'hlist_node', 'callback_head', 'static_key', 'jump_entry', 'static_key_false', 'timespec', 'restart_block', 'pt_regs']
+Added Kind.STRUCT (228): ['cgroup_bpf', 'ucounts', 'dev_links_info', 'blk_issue_stat', 'blk_rq_stat', 'swap_cluster_list', 'ip_conntrack_stat', 'nf_dccp_net', 'nf_sctp_net', 'nf_udplite_net']
+Removed Kind.STRUCT (50): ['fault_env', 'dsa_switch_driver', 'stacktrace_ops', 'msr_range', 'amd_hwid', 'mc_saved_data', 'ucode_blobs', 'tnt', 'lglock', 'modversion_info']
+Common Kind.STRUCT (6432): ['list_head', 'hlist_head', 'hlist_node', 'callback_head', 'static_key', 'jump_entry', 'timespec', 'restart_block', 'pt_regs', 'desc_struct']
+Changed Kind.STRUCT (640): ['pv_cpu_ops', 'thread_struct', 'task_struct', 'mm_struct', 'cpumask', 'pv_lock_ops', 'fpu', 'cpuinfo_x86', 'x86_legacy_features', 'x86_platform_ops']
+Kind.STRUCT pv_cpu_ops
+                     Removed fields:
+                                     clts: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                            read_cr4_safe: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [], 'ret_type': {'kind': 'INT', 'name': 'long unsigned int'}}}
+Kind.STRUCT thread_struct
+                     Added fields:
+                                   status: {'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.STRUCT task_struct
+                     Added fields:
+                              thread_info: {'kind': 'STRUCT', 'name': 'thread_info'}
+                                      cpu: {'kind': 'INT', 'name': 'unsigned int'}
+                      no_cgroup_migration: {'kind': 'INT', 'name': 'unsigned int'}
+                                   closid: {'kind': 'INT', 'name': 'int'}
+                            stack_vm_area: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_struct'}}
+                           stack_refcount: {'kind': 'TYPEDEF', 'name': 'atomic_t'}
+                     Removed fields:
+                              utimescaled: {'kind': 'TYPEDEF', 'name': 'cputime_t'}
+                              stimescaled: {'kind': 'TYPEDEF', 'name': 'cputime_t'}
+Kind.STRUCT mm_struct
+                     Added fields:
+                       cpumask_allocation: {'kind': 'STRUCT', 'name': 'cpumask'}
+                     Removed fields:
+                                  bd_addr: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+Kind.STRUCT cpumask
+                     Field type changed:
+                                     bits: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 8, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 128, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+Kind.STRUCT pv_lock_ops
+                     Added fields:
+                        vcpu_is_preempted: {'kind': 'STRUCT', 'name': 'paravirt_callee_save'}
+Kind.STRUCT fpu
+                     Removed fields:
+                                  counter: {'kind': 'INT', 'name': 'unsigned char'}
+Kind.STRUCT cpuinfo_x86
+                     Added fields:
+                                    cu_id: {'kind': 'TYPEDEF', 'name': '__u8'}
+Kind.STRUCT x86_legacy_features
+                     Added fields:
+                                    i8042: {'kind': 'ENUM', 'name': 'x86_legacy_i8042_state', 'size': 4}
+Kind.STRUCT x86_platform_ops
+                     Removed fields:
+                             i8042_detect: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT mutex
+                     Removed fields:
+                                    count: {'kind': 'TYPEDEF', 'name': 'atomic_t'}
+                     Fields reordered:
+                                          ['count', 'wait_lock', 'wait_list', 'owner', 'osq']
+                                          ['owner', 'wait_lock', 'osq', 'wait_list']
+                     Field type changed:
+                                    owner: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}
+                                         ->{'kind': 'TYPEDEF', 'name': 'atomic_long_t'}
+Kind.STRUCT apic
+                     Added fields:
+                         native_eoi_write: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT smp_ops
+                     Added fields:
+                     crash_stop_other_cpus: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT pglist_data
+                     Layout changed
+Kind.STRUCT zone
+                     Added fields:
+                              initialized: {'kind': 'INT', 'name': 'int'}
+                     Removed fields:
+                               wait_table: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'wait_queue_head_t'}}
+                     wait_table_hash_nr_entries: {'kind': 'INT', 'name': 'long unsigned int'}
+                          wait_table_bits: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT zonelist
+                     Field type changed:
+                                _zonerefs: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 321, 'type': {'kind': 'STRUCT', 'name': 'zoneref'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 5121, 'type': {'kind': 'STRUCT', 'name': 'zoneref'}}
+Kind.STRUCT address_space
+                     Added fields:
+                                 gfp_mask: {'kind': 'TYPEDEF', 'name': 'gfp_t'}
+Kind.STRUCT file
+                     Layout changed
+Kind.STRUCT vm_operations_struct
+                     Field type changed:
+                                map_pages: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT vm_fault
+                     Added fields:
+                                      vma: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_area_struct'}}
+                                  address: {'kind': 'INT', 'name': 'long unsigned int'}
+                                      pmd: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pmd_t'}}
+                                 orig_pte: {'kind': 'TYPEDEF', 'name': 'pte_t'}
+                                    memcg: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mem_cgroup'}}
+                                      pte: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pte_t'}}
+                                      ptl: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'spinlock_t'}}
+                             prealloc_pte: {'kind': 'TYPEDEF', 'name': 'pgtable_t'}
+                     Removed fields:
+                          virtual_address: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                                    entry: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+Kind.STRUCT group_info
+                     Added fields:
+                                      gid: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 0, 'type': {'kind': 'TYPEDEF', 'name': 'kgid_t'}}
+                     Removed fields:
+                                  nblocks: {'kind': 'INT', 'name': 'int'}
+                              small_block: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 32, 'type': {'kind': 'TYPEDEF', 'name': 'kgid_t'}}
+                                   blocks: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 0, 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'kgid_t'}}}
+Kind.STRUCT idr_layer
+                     Struct has anonymous fields
+Kind.STRUCT percpu_rw_semaphore
+                     Added fields:
+                               read_count: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+                                   writer: {'kind': 'TYPEDEF', 'name': 'wait_queue_head_t'}
+                            readers_block: {'kind': 'INT', 'name': 'int'}
+                     Removed fields:
+                            fast_read_ctr: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+                            slow_read_ctr: {'kind': 'TYPEDEF', 'name': 'atomic_t'}
+                              write_waitq: {'kind': 'TYPEDEF', 'name': 'wait_queue_head_t'}
+Kind.STRUCT cgroup
+                     Added fields:
+                                      bpf: {'kind': 'STRUCT', 'name': 'cgroup_bpf'}
+Kind.STRUCT cgroup_root
+                     Layout changed
+Kind.STRUCT seq_file
+                     Layout changed
+Kind.STRUCT kernfs_open_file
+                     Layout changed
+Kind.STRUCT signal_struct
+                     Added fields:
+                                   oom_mm: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_struct'}}
+                     Removed fields:
+                              oom_victims: {'kind': 'TYPEDEF', 'name': 'atomic_t'}
+Kind.STRUCT tlbflush_unmap_batch
+                     Layout changed
+Kind.STRUCT dentry_operations
+                     Field type changed:
+                                 d_manage: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT super_block
+                     Layout changed
+Kind.STRUCT radix_tree_node
+                     Struct has anonymous fields
+Kind.STRUCT block_device
+                     Layout changed
+Kind.STRUCT dquot
+                     Layout changed
+Kind.STRUCT quotactl_ops
+                     Field type changed:
+                                 quota_on: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT quota_info
+                     Removed fields:
+                            dqonoff_mutex: {'kind': 'STRUCT', 'name': 'mutex'}
+Kind.STRUCT inode_operations
+                     Removed fields:
+                                  rename2: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                 setxattr: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                 getxattr: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'ssize_t'}}}
+                              removexattr: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                     Field type changed:
+                                   rename: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT file_operations
+                     Removed fields:
+                                aio_fsync: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kiocb'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT super_operations
+                     Removed fields:
+                                real_loop: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file'}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file'}}}}
+Kind.STRUCT perf_event
+                     Added fields:
+                               event_caps: {'kind': 'INT', 'name': 'int'}
+                               group_caps: {'kind': 'INT', 'name': 'int'}
+                     orig_overflow_handler: {'kind': 'TYPEDEF', 'name': 'perf_overflow_handler_t'}
+                                     prog: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_prog'}}
+                     Removed fields:
+                              group_flags: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT device
+                     Added fields:
+                                    links: {'kind': 'STRUCT', 'name': 'dev_links_info'}
+                             iommu_fwspec: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_fwspec'}}
+Kind.STRUCT dev_pm_info
+                     Added fields:
+                              in_dpm_list: {'kind': 'TYPEDEF', 'name': 'bool'}
+                              links_count: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT mem_cgroup
+                     Layout changed
+Kind.STRUCT mempolicy
+                     Layout changed
+Kind.STRUCT user_namespace
+                     Added fields:
+                                     work: {'kind': 'STRUCT', 'name': 'work_struct'}
+                                      set: {'kind': 'STRUCT', 'name': 'ctl_table_set'}
+                                  sysctls: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ctl_table_header'}}
+                                  ucounts: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ucounts'}}
+                               ucount_max: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 7, 'type': {'kind': 'INT', 'name': 'int'}}
+Kind.STRUCT module
+                     Field type changed:
+                                     crcs: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 's32'}}}
+                                 gpl_crcs: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 's32'}}}
+                              unused_crcs: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 's32'}}}
+                          unused_gpl_crcs: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 's32'}}}
+                          gpl_future_crcs: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 's32'}}}
+                                   taints: {'kind': 'INT', 'name': 'unsigned int'}
+                                         ->{'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT pid_namespace
+                     Added fields:
+                                  ucounts: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ucounts'}}
+Kind.STRUCT swap_info_struct
+                     Added fields:
+                            free_clusters: {'kind': 'STRUCT', 'name': 'swap_cluster_list'}
+                         discard_clusters: {'kind': 'STRUCT', 'name': 'swap_cluster_list'}
+                     Removed fields:
+                        free_cluster_head: {'kind': 'STRUCT', 'name': 'swap_cluster_info'}
+                        free_cluster_tail: {'kind': 'STRUCT', 'name': 'swap_cluster_info'}
+                     discard_cluster_head: {'kind': 'STRUCT', 'name': 'swap_cluster_info'}
+                     discard_cluster_tail: {'kind': 'STRUCT', 'name': 'swap_cluster_info'}
+Kind.STRUCT hd_struct
+                     Layout changed
+Kind.STRUCT gendisk
+                     Layout changed
+Kind.STRUCT request_queue
+                     Added fields:
+                                    rq_wb: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rq_wb'}}
+                              queue_depth: {'kind': 'INT', 'name': 'unsigned int'}
+                                 rq_stats: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'STRUCT', 'name': 'blk_rq_stat'}}
+                                poll_nsec: {'kind': 'INT', 'name': 'int'}
+                     Field type changed:
+                             requeue_work: {'kind': 'STRUCT', 'name': 'work_struct'}
+                                         ->{'kind': 'STRUCT', 'name': 'delayed_work'}
+Kind.STRUCT bdi_writeback
+                     Struct has anonymous fields
+Kind.STRUCT backing_dev_info
+                     Added fields:
+                                 io_pages: {'kind': 'INT', 'name': 'long unsigned int'}
+                     Fields reordered:
+                                          ['bdi_list', 'ra_pages', 'capabilities', 'congested_fn', 'congested_data', 'name', 'min_ratio', 'max_ratio', 'max_prop_frac', 'tot_write_bandwidth', 'wb', 'wb_list', 'cgwb_tree', 'cgwb_congested_tree', 'usage_cnt', 'wb_waitq', 'dev', 'owner', 'laptop_mode_wb_timer', 'debug_dir', 'debug_stats']
+                                          ['bdi_list', 'ra_pages', 'io_pages', 'congested_fn', 'congested_data', 'name', 'capabilities', 'min_ratio', 'max_ratio', 'max_prop_frac', 'tot_write_bandwidth', 'wb', 'wb_list', 'cgwb_tree', 'cgwb_congested_tree', 'usage_cnt', 'wb_waitq', 'dev', 'owner', 'laptop_mode_wb_timer', 'debug_dir', 'debug_stats']
+Kind.STRUCT tty_struct
+                     Layout changed
+Kind.STRUCT perf_event_context
+                     Layout changed
+Kind.STRUCT ftrace_ret_stack
+                     Added fields:
+                                     retp: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                     Removed fields:
+                                       fp: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT cgroup_namespace
+                     Added fields:
+                                  ucounts: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ucounts'}}
+Kind.STRUCT proc_ns_operations
+                     Added fields:
+                                    owner: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ns_common'}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}}}
+                               get_parent: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ns_common'}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ns_common'}}}}
+Kind.STRUCT ftrace_ops
+                     Layout changed
+Kind.STRUCT ftrace_ops_hash
+                     Layout changed
+Kind.STRUCT class
+                     Added fields:
+                             class_groups: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'attribute_group'}}}}
+Kind.STRUCT perf_cpu_context
+                     Added fields:
+                           sched_cb_entry: {'kind': 'STRUCT', 'name': 'list_head'}
+                           sched_cb_usage: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT trace_iterator
+                     Layout changed
+Kind.STRUCT tty_port
+                     Layout changed
+Kind.STRUCT tty_bufhead
+                     Layout changed
+Kind.STRUCT efi_memory_map
+                     Added fields:
+                                     late: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT efi
+                     Added fields:
+                                 rng_seed: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT vmpressure
+                     Layout changed
+Kind.STRUCT mem_cgroup_per_node
+                     Added fields:
+                            lru_zone_size: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 25, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                     Removed fields:
+                                 lru_size: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 5, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+Kind.STRUCT request
+                     Struct has anonymous fields
+Kind.STRUCT elevator_queue
+                     Layout changed
+Kind.STRUCT blk_queue_tag
+                     Removed fields:
+                                     busy: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT queue_limits
+                     Added fields:
+                     max_write_zeroes_sectors: {'kind': 'INT', 'name': 'unsigned int'}
+                                    zoned: {'kind': 'ENUM', 'name': 'blk_zoned_model', 'size': 4}
+Kind.STRUCT uts_namespace
+                     Added fields:
+                                  ucounts: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ucounts'}}
+Kind.STRUCT ctl_table_root
+                     Added fields:
+                            set_ownership: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ctl_table_header'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ctl_table'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'kuid_t'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'kgid_t'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                     Field type changed:
+                                   lookup: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ctl_table_root'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nsproxy'}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ctl_table_set'}}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ctl_table_root'}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ctl_table_set'}}}}
+Kind.STRUCT sock
+                     Struct has anonymous fields
+Kind.STRUCT pipe_inode_info
+                     Layout changed
+Kind.STRUCT iov_iter
+                     Struct has anonymous fields
+Kind.STRUCT net
+                     Added fields:
+                                  ucounts: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ucounts'}}
+Kind.STRUCT dma_map_ops
+                     Added fields:
+                             map_resource: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'phys_addr_t'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}, {'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'dma_data_direction', 'size': 4}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'dma_addr_t'}}}
+                           unmap_resource: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'dma_addr_t'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}, {'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'dma_data_direction', 'size': 4}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT sk_buff
+                     Struct has anonymous fields
+Kind.STRUCT ipv6_devconf
+                     Added fields:
+                     rtr_solicit_max_interval: {'kind': 'TYPEDEF', 'name': '__s32'}
+                             seg6_enabled: {'kind': 'TYPEDEF', 'name': '__s32'}
+                        seg6_require_hmac: {'kind': 'TYPEDEF', 'name': '__s32'}
+                             enhanced_dad: {'kind': 'TYPEDEF', 'name': '__u32'}
+Kind.STRUCT proto_ops
+                     Added fields:
+                                read_sock: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'read_descriptor_t'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'sk_read_actor_t'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT flow_dissector
+                     Field type changed:
+                                   offset: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 11, 'type': {'kind': 'INT', 'name': 'short unsigned int'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 17, 'type': {'kind': 'INT', 'name': 'short unsigned int'}}
+Kind.STRUCT flowi_common
+                     Added fields:
+                               flowic_uid: {'kind': 'TYPEDEF', 'name': 'kuid_t'}
+Kind.STRUCT flowi4
+                     Layout changed
+Kind.STRUCT flowi6
+                     Layout changed
+Kind.STRUCT flowidn
+                     Layout changed
+Kind.STRUCT flowi
+                     Layout changed
+Kind.STRUCT net_device
+                     Struct has anonymous fields
+Kind.STRUCT linux_mib
+                     Field type changed:
+                                     mibs: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 117, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 118, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+Kind.STRUCT netns_packet
+                     Layout changed
+Kind.STRUCT netns_ipv4
+                     Added fields:
+                      sysctl_tcp_tw_reuse: {'kind': 'INT', 'name': 'int'}
+                                  fib_seq: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed fields:
+                                fib_local: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fib_table'}}
+Kind.STRUCT dst_ops
+                     Added fields:
+                            confirm_neigh: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'dst_entry'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT dst_entry
+                     Struct has anonymous fields
+Kind.STRUCT netns_ipv6
+                     Added fields:
+                                seg6_data: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'seg6_pernet_data'}}
+Kind.STRUCT netns_nf
+                     Added fields:
+                              defrag_ipv4: {'kind': 'TYPEDEF', 'name': 'bool'}
+                              defrag_ipv6: {'kind': 'TYPEDEF', 'name': 'bool'}
+                     Field type changed:
+                                    hooks: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 104, 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 104, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_entry'}}}
+Kind.STRUCT nf_ip_net
+                     Added fields:
+                                     dccp: {'kind': 'STRUCT', 'name': 'nf_dccp_net'}
+                                     sctp: {'kind': 'STRUCT', 'name': 'nf_sctp_net'}
+                                  udplite: {'kind': 'STRUCT', 'name': 'nf_udplite_net'}
+Kind.STRUCT netns_ct
+                     Removed fields:
+                              label_words: {'kind': 'TYPEDEF', 'name': 'u8'}
+                     Field type changed:
+                                     stat: {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'ip_conntrack_stat', 'fwd_kind': 'struct'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ip_conntrack_stat'}}
+Kind.STRUCT flow_cache
+                     Added fields:
+                                     node: {'kind': 'STRUCT', 'name': 'hlist_node'}
+                     Removed fields:
+                          hotcpu_notifier: {'kind': 'STRUCT', 'name': 'notifier_block'}
+Kind.STRUCT netns_xfrm
+                     Removed fields:
+                            state_gc_list: {'kind': 'STRUCT', 'name': 'hlist_head'}
+                            state_gc_work: {'kind': 'STRUCT', 'name': 'work_struct'}
+                     Field type changed:
+                         xfrm_policy_lock: {'kind': 'TYPEDEF', 'name': 'rwlock_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'spinlock_t'}
+Kind.STRUCT mdio_device
+                     Layout changed
+Kind.STRUCT mii_bus
+                     Layout changed
+Kind.STRUCT phy_device
+                     Added fields:
+                         eee_broken_modes: {'kind': 'TYPEDEF', 'name': 'u32'}
+                         phy_led_triggers: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'phy_led_trigger'}}
+                     phy_num_led_triggers: {'kind': 'INT', 'name': 'unsigned int'}
+                           last_triggered: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'phy_led_trigger'}}
+                                mdix_ctrl: {'kind': 'TYPEDEF', 'name': 'u8'}
+Kind.STRUCT phy_driver
+                     Added fields:
+                              get_tunable: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'phy_device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ethtool_tunable'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                              set_tunable: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'phy_device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ethtool_tunable'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT dsa_switch
+                     Added fields:
+                                      ops: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dsa_switch_ops'}}
+                     Removed fields:
+                                      drv: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dsa_switch_driver'}}
+Kind.STRUCT dsa_port
+                     Added fields:
+                                stp_state: {'kind': 'TYPEDEF', 'name': 'u8'}
+Kind.STRUCT ifla_vf_info
+                     Added fields:
+                               vlan_proto: {'kind': 'TYPEDEF', 'name': '__be16'}
+Kind.STRUCT napi_struct
+                     Removed fields:
+                                poll_lock: {'kind': 'TYPEDEF', 'name': 'spinlock_t'}
+Kind.STRUCT Qdisc
+                     Added fields:
+                                     hash: {'kind': 'STRUCT', 'name': 'hlist_node'}
+                     Removed fields:
+                                     list: {'kind': 'STRUCT', 'name': 'list_head'}
+                     Field type changed:
+                                 rate_est: {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}
+                                        q: {'kind': 'STRUCT', 'name': 'sk_buff_head'}
+                                         ->{'kind': 'STRUCT', 'name': 'qdisc_skb_head'}
+Kind.STRUCT tc_to_netdev
+                     Struct has anonymous fields
+Kind.STRUCT bpf_prog
+                     Struct has anonymous fields
+Kind.STRUCT net_device_ops
+                     Added fields:
+                     ndo_has_offload_stats: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                     ndo_get_offload_stats: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                     Field type changed:
+                          ndo_set_vf_vlan: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u16'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u8'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u16'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u8'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': '__be16'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                             ndo_fdb_dump: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'netlink_callback'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'netlink_callback'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT l3mdev_ops
+                     Added fields:
+                            l3mdev_l3_out: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u16'}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}}
+                     l3mdev_link_scope_lookup: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'flowi6'}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dst_entry'}}}}
+                     Removed fields:
+                        l3mdev_get_rtable: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'flowi4'}}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rtable'}}}}
+                         l3mdev_get_saddr: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'flowi4'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                       l3mdev_get_rt6_dst: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'flowi6'}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dst_entry'}}}}
+                        l3mdev_get_saddr6: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'flowi6'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT inet6_dev
+                     Added fields:
+                            desync_factor: {'kind': 'TYPEDEF', 'name': 'u32'}
+                              rs_interval: {'kind': 'TYPEDEF', 'name': '__s32'}
+                     Removed fields:
+                              regen_timer: {'kind': 'STRUCT', 'name': 'timer_list'}
+Kind.STRUCT proto
+                     Removed fields:
+                                 clear_sk: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT fib_rule
+                     Added fields:
+                                uid_range: {'kind': 'STRUCT', 'name': 'fib_kuid_range'}
+Kind.STRUCT ndisc_options
+                     Field type changed:
+                             nd_opt_array: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 6, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nd_opt_hdr'}}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 15, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nd_opt_hdr'}}}
+Kind.STRUCT thread_info
+                     Removed fields:
+                                     task: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}
+                                   status: {'kind': 'TYPEDEF', 'name': '__u32'}
+                                      cpu: {'kind': 'TYPEDEF', 'name': '__u32'}
+                     Field type changed:
+                                    flags: {'kind': 'TYPEDEF', 'name': '__u32'}
+                                         ->{'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT kprobe_insn_cache
+                     Layout changed
+Kind.STRUCT clocksource
+                     Field type changed:
+                                     read: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'clocksource'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'cycle_t'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'clocksource'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'u64'}}}
+                                     mask: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+                                  cs_last: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+                                  wd_last: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT tk_read_base
+                     Field type changed:
+                                     read: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'clocksource'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'cycle_t'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'clocksource'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'u64'}}}
+                                     mask: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+                               cycle_last: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT timekeeper
+                     Field type changed:
+                           cycle_interval: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT vsyscall_gtod_data
+                     Field type changed:
+                               cycle_last: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+                                     mask: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT ldt_struct
+                     Field type changed:
+                                     size: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT cpu_hw_events
+                     Added fields:
+                                   n_pebs: {'kind': 'INT', 'name': 'int'}
+                             n_large_pebs: {'kind': 'INT', 'name': 'int'}
+                     Removed fields:
+                              lbr_context: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+Kind.STRUCT x86_pmu
+                     Struct has anonymous fields
+Kind.STRUCT pci_dev
+                     Struct has anonymous fields
+Kind.STRUCT pci_bus
+                     Layout changed
+Kind.STRUCT pci_sysdata
+                     Added fields:
+                               vmd_domain: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT irq_desc
+                     Added fields:
+                                     kobj: {'kind': 'STRUCT', 'name': 'kobject'}
+Kind.STRUCT irq_common_data
+                     Layout changed
+Kind.STRUCT msi_desc
+                     Struct has anonymous fields
+Kind.STRUCT hypervisor_x86
+                     Added fields:
+                                 pin_vcpu: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT e820map
+                     Field type changed:
+                                      map: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 320, 'type': {'kind': 'STRUCT', 'name': 'e820entry'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3200, 'type': {'kind': 'STRUCT', 'name': 'e820entry'}}
+Kind.STRUCT cpuidle_device
+                     Added fields:
+                        use_deepest_state: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT consw
+                     Field type changed:
+                               con_scroll: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vc_data'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vc_data'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'con_scroll', 'size': 4}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+Kind.STRUCT amd_northbridge
+                     Added fields:
+                                     root: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pci_dev'}}
+Kind.STRUCT cpu
+                     Layout changed
+Kind.STRUCT x86_cpu
+                     Layout changed
+Kind.STRUCT system_counterval_t
+                     Field type changed:
+                                   cycles: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT platform_device
+                     Layout changed
+Kind.STRUCT pnp_card
+                     Layout changed
+Kind.STRUCT pnp_protocol
+                     Layout changed
+Kind.STRUCT pnp_dev
+                     Layout changed
+Kind.STRUCT trace_event_raw_x86_fpu
+                     Removed fields:
+                                  counter: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT cacheinfo
+                     Added fields:
+                                       id: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT cpu_cacheinfo
+                     Added fields:
+                        cpu_map_populated: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT _cpuid4_info_regs
+                     Added fields:
+                                       id: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT mce
+                     Added fields:
+                                     synd: {'kind': 'TYPEDEF', 'name': '__u64'}
+                                     ipid: {'kind': 'TYPEDEF', 'name': '__u64'}
+                                     ppin: {'kind': 'TYPEDEF', 'name': '__u64'}
+Kind.STRUCT mce_log
+                     Layout changed
+Kind.STRUCT mce_evt_llist
+                     Layout changed
+Kind.STRUCT trace_event_raw_mce_record
+                     Added fields:
+                                     synd: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     ipid: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT cper_mce_record
+                     Layout changed
+Kind.STRUCT sched_domain
+                     Struct has anonymous fields
+Kind.STRUCT sd_data
+                     Added fields:
+                                      sds: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sched_domain_shared'}}}
+Kind.STRUCT sched_domain_topology_level
+                     Layout changed
+Kind.STRUCT apic_chip_data
+                     Layout changed
+Kind.STRUCT kvm_steal_time
+                     Added fields:
+                                preempted: {'kind': 'TYPEDEF', 'name': '__u8'}
+                                   u8_pad: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'TYPEDEF', 'name': '__u8'}}
+                     Field type changed:
+                                      pad: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 12, 'type': {'kind': 'TYPEDEF', 'name': '__u32'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 11, 'type': {'kind': 'TYPEDEF', 'name': '__u32'}}
+Kind.STRUCT paravirt_patch_template
+                     Layout changed
+Kind.STRUCT hstate
+                     Field type changed:
+                       hugepage_freelists: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+                       nr_huge_pages_node: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+                     free_huge_pages_node: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+                     surplus_huge_pages_node: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+Kind.STRUCT mmu_gather
+                     Removed fields:
+                                     addr: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT numa_meminfo
+                     Field type changed:
+                                      blk: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 128, 'type': {'kind': 'STRUCT', 'name': 'numa_memblk'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2048, 'type': {'kind': 'STRUCT', 'name': 'numa_memblk'}}
+Kind.STRUCT pmc_reg_map
+                     Added fields:
+                                pfear_sts: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pmc_bit_map'}}}
+                                 mphy_sts: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pmc_bit_map'}}}
+                                  pll_sts: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pmc_bit_map'}}}
+                     Removed fields:
+                                 d3_sts_0: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pmc_bit_map'}}}
+                                 d3_sts_1: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pmc_bit_map'}}}
+                                 func_dis: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pmc_bit_map'}}}
+                               func_dis_2: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pmc_bit_map'}}}
+                                      pss: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pmc_bit_map'}}}
+Kind.STRUCT pmc_dev
+                     Added fields:
+                                      map: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pmc_reg_map'}}}
+                        pmc_xram_read_bit: {'kind': 'INT', 'name': 'int'}
+                                     lock: {'kind': 'STRUCT', 'name': 'mutex'}
+Kind.STRUCT bpf_func_proto
+                     Added fields:
+                               pkt_access: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT bpf_verifier_ops
+                     Added fields:
+                             gen_prologue: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_insn'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'bpf_prog'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT files_struct
+                     Field type changed:
+                                  next_fd: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT smp_hotplug_thread
+                     Layout changed
+Kind.STRUCT cpuhp_cpu_state
+                     Added fields:
+                                   single: {'kind': 'TYPEDEF', 'name': 'bool'}
+                                  bringup: {'kind': 'TYPEDEF', 'name': 'bool'}
+                                     node: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'hlist_node'}}
+                     Removed fields:
+                                       cb: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT cpuhp_step
+                     Added fields:
+                                     list: {'kind': 'STRUCT', 'name': 'hlist_head'}
+                           multi_instance: {'kind': 'TYPEDEF', 'name': 'bool'}
+                     Field type changed:
+                                  startup: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'UNION', 'name': '(anon)'}
+                                 teardown: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'UNION', 'name': '(anon)'}
+Kind.STRUCT workqueue_struct
+                     Layout changed
+Kind.STRUCT workqueue_attrs
+                     Layout changed
+Kind.STRUCT worker_pool
+                     Layout changed
+Kind.STRUCT wq_device
+                     Layout changed
+Kind.STRUCT kthread_work
+                     Added fields:
+                                canceling: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT kthread_worker
+                     Added fields:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+                        delayed_work_list: {'kind': 'STRUCT', 'name': 'list_head'}
+Kind.STRUCT kthread_flush_work
+                     Layout changed
+Kind.STRUCT ipc_namespace
+                     Added fields:
+                                  ucounts: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ucounts'}}
+Kind.STRUCT srcu_notifier_head
+                     Layout changed
+Kind.STRUCT sched_group
+                     Added fields:
+                          asym_prefer_cpu: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT sched_group_capacity
+                     Added fields:
+                             min_capacity: {'kind': 'INT', 'name': 'long unsigned int'}
+                     Removed fields:
+                             nr_busy_cpus: {'kind': 'TYPEDEF', 'name': 'atomic_t'}
+                     Field type changed:
+                                 capacity: {'kind': 'INT', 'name': 'unsigned int'}
+                                         ->{'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT cfs_rq
+                     Added fields:
+                            propagate_avg: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT update_util_data
+                     Field type changed:
+                                     func: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'update_util_data'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'update_util_data'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT cpupri_vec
+                     Layout changed
+Kind.STRUCT cpupri
+                     Layout changed
+Kind.STRUCT cpudl
+                     Layout changed
+Kind.STRUCT rq
+                     Added fields:
+                         tmp_alone_branch: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+                     Removed fields:
+                               nohz_stamp: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT root_domain
+                     Added fields:
+                         max_cpu_capacity: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT ww_mutex
+                     Layout changed
+Kind.STRUCT devkmsg_user
+                     Removed fields:
+                                     prev: {'kind': 'ENUM', 'name': 'log_flags', 'size': 4}
+Kind.STRUCT cont
+                     Removed fields:
+                                     cons: {'kind': 'TYPEDEF', 'name': 'size_t'}
+                                  flushed: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT rcu_data
+                     Added fields:
+                            exp_workdone0: {'kind': 'TYPEDEF', 'name': 'atomic_long_t'}
+                        exp_dynticks_snap: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT rcu_state
+                     Field type changed:
+                                     node: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 9, 'type': {'kind': 'STRUCT', 'name': 'rcu_node'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 131, 'type': {'kind': 'STRUCT', 'name': 'rcu_node'}}
+                                    level: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rcu_node'}}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rcu_node'}}}
+Kind.STRUCT klp_ops
+                     Layout changed
+Kind.STRUCT system_time_snapshot
+                     Field type changed:
+                                   cycles: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT cyclecounter
+                     Field type changed:
+                                     read: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cyclecounter'}}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'cycle_t'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cyclecounter'}}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'u64'}}}
+                                     mask: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT timecounter
+                     Field type changed:
+                               cycle_last: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT rtc_device
+                     Layout changed
+Kind.STRUCT call_function_data
+                     Layout changed
+Kind.STRUCT symsearch
+                     Field type changed:
+                                     crcs: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 's32'}}}
+Kind.STRUCT find_symbol_arg
+                     Field type changed:
+                                      crc: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 's32'}}}
+Kind.STRUCT bsd_acct_struct
+                     Layout changed
+Kind.STRUCT kexec_buf
+                     Field type changed:
+                                   buffer: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+                                         ->{'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+Kind.STRUCT cpuset
+                     Layout changed
+Kind.STRUCT cpuset_migrate_mm_work
+                     Layout changed
+Kind.STRUCT net_generic
+                     Struct has anonymous fields
+Kind.STRUCT pernet_operations
+                     Field type changed:
+                                       id: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+Kind.STRUCT audit_net
+                     Added fields:
+                                       sk: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}
+                     Removed fields:
+                                     nlsk: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}
+Kind.STRUCT fsnotify_ops
+                     Field type changed:
+                             handle_event: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fsnotify_group'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fsnotify_mark'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fsnotify_mark'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned char'}}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fsnotify_group'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fsnotify_mark'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fsnotify_mark'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned char'}}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT fsnotify_group
+                     Struct has anonymous fields
+Kind.STRUCT fanotify_group_private_data
+                     Removed fields:
+                              access_lock: {'kind': 'TYPEDEF', 'name': 'spinlock_t'}
+Kind.STRUCT node
+                     Layout changed
+Kind.STRUCT seccomp_filter
+                     Added fields:
+                                      log: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT rchan_buf
+                     Added fields:
+                              wakeup_work: {'kind': 'STRUCT', 'name': 'irq_work'}
+                     Removed fields:
+                                    timer: {'kind': 'STRUCT', 'name': 'timer_list'}
+Kind.STRUCT rchan
+                     Field type changed:
+                                      buf: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 512, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rchan_buf'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rchan_buf'}}}
+Kind.STRUCT genl_family
+                     Removed fields:
+                              family_list: {'kind': 'STRUCT', 'name': 'list_head'}
+                     Field type changed:
+                                       id: {'kind': 'INT', 'name': 'unsigned int'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.STRUCT trace_array
+                     Layout changed
+Kind.STRUCT trace_buffer
+                     Field type changed:
+                               time_start: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT trace_array_cpu
+                     Field type changed:
+                        preempt_timestamp: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT ftrace_buffer_info
+                     Layout changed
+Kind.STRUCT stat_session
+                     Layout changed
+Kind.STRUCT opstack_op
+                     Field type changed:
+                                       op: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'ENUM', 'name': 'filter_op_ids', 'size': 4}
+Kind.STRUCT postfix_elt
+                     Field type changed:
+                                       op: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'ENUM', 'name': 'filter_op_ids', 'size': 4}
+Kind.STRUCT trace_event_raw_pstate_sample
+                     Added fields:
+                                 io_boost: {'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.STRUCT uprobe_cpu_buffer
+                     Layout changed
+Kind.STRUCT bpf_call_arg_meta
+                     Added fields:
+                               pkt_access: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT bpf_htab
+                     Struct has anonymous fields
+Kind.STRUCT htab_elem
+                     Struct has anonymous fields
+Kind.STRUCT swevent_htable
+                     Layout changed
+Kind.STRUCT parallel_data
+                     Layout changed
+Kind.STRUCT padata_cpumask
+                     Layout changed
+Kind.STRUCT padata_instance
+                     Added fields:
+                                     node: {'kind': 'STRUCT', 'name': 'hlist_node'}
+                     Removed fields:
+                             cpu_notifier: {'kind': 'STRUCT', 'name': 'notifier_block'}
+Kind.STRUCT radix_tree_iter
+                     Added fields:
+                                     node: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'radix_tree_node'}}
+Kind.STRUCT kmem_cache
+                     Field type changed:
+                                     node: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kmem_cache_node'}}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kmem_cache_node'}}}
+Kind.STRUCT oom_control
+                     Added fields:
+                               totalpages: {'kind': 'INT', 'name': 'long unsigned int'}
+                                   chosen: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}
+                            chosen_points: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT page_ext_operations
+                     Added fields:
+                                   offset: {'kind': 'TYPEDEF', 'name': 'size_t'}
+                                     size: {'kind': 'TYPEDEF', 'name': 'size_t'}
+Kind.STRUCT compact_control
+                     Added fields:
+                     ignore_block_suitable: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT shmem_sb_info
+                     Removed fields:
+                                 idr_lock: {'kind': 'STRUCT', 'name': 'mutex'}
+                                idr_nouse: {'kind': 'TYPEDEF', 'name': 'bool'}
+                                      idr: {'kind': 'STRUCT', 'name': 'idr'}
+                     Field type changed:
+                               max_inodes: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'long unsigned int'}
+                              free_inodes: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT zswap_pool
+                     Added fields:
+                                     node: {'kind': 'STRUCT', 'name': 'hlist_node'}
+                     Removed fields:
+                                 notifier: {'kind': 'STRUCT', 'name': 'notifier_block'}
+Kind.STRUCT nodemask_scratch
+                     Layout changed
+Kind.STRUCT stable_node
+                     Struct has anonymous fields
+Kind.STRUCT location
+                     Field type changed:
+                                     cpus: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 8, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 128, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+Kind.STRUCT memory_block
+                     Layout changed
+Kind.STRUCT mem_cgroup_tree
+                     Field type changed:
+                         rb_tree_per_node: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mem_cgroup_tree_per_node'}}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mem_cgroup_tree_per_node'}}}
+Kind.STRUCT cma
+                     Layout changed
+Kind.STRUCT mnt_namespace
+                     Added fields:
+                                  ucounts: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ucounts'}}
+Kind.STRUCT simple_attr
+                     Layout changed
+Kind.STRUCT bdev_inode
+                     Layout changed
+Kind.STRUCT proc_inode
+                     Field type changed:
+                                       fd: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT eventpoll
+                     Layout changed
+Kind.STRUCT timerfd_ctx
+                     Added fields:
+                              cancel_lock: {'kind': 'TYPEDEF', 'name': 'spinlock_t'}
+Kind.STRUCT userfaultfd_wait_queue
+                     Added fields:
+                                    waken: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT exceptional_entry_key
+                     Added fields:
+                              entry_start: {'kind': 'INT', 'name': 'long unsigned int'}
+                     Removed fields:
+                                    index: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT fscrypt_operations
+                     Added fields:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT mb_cache
+                     Field type changed:
+                            c_max_entries: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT numa_maps
+                     Field type changed:
+                                     node: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+Kind.STRUCT numa_maps_private
+                     Layout changed
+Kind.STRUCT pde_opener
+                     Field type changed:
+                                  closing: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT pid_entry
+                     Field type changed:
+                                      len: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT map_files_info
+                     Field type changed:
+                                      len: {'kind': 'INT', 'name': 'long unsigned int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT journal_s
+                     Layout changed
+Kind.STRUCT ext4_sb_info
+                     Layout changed
+Kind.STRUCT ext4_locality_group
+                     Layout changed
+Kind.STRUCT fsxattr
+                     Added fields:
+                           fsx_cowextsize: {'kind': 'TYPEDEF', 'name': '__u32'}
+                     Field type changed:
+                                  fsx_pad: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 12, 'type': {'kind': 'INT', 'name': 'unsigned char'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 8, 'type': {'kind': 'INT', 'name': 'unsigned char'}}
+Kind.STRUCT ext4_lazy_init
+                     Layout changed
+Kind.STRUCT squashfs_sb_info
+                     Layout changed
+Kind.STRUCT squashfs_stream
+                     Layout changed
+Kind.STRUCT msdos_sb_info
+                     Layout changed
+Kind.STRUCT ecryptfs_crypt_stat
+                     Layout changed
+Kind.STRUCT ecryptfs_mount_crypt_stat
+                     Layout changed
+Kind.STRUCT ecryptfs_inode_info
+                     Layout changed
+Kind.STRUCT ecryptfs_sb_info
+                     Layout changed
+Kind.STRUCT ecryptfs_key_tfm
+                     Layout changed
+Kind.STRUCT ecryptfs_msg_ctx
+                     Layout changed
+Kind.STRUCT ecryptfs_kthread_ctl
+                     Layout changed
+Kind.STRUCT ecryptfs_daemon
+                     Layout changed
+Kind.STRUCT fuse_conn
+                     Added fields:
+                          handle_killpriv: {'kind': 'INT', 'name': 'unsigned int'}
+                                posix_acl: {'kind': 'INT', 'name': 'unsigned int'}
+                      default_permissions: {'kind': 'INT', 'name': 'unsigned int'}
+                              allow_other: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed fields:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT fuse_inode
+                     Layout changed
+Kind.STRUCT fuse_mount_data
+                     Added fields:
+                      default_permissions: {'kind': 'INT', 'name': 'unsigned int'}
+                              allow_other: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed fields:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT pstore_info
+                     Added fields:
+                           write_buf_user: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'pstore_type_id', 'size': 4}}, {'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'kmsg_dump_reason', 'size': 4}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pstore_info'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT pstore_ftrace_record
+                     Added fields:
+                                       ts: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed fields:
+                                      cpu: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT msg_receiver
+                     Field type changed:
+                                    r_msg: {'kind': 'VOLATILE', 'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'msg_msg'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'msg_msg'}}
+Kind.STRUCT msg_sender
+                     Added fields:
+                                    msgsz: {'kind': 'TYPEDEF', 'name': 'size_t'}
+Kind.STRUCT sem_queue
+                     Added fields:
+                                   dupsop: {'kind': 'TYPEDEF', 'name': 'bool'}
+                     Field type changed:
+                                    alter: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT key_user
+                     Layout changed
+Kind.STRUCT security_hook_heads
+                     Added fields:
+                     dentry_create_files_as: {'kind': 'STRUCT', 'name': 'list_head'}
+                            inode_copy_up: {'kind': 'STRUCT', 'name': 'list_head'}
+                      inode_copy_up_xattr: {'kind': 'STRUCT', 'name': 'list_head'}
+Kind.STRUCT nf_hook_state
+                     Removed fields:
+                                   thresh: {'kind': 'INT', 'name': 'int'}
+                                hook_list: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+Kind.STRUCT inet_skb_parm
+                     Field type changed:
+                                    flags: {'kind': 'INT', 'name': 'unsigned char'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u16'}
+Kind.STRUCT inode_security_struct
+                     Struct has anonymous fields
+Kind.STRUCT superblock_security_struct
+                     Layout changed
+Kind.STRUCT fib6_table
+                     Added fields:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT xfrm_state
+                     Struct has anonymous fields
+Kind.STRUCT smack_known
+                     Layout changed
+Kind.STRUCT inode_smack
+                     Layout changed
+Kind.STRUCT task_smack
+                     Layout changed
+Kind.STRUCT unix_sock
+                     Layout changed
+Kind.STRUCT inet_cork_full
+                     Layout changed
+Kind.STRUCT inet_sock
+                     Layout changed
+Kind.STRUCT tomoyo_io_buffer
+                     Layout changed
+Kind.STRUCT rhashtable
+                     Added fields:
+                                   rhlist: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT aa_ns
+                     Added fields:
+                                 revision: {'kind': 'INT', 'name': 'long int'}
+                                     wait: {'kind': 'TYPEDEF', 'name': 'wait_queue_head_t'}
+                     Field type changed:
+                                    dents: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 12, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 13, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}
+Kind.STRUCT ima_template_desc
+                     Added fields:
+                                     list: {'kind': 'STRUCT', 'name': 'list_head'}
+Kind.STRUCT ahash_request_priv
+                     Added fields:
+                                    flags: {'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.STRUCT priv
+                     Field type changed:
+                                    child: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_cipher'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_skcipher'}}
+Kind.STRUCT drbg_state
+                     Added fields:
+                         outscratchpadbuf: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': '__u8'}}
+                            outscratchpad: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': '__u8'}}
+Kind.STRUCT blk_mq_ctx
+                     Struct has anonymous fields
+Kind.STRUCT blk_mq_ops
+                     Added fields:
+                               map_queues: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'map_queues_fn'}}
+                     Removed fields:
+                                map_queue: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'map_queue_fn'}}
+Kind.STRUCT blk_mq_hw_ctx
+                     Struct has anonymous fields
+Kind.STRUCT blk_mq_tag_set
+                     Added fields:
+                                   mq_map: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+Kind.STRUCT blk_mq_tags
+                     Removed fields:
+                             alloc_policy: {'kind': 'INT', 'name': 'int'}
+                                  cpumask: {'kind': 'TYPEDEF', 'name': 'cpumask_var_t'}
+                     Field type changed:
+                              bitmap_tags: {'kind': 'STRUCT', 'name': 'blk_mq_bitmap_tags'}
+                                         ->{'kind': 'STRUCT', 'name': 'sbitmap_queue'}
+                           breserved_tags: {'kind': 'STRUCT', 'name': 'blk_mq_bitmap_tags'}
+                                         ->{'kind': 'STRUCT', 'name': 'sbitmap_queue'}
+Kind.STRUCT disk_events
+                     Layout changed
+Kind.STRUCT bsg_job
+                     Added fields:
+                                     kref: {'kind': 'STRUCT', 'name': 'kref'}
+Kind.STRUCT percpu_ida
+                     Struct has anonymous fields
+Kind.STRUCT rhashtable_iter
+                     Added fields:
+                                     list: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rhlist_head'}}
+                     Field type changed:
+                                   walker: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rhashtable_walker'}}
+                                         ->{'kind': 'STRUCT', 'name': 'rhashtable_walker'}
+Kind.STRUCT trace_event_raw_swiotlb_bounced
+                     Field type changed:
+                            swiotlb_force: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'ENUM', 'name': 'swiotlb_force', 'size': 4}
+Kind.STRUCT phy_ops
+                     Added fields:
+                                    reset: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'phy'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT phy
+                     Layout changed
+Kind.STRUCT gpio_chip
+                     Added fields:
+                       irq_chained_parent: {'kind': 'INT', 'name': 'int'}
+                               irq_nested: {'kind': 'TYPEDEF', 'name': 'bool'}
+                      irq_need_valid_mask: {'kind': 'TYPEDEF', 'name': 'bool'}
+                           irq_valid_mask: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                     Removed fields:
+                         irq_not_threaded: {'kind': 'TYPEDEF', 'name': 'bool'}
+                               irq_parent: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT pinctrl_dev
+                     Layout changed
+Kind.STRUCT amd_gpio
+                     Field type changed:
+                                     lock: {'kind': 'TYPEDEF', 'name': 'spinlock_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'raw_spinlock_t'}
+Kind.STRUCT acpi_device
+                     Layout changed
+Kind.STRUCT byt_gpio
+                     Layout changed
+Kind.STRUCT chv_community
+                     Added fields:
+                                    nirqs: {'kind': 'TYPEDEF', 'name': 'size_t'}
+Kind.STRUCT chv_pinctrl
+                     Layout changed
+Kind.STRUCT gpio_device
+                     Layout changed
+Kind.STRUCT lineevent_state
+                     Layout changed
+Kind.STRUCT gpiod_data
+                     Layout changed
+Kind.STRUCT acpi_gpio_chip
+                     Layout changed
+Kind.STRUCT lp_gpio
+                     Layout changed
+Kind.STRUCT rc5t583
+                     Layout changed
+Kind.STRUCT rc5t583_gpio
+                     Layout changed
+Kind.STRUCT i2c_client
+                     Removed fields:
+                                 slave_cb: {'kind': 'TYPEDEF', 'name': 'i2c_slave_cb_t'}
+Kind.STRUCT i2c_driver
+                     Added fields:
+                                probe_new: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'i2c_client'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT i2c_adapter
+                     Added fields:
+                                 lock_ops: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'i2c_lock_operations'}}}
+                       host_notify_domain: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'irq_domain'}}
+                     Removed fields:
+                                 lock_bus: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'i2c_adapter'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                              trylock_bus: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'i2c_adapter'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                               unlock_bus: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'i2c_adapter'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT i2c_algorithm
+                     Removed fields:
+                                reg_slave: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'i2c_client'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                              unreg_slave: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'i2c_client'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT sx150x_123_pri
+                     Added fields:
+                             reg_advanced: {'kind': 'TYPEDEF', 'name': 'u8'}
+                     Removed fields:
+                              reg_advance: {'kind': 'TYPEDEF', 'name': 'u8'}
+Kind.STRUCT sx150x_456_pri
+                     Added fields:
+                             reg_advanced: {'kind': 'TYPEDEF', 'name': 'u8'}
+                     Removed fields:
+                              reg_advance: {'kind': 'TYPEDEF', 'name': 'u8'}
+Kind.STRUCT sx150x_device_data
+                     Added fields:
+                                     pins: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pinctrl_pin_desc'}}}
+                                    npins: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT regulator_ops
+                     Added fields:
+                          get_error_flags: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'regulator_dev'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                         set_voltage_time: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'regulator_dev'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT regulator_dev
+                     Layout changed
+Kind.STRUCT extcon_dev
+                     Layout changed
+Kind.STRUCT palmas
+                     Layout changed
+Kind.STRUCT palmas_pmic
+                     Layout changed
+Kind.STRUCT palmas_gpio
+                     Layout changed
+Kind.STRUCT tps6586x_gpio
+                     Layout changed
+Kind.STRUCT tps65910_gpio
+                     Layout changed
+Kind.STRUCT pwm_export
+                     Layout changed
+Kind.STRUCT intel_soc_pmic
+                     Added fields:
+                        irq_chip_data_tmu: {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'regmap_irq_chip_data', 'fwd_kind': 'struct'}}
+Kind.STRUCT pci_sriov
+                     Layout changed
+Kind.STRUCT pci_vpd
+                     Layout changed
+Kind.STRUCT pci_host_bridge
+                     Added fields:
+                                      ops: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pci_ops'}}
+                                  sysdata: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                                    busnr: {'kind': 'INT', 'name': 'int'}
+                                      msi: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'msi_controller'}}
+                                  private: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 0, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+Kind.STRUCT pci_platform_pm_ops
+                     Added fields:
+                                get_state: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pci_dev'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'pci_power_t'}}}
+Kind.STRUCT pcie_device
+                     Layout changed
+Kind.STRUCT aer_rpc
+                     Added fields:
+                                   e_info: {'kind': 'STRUCT', 'name': 'aer_err_info'}
+Kind.STRUCT controller
+                     Layout changed
+Kind.STRUCT pcie_port
+                     Added fields:
+                             num_viewport: {'kind': 'TYPEDEF', 'name': 'u32'}
+                      iatu_unroll_enabled: {'kind': 'TYPEDEF', 'name': 'u8'}
+Kind.STRUCT pcie_host_ops
+                     Field type changed:
+                                 readl_rc: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pcie_port'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pcie_port'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'u32'}}}
+                                writel_rc: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pcie_port'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pcie_port'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT dw_plat_pcie
+                     Removed fields:
+                                 mem_base: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+Kind.STRUCT dma_chan_dev
+                     Layout changed
+Kind.STRUCT dma_slave_config
+                     Added fields:
+                     src_port_window_size: {'kind': 'TYPEDEF', 'name': 'u32'}
+                     dst_port_window_size: {'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.STRUCT dma_async_tx_descriptor
+                     Added fields:
+                          callback_result: {'kind': 'TYPEDEF', 'name': 'dma_async_tx_callback_result'}
+Kind.STRUCT rio_dev
+                     Layout changed
+Kind.STRUCT rio_mport
+                     Layout changed
+Kind.STRUCT rio_net
+                     Layout changed
+Kind.STRUCT vc_data
+                     Layout changed
+Kind.STRUCT backlight_device
+                     Layout changed
+Kind.STRUCT fb_info
+                     Struct has anonymous fields
+Kind.STRUCT fb_deferred_io
+                     Layout changed
+Kind.STRUCT acpi_table_desc
+                     Added fields:
+                         validation_count: {'kind': 'TYPEDEF', 'name': 'u16'}
+Kind.STRUCT thermal_zone_device_ops
+                     Added fields:
+                                set_trips: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'thermal_zone_device'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT thermal_zone_device
+                     Added fields:
+                     trips_attribute_group: {'kind': 'STRUCT', 'name': 'attribute_group'}
+                            prev_low_trip: {'kind': 'INT', 'name': 'int'}
+                           prev_high_trip: {'kind': 'INT', 'name': 'int'}
+                             notify_event: {'kind': 'ENUM', 'name': 'thermal_notify_event', 'size': 4}
+Kind.STRUCT thermal_cooling_device
+                     Layout changed
+Kind.STRUCT acpi_processor_performance
+                     Layout changed
+Kind.STRUCT acpi_processor_throttling
+                     Layout changed
+Kind.STRUCT acpi_processor
+                     Layout changed
+Kind.STRUCT acpi_ec
+                     Added fields:
+                             busy_polling: {'kind': 'TYPEDEF', 'name': 'bool'}
+                            polling_guard: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT lpss_device_desc
+                     Added fields:
+                               properties: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'property_entry'}}
+Kind.STRUCT apd_device_desc
+                     Added fields:
+                               properties: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'property_entry'}}
+Kind.STRUCT acpi_power_resource
+                     Layout changed
+Kind.STRUCT acpi_table_attr
+                     Added fields:
+                                 filename: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 8, 'type': {'kind': 'INT', 'name': 'char'}}
+                     Field type changed:
+                                     name: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 8, 'type': {'kind': 'INT', 'name': 'char'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'INT', 'name': 'char'}}
+Kind.STRUCT acpi_gpe_event_info
+                     Added fields:
+                     disable_for_dispatch: {'kind': 'TYPEDEF', 'name': 'u8'}
+Kind.STRUCT acpi_gpe_register_info
+                     Added fields:
+                             mask_for_run: {'kind': 'TYPEDEF', 'name': 'u8'}
+Kind.STRUCT led_classdev
+                     Added fields:
+                               work_flags: {'kind': 'INT', 'name': 'long unsigned int'}
+                     new_blink_brightness: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT power_supply
+                     Layout changed
+Kind.STRUCT input_dev
+                     Layout changed
+Kind.STRUCT ff_device
+                     Layout changed
+Kind.STRUCT acpi_button
+                     Added fields:
+                               last_state: {'kind': 'INT', 'name': 'int'}
+                                last_time: {'kind': 'TYPEDEF', 'name': 'ktime_t'}
+Kind.STRUCT cpufreq_policy
+                     Layout changed
+Kind.STRUCT container_dev
+                     Layout changed
+Kind.STRUCT acpi_battery
+                     Layout changed
+Kind.STRUCT erst_record_id_cache
+                     Layout changed
+Kind.STRUCT ghes
+                     Struct has anonymous fields
+Kind.STRUCT virtio_device
+                     Layout changed
+Kind.STRUCT virtio_mmio_device
+                     Layout changed
+Kind.STRUCT virtio_pci_device
+                     Removed fields:
+                             msix_entries: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'msix_entry'}}
+Kind.STRUCT virtio_balloon
+                     Layout changed
+Kind.STRUCT shutdown_handler
+                     Added fields:
+                                     flag: {'kind': 'TYPEDEF', 'name': 'bool'}
+                     Field type changed:
+                                  command: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+                                         ->{'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 11, 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}
+Kind.STRUCT xenbus_device
+                     Layout changed
+Kind.STRUCT xs_handle
+                     Layout changed
+Kind.STRUCT xenbus_file_priv
+                     Layout changed
+Kind.STRUCT usb_interface
+                     Layout changed
+Kind.STRUCT usb_bus
+                     Layout changed
+Kind.STRUCT usb_device
+                     Layout changed
+Kind.STRUCT usb_hcd
+                     Layout changed
+Kind.STRUCT pcpu
+                     Layout changed
+Kind.STRUCT regulator_bulk_data
+                     Removed fields:
+                                 optional: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT fixed_regulator_data
+                     Layout changed
+Kind.STRUCT reset_control
+                     Added fields:
+                          triggered_count: {'kind': 'TYPEDEF', 'name': 'atomic_t'}
+Kind.STRUCT n_tty_data
+                     Layout changed
+Kind.STRUCT tty_audit_buf
+                     Layout changed
+Kind.STRUCT hvc_struct
+                     Layout changed
+Kind.STRUCT uart_port
+                     Added fields:
+                                set_ldisc: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'uart_port'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ktermios'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT uart_state
+                     Layout changed
+Kind.STRUCT earlycon_device
+                     Layout changed
+Kind.STRUCT plat_serial8250_port
+                     Added fields:
+                                set_ldisc: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'uart_port'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ktermios'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT uart_8250_port
+                     Field type changed:
+                             capabilities: {'kind': 'INT', 'name': 'short unsigned int'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.STRUCT uart_8250_dma
+                     Added fields:
+                              rx_dma_addr: {'kind': 'TYPEDEF', 'name': 'phys_addr_t'}
+                              tx_dma_addr: {'kind': 'TYPEDEF', 'name': 'phys_addr_t'}
+Kind.STRUCT fintek_8250
+                     Added fields:
+                                      pid: {'kind': 'TYPEDEF', 'name': 'u16'}
+Kind.STRUCT regmap_config
+                     Field type changed:
+                           read_flag_mask: {'kind': 'TYPEDEF', 'name': 'u8'}
+                                         ->{'kind': 'INT', 'name': 'long unsigned int'}
+                          write_flag_mask: {'kind': 'TYPEDEF', 'name': 'u8'}
+                                         ->{'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT spi_device
+                     Layout changed
+Kind.STRUCT spi_master
+                     Added fields:
+                         max_message_size: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'spi_device'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'size_t'}}}
+Kind.STRUCT max310x_one
+                     Layout changed
+Kind.STRUCT max310x_port
+                     Layout changed
+Kind.STRUCT sccnxp_port
+                     Layout changed
+Kind.STRUCT kgdb_nmi_tty_priv
+                     Layout changed
+Kind.STRUCT ttyprintk_port
+                     Layout changed
+Kind.STRUCT ports_device
+                     Added fields:
+                             max_nr_ports: {'kind': 'TYPEDEF', 'name': 'u32'}
+                     Removed fields:
+                                   config: {'kind': 'STRUCT', 'name': 'virtio_console_config'}
+Kind.STRUCT agp_front_data
+                     Layout changed
+Kind.STRUCT tpm_chip
+                     Added fields:
+                                      log: {'kind': 'STRUCT', 'name': 'tpm_bios_log'}
+                           bin_log_seqops: {'kind': 'STRUCT', 'name': 'tpm_chip_seqops'}
+                         ascii_log_seqops: {'kind': 'STRUCT', 'name': 'tpm_chip_seqops'}
+                     Field type changed:
+                                 bios_dir: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}
+Kind.STRUCT file_priv
+                     Layout changed
+Kind.STRUCT iommu_ops
+                     Added fields:
+                         get_resv_regions: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                         put_resv_regions: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                        apply_resv_region: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_domain'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_resv_region'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                     Removed fields:
+                           get_dm_regions: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                           put_dm_regions: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                          apply_dm_region: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_domain'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_dm_region'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT iommu_group
+                     Layout changed
+Kind.STRUCT iommu_device
+                     Added fields:
+                                      ops: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'iommu_ops'}}}
+                                   fwnode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fwnode_handle'}}
+                     Removed fields:
+                                     name: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+                     Field type changed:
+                                      dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+                                         ->{'kind': 'STRUCT', 'name': 'device'}
+Kind.STRUCT protection_domain
+                     Layout changed
+Kind.STRUCT amd_iommu
+                     Added fields:
+                                   ga_log: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u8'}}
+                              ga_log_tail: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u8'}}
+                                    iommu: {'kind': 'STRUCT', 'name': 'iommu_device'}
+                                 irte_ops: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'amd_irte_ops'}}
+                                  cmd_sem: {'kind': 'VOLATILE', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}
+                     Removed fields:
+                                iommu_dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+Kind.STRUCT dma_ops_domain
+                     Layout changed
+Kind.STRUCT iommu_dev_data
+                     Added fields:
+                                use_vapic: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT amd_ir_data
+                     Struct has anonymous fields
+Kind.STRUCT intel_iommu
+                     Added fields:
+                                    iommu: {'kind': 'STRUCT', 'name': 'iommu_device'}
+                     Removed fields:
+                                iommu_dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+Kind.STRUCT dmar_rmrr_unit
+                     Added fields:
+                                     resv: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_resv_region'}}
+Kind.STRUCT nvm_dev
+                     Added fields:
+                                      geo: {'kind': 'STRUCT', 'name': 'nvm_geo'}
+                             private_data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                                     rmap: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                     Removed fields:
+                                 nr_chnls: {'kind': 'INT', 'name': 'int'}
+                                nr_planes: {'kind': 'INT', 'name': 'int'}
+                            luns_per_chnl: {'kind': 'INT', 'name': 'int'}
+                               sec_per_pg: {'kind': 'INT', 'name': 'int'}
+                              pgs_per_blk: {'kind': 'INT', 'name': 'int'}
+                             blks_per_lun: {'kind': 'INT', 'name': 'int'}
+                                 fpg_size: {'kind': 'INT', 'name': 'int'}
+                                pfpg_size: {'kind': 'INT', 'name': 'int'}
+                                 sec_size: {'kind': 'INT', 'name': 'int'}
+                                 oob_size: {'kind': 'INT', 'name': 'int'}
+                                    mccap: {'kind': 'INT', 'name': 'int'}
+                                     ppaf: {'kind': 'STRUCT', 'name': 'nvm_addr_format'}
+                              max_rq_size: {'kind': 'INT', 'name': 'int'}
+                               plane_mode: {'kind': 'INT', 'name': 'int'}
+                               sec_per_pl: {'kind': 'INT', 'name': 'int'}
+                              sec_per_blk: {'kind': 'INT', 'name': 'int'}
+                              sec_per_lun: {'kind': 'INT', 'name': 'int'}
+                             total_blocks: {'kind': 'INT', 'name': 'long unsigned int'}
+                                  nr_luns: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT nvm_rq
+                     Struct has anonymous fields
+Kind.STRUCT nvmm_type
+                     Added fields:
+                                trans_ppa: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_trans_ppa_fn'}}
+                              part_to_tgt: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_part_to_tgt_fn'}}
+                     Removed fields:
+                                  get_blk: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_get_blk_fn'}}
+                                  put_blk: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_put_blk_fn'}}
+                                 open_blk: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_open_blk_fn'}}
+                                close_blk: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_close_blk_fn'}}
+                                flush_blk: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_flush_blk_fn'}}
+                                 mark_blk: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_mark_blk_fn'}}
+                                  get_lun: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_get_lun_fn'}}
+                              reserve_lun: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_reserve_lun'}}
+                              release_lun: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_release_lun'}}
+                           lun_info_print: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nvmm_lun_info_print_fn'}}
+Kind.STRUCT wake_irq
+                     Added fields:
+                                   status: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed fields:
+                            dedicated_irq: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT subsys_private
+                     Layout changed
+Kind.STRUCT root_device
+                     Layout changed
+Kind.STRUCT platform_object
+                     Layout changed
+Kind.STRUCT internal_container
+                     Layout changed
+Kind.STRUCT transport_class
+                     Layout changed
+Kind.STRUCT anon_transport_class
+                     Layout changed
+Kind.STRUCT genpd_power_state
+                     Added fields:
+                             residency_ns: {'kind': 'TYPEDEF', 'name': 's64'}
+                                   fwnode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fwnode_handle'}}
+Kind.STRUCT generic_pm_domain
+                     Struct has anonymous fields
+Kind.STRUCT isa_dev
+                     Layout changed
+Kind.STRUCT firmware_buf
+                     Added fields:
+                                    fw_st: {'kind': 'STRUCT', 'name': 'fw_state'}
+                     Removed fields:
+                               completion: {'kind': 'STRUCT', 'name': 'completion'}
+                                   status: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT firmware_priv
+                     Layout changed
+Kind.STRUCT regmap
+                     Struct has anonymous fields
+Kind.STRUCT regmap_irq_chip_data
+                     Layout changed
+Kind.STRUCT devcd_entry
+                     Layout changed
+Kind.STRUCT loop_device
+                     Removed fields:
+                     lo_backing_virt_file: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file'}}
+Kind.STRUCT loop_cmd
+                     Layout changed
+Kind.STRUCT switch_request
+                     Removed fields:
+                                virt_file: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file'}}
+Kind.STRUCT blkfront_info
+                     Fields reordered:
+                                          ['mutex', 'xbdev', 'gd', 'sector_size', 'physical_sector_size', 'vdevice', 'handle', 'connected', 'nr_ring_pages', 'rq', 'feature_flush', 'feature_fua', 'feature_discard', 'feature_secdiscard', 'discard_granularity', 'discard_alignment', 'feature_persistent', 'max_indirect_segments', 'is_ready', 'tag_set', 'rinfo', 'nr_rings', 'requests', 'bio_list']
+                                          ['mutex', 'xbdev', 'gd', 'sector_size', 'physical_sector_size', 'vdevice', 'handle', 'connected', 'nr_ring_pages', 'rq', 'feature_flush', 'feature_fua', 'feature_discard', 'feature_secdiscard', 'feature_persistent', 'discard_granularity', 'discard_alignment', 'max_indirect_segments', 'is_ready', 'tag_set', 'rinfo', 'nr_rings', 'requests', 'bio_list']
+Kind.STRUCT sram_partition
+                     Layout changed
+Kind.STRUCT pm860x_chip
+                     Layout changed
+Kind.STRUCT htcpld_chip
+                     Layout changed
+Kind.STRUCT arizona
+                     Added fields:
+                                     mclk: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'clk'}}}
+Kind.STRUCT wm8400
+                     Layout changed
+Kind.STRUCT wm831x
+                     Layout changed
+Kind.STRUCT wm8350
+                     Layout changed
+Kind.STRUCT sih_agent
+                     Layout changed
+Kind.STRUCT twl4030_audio
+                     Layout changed
+Kind.STRUCT twl6040
+                     Field type changed:
+                                    cells: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'STRUCT', 'name': 'mfd_cell'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'STRUCT', 'name': 'mfd_cell'}}
+Kind.STRUCT pcap_chip
+                     Layout changed
+Kind.STRUCT da903x_chip
+                     Layout changed
+Kind.STRUCT da9052
+                     Layout changed
+Kind.STRUCT lp8788_irq_data
+                     Layout changed
+Kind.STRUCT max8925_chip
+                     Layout changed
+Kind.STRUCT max8997_dev
+                     Layout changed
+Kind.STRUCT max8998_dev
+                     Layout changed
+Kind.STRUCT ab3100
+                     Layout changed
+Kind.STRUCT adp5520_chip
+                     Layout changed
+Kind.STRUCT tps6586x
+                     Layout changed
+Kind.STRUCT aat2870_data
+                     Layout changed
+Kind.STRUCT nvdimm
+                     Layout changed
+Kind.STRUCT nd_mapping
+                     Added fields:
+                                     lock: {'kind': 'STRUCT', 'name': 'mutex'}
+                     Fields reordered:
+                                          ['nvdimm', 'labels', 'start', 'size', 'ndd']
+                                          ['nvdimm', 'start', 'size', 'labels', 'lock', 'ndd']
+                     Field type changed:
+                                   labels: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nd_namespace_label'}}}
+                                         ->{'kind': 'STRUCT', 'name': 'list_head'}
+Kind.STRUCT nd_interleave_set
+                     Added fields:
+                                altcookie: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.STRUCT nvdimm_bus
+                     Layout changed
+Kind.STRUCT nd_region
+                     Layout changed
+Kind.STRUCT nd_blk_region
+                     Layout changed
+Kind.STRUCT nd_namespace_common
+                     Layout changed
+Kind.STRUCT nd_region_desc
+                     Added fields:
+                                  mapping: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nd_mapping_desc'}}
+                     Removed fields:
+                               nd_mapping: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nd_mapping'}}
+Kind.STRUCT nd_btt
+                     Layout changed
+Kind.STRUCT nd_namespace_io
+                     Layout changed
+Kind.STRUCT nd_namespace_pmem
+                     Added fields:
+                                       id: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT nd_namespace_blk
+                     Layout changed
+Kind.STRUCT nd_pfn
+                     Layout changed
+Kind.STRUCT nd_dax
+                     Layout changed
+Kind.STRUCT btt
+                     Layout changed
+Kind.STRUCT dma_buf
+                     Layout changed
+Kind.STRUCT dma_buf_poll_cb_t
+                     Field type changed:
+                                       cb: {'kind': 'STRUCT', 'name': 'fence_cb'}
+                                         ->{'kind': 'STRUCT', 'name': 'dma_fence_cb'}
+Kind.STRUCT reservation_object
+                     Field type changed:
+                               fence_excl: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+Kind.STRUCT reservation_object_list
+                     Field type changed:
+                                   shared: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 0, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 0, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}}
+Kind.STRUCT dma_buf_list
+                     Layout changed
+Kind.STRUCT default_wait_cb
+                     Field type changed:
+                                     base: {'kind': 'STRUCT', 'name': 'fence_cb'}
+                                         ->{'kind': 'STRUCT', 'name': 'dma_fence_cb'}
+Kind.STRUCT seqno_fence
+                     Field type changed:
+                                     base: {'kind': 'STRUCT', 'name': 'fence'}
+                                         ->{'kind': 'STRUCT', 'name': 'dma_fence'}
+                                      ops: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'fence_ops'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'dma_fence_ops'}}}
+Kind.STRUCT sync_file
+                     Added fields:
+                                    fence: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+                                       cb: {'kind': 'STRUCT', 'name': 'dma_fence_cb'}
+                     Removed fields:
+                               num_fences: {'kind': 'INT', 'name': 'int'}
+                                   status: {'kind': 'TYPEDEF', 'name': 'atomic_t'}
+                                      cbs: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 0, 'type': {'kind': 'STRUCT', 'name': 'sync_file_cb'}}
+Kind.STRUCT scsi_device
+                     Layout changed
+Kind.STRUCT Scsi_Host
+                     Struct has anonymous fields
+Kind.STRUCT scsi_target
+                     Layout changed
+Kind.STRUCT scsi_host_template
+                     Added fields:
+                               map_queues: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'Scsi_Host'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT scsi_disk
+                     Added fields:
+                                 nr_zones: {'kind': 'INT', 'name': 'unsigned int'}
+                              zone_blocks: {'kind': 'INT', 'name': 'unsigned int'}
+                               zone_shift: {'kind': 'INT', 'name': 'unsigned int'}
+                              zones_wlock: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                       zones_optimal_open: {'kind': 'INT', 'name': 'unsigned int'}
+                     zones_optimal_nonseq: {'kind': 'INT', 'name': 'unsigned int'}
+                           zones_max_open: {'kind': 'INT', 'name': 'unsigned int'}
+                                 rc_basis: {'kind': 'INT', 'name': 'unsigned int'}
+                                    zoned: {'kind': 'INT', 'name': 'unsigned int'}
+                                   urswrz: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT sg_device
+                     Layout changed
+Kind.STRUCT ata_link
+                     Layout changed
+Kind.STRUCT ata_host
+                     Layout changed
+Kind.STRUCT ata_port
+                     Layout changed
+Kind.STRUCT ata_device
+                     Struct has anonymous fields
+Kind.STRUCT mipi_dsi_device
+                     Layout changed
+Kind.STRUCT vgasr_priv
+                     Layout changed
+Kind.STRUCT flow_dissector_key_tags
+                     Removed fields:
+                                  vlan_id: {'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.STRUCT flow_keys
+                     Added fields:
+                                     vlan: {'kind': 'STRUCT', 'name': 'flow_dissector_key_vlan'}
+Kind.STRUCT tun_file
+                     Struct has anonymous fields
+Kind.STRUCT ppp_net
+                     Layout changed
+Kind.STRUCT usb_hub
+                     Layout changed
+Kind.STRUCT usb_port
+                     Layout changed
+Kind.STRUCT ep_device
+                     Layout changed
+Kind.STRUCT usb_gadget
+                     Added fields:
+                     quirk_avoids_skb_reserve: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT dwc2_hsotg
+                     Added fields:
+                                   params: {'kind': 'STRUCT', 'name': 'dwc2_core_params'}
+                     Removed fields:
+                              core_params: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dwc2_core_params'}}
+Kind.STRUCT dwc2_core_params
+                     Added fields:
+                                 host_dma: {'kind': 'TYPEDEF', 'name': 'bool'}
+                                    g_dma: {'kind': 'TYPEDEF', 'name': 'bool'}
+                               g_dma_desc: {'kind': 'TYPEDEF', 'name': 'bool'}
+                           g_rx_fifo_size: {'kind': 'TYPEDEF', 'name': 'u32'}
+                        g_np_tx_fifo_size: {'kind': 'TYPEDEF', 'name': 'u32'}
+                           g_tx_fifo_size: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 16, 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+                     Removed fields:
+                               dma_enable: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT dwc2_hw_params
+                     Added fields:
+                             rx_fifo_size: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed fields:
+                       dma_desc_fs_enable: {'kind': 'INT', 'name': 'unsigned int'}
+                        host_rx_fifo_size: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT dwc2_qh
+                     Field type changed:
+                                desc_list: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dwc2_hcd_dma_desc'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dwc2_dma_desc'}}
+Kind.STRUCT ehci_hcd
+                     Added fields:
+                      has_fsl_susp_errata: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT debug_buffer
+                     Layout changed
+Kind.STRUCT ehci_platform_priv
+                     Field type changed:
+                                     clks: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'clk'}}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'clk'}}}
+                                     rsts: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'reset_control', 'fwd_kind': 'struct'}}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'reset_control', 'fwd_kind': 'struct'}}}
+Kind.STRUCT xhci_command
+                     Added fields:
+                                  slot_id: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT xhci_hcd
+                     Added fields:
+                     cmd_ring_stop_completion: {'kind': 'STRUCT', 'name': 'completion'}
+                     Removed fields:
+                                 addr_dev: {'kind': 'STRUCT', 'name': 'completion'}
+                                  slot_id: {'kind': 'INT', 'name': 'int'}
+                            error_bitmask: {'kind': 'INT', 'name': 'int'}
+                     Field type changed:
+                                cmd_timer: {'kind': 'STRUCT', 'name': 'timer_list'}
+                                         ->{'kind': 'STRUCT', 'name': 'delayed_work'}
+Kind.STRUCT xhci_virt_device
+                     Removed fields:
+                           cmd_completion: {'kind': 'STRUCT', 'name': 'completion'}
+Kind.STRUCT serio
+                     Layout changed
+Kind.STRUCT ps2dev
+                     Layout changed
+Kind.STRUCT mousedev
+                     Layout changed
+Kind.STRUCT evdev
+                     Layout changed
+Kind.STRUCT atkbd
+                     Layout changed
+Kind.STRUCT elants_data
+                     Layout changed
+Kind.STRUCT uinput_device
+                     Layout changed
+Kind.STRUCT cmos_rtc
+                     Added fields:
+                             saved_wkalrm: {'kind': 'STRUCT', 'name': 'rtc_wkalrm'}
+Kind.STRUCT hwmon_device
+                     Added fields:
+                                     chip: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'hwmon_chip_info'}}}
+                                    group: {'kind': 'STRUCT', 'name': 'attribute_group'}
+                                   groups: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'attribute_group'}}}}
+Kind.STRUCT watchdog_ops
+                     Added fields:
+                           set_pretimeout: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'watchdog_device'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT watchdog_device
+                     Added fields:
+                                      gov: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'watchdog_governor'}}}
+                               pretimeout: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT watchdog_core_data
+                     Layout changed
+Kind.STRUCT mddev
+                     Added fields:
+                                 sb_flags: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.STRUCT dm_stats
+                     Layout changed
+Kind.STRUCT mapped_device
+                     Layout changed
+Kind.STRUCT dpages
+                     Struct has anonymous fields
+Kind.STRUCT kcopyd_job
+                     Layout changed
+Kind.STRUCT dm_stat
+                     Field type changed:
+                              stat_percpu: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 512, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dm_stat_percpu'}}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 8192, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dm_stat_percpu'}}}
+Kind.STRUCT dm_rq_target_io
+                     Layout changed
+Kind.STRUCT gov_attr_set
+                     Layout changed
+Kind.STRUCT dbs_data
+                     Layout changed
+Kind.STRUCT policy_dbs_info
+                     Added fields:
+                             update_mutex: {'kind': 'STRUCT', 'name': 'mutex'}
+                             idle_periods: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed fields:
+                              timer_mutex: {'kind': 'STRUCT', 'name': 'mutex'}
+Kind.STRUCT dbs_governor
+                     Added fields:
+                           gov_dbs_update: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cpufreq_policy'}}}], 'ret_type': {'kind': 'INT', 'name': 'unsigned int'}}}
+                     Removed fields:
+                            gov_dbs_timer: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cpufreq_policy'}}}], 'ret_type': {'kind': 'INT', 'name': 'unsigned int'}}}
+Kind.STRUCT acpi_cpufreq_data
+                     Layout changed
+Kind.STRUCT powernow_k8_data
+                     Layout changed
+Kind.STRUCT pstate_data
+                     Added fields:
+                                 max_freq: {'kind': 'INT', 'name': 'unsigned int'}
+                               turbo_freq: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT cpudata
+                     Added fields:
+                                   policy: {'kind': 'INT', 'name': 'unsigned int'}
+                              last_update: {'kind': 'TYPEDEF', 'name': 'u64'}
+                              perf_limits: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'perf_limits'}}
+                             iowait_boost: {'kind': 'INT', 'name': 'unsigned int'}
+                            epp_powersave: {'kind': 'TYPEDEF', 'name': 's16'}
+                               epp_policy: {'kind': 'TYPEDEF', 'name': 's16'}
+                              epp_default: {'kind': 'TYPEDEF', 'name': 's16'}
+                                epp_saved: {'kind': 'TYPEDEF', 'name': 's16'}
+Kind.STRUCT cpuidle_governor
+                     Removed fields:
+                                    owner: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'module'}}
+Kind.STRUCT mmc_request
+                     Added fields:
+                           cmd_completion: {'kind': 'STRUCT', 'name': 'completion'}
+                       cap_cmd_during_tfr: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT mmc_host
+                     Added fields:
+                              ongoing_mrq: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mmc_request'}}
+Kind.STRUCT mmc_ext_csd
+                     Added fields:
+                             cmdq_support: {'kind': 'TYPEDEF', 'name': 'bool'}
+                               cmdq_depth: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT mmc_card
+                     Added fields:
+                                  raw_ssr: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 16, 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+Kind.STRUCT mmc_host_ops
+                     Field type changed:
+                                  pre_req: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mmc_host'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mmc_request'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mmc_host'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mmc_request'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT mmc_async_req
+                     Field type changed:
+                                err_check: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mmc_card'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mmc_async_req'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mmc_card'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mmc_async_req'}}}], 'ret_type': {'kind': 'ENUM', 'name': 'mmc_blk_status', 'size': 4}}}
+Kind.STRUCT mmc_context_info
+                     Removed fields:
+                                     lock: {'kind': 'TYPEDEF', 'name': 'spinlock_t'}
+Kind.STRUCT sdio_func
+                     Layout changed
+Kind.STRUCT efivars
+                     Removed fields:
+                                     lock: {'kind': 'TYPEDEF', 'name': 'spinlock_t'}
+Kind.STRUCT cros_ec_device
+                     Added fields:
+                     mkbp_event_supported: {'kind': 'TYPEDEF', 'name': 'bool'}
+                           event_notifier: {'kind': 'STRUCT', 'name': 'blocking_notifier_head'}
+                               event_data: {'kind': 'STRUCT', 'name': 'ec_response_get_next_event'}
+                               event_size: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT clk_notifier
+                     Layout changed
+Kind.STRUCT devfreq_governor
+                     Added fields:
+                                immutable: {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+Kind.STRUCT devfreq
+                     Layout changed
+Kind.STRUCT devfreq_event_dev
+                     Layout changed
+Kind.STRUCT extcon_cable
+                     Added fields:
+                              usb_propval: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'UNION', 'name': 'extcon_property_value'}}
+                              chg_propval: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1, 'type': {'kind': 'UNION', 'name': 'extcon_property_value'}}
+                             jack_propval: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1, 'type': {'kind': 'UNION', 'name': 'extcon_property_value'}}
+                             disp_propval: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'UNION', 'name': 'extcon_property_value'}}
+                                 usb_bits: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                                 chg_bits: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                                jack_bits: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                                disp_bits: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+Kind.STRUCT vme_dev
+                     Layout changed
+Kind.STRUCT vme_bridge
+                     Field type changed:
+                                lm_attach: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vme_lm_resource'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vme_lm_resource'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT vme_driver
+                     Removed fields:
+                                 shutdown: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT vme_slave_resource
+                     Layout changed
+Kind.STRUCT vme_dma_list
+                     Layout changed
+Kind.STRUCT vme_dma_resource
+                     Layout changed
+Kind.STRUCT vme_lm_resource
+                     Layout changed
+Kind.STRUCT powercap_control_type
+                     Layout changed
+Kind.STRUCT powercap_zone
+                     Layout changed
+Kind.STRUCT restore_data_record
+                     Added fields:
+                              e820_digest: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 16, 'type': {'kind': 'TYPEDEF', 'name': 'u8'}}
+Kind.STRUCT inet_connection_sock_af_ops
+                     Field type changed:
+                            bind_conflict: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inet_bind_bucket'}}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inet_bind_bucket'}}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT inet_connection_sock
+                     Field type changed:
+                             icsk_ca_priv: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 8, 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 11, 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}
+Kind.STRUCT tcp_congestion_ops
+                     Added fields:
+                            tso_segs_goal: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'u32'}}}
+                            sndbuf_expand: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'u32'}}}
+                             cong_control: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'rate_sample'}}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT tcp_fastopen_cookie
+                     Struct has anonymous fields
+Kind.STRUCT tcp_sock
+                     Added fields:
+                             chrono_start: {'kind': 'TYPEDEF', 'name': 'u32'}
+                              chrono_stat: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+                              chrono_type: {'kind': 'TYPEDEF', 'name': 'u8'}
+                         rate_app_limited: {'kind': 'TYPEDEF', 'name': 'u8'}
+                                     lost: {'kind': 'TYPEDEF', 'name': 'u32'}
+                              app_limited: {'kind': 'TYPEDEF', 'name': 'u32'}
+                          first_tx_mstamp: {'kind': 'STRUCT', 'name': 'skb_mstamp'}
+                         delivered_mstamp: {'kind': 'STRUCT', 'name': 'skb_mstamp'}
+                           rate_delivered: {'kind': 'TYPEDEF', 'name': 'u32'}
+                         rate_interval_us: {'kind': 'TYPEDEF', 'name': 'u32'}
+                             ooo_last_skb: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}
+                     Removed fields:
+                                    syncp: {'kind': 'STRUCT', 'name': 'u64_stats_sync'}
+                                tsq_flags: {'kind': 'INT', 'name': 'long unsigned int'}
+                     Field type changed:
+                                  rtt_min: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'STRUCT', 'name': 'rtt_meas'}}
+                                         ->{'kind': 'STRUCT', 'name': 'minmax'}
+                       out_of_order_queue: {'kind': 'STRUCT', 'name': 'sk_buff_head'}
+                                         ->{'kind': 'STRUCT', 'name': 'rb_root'}
+Kind.STRUCT sock_exterr_skb
+                     Added fields:
+                                opt_stats: {'kind': 'TYPEDEF', 'name': 'u8'}
+                                   unused: {'kind': 'TYPEDEF', 'name': 'u8'}
+Kind.STRUCT tcp_request_sock
+                     Added fields:
+                                   ts_off: {'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.STRUCT napi_alloc_cache
+                     Field type changed:
+                                skb_count: {'kind': 'TYPEDEF', 'name': 'size_t'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT lwtunnel_state
+                     Added fields:
+                                 headroom: {'kind': 'TYPEDEF', 'name': '__u16'}
+                                      rcu: {'kind': 'STRUCT', 'name': 'callback_head'}
+                     Removed fields:
+                                      len: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT xdp_buff
+                     Added fields:
+                          data_hard_start: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+Kind.STRUCT flow_cache_entry
+                     Layout changed
+Kind.STRUCT inet6_ifaddr
+                     Added fields:
+                                dad_nonce: {'kind': 'TYPEDEF', 'name': '__u64'}
+Kind.STRUCT fib_info
+                     Added fields:
+                          fib_offload_cnt: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT tc_action
+                     Added fields:
+                               act_cookie: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'tc_cookie'}}
+                     Field type changed:
+                            tcfa_rate_est: {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}
+Kind.STRUCT tc_action_ops
+                     Added fields:
+                                  get_dev: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'tc_action'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.STRUCT lwtunnel_encap_ops
+                     Added fields:
+                            destroy_state: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lwtunnel_state'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                     xmit: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                    owner: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'module'}}
+Kind.STRUCT pfifo_fast_priv
+                     Field type changed:
+                                        q: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'STRUCT', 'name': 'sk_buff_head'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'STRUCT', 'name': 'qdisc_skb_head'}}
+Kind.STRUCT netlink_sock
+                     Layout changed
+Kind.STRUCT nl_seq_iter
+                     Layout changed
+Kind.STRUCT nf_hook_entry
+                     Added fields:
+                                     next: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_entry'}}
+                                     hook: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'nf_hookfn'}}
+                                     priv: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                     Removed fields:
+                                      ops: {'kind': 'STRUCT', 'name': 'nf_hook_ops'}
+Kind.STRUCT nf_queue_handler
+                     Field type changed:
+                             nf_hook_drop: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_ops'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_entry'}}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.STRUCT nf_queue_entry
+                     Added fields:
+                                     hook: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_entry'}}
+                     Removed fields:
+                                     elem: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_ops'}}
+Kind.STRUCT ip_reply_arg
+                     Added fields:
+                                      uid: {'kind': 'TYPEDEF', 'name': 'kuid_t'}
+Kind.STRUCT tcp_request_sock_ops
+                     Field type changed:
+                                 init_seq: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': '__u32'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': '__u32'}}}
+Kind.STRUCT tcp_info
+                     Added fields:
+                     tcpi_delivery_rate_app_limited: {'kind': 'TYPEDEF', 'name': '__u8'}
+                       tcpi_delivery_rate: {'kind': 'TYPEDEF', 'name': '__u64'}
+                           tcpi_busy_time: {'kind': 'TYPEDEF', 'name': '__u64'}
+                        tcpi_rwnd_limited: {'kind': 'TYPEDEF', 'name': '__u64'}
+                      tcpi_sndbuf_limited: {'kind': 'TYPEDEF', 'name': '__u64'}
+Kind.STRUCT tcp_skb_cb
+                     Struct has anonymous fields
+Kind.STRUCT tcp_sacktag_state
+                     Added fields:
+                                     rate: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rate_sample'}}
+Kind.STRUCT raw_sock
+                     Layout changed
+Kind.STRUCT udp_sock
+                     Added fields:
+                          forward_deficit: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT fib4_rule
+                     Layout changed
+Kind.STRUCT ip_tunnel
+                     Field type changed:
+                            ip_tnl_net_id: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT ip6_tnl
+                     Layout changed
+Kind.STRUCT __ip6_tnl_parm
+                     Added fields:
+                               collect_md: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT wpan_phy
+                     Layout changed
+Kind.STRUCT ip6rd_flowi
+                     Layout changed
+Kind.STRUCT raw6_sock
+                     Layout changed
+Kind.STRUCT tcp6_sock
+                     Layout changed
+Kind.STRUCT fib6_rule
+                     Layout changed
+Kind.STRUCT packet_sock
+                     Layout changed
+Kind.STRUCT wireless_dev
+                     Added fields:
+                               is_running: {'kind': 'TYPEDEF', 'name': 'bool'}
+                     Removed fields:
+                              p2p_started: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT cfg80211_crypto_settings
+                     Added fields:
+                                 wep_keys: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'key_params'}}
+                               wep_tx_key: {'kind': 'INT', 'name': 'int'}
+Kind.STRUCT wiphy
+                     Added fields:
+                           cookie_counter: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Field type changed:
+                             ext_features: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1, 'type': {'kind': 'TYPEDEF', 'name': 'u8'}}
+                                         ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'TYPEDEF', 'name': 'u8'}}
+Kind.STRUCT cfg80211_connect_params
+                     Layout changed
+Kind.STRUCT ieee80211_iface_combination
+                     Added fields:
+                       beacon_int_min_gcd: {'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.STRUCT rfkill
+                     Layout changed
+Kind.STRUCT rfkill_data
+                     Layout changed
+Kind.STRUCT ncsi_channel
+                     Added fields:
+                                  monitor: {'kind': 'STRUCT', 'name': '(anon)'}
+                     Removed fields:
+                                    timer: {'kind': 'STRUCT', 'name': 'timer_list'}
+                                  enabled: {'kind': 'TYPEDEF', 'name': 'bool'}
+                                  timeout: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.STRUCT ncsi_dev_priv
+                     Added fields:
+                              hot_channel: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ncsi_channel'}}
+Kind.STRUCT ncsi_request
+                     Added fields:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed fields:
+                                   driven: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.STRUCT ncsi_cmd_arg
+                     Struct has anonymous fields

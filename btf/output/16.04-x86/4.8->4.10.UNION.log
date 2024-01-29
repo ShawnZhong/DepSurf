@@ -1,0 +1,21 @@
+Old Kind.UNION (83): ['fpregs_state', 'irq_stack_union', 'ktime', 'sigval', 'key_payload', 'perf_mem_data_src', 'flowi_uli', 'ethtool_flow_union', 'thread_union', 'perf_capabilities']
+New Kind.UNION (89): ['fpregs_state', 'irq_stack_union', 'sigval', 'key_payload', 'perf_mem_data_src', 'flowi_uli', 'ethtool_flow_union', 'thread_union', 'perf_capabilities', 'cpuid10_eax']
+Added Kind.UNION (7): ['cpuid_0x10_1_eax', 'cpuid_0x10_1_edx', 'fuse_dentry', 'irte_ga_lo', 'irte_ga_hi', 'ec_response_get_next_data', 'extcon_property_value']
+Removed Kind.UNION (1): ['ktime']
+Common Kind.UNION (82): ['fpregs_state', 'irq_stack_union', 'sigval', 'key_payload', 'perf_mem_data_src', 'flowi_uli', 'ethtool_flow_union', 'thread_union', 'perf_capabilities', 'cpuid10_eax']
+Changed Kind.UNION (4): ['thread_union', 'bpf_attr', 'security_list_options', 'tcp_cc_info']
+Kind.UNION  thread_union
+                     Removed fields:
+                              thread_info: {'kind': 'STRUCT', 'name': 'thread_info'}
+Kind.UNION  bpf_attr
+                     Struct has anonymous fields
+Kind.UNION  security_list_options
+                     Added fields:
+                     dentry_create_files_as: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'qstr'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                            inode_copy_up: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                      inode_copy_up_xattr: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                     Removed fields:
+                     kernel_module_from_file: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.UNION  tcp_cc_info
+                     Added fields:
+                                      bbr: {'kind': 'STRUCT', 'name': 'tcp_bbr_info'}

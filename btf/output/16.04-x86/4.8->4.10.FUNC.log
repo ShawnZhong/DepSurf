@@ -1,0 +1,2054 @@
+Old Kind.FUNC (38123): ['reset_early_page_tables', 'copy_bootdata', 'x86_64_start_reservations', 'x86_64_start_kernel', 'early_make_pgtable', 'reserve_bios_regions', 'x86_early_init_platform_quirks', 'arch_local_irq_disable', 'arch_local_save_flags', 'repair_env_string']
+New Kind.FUNC (39045): ['reset_early_page_tables', 'copy_bootdata', 'x86_64_start_reservations', 'x86_64_start_kernel', 'early_make_pgtable', 'reserve_bios_regions', 'x86_early_init_platform_quirks', 'arch_local_save_flags', 'repair_env_string', 'set_init_arg']
+Added Kind.FUNC (1507): ['map_vdso_randomized', 'map_vdso_once', 'cpumask_weight', 'bitmap_copy', 'intel_pmu_del_event', 'intel_pmu_add_event', 'pebs_update_state', 'intel_pmu_pebs_add', 'intel_pmu_pebs_del', 'intel_pmu_lbr_add']
+Removed Kind.FUNC (585): ['arch_local_irq_disable', 'arch_local_irq_enable', 'list_del', 'backtrace_stack', 'backtrace_address', '__intel_pmu_lbr_disable', 'intel_pmu_lbr_enable', 'intel_pmu_lbr_disable', 'uncore_cpu_prepare', 'uncore_cpu_starting']
+Common Kind.FUNC (37538): ['reset_early_page_tables', 'copy_bootdata', 'x86_64_start_reservations', 'x86_64_start_kernel', 'early_make_pgtable', 'reserve_bios_regions', 'x86_early_init_platform_quirks', 'arch_local_save_flags', 'repair_env_string', 'set_init_arg']
+Changed Kind.FUNC (386): ['map_vdso', 'native_write_msr_safe', 'xen_clocksource_read', 'xen_clocksource_get_cycles', 'show_trace_log_lvl', 'alloc_ldt_struct', 'read_tsc', 'convert_art_to_tsc', 'save_stack_address', 'mce_start_timer']
+Kind.FUNC   map_vdso
+                     Added params:
+                                     addr: {'kind': 'INT', 'name': 'long unsigned int'}
+                     Removed params:
+                           calculate_addr: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   native_write_msr_safe
+                     Param type changed:
+                                      low: {'kind': 'INT', 'name': 'unsigned int'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u32'}
+                                     high: {'kind': 'INT', 'name': 'unsigned int'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.FUNC   xen_clocksource_read
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   xen_clocksource_get_cycles
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   show_trace_log_lvl
+                     Removed params:
+                                       bp: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   alloc_ldt_struct
+                     Param type changed:
+                                     size: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   read_tsc
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   convert_art_to_tsc
+                     Param type changed:
+                                      art: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   save_stack_address
+                     Added params:
+                                    trace: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'stack_trace'}}
+                                  nosched: {'kind': 'TYPEDEF', 'name': 'bool'}
+                     Removed params:
+                                     data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                                 reliable: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   mce_start_timer
+                     Removed params:
+                                      cpu: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   native_write_msr
+                     Param type changed:
+                                      low: {'kind': 'INT', 'name': 'unsigned int'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u32'}
+                                     high: {'kind': 'INT', 'name': 'unsigned int'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.FUNC   find_patch
+                     Added params:
+                                      uci: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ucode_cpu_info'}}
+                     Removed params:
+                                      cpu: {'kind': 'INT', 'name': 'unsigned int'}
+                     Return type changed:
+                                         : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ucode_patch'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'microcode_intel'}}
+Kind.FUNC   load_ucode_amd_ap
+                     Added params:
+                                   family: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   save_microcode_in_initrd_amd
+                     Added params:
+                                      fam: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   topology_update_package_map
+                     Added params:
+                                      pkg: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                   apicid: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   check_tsc_warp
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'cycles_t'}
+Kind.FUNC   can_boost
+                     Added params:
+                                     addr: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+Kind.FUNC   read_hpet
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   kvm_clock_read
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   kvm_clock_get_cycles
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   kvm_sched_clock_read
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   pvclock_clocksource_read
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   sync_global_pgds
+                     Removed params:
+                                  removed: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   track_pfn_insert
+                     Return type changed:
+                                         : {'kind': 'INT', 'name': 'int'}
+                                         ->{'name': 'void', 'kind': 'VOID'}
+Kind.FUNC   account_kernel_stack
+                     Added params:
+                                      tsk: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}
+                     Removed params:
+                                    stack: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+Kind.FUNC   cpuhp_issue_call
+                     Added params:
+                                     node: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'hlist_node'}}
+                     Removed params:
+                                       cb: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.FUNC   cpuhp_store_callbacks
+                     Added params:
+                           multi_instance: {'kind': 'TYPEDEF', 'name': 'bool'}
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   cpuhp_invoke_callback
+                     Added params:
+                                    state: {'kind': 'ENUM', 'name': 'cpuhp_state', 'size': 4}
+                                  bringup: {'kind': 'TYPEDEF', 'name': 'bool'}
+                                     node: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'hlist_node'}}
+                     Removed params:
+                                     step: {'kind': 'ENUM', 'name': 'cpuhp_state', 'size': 4}
+                                       cb: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+Kind.FUNC   cpuhp_down_callbacks
+                     Removed params:
+                                    steps: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cpuhp_step'}}
+Kind.FUNC   cpuhp_up_callbacks
+                     Removed params:
+                                    steps: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cpuhp_step'}}
+Kind.FUNC   __cpuhp_setup_state
+                     Added params:
+                           multi_instance: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   workqueue_set_unbound_cpumask
+                     Param type changed:
+                                  cpumask: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cpumask'}}
+                                         ->{'kind': 'TYPEDEF', 'name': 'cpumask_var_t'}
+Kind.FUNC   account_user_time
+                     Removed params:
+                           cputime_scaled: {'kind': 'TYPEDEF', 'name': 'cputime_t'}
+Kind.FUNC   account_system_time
+                     Removed params:
+                           cputime_scaled: {'kind': 'TYPEDEF', 'name': 'cputime_t'}
+Kind.FUNC   select_idle_sibling
+                     Added params:
+                                     prev: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   update_load_avg
+                     Added params:
+                                    flags: {'kind': 'INT', 'name': 'int'}
+                     Removed params:
+                                update_tg: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   cpudl_set
+                     Removed params:
+                                 is_valid: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   cpufreq_add_update_util_hook
+                     Param type changed:
+                                     func: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'update_util_data'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'update_util_data'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   mutex_optimistic_spin
+                     Added params:
+                                   waiter: {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}
+Kind.FUNC   __mutex_lock_slowpath
+                     Added params:
+                                     lock: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mutex'}}
+                     Removed params:
+                               lock_count: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'atomic_t'}}
+Kind.FUNC   percpu_down_write
+                     Added params:
+                                      sem: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+                     Removed params:
+                                      brw: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+Kind.FUNC   __percpu_init_rwsem
+                     Added params:
+                                      sem: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+                     Removed params:
+                                      brw: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+Kind.FUNC   percpu_free_rwsem
+                     Added params:
+                                      sem: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+                     Removed params:
+                                      brw: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+Kind.FUNC   percpu_up_write
+                     Added params:
+                                      sem: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+                     Removed params:
+                                      brw: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+Kind.FUNC   cont_add
+                     Added params:
+                                    flags: {'kind': 'ENUM', 'name': 'log_flags', 'size': 4}
+Kind.FUNC   msg_print_text
+                     Removed params:
+                                     prev: {'kind': 'ENUM', 'name': 'log_flags', 'size': 4}
+Kind.FUNC   console_cpu_notify
+                     Added params:
+                                      cpu: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                     self: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'notifier_block'}}
+                                   action: {'kind': 'INT', 'name': 'long unsigned int'}
+                                     hcpu: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+Kind.FUNC   alloc_msi_entry
+                     Added params:
+                                     nvec: {'kind': 'INT', 'name': 'int'}
+                                 affinity: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cpumask'}}}
+Kind.FUNC   dummy_clock_read
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   jiffies_read
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   timecounter_cyc2time
+                     Param type changed:
+                             cycle_tstamp: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   find_symbol
+                     Param type changed:
+                                      crc: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 's32'}}}}
+Kind.FUNC   kexec_add_buffer
+                     Added params:
+                                     kbuf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kexec_buf'}}
+                     Removed params:
+                                    image: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kimage'}}
+                                   buffer: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+                                    bufsz: {'kind': 'INT', 'name': 'long unsigned int'}
+                                    memsz: {'kind': 'INT', 'name': 'long unsigned int'}
+                                buf_align: {'kind': 'INT', 'name': 'long unsigned int'}
+                                  buf_min: {'kind': 'INT', 'name': 'long unsigned int'}
+                                  buf_max: {'kind': 'INT', 'name': 'long unsigned int'}
+                                 top_down: {'kind': 'TYPEDEF', 'name': 'bool'}
+                                load_addr: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+Kind.FUNC   cgroup_path_ns
+                     Return type changed:
+                                         : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   task_cgroup_path
+                     Return type changed:
+                                         : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   free_user_ns
+                     Added params:
+                                     work: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'work_struct'}}
+                     Removed params:
+                                       ns: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+Kind.FUNC   audit_log_name
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   audit_log_link_denied
+                     Param type changed:
+                                     link: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   audit_watch_handle_event
+                     Param type changed:
+                                     data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   audit_mark_handle_event
+                     Param type changed:
+                                     data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   audit_tree_handle_event
+                     Param type changed:
+                                     data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   wakeup_readers
+                     Added params:
+                                     work: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'irq_work'}}
+                     Removed params:
+                                     data: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   ns2usecs
+                     Param type changed:
+                                     nsec: {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   ftrace_now
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   ftrace_push_return_trace
+                     Added params:
+                                     retp: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+Kind.FUNC   blk_fill_rwbs
+                     Removed params:
+                                       rw: {'kind': 'TYPEDEF', 'name': 'u32'}
+                     Param type changed:
+                                       op: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   filter_opstack_push
+                     Param type changed:
+                                       op: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'ENUM', 'name': 'filter_op_ids', 'size': 4}
+Kind.FUNC   postfix_append_op
+                     Param type changed:
+                                       op: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'ENUM', 'name': 'filter_op_ids', 'size': 4}
+Kind.FUNC   bpf_get_current_task
+                     Added params:
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_5: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_trace_printk
+                     Added params:
+                                      fmt: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     arg1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     arg2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     arg3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_perf_event_output
+                     Added params:
+                                     regs: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      map: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     data: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_perf_event_output_tp
+                     Added params:
+                                  tp_buff: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      map: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                    flags: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     data: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                    index: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_get_stackid_tp
+                     Added params:
+                                  tp_buff: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      map: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                    flags: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_perf_event_read
+                     Added params:
+                                      map: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_probe_read
+                     Added params:
+                                      dst: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     size: {'kind': 'TYPEDEF', 'name': 'u64'}
+                               unsafe_ptr: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_probe_write_user
+                     Added params:
+                               unsafe_ptr: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      src: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     size: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   perf_trace_pstate_sample
+                     Added params:
+                                 io_boost: {'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.FUNC   trace_event_raw_event_pstate_sample
+                     Added params:
+                                 io_boost: {'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.FUNC   bpf_user_rnd_u32
+                     Added params:
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_5: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   check_reg_arg
+                     Param type changed:
+                                     regs: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'reg_state'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_reg_state'}}
+Kind.FUNC   pop_stack
+                     Param type changed:
+                                      env: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_env'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_env'}}
+Kind.FUNC   print_verifier_state
+                     Param type changed:
+                                    state: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_state'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_state'}}
+Kind.FUNC   check_stack_boundary
+                     Param type changed:
+                                      env: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_env'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_env'}}
+Kind.FUNC   check_func_arg
+                     Param type changed:
+                                      env: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_env'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_env'}}
+Kind.FUNC   check_mem_access
+                     Param type changed:
+                                      env: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_env'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_env'}}
+Kind.FUNC   do_check
+                     Param type changed:
+                                      env: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_env'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_env'}}
+Kind.FUNC   bpf_get_current_uid_gid
+                     Added params:
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_5: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_map_lookup_elem
+                     Added params:
+                                      map: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      key: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_map_update_elem
+                     Added params:
+                                      map: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      key: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                    value: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                    flags: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_map_delete_elem
+                     Added params:
+                                      map: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      key: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_get_smp_processor_id
+                     Added params:
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_5: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_get_current_pid_tgid
+                     Added params:
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_5: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_ktime_get_ns
+                     Added params:
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_5: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_get_current_comm
+                     Added params:
+                                      buf: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_get_stackid
+                     Added params:
+                                     regs: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      map: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   padata_set_cpumask
+                     Param type changed:
+                                  cpumask: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cpumask'}}
+                                         ->{'kind': 'TYPEDEF', 'name': 'cpumask_var_t'}
+Kind.FUNC   __lock_page
+                     Added params:
+                                   __page: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+                     Removed params:
+                                     page: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+Kind.FUNC   __lock_page_killable
+                     Added params:
+                                   __page: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+                     Removed params:
+                                     page: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+Kind.FUNC   filemap_map_pages
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                       fe: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+Kind.FUNC   exit_oom_victim
+                     Removed params:
+                                      tsk: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}
+Kind.FUNC   oom_kill_process
+                     Removed params:
+                                        p: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}
+                                   points: {'kind': 'INT', 'name': 'unsigned int'}
+                               totalpages: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   oom_killer_disable
+                     Added params:
+                                  timeout: {'kind': 'INT', 'name': 'long int'}
+Kind.FUNC   lruvec_lru_size
+                     Added params:
+                                 zone_idx: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   get_user_pages_locked
+                     Added params:
+                                gup_flags: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                    write: {'kind': 'INT', 'name': 'int'}
+                                    force: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   get_user_pages_unlocked
+                     Added params:
+                                gup_flags: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                    write: {'kind': 'INT', 'name': 'int'}
+                                    force: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   get_user_pages_remote
+                     Added params:
+                                gup_flags: {'kind': 'INT', 'name': 'unsigned int'}
+                                   locked: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+                     Removed params:
+                                    write: {'kind': 'INT', 'name': 'int'}
+                                    force: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   get_user_pages
+                     Added params:
+                                gup_flags: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                    write: {'kind': 'INT', 'name': 'int'}
+                                    force: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   __access_remote_vm
+                     Added params:
+                                gup_flags: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                    write: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   do_page_mkwrite
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                      vma: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_area_struct'}}
+                                     page: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+                                  address: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   __do_fault
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                       fe: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+                                    pgoff: {'kind': 'INT', 'name': 'long unsigned int'}
+                                 cow_page: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+                                     page: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}}
+                                    entry: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   wp_page_copy
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                       fe: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+                                 orig_pte: {'kind': 'TYPEDEF', 'name': 'pte_t'}
+                                 old_page: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+Kind.FUNC   do_wp_page
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                       fe: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+                                 orig_pte: {'kind': 'TYPEDEF', 'name': 'pte_t'}
+Kind.FUNC   do_swap_page
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                       fe: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+                                 orig_pte: {'kind': 'TYPEDEF', 'name': 'pte_t'}
+Kind.FUNC   alloc_set_pte
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                       fe: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+Kind.FUNC   access_remote_vm
+                     Added params:
+                                gup_flags: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                    write: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   access_process_vm
+                     Added params:
+                                gup_flags: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                    write: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   vma_wants_writenotify
+                     Added params:
+                             vm_page_prot: {'kind': 'TYPEDEF', 'name': 'pgprot_t'}
+Kind.FUNC   __purge_vmap_area_lazy
+                     Removed params:
+                                     sync: {'kind': 'INT', 'name': 'int'}
+                              force_flush: {'kind': 'INT', 'name': 'int'}
+                     Param type changed:
+                                    start: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                                         ->{'kind': 'INT', 'name': 'long unsigned int'}
+                                      end: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                                         ->{'kind': 'INT', 'name': 'long unsigned int'}
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   hugetlb_fix_reserve_counts
+                     Removed params:
+                          restore_reserve: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   hugetlb_cow
+                     Removed params:
+                                      pte: {'kind': 'TYPEDEF', 'name': 'pte_t'}
+Kind.FUNC   stable_tree_append
+                     Added params:
+                     max_page_sharing_bypass: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   zone_can_shift
+                     Added params:
+                               zone_shift: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+                     Return type changed:
+                                         : {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   test_pages_in_a_zone
+                     Added params:
+                              valid_start: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                                valid_end: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+Kind.FUNC   touch_pmd
+                     Added params:
+                                    flags: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   do_huge_pmd_anonymous_page
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                       fe: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+Kind.FUNC   huge_pmd_set_accessed
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                       fe: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+Kind.FUNC   do_huge_pmd_numa_page
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                       fe: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+Kind.FUNC   move_huge_pmd
+                     Added params:
+                               need_flush: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}
+Kind.FUNC   do_huge_pmd_wp_page
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                       fe: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+Kind.FUNC   mem_cgroup_update_lru_size
+                     Added params:
+                                      zid: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   get_vaddr_frames
+                     Added params:
+                                gup_flags: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                    write: {'kind': 'TYPEDEF', 'name': 'bool'}
+                                    force: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   alloc_file
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   may_open
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   expand_files
+                     Param type changed:
+                                       nr: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   clone_private_mount
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   commit_tree
+                     Removed params:
+                                  shadows: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mount'}}
+Kind.FUNC   lookup_mnt
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   mnt_clone_internal
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   collect_mounts
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   path_is_under
+                     Param type changed:
+                                    path1: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+                                    path2: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   seq_put_decimal_ull
+                     Param type changed:
+                                delimiter: {'kind': 'INT', 'name': 'char'}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+Kind.FUNC   seq_put_decimal_ll
+                     Param type changed:
+                                delimiter: {'kind': 'INT', 'name': 'char'}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+Kind.FUNC   vfs_listxattr
+                     Added params:
+                                   dentry: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+                     Removed params:
+                                        d: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+Kind.FUNC   xattr_resolve_name
+                     Added params:
+                                    inode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+                     Removed params:
+                                 handlers: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'xattr_handler'}}}}
+Kind.FUNC   simple_rename
+                     Added params:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   vmsplice_to_pipe
+                     Added params:
+                                     uiov: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'iovec'}}}
+                     Removed params:
+                                      iov: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'iovec'}}}
+Kind.FUNC   utimes_common
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   vfs_statfs
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   fsnotify
+                     Param type changed:
+                                     data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   __fsnotify_parent
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   dnotify_handle_event
+                     Param type changed:
+                                     data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   inotify_handle_event
+                     Param type changed:
+                                     data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   fanotify_handle_event
+                     Param type changed:
+                                     data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   fanotify_alloc_event
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   handle_userfault
+                     Added params:
+                                      vmf: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+                     Removed params:
+                                       fe: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+Kind.FUNC   aio_setup_ring
+                     Added params:
+                                nr_events: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   dax_wake_mapping_entry_waiter
+                     Added params:
+                                    entry: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+Kind.FUNC   fscrypt_decrypt_page
+                     Added params:
+                                    inode: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+                                      len: {'kind': 'INT', 'name': 'unsigned int'}
+                                     offs: {'kind': 'INT', 'name': 'unsigned int'}
+                                 lblk_num: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   fscrypt_initialize
+                     Added params:
+                                cop_flags: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   fscrypt_get_ctx
+                     Param type changed:
+                                    inode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+Kind.FUNC   fscrypt_encrypt_page
+                     Added params:
+                                     page: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+                                      len: {'kind': 'INT', 'name': 'unsigned int'}
+                                     offs: {'kind': 'INT', 'name': 'unsigned int'}
+                                 lblk_num: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                           plaintext_page: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+                     Param type changed:
+                                    inode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+Kind.FUNC   fscrypt_zeroout_range
+                     Param type changed:
+                                    inode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+Kind.FUNC   fscrypt_fname_encrypted_size
+                     Param type changed:
+                                    inode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+Kind.FUNC   fscrypt_fname_alloc_buffer
+                     Param type changed:
+                                    inode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+Kind.FUNC   compat_SyS_io_setup
+                     Added params:
+                                nr_events: {'kind': 'INT', 'name': 'long int'}
+                     Removed params:
+                                  nr_reqs: {'kind': 'INT', 'name': 'long int'}
+Kind.FUNC   mb_cache_shrink
+                     Param type changed:
+                               nr_to_scan: {'kind': 'INT', 'name': 'unsigned int'}
+                                         ->{'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   dquot_quota_on
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   proc_pid_make_inode
+                     Added params:
+                                     mode: {'kind': 'TYPEDEF', 'name': 'umode_t'}
+Kind.FUNC   sysctl_follow_link
+                     Removed params:
+                               namespaces: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nsproxy'}}
+Kind.FUNC   kernfs_iop_rename
+                     Added params:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   get_dcookie
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   ext4_truncate
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   ext4_quota_on
+                     Param type changed:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+Kind.FUNC   ext4_ext_truncate
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   journal_init_common
+                     Added params:
+                                     bdev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'block_device'}}
+                                   fs_dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'block_device'}}
+                                    start: {'kind': 'INT', 'name': 'long long unsigned int'}
+                                      len: {'kind': 'INT', 'name': 'int'}
+                                blocksize: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   vfat_rename
+                     Added params:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   ecryptfs_rename
+                     Added params:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   get_name
+                     Added params:
+                                     bank: {'kind': 'INT', 'name': 'unsigned int'}
+                                        b: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'threshold_block'}}
+                     Removed params:
+                                     path: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+                                     name: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+                                    child: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+                     Return type changed:
+                                         : {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+Kind.FUNC   fuse_getxattr
+                     Removed params:
+                                    entry: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+Kind.FUNC   fuse_removexattr
+                     Added params:
+                                    inode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+                     Removed params:
+                                    entry: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+Kind.FUNC   fuse_setxattr
+                     Removed params:
+                                   unused: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+Kind.FUNC   fuse_do_setattr
+                     Added params:
+                                   dentry: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+                     Removed params:
+                                    inode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+Kind.FUNC   wake_const_ops
+                     Added params:
+                                   wake_q: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'wake_q_head'}}
+                     Removed params:
+                                       pt: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+Kind.FUNC   do_smart_wakeup_zero
+                     Added params:
+                                   wake_q: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'wake_q_head'}}
+                     Removed params:
+                                       pt: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+Kind.FUNC   update_queue
+                     Added params:
+                                   wake_q: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'wake_q_head'}}
+                     Removed params:
+                                       pt: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+Kind.FUNC   do_smart_update
+                     Added params:
+                                   wake_q: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'wake_q_head'}}
+                     Removed params:
+                                       pt: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+Kind.FUNC   selinux_determine_inode_label
+                     Added params:
+                                     tsec: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'task_security_struct'}}}
+Kind.FUNC   ima_d_path
+                     Added params:
+                                  namebuf: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+Kind.FUNC   crypto_cbc_setkey
+                     Param type changed:
+                                   parent: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_tfm'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_skcipher'}}
+Kind.FUNC   crypto_cbc_free
+                     Param type changed:
+                                     inst: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_instance'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_instance'}}
+Kind.FUNC   crypto_cbc_exit_tfm
+                     Param type changed:
+                                      tfm: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_tfm'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_skcipher'}}
+Kind.FUNC   crypto_cbc_init_tfm
+                     Param type changed:
+                                      tfm: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_tfm'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_skcipher'}}
+Kind.FUNC   crypto_cbc_encrypt
+                     Added params:
+                                      req: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_request'}}
+                     Removed params:
+                                     desc: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blkcipher_desc'}}
+                                      dst: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+                                      src: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+                                   nbytes: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   crypto_cbc_decrypt
+                     Added params:
+                                      req: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_request'}}
+                     Removed params:
+                                     desc: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blkcipher_desc'}}
+                                      dst: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+                                      src: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+                                   nbytes: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   decrypt
+                     Added params:
+                                      req: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_request'}}
+                     Removed params:
+                                     desc: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blkcipher_desc'}}
+                                      dst: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+                                      src: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+                                   nbytes: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   encrypt
+                     Added params:
+                                      req: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_request'}}
+                     Removed params:
+                                     desc: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blkcipher_desc'}}
+                                      dst: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+                                      src: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+                                   nbytes: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   free
+                     Param type changed:
+                                     inst: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_instance'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_instance'}}
+Kind.FUNC   exit_tfm
+                     Param type changed:
+                                      tfm: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_tfm'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_skcipher'}}
+Kind.FUNC   init_tfm
+                     Param type changed:
+                                      tfm: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_tfm'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_skcipher'}}
+Kind.FUNC   bio_init
+                     Added params:
+                                    table: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bio_vec'}}
+                                 max_vecs: {'kind': 'INT', 'name': 'short unsigned int'}
+Kind.FUNC   elv_may_queue
+                     Removed params:
+                                 op_flags: {'kind': 'INT', 'name': 'int'}
+                     Param type changed:
+                                       op: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   freed_request
+                     Added params:
+                                     sync: {'kind': 'TYPEDEF', 'name': 'bool'}
+                                 rq_flags: {'kind': 'TYPEDEF', 'name': 'req_flags_t'}
+                     Removed params:
+                                       op: {'kind': 'INT', 'name': 'int'}
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   get_request
+                     Removed params:
+                                 op_flags: {'kind': 'INT', 'name': 'int'}
+                     Param type changed:
+                                       op: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   blk_mq_add_to_requeue_list
+                     Added params:
+                        kick_requeue_list: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   blk_mq_requeue_request
+                     Added params:
+                        kick_requeue_list: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   __blk_mq_alloc_request
+                     Removed params:
+                                 op_flags: {'kind': 'INT', 'name': 'int'}
+                     Param type changed:
+                                       op: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   blk_mq_map_request
+                     Param type changed:
+                                     data: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blk_map_ctx'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blk_mq_alloc_data'}}
+Kind.FUNC   blk_mq_put_tag
+                     Added params:
+                                      ctx: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blk_mq_ctx'}}
+                     Removed params:
+                                 last_tag: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+Kind.FUNC   cfq_may_queue
+                     Removed params:
+                                 op_flags: {'kind': 'INT', 'name': 'int'}
+                     Param type changed:
+                                       op: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   check_blkcg_changed
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   __radix_tree_preload
+                     Param type changed:
+                                       nr: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   __radix_tree_delete_node
+                     Added params:
+                              update_node: {'kind': 'TYPEDEF', 'name': 'radix_tree_update_node_t'}
+                                  private: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'bool'}
+                                         ->{'name': 'void', 'kind': 'VOID'}
+Kind.FUNC   rhashtable_insert_slow
+                     Removed params:
+                                      tbl: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bucket_table'}}
+                     Return type changed:
+                                         : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bucket_table'}}
+                                         ->{'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+Kind.FUNC   unmap_single
+                     Added params:
+                                    attrs: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   swiotlb_tbl_map_single
+                     Added params:
+                                    attrs: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   swiotlb_tbl_unmap_single
+                     Added params:
+                                    attrs: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   trace_event_raw_event_swiotlb_bounced
+                     Param type changed:
+                            swiotlb_force: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'ENUM', 'name': 'swiotlb_force', 'size': 4}
+Kind.FUNC   perf_trace_swiotlb_bounced
+                     Param type changed:
+                            swiotlb_force: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'ENUM', 'name': 'swiotlb_force', 'size': 4}
+Kind.FUNC   amd_gpio_irq_handler
+                     Added params:
+                                      irq: {'kind': 'INT', 'name': 'int'}
+                                   dev_id: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                     Removed params:
+                                     desc: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'irq_desc'}}
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'irqreturn_t'}
+Kind.FUNC   sx150x_gpio_set_single_ended
+                     Added params:
+                                     chip: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+                     Removed params:
+                                       gc: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+Kind.FUNC   sx150x_gpio_set
+                     Added params:
+                                     chip: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+                                    value: {'kind': 'INT', 'name': 'int'}
+                     Removed params:
+                                       gc: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+                                      val: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   sx150x_gpio_direction_output
+                     Added params:
+                                     chip: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+                                    value: {'kind': 'INT', 'name': 'int'}
+                     Removed params:
+                                       gc: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+                                      val: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   sx150x_gpio_direction_input
+                     Added params:
+                                     chip: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+                     Removed params:
+                                       gc: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+Kind.FUNC   sx150x_gpio_get
+                     Added params:
+                                     chip: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+                     Removed params:
+                                       gc: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+Kind.FUNC   pci_bridge_d3_update
+                     Removed params:
+                                   remove: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   pci_register_io_range
+                     Added params:
+                                   fwnode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fwnode_handle'}}
+Kind.FUNC   cper_print_aer
+                     Added params:
+                             aer_severity: {'kind': 'INT', 'name': 'int'}
+                     Removed params:
+                            cper_severity: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   msi_setup_entry
+                     Added params:
+                                     affd: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'irq_affinity'}}}
+Kind.FUNC   __pci_enable_msi_range
+                     Added params:
+                                     affd: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'irq_affinity'}}}
+                     Removed params:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   vgacon_scroll
+                     Param type changed:
+                                        t: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+                                        b: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+                                      dir: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'ENUM', 'name': 'con_scroll', 'size': 4}
+                                    lines: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+                     Return type changed:
+                                         : {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   fbcon_scroll
+                     Param type changed:
+                                        t: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+                                        b: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+                                      dir: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'ENUM', 'name': 'con_scroll', 'size': 4}
+                                    count: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'INT', 'name': 'unsigned int'}
+                     Return type changed:
+                                         : {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   map_madt_entry
+                     Added params:
+                          ignore_disabled: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   ec_install_handlers
+                     Added params:
+                            handle_events: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   acpi_create_platform_device
+                     Added params:
+                               properties: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'property_entry'}}
+Kind.FUNC   acpi_table_attr_init
+                     Added params:
+                               tables_obj: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kobject'}}
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   acpi_ev_initialize_region
+                     Removed params:
+                           acpi_ns_locked: {'kind': 'TYPEDEF', 'name': 'u8'}
+Kind.FUNC   acpi_ex_add_table
+                     Removed params:
+                              parent_node: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'acpi_namespace_node'}}
+Kind.FUNC   acpi_get_table_by_index
+                     Added params:
+                                out_table: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'acpi_table_header'}}}
+                     Removed params:
+                                    table: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'acpi_table_header'}}}
+Kind.FUNC   acpi_ut_strtoul64
+                     Added params:
+                                    flags: {'kind': 'TYPEDEF', 'name': 'u32'}
+                             return_value: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}
+                     Removed params:
+                                     base: {'kind': 'TYPEDEF', 'name': 'u32'}
+                     max_integer_byte_width: {'kind': 'TYPEDEF', 'name': 'u32'}
+                              ret_integer: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}
+Kind.FUNC   acpi_processor_reevaluate_tstate
+                     Added params:
+                                  is_dead: {'kind': 'TYPEDEF', 'name': 'bool'}
+                     Removed params:
+                                   action: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   acpi_processor_ppc_has_changed
+                     Return type changed:
+                                         : {'kind': 'INT', 'name': 'int'}
+                                         ->{'name': 'void', 'kind': 'VOID'}
+Kind.FUNC   acpi_ioapic_add
+                     Added params:
+                              root_handle: {'kind': 'TYPEDEF', 'name': 'acpi_handle'}
+                     Removed params:
+                                     root: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'acpi_pci_root'}}
+Kind.FUNC   xen_acpi_processor_resume
+                     Removed params:
+                                       nb: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'notifier_block'}}
+                                   action: {'kind': 'INT', 'name': 'long unsigned int'}
+                                     data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                     Return type changed:
+                                         : {'kind': 'INT', 'name': 'int'}
+                                         ->{'name': 'void', 'kind': 'VOID'}
+Kind.FUNC   regulator_mode_constrain
+                     Param type changed:
+                                     mode: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+Kind.FUNC   name_show
+                     Added params:
+                                     kobj: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kobject'}}
+                     Removed params:
+                                      dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+                     Param type changed:
+                                     attr: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device_attribute'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kobj_attribute'}}
+Kind.FUNC   uart_parse_earlycon
+                     Param type changed:
+                                     addr: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'resource_size_t'}}
+Kind.FUNC   serial8250_set_isa_configurator
+                     Param type changed:
+                                        v: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'uart_port'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'short unsigned int'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'uart_port'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   tpm_getcap
+                     Param type changed:
+                                subcap_id: {'kind': 'TYPEDEF', 'name': '__be32'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.FUNC   tpm_chip_alloc
+                     Added params:
+                                     pdev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+                     Removed params:
+                                      dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+Kind.FUNC   tpm_bios_log_setup
+                     Added params:
+                                     chip: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'tpm_chip'}}
+                     Removed params:
+                                     name: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+                     Return type changed:
+                                         : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   tpm_bios_log_teardown
+                     Added params:
+                                     chip: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'tpm_chip'}}
+                     Removed params:
+                                      lst: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}
+Kind.FUNC   iommu_device_link
+                     Added params:
+                                    iommu: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_device'}}
+                     Removed params:
+                                      dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+Kind.FUNC   iommu_device_unlink
+                     Added params:
+                                    iommu: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_device'}}
+                     Removed params:
+                                      dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+Kind.FUNC   modify_irte
+                     Param type changed:
+                                     irte: {'kind': 'UNION', 'name': 'irte'}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'irte'}}
+Kind.FUNC   nvm_unregister
+                     Added params:
+                                      dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_dev'}}
+                     Removed params:
+                                disk_name: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+Kind.FUNC   nvm_submit_io
+                     Added params:
+                                  tgt_dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_tgt_dev'}}
+                     Removed params:
+                                      dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_dev'}}
+Kind.FUNC   nvm_erase_blk
+                     Added params:
+                                  tgt_dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_tgt_dev'}}
+                                        p: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ppa_addr'}}
+                                    flags: {'kind': 'INT', 'name': 'int'}
+                     Removed params:
+                                      dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_dev'}}
+                                      blk: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_block'}}
+Kind.FUNC   nvm_erase_ppa
+                     Added params:
+                                    flags: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   nvm_register
+                     Added params:
+                                      dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_dev'}}
+                     Removed params:
+                                        q: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request_queue'}}
+                                disk_name: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+                                      ops: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_dev_ops'}}
+Kind.FUNC   nvm_set_bb_tbl
+                     Added params:
+                                     ppas: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ppa_addr'}}
+                                  nr_ppas: {'kind': 'INT', 'name': 'int'}
+                     Removed params:
+                                        s: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sysblk_scan'}}
+Kind.FUNC   pm860x_probe
+                     Removed params:
+                                       id: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'i2c_device_id'}}}
+Kind.FUNC   nd_blk_available_dpa
+                     Added params:
+                                nd_region: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nd_region'}}
+                     Removed params:
+                               nd_mapping: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nd_mapping'}}
+Kind.FUNC   create_namespace_blk
+                     Added params:
+                                 nd_label: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nd_namespace_label'}}
+                                    count: {'kind': 'INT', 'name': 'int'}
+                     Return type changed:
+                                         : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+Kind.FUNC   dma_buf_poll_cb
+                     Param type changed:
+                                    fence: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+                                       cb: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence_cb'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence_cb'}}
+Kind.FUNC   reservation_object_add_shared_fence
+                     Param type changed:
+                                    fence: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+Kind.FUNC   reservation_object_get_fences_rcu
+                     Param type changed:
+                              pfence_excl: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}}
+                                  pshared: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}}}
+Kind.FUNC   reservation_object_add_excl_fence
+                     Param type changed:
+                                    fence: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+Kind.FUNC   seqno_fence_get_driver_name
+                     Param type changed:
+                                    fence: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+Kind.FUNC   seqno_fence_get_timeline_name
+                     Param type changed:
+                                    fence: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+Kind.FUNC   seqno_enable_signaling
+                     Param type changed:
+                                    fence: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+Kind.FUNC   seqno_signaled
+                     Param type changed:
+                                    fence: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+Kind.FUNC   seqno_wait
+                     Param type changed:
+                                    fence: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+Kind.FUNC   seqno_release
+                     Param type changed:
+                                    fence: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+Kind.FUNC   fence_check_cb_func
+                     Param type changed:
+                                        f: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+                                       cb: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence_cb'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence_cb'}}
+Kind.FUNC   sync_file_alloc
+                     Removed params:
+                                     size: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   sync_file_create
+                     Param type changed:
+                                    fence: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+Kind.FUNC   scsi_internal_device_block
+                     Added params:
+                                     wait: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   scsi_execute_req_flags
+                     Added params:
+                                 rq_flags: {'kind': 'TYPEDEF', 'name': 'req_flags_t'}
+Kind.FUNC   ata_build_rw_tf
+                     Added params:
+                                    class: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   phy_trigger_machine
+                     Added params:
+                                     sync: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   phy_change
+                     Added params:
+                                   phydev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'phy_device'}}
+                     Removed params:
+                                     work: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'work_struct'}}
+Kind.FUNC   td_to_noop
+                     Added params:
+                                       td: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'xhci_td'}}
+                     Removed params:
+                                   cur_td: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'xhci_td'}}
+Kind.FUNC   xhci_handle_command_timeout
+                     Added params:
+                                     work: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'work_struct'}}
+                     Removed params:
+                                     data: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   finish_td
+                     Added params:
+                                   ep_trb: {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'xhci_trb'}}
+                     Removed params:
+                                event_trb: {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'xhci_trb'}}
+Kind.FUNC   thermal_zone_device_update
+                     Added params:
+                                    event: {'kind': 'ENUM', 'name': 'thermal_notify_event', 'size': 4}
+Kind.FUNC   md_super_wait
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   dm_wait_for_completion
+                     Added params:
+                               task_state: {'kind': 'INT', 'name': 'long int'}
+                     Removed params:
+                            interruptible: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   __dm_suspend
+                     Added params:
+                               task_state: {'kind': 'INT', 'name': 'long int'}
+                     Removed params:
+                            interruptible: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   dm_requeue_original_request
+                     Added params:
+                                      tio: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dm_rq_target_io'}}
+                            delay_requeue: {'kind': 'TYPEDEF', 'name': 'bool'}
+                     Removed params:
+                                       md: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mapped_device'}}
+                                       rq: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request'}}
+Kind.FUNC   map_request
+                     Removed params:
+                                       rq: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request'}}
+                                       md: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mapped_device'}}
+Kind.FUNC   cpufreq_offline
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   cpufreq_update_policy
+                     Return type changed:
+                                         : {'kind': 'INT', 'name': 'int'}
+                                         ->{'name': 'void', 'kind': 'VOID'}
+Kind.FUNC   dbs_update_util_handler
+                     Added params:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                     util: {'kind': 'INT', 'name': 'long unsigned int'}
+                                      max: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   intel_pstate_update_util
+                     Added params:
+                                    flags: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                     util: {'kind': 'INT', 'name': 'long unsigned int'}
+                                      max: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   mmc_start_req
+                     Added params:
+                                 ret_stat: {'kind': 'PTR', 'type': {'kind': 'ENUM', 'name': 'mmc_blk_status', 'size': 4}}
+                     Removed params:
+                                    error: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+Kind.FUNC   __mmc_switch
+                     Added params:
+                                   timing: {'kind': 'INT', 'name': 'unsigned char'}
+                            retry_crc_err: {'kind': 'TYPEDEF', 'name': 'bool'}
+                     Removed params:
+                               ignore_crc: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   efivar_entry_iter_begin
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   efivar_entry_add
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   efivar_entry_remove
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   cper_estatus_print_section
+                     Param type changed:
+                                    gdata: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'acpi_hest_generic_data'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'acpi_hest_generic_data'}}
+Kind.FUNC   acpi_pm_read
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   acpi_pm_read_slow
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   extcon_set_state
+                     Added params:
+                                       id: {'kind': 'INT', 'name': 'unsigned int'}
+                              cable_state: {'kind': 'TYPEDEF', 'name': 'bool'}
+                     Removed params:
+                                    state: {'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.FUNC   vme_lm_attach
+                     Added params:
+                                     data: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+                     Param type changed:
+                                 callback: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   __skb_complete_tx_timestamp
+                     Added params:
+                                opt_stats: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   skb_splice_bits
+                     Removed params:
+                                splice_cb: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pipe_inode_info'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'splice_pipe_desc'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'ssize_t'}}}
+Kind.FUNC   __skb_try_recv_datagram
+                     Added params:
+                               destructor: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   __skb_recv_datagram
+                     Added params:
+                               destructor: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+Kind.FUNC   gnet_stats_copy_rate_est
+                     Added params:
+                                 rate_est: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}}
+                     Removed params:
+                                        b: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_basic_packed'}}}
+                                        r: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}}
+Kind.FUNC   gen_kill_estimator
+                     Removed params:
+                                   bstats: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_basic_packed'}}
+                     Param type changed:
+                                 rate_est: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}}
+Kind.FUNC   gen_estimator_active
+                     Removed params:
+                                   bstats: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_basic_packed'}}}
+                     Param type changed:
+                                 rate_est: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}}
+Kind.FUNC   gen_new_estimator
+                     Param type changed:
+                                 rate_est: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}}
+Kind.FUNC   gen_replace_estimator
+                     Param type changed:
+                                 rate_est: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}}
+Kind.FUNC   secure_tcpv6_sequence_number
+                     Added params:
+                                    tsoff: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': '__u32'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.FUNC   secure_tcp_sequence_number
+                     Added params:
+                                    tsoff: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': '__u32'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.FUNC   __skb_get_hash_symmetric
+                     Param type changed:
+                                      skb: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}
+Kind.FUNC   __napi_complete
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   __netdev_adjacent_dev_insert
+                     Removed params:
+                                   ref_nr: {'kind': 'TYPEDEF', 'name': 'u16'}
+Kind.FUNC   flush_backlog
+                     Added params:
+                                     work: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'work_struct'}}
+                     Removed params:
+                                      arg: {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+Kind.FUNC   remove_xps_queue
+                     Added params:
+                                      tci: {'kind': 'INT', 'name': 'int'}
+                     Removed params:
+                                      cpu: {'kind': 'INT', 'name': 'int'}
+                     Return type changed:
+                                         : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'xps_map'}}
+                                         ->{'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   dev_change_xdp_fd
+                     Added params:
+                                    flags: {'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.FUNC   napi_complete_done
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   ndo_dflt_fdb_dump
+                     Param type changed:
+                                      idx: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+Kind.FUNC   __get_raw_cpu_id
+                     Added params:
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_5: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                      ctx: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                        a: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                        x: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_get_route_realm
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_under_cgroup
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      map: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      idx: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_redirect
+                     Added params:
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_change_type
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                 pkt_type: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_get_tunnel_opt
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       to: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_set_tunnel_opt
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     from: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   __skb_get_nlattr_nest
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                      ctx: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   __skb_get_nlattr
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                      ctx: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   __skb_get_pay_offset
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                      ctx: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                        a: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                        x: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_csum_diff
+                     Added params:
+                                     from: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       to: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_l4_csum_replace
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   offset: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_l3_csum_replace
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   offset: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_store_bytes
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   offset: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     from: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      len: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_event_output
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      map: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     meta: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_get_hash_recalc
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_get_tunnel_key
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       to: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_get_cgroup_classid
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_set_tunnel_key
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                     from: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_clone_redirect
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_load_bytes
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   offset: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       to: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                      len: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_change_proto
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                    proto: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_vlan_pop
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r3: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   bpf_skb_vlan_push
+                     Added params:
+                                      skb: {'kind': 'TYPEDEF', 'name': 'u64'}
+                               vlan_proto: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                   __ur_2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                     Removed params:
+                                       r1: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r2: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r4: {'kind': 'TYPEDEF', 'name': 'u64'}
+                                       r5: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   tfilter_notify
+                     Added params:
+                                  unicast: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   genl_family_find_byname
+                     Return type changed:
+                                         : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+Kind.FUNC   genlmsg_put
+                     Param type changed:
+                                   family: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+Kind.FUNC   genl_family_rcv_msg
+                     Param type changed:
+                                   family: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+Kind.FUNC   genlmsg_multicast_allns
+                     Param type changed:
+                                   family: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+Kind.FUNC   genl_notify
+                     Param type changed:
+                                   family: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+Kind.FUNC   ctrl_fill_info
+                     Param type changed:
+                                   family: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+Kind.FUNC   ctrl_build_family_msg
+                     Param type changed:
+                                   family: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+Kind.FUNC   genl_ctrl_event
+                     Param type changed:
+                                   family: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+Kind.FUNC   genl_unregister_family
+                     Param type changed:
+                                   family: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+Kind.FUNC   nf_hook_slow
+                     Added params:
+                                    entry: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_entry'}}
+Kind.FUNC   nf_log_set
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   nf_queue_nf_hook_drop
+                     Added params:
+                                    entry: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_entry'}}}
+                     Removed params:
+                                      ops: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_ops'}}
+Kind.FUNC   nf_queue
+                     Added params:
+                                   entryp: {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_entry'}}}
+                                  verdict: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                     elem: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_ops'}}
+                                 queuenum: {'kind': 'INT', 'name': 'unsigned int'}
+Kind.FUNC   ip_cmsg_recv_offset
+                     Added params:
+                                       sk: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}
+Kind.FUNC   compute_score
+                     Added params:
+                                exact_dif: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   inet_csk_bind_conflict
+                     Added params:
+                             reuseport_ok: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   tcp_clean_rtx_queue
+                     Added params:
+                                      now: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skb_mstamp'}}
+Kind.FUNC   tcp_collapse
+                     Added params:
+                                     root: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rb_root'}}
+Kind.FUNC   __pskb_trim_head
+                     Return type changed:
+                                         : {'name': 'void', 'kind': 'VOID'}
+                                         ->{'kind': 'INT', 'name': 'int'}
+Kind.FUNC   tcp_v4_init_sequence
+                     Added params:
+                                    tsoff: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': '__u32'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.FUNC   tcp_v4_send_ack
+                     Added params:
+                                       sk: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}
+                     Removed params:
+                                      net: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}
+Kind.FUNC   fib_table_insert
+                     Added params:
+                                      net: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}
+Kind.FUNC   fib_table_delete
+                     Added params:
+                                      net: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}
+Kind.FUNC   fib_table_flush
+                     Added params:
+                                      net: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}
+Kind.FUNC   ip6_xmit
+                     Added params:
+                                     mark: {'kind': 'TYPEDEF', 'name': '__u32'}
+Kind.FUNC   ipv6_regen_rndid
+                     Added params:
+                                     idev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inet6_dev'}}
+                     Removed params:
+                                     data: {'kind': 'INT', 'name': 'long unsigned int'}
+Kind.FUNC   rt6_get_route_info
+                     Added params:
+                                      dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}
+                     Removed params:
+                                  ifindex: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   ip6_update_pmtu
+                     Added params:
+                                      uid: {'kind': 'TYPEDEF', 'name': 'kuid_t'}
+Kind.FUNC   rt6_add_route_info
+                     Added params:
+                                      dev: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}
+                     Removed params:
+                                  ifindex: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   ip6_redirect
+                     Added params:
+                                      uid: {'kind': 'TYPEDEF', 'name': 'kuid_t'}
+Kind.FUNC   ndisc_send_ns
+                     Added params:
+                                    nonce: {'kind': 'TYPEDEF', 'name': 'u64'}
+Kind.FUNC   tcp_v6_init_sequence
+                     Added params:
+                                    tsoff: {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+                     Return type changed:
+                                         : {'kind': 'TYPEDEF', 'name': '__u32'}
+                                         ->{'kind': 'TYPEDEF', 'name': 'u32'}
+Kind.FUNC   ipv6_push_nfrag_opts
+                     Added params:
+                                    saddr: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'in6_addr'}}
+Kind.FUNC   inet6_csk_bind_conflict
+                     Added params:
+                             reuseport_ok: {'kind': 'TYPEDEF', 'name': 'bool'}
+Kind.FUNC   mif6_delete
+                     Added params:
+                                   notify: {'kind': 'INT', 'name': 'int'}
+Kind.FUNC   net_ctl_header_lookup
+                     Removed params:
+                               namespaces: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nsproxy'}}
+Kind.FUNC   switchdev_port_fdb_dump
+                     Param type changed:
+                                      idx: {'kind': 'INT', 'name': 'int'}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+Kind.FUNC   ncsi_alloc_request
+                     Added params:
+                                req_flags: {'kind': 'INT', 'name': 'unsigned int'}
+                     Removed params:
+                                   driven: {'kind': 'TYPEDEF', 'name': 'bool'}
