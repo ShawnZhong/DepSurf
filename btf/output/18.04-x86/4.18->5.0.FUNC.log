@@ -2396,10 +2396,10 @@ Kind.FUNC   posix_locks_conflict
                                          ->{'kind': 'TYPEDEF', 'name': 'bool'}
 Kind.FUNC   locks_insert_block
                      Added params:
-                                 conflict: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                                 conflict: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
 Kind.FUNC   __locks_insert_block
                      Added params:
-                                 conflict: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                                 conflict: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
 Kind.FUNC   locks_delete_block
                      Return type changed:
                                          : {'name': 'void', 'kind': 'VOID'}

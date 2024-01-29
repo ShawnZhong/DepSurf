@@ -152,8 +152,8 @@ Kind.STRUCT request
                             alloc_time_ns: {'kind': 'TYPEDEF', 'name': 'u64'}
 Kind.STRUCT elevator_mq_ops
                      Field type changed:
-                                bio_merge: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blk_mq_hw_ctx'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bio'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request_queue'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bio'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                                bio_merge: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blk_mq_hw_ctx'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bio'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request_queue'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bio'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
 Kind.STRUCT elevator_type
                      Added fields:
                         elevator_features: {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}
@@ -236,10 +236,10 @@ Kind.STRUCT napi_struct
                                  rx_count: {'kind': 'INT', 'name': 'int'}
 Kind.STRUCT net_device_ops
                      Added fields:
-                           ndo_xsk_wakeup: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                           ndo_xsk_wakeup: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon-1)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
                      Removed fields:
                      ndo_get_lock_subclass: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                       ndo_xsk_async_xmit: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                       ndo_xsk_async_xmit: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}, {'name': '(anon-1)', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 Kind.STRUCT rtnl_link_ops
                      Added fields:
                              netns_refund: {'kind': 'TYPEDEF', 'name': 'bool'}
@@ -254,8 +254,8 @@ Kind.STRUCT tcf_block
                                          ->{'kind': 'TYPEDEF', 'name': 'atomic_t'}
 Kind.STRUCT tcf_proto_ops
                      Added fields:
-                                   hw_add: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'tcf_proto'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                                   hw_del: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'tcf_proto'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                   hw_add: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'tcf_proto'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                   hw_del: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'tcf_proto'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT neigh_table
                      Added fields:
                              is_multicast: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
@@ -360,12 +360,12 @@ Kind.STRUCT dev_pm_qos
                         max_frequency_req: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dev_pm_qos_request'}}
 Kind.STRUCT iommu_ops
                      Removed fields:
-                          iotlb_range_add: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_domain'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                          iotlb_range_add: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_domain'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
                      Field type changed:
-                                    unmap: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_domain'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'size_t'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_domain'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_iotlb_gather'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'size_t'}}}
+                                    unmap: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_domain'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'size_t'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_domain'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_iotlb_gather'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'size_t'}}}
                                iotlb_sync: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_domain'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_domain'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_iotlb_gather'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_domain'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_iotlb_gather'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT severity
                      Added fields:
                                 cpu_model: {'kind': 'INT', 'name': 'unsigned char'}
@@ -416,8 +416,8 @@ Kind.STRUCT cfs_rq
                         idle_h_nr_running: {'kind': 'INT', 'name': 'unsigned int'}
 Kind.STRUCT sched_class
                      Added fields:
-                            set_next_task: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rq'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                                  balance: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rq'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rq_flags'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                            set_next_task: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rq'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                  balance: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rq'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rq_flags'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
                      Removed fields:
                             set_curr_task: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rq'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT task_group
@@ -465,8 +465,8 @@ Kind.STRUCT k_clock
                        timer_wait_running: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'k_itimer'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT genl_family
                      Removed fields:
-                               mcast_bind: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                             mcast_unbind: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                               mcast_bind: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                             mcast_unbind: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT trace_array
                      Added fields:
                                 trace_ref: {'kind': 'INT', 'name': 'int'}
@@ -484,8 +484,8 @@ Kind.STRUCT stack_entry
                                          ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 8, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
 Kind.STRUCT dyn_event_operations
                      Field type changed:
-                                    match: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dyn_event'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dyn_event'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                                    match: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dyn_event'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}}, {'name': '(anon-4)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dyn_event'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
 Kind.STRUCT trace_probe
                      Added fields:
                                      list: {'kind': 'STRUCT', 'name': 'list_head'}
@@ -581,12 +581,12 @@ Kind.STRUCT mm_walk
                      Added fields:
                                       ops: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'mm_walk_ops'}}}
                      Removed fields:
-                                pud_entry: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pud_t'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                pmd_entry: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pmd_t'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                pte_entry: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pte_t'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                 pte_hole: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                            hugetlb_entry: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pte_t'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                test_walk: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                pud_entry: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pud_t'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                pmd_entry: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pmd_t'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                pte_entry: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pte_t'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                 pte_hole: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                            hugetlb_entry: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pte_t'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-4)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                test_walk: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mm_walk'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 Kind.STRUCT vmap_area
                      Added fields:
                                    (anon): {'kind': 'UNION', 'name': '(anon)'}
@@ -620,8 +620,8 @@ Kind.STRUCT hmm_range
                                page_shift: {'kind': 'TYPEDEF', 'name': 'uint8_t'}
 Kind.STRUCT hmm_mirror_ops
                      Field type changed:
-                     sync_cpu_device_pagetables: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'hmm_mirror'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'hmm_update'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'hmm_mirror'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'mmu_notifier_range'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                     sync_cpu_device_pagetables: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'hmm_mirror'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'hmm_update'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'hmm_mirror'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'mmu_notifier_range'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 Kind.STRUCT hmm_vma_walk
                      Added fields:
                                     flags: {'kind': 'INT', 'name': 'unsigned int'}
@@ -798,7 +798,7 @@ Kind.STRUCT fuse_req
                                     inode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
                                        io: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fuse_io_priv'}}
                          writepages_entry: {'kind': 'STRUCT', 'name': 'list_head'}
-                                      end: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fuse_conn'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fuse_req'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                      end: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fuse_conn'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fuse_req'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
                               stolen_file: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file'}}
                      Field type changed:
                                        in: {'kind': 'STRUCT', 'name': 'fuse_in'}
@@ -822,7 +822,7 @@ Kind.STRUCT fuse_args
                                 may_block: {'kind': 'TYPEDEF', 'name': 'bool'}
                                   in_args: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'STRUCT', 'name': 'fuse_in_arg'}}
                                  out_args: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'STRUCT', 'name': 'fuse_arg'}}
-                                      end: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fuse_conn'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fuse_args'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                      end: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fuse_conn'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fuse_args'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
                      Removed fields:
                                        in: {'kind': 'STRUCT', 'name': '(anon)'}
                                       out: {'kind': 'STRUCT', 'name': '(anon)'}
@@ -873,8 +873,8 @@ Kind.STRUCT sctp_sock
                      Layout changed
 Kind.STRUCT sctp_af
                      Field type changed:
-                          from_addr_param: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'sctp_addr'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'sctp_addr_param'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': '__be16'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'sctp_addr'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'sctp_addr_param'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': '__be16'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                          from_addr_param: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'sctp_addr'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'sctp_addr_param'}}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': '__be16'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'sctp_addr'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'sctp_addr_param'}}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': '__be16'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
 Kind.STRUCT sidtab
                      Field type changed:
                                     count: {'kind': 'TYPEDEF', 'name': 'atomic_t'}
@@ -906,7 +906,7 @@ Kind.STRUCT rctx
                                        sg: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
 Kind.STRUCT rq_qos_ops
                      Added fields:
-                                    merge: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rq_qos'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bio'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                    merge: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rq_qos'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request'}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bio'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
                       queue_depth_changed: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rq_qos'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT virtio_device
                      Added fields:
@@ -917,13 +917,13 @@ Kind.STRUCT ib_ucontext
                      Added fields:
                                   mmap_xa: {'kind': 'STRUCT', 'name': 'xarray'}
                      Removed fields:
-                         invalidate_range: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'ib_umem_odp', 'fwd_kind': 'struct'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                         invalidate_range: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'ib_umem_odp', 'fwd_kind': 'struct'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
                          per_mm_list_lock: {'kind': 'STRUCT', 'name': 'mutex'}
                               per_mm_list: {'kind': 'STRUCT', 'name': 'list_head'}
 Kind.STRUCT ib_device_ops
                      Added fields:
                                 mmap_free: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rdma_user_mmap_entry'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                         invalidate_range: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'ib_umem_odp', 'fwd_kind': 'struct'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                         invalidate_range: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'ib_umem_odp', 'fwd_kind': 'struct'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT once_work
                      Added fields:
                                    module: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'module'}}
@@ -932,17 +932,17 @@ Kind.STRUCT gpio_chip
                           need_valid_mask: {'kind': 'TYPEDEF', 'name': 'bool'}
                      Field type changed:
                           init_valid_mask: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 Kind.STRUCT gpio_irq_chip
                      Added fields:
                                    fwnode: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fwnode_handle'}}
                             parent_domain: {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'irq_domain'}}
-                     child_to_parent_hwirq: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                     populate_parent_fwspec: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'irq_fwspec'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                      child_offset_to_irq: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'unsigned int'}}}
+                     child_to_parent_hwirq: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}}, {'name': '(anon-4)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                     populate_parent_fwspec: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'irq_fwspec'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                      child_offset_to_irq: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'unsigned int'}}}
                      child_irq_domain_ops: {'kind': 'STRUCT', 'name': 'irq_domain_ops'}
                                   init_hw: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                          init_valid_mask: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                          init_valid_mask: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
                      Removed fields:
                           need_valid_mask: {'kind': 'TYPEDEF', 'name': 'bool'}
 Kind.STRUCT amd_gpio
@@ -975,8 +975,8 @@ Kind.STRUCT xgpio_instance
                      Layout changed
 Kind.STRUCT pwm_ops
                      Field type changed:
-                                    apply: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pwm_chip'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pwm_device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pwm_state'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pwm_chip'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pwm_device'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pwm_state'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                    apply: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pwm_chip'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pwm_device'}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pwm_state'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pwm_chip'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pwm_device'}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'pwm_state'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 Kind.STRUCT pcie_port_service_driver
                      Layout changed
 Kind.STRUCT pci_epf_driver
@@ -985,8 +985,8 @@ Kind.STRUCT rio_driver
                      Layout changed
 Kind.STRUCT fbcon_ops
                      Field type changed:
-                                   cursor: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vc_data'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fb_info'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vc_data'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fb_info'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                   cursor: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vc_data'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fb_info'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-4)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-5)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vc_data'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fb_info'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-4)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT acpi_table_desc
                      Layout changed
 Kind.STRUCT acpi_ec
@@ -1051,24 +1051,24 @@ Kind.STRUCT virtio_driver
 Kind.STRUCT xenbus_watch
                      Added fields:
                                nr_pending: {'kind': 'INT', 'name': 'unsigned int'}
-                              will_handle: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'xenbus_watch'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                              will_handle: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'xenbus_watch'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
 Kind.STRUCT evtchn_ops
                      Added fields:
-                                   remove: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'evtchn_port_t'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                   remove: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'evtchn_port_t'}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
                               percpu_init: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
                             percpu_deinit: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
                      Removed fields:
                         test_and_set_mask: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
                      Field type changed:
                             handle_events: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'evtchn_loop_ctrl'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'evtchn_loop_ctrl'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT xenbus_device
                      Layout changed
 Kind.STRUCT xenbus_driver
                      Layout changed
 Kind.STRUCT xen_bus_type
                      Added fields:
-                     otherend_will_handle: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'xenbus_watch'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
+                     otherend_will_handle: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'xenbus_watch'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'bool'}}}
 Kind.STRUCT watch_adapter
                      Layout changed
 Kind.STRUCT usb_bus
@@ -1140,9 +1140,9 @@ Kind.STRUCT nvdimm
                      Layout changed
 Kind.STRUCT nvdimm_security_ops
                      Added fields:
-                                get_flags: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvdimm'}}}, {'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'nvdimm_passphrase_type', 'size': 4}}], 'ret_type': {'kind': 'INT', 'name': 'long unsigned int'}}}
+                                get_flags: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvdimm'}}}, {'name': '(anon-1)', 'type': {'kind': 'ENUM', 'name': 'nvdimm_passphrase_type', 'size': 4}}], 'ret_type': {'kind': 'INT', 'name': 'long unsigned int'}}}
                      Removed fields:
-                                    state: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvdimm'}}}, {'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'nvdimm_passphrase_type', 'size': 4}}], 'ret_type': {'kind': 'ENUM', 'name': 'nvdimm_security_state', 'size': 4}}}
+                                    state: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvdimm'}}}, {'name': '(anon-1)', 'type': {'kind': 'ENUM', 'name': 'nvdimm_passphrase_type', 'size': 4}}], 'ret_type': {'kind': 'ENUM', 'name': 'nvdimm_security_state', 'size': 4}}}
 Kind.STRUCT nd_device_driver
                      Layout changed
 Kind.STRUCT nd_pfn_sb
@@ -1194,7 +1194,7 @@ Kind.STRUCT scsi_driver
                      Layout changed
 Kind.STRUCT scsi_host_template
                      Added fields:
-                               commit_rqs: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'Scsi_Host'}}}, {'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u16'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                               commit_rqs: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'Scsi_Host'}}}, {'name': '(anon-1)', 'type': {'kind': 'TYPEDEF', 'name': 'u16'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT scsi_nl_hdr
                      Field type changed:
                                   version: {'kind': 'TYPEDEF', 'name': 'uint8_t'}
@@ -1254,8 +1254,8 @@ Kind.STRUCT soc_device_attribute
                             serial_number: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
 Kind.STRUCT xhci_driver_overrides
                      Added fields:
-                          check_bandwidth: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'usb_hcd'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'usb_device'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                          reset_bandwidth: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'usb_hcd'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'usb_device'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                          check_bandwidth: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'usb_hcd'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'usb_device'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                          reset_bandwidth: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'usb_hcd'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'usb_device'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT trace_event_raw_xhci_log_trb
                      Added fields:
                            __data_loc_str: {'kind': 'TYPEDEF', 'name': 'u32'}
@@ -1369,7 +1369,7 @@ Kind.STRUCT inet_connection_sock
                        icsk_probes_tstamp: {'kind': 'TYPEDEF', 'name': 'u32'}
 Kind.STRUCT tcp_ulp_ops
                      Added fields:
-                                 get_info: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                 get_info: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
                             get_info_size: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'size_t'}}}
 Kind.STRUCT tcp_sock
                      Added fields:
@@ -1387,21 +1387,21 @@ Kind.STRUCT devlink
                             reload_failed: {'kind': 'TYPEDEF', 'name': 'u8'}
 Kind.STRUCT devlink_ops
                      Added fields:
-                              reload_down: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'netlink_ext_ack'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                reload_up: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'netlink_ext_ack'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                trap_init: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'devlink_trap'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                trap_fini: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'devlink_trap'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                          trap_action_set: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'devlink_trap'}}}}, {'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'devlink_trap_action', 'size': 4}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                          trap_group_init: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'devlink_trap_group'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                              reload_down: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'netlink_ext_ack'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                reload_up: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'netlink_ext_ack'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                trap_init: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'devlink_trap'}}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                trap_fini: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'devlink_trap'}}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                          trap_action_set: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'devlink_trap'}}}}, {'name': '(anon-2)', 'type': {'kind': 'ENUM', 'name': 'devlink_trap_action', 'size': 4}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                          trap_group_init: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'devlink_trap_group'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
                      Removed fields:
-                                   reload: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'netlink_ext_ack'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                                   reload: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'devlink'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'netlink_ext_ack'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 Kind.STRUCT dsa_switch
                      Removed fields:
                                    bitmap: {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
                                   _bitmap: {'kind': 'INT', 'name': 'long unsigned int'}
 Kind.STRUCT dsa_switch_ops
                      Added fields:
-                            port_setup_tc: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dsa_switch'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'tc_setup_type', 'size': 4}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                            port_setup_tc: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dsa_switch'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-2)', 'type': {'kind': 'ENUM', 'name': 'tc_setup_type', 'size': 4}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 Kind.STRUCT in_device
                      Field type changed:
                              mr_ifc_count: {'kind': 'INT', 'name': 'unsigned char'}
@@ -1422,9 +1422,9 @@ Kind.STRUCT tls_context
                      Added fields:
                                       rcu: {'kind': 'STRUCT', 'name': 'callback_head'}
                      Removed fields:
-                           sk_proto_close: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                               setsockopt: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                               getsockopt: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                           sk_proto_close: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+                               setsockopt: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}, {'name': '(anon-4)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+                               getsockopt: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}, {'name': '(anon-4)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
                                      hash: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
                                    unhash: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 Kind.STRUCT devlink_snapshot
@@ -1437,12 +1437,12 @@ Kind.STRUCT macvlan_dev
                                nest_level: {'kind': 'INT', 'name': 'int'}
 Kind.STRUCT tc_action_ops
                      Added fields:
-                        get_psample_group: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'tc_action'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'tc_action_priv_destructor'}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'psample_group'}}}}
+                        get_psample_group: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'tc_action'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'tc_action_priv_destructor'}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'psample_group'}}}}
                      Removed fields:
                                   put_dev: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
                      Field type changed:
                                   get_dev: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'tc_action'}}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'tc_action'}}}}, {'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'tc_action_priv_destructor'}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}}
+                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'tc_action'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'tc_action_priv_destructor'}}}], 'ret_type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}}}
 Kind.STRUCT tcf_vlan_params
                      Added fields:
                      tcfv_push_prio_exists: {'kind': 'TYPEDEF', 'name': 'bool'}
