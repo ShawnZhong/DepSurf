@@ -210,7 +210,7 @@ perf_branch_sample_type_shift
 		PERF_SAMPLE_BRANCH_MAX_SHIFT            : 14 -> 17
 cpuhp_state
 	Added values:
-		CPUHP_INVALID                           : 18446744073709551615
+		CPUHP_INVALID                           : -1
 		CPUHP_CREATE_THREADS                    : 1
 		CPUHP_PERF_PREPARE                      : 2
 		CPUHP_PERF_X86_PREPARE                  : 3
@@ -1007,7 +1007,7 @@ pci_bus_flags
 		PCI_BUS_FLAGS_NO_AERSID                 : 4
 dmi_device_type
 	Added values:
-		DMI_DEV_TYPE_DEV_SLOT                   : 18446744073709551612
+		DMI_DEV_TYPE_DEV_SLOT                   : -4
 dma_ctrl_flags
 	Added values:
 		DMA_PREP_CMD                            : 128
@@ -1259,7 +1259,7 @@ iommu_init_state
 		IOMMU_CMDLINE_DISABLED                  : 10
 vga_switcheroo_client_id
 	Value changed:
-		VGA_SWITCHEROO_UNKNOWN_ID               : 18446744073709551615 -> 4096
+		VGA_SWITCHEROO_UNKNOWN_ID               : -1 -> 4096
 arizona_type
 	Added values:
 		WM1831                                  : 7

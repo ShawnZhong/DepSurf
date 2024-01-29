@@ -3,8 +3,8 @@ New Kind.ENUM (963): ['timespec_type', 'x86_hardware_subarch', 'x86_legacy_i8042
 Added Kind.ENUM (84): ['numa_stat_item', 'memory_type', 'perf_event_state', 's2idle_states', 'tc_setup_type', 'bpf_netdev_command', 'HV_GENERIC_SET_FORMAT', 'siginfo_layout', 'spectre_v2_user_mitigation', 'l1tf_mitigations']
 Removed Kind.ENUM (9): ['perf_event_active_state', 'fwnode_type', 'freeze_state', 'xdp_netdev_command', 'acpi_blacklist_predicates', 'tc_clsu32_command', 'tc_fl_command', 'tc_matchall_command', 'tc_clsbpf_command']
 Common Kind.ENUM (879): ['timespec_type', 'x86_hardware_subarch', 'x86_legacy_i8042_state', 'fixed_addresses', 'zone_stat_item', 'node_stat_item', 'zone_type', 'uprobe_task_state', 'page_entry_size', 'pid_type']
-Changed Kind.ENUM (89): ['zone_stat_item', 'node_stat_item', 'migrate_mode', 'vm_event_item', 'perf_event_task_context', 'perf_branch_sample_type_shift', 'cpuhp_state', 'bpf_attach_type', 'memcg_stat_item', 'memcg_event_item']
-Reasons Kind.ENUM (3): [('Removed values', 18), ('Value changed', 53), ('Added values', 64)]
+Changed Kind.ENUM (75): ['zone_stat_item', 'node_stat_item', 'migrate_mode', 'vm_event_item', 'perf_branch_sample_type_shift', 'cpuhp_state', 'bpf_attach_type', 'memcg_stat_item', 'memcg_event_item', 'bpf_prog_type']
+Reasons Kind.ENUM (3): [('Removed values', 18), ('Value changed', 39), ('Added values', 64)]
 zone_stat_item
 	Removed values:
 		NUMA_HIT                                : 12
@@ -35,9 +35,6 @@ vm_event_item
 		BALLOON_DEFLATE                         : 79 -> 81
 		BALLOON_MIGRATE                         : 80 -> 82
 		NR_VM_EVENT_ITEMS                       : 81 -> 85
-perf_event_task_context
-	Value changed:
-		perf_invalid_context                    : -1 -> 18446744073709551615
 perf_branch_sample_type_shift
 	Added values:
 		PERF_SAMPLE_BRANCH_TYPE_SAVE_SHIFT      : 16
@@ -45,7 +42,7 @@ perf_branch_sample_type_shift
 		PERF_SAMPLE_BRANCH_MAX_SHIFT            : 16 -> 17
 cpuhp_state
 	Added values:
-		CPUHP_INVALID                           : 18446744073709551615
+		CPUHP_INVALID                           : -1
 		CPUHP_TIMERS_PREPARE                    : 62
 		CPUHP_AP_IRQ_MIPS_GIC_STARTING          : 94
 		CPUHP_AP_MICROCODE_LOADER               : 96
@@ -174,12 +171,6 @@ ethtool_link_mode_bit_indices
 		ETHTOOL_LINK_MODE_FEC_BASER_BIT         : 51
 	Value changed:
 		__ETHTOOL_LINK_MODE_LAST                : 48 -> 51
-netdev_tx
-	Value changed:
-		__NETDEV_TX_MIN                         : -2147483648 -> 18446744071562067968
-ctx_state
-	Value changed:
-		CONTEXT_DISABLED                        : -1 -> 18446744073709551615
 perf_event_sample_format
 	Added values:
 		PERF_SAMPLE_PHYS_ADDR                   : 524288
@@ -190,9 +181,6 @@ perf_branch_sample_type
 		PERF_SAMPLE_BRANCH_TYPE_SAVE            : 65536
 	Value changed:
 		PERF_SAMPLE_BRANCH_MAX                  : 65536 -> 131072
-extra_reg_type
-	Value changed:
-		EXTRA_REG_NONE                          : -1 -> 18446744073709551615
 cpuid_leafs
 	Added values:
 		CPUID_LNX_4                             : 11
@@ -292,9 +280,6 @@ bpf_reg_type
 		PTR_TO_STACK                            : 7 -> 6
 		PTR_TO_PACKET                           : 9 -> 8
 		PTR_TO_PACKET_END                       : 10 -> 9
-sysctl_writes_mode
-	Value changed:
-		SYSCTL_WRITES_LEGACY                    : -1 -> 18446744073709551615
 KTHREAD_BITS
 	Removed values:
 		KTHREAD_IS_PARKED                       : 3
@@ -357,24 +342,6 @@ mf_action_page_type
 		MF_MSG_BUDDY                            : 17 -> 18
 		MF_MSG_BUDDY_2ND                        : 18 -> 19
 		MF_MSG_UNKNOWN                          : 19 -> 20
-nf_ip_hook_priorities
-	Value changed:
-		NF_IP_PRI_FIRST                         : -2147483648 -> 18446744071562067968
-		NF_IP_PRI_CONNTRACK_DEFRAG              : -400 -> 18446744073709551216
-		NF_IP_PRI_RAW                           : -300 -> 18446744073709551316
-		NF_IP_PRI_SELINUX_FIRST                 : -225 -> 18446744073709551391
-		NF_IP_PRI_CONNTRACK                     : -200 -> 18446744073709551416
-		NF_IP_PRI_MANGLE                        : -150 -> 18446744073709551466
-		NF_IP_PRI_NAT_DST                       : -100 -> 18446744073709551516
-nf_ip6_hook_priorities
-	Value changed:
-		NF_IP6_PRI_FIRST                        : -2147483648 -> 18446744071562067968
-		NF_IP6_PRI_CONNTRACK_DEFRAG             : -400 -> 18446744073709551216
-		NF_IP6_PRI_RAW                          : -300 -> 18446744073709551316
-		NF_IP6_PRI_SELINUX_FIRST                : -225 -> 18446744073709551391
-		NF_IP6_PRI_CONNTRACK                    : -200 -> 18446744073709551416
-		NF_IP6_PRI_MANGLE                       : -150 -> 18446744073709551466
-		NF_IP6_PRI_NAT_DST                      : -100 -> 18446744073709551516
 integrity_status
 	Added values:
 		INTEGRITY_PASS_IMMUTABLE                : 1
@@ -428,18 +395,6 @@ pci_dev_flags
 pci_bus_speed
 	Added values:
 		PCIE_SPEED_16_0GT                       : 23
-enable_type
-	Value changed:
-		undefined                               : -1 -> 18446744073709551615
-pm_qos_flags_status
-	Value changed:
-		PM_QOS_FLAGS_UNDEFINED                  : -1 -> 18446744073709551615
-dmi_device_type
-	Value changed:
-		DMI_DEV_TYPE_IPMI                       : -1 -> 18446744073709551615
-		DMI_DEV_TYPE_OEM_STRING                 : -2 -> 18446744073709551614
-		DMI_DEV_TYPE_DEV_ONBOARD                : -3 -> 18446744073709551613
-		DMI_DEV_TYPE_DEV_SLOT                   : -4 -> 18446744073709551612
 dma_ctrl_flags
 	Added values:
 		DMA_PREP_CMD                            : 128
@@ -450,9 +405,6 @@ hdmi_extended_colorimetry
 	Removed values:
 		HDMI_EXTENDED_COLORIMETRY_ADOBE_YCC_601 : 3
 		HDMI_EXTENDED_COLORIMETRY_ADOBE_RGB     : 4
-hdmi_3d_structure
-	Value changed:
-		HDMI_3D_STRUCTURE_INVALID               : -1 -> 18446744073709551615
 acpi_bus_device_type
 	Added values:
 		ACPI_BUS_TYPE_ECDT_EC                   : 6
@@ -461,9 +413,6 @@ acpi_bus_device_type
 thermal_notify_event
 	Added values:
 		THERMAL_TABLE_CHANGED                   : 7
-shutdown_state
-	Value changed:
-		SHUTDOWN_INVALID                        : -1 -> 18446744073709551615
 pci_board_num_t
 	Added values:
 		pbn_sunix_pci_1s                        : 105
@@ -484,9 +433,6 @@ iommu_attr
 		DOMAIN_ATTR_DMA_USE_FLUSH_QUEUE         : 7
 	Value changed:
 		DOMAIN_ATTR_MAX                         : 7 -> 8
-device_link_state
-	Value changed:
-		DL_STATE_NONE                           : -1 -> 18446744073709551615
 zbc_zone_type
 	Removed values:
 		ZBC_ZONE_TYPE_RESERVED                  : 4
@@ -567,11 +513,6 @@ fib_event_type
 	Added values:
 		FIB_EVENT_VIF_ADD                       : 8
 		FIB_EVENT_VIF_DEL                       : 9
-rt6_nud_state
-	Value changed:
-		RT6_NUD_FAIL_HARD                       : -3 -> 18446744073709551613
-		RT6_NUD_FAIL_PROBE                      : -2 -> 18446744073709551614
-		RT6_NUD_FAIL_DO_RR                      : -1 -> 18446744073709551615
 nl80211_mfp
 	Added values:
 		NL80211_MFP_OPTIONAL                    : 2

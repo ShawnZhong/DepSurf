@@ -263,7 +263,7 @@ wb_reason
 		WB_REASON_MAX                           : 8 -> 9
 reboot_mode
 	Added values:
-		REBOOT_UNDEFINED                        : 18446744073709551615
+		REBOOT_UNDEFINED                        : -1
 memcg_stat_item
 	Value changed:
 		MEMCG_CACHE                             : 28 -> 32
@@ -807,10 +807,10 @@ hash_algo
 		HASH_ALGO__LAST                         : 18 -> 20
 nf_ip_hook_priorities
 	Added values:
-		NF_IP_PRI_RAW_BEFORE_DEFRAG             : 18446744073709551166
+		NF_IP_PRI_RAW_BEFORE_DEFRAG             : -450
 nf_ip6_hook_priorities
 	Added values:
-		NF_IP6_PRI_RAW_BEFORE_DEFRAG            : 18446744073709551166
+		NF_IP6_PRI_RAW_BEFORE_DEFRAG            : -450
 ima_hooks
 	Added values:
 		CREDS_CHECK                             : 4

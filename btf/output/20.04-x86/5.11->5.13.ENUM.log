@@ -474,7 +474,7 @@ nvdimm_event
 		NVDIMM_REVALIDATE_REGION                : 1
 netdev_priv_flags
 	Added values:
-		IFF_TX_SKB_NO_LINEAR                    : 18446744071562067968
+		IFF_TX_SKB_NO_LINEAR                    : -2147483648
 ethtool_stringset
 	Added values:
 		ETH_SS_STATS_STD                        : 16

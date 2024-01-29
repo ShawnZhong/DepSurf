@@ -151,7 +151,7 @@ vm_event_item
 		NR_VM_EVENT_ITEMS                       : 85 -> 100
 e820_type
 	Added values:
-		E820_TYPE_SOFT_RESERVED                 : 18446744073441116159
+		E820_TYPE_SOFT_RESERVED                 : -268435457
 node_states
 	Added values:
 		N_GENERIC_INITIATOR                     : 5
@@ -1433,7 +1433,7 @@ pci_bus_speed
 		PCIE_SPEED_64_0GT                       : 25
 pci_barno
 	Added values:
-		NO_BAR                                  : 18446744073709551615
+		NO_BAR                                  : -1
 dma_status
 	Added values:
 		DMA_OUT_OF_ORDER                        : 4
@@ -1705,7 +1705,7 @@ nvdimm_event
 		NVDIMM_REVALIDATE_REGION                : 1
 netdev_priv_flags
 	Added values:
-		IFF_TX_SKB_NO_LINEAR                    : 18446744071562067968
+		IFF_TX_SKB_NO_LINEAR                    : -2147483648
 netdev_state_t
 	Added values:
 		__LINK_STATE_TESTING                    : 5

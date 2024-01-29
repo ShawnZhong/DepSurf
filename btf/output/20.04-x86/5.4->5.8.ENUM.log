@@ -87,7 +87,7 @@ vm_event_item
 		NR_VM_EVENT_ITEMS                       : 85 -> 92
 e820_type
 	Added values:
-		E820_TYPE_SOFT_RESERVED                 : 18446744073441116159
+		E820_TYPE_SOFT_RESERVED                 : -268435457
 cpuhp_state
 	Added values:
 		CPUHP_AP_CPU_PM_STARTING                : 91
@@ -662,7 +662,7 @@ pci_dev_flags
 		PCI_DEV_FLAGS_ENABLE_ASPM               : 4096
 pci_barno
 	Added values:
-		NO_BAR                                  : 18446744073709551615
+		NO_BAR                                  : -1
 acpi_ex_debugger_commands
 	Added values:
 		CMD_FIELDS                              : 15
