@@ -4,54 +4,55 @@ Added Kind.UNION (4): ['cpuid_0x10_3_eax', 'cpuid_0x10_x_edx', 'mon_data_bits', 
 Removed Kind.UNION (1): ['cpuid_0x10_1_edx']
 Common Kind.UNION (88): ['fpregs_state', 'irq_stack_union', 'sigval', 'key_payload', 'perf_mem_data_src', 'flowi_uli', 'ethtool_flow_union', 'thread_union', 'perf_capabilities', 'cpuid10_eax']
 Changed Kind.UNION (9): ['bpf_attr', 'proc_op', 'security_list_options', 'acpi_resource_data', 'acpi_parse_object', 'acpi_descriptor', 'aml_resource', 'tpm2_cmd_params', 'ec_response_get_next_data']
-Kind.UNION  bpf_attr
-                     Added fields:
-                                     test: {'kind': 'STRUCT', 'name': '(anon)'}
-                                 (anon-5): {'kind': 'STRUCT', 'name': '(anon)'}
-                                     info: {'kind': 'STRUCT', 'name': '(anon)'}
-Kind.UNION  proc_op
-                     Added fields:
-                                      lsm: {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
-Kind.UNION  security_list_options
-                     Added fields:
-                               task_alloc: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                             task_prlimit: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                           ib_pkey_access: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}, {'name': '(anon-1)', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': 'u16'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                     ib_endport_manage_subnet: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': 'u8'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                        ib_alloc_security: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                         ib_free_security: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-                     Removed fields:
-                                task_wait: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                     Field type changed:
-                        sb_clone_mnt_opts: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                              setprocattr: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}, {'name': '(anon-3)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-                                         ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-Kind.UNION  acpi_resource_data
-                     Added fields:
-                             pin_function: {'kind': 'STRUCT', 'name': 'acpi_resource_pin_function'}
-                               pin_config: {'kind': 'STRUCT', 'name': 'acpi_resource_pin_config'}
-                                pin_group: {'kind': 'STRUCT', 'name': 'acpi_resource_pin_group'}
-                       pin_group_function: {'kind': 'STRUCT', 'name': 'acpi_resource_pin_group_function'}
-                         pin_group_config: {'kind': 'STRUCT', 'name': 'acpi_resource_pin_group_config'}
-Kind.UNION  acpi_parse_object
-                     Layout changed
-Kind.UNION  acpi_descriptor
-                     Layout changed
-Kind.UNION  aml_resource
-                     Added fields:
-                             pin_function: {'kind': 'STRUCT', 'name': 'aml_resource_pin_function'}
-                               pin_config: {'kind': 'STRUCT', 'name': 'aml_resource_pin_config'}
-                                pin_group: {'kind': 'STRUCT', 'name': 'aml_resource_pin_group'}
-                       pin_group_function: {'kind': 'STRUCT', 'name': 'aml_resource_pin_group_function'}
-                         pin_group_config: {'kind': 'STRUCT', 'name': 'aml_resource_pin_group_config'}
-Kind.UNION  tpm2_cmd_params
-                     Removed fields:
-                               pcrread_in: {'kind': 'STRUCT', 'name': 'tpm2_pcr_read_in'}
-                              pcrread_out: {'kind': 'STRUCT', 'name': 'tpm2_pcr_read_out'}
-                             pcrextend_in: {'kind': 'STRUCT', 'name': 'tpm2_pcr_extend_in'}
-Kind.UNION  ec_response_get_next_data
-                     Added fields:
-                                  buttons: {'kind': 'TYPEDEF', 'name': 'uint32_t'}
-                                 switches: {'kind': 'TYPEDEF', 'name': 'uint32_t'}
-                                    sysrq: {'kind': 'TYPEDEF', 'name': 'uint32_t'}
+Reasons Kind.UNION (4): [('Added fields', 6), ('Removed fields', 2), ('Field type changed', 1), ('Layout changed', 2)]
+bpf_attr
+	Added fields:
+		test                : {'kind': 'STRUCT', 'name': '(anon)'}
+		(anon-5)            : {'kind': 'STRUCT', 'name': '(anon)'}
+		info                : {'kind': 'STRUCT', 'name': '(anon)'}
+proc_op
+	Added fields:
+		lsm                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+security_list_options
+	Added fields:
+		task_alloc          : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		task_prlimit        : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		ib_pkey_access      : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}, {'name': '(anon-1)', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': 'u16'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		ib_endport_manage_subnet: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': 'u8'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		ib_alloc_security   : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		ib_free_security    : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+	Removed fields:
+		task_wait           : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+	Field type changed:
+		sb_clone_mnt_opts   : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		setprocattr         : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}, {'name': '(anon-3)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}, {'name': '(anon-2)', 'type': {'kind': 'TYPEDEF', 'name': 'size_t'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+acpi_resource_data
+	Added fields:
+		pin_function        : {'kind': 'STRUCT', 'name': 'acpi_resource_pin_function'}
+		pin_config          : {'kind': 'STRUCT', 'name': 'acpi_resource_pin_config'}
+		pin_group           : {'kind': 'STRUCT', 'name': 'acpi_resource_pin_group'}
+		pin_group_function  : {'kind': 'STRUCT', 'name': 'acpi_resource_pin_group_function'}
+		pin_group_config    : {'kind': 'STRUCT', 'name': 'acpi_resource_pin_group_config'}
+acpi_parse_object
+	Layout changed
+acpi_descriptor
+	Layout changed
+aml_resource
+	Added fields:
+		pin_function        : {'kind': 'STRUCT', 'name': 'aml_resource_pin_function'}
+		pin_config          : {'kind': 'STRUCT', 'name': 'aml_resource_pin_config'}
+		pin_group           : {'kind': 'STRUCT', 'name': 'aml_resource_pin_group'}
+		pin_group_function  : {'kind': 'STRUCT', 'name': 'aml_resource_pin_group_function'}
+		pin_group_config    : {'kind': 'STRUCT', 'name': 'aml_resource_pin_group_config'}
+tpm2_cmd_params
+	Removed fields:
+		pcrread_in          : {'kind': 'STRUCT', 'name': 'tpm2_pcr_read_in'}
+		pcrread_out         : {'kind': 'STRUCT', 'name': 'tpm2_pcr_read_out'}
+		pcrextend_in        : {'kind': 'STRUCT', 'name': 'tpm2_pcr_extend_in'}
+ec_response_get_next_data
+	Added fields:
+		buttons             : {'kind': 'TYPEDEF', 'name': 'uint32_t'}
+		switches            : {'kind': 'TYPEDEF', 'name': 'uint32_t'}
+		sysrq               : {'kind': 'TYPEDEF', 'name': 'uint32_t'}

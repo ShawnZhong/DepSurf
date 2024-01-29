@@ -4,561 +4,562 @@ Added Kind.ENUM (49): ['x86_legacy_i8042_state', 'bpf_attach_type', 'dl_dev_stat
 Removed Kind.ENUM (12): ['cpuid_regs', 'amd_ip_types', 'amd_core_mca_blocks', 'amd_df_mca_blocks', 'rq_flag_bits', 'req_op', 'perf_group_flag', 'oom_scan_t', 'i2c_slave_event', 'fence_flag_bits']
 Common Kind.ENUM (783): ['x86_hardware_subarch', 'fixed_addresses', 'zone_type', 'uprobe_task_state', 'pid_type', 'hrtimer_restart', 'rcu_sync_type', 'migrate_mode', 'quota_type', 'system_states']
 Changed Kind.ENUM (42): ['cpuhp_state', 'fwnode_type', 'dsa_tag_protocol', 'bpf_prog_type', 'pageflags', 'pt_capabilities', 'stack_type', 'flow_dissector_key_id', 'bpf_map_type', 'bpf_func_id']
-Kind.ENUM   cpuhp_state
-                     Added values:
-                             CPUHP_X86_MCE_DEAD                      : 10
-                             CPUHP_VIRT_NET_DEAD                     : 11
-                             CPUHP_SLUB_DEAD                         : 12
-                             CPUHP_MM_WRITEBACK_DEAD                 : 13
-                             CPUHP_MM_VMSTAT_DEAD                    : 14
-                             CPUHP_SOFTIRQ_DEAD                      : 15
-                             CPUHP_NET_MVNETA_DEAD                   : 16
-                             CPUHP_CPUIDLE_DEAD                      : 17
-                             CPUHP_ARM64_FPSIMD_DEAD                 : 18
-                             CPUHP_ARM_OMAP_WAKE_DEAD                : 19
-                             CPUHP_IRQ_POLL_DEAD                     : 20
-                             CPUHP_BLOCK_SOFTIRQ_DEAD                : 21
-                             CPUHP_VIRT_SCSI_DEAD                    : 22
-                             CPUHP_ACPI_CPUDRV_DEAD                  : 23
-                             CPUHP_S390_PFAULT_DEAD                  : 24
-                             CPUHP_BLK_MQ_DEAD                       : 25
-                             CPUHP_FS_BUFF_DEAD                      : 26
-                             CPUHP_PRINTK_DEAD                       : 27
-                             CPUHP_MM_MEMCQ_DEAD                     : 28
-                             CPUHP_PERCPU_CNT_DEAD                   : 29
-                             CPUHP_RADIX_DEAD                        : 30
-                             CPUHP_PAGE_ALLOC_DEAD                   : 31
-                             CPUHP_NET_DEV_DEAD                      : 32
-                             CPUHP_PCI_XGENE_DEAD                    : 33
-                             CPUHP_IOMMU_INTEL_DEAD                  : 34
-                             CPUHP_LUSTRE_CFS_DEAD                   : 35
-                             CPUHP_SCSI_BNX2FC_DEAD                  : 36
-                             CPUHP_SCSI_BNX2I_DEAD                   : 37
-                             CPUHP_RELAY_PREPARE                     : 44
-                             CPUHP_SLAB_PREPARE                      : 45
-                             CPUHP_MD_RAID5_PREPARE                  : 46
-                             CPUHP_CPUIDLE_COUPLED_PREPARE           : 48
-                             CPUHP_POWERPC_PMAC_PREPARE              : 49
-                             CPUHP_POWERPC_MMU_CTX_PREPARE           : 50
-                             CPUHP_XEN_PREPARE                       : 51
-                             CPUHP_XEN_EVTCHN_PREPARE                : 52
-                             CPUHP_ARM_SHMOBILE_SCU_PREPARE          : 53
-                             CPUHP_SH_SH3X_PREPARE                   : 54
-                             CPUHP_BLK_MQ_PREPARE                    : 55
-                             CPUHP_NET_FLOW_PREPARE                  : 56
-                             CPUHP_TOPOLOGY_PREPARE                  : 57
-                             CPUHP_NET_IUCV_PREPARE                  : 58
-                             CPUHP_ARM_BL_PREPARE                    : 59
-                             CPUHP_TRACE_RB_PREPARE                  : 60
-                             CPUHP_MM_ZS_PREPARE                     : 61
-                             CPUHP_MM_ZSWP_MEM_PREPARE               : 62
-                             CPUHP_MM_ZSWP_POOL_PREPARE              : 63
-                             CPUHP_ZCOMP_PREPARE                     : 65
-                             CPUHP_MIPS_SOC_PREPARE                  : 67
-                             CPUHP_BP_PREPARE_DYN                    : 68
-                             CPUHP_BP_PREPARE_DYN_END                : 88
-                             CPUHP_AP_ARM64_DEBUG_MONITORS_STARTING  : 108
-                             CPUHP_AP_PERF_ARM_HW_BREAKPOINT_STARTING: 109
-                             CPUHP_AP_PERF_ARM_ACPI_STARTING         : 110
-                             CPUHP_AP_JCORE_TIMER_STARTING           : 115
-                             CPUHP_AP_PERF_ARM_L2X0_ONLINE           : 151
-                             CPUHP_AP_PERF_ARM_QCOM_L2_ONLINE        : 152
-                             CPUHP_AP_PERF_ARM_QCOM_L3_ONLINE        : 153
-                     Removed values:
-                             CPUHP_PERF_X86_UNCORE_PREP              : 4
-                             CPUHP_PERF_X86_RAPL_PREP                : 6
-                             CPUHP_NOTIFY_PREPARE                    : 19
-                             CPUHP_AP_IRQ_GICV3_STARTING             : 28
-                             CPUHP_AP_IRQ_ARMADA_CASC_STARTING       : 31
-                             CPUHP_AP_PERF_X86_UNCORE_STARTING       : 34
-                             CPUHP_AP_ARM_CORESIGHT4_STARTING        : 63
-                             CPUHP_AP_NOTIFY_STARTING                : 67
-                             CPUHP_AP_NOTIFY_ONLINE                  : 87
-                     Value changed:
-                             CPUHP_PERF_X86_AMD_UNCORE_PREP          : 5 -> 4
-                             CPUHP_PERF_BFIN                         : 7 -> 5
-                             CPUHP_PERF_POWER                        : 8 -> 6
-                             CPUHP_PERF_SUPERH                       : 9 -> 7
-                             CPUHP_X86_HPET_DEAD                     : 10 -> 8
-                             CPUHP_X86_APB_DEAD                      : 11 -> 9
-                             CPUHP_WORKQUEUE_PREP                    : 12 -> 38
-                             CPUHP_POWER_NUMA_PREPARE                : 13 -> 39
-                             CPUHP_HRTIMERS_PREPARE                  : 14 -> 40
-                             CPUHP_PROFILE_PREPARE                   : 15 -> 41
-                             CPUHP_X2APIC_PREPARE                    : 16 -> 42
-                             CPUHP_SMPCFD_PREPARE                    : 17 -> 43
-                             CPUHP_RCUTREE_PREP                      : 18 -> 47
-                             CPUHP_KVM_PPC_BOOK3S_PREPARE            : 20 -> 64
-                             CPUHP_TIMERS_DEAD                       : 21 -> 66
-                             CPUHP_BRINGUP_CPU                       : 22 -> 89
-                             CPUHP_AP_IDLE_DEAD                      : 23 -> 90
-                             CPUHP_AP_OFFLINE                        : 24 -> 91
-                             CPUHP_AP_SCHED_STARTING                 : 25 -> 92
-                             CPUHP_AP_RCUTREE_DYING                  : 26 -> 93
-                             CPUHP_AP_IRQ_GIC_STARTING               : 27 -> 94
-                             CPUHP_AP_IRQ_HIP04_STARTING             : 29 -> 95
-                             CPUHP_AP_IRQ_ARMADA_XP_STARTING         : 30 -> 96
-                             CPUHP_AP_IRQ_BCM2836_STARTING           : 32 -> 97
-                             CPUHP_AP_ARM_MVEBU_COHERENCY            : 33 -> 98
-                             CPUHP_AP_PERF_X86_AMD_UNCORE_STARTING   : 35 -> 99
-                             CPUHP_AP_PERF_X86_STARTING              : 36 -> 100
-                             CPUHP_AP_PERF_X86_AMD_IBS_STARTING      : 37 -> 101
-                             CPUHP_AP_PERF_X86_CQM_STARTING          : 38 -> 102
-                             CPUHP_AP_PERF_X86_CSTATE_STARTING       : 39 -> 103
-                             CPUHP_AP_PERF_XTENSA_STARTING           : 40 -> 104
-                             CPUHP_AP_PERF_METAG_STARTING            : 41 -> 105
-                             CPUHP_AP_MIPS_OP_LOONGSON3_STARTING     : 42 -> 106
-                             CPUHP_AP_ARM_VFP_STARTING               : 43 -> 107
-                             CPUHP_AP_PERF_ARM_STARTING              : 44 -> 111
-                             CPUHP_AP_ARM_L2X0_STARTING              : 45 -> 112
-                             CPUHP_AP_ARM_ARCH_TIMER_STARTING        : 46 -> 113
-                             CPUHP_AP_ARM_GLOBAL_TIMER_STARTING      : 47 -> 114
-                             CPUHP_AP_DUMMY_TIMER_STARTING           : 48 -> 128
-                             CPUHP_AP_EXYNOS4_MCT_TIMER_STARTING     : 49 -> 116
-                             CPUHP_AP_ARM_TWD_STARTING               : 50 -> 117
-                             CPUHP_AP_METAG_TIMER_STARTING           : 51 -> 118
-                             CPUHP_AP_QCOM_TIMER_STARTING            : 52 -> 119
-                             CPUHP_AP_ARMADA_TIMER_STARTING          : 53 -> 120
-                             CPUHP_AP_MARCO_TIMER_STARTING           : 54 -> 121
-                             CPUHP_AP_MIPS_GIC_TIMER_STARTING        : 55 -> 122
-                             CPUHP_AP_ARC_TIMER_STARTING             : 56 -> 123
-                             CPUHP_AP_KVM_STARTING                   : 57 -> 124
-                             CPUHP_AP_KVM_ARM_VGIC_INIT_STARTING     : 58 -> 125
-                             CPUHP_AP_KVM_ARM_VGIC_STARTING          : 59 -> 126
-                             CPUHP_AP_KVM_ARM_TIMER_STARTING         : 60 -> 127
-                             CPUHP_AP_ARM_XEN_STARTING               : 61 -> 129
-                             CPUHP_AP_ARM_CORESIGHT_STARTING         : 62 -> 130
-                             CPUHP_AP_ARM64_ISNDEP_STARTING          : 64 -> 131
-                             CPUHP_AP_SMPCFD_DYING                   : 65 -> 132
-                             CPUHP_AP_X86_TBOOT_DYING                : 66 -> 133
-                             CPUHP_AP_ONLINE                         : 68 -> 134
-                             CPUHP_TEARDOWN_CPU                      : 69 -> 135
-                             CPUHP_AP_ONLINE_IDLE                    : 70 -> 136
-                             CPUHP_AP_SMPBOOT_THREADS                : 71 -> 137
-                             CPUHP_AP_X86_VDSO_VMA_ONLINE            : 72 -> 138
-                             CPUHP_AP_PERF_ONLINE                    : 73 -> 139
-                             CPUHP_AP_PERF_X86_ONLINE                : 74 -> 140
-                             CPUHP_AP_PERF_X86_UNCORE_ONLINE         : 75 -> 141
-                             CPUHP_AP_PERF_X86_AMD_UNCORE_ONLINE     : 76 -> 142
-                             CPUHP_AP_PERF_X86_AMD_POWER_ONLINE      : 77 -> 143
-                             CPUHP_AP_PERF_X86_RAPL_ONLINE           : 78 -> 144
-                             CPUHP_AP_PERF_X86_CQM_ONLINE            : 79 -> 145
-                             CPUHP_AP_PERF_X86_CSTATE_ONLINE         : 80 -> 146
-                             CPUHP_AP_PERF_S390_CF_ONLINE            : 81 -> 147
-                             CPUHP_AP_PERF_S390_SF_ONLINE            : 82 -> 148
-                             CPUHP_AP_PERF_ARM_CCI_ONLINE            : 83 -> 149
-                             CPUHP_AP_PERF_ARM_CCN_ONLINE            : 84 -> 150
-                             CPUHP_AP_WORKQUEUE_ONLINE               : 85 -> 154
-                             CPUHP_AP_RCUTREE_ONLINE                 : 86 -> 155
-                             CPUHP_AP_ONLINE_DYN                     : 88 -> 156
-                             CPUHP_AP_ONLINE_DYN_END                 : 118 -> 186
-                             CPUHP_AP_X86_HPET_ONLINE                : 119 -> 187
-                             CPUHP_AP_X86_KVM_CLK_ONLINE             : 120 -> 188
-                             CPUHP_AP_ACTIVE                         : 121 -> 189
-                             CPUHP_ONLINE                            : 122 -> 190
-Kind.ENUM   fwnode_type
-                     Added values:
-                             FWNODE_ACPI_STATIC                      : 4
-                     Value changed:
-                             FWNODE_PDATA                            : 4 -> 5
-                             FWNODE_IRQCHIP                          : 5 -> 6
-Kind.ENUM   dsa_tag_protocol
-                     Added values:
-                             DSA_TAG_PROTO_QCA                       : 5
-                     Value changed:
-                             DSA_TAG_LAST                            : 5 -> 6
-Kind.ENUM   bpf_prog_type
-                     Added values:
-                             BPF_PROG_TYPE_PERF_EVENT                : 7
-                             BPF_PROG_TYPE_CGROUP_SKB                : 8
-                             BPF_PROG_TYPE_CGROUP_SOCK               : 9
-                             BPF_PROG_TYPE_LWT_IN                    : 10
-                             BPF_PROG_TYPE_LWT_OUT                   : 11
-                             BPF_PROG_TYPE_LWT_XMIT                  : 12
-Kind.ENUM   pageflags
-                     Added values:
-                             PG_waiters                              : 7
-                     Value changed:
-                             PG_slab                                 : 7 -> 8
-                             PG_owner_priv_1                         : 8 -> 9
-                             PG_arch_1                               : 9 -> 10
-                             PG_reserved                             : 10 -> 11
-                             PG_private                              : 11 -> 12
-                             PG_private_2                            : 12 -> 13
-                             PG_writeback                            : 13 -> 14
-                             PG_head                                 : 14 -> 15
-                             PG_swapcache                            : 15 -> 9
-                             PG_checked                              : 8 -> 9
-                             PG_fscache                              : 12 -> 13
-                             PG_pinned                               : 8 -> 9
-                             PG_foreign                              : 8 -> 9
-                             PG_slob_free                            : 11 -> 12
-                             PG_double_map                           : 12 -> 13
-Kind.ENUM   pt_capabilities
-                     Added values:
-                             PT_CAP_ptwrite                          : 5
-                             PT_CAP_power_event_trace                : 6
-                     Value changed:
-                             PT_CAP_topa_output                      : 5 -> 7
-                             PT_CAP_topa_multiple_entries            : 6 -> 8
-                             PT_CAP_single_range_output              : 7 -> 9
-                             PT_CAP_payloads_lip                     : 8 -> 10
-                             PT_CAP_num_address_ranges               : 9 -> 11
-                             PT_CAP_mtc_periods                      : 10 -> 12
-                             PT_CAP_cycle_thresholds                 : 11 -> 13
-                             PT_CAP_psb_periods                      : 12 -> 14
-Kind.ENUM   stack_type
-                     Added values:
-                             STACK_TYPE_UNKNOWN                      : 0
-                             STACK_TYPE_TASK                         : 1
-                             STACK_TYPE_IRQ                          : 2
-                             STACK_TYPE_SOFTIRQ                      : 3
-                             STACK_TYPE_EXCEPTION                    : 4
-                             STACK_TYPE_EXCEPTION_LAST               : 7
-                     Removed values:
-                             STACK_IS_UNKNOWN                        : 0
-                             STACK_IS_NORMAL                         : 1
-                             STACK_IS_EXCEPTION                      : 2
-                             STACK_IS_IRQ                            : 3
-Kind.ENUM   flow_dissector_key_id
-                     Added values:
-                             FLOW_DISSECTOR_KEY_ICMP                 : 5
-                             FLOW_DISSECTOR_KEY_VLAN                 : 8
-                             FLOW_DISSECTOR_KEY_ENC_KEYID            : 12
-                             FLOW_DISSECTOR_KEY_ENC_IPV4_ADDRS       : 13
-                             FLOW_DISSECTOR_KEY_ENC_IPV6_ADDRS       : 14
-                             FLOW_DISSECTOR_KEY_ENC_CONTROL          : 15
-                             FLOW_DISSECTOR_KEY_ENC_PORTS            : 16
-                     Removed values:
-                             FLOW_DISSECTOR_KEY_VLANID               : 7
-                     Value changed:
-                             FLOW_DISSECTOR_KEY_ETH_ADDRS            : 5 -> 6
-                             FLOW_DISSECTOR_KEY_TIPC_ADDRS           : 6 -> 7
-                             FLOW_DISSECTOR_KEY_FLOW_LABEL           : 8 -> 9
-                             FLOW_DISSECTOR_KEY_GRE_KEYID            : 9 -> 10
-                             FLOW_DISSECTOR_KEY_MPLS_ENTROPY         : 10 -> 11
-                             FLOW_DISSECTOR_KEY_MAX                  : 11 -> 17
-Kind.ENUM   bpf_map_type
-                     Added values:
-                             BPF_MAP_TYPE_LRU_HASH                   : 9
-                             BPF_MAP_TYPE_LRU_PERCPU_HASH            : 10
-Kind.ENUM   bpf_func_id
-                     Added values:
-                             BPF_FUNC_current_task_under_cgroup      : 37
-                             BPF_FUNC_skb_change_tail                : 38
-                             BPF_FUNC_skb_pull_data                  : 39
-                             BPF_FUNC_csum_update                    : 40
-                             BPF_FUNC_set_hash_invalid               : 41
-                             BPF_FUNC_get_numa_node_id               : 42
-                             BPF_FUNC_skb_change_head                : 43
-                             BPF_FUNC_xdp_adjust_head                : 44
-                     Value changed:
-                             __BPF_FUNC_MAX_ID                       : 37 -> 45
-Kind.ENUM   bpf_reg_type
-                     Added values:
-                             PTR_TO_MAP_VALUE_ADJ                    : 11
-Kind.ENUM   alarmtimer_type
-                     Added values:
-                             ALARM_REALTIME_FREEZER                  : 3
-                             ALARM_BOOTTIME_FREEZER                  : 4
-Kind.ENUM   ethtool_link_mode_bit_indices
-                     Added values:
-                             ETHTOOL_LINK_MODE_1000baseX_Full_BIT    : 41
-                             ETHTOOL_LINK_MODE_10000baseCR_Full_BIT  : 42
-                             ETHTOOL_LINK_MODE_10000baseSR_Full_BIT  : 43
-                             ETHTOOL_LINK_MODE_10000baseLR_Full_BIT  : 44
-                             ETHTOOL_LINK_MODE_10000baseLRM_Full_BIT : 45
-                             ETHTOOL_LINK_MODE_10000baseER_Full_BIT  : 46
-                             ETHTOOL_LINK_MODE_2500baseT_Full_BIT    : 47
-                             ETHTOOL_LINK_MODE_5000baseT_Full_BIT    : 48
-                     Value changed:
-                             __ETHTOOL_LINK_MODE_LAST                : 40 -> 48
-Kind.ENUM   regex_type
-                     Added values:
-                             MATCH_GLOB                              : 4
-Kind.ENUM   trace_type
-                     Added values:
-                             TRACE_HWLAT                             : 15
-                             TRACE_RAW_DATA                          : 16
-                     Value changed:
-                             __TRACE_LAST_TYPE                       : 15 -> 17
-Kind.ENUM   bpf_cmd
-                     Added values:
-                             BPF_PROG_ATTACH                         : 8
-                             BPF_PROG_DETACH                         : 9
-Kind.ENUM   mapping_flags
-                     Added values:
-                             AS_NO_WRITEBACK_TAGS                    : 5
-                     Value changed:
-                             AS_EIO                                  : 25 -> 0
-                             AS_ENOSPC                               : 26 -> 1
-                             AS_MM_ALL_LOCKS                         : 27 -> 2
-                             AS_UNEVICTABLE                          : 28 -> 3
-                             AS_EXITING                              : 29 -> 4
-Kind.ENUM   compact_priority
-                     Added values:
-                             COMPACT_PRIO_SYNC_FULL                  : 0
-                             MIN_COMPACT_COSTLY_PRIORITY             : 1
-                     Value changed:
-                             COMPACT_PRIO_SYNC_LIGHT                 : 0 -> 1
-                             DEF_COMPACT_PRIORITY                    : 0 -> 1
-                             COMPACT_PRIO_ASYNC                      : 1 -> 2
-                             INIT_COMPACT_PRIORITY                   : 1 -> 2
-Kind.ENUM   compact_result
-                     Added values:
-                             COMPACT_SUCCESS                         : 8
-                     Removed values:
-                             COMPACT_PARTIAL                         : 8
-Kind.ENUM   label_initialized
-                     Added values:
-                             LABEL_PENDING                           : 2
-Kind.ENUM   aafs_ns_type
-                     Added values:
-                             AAFS_NS_REVISION                        : 7
-                     Value changed:
-                             AAFS_NS_COUNT                           : 7 -> 8
-                             AAFS_NS_MAX_COUNT                       : 8 -> 9
-                             AAFS_NS_SIZE                            : 9 -> 10
-                             AAFS_NS_MAX_SIZE                        : 10 -> 11
-                             AAFS_NS_OWNER                           : 11 -> 12
-                             AAFS_NS_SIZEOF                          : 12 -> 13
-Kind.ENUM   crypto_attr_type_t
-                     Added values:
-                             CRYPTOCFGA_REPORT_ACOMP                 : 11
-                     Value changed:
-                             __CRYPTOCFGA_MAX                        : 11 -> 12
-Kind.ENUM   rq_atomic_flags
-                     Added values:
-                             REQ_ATOM_POLL_SLEPT                     : 2
-Kind.ENUM   pci_bus_flags
-                     Added values:
-                             PCI_BUS_FLAGS_NO_AERSID                 : 4
-Kind.ENUM   hdmi_picture_aspect
-                     Added values:
-                             HDMI_PICTURE_ASPECT_64_27               : 3
-                             HDMI_PICTURE_ASPECT_256_135             : 4
-                     Value changed:
-                             HDMI_PICTURE_ASPECT_RESERVED            : 3 -> 5
-Kind.ENUM   pci_board_num_t
-                     Added values:
-                             pbn_b0_4_1250000                        : 14
-                     Removed values:
-                             pbn_byt                                 : 107
-                             pbn_qrk                                 : 108
-                     Value changed:
-                             pbn_b0_2_1843200                        : 14 -> 15
-                             pbn_b0_4_1843200                        : 15 -> 16
-                             pbn_b0_2_1843200_200                    : 16 -> 17
-                             pbn_b0_4_1843200_200                    : 17 -> 18
-                             pbn_b0_8_1843200_200                    : 18 -> 19
-                             pbn_b0_1_4000000                        : 19 -> 20
-                             pbn_b0_bt_1_115200                      : 20 -> 21
-                             pbn_b0_bt_2_115200                      : 21 -> 22
-                             pbn_b0_bt_4_115200                      : 22 -> 23
-                             pbn_b0_bt_8_115200                      : 23 -> 24
-                             pbn_b0_bt_1_460800                      : 24 -> 25
-                             pbn_b0_bt_2_460800                      : 25 -> 26
-                             pbn_b0_bt_4_460800                      : 26 -> 27
-                             pbn_b0_bt_1_921600                      : 27 -> 28
-                             pbn_b0_bt_2_921600                      : 28 -> 29
-                             pbn_b0_bt_4_921600                      : 29 -> 30
-                             pbn_b0_bt_8_921600                      : 30 -> 31
-                             pbn_b1_1_115200                         : 31 -> 32
-                             pbn_b1_2_115200                         : 32 -> 33
-                             pbn_b1_4_115200                         : 33 -> 34
-                             pbn_b1_8_115200                         : 34 -> 35
-                             pbn_b1_16_115200                        : 35 -> 36
-                             pbn_b1_1_921600                         : 36 -> 37
-                             pbn_b1_2_921600                         : 37 -> 38
-                             pbn_b1_4_921600                         : 38 -> 39
-                             pbn_b1_8_921600                         : 39 -> 40
-                             pbn_b1_2_1250000                        : 40 -> 41
-                             pbn_b1_bt_1_115200                      : 41 -> 42
-                             pbn_b1_bt_2_115200                      : 42 -> 43
-                             pbn_b1_bt_4_115200                      : 43 -> 44
-                             pbn_b1_bt_2_921600                      : 44 -> 45
-                             pbn_b1_1_1382400                        : 45 -> 46
-                             pbn_b1_2_1382400                        : 46 -> 47
-                             pbn_b1_4_1382400                        : 47 -> 48
-                             pbn_b1_8_1382400                        : 48 -> 49
-                             pbn_b2_1_115200                         : 49 -> 50
-                             pbn_b2_2_115200                         : 50 -> 51
-                             pbn_b2_4_115200                         : 51 -> 52
-                             pbn_b2_8_115200                         : 52 -> 53
-                             pbn_b2_1_460800                         : 53 -> 54
-                             pbn_b2_4_460800                         : 54 -> 55
-                             pbn_b2_8_460800                         : 55 -> 56
-                             pbn_b2_16_460800                        : 56 -> 57
-                             pbn_b2_1_921600                         : 57 -> 58
-                             pbn_b2_4_921600                         : 58 -> 59
-                             pbn_b2_8_921600                         : 59 -> 60
-                             pbn_b2_8_1152000                        : 60 -> 61
-                             pbn_b2_bt_1_115200                      : 61 -> 62
-                             pbn_b2_bt_2_115200                      : 62 -> 63
-                             pbn_b2_bt_4_115200                      : 63 -> 64
-                             pbn_b2_bt_2_921600                      : 64 -> 65
-                             pbn_b2_bt_4_921600                      : 65 -> 66
-                             pbn_b3_2_115200                         : 66 -> 67
-                             pbn_b3_4_115200                         : 67 -> 68
-                             pbn_b3_8_115200                         : 68 -> 69
-                             pbn_b4_bt_2_921600                      : 69 -> 70
-                             pbn_b4_bt_4_921600                      : 70 -> 71
-                             pbn_b4_bt_8_921600                      : 71 -> 72
-                             pbn_panacom                             : 72 -> 73
-                             pbn_panacom2                            : 73 -> 74
-                             pbn_panacom4                            : 74 -> 75
-                             pbn_plx_romulus                         : 75 -> 76
-                             pbn_endrun_2_4000000                    : 76 -> 77
-                             pbn_oxsemi                              : 77 -> 78
-                             pbn_oxsemi_1_4000000                    : 78 -> 79
-                             pbn_oxsemi_2_4000000                    : 79 -> 80
-                             pbn_oxsemi_4_4000000                    : 80 -> 81
-                             pbn_oxsemi_8_4000000                    : 81 -> 82
-                             pbn_intel_i960                          : 82 -> 83
-                             pbn_sgi_ioc3                            : 83 -> 84
-                             pbn_computone_4                         : 84 -> 85
-                             pbn_computone_6                         : 85 -> 86
-                             pbn_computone_8                         : 86 -> 87
-                             pbn_sbsxrsio                            : 87 -> 88
-                             pbn_exar_XR17C152                       : 88 -> 89
-                             pbn_exar_XR17C154                       : 89 -> 90
-                             pbn_exar_XR17C158                       : 90 -> 91
-                             pbn_exar_XR17V352                       : 91 -> 92
-                             pbn_exar_XR17V354                       : 92 -> 93
-                             pbn_exar_XR17V358                       : 93 -> 94
-                             pbn_exar_XR17V4358                      : 94 -> 95
-                             pbn_exar_XR17V8358                      : 95 -> 96
-                             pbn_exar_ibm_saturn                     : 96 -> 97
-                             pbn_pasemi_1682M                        : 97 -> 98
-                             pbn_ni8430_2                            : 98 -> 99
-                             pbn_ni8430_4                            : 99 -> 100
-                             pbn_ni8430_8                            : 100 -> 101
-                             pbn_ni8430_16                           : 101 -> 102
-                             pbn_ADDIDATA_PCIe_1_3906250             : 102 -> 103
-                             pbn_ADDIDATA_PCIe_2_3906250             : 103 -> 104
-                             pbn_ADDIDATA_PCIe_4_3906250             : 104 -> 105
-                             pbn_ADDIDATA_PCIe_8_3906250             : 105 -> 106
-                             pbn_ce4100_1_115200                     : 106 -> 107
-                             pbn_omegapci                            : 109 -> 108
-                             pbn_NETMOS9900_2s_115200                : 110 -> 109
-                             pbn_brcm_trumanage                      : 111 -> 110
-                             pbn_fintek_4                            : 112 -> 111
-                             pbn_fintek_8                            : 113 -> 112
-                             pbn_fintek_12                           : 114 -> 113
-                             pbn_wch382_2                            : 115 -> 114
-                             pbn_wch384_4                            : 116 -> 115
-                             pbn_pericom_PI7C9X7951                  : 117 -> 116
-                             pbn_pericom_PI7C9X7952                  : 118 -> 117
-                             pbn_pericom_PI7C9X7954                  : 119 -> 118
-                             pbn_pericom_PI7C9X7958                  : 120 -> 119
-Kind.ENUM   tpm_const
-                     Added values:
-                             TPM_NUM_EVENT_LOG_FILES                 : 3
-Kind.ENUM   tpm_chip_flags
-                     Added values:
-                             TPM_CHIP_FLAG_HAVE_TIMEOUTS             : 16
-                     Removed values:
-                             TPM_CHIP_FLAG_REGISTERED                : 1
-Kind.ENUM   tpm_capabilities
-                     Added values:
-                             TPM_CAP_VERSION_1_1                     : 6
-                             TPM_CAP_VERSION_1_2                     : 26
-                     Removed values:
-                             CAP_VERSION_1_1                         : 100663296
-                             CAP_VERSION_1_2                         : 436207616
-                     Value changed:
-                             TPM_CAP_FLAG                            : 67108864 -> 4
-                             TPM_CAP_PROP                            : 83886080 -> 5
-Kind.ENUM   tpm_sub_capabilities
-                     Value changed:
-                             TPM_CAP_PROP_PCR                        : 16842752 -> 257
-                             TPM_CAP_PROP_MANUFACTURER               : 50397184 -> 259
-                             TPM_CAP_FLAG_PERM                       : 134283264 -> 264
-                             TPM_CAP_FLAG_VOL                        : 151060480 -> 265
-                             TPM_CAP_PROP_OWNER                      : 285278208 -> 273
-                             TPM_CAP_PROP_TIS_TIMEOUT                : 352387072 -> 277
-                             TPM_CAP_PROP_TIS_DURATION               : 536936448 -> 288
-Kind.ENUM   tpm_tis_flags
-                     Added values:
-                             TPM_TIS_ITPM_WORKAROUND                 : 1
-                     Removed values:
-                             TPM_TIS_ITPM_POSSIBLE                   : 1
-Kind.ENUM   ethtool_stringset
-                     Added values:
-                             ETH_SS_PHY_TUNABLES                     : 8
-Kind.ENUM   flag_bits
-                     Added values:
-                             ExternalBbl                             : 15
-                             FailFast                                : 16
-                             LastDev                                 : 17
-Kind.ENUM   hw_event_mc_err_type
-                     Added values:
-                             HW_EVENT_ERR_DEFERRED                   : 2
-                     Value changed:
-                             HW_EVENT_ERR_FATAL                      : 2 -> 3
-                             HW_EVENT_ERR_INFO                       : 3 -> 4
-Kind.ENUM   rtattr_type_t
-                     Added values:
-                             RTA_UID                                 : 25
-                     Value changed:
-                             __RTA_MAX                               : 25 -> 26
-Kind.ENUM   switchdev_obj_id
-                     Removed values:
-                             SWITCHDEV_OBJ_ID_IPV4_FIB               : 2
-                     Value changed:
-                             SWITCHDEV_OBJ_ID_PORT_FDB               : 3 -> 2
-                             SWITCHDEV_OBJ_ID_PORT_MDB               : 4 -> 3
-Kind.ENUM   lwtunnel_encap_types
-                     Added values:
-                             LWTUNNEL_ENCAP_SEG6                     : 5
-                             LWTUNNEL_ENCAP_BPF                      : 6
-                     Value changed:
-                             __LWTUNNEL_ENCAP_MAX                    : 5 -> 7
-Kind.ENUM   ip_conntrack_info
-                     Added values:
-                             IP_CT_ESTABLISHED                       : 0
-                             IP_CT_RELATED                           : 1
-                             IP_CT_NEW                               : 2
-                             IP_CT_IS_REPLY                          : 3
-                             IP_CT_ESTABLISHED_REPLY                 : 3
-                             IP_CT_RELATED_REPLY                     : 4
-                             IP_CT_NUMBER                            : 5
-Kind.ENUM   tsq_flags
-                     Added values:
-                             TSQF_THROTTLED                          : 1
-                             TSQF_QUEUED                             : 2
-                             TCPF_TSQ_DEFERRED                       : 4
-                             TCPF_WRITE_TIMER_DEFERRED               : 8
-                             TCPF_DELACK_TIMER_DEFERRED              : 16
-                             TCPF_MTU_REDUCED_DEFERRED               : 32
-                     Removed values:
-                             TSQ_THROTTLED                           : 0
-                             TSQ_QUEUED                              : 1
-                             TCP_TSQ_DEFERRED                        : 2
-                             TCP_WRITE_TIMER_DEFERRED                : 3
-                             TCP_DELACK_TIMER_DEFERRED               : 4
-                             TCP_MTU_REDUCED_DEFERRED                : 5
-Kind.ENUM   nl80211_iftype
-                     Added values:
-                             NL80211_IFTYPE_NAN                      : 12
-                     Value changed:
-                             NUM_NL80211_IFTYPES                     : 12 -> 13
-                             NL80211_IFTYPE_MAX                      : 11 -> 12
-Kind.ENUM   nl80211_auth_type
-                     Added values:
-                             NL80211_AUTHTYPE_FILS_SK                : 5
-                             NL80211_AUTHTYPE_FILS_SK_PFS            : 6
-                             NL80211_AUTHTYPE_FILS_PK                : 7
-                     Value changed:
-                             __NL80211_AUTHTYPE_NUM                  : 5 -> 8
-                             NL80211_AUTHTYPE_MAX                    : 4 -> 7
-                             NL80211_AUTHTYPE_AUTOMATIC              : 5 -> 8
-Kind.ENUM   nl80211_ext_feature_index
-                     Added values:
-                             NL80211_EXT_FEATURE_BEACON_RATE_LEGACY  : 6
-                             NL80211_EXT_FEATURE_BEACON_RATE_HT      : 7
-                             NL80211_EXT_FEATURE_BEACON_RATE_VHT     : 8
-                             NL80211_EXT_FEATURE_FILS_STA            : 9
-                     Value changed:
-                             NUM_NL80211_EXT_FEATURES                : 6 -> 10
-                             MAX_NL80211_EXT_FEATURES                : 5 -> 9
+Reasons Kind.ENUM (3): [('Added values', 40), ('Removed values', 10), ('Value changed', 24)]
+cpuhp_state
+	Added values:
+		CPUHP_X86_MCE_DEAD                      : 10
+		CPUHP_VIRT_NET_DEAD                     : 11
+		CPUHP_SLUB_DEAD                         : 12
+		CPUHP_MM_WRITEBACK_DEAD                 : 13
+		CPUHP_MM_VMSTAT_DEAD                    : 14
+		CPUHP_SOFTIRQ_DEAD                      : 15
+		CPUHP_NET_MVNETA_DEAD                   : 16
+		CPUHP_CPUIDLE_DEAD                      : 17
+		CPUHP_ARM64_FPSIMD_DEAD                 : 18
+		CPUHP_ARM_OMAP_WAKE_DEAD                : 19
+		CPUHP_IRQ_POLL_DEAD                     : 20
+		CPUHP_BLOCK_SOFTIRQ_DEAD                : 21
+		CPUHP_VIRT_SCSI_DEAD                    : 22
+		CPUHP_ACPI_CPUDRV_DEAD                  : 23
+		CPUHP_S390_PFAULT_DEAD                  : 24
+		CPUHP_BLK_MQ_DEAD                       : 25
+		CPUHP_FS_BUFF_DEAD                      : 26
+		CPUHP_PRINTK_DEAD                       : 27
+		CPUHP_MM_MEMCQ_DEAD                     : 28
+		CPUHP_PERCPU_CNT_DEAD                   : 29
+		CPUHP_RADIX_DEAD                        : 30
+		CPUHP_PAGE_ALLOC_DEAD                   : 31
+		CPUHP_NET_DEV_DEAD                      : 32
+		CPUHP_PCI_XGENE_DEAD                    : 33
+		CPUHP_IOMMU_INTEL_DEAD                  : 34
+		CPUHP_LUSTRE_CFS_DEAD                   : 35
+		CPUHP_SCSI_BNX2FC_DEAD                  : 36
+		CPUHP_SCSI_BNX2I_DEAD                   : 37
+		CPUHP_RELAY_PREPARE                     : 44
+		CPUHP_SLAB_PREPARE                      : 45
+		CPUHP_MD_RAID5_PREPARE                  : 46
+		CPUHP_CPUIDLE_COUPLED_PREPARE           : 48
+		CPUHP_POWERPC_PMAC_PREPARE              : 49
+		CPUHP_POWERPC_MMU_CTX_PREPARE           : 50
+		CPUHP_XEN_PREPARE                       : 51
+		CPUHP_XEN_EVTCHN_PREPARE                : 52
+		CPUHP_ARM_SHMOBILE_SCU_PREPARE          : 53
+		CPUHP_SH_SH3X_PREPARE                   : 54
+		CPUHP_BLK_MQ_PREPARE                    : 55
+		CPUHP_NET_FLOW_PREPARE                  : 56
+		CPUHP_TOPOLOGY_PREPARE                  : 57
+		CPUHP_NET_IUCV_PREPARE                  : 58
+		CPUHP_ARM_BL_PREPARE                    : 59
+		CPUHP_TRACE_RB_PREPARE                  : 60
+		CPUHP_MM_ZS_PREPARE                     : 61
+		CPUHP_MM_ZSWP_MEM_PREPARE               : 62
+		CPUHP_MM_ZSWP_POOL_PREPARE              : 63
+		CPUHP_ZCOMP_PREPARE                     : 65
+		CPUHP_MIPS_SOC_PREPARE                  : 67
+		CPUHP_BP_PREPARE_DYN                    : 68
+		CPUHP_BP_PREPARE_DYN_END                : 88
+		CPUHP_AP_ARM64_DEBUG_MONITORS_STARTING  : 108
+		CPUHP_AP_PERF_ARM_HW_BREAKPOINT_STARTING: 109
+		CPUHP_AP_PERF_ARM_ACPI_STARTING         : 110
+		CPUHP_AP_JCORE_TIMER_STARTING           : 115
+		CPUHP_AP_PERF_ARM_L2X0_ONLINE           : 151
+		CPUHP_AP_PERF_ARM_QCOM_L2_ONLINE        : 152
+		CPUHP_AP_PERF_ARM_QCOM_L3_ONLINE        : 153
+	Removed values:
+		CPUHP_PERF_X86_UNCORE_PREP              : 4
+		CPUHP_PERF_X86_RAPL_PREP                : 6
+		CPUHP_NOTIFY_PREPARE                    : 19
+		CPUHP_AP_IRQ_GICV3_STARTING             : 28
+		CPUHP_AP_IRQ_ARMADA_CASC_STARTING       : 31
+		CPUHP_AP_PERF_X86_UNCORE_STARTING       : 34
+		CPUHP_AP_ARM_CORESIGHT4_STARTING        : 63
+		CPUHP_AP_NOTIFY_STARTING                : 67
+		CPUHP_AP_NOTIFY_ONLINE                  : 87
+	Value changed:
+		CPUHP_PERF_X86_AMD_UNCORE_PREP          : 5 -> 4
+		CPUHP_PERF_BFIN                         : 7 -> 5
+		CPUHP_PERF_POWER                        : 8 -> 6
+		CPUHP_PERF_SUPERH                       : 9 -> 7
+		CPUHP_X86_HPET_DEAD                     : 10 -> 8
+		CPUHP_X86_APB_DEAD                      : 11 -> 9
+		CPUHP_WORKQUEUE_PREP                    : 12 -> 38
+		CPUHP_POWER_NUMA_PREPARE                : 13 -> 39
+		CPUHP_HRTIMERS_PREPARE                  : 14 -> 40
+		CPUHP_PROFILE_PREPARE                   : 15 -> 41
+		CPUHP_X2APIC_PREPARE                    : 16 -> 42
+		CPUHP_SMPCFD_PREPARE                    : 17 -> 43
+		CPUHP_RCUTREE_PREP                      : 18 -> 47
+		CPUHP_KVM_PPC_BOOK3S_PREPARE            : 20 -> 64
+		CPUHP_TIMERS_DEAD                       : 21 -> 66
+		CPUHP_BRINGUP_CPU                       : 22 -> 89
+		CPUHP_AP_IDLE_DEAD                      : 23 -> 90
+		CPUHP_AP_OFFLINE                        : 24 -> 91
+		CPUHP_AP_SCHED_STARTING                 : 25 -> 92
+		CPUHP_AP_RCUTREE_DYING                  : 26 -> 93
+		CPUHP_AP_IRQ_GIC_STARTING               : 27 -> 94
+		CPUHP_AP_IRQ_HIP04_STARTING             : 29 -> 95
+		CPUHP_AP_IRQ_ARMADA_XP_STARTING         : 30 -> 96
+		CPUHP_AP_IRQ_BCM2836_STARTING           : 32 -> 97
+		CPUHP_AP_ARM_MVEBU_COHERENCY            : 33 -> 98
+		CPUHP_AP_PERF_X86_AMD_UNCORE_STARTING   : 35 -> 99
+		CPUHP_AP_PERF_X86_STARTING              : 36 -> 100
+		CPUHP_AP_PERF_X86_AMD_IBS_STARTING      : 37 -> 101
+		CPUHP_AP_PERF_X86_CQM_STARTING          : 38 -> 102
+		CPUHP_AP_PERF_X86_CSTATE_STARTING       : 39 -> 103
+		CPUHP_AP_PERF_XTENSA_STARTING           : 40 -> 104
+		CPUHP_AP_PERF_METAG_STARTING            : 41 -> 105
+		CPUHP_AP_MIPS_OP_LOONGSON3_STARTING     : 42 -> 106
+		CPUHP_AP_ARM_VFP_STARTING               : 43 -> 107
+		CPUHP_AP_PERF_ARM_STARTING              : 44 -> 111
+		CPUHP_AP_ARM_L2X0_STARTING              : 45 -> 112
+		CPUHP_AP_ARM_ARCH_TIMER_STARTING        : 46 -> 113
+		CPUHP_AP_ARM_GLOBAL_TIMER_STARTING      : 47 -> 114
+		CPUHP_AP_DUMMY_TIMER_STARTING           : 48 -> 128
+		CPUHP_AP_EXYNOS4_MCT_TIMER_STARTING     : 49 -> 116
+		CPUHP_AP_ARM_TWD_STARTING               : 50 -> 117
+		CPUHP_AP_METAG_TIMER_STARTING           : 51 -> 118
+		CPUHP_AP_QCOM_TIMER_STARTING            : 52 -> 119
+		CPUHP_AP_ARMADA_TIMER_STARTING          : 53 -> 120
+		CPUHP_AP_MARCO_TIMER_STARTING           : 54 -> 121
+		CPUHP_AP_MIPS_GIC_TIMER_STARTING        : 55 -> 122
+		CPUHP_AP_ARC_TIMER_STARTING             : 56 -> 123
+		CPUHP_AP_KVM_STARTING                   : 57 -> 124
+		CPUHP_AP_KVM_ARM_VGIC_INIT_STARTING     : 58 -> 125
+		CPUHP_AP_KVM_ARM_VGIC_STARTING          : 59 -> 126
+		CPUHP_AP_KVM_ARM_TIMER_STARTING         : 60 -> 127
+		CPUHP_AP_ARM_XEN_STARTING               : 61 -> 129
+		CPUHP_AP_ARM_CORESIGHT_STARTING         : 62 -> 130
+		CPUHP_AP_ARM64_ISNDEP_STARTING          : 64 -> 131
+		CPUHP_AP_SMPCFD_DYING                   : 65 -> 132
+		CPUHP_AP_X86_TBOOT_DYING                : 66 -> 133
+		CPUHP_AP_ONLINE                         : 68 -> 134
+		CPUHP_TEARDOWN_CPU                      : 69 -> 135
+		CPUHP_AP_ONLINE_IDLE                    : 70 -> 136
+		CPUHP_AP_SMPBOOT_THREADS                : 71 -> 137
+		CPUHP_AP_X86_VDSO_VMA_ONLINE            : 72 -> 138
+		CPUHP_AP_PERF_ONLINE                    : 73 -> 139
+		CPUHP_AP_PERF_X86_ONLINE                : 74 -> 140
+		CPUHP_AP_PERF_X86_UNCORE_ONLINE         : 75 -> 141
+		CPUHP_AP_PERF_X86_AMD_UNCORE_ONLINE     : 76 -> 142
+		CPUHP_AP_PERF_X86_AMD_POWER_ONLINE      : 77 -> 143
+		CPUHP_AP_PERF_X86_RAPL_ONLINE           : 78 -> 144
+		CPUHP_AP_PERF_X86_CQM_ONLINE            : 79 -> 145
+		CPUHP_AP_PERF_X86_CSTATE_ONLINE         : 80 -> 146
+		CPUHP_AP_PERF_S390_CF_ONLINE            : 81 -> 147
+		CPUHP_AP_PERF_S390_SF_ONLINE            : 82 -> 148
+		CPUHP_AP_PERF_ARM_CCI_ONLINE            : 83 -> 149
+		CPUHP_AP_PERF_ARM_CCN_ONLINE            : 84 -> 150
+		CPUHP_AP_WORKQUEUE_ONLINE               : 85 -> 154
+		CPUHP_AP_RCUTREE_ONLINE                 : 86 -> 155
+		CPUHP_AP_ONLINE_DYN                     : 88 -> 156
+		CPUHP_AP_ONLINE_DYN_END                 : 118 -> 186
+		CPUHP_AP_X86_HPET_ONLINE                : 119 -> 187
+		CPUHP_AP_X86_KVM_CLK_ONLINE             : 120 -> 188
+		CPUHP_AP_ACTIVE                         : 121 -> 189
+		CPUHP_ONLINE                            : 122 -> 190
+fwnode_type
+	Added values:
+		FWNODE_ACPI_STATIC                      : 4
+	Value changed:
+		FWNODE_PDATA                            : 4 -> 5
+		FWNODE_IRQCHIP                          : 5 -> 6
+dsa_tag_protocol
+	Added values:
+		DSA_TAG_PROTO_QCA                       : 5
+	Value changed:
+		DSA_TAG_LAST                            : 5 -> 6
+bpf_prog_type
+	Added values:
+		BPF_PROG_TYPE_PERF_EVENT                : 7
+		BPF_PROG_TYPE_CGROUP_SKB                : 8
+		BPF_PROG_TYPE_CGROUP_SOCK               : 9
+		BPF_PROG_TYPE_LWT_IN                    : 10
+		BPF_PROG_TYPE_LWT_OUT                   : 11
+		BPF_PROG_TYPE_LWT_XMIT                  : 12
+pageflags
+	Added values:
+		PG_waiters                              : 7
+	Value changed:
+		PG_slab                                 : 7 -> 8
+		PG_owner_priv_1                         : 8 -> 9
+		PG_arch_1                               : 9 -> 10
+		PG_reserved                             : 10 -> 11
+		PG_private                              : 11 -> 12
+		PG_private_2                            : 12 -> 13
+		PG_writeback                            : 13 -> 14
+		PG_head                                 : 14 -> 15
+		PG_swapcache                            : 15 -> 9
+		PG_checked                              : 8 -> 9
+		PG_fscache                              : 12 -> 13
+		PG_pinned                               : 8 -> 9
+		PG_foreign                              : 8 -> 9
+		PG_slob_free                            : 11 -> 12
+		PG_double_map                           : 12 -> 13
+pt_capabilities
+	Added values:
+		PT_CAP_ptwrite                          : 5
+		PT_CAP_power_event_trace                : 6
+	Value changed:
+		PT_CAP_topa_output                      : 5 -> 7
+		PT_CAP_topa_multiple_entries            : 6 -> 8
+		PT_CAP_single_range_output              : 7 -> 9
+		PT_CAP_payloads_lip                     : 8 -> 10
+		PT_CAP_num_address_ranges               : 9 -> 11
+		PT_CAP_mtc_periods                      : 10 -> 12
+		PT_CAP_cycle_thresholds                 : 11 -> 13
+		PT_CAP_psb_periods                      : 12 -> 14
+stack_type
+	Added values:
+		STACK_TYPE_UNKNOWN                      : 0
+		STACK_TYPE_TASK                         : 1
+		STACK_TYPE_IRQ                          : 2
+		STACK_TYPE_SOFTIRQ                      : 3
+		STACK_TYPE_EXCEPTION                    : 4
+		STACK_TYPE_EXCEPTION_LAST               : 7
+	Removed values:
+		STACK_IS_UNKNOWN                        : 0
+		STACK_IS_NORMAL                         : 1
+		STACK_IS_EXCEPTION                      : 2
+		STACK_IS_IRQ                            : 3
+flow_dissector_key_id
+	Added values:
+		FLOW_DISSECTOR_KEY_ICMP                 : 5
+		FLOW_DISSECTOR_KEY_VLAN                 : 8
+		FLOW_DISSECTOR_KEY_ENC_KEYID            : 12
+		FLOW_DISSECTOR_KEY_ENC_IPV4_ADDRS       : 13
+		FLOW_DISSECTOR_KEY_ENC_IPV6_ADDRS       : 14
+		FLOW_DISSECTOR_KEY_ENC_CONTROL          : 15
+		FLOW_DISSECTOR_KEY_ENC_PORTS            : 16
+	Removed values:
+		FLOW_DISSECTOR_KEY_VLANID               : 7
+	Value changed:
+		FLOW_DISSECTOR_KEY_ETH_ADDRS            : 5 -> 6
+		FLOW_DISSECTOR_KEY_TIPC_ADDRS           : 6 -> 7
+		FLOW_DISSECTOR_KEY_FLOW_LABEL           : 8 -> 9
+		FLOW_DISSECTOR_KEY_GRE_KEYID            : 9 -> 10
+		FLOW_DISSECTOR_KEY_MPLS_ENTROPY         : 10 -> 11
+		FLOW_DISSECTOR_KEY_MAX                  : 11 -> 17
+bpf_map_type
+	Added values:
+		BPF_MAP_TYPE_LRU_HASH                   : 9
+		BPF_MAP_TYPE_LRU_PERCPU_HASH            : 10
+bpf_func_id
+	Added values:
+		BPF_FUNC_current_task_under_cgroup      : 37
+		BPF_FUNC_skb_change_tail                : 38
+		BPF_FUNC_skb_pull_data                  : 39
+		BPF_FUNC_csum_update                    : 40
+		BPF_FUNC_set_hash_invalid               : 41
+		BPF_FUNC_get_numa_node_id               : 42
+		BPF_FUNC_skb_change_head                : 43
+		BPF_FUNC_xdp_adjust_head                : 44
+	Value changed:
+		__BPF_FUNC_MAX_ID                       : 37 -> 45
+bpf_reg_type
+	Added values:
+		PTR_TO_MAP_VALUE_ADJ                    : 11
+alarmtimer_type
+	Added values:
+		ALARM_REALTIME_FREEZER                  : 3
+		ALARM_BOOTTIME_FREEZER                  : 4
+ethtool_link_mode_bit_indices
+	Added values:
+		ETHTOOL_LINK_MODE_1000baseX_Full_BIT    : 41
+		ETHTOOL_LINK_MODE_10000baseCR_Full_BIT  : 42
+		ETHTOOL_LINK_MODE_10000baseSR_Full_BIT  : 43
+		ETHTOOL_LINK_MODE_10000baseLR_Full_BIT  : 44
+		ETHTOOL_LINK_MODE_10000baseLRM_Full_BIT : 45
+		ETHTOOL_LINK_MODE_10000baseER_Full_BIT  : 46
+		ETHTOOL_LINK_MODE_2500baseT_Full_BIT    : 47
+		ETHTOOL_LINK_MODE_5000baseT_Full_BIT    : 48
+	Value changed:
+		__ETHTOOL_LINK_MODE_LAST                : 40 -> 48
+regex_type
+	Added values:
+		MATCH_GLOB                              : 4
+trace_type
+	Added values:
+		TRACE_HWLAT                             : 15
+		TRACE_RAW_DATA                          : 16
+	Value changed:
+		__TRACE_LAST_TYPE                       : 15 -> 17
+bpf_cmd
+	Added values:
+		BPF_PROG_ATTACH                         : 8
+		BPF_PROG_DETACH                         : 9
+mapping_flags
+	Added values:
+		AS_NO_WRITEBACK_TAGS                    : 5
+	Value changed:
+		AS_EIO                                  : 25 -> 0
+		AS_ENOSPC                               : 26 -> 1
+		AS_MM_ALL_LOCKS                         : 27 -> 2
+		AS_UNEVICTABLE                          : 28 -> 3
+		AS_EXITING                              : 29 -> 4
+compact_priority
+	Added values:
+		COMPACT_PRIO_SYNC_FULL                  : 0
+		MIN_COMPACT_COSTLY_PRIORITY             : 1
+	Value changed:
+		COMPACT_PRIO_SYNC_LIGHT                 : 0 -> 1
+		DEF_COMPACT_PRIORITY                    : 0 -> 1
+		COMPACT_PRIO_ASYNC                      : 1 -> 2
+		INIT_COMPACT_PRIORITY                   : 1 -> 2
+compact_result
+	Added values:
+		COMPACT_SUCCESS                         : 8
+	Removed values:
+		COMPACT_PARTIAL                         : 8
+label_initialized
+	Added values:
+		LABEL_PENDING                           : 2
+aafs_ns_type
+	Added values:
+		AAFS_NS_REVISION                        : 7
+	Value changed:
+		AAFS_NS_COUNT                           : 7 -> 8
+		AAFS_NS_MAX_COUNT                       : 8 -> 9
+		AAFS_NS_SIZE                            : 9 -> 10
+		AAFS_NS_MAX_SIZE                        : 10 -> 11
+		AAFS_NS_OWNER                           : 11 -> 12
+		AAFS_NS_SIZEOF                          : 12 -> 13
+crypto_attr_type_t
+	Added values:
+		CRYPTOCFGA_REPORT_ACOMP                 : 11
+	Value changed:
+		__CRYPTOCFGA_MAX                        : 11 -> 12
+rq_atomic_flags
+	Added values:
+		REQ_ATOM_POLL_SLEPT                     : 2
+pci_bus_flags
+	Added values:
+		PCI_BUS_FLAGS_NO_AERSID                 : 4
+hdmi_picture_aspect
+	Added values:
+		HDMI_PICTURE_ASPECT_64_27               : 3
+		HDMI_PICTURE_ASPECT_256_135             : 4
+	Value changed:
+		HDMI_PICTURE_ASPECT_RESERVED            : 3 -> 5
+pci_board_num_t
+	Added values:
+		pbn_b0_4_1250000                        : 14
+	Removed values:
+		pbn_byt                                 : 107
+		pbn_qrk                                 : 108
+	Value changed:
+		pbn_b0_2_1843200                        : 14 -> 15
+		pbn_b0_4_1843200                        : 15 -> 16
+		pbn_b0_2_1843200_200                    : 16 -> 17
+		pbn_b0_4_1843200_200                    : 17 -> 18
+		pbn_b0_8_1843200_200                    : 18 -> 19
+		pbn_b0_1_4000000                        : 19 -> 20
+		pbn_b0_bt_1_115200                      : 20 -> 21
+		pbn_b0_bt_2_115200                      : 21 -> 22
+		pbn_b0_bt_4_115200                      : 22 -> 23
+		pbn_b0_bt_8_115200                      : 23 -> 24
+		pbn_b0_bt_1_460800                      : 24 -> 25
+		pbn_b0_bt_2_460800                      : 25 -> 26
+		pbn_b0_bt_4_460800                      : 26 -> 27
+		pbn_b0_bt_1_921600                      : 27 -> 28
+		pbn_b0_bt_2_921600                      : 28 -> 29
+		pbn_b0_bt_4_921600                      : 29 -> 30
+		pbn_b0_bt_8_921600                      : 30 -> 31
+		pbn_b1_1_115200                         : 31 -> 32
+		pbn_b1_2_115200                         : 32 -> 33
+		pbn_b1_4_115200                         : 33 -> 34
+		pbn_b1_8_115200                         : 34 -> 35
+		pbn_b1_16_115200                        : 35 -> 36
+		pbn_b1_1_921600                         : 36 -> 37
+		pbn_b1_2_921600                         : 37 -> 38
+		pbn_b1_4_921600                         : 38 -> 39
+		pbn_b1_8_921600                         : 39 -> 40
+		pbn_b1_2_1250000                        : 40 -> 41
+		pbn_b1_bt_1_115200                      : 41 -> 42
+		pbn_b1_bt_2_115200                      : 42 -> 43
+		pbn_b1_bt_4_115200                      : 43 -> 44
+		pbn_b1_bt_2_921600                      : 44 -> 45
+		pbn_b1_1_1382400                        : 45 -> 46
+		pbn_b1_2_1382400                        : 46 -> 47
+		pbn_b1_4_1382400                        : 47 -> 48
+		pbn_b1_8_1382400                        : 48 -> 49
+		pbn_b2_1_115200                         : 49 -> 50
+		pbn_b2_2_115200                         : 50 -> 51
+		pbn_b2_4_115200                         : 51 -> 52
+		pbn_b2_8_115200                         : 52 -> 53
+		pbn_b2_1_460800                         : 53 -> 54
+		pbn_b2_4_460800                         : 54 -> 55
+		pbn_b2_8_460800                         : 55 -> 56
+		pbn_b2_16_460800                        : 56 -> 57
+		pbn_b2_1_921600                         : 57 -> 58
+		pbn_b2_4_921600                         : 58 -> 59
+		pbn_b2_8_921600                         : 59 -> 60
+		pbn_b2_8_1152000                        : 60 -> 61
+		pbn_b2_bt_1_115200                      : 61 -> 62
+		pbn_b2_bt_2_115200                      : 62 -> 63
+		pbn_b2_bt_4_115200                      : 63 -> 64
+		pbn_b2_bt_2_921600                      : 64 -> 65
+		pbn_b2_bt_4_921600                      : 65 -> 66
+		pbn_b3_2_115200                         : 66 -> 67
+		pbn_b3_4_115200                         : 67 -> 68
+		pbn_b3_8_115200                         : 68 -> 69
+		pbn_b4_bt_2_921600                      : 69 -> 70
+		pbn_b4_bt_4_921600                      : 70 -> 71
+		pbn_b4_bt_8_921600                      : 71 -> 72
+		pbn_panacom                             : 72 -> 73
+		pbn_panacom2                            : 73 -> 74
+		pbn_panacom4                            : 74 -> 75
+		pbn_plx_romulus                         : 75 -> 76
+		pbn_endrun_2_4000000                    : 76 -> 77
+		pbn_oxsemi                              : 77 -> 78
+		pbn_oxsemi_1_4000000                    : 78 -> 79
+		pbn_oxsemi_2_4000000                    : 79 -> 80
+		pbn_oxsemi_4_4000000                    : 80 -> 81
+		pbn_oxsemi_8_4000000                    : 81 -> 82
+		pbn_intel_i960                          : 82 -> 83
+		pbn_sgi_ioc3                            : 83 -> 84
+		pbn_computone_4                         : 84 -> 85
+		pbn_computone_6                         : 85 -> 86
+		pbn_computone_8                         : 86 -> 87
+		pbn_sbsxrsio                            : 87 -> 88
+		pbn_exar_XR17C152                       : 88 -> 89
+		pbn_exar_XR17C154                       : 89 -> 90
+		pbn_exar_XR17C158                       : 90 -> 91
+		pbn_exar_XR17V352                       : 91 -> 92
+		pbn_exar_XR17V354                       : 92 -> 93
+		pbn_exar_XR17V358                       : 93 -> 94
+		pbn_exar_XR17V4358                      : 94 -> 95
+		pbn_exar_XR17V8358                      : 95 -> 96
+		pbn_exar_ibm_saturn                     : 96 -> 97
+		pbn_pasemi_1682M                        : 97 -> 98
+		pbn_ni8430_2                            : 98 -> 99
+		pbn_ni8430_4                            : 99 -> 100
+		pbn_ni8430_8                            : 100 -> 101
+		pbn_ni8430_16                           : 101 -> 102
+		pbn_ADDIDATA_PCIe_1_3906250             : 102 -> 103
+		pbn_ADDIDATA_PCIe_2_3906250             : 103 -> 104
+		pbn_ADDIDATA_PCIe_4_3906250             : 104 -> 105
+		pbn_ADDIDATA_PCIe_8_3906250             : 105 -> 106
+		pbn_ce4100_1_115200                     : 106 -> 107
+		pbn_omegapci                            : 109 -> 108
+		pbn_NETMOS9900_2s_115200                : 110 -> 109
+		pbn_brcm_trumanage                      : 111 -> 110
+		pbn_fintek_4                            : 112 -> 111
+		pbn_fintek_8                            : 113 -> 112
+		pbn_fintek_12                           : 114 -> 113
+		pbn_wch382_2                            : 115 -> 114
+		pbn_wch384_4                            : 116 -> 115
+		pbn_pericom_PI7C9X7951                  : 117 -> 116
+		pbn_pericom_PI7C9X7952                  : 118 -> 117
+		pbn_pericom_PI7C9X7954                  : 119 -> 118
+		pbn_pericom_PI7C9X7958                  : 120 -> 119
+tpm_const
+	Added values:
+		TPM_NUM_EVENT_LOG_FILES                 : 3
+tpm_chip_flags
+	Added values:
+		TPM_CHIP_FLAG_HAVE_TIMEOUTS             : 16
+	Removed values:
+		TPM_CHIP_FLAG_REGISTERED                : 1
+tpm_capabilities
+	Added values:
+		TPM_CAP_VERSION_1_1                     : 6
+		TPM_CAP_VERSION_1_2                     : 26
+	Removed values:
+		CAP_VERSION_1_1                         : 100663296
+		CAP_VERSION_1_2                         : 436207616
+	Value changed:
+		TPM_CAP_FLAG                            : 67108864 -> 4
+		TPM_CAP_PROP                            : 83886080 -> 5
+tpm_sub_capabilities
+	Value changed:
+		TPM_CAP_PROP_PCR                        : 16842752 -> 257
+		TPM_CAP_PROP_MANUFACTURER               : 50397184 -> 259
+		TPM_CAP_FLAG_PERM                       : 134283264 -> 264
+		TPM_CAP_FLAG_VOL                        : 151060480 -> 265
+		TPM_CAP_PROP_OWNER                      : 285278208 -> 273
+		TPM_CAP_PROP_TIS_TIMEOUT                : 352387072 -> 277
+		TPM_CAP_PROP_TIS_DURATION               : 536936448 -> 288
+tpm_tis_flags
+	Added values:
+		TPM_TIS_ITPM_WORKAROUND                 : 1
+	Removed values:
+		TPM_TIS_ITPM_POSSIBLE                   : 1
+ethtool_stringset
+	Added values:
+		ETH_SS_PHY_TUNABLES                     : 8
+flag_bits
+	Added values:
+		ExternalBbl                             : 15
+		FailFast                                : 16
+		LastDev                                 : 17
+hw_event_mc_err_type
+	Added values:
+		HW_EVENT_ERR_DEFERRED                   : 2
+	Value changed:
+		HW_EVENT_ERR_FATAL                      : 2 -> 3
+		HW_EVENT_ERR_INFO                       : 3 -> 4
+rtattr_type_t
+	Added values:
+		RTA_UID                                 : 25
+	Value changed:
+		__RTA_MAX                               : 25 -> 26
+switchdev_obj_id
+	Removed values:
+		SWITCHDEV_OBJ_ID_IPV4_FIB               : 2
+	Value changed:
+		SWITCHDEV_OBJ_ID_PORT_FDB               : 3 -> 2
+		SWITCHDEV_OBJ_ID_PORT_MDB               : 4 -> 3
+lwtunnel_encap_types
+	Added values:
+		LWTUNNEL_ENCAP_SEG6                     : 5
+		LWTUNNEL_ENCAP_BPF                      : 6
+	Value changed:
+		__LWTUNNEL_ENCAP_MAX                    : 5 -> 7
+ip_conntrack_info
+	Added values:
+		IP_CT_ESTABLISHED                       : 0
+		IP_CT_RELATED                           : 1
+		IP_CT_NEW                               : 2
+		IP_CT_IS_REPLY                          : 3
+		IP_CT_ESTABLISHED_REPLY                 : 3
+		IP_CT_RELATED_REPLY                     : 4
+		IP_CT_NUMBER                            : 5
+tsq_flags
+	Added values:
+		TSQF_THROTTLED                          : 1
+		TSQF_QUEUED                             : 2
+		TCPF_TSQ_DEFERRED                       : 4
+		TCPF_WRITE_TIMER_DEFERRED               : 8
+		TCPF_DELACK_TIMER_DEFERRED              : 16
+		TCPF_MTU_REDUCED_DEFERRED               : 32
+	Removed values:
+		TSQ_THROTTLED                           : 0
+		TSQ_QUEUED                              : 1
+		TCP_TSQ_DEFERRED                        : 2
+		TCP_WRITE_TIMER_DEFERRED                : 3
+		TCP_DELACK_TIMER_DEFERRED               : 4
+		TCP_MTU_REDUCED_DEFERRED                : 5
+nl80211_iftype
+	Added values:
+		NL80211_IFTYPE_NAN                      : 12
+	Value changed:
+		NUM_NL80211_IFTYPES                     : 12 -> 13
+		NL80211_IFTYPE_MAX                      : 11 -> 12
+nl80211_auth_type
+	Added values:
+		NL80211_AUTHTYPE_FILS_SK                : 5
+		NL80211_AUTHTYPE_FILS_SK_PFS            : 6
+		NL80211_AUTHTYPE_FILS_PK                : 7
+	Value changed:
+		__NL80211_AUTHTYPE_NUM                  : 5 -> 8
+		NL80211_AUTHTYPE_MAX                    : 4 -> 7
+		NL80211_AUTHTYPE_AUTOMATIC              : 5 -> 8
+nl80211_ext_feature_index
+	Added values:
+		NL80211_EXT_FEATURE_BEACON_RATE_LEGACY  : 6
+		NL80211_EXT_FEATURE_BEACON_RATE_HT      : 7
+		NL80211_EXT_FEATURE_BEACON_RATE_VHT     : 8
+		NL80211_EXT_FEATURE_FILS_STA            : 9
+	Value changed:
+		NUM_NL80211_EXT_FEATURES                : 6 -> 10
+		MAX_NL80211_EXT_FEATURES                : 5 -> 9
