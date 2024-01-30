@@ -163,9 +163,57 @@ We classify the bugs into the following types:
 
 \begin{table*}
   \centering
-\newcommand{\thead}[1]{\multicolumn{1}{|c}{\bfseries #1}}
-  \begin{tabular}{c|c|c|c|c|c|c|c|c}
-    \thead{Changes} & \theadmulti{4}{Ubuntu 18.04} & \theadmulti{4}{Ubuntu 20.04} \\ \hline
+
+  \newcommand{\theadl}[2]{\multicolumn{#1}{c}{\bfseries #2}}
+  \newcommand{\theadr}[2]{\multicolumn{#1}{c||}{\bfseries #2}}
+  %   \newcommand{\version}[1]{\rotatebox[origin=c]{90}{#1}}
+  \newcommand{\mcolr}[2]{\multicolumn{#1}{r||}{#2}}
+  \newcommand{\mrow}[2]{\multirow{#1}{*}{#2}}
+
+  \setlength{\tabcolsep}{5pt}
+
+  \begin{tabular}{c|l||r|r|r|r|r||r|r|r|r|r}
+    \theadr{2}{Distribution}
+     & \theadr{5}{Ubuntu 18.04}
+     & \theadl{5}{Ubuntu 20.04}
+    \\ \hline
+
+
+    \mcolr{2}{Old Version}
+     & 4.15                     & 4.18  & 5.0   & 5.3   & Oldest & 5.4   & 5.8   & 5.11  & 5.13  & Oldest         \\
+    \mcolr{2}{New Version}
+     & 4.18                     & 5.0   & 5.3   & 5.4   & Latest & 5.8   & 5.11  & 5.13  & 5.15  & Latest         \\ \hline\hline
+
+    \mrow{9}{\bfseries Struct}
+     & Common                   & 7193  & 7507  & 7762  & 8160   & 7057  & 8248  & 8566  & 8983  & 9099   & 7944  \\ \cline{2-12}
+     & Added                    & 426   & 347   & 432   & 279    & 1382  & 474   & 513   & 233   & 283    & 1438  \\ \cline{2-12}
+     & Removed                  & 136   & 112   & 92    & 34     & 272   & 191   & 156   & 96    & 117    & 495   \\ \cline{2-12}
+     & Changed                  & 785   & 813   & 655   & 369    & 1293  & 896   & 771   & 476   & 656    & 1569  \\ \cline{2-12}
+     & - Field added            & 354   & 437   & 352   & 193    & 779   & 464   & 439   & 272   & 365    & 983   \\ \cline{2-12}
+     & - Field removed          & 261   & 208   & 183   & 88     & 451   & 257   & 232   & 154   & 163    & 554   \\ \cline{2-12}
+     & - Field reordered        & 27    & 35    & 24    & 10     & 69    & 33    & 26    & 23    & 20     & 75    \\ \cline{2-12}
+     & - Field type changed     & 189   & 184   & 112   & 62     & 361   & 190   & 164   & 111   & 140    & 429   \\ \cline{2-12}
+     & - Layout changed         & 189   & 191   & 168   & 100    & 214   & 226   & 166   & 73    & 162    & 244   \\ \hline
+
+    \mrow{9}{\bfseries Function}
+     & Common                   & 40918 & 43288 & 44821 & 46561  & 39572 & 46310 & 48669 & 50994 & 51214  & 44189 \\ \cline{2-12}
+     & Added                    & 3613  & 2314  & 2089  & 1400   & 8389  & 3435  & 3080  & 1343  & 2121   & 9146  \\ \cline{2-12}
+     & Removed                  & 1801  & 1243  & 781   & 349    & 3147  & 1861  & 1076  & 755   & 1123   & 3982  \\ \cline{2-12}
+     & Changed                  & 1062  & 1074  & 478   & 338    & 1755  & 846   & 1176  & 549   & 640    & 2475  \\ \cline{2-12}
+     & - Param added            & 545   & 696   & 250   & 253    & 918   & 511   & 375   & 428   & 298    & 1247  \\ \cline{2-12}
+     & - Param removed          & 393   & 604   & 193   & 206    & 647   & 426   & 343   & 172   & 194    & 875   \\ \cline{2-12}
+     & - Param reordered        & 3     & 2     & 0     & 0      & 2     & 5     & 2     & 2     & 2      & 10    \\ \cline{2-12}
+     & - Param type changed     & 349   & 181   & 107   & 146    & 414   & 176   & 623   & 42    & 214    & 825   \\ \cline{2-12}
+     & - Return type changed    & 196   & 151   & 71    & 32     & 382   & 118   & 82    & 51    & 111    & 292   \\ \hline
+
+    \mrow{7}{\bfseries Enum}
+     & Common                   & 954   & 1004  & 1057  & 1146   & 944   & 1163  & 1229  & 1308  & 1341   & 1132  \\ \cline{2-12}
+     & Added                    & 61    & 71    & 96    & 32     & 234   & 74    & 88    & 53    & 49     & 258   \\ \cline{2-12}
+     & Removed                  & 25    & 11    & 18    & 7      & 35    & 15    & 8     & 9     & 20     & 46    \\ \cline{2-12}
+     & Changed                  & 66    & 64    & 72    & 33     & 130   & 109   & 105   & 66    & 66     & 212   \\ \cline{2-12}
+     & - Value added            & 57    & 57    & 65    & 31     & 121   & 91    & 96    & 61    & 60     & 189   \\ \cline{2-12}
+     & - Value removed          & 23    & 13    & 14    & 2      & 34    & 25    & 15    & 7     & 13     & 47    \\ \cline{2-12}
+     & - Value changed          & 25    & 37    & 36    & 19     & 65    & 66    & 55    & 40    & 35     & 121   \\
   \end{tabular}
   \caption{Linux kernel source code changes}
   \label{tab:kernel_source_code_changes}
