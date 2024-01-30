@@ -1,9 +1,11 @@
 \usepackage{multirow}
+\usepackage{bbding} % for star rating
 
-\usepackage{bbding}
+%%%
+%%% Style
+%%%
 
-% code formatting
-\usepackage{minted}
+\usepackage{minted} % code formatting
 % \usemintedstyle{emacs}
 \setminted{
   fontsize=\small,
@@ -15,6 +17,10 @@
 
 % use a bolder font for \texttt{}
 \renewcommand*{\ttdefault}{cmtt}
+
+%%%
+%%% Spacing
+%%%
 
 % set the space
 \setlength{\abovecaptionskip}{4pt plus 2pt minus 2pt}
@@ -37,6 +43,15 @@
 % change caption font size
 \usepackage[font=small]{caption}
 
+
+%%%
+%%% Macros
+%%%
+
+% define \thead{} command to bold and center the title of a table cell
+
+
+\newcommand{\theadmulti}[2]{\multicolumn{#1}{|c}{\bfseries #2}}
 
 % define \minisec{} command to get rid of paragraph indentation and bold the title
 \newcommand{\minisec}[1]{\vspace{0.25em}\noindent\textbf{#1. }}
