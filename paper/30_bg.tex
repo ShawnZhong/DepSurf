@@ -7,6 +7,43 @@ eBPF is a new technology that allows users to write programs that run inside the
 eBPF programs are mostly written in high-level languages, such as C, and compiled into eBPF bytecode that can be loaded into the kernel.
 The kernel's verifier checks the bytecode for safety and then JIT compiles it into native code for fast execution.
 
+\begin{table*}[t]
+  \newcommand*{\thead}[1]{\multicolumn{1}{|c}{\bfseries #1}}
+  \newcommand{\stari}{\raisebox{-0.25em}{\FiveStar\FiveStarOpen\FiveStarOpen\FiveStarOpen\FiveStarOpen}}
+  \newcommand{\starii}{\raisebox{-0.25em}{\FiveStar\FiveStar\FiveStarOpen\FiveStarOpen\FiveStarOpen}}
+  \newcommand{\stariii}{\raisebox{-0.25em}{\FiveStar\FiveStar\FiveStar\FiveStarOpen\FiveStarOpen}}
+  \newcommand{\stariv}{\raisebox{-0.25em}{\FiveStar\FiveStar\FiveStar\FiveStar\FiveStarOpen}}
+
+  \setlength{\tabcolsep}{4.5pt}
+
+  \centering
+  \begin{tabular}{c||l|l|l|l|l}
+     & \thead{Type}   & \thead{Hook}          & \thead{Capabilities}                                  & \thead{Use Cases}                    & \thead{Stability} \\ \hline \hline
+
+    \multirow{4}{*}{\textbf{Tracing}}
+     & kprobe         & kernel function       & \textbf{base} (e.g., read/write map, read kernel      & \multirow{2}{*}{kernel profiling}    & \stari            \\ \cline{2-3} \cline{6-6}
+     & tracepoint     & kernel static hook    & \quad  or userspace data, print message) +            &                                      & \starii           \\ \cline{2-3} \cline{5-6}
+     & uprobe         & userspace function    & \textbf{profiling} (e.g., write to userspace, get     & \multirow{2}{*}{userspace profiling} & \stari            \\ \cline{2-3} \cline{6-6}
+     & USDT           & userspace static hook & \quad process info, output perf event, etc.)          &                                      & \starii           \\ \hline
+
+
+    \multirow{2}{*}{\textbf{Network}}
+     & XDP            & NIC ingress           & \textbf{base} + \textbf{network} (e.g., read, modify, & firewall, forwarding,                & \stariv           \\ \cline{2-3} \cline{6-6}
+     & tc             & network packet        & drop, redirect packets)                               & packet processing                    & \stariv           \\ \hline
+
+    \multirow{1}{*}{\textbf{Security}}
+     & LSM            & security hook         & \textbf{base} + deny operations                       & access control                       & \stariii          \\ \hline
+
+    % \multirow{3}{*}{\shortstack{\textbf{Research / }                                                                                             \\ \textbf{Experimental}}}
+    %  & scheduler~\cite{sched_ext} & \multirow{3}{*}{Defined by developer}                                 & process scheduling                   \\ \cline{2-2} \cline{4-4}
+    %  & hid~\cite{hid_bpf}         &                                                                       & tweak input devices                  \\ \cline{2-2} \cline{4-4}
+    \multirow{1}{*}{\textbf{Research}}
+     & XRP~\cite{xrp} & NVMe driver           & \textbf{base}                                         & offload storage func                 & \stariv           \\ \hline
+  \end{tabular}
+  \caption{eBPF Program Types. }
+  \label{tab:ebpf_program_types}
+\end{table*}
+
 \minisec{Hooks}
 eBPF programs are attached to hooks and are executed whenever the hooks are triggered. 
 The types of hooks include tracepoints, kprobes, kretprobes, uprobes, and uretprobes.
