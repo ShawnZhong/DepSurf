@@ -3,6 +3,10 @@
 Install 
 
 ```sh
+sudo apt install cmake clang pkg-config libelf-dev
+```
+
+```sh
 sudo apt install -y make cmake clang llvm libelf-dev linux-tools-$(uname -r)
 ```
 

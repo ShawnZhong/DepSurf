@@ -38,7 +38,6 @@ extern "C" __attribute__((noinline)) int uprobed_sub(int a, int b) {
 }
 
 void print_output() {
-  // open debug file
   int fd = open("/sys/kernel/debug/tracing/trace_pipe", O_RDONLY);
   if (fd < 0) throw std::runtime_error("Failed to open trace_pipe");
   while (1) {
@@ -55,7 +54,7 @@ int main() {
 
   BPF bpf;
 
-  // std::thread t(print_output);
+  std::thread t(print_output);
 
   for (int i = 0;; i++) {
     uprobed_sub(i * i, i);

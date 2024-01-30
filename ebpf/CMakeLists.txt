@@ -74,5 +74,5 @@ target_include_directories(ebpf_bpf SYSTEM PRIVATE ${LIBBPF_INCLUDE_DIRS})
 set_target_properties(ebpf_bpf PROPERTIES EXCLUDE_FROM_ALL TRUE)
 
 
-add_executable(main main.cpp)
+# add_executable(main main.cpp)
 
