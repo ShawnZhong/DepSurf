@@ -1,8 +1,10 @@
-*.aux
-*.fdb_latexmk
-*.fls
-*.out
-*.synctex.gz
-*.bbl
-*.blg
+main.aux
+main.fdb_latexmk
+main.fls
+main.out
+main.synctex.gz
+main.bbl
+main.blg
 main.pdf
+main.log
+_minted-main
