@@ -16,17 +16,18 @@ struct {
 // SEC("lwt_in")
 // SEC("socket")
 // SEC("cgroup/dev")
-SEC("lsm/file_open")
+// SEC("lsm/file_open")
 // SEC("kprobe/vfs_open")
+SEC("uprobe//proc/self/exe:uprobed_sub")
 int prog(void* ctx) {
-  // char buf;
-  // void* ptr = (void*)0xffffa1b713b5d788;
-  // int rc = bpf_probe_read_kernel(&buf, 1, ptr);
-  // bpf_printk("rc: %d", rc);
+  char buf;
+  void* ptr = (void*)0xffffa1b713b5d788;
+  int rc = bpf_probe_read_kernel(&buf, 1, ptr);
+  bpf_printk("rc: %d", rc);
 
   //   return bpf_skb_load_bytes(ctx, 0, &buf, 1) == 0;
-  bpf_inode_storage_get(&inode_storage_map, 0x0, 0x0, 0);
-  return 0;
+  // bpf_inode_storage_get(&inode_storage_map, 0x0, 0x0, 0);
+  // return 0;
 
   // return XDP_PASS;
 }
