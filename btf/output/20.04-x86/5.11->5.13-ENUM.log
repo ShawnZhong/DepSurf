@@ -1,0 +1,584 @@
+Old Kind.ENUM (1317): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'tlb_infos', 'l1tf_mitigations', 'pcpu_fc', 'node_states', 'uprobe_task_state', 'migratetype', 'numa_stat_item']
+New Kind.ENUM (1361): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'tlb_infos', 'l1tf_mitigations', 'pcpu_fc', 'node_states', 'uprobe_task_state', 'migratetype', 'numa_stat_item']
+Added Kind.ENUM (53): ['fault_flag', 'blk_bounce', 'net_device_path_type', 'nfs4_change_attr_type', 'hybrid_pmu_type', 'uncore_access_type', 'clocksource_ids', 'hv_isolation_type', 'hv_interrupt_type', 'hv_device_type']
+Removed Kind.ENUM (9): ['iommu_attr', 'intel_mid_cpu_type', 'intel_mid_timer_options', 'schedutil_type', 'mutex_trylock_recursive_enum', 'writer_wait_state', 'dma_sync_target', 'io_mem_account', 'intel_msic_block']
+Common Kind.ENUM (1308): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'tlb_infos', 'l1tf_mitigations', 'pcpu_fc', 'node_states', 'uprobe_task_state', 'migratetype', 'numa_stat_item']
+Changed Kind.ENUM (66): ['node_stat_item', 'vm_event_item', 'cpuhp_state', 'perf_sw_ids', 'bpf_attach_type', 'bpf_func_id', 'bpf_arg_type', 'bpf_reg_type', 'memcg_stat_item', 'tc_setup_type']
+Reasons Kind.ENUM (3): [('Sub added', 61), ('Sub removed', 7), ('Value changed', 40)]
+node_stat_item
+	Sub added
+		NR_SWAPCACHE                            : 38
+	Value changed
+		NR_VM_NODE_STAT_ITEMS                   : 38 -> 39
+vm_event_item
+	Sub added
+		DIRECT_MAP_LEVEL2_SPLIT                 : 96
+		DIRECT_MAP_LEVEL3_SPLIT                 : 97
+	Value changed
+		NR_VM_EVENT_ITEMS                       : 96 -> 98
+cpuhp_state
+	Sub added
+		CPUHP_IOMMU_IOVA_DEAD                   : 33
+		CPUHP_AP_IRQ_APPLE_AIC_STARTING         : 95
+		CPUHP_AP_PERF_X86_IDXD_ONLINE           : 163
+		CPUHP_AP_PERF_S390_CFD_ONLINE           : 165
+		CPUHP_AP_PERF_ARM_HISI_PA_ONLINE        : 172
+		CPUHP_AP_PERF_ARM_HISI_SLLC_ONLINE      : 173
+		CPUHP_AP_PERF_CSKY_ONLINE               : 185
+		CPUHP_AP_DTPM_CPU_ONLINE                : 223
+	Sub removed
+		CPUHP_IOMMU_INTEL_DEAD                  : 33
+	Value changed
+		CPUHP_AP_IRQ_ARMADA_XP_STARTING         : 95 -> 96
+		CPUHP_AP_IRQ_BCM2836_STARTING           : 96 -> 97
+		CPUHP_AP_IRQ_MIPS_GIC_STARTING          : 97 -> 98
+		CPUHP_AP_IRQ_RISCV_STARTING             : 98 -> 99
+		CPUHP_AP_IRQ_SIFIVE_PLIC_STARTING       : 99 -> 100
+		CPUHP_AP_ARM_MVEBU_COHERENCY            : 100 -> 101
+		CPUHP_AP_MICROCODE_LOADER               : 101 -> 102
+		CPUHP_AP_PERF_X86_AMD_UNCORE_STARTING   : 102 -> 103
+		CPUHP_AP_PERF_X86_STARTING              : 103 -> 104
+		CPUHP_AP_PERF_X86_AMD_IBS_STARTING      : 104 -> 105
+		CPUHP_AP_PERF_X86_CQM_STARTING          : 105 -> 106
+		CPUHP_AP_PERF_X86_CSTATE_STARTING       : 106 -> 107
+		CPUHP_AP_PERF_XTENSA_STARTING           : 107 -> 108
+		CPUHP_AP_MIPS_OP_LOONGSON3_STARTING     : 108 -> 109
+		CPUHP_AP_ARM_SDEI_STARTING              : 109 -> 110
+		CPUHP_AP_ARM_VFP_STARTING               : 110 -> 111
+		CPUHP_AP_ARM64_DEBUG_MONITORS_STARTING  : 111 -> 112
+		CPUHP_AP_PERF_ARM_HW_BREAKPOINT_STARTING: 112 -> 113
+		CPUHP_AP_PERF_ARM_ACPI_STARTING         : 113 -> 114
+		CPUHP_AP_PERF_ARM_STARTING              : 114 -> 115
+		CPUHP_AP_ARM_L2X0_STARTING              : 115 -> 116
+		CPUHP_AP_EXYNOS4_MCT_TIMER_STARTING     : 116 -> 117
+		CPUHP_AP_ARM_ARCH_TIMER_STARTING        : 117 -> 118
+		CPUHP_AP_ARM_GLOBAL_TIMER_STARTING      : 118 -> 119
+		CPUHP_AP_JCORE_TIMER_STARTING           : 119 -> 120
+		CPUHP_AP_ARM_TWD_STARTING               : 120 -> 121
+		CPUHP_AP_QCOM_TIMER_STARTING            : 121 -> 122
+		CPUHP_AP_TEGRA_TIMER_STARTING           : 122 -> 123
+		CPUHP_AP_ARMADA_TIMER_STARTING          : 123 -> 124
+		CPUHP_AP_MARCO_TIMER_STARTING           : 124 -> 125
+		CPUHP_AP_MIPS_GIC_TIMER_STARTING        : 125 -> 126
+		CPUHP_AP_ARC_TIMER_STARTING             : 126 -> 127
+		CPUHP_AP_RISCV_TIMER_STARTING           : 127 -> 128
+		CPUHP_AP_CLINT_TIMER_STARTING           : 128 -> 129
+		CPUHP_AP_CSKY_TIMER_STARTING            : 129 -> 130
+		CPUHP_AP_TI_GP_TIMER_STARTING           : 130 -> 131
+		CPUHP_AP_HYPERV_TIMER_STARTING          : 131 -> 132
+		CPUHP_AP_KVM_STARTING                   : 132 -> 133
+		CPUHP_AP_KVM_ARM_VGIC_INIT_STARTING     : 133 -> 134
+		CPUHP_AP_KVM_ARM_VGIC_STARTING          : 134 -> 135
+		CPUHP_AP_KVM_ARM_TIMER_STARTING         : 135 -> 136
+		CPUHP_AP_DUMMY_TIMER_STARTING           : 136 -> 137
+		CPUHP_AP_ARM_XEN_STARTING               : 137 -> 138
+		CPUHP_AP_ARM_CORESIGHT_STARTING         : 138 -> 139
+		CPUHP_AP_ARM_CORESIGHT_CTI_STARTING     : 139 -> 140
+		CPUHP_AP_ARM64_ISNDEP_STARTING          : 140 -> 141
+		CPUHP_AP_SMPCFD_DYING                   : 141 -> 142
+		CPUHP_AP_X86_TBOOT_DYING                : 142 -> 143
+		CPUHP_AP_ARM_CACHE_B15_RAC_DYING        : 143 -> 144
+		CPUHP_AP_ONLINE                         : 144 -> 145
+		CPUHP_TEARDOWN_CPU                      : 145 -> 146
+		CPUHP_AP_ONLINE_IDLE                    : 146 -> 147
+		CPUHP_AP_SCHED_WAIT_EMPTY               : 147 -> 148
+		CPUHP_AP_SMPBOOT_THREADS                : 148 -> 149
+		CPUHP_AP_X86_VDSO_VMA_ONLINE            : 149 -> 150
+		CPUHP_AP_IRQ_AFFINITY_ONLINE            : 150 -> 151
+		CPUHP_AP_BLK_MQ_ONLINE                  : 151 -> 152
+		CPUHP_AP_ARM_MVEBU_SYNC_CLOCKS          : 152 -> 153
+		CPUHP_AP_X86_INTEL_EPB_ONLINE           : 153 -> 154
+		CPUHP_AP_PERF_ONLINE                    : 154 -> 155
+		CPUHP_AP_PERF_X86_ONLINE                : 155 -> 156
+		CPUHP_AP_PERF_X86_UNCORE_ONLINE         : 156 -> 157
+		CPUHP_AP_PERF_X86_AMD_UNCORE_ONLINE     : 157 -> 158
+		CPUHP_AP_PERF_X86_AMD_POWER_ONLINE      : 158 -> 159
+		CPUHP_AP_PERF_X86_RAPL_ONLINE           : 159 -> 160
+		CPUHP_AP_PERF_X86_CQM_ONLINE            : 160 -> 161
+		CPUHP_AP_PERF_X86_CSTATE_ONLINE         : 161 -> 162
+		CPUHP_AP_PERF_S390_CF_ONLINE            : 162 -> 164
+		CPUHP_AP_PERF_S390_SF_ONLINE            : 163 -> 166
+		CPUHP_AP_PERF_ARM_CCI_ONLINE            : 164 -> 167
+		CPUHP_AP_PERF_ARM_CCN_ONLINE            : 165 -> 168
+		CPUHP_AP_PERF_ARM_HISI_DDRC_ONLINE      : 166 -> 169
+		CPUHP_AP_PERF_ARM_HISI_HHA_ONLINE       : 167 -> 170
+		CPUHP_AP_PERF_ARM_HISI_L3_ONLINE        : 168 -> 171
+		CPUHP_AP_PERF_ARM_L2X0_ONLINE           : 169 -> 174
+		CPUHP_AP_PERF_ARM_QCOM_L2_ONLINE        : 170 -> 175
+		CPUHP_AP_PERF_ARM_QCOM_L3_ONLINE        : 171 -> 176
+		CPUHP_AP_PERF_ARM_APM_XGENE_ONLINE      : 172 -> 177
+		CPUHP_AP_PERF_ARM_CAVIUM_TX2_UNCORE_ONLINE: 173 -> 178
+		CPUHP_AP_PERF_POWERPC_NEST_IMC_ONLINE   : 174 -> 179
+		CPUHP_AP_PERF_POWERPC_CORE_IMC_ONLINE   : 175 -> 180
+		CPUHP_AP_PERF_POWERPC_THREAD_IMC_ONLINE : 176 -> 181
+		CPUHP_AP_PERF_POWERPC_TRACE_IMC_ONLINE  : 177 -> 182
+		CPUHP_AP_PERF_POWERPC_HV_24x7_ONLINE    : 178 -> 183
+		CPUHP_AP_PERF_POWERPC_HV_GPCI_ONLINE    : 179 -> 184
+		CPUHP_AP_WATCHDOG_ONLINE                : 180 -> 186
+		CPUHP_AP_WORKQUEUE_ONLINE               : 181 -> 187
+		CPUHP_AP_RCUTREE_ONLINE                 : 182 -> 188
+		CPUHP_AP_BASE_CACHEINFO_ONLINE          : 183 -> 189
+		CPUHP_AP_ONLINE_DYN                     : 184 -> 190
+		CPUHP_AP_ONLINE_DYN_END                 : 214 -> 220
+		CPUHP_AP_X86_HPET_ONLINE                : 215 -> 221
+		CPUHP_AP_X86_KVM_CLK_ONLINE             : 216 -> 222
+		CPUHP_AP_ACTIVE                         : 217 -> 224
+		CPUHP_ONLINE                            : 218 -> 225
+perf_sw_ids
+	Sub added
+		PERF_COUNT_SW_CGROUP_SWITCHES           : 11
+	Value changed
+		PERF_COUNT_SW_MAX                       : 11 -> 12
+bpf_attach_type
+	Sub added
+		BPF_SK_SKB_VERDICT                      : 38
+	Value changed
+		__MAX_BPF_ATTACH_TYPE                   : 38 -> 39
+bpf_func_id
+	Sub added
+		BPF_FUNC_check_mtu                      : 163
+		BPF_FUNC_for_each_map_elem              : 164
+		BPF_FUNC_snprintf                       : 165
+	Value changed
+		__BPF_FUNC_MAX_ID                       : 163 -> 166
+bpf_arg_type
+	Sub added
+		ARG_PTR_TO_FUNC                         : 26
+		ARG_PTR_TO_STACK_OR_NULL                : 27
+		ARG_PTR_TO_CONST_STR                    : 28
+	Value changed
+		__BPF_ARG_TYPE_MAX                      : 26 -> 29
+bpf_reg_type
+	Sub added
+		PTR_TO_FUNC                             : 28
+		PTR_TO_MAP_KEY                          : 29
+		__BPF_REG_TYPE_MAX                      : 30
+memcg_stat_item
+	Value changed
+		MEMCG_SWAP                              : 38 -> 39
+		MEMCG_SOCK                              : 39 -> 40
+		MEMCG_PERCPU_B                          : 40 -> 41
+		MEMCG_NR_STAT                           : 41 -> 42
+tc_setup_type
+	Sub added
+		TC_SETUP_QDISC_HTB                      : 18
+ucount_type
+	Sub added
+		UCOUNT_FANOTIFY_GROUPS                  : 10
+		UCOUNT_FANOTIFY_MARKS                   : 11
+	Value changed
+		UCOUNT_COUNTS                           : 10 -> 12
+psi_task_count
+	Sub added
+		NR_MEMSTALL_RUNNING                     : 4
+	Value changed
+		NR_PSI_TASK_COUNTS                      : 4 -> 5
+psi_states
+	Sub added
+		PSI_CPU_FULL                            : 5
+	Value changed
+		PSI_NONIDLE                             : 5 -> 6
+		NR_PSI_STATES                           : 6 -> 7
+cgroup_subsys_id
+	Sub added
+		misc_cgrp_id                            : 13
+	Value changed
+		CGROUP_SUBSYS_COUNT                     : 13 -> 14
+perf_event_sample_format
+	Sub added
+		PERF_SAMPLE_WEIGHT_STRUCT               : 16777216
+	Value changed
+		PERF_SAMPLE_MAX                         : 16777216 -> 33554432
+pageflags
+	Sub added
+		PG_has_hwpoisoned                       : 17
+lockdown_reason
+	Sub added
+		LOCKDOWN_KGDB                           : 17
+	Value changed
+		LOCKDOWN_INTEGRITY_MAX                  : 17 -> 18
+		LOCKDOWN_KCORE                          : 18 -> 19
+		LOCKDOWN_KPROBES                        : 19 -> 20
+		LOCKDOWN_BPF_READ                       : 20 -> 21
+		LOCKDOWN_PERF                           : 21 -> 22
+		LOCKDOWN_TRACEFS                        : 22 -> 23
+		LOCKDOWN_XMON_RW                        : 23 -> 24
+		LOCKDOWN_XFRM_SECRET                    : 24 -> 25
+		LOCKDOWN_CONFIDENTIALITY_MAX            : 25 -> 26
+iommu_dev_features
+	Sub added
+		IOMMU_DEV_FEAT_IOPF                     : 2
+cpuid_leafs
+	Sub added
+		CPUID_8000_001F_EAX                     : 19
+spectre_v2_mitigation
+	Sub added
+		SPECTRE_V2_RETPOLINE                    : 1
+		SPECTRE_V2_LFENCE                       : 2
+		SPECTRE_V2_EIBRS                        : 3
+		SPECTRE_V2_EIBRS_RETPOLINE              : 4
+		SPECTRE_V2_EIBRS_LFENCE                 : 5
+	Sub removed
+		SPECTRE_V2_RETPOLINE_GENERIC            : 1
+		SPECTRE_V2_RETPOLINE_AMD                : 2
+		SPECTRE_V2_IBRS_ENHANCED                : 3
+spectre_v2_mitigation_cmd
+	Sub added
+		SPECTRE_V2_CMD_RETPOLINE_LFENCE         : 5
+		SPECTRE_V2_CMD_EIBRS                    : 6
+		SPECTRE_V2_CMD_EIBRS_RETPOLINE          : 7
+		SPECTRE_V2_CMD_EIBRS_LFENCE             : 8
+	Sub removed
+		SPECTRE_V2_CMD_RETPOLINE_AMD            : 5
+sgx_encls_function
+	Sub added
+		EAUG                                    : 13
+		EMODPR                                  : 14
+		EMODT                                   : 15
+sgx_return_code
+	Sub added
+		SGX_CHILD_PRESENT                       : 13
+acpi_madt_type
+	Sub added
+		ACPI_MADT_TYPE_MULTIPROC_WAKEUP         : 16
+	Value changed
+		ACPI_MADT_TYPE_RESERVED                 : 16 -> 17
+siginfo_layout
+	Sub added
+		SIL_FAULT_TRAPNO                        : 4
+		SIL_PERF_EVENT                          : 8
+	Value changed
+		SIL_FAULT_MCEERR                        : 4 -> 5
+		SIL_FAULT_BNDERR                        : 5 -> 6
+		SIL_FAULT_PKUERR                        : 6 -> 7
+		SIL_CHLD                                : 7 -> 9
+		SIL_RT                                  : 8 -> 10
+		SIL_SYS                                 : 9 -> 11
+mod_license
+	Sub removed
+		WILL_BE_GPL_ONLY                        : 2
+migrate_reason
+	Sub added
+		MR_LONGTERM_PIN                         : 7
+	Value changed
+		MR_TYPES                                : 7 -> 8
+trace_iterator_bits
+	Sub added
+		TRACE_ITER_HASH_PTR_BIT                 : 23
+	Value changed
+		TRACE_ITER_FUNCTION_BIT                 : 23 -> 24
+		TRACE_ITER_FUNC_FORK_BIT                : 24 -> 25
+		TRACE_ITER_DISPLAY_GRAPH_BIT            : 25 -> 26
+		TRACE_ITER_STACKTRACE_BIT               : 26 -> 27
+		TRACE_ITER_LAST_BIT                     : 27 -> 28
+trace_type
+	Sub added
+		TRACE_FUNC_REPEATS                      : 17
+	Value changed
+		__TRACE_LAST_TYPE                       : 17 -> 18
+trace_iterator_flags
+	Sub added
+		TRACE_ITER_HASH_PTR                     : 8388608
+	Value changed
+		TRACE_ITER_FUNCTION                     : 8388608 -> 16777216
+		TRACE_ITER_FUNC_FORK                    : 16777216 -> 33554432
+		TRACE_ITER_DISPLAY_GRAPH                : 33554432 -> 67108864
+		TRACE_ITER_STACKTRACE                   : 67108864 -> 134217728
+iter_type
+	Sub added
+		ITER_XARRAY                             : 128
+vma_resv_mode
+	Sub added
+		VMA_DEL_RESV                            : 4
+fanotify_event_type
+	Sub added
+		__FANOTIFY_EVENT_TYPE_NUM               : 5
+fuse_opcode
+	Sub added
+		FUSE_SYNCFS                             : 50
+tpm2_object_attributes
+	Sub added
+		TPM2_OA_FIXED_TPM                       : 2
+		TPM2_OA_FIXED_PARENT                    : 16
+xfrm_attr_type_t
+	Sub added
+		XFRMA_MTIMER_THRESH                     : 32
+	Value changed
+		__XFRMA_MAX                             : 32 -> 33
+ima_hooks
+	Sub added
+		CRITICAL_DATA                           : 13
+	Value changed
+		MAX_CHECK                               : 13 -> 14
+OID
+	Sub added
+		OID_id_prime192v1                       : 3
+		OID_id_prime256v1                       : 4
+		OID_id_ecdsa_with_sha224                : 6
+		OID_id_ecdsa_with_sha256                : 7
+		OID_id_ecdsa_with_sha384                : 8
+		OID_id_ecdsa_with_sha512                : 9
+		OID_id_ansip384r1                       : 38
+		OID_TPMLoadableKey                      : 85
+		OID_TPMImportableKey                    : 86
+		OID_TPMSealedData                       : 87
+	Value changed
+		OID_id_ecdsa_with_sha1                  : 2 -> 5
+		OID_id_ecPublicKey                      : 3 -> 2
+		OID_rsaEncryption                       : 4 -> 10
+		OID_md2WithRSAEncryption                : 5 -> 11
+		OID_md3WithRSAEncryption                : 6 -> 12
+		OID_md4WithRSAEncryption                : 7 -> 13
+		OID_sha1WithRSAEncryption               : 8 -> 14
+		OID_sha256WithRSAEncryption             : 9 -> 15
+		OID_sha384WithRSAEncryption             : 10 -> 16
+		OID_sha512WithRSAEncryption             : 11 -> 17
+		OID_sha224WithRSAEncryption             : 12 -> 18
+		OID_data                                : 13 -> 19
+		OID_signed_data                         : 14 -> 20
+		OID_email_address                       : 15 -> 21
+		OID_contentType                         : 16 -> 22
+		OID_messageDigest                       : 17 -> 23
+		OID_signingTime                         : 18 -> 24
+		OID_smimeCapabilites                    : 19 -> 25
+		OID_smimeAuthenticatedAttrs             : 20 -> 26
+		OID_md2                                 : 21 -> 27
+		OID_md4                                 : 22 -> 28
+		OID_md5                                 : 23 -> 29
+		OID_msIndirectData                      : 24 -> 30
+		OID_msStatementType                     : 25 -> 31
+		OID_msSpOpusInfo                        : 26 -> 32
+		OID_msPeImageDataObjId                  : 27 -> 33
+		OID_msIndividualSPKeyPurpose            : 28 -> 34
+		OID_msOutlookExpress                    : 29 -> 35
+		OID_certAuthInfoAccess                  : 30 -> 36
+		OID_sha1                                : 31 -> 37
+		OID_sha256                              : 32 -> 39
+		OID_sha384                              : 33 -> 40
+		OID_sha512                              : 34 -> 41
+		OID_sha224                              : 35 -> 42
+		OID_commonName                          : 36 -> 43
+		OID_surname                             : 37 -> 44
+		OID_countryName                         : 38 -> 45
+		OID_locality                            : 39 -> 46
+		OID_stateOrProvinceName                 : 40 -> 47
+		OID_organizationName                    : 41 -> 48
+		OID_organizationUnitName                : 42 -> 49
+		OID_title                               : 43 -> 50
+		OID_description                         : 44 -> 51
+		OID_name                                : 45 -> 52
+		OID_givenName                           : 46 -> 53
+		OID_initials                            : 47 -> 54
+		OID_generationalQualifier               : 48 -> 55
+		OID_subjectKeyIdentifier                : 49 -> 56
+		OID_keyUsage                            : 50 -> 57
+		OID_subjectAltName                      : 51 -> 58
+		OID_issuerAltName                       : 52 -> 59
+		OID_basicConstraints                    : 53 -> 60
+		OID_crlDistributionPoints               : 54 -> 61
+		OID_certPolicies                        : 55 -> 62
+		OID_authorityKeyIdentifier              : 56 -> 63
+		OID_extKeyUsage                         : 57 -> 64
+		OID_gostCPSignA                         : 58 -> 65
+		OID_gostCPSignB                         : 59 -> 66
+		OID_gostCPSignC                         : 60 -> 67
+		OID_gost2012PKey256                     : 61 -> 68
+		OID_gost2012PKey512                     : 62 -> 69
+		OID_gost2012Digest256                   : 63 -> 70
+		OID_gost2012Digest512                   : 64 -> 71
+		OID_gost2012Signature256                : 65 -> 72
+		OID_gost2012Signature512                : 66 -> 73
+		OID_gostTC26Sign256A                    : 67 -> 74
+		OID_gostTC26Sign256B                    : 68 -> 75
+		OID_gostTC26Sign256C                    : 69 -> 76
+		OID_gostTC26Sign256D                    : 70 -> 77
+		OID_gostTC26Sign512A                    : 71 -> 78
+		OID_gostTC26Sign512B                    : 72 -> 79
+		OID_gostTC26Sign512C                    : 73 -> 80
+		OID_sm2                                 : 74 -> 81
+		OID_sm3                                 : 75 -> 82
+		OID_SM2_with_SM3                        : 76 -> 83
+		OID_sm3WithRSAEncryption                : 77 -> 84
+		OID__NR                                 : 78 -> 88
+rdma_restrack_type
+	Sub added
+		RDMA_RESTRACK_SRQ                       : 7
+	Value changed
+		RDMA_RESTRACK_MAX                       : 7 -> 8
+devm_ioremap_type
+	Sub added
+		DEVM_IOREMAP_NP                         : 3
+pin_config_param
+	Sub added
+		PIN_CONFIG_MODE_LOW_POWER               : 15
+		PIN_CONFIG_MODE_PWM                     : 16
+	Sub removed
+		PIN_CONFIG_LOW_POWER_MODE               : 15
+	Value changed
+		PIN_CONFIG_OUTPUT_ENABLE                : 16 -> 17
+		PIN_CONFIG_OUTPUT                       : 17 -> 18
+		PIN_CONFIG_POWER_SOURCE                 : 18 -> 20
+		PIN_CONFIG_SLEEP_HARDWARE_STATE         : 19 -> 21
+		PIN_CONFIG_SLEW_RATE                    : 20 -> 22
+		PIN_CONFIG_SKEW_DELAY                   : 21 -> 23
+		PIN_CONFIG_PERSIST_STATE                : 22 -> 19
+pci_dev_flags
+	Sub added
+		PCI_DEV_FLAGS_HAS_MSI_MASKING           : 8192
+dmaengine_alignment
+	Sub added
+		DMAENGINE_ALIGN_128_BYTES               : 7
+		DMAENGINE_ALIGN_256_BYTES               : 8
+hdmi_metadata_type
+	Value changed
+		HDMI_STATIC_METADATA_TYPE1              : 1 -> 0
+si_type
+	Sub added
+		SI_TYPE_MAX                             : 4
+tis_defaults
+	Sub added
+		TIS_TIMEOUT_MIN_ATML                    : 14700
+		TIS_TIMEOUT_MAX_ATML                    : 15000
+iommu_init_state
+	Sub removed
+		IOMMU_DMA_OPS                           : 6
+	Value changed
+		IOMMU_INITIALIZED                       : 7 -> 6
+		IOMMU_NOT_FOUND                         : 8 -> 7
+		IOMMU_INIT_ERROR                        : 9 -> 8
+		IOMMU_CMDLINE_DISABLED                  : 10 -> 9
+acpi_dmar_type
+	Sub added
+		ACPI_DMAR_TYPE_SATC                     : 5
+	Value changed
+		ACPI_DMAR_TYPE_RESERVED                 : 5 -> 6
+pce_status
+	Sub added
+		PCE_STATUS_PREPARED                     : 2
+	Value changed
+		PCE_STATUS_ENABLED                      : 2 -> 3
+		PCE_STATUS_ERROR                        : 3 -> 4
+blkif_state
+	Sub added
+		BLKIF_STATE_ERROR                       : 3
+blk_req_status
+	Sub added
+		REQ_PROCESSING                          : 0
+	Value changed
+		REQ_WAITING                             : 0 -> 1
+		REQ_DONE                                : 1 -> 2
+		REQ_ERROR                               : 2 -> 3
+		REQ_EOPNOTSUPP                          : 3 -> 4
+nvdimm_event
+	Sub added
+		NVDIMM_REVALIDATE_REGION                : 1
+netdev_priv_flags
+	Sub added
+		IFF_TX_SKB_NO_LINEAR                    : -2147483648
+ethtool_stringset
+	Sub added
+		ETH_SS_STATS_STD                        : 16
+		ETH_SS_STATS_ETH_PHY                    : 17
+		ETH_SS_STATS_ETH_MAC                    : 18
+		ETH_SS_STATS_ETH_CTRL                   : 19
+		ETH_SS_STATS_RMON                       : 20
+	Value changed
+		ETH_SS_COUNT                            : 16 -> 21
+acpi_pcct_type
+	Sub added
+		ACPI_PCCT_TYPE_HW_REG_COMM_SUBSPACE     : 5
+	Value changed
+		ACPI_PCCT_TYPE_RESERVED                 : 5 -> 6
+rproc_state
+	Sub added
+		RPROC_ATTACHED                          : 5
+	Value changed
+		RPROC_DETACHED                          : 5 -> 6
+		RPROC_LAST                              : 6 -> 7
+flow_action_id
+	Sub added
+		FLOW_ACTION_PPPOE_PUSH                  : 29
+	Value changed
+		NUM_FLOW_ACTIONS                        : 29 -> 30
+devlink_port_flavour
+	Sub added
+		DEVLINK_PORT_FLAVOUR_PCI_SF             : 7
+dsa_tag_protocol
+	Sub added
+		DSA_TAG_PROTO_BRCM_LEGACY               : 22
+		DSA_TAG_PROTO_XRS700X                   : 19
+		DSA_TAG_PROTO_OCELOT_8021Q              : 20
+		DSA_TAG_PROTO_SEVILLE                   : 21
+gro_result
+	Sub removed
+		GRO_DROP                                : 4
+	Value changed
+		GRO_CONSUMED                            : 5 -> 4
+devlink_attr
+	Sub added
+		DEVLINK_ATTR_PORT_PCI_SF_NUMBER         : 164
+	Value changed
+		__DEVLINK_ATTR_MAX                      : 164 -> 165
+		DEVLINK_ATTR_MAX                        : 163 -> 164
+devlink_port_function_attr
+	Sub added
+		DEVLINK_PORT_FN_ATTR_STATE              : 2
+		DEVLINK_PORT_FN_ATTR_OPSTATE            : 3
+	Value changed
+		__DEVLINK_PORT_FUNCTION_ATTR_MAX        : 2 -> 4
+		DEVLINK_PORT_FUNCTION_ATTR_MAX          : 1 -> 3
+devlink_trap_generic_id
+	Sub added
+		DEVLINK_TRAP_GENERIC_ID_DMAC_FILTER     : 91
+	Value changed
+		__DEVLINK_TRAP_GENERIC_ID_MAX           : 91 -> 92
+		DEVLINK_TRAP_GENERIC_ID_MAX             : 90 -> 91
+nexthop_event_type
+	Sub added
+		NEXTHOP_EVENT_RES_TABLE_PRE_REPLACE     : 2
+		NEXTHOP_EVENT_BUCKET_REPLACE            : 3
+nl80211_ext_feature_index
+	Sub added
+		NL80211_EXT_FEATURE_SECURE_LTF          : 55
+		NL80211_EXT_FEATURE_SECURE_RTT          : 56
+		NL80211_EXT_FEATURE_PROT_RANGE_NEGO_AND_MEASURE: 57
+	Value changed
+		NUM_NL80211_EXT_FEATURES                : 55 -> 58
+		MAX_NL80211_EXT_FEATURES                : 54 -> 57
+linux_mptcp_mib_field
+	Sub added
+		MPTCP_MIB_MPCAPABLEACTIVE               : 2
+		MPTCP_MIB_MPCAPABLEACTIVEACK            : 3
+		MPTCP_MIB_TOKENFALLBACKINIT             : 7
+		MPTCP_MIB_PORTADD                       : 24
+		MPTCP_MIB_JOINPORTSYNRX                 : 25
+		MPTCP_MIB_JOINPORTSYNACKRX              : 26
+		MPTCP_MIB_JOINPORTACKRX                 : 27
+		MPTCP_MIB_MISMATCHPORTSYNRX             : 28
+		MPTCP_MIB_MISMATCHPORTACKRX             : 29
+		MPTCP_MIB_MPPRIOTX                      : 32
+		MPTCP_MIB_MPPRIORX                      : 33
+		MPTCP_MIB_RCVPRUNED                     : 34
+	Value changed
+		MPTCP_MIB_MPCAPABLEPASSIVEACK           : 2 -> 4
+		MPTCP_MIB_MPCAPABLEPASSIVEFALLBACK      : 3 -> 5
+		MPTCP_MIB_MPCAPABLEACTIVEFALLBACK       : 4 -> 6
+		MPTCP_MIB_RETRANSSEGS                   : 5 -> 8
+		MPTCP_MIB_JOINNOTOKEN                   : 6 -> 9
+		MPTCP_MIB_JOINSYNRX                     : 7 -> 10
+		MPTCP_MIB_JOINSYNACKRX                  : 8 -> 11
+		MPTCP_MIB_JOINSYNACKMAC                 : 9 -> 12
+		MPTCP_MIB_JOINACKRX                     : 10 -> 13
+		MPTCP_MIB_JOINACKMAC                    : 11 -> 14
+		MPTCP_MIB_DSSNOMATCH                    : 12 -> 15
+		MPTCP_MIB_INFINITEMAPRX                 : 13 -> 16
+		MPTCP_MIB_OFOQUEUETAIL                  : 14 -> 17
+		MPTCP_MIB_OFOQUEUE                      : 15 -> 18
+		MPTCP_MIB_OFOMERGE                      : 16 -> 19
+		MPTCP_MIB_NODSSWINDOW                   : 17 -> 20
+		MPTCP_MIB_DUPDATA                       : 18 -> 21
+		MPTCP_MIB_ADDADDR                       : 19 -> 22
+		MPTCP_MIB_ECHOADD                       : 20 -> 23
+		MPTCP_MIB_RMADDR                        : 21 -> 30
+		MPTCP_MIB_RMSUBFLOW                     : 22 -> 31
+		__MPTCP_MIB_MAX                         : 23 -> 35

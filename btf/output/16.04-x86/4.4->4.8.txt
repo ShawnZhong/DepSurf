@@ -1,0 +1,35 @@
+                            4.4->4.8
+struct common                   6072
+       added                     410
+       removed                   138
+       changed                   828
+       Sub added                 404
+       Sub removed               286
+       Sub reordered              35
+       Sub type changed          165
+       Layout changed            214
+func   common                  35475
+       added                    2648
+       removed                  1372
+       changed                   802
+       Sub added                 395
+       Sub removed               310
+       Sub reordered               0
+       Sub type changed          213
+       Return type changed       121
+enum   common                    740
+       added                      55
+       removed                    47
+       changed                    83
+       Sub added                  69
+       Sub removed                21
+       Value changed              42
+union  common                     80
+       added                       3
+       removed                     1
+       changed                     2
+       Sub added                   2
+       Sub removed                 1
+       Sub reordered               0
+       Sub type changed            1
+       Layout changed              0

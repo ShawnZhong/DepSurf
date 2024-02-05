@@ -1,0 +1,2055 @@
+Old Kind.FUNC (38123): ['reset_early_page_tables', 'copy_bootdata', 'x86_64_start_reservations', 'x86_64_start_kernel', 'early_make_pgtable', 'reserve_bios_regions', 'x86_early_init_platform_quirks', 'arch_local_irq_disable', 'arch_local_save_flags', 'repair_env_string']
+New Kind.FUNC (39045): ['reset_early_page_tables', 'copy_bootdata', 'x86_64_start_reservations', 'x86_64_start_kernel', 'early_make_pgtable', 'reserve_bios_regions', 'x86_early_init_platform_quirks', 'arch_local_save_flags', 'repair_env_string', 'set_init_arg']
+Added Kind.FUNC (1507): ['map_vdso_randomized', 'map_vdso_once', 'cpumask_weight', 'bitmap_copy', 'intel_pmu_del_event', 'intel_pmu_add_event', 'pebs_update_state', 'intel_pmu_pebs_add', 'intel_pmu_pebs_del', 'intel_pmu_lbr_add']
+Removed Kind.FUNC (585): ['arch_local_irq_disable', 'arch_local_irq_enable', 'list_del', 'backtrace_stack', 'backtrace_address', '__intel_pmu_lbr_disable', 'intel_pmu_lbr_enable', 'intel_pmu_lbr_disable', 'uncore_cpu_prepare', 'uncore_cpu_starting']
+Common Kind.FUNC (37538): ['reset_early_page_tables', 'copy_bootdata', 'x86_64_start_reservations', 'x86_64_start_kernel', 'early_make_pgtable', 'reserve_bios_regions', 'x86_early_init_platform_quirks', 'arch_local_save_flags', 'repair_env_string', 'set_init_arg']
+Changed Kind.FUNC (386): ['map_vdso', 'native_write_msr_safe', 'xen_clocksource_read', 'xen_clocksource_get_cycles', 'show_trace_log_lvl', 'alloc_ldt_struct', 'read_tsc', 'convert_art_to_tsc', 'save_stack_address', 'mce_start_timer']
+Reasons Kind.FUNC (5): [('Sub added', 224), ('Sub removed', 181), ('Sub reordered', 0), ('Sub type changed', 105), ('Return type changed', 51)]
+map_vdso
+	Sub added
+		addr                : {'kind': 'INT', 'name': 'long unsigned int'}
+	Sub removed
+		calculate_addr      : {'kind': 'TYPEDEF', 'name': 'bool'}
+native_write_msr_safe
+	Sub type changed
+		low                 : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u32'}
+		high                : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u32'}
+xen_clocksource_read
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+xen_clocksource_get_cycles
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+show_trace_log_lvl
+	Sub removed
+		bp                  : {'kind': 'INT', 'name': 'long unsigned int'}
+alloc_ldt_struct
+	Sub type changed
+		size                : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+read_tsc
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+convert_art_to_tsc
+	Sub type changed
+		art                 : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+save_stack_address
+	Sub added
+		trace               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'stack_trace'}}
+		nosched             : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Sub removed
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		reliable            : {'kind': 'INT', 'name': 'int'}
+mce_start_timer
+	Sub removed
+		cpu                 : {'kind': 'INT', 'name': 'unsigned int'}
+native_write_msr
+	Sub type changed
+		low                 : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u32'}
+		high                : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u32'}
+find_patch
+	Sub added
+		uci                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ucode_cpu_info'}}
+	Sub removed
+		cpu                 : {'kind': 'INT', 'name': 'unsigned int'}
+	Return type changed
+		                    : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ucode_patch'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'microcode_intel'}}
+load_ucode_amd_ap
+	Sub added
+		family              : {'kind': 'INT', 'name': 'unsigned int'}
+save_microcode_in_initrd_amd
+	Sub added
+		fam                 : {'kind': 'INT', 'name': 'unsigned int'}
+topology_update_package_map
+	Sub added
+		pkg                 : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		apicid              : {'kind': 'INT', 'name': 'unsigned int'}
+check_tsc_warp
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'cycles_t'}
+can_boost
+	Sub added
+		addr                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+read_hpet
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+kvm_clock_read
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+kvm_clock_get_cycles
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+kvm_sched_clock_read
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+pvclock_clocksource_read
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+sync_global_pgds
+	Sub removed
+		removed             : {'kind': 'INT', 'name': 'int'}
+track_pfn_insert
+	Return type changed
+		                    : {'kind': 'INT', 'name': 'int'}
+		                    ->{'name': 'void', 'kind': 'VOID'}
+account_kernel_stack
+	Sub added
+		tsk                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}
+	Sub removed
+		stack               : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+cpuhp_issue_call
+	Sub added
+		node                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'hlist_node'}}
+	Sub removed
+		cb                  : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+cpuhp_store_callbacks
+	Sub added
+		multi_instance      : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+cpuhp_invoke_callback
+	Sub added
+		state               : {'kind': 'ENUM', 'name': 'cpuhp_state', 'size': 4}
+		bringup             : {'kind': 'TYPEDEF', 'name': 'bool'}
+		node                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'hlist_node'}}
+	Sub removed
+		step                : {'kind': 'ENUM', 'name': 'cpuhp_state', 'size': 4}
+		cb                  : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+cpuhp_down_callbacks
+	Sub removed
+		steps               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cpuhp_step'}}
+cpuhp_up_callbacks
+	Sub removed
+		steps               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cpuhp_step'}}
+__cpuhp_setup_state
+	Sub added
+		multi_instance      : {'kind': 'TYPEDEF', 'name': 'bool'}
+workqueue_set_unbound_cpumask
+	Sub type changed
+		cpumask             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cpumask'}}
+		                    ->{'kind': 'TYPEDEF', 'name': 'cpumask_var_t'}
+account_user_time
+	Sub removed
+		cputime_scaled      : {'kind': 'TYPEDEF', 'name': 'cputime_t'}
+account_system_time
+	Sub removed
+		cputime_scaled      : {'kind': 'TYPEDEF', 'name': 'cputime_t'}
+select_idle_sibling
+	Sub added
+		prev                : {'kind': 'INT', 'name': 'int'}
+update_load_avg
+	Sub added
+		flags               : {'kind': 'INT', 'name': 'int'}
+	Sub removed
+		update_tg           : {'kind': 'INT', 'name': 'int'}
+cpudl_set
+	Sub removed
+		is_valid            : {'kind': 'INT', 'name': 'int'}
+cpufreq_add_update_util_hook
+	Sub type changed
+		func                : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'update_util_data'}}}, {'name': '(anon-1)', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'update_util_data'}}}, {'name': '(anon-1)', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+mutex_optimistic_spin
+	Sub added
+		waiter              : {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}
+__mutex_lock_slowpath
+	Sub added
+		lock                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mutex'}}
+	Sub removed
+		lock_count          : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'atomic_t'}}
+percpu_down_write
+	Sub added
+		sem                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+	Sub removed
+		brw                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+__percpu_init_rwsem
+	Sub added
+		sem                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+	Sub removed
+		brw                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+percpu_free_rwsem
+	Sub added
+		sem                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+	Sub removed
+		brw                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+percpu_up_write
+	Sub added
+		sem                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+	Sub removed
+		brw                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'percpu_rw_semaphore'}}
+cont_add
+	Sub added
+		flags               : {'kind': 'ENUM', 'name': 'log_flags', 'size': 4}
+msg_print_text
+	Sub removed
+		prev                : {'kind': 'ENUM', 'name': 'log_flags', 'size': 4}
+console_cpu_notify
+	Sub added
+		cpu                 : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		self                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'notifier_block'}}
+		action              : {'kind': 'INT', 'name': 'long unsigned int'}
+		hcpu                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+alloc_msi_entry
+	Sub added
+		nvec                : {'kind': 'INT', 'name': 'int'}
+		affinity            : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cpumask'}}}
+dummy_clock_read
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+jiffies_read
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+timecounter_cyc2time
+	Sub type changed
+		cycle_tstamp        : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+find_symbol
+	Sub type changed
+		crc                 : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 's32'}}}}
+kexec_add_buffer
+	Sub added
+		kbuf                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kexec_buf'}}
+	Sub removed
+		image               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kimage'}}
+		buffer              : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+		bufsz               : {'kind': 'INT', 'name': 'long unsigned int'}
+		memsz               : {'kind': 'INT', 'name': 'long unsigned int'}
+		buf_align           : {'kind': 'INT', 'name': 'long unsigned int'}
+		buf_min             : {'kind': 'INT', 'name': 'long unsigned int'}
+		buf_max             : {'kind': 'INT', 'name': 'long unsigned int'}
+		top_down            : {'kind': 'TYPEDEF', 'name': 'bool'}
+		load_addr           : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+cgroup_path_ns
+	Return type changed
+		                    : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+		                    ->{'kind': 'INT', 'name': 'int'}
+task_cgroup_path
+	Return type changed
+		                    : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+		                    ->{'kind': 'INT', 'name': 'int'}
+free_user_ns
+	Sub added
+		work                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'work_struct'}}
+	Sub removed
+		ns                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+audit_log_name
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+audit_log_link_denied
+	Sub type changed
+		link                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+audit_watch_handle_event
+	Sub type changed
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+audit_mark_handle_event
+	Sub type changed
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+audit_tree_handle_event
+	Sub type changed
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+wakeup_readers
+	Sub added
+		work                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'irq_work'}}
+	Sub removed
+		data                : {'kind': 'INT', 'name': 'long unsigned int'}
+ns2usecs
+	Sub type changed
+		nsec                : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+ftrace_now
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+ftrace_push_return_trace
+	Sub added
+		retp                : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+blk_fill_rwbs
+	Sub removed
+		rw                  : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Sub type changed
+		op                  : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+filter_opstack_push
+	Sub type changed
+		op                  : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'ENUM', 'name': 'filter_op_ids', 'size': 4}
+postfix_append_op
+	Sub type changed
+		op                  : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'ENUM', 'name': 'filter_op_ids', 'size': 4}
+bpf_get_current_task
+	Sub added
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_5              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_trace_printk
+	Sub added
+		fmt                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		arg1                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		arg2                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		arg3                : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_perf_event_output
+	Sub added
+		regs                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		map                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		data                : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_perf_event_output_tp
+	Sub added
+		tp_buff             : {'kind': 'TYPEDEF', 'name': 'u64'}
+		map                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		flags               : {'kind': 'TYPEDEF', 'name': 'u64'}
+		data                : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		index               : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_get_stackid_tp
+	Sub added
+		tp_buff             : {'kind': 'TYPEDEF', 'name': 'u64'}
+		map                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		flags               : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_perf_event_read
+	Sub added
+		map                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_probe_read
+	Sub added
+		dst                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		size                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		unsafe_ptr          : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_probe_write_user
+	Sub added
+		unsafe_ptr          : {'kind': 'TYPEDEF', 'name': 'u64'}
+		src                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		size                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+perf_trace_pstate_sample
+	Sub added
+		io_boost            : {'kind': 'TYPEDEF', 'name': 'u32'}
+trace_event_raw_event_pstate_sample
+	Sub added
+		io_boost            : {'kind': 'TYPEDEF', 'name': 'u32'}
+bpf_user_rnd_u32
+	Sub added
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_5              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+check_reg_arg
+	Sub type changed
+		regs                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'reg_state'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_reg_state'}}
+pop_stack
+	Sub type changed
+		env                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_env'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_env'}}
+print_verifier_state
+	Sub type changed
+		state               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_state'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_state'}}
+check_stack_boundary
+	Sub type changed
+		env                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_env'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_env'}}
+check_func_arg
+	Sub type changed
+		env                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_env'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_env'}}
+check_mem_access
+	Sub type changed
+		env                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_env'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_env'}}
+do_check
+	Sub type changed
+		env                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'verifier_env'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_verifier_env'}}
+bpf_get_current_uid_gid
+	Sub added
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_5              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_map_lookup_elem
+	Sub added
+		map                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		key                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_map_update_elem
+	Sub added
+		map                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		key                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		value               : {'kind': 'TYPEDEF', 'name': 'u64'}
+		flags               : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_map_delete_elem
+	Sub added
+		map                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		key                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_get_smp_processor_id
+	Sub added
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_5              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_get_current_pid_tgid
+	Sub added
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_5              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_ktime_get_ns
+	Sub added
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_5              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_get_current_comm
+	Sub added
+		buf                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_get_stackid
+	Sub added
+		regs                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		map                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+padata_set_cpumask
+	Sub type changed
+		cpumask             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cpumask'}}
+		                    ->{'kind': 'TYPEDEF', 'name': 'cpumask_var_t'}
+__lock_page
+	Sub added
+		__page              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+	Sub removed
+		page                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+__lock_page_killable
+	Sub added
+		__page              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+	Sub removed
+		page                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+filemap_map_pages
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		fe                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+exit_oom_victim
+	Sub removed
+		tsk                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}
+oom_kill_process
+	Sub removed
+		p                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}
+		points              : {'kind': 'INT', 'name': 'unsigned int'}
+		totalpages          : {'kind': 'INT', 'name': 'long unsigned int'}
+oom_killer_disable
+	Sub added
+		timeout             : {'kind': 'INT', 'name': 'long int'}
+lruvec_lru_size
+	Sub added
+		zone_idx            : {'kind': 'INT', 'name': 'int'}
+get_user_pages_locked
+	Sub added
+		gup_flags           : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		write               : {'kind': 'INT', 'name': 'int'}
+		force               : {'kind': 'INT', 'name': 'int'}
+get_user_pages_unlocked
+	Sub added
+		gup_flags           : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		write               : {'kind': 'INT', 'name': 'int'}
+		force               : {'kind': 'INT', 'name': 'int'}
+get_user_pages_remote
+	Sub added
+		gup_flags           : {'kind': 'INT', 'name': 'unsigned int'}
+		locked              : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+	Sub removed
+		write               : {'kind': 'INT', 'name': 'int'}
+		force               : {'kind': 'INT', 'name': 'int'}
+get_user_pages
+	Sub added
+		gup_flags           : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		write               : {'kind': 'INT', 'name': 'int'}
+		force               : {'kind': 'INT', 'name': 'int'}
+__access_remote_vm
+	Sub added
+		gup_flags           : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		write               : {'kind': 'INT', 'name': 'int'}
+do_page_mkwrite
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		vma                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_area_struct'}}
+		page                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+		address             : {'kind': 'INT', 'name': 'long unsigned int'}
+__do_fault
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		fe                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+		pgoff               : {'kind': 'INT', 'name': 'long unsigned int'}
+		cow_page            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+		page                : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}}
+		entry               : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}
+wp_page_copy
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		fe                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+		orig_pte            : {'kind': 'TYPEDEF', 'name': 'pte_t'}
+		old_page            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+do_wp_page
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		fe                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+		orig_pte            : {'kind': 'TYPEDEF', 'name': 'pte_t'}
+do_swap_page
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		fe                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+		orig_pte            : {'kind': 'TYPEDEF', 'name': 'pte_t'}
+alloc_set_pte
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		fe                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+access_remote_vm
+	Sub added
+		gup_flags           : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		write               : {'kind': 'INT', 'name': 'int'}
+access_process_vm
+	Sub added
+		gup_flags           : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		write               : {'kind': 'INT', 'name': 'int'}
+vma_wants_writenotify
+	Sub added
+		vm_page_prot        : {'kind': 'TYPEDEF', 'name': 'pgprot_t'}
+__purge_vmap_area_lazy
+	Sub removed
+		sync                : {'kind': 'INT', 'name': 'int'}
+		force_flush         : {'kind': 'INT', 'name': 'int'}
+	Sub type changed
+		start               : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+		end                 : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'bool'}
+hugetlb_fix_reserve_counts
+	Sub removed
+		restore_reserve     : {'kind': 'TYPEDEF', 'name': 'bool'}
+hugetlb_cow
+	Sub removed
+		pte                 : {'kind': 'TYPEDEF', 'name': 'pte_t'}
+stable_tree_append
+	Sub added
+		max_page_sharing_bypass: {'kind': 'TYPEDEF', 'name': 'bool'}
+zone_can_shift
+	Sub added
+		zone_shift          : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+	Return type changed
+		                    : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'bool'}
+test_pages_in_a_zone
+	Sub added
+		valid_start         : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		valid_end           : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+touch_pmd
+	Sub added
+		flags               : {'kind': 'INT', 'name': 'int'}
+do_huge_pmd_anonymous_page
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		fe                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+huge_pmd_set_accessed
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		fe                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+do_huge_pmd_numa_page
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		fe                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+move_huge_pmd
+	Sub added
+		need_flush          : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'bool'}}
+do_huge_pmd_wp_page
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		fe                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+mem_cgroup_update_lru_size
+	Sub added
+		zid                 : {'kind': 'INT', 'name': 'int'}
+get_vaddr_frames
+	Sub added
+		gup_flags           : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		write               : {'kind': 'TYPEDEF', 'name': 'bool'}
+		force               : {'kind': 'TYPEDEF', 'name': 'bool'}
+alloc_file
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+may_open
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+expand_files
+	Sub type changed
+		nr                  : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+clone_private_mount
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+commit_tree
+	Sub removed
+		shadows             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mount'}}
+lookup_mnt
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+mnt_clone_internal
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+collect_mounts
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+path_is_under
+	Sub type changed
+		path1               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+		path2               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+seq_put_decimal_ull
+	Sub type changed
+		delimiter           : {'kind': 'INT', 'name': 'char'}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+seq_put_decimal_ll
+	Sub type changed
+		delimiter           : {'kind': 'INT', 'name': 'char'}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+vfs_listxattr
+	Sub added
+		dentry              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+	Sub removed
+		d                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+xattr_resolve_name
+	Sub added
+		inode               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+	Sub removed
+		handlers            : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'xattr_handler'}}}}
+simple_rename
+	Sub added
+		flags               : {'kind': 'INT', 'name': 'unsigned int'}
+vmsplice_to_pipe
+	Sub added
+		uiov                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'iovec'}}}
+	Sub removed
+		iov                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'iovec'}}}
+utimes_common
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+vfs_statfs
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+fsnotify
+	Sub type changed
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+__fsnotify_parent
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+dnotify_handle_event
+	Sub type changed
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+inotify_handle_event
+	Sub type changed
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+fanotify_handle_event
+	Sub type changed
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+fanotify_alloc_event
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+handle_userfault
+	Sub added
+		vmf                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'vm_fault'}}
+	Sub removed
+		fe                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fault_env'}}
+aio_setup_ring
+	Sub added
+		nr_events           : {'kind': 'INT', 'name': 'unsigned int'}
+dax_wake_mapping_entry_waiter
+	Sub added
+		entry               : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+fscrypt_decrypt_page
+	Sub added
+		inode               : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+		len                 : {'kind': 'INT', 'name': 'unsigned int'}
+		offs                : {'kind': 'INT', 'name': 'unsigned int'}
+		lblk_num            : {'kind': 'TYPEDEF', 'name': 'u64'}
+fscrypt_initialize
+	Sub added
+		cop_flags           : {'kind': 'INT', 'name': 'unsigned int'}
+fscrypt_get_ctx
+	Sub type changed
+		inode               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+fscrypt_encrypt_page
+	Sub added
+		page                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+		len                 : {'kind': 'INT', 'name': 'unsigned int'}
+		offs                : {'kind': 'INT', 'name': 'unsigned int'}
+		lblk_num            : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		plaintext_page      : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+	Sub type changed
+		inode               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+fscrypt_zeroout_range
+	Sub type changed
+		inode               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+fscrypt_fname_encrypted_size
+	Sub type changed
+		inode               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+fscrypt_fname_alloc_buffer
+	Sub type changed
+		inode               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+compat_SyS_io_setup
+	Sub added
+		nr_events           : {'kind': 'INT', 'name': 'long int'}
+	Sub removed
+		nr_reqs             : {'kind': 'INT', 'name': 'long int'}
+mb_cache_shrink
+	Sub type changed
+		nr_to_scan          : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+dquot_quota_on
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+proc_pid_make_inode
+	Sub added
+		mode                : {'kind': 'TYPEDEF', 'name': 'umode_t'}
+sysctl_follow_link
+	Sub removed
+		namespaces          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nsproxy'}}
+kernfs_iop_rename
+	Sub added
+		flags               : {'kind': 'INT', 'name': 'unsigned int'}
+get_dcookie
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+ext4_truncate
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+ext4_quota_on
+	Sub type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+ext4_ext_truncate
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+journal_init_common
+	Sub added
+		bdev                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'block_device'}}
+		fs_dev              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'block_device'}}
+		start               : {'kind': 'INT', 'name': 'long long unsigned int'}
+		len                 : {'kind': 'INT', 'name': 'int'}
+		blocksize           : {'kind': 'INT', 'name': 'int'}
+vfat_rename
+	Sub added
+		flags               : {'kind': 'INT', 'name': 'unsigned int'}
+ecryptfs_rename
+	Sub added
+		flags               : {'kind': 'INT', 'name': 'unsigned int'}
+get_name
+	Sub added
+		bank                : {'kind': 'INT', 'name': 'unsigned int'}
+		b                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'threshold_block'}}
+	Sub removed
+		path                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+		name                : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+		child               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+	Return type changed
+		                    : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+fuse_getxattr
+	Sub removed
+		entry               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+fuse_removexattr
+	Sub added
+		inode               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+	Sub removed
+		entry               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+fuse_setxattr
+	Sub removed
+		unused              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+fuse_do_setattr
+	Sub added
+		dentry              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}
+	Sub removed
+		inode               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+wake_const_ops
+	Sub added
+		wake_q              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'wake_q_head'}}
+	Sub removed
+		pt                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+do_smart_wakeup_zero
+	Sub added
+		wake_q              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'wake_q_head'}}
+	Sub removed
+		pt                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+update_queue
+	Sub added
+		wake_q              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'wake_q_head'}}
+	Sub removed
+		pt                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+do_smart_update
+	Sub added
+		wake_q              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'wake_q_head'}}
+	Sub removed
+		pt                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+selinux_determine_inode_label
+	Sub added
+		tsec                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'task_security_struct'}}}
+ima_d_path
+	Sub added
+		namebuf             : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+crypto_cbc_setkey
+	Sub type changed
+		parent              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_tfm'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_skcipher'}}
+crypto_cbc_free
+	Sub type changed
+		inst                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_instance'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_instance'}}
+crypto_cbc_exit_tfm
+	Sub type changed
+		tfm                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_tfm'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_skcipher'}}
+crypto_cbc_init_tfm
+	Sub type changed
+		tfm                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_tfm'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_skcipher'}}
+crypto_cbc_encrypt
+	Sub added
+		req                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_request'}}
+	Sub removed
+		desc                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blkcipher_desc'}}
+		dst                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+		src                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+		nbytes              : {'kind': 'INT', 'name': 'unsigned int'}
+crypto_cbc_decrypt
+	Sub added
+		req                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_request'}}
+	Sub removed
+		desc                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blkcipher_desc'}}
+		dst                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+		src                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+		nbytes              : {'kind': 'INT', 'name': 'unsigned int'}
+decrypt
+	Sub added
+		req                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_request'}}
+	Sub removed
+		desc                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blkcipher_desc'}}
+		dst                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+		src                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+		nbytes              : {'kind': 'INT', 'name': 'unsigned int'}
+encrypt
+	Sub added
+		req                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_request'}}
+	Sub removed
+		desc                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blkcipher_desc'}}
+		dst                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+		src                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'scatterlist'}}
+		nbytes              : {'kind': 'INT', 'name': 'unsigned int'}
+free
+	Sub type changed
+		inst                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_instance'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skcipher_instance'}}
+exit_tfm
+	Sub type changed
+		tfm                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_tfm'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_skcipher'}}
+init_tfm
+	Sub type changed
+		tfm                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_tfm'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'crypto_skcipher'}}
+bio_init
+	Sub added
+		table               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bio_vec'}}
+		max_vecs            : {'kind': 'INT', 'name': 'short unsigned int'}
+elv_may_queue
+	Sub removed
+		op_flags            : {'kind': 'INT', 'name': 'int'}
+	Sub type changed
+		op                  : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+freed_request
+	Sub added
+		sync                : {'kind': 'TYPEDEF', 'name': 'bool'}
+		rq_flags            : {'kind': 'TYPEDEF', 'name': 'req_flags_t'}
+	Sub removed
+		op                  : {'kind': 'INT', 'name': 'int'}
+		flags               : {'kind': 'INT', 'name': 'unsigned int'}
+get_request
+	Sub removed
+		op_flags            : {'kind': 'INT', 'name': 'int'}
+	Sub type changed
+		op                  : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+blk_mq_add_to_requeue_list
+	Sub added
+		kick_requeue_list   : {'kind': 'TYPEDEF', 'name': 'bool'}
+blk_mq_requeue_request
+	Sub added
+		kick_requeue_list   : {'kind': 'TYPEDEF', 'name': 'bool'}
+__blk_mq_alloc_request
+	Sub removed
+		op_flags            : {'kind': 'INT', 'name': 'int'}
+	Sub type changed
+		op                  : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+blk_mq_map_request
+	Sub type changed
+		data                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blk_map_ctx'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blk_mq_alloc_data'}}
+blk_mq_put_tag
+	Sub added
+		ctx                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'blk_mq_ctx'}}
+	Sub removed
+		last_tag            : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+cfq_may_queue
+	Sub removed
+		op_flags            : {'kind': 'INT', 'name': 'int'}
+	Sub type changed
+		op                  : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+check_blkcg_changed
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'bool'}
+__radix_tree_preload
+	Sub type changed
+		nr                  : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+__radix_tree_delete_node
+	Sub added
+		update_node         : {'kind': 'TYPEDEF', 'name': 'radix_tree_update_node_t'}
+		private             : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'bool'}
+		                    ->{'name': 'void', 'kind': 'VOID'}
+rhashtable_insert_slow
+	Sub removed
+		tbl                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bucket_table'}}
+	Return type changed
+		                    : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bucket_table'}}
+		                    ->{'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+unmap_single
+	Sub added
+		attrs               : {'kind': 'INT', 'name': 'long unsigned int'}
+swiotlb_tbl_map_single
+	Sub added
+		attrs               : {'kind': 'INT', 'name': 'long unsigned int'}
+swiotlb_tbl_unmap_single
+	Sub added
+		attrs               : {'kind': 'INT', 'name': 'long unsigned int'}
+trace_event_raw_event_swiotlb_bounced
+	Sub type changed
+		swiotlb_force       : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'ENUM', 'name': 'swiotlb_force', 'size': 4}
+perf_trace_swiotlb_bounced
+	Sub type changed
+		swiotlb_force       : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'ENUM', 'name': 'swiotlb_force', 'size': 4}
+amd_gpio_irq_handler
+	Sub added
+		irq                 : {'kind': 'INT', 'name': 'int'}
+		dev_id              : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Sub removed
+		desc                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'irq_desc'}}
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'irqreturn_t'}
+sx150x_gpio_set_single_ended
+	Sub added
+		chip                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+	Sub removed
+		gc                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+sx150x_gpio_set
+	Sub added
+		chip                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+		value               : {'kind': 'INT', 'name': 'int'}
+	Sub removed
+		gc                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+		val                 : {'kind': 'INT', 'name': 'int'}
+sx150x_gpio_direction_output
+	Sub added
+		chip                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+		value               : {'kind': 'INT', 'name': 'int'}
+	Sub removed
+		gc                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+		val                 : {'kind': 'INT', 'name': 'int'}
+sx150x_gpio_direction_input
+	Sub added
+		chip                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+	Sub removed
+		gc                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+sx150x_gpio_get
+	Sub added
+		chip                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+	Sub removed
+		gc                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}
+pci_bridge_d3_update
+	Sub removed
+		remove              : {'kind': 'TYPEDEF', 'name': 'bool'}
+pci_register_io_range
+	Sub added
+		fwnode              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fwnode_handle'}}
+cper_print_aer
+	Sub added
+		aer_severity        : {'kind': 'INT', 'name': 'int'}
+	Sub removed
+		cper_severity       : {'kind': 'INT', 'name': 'int'}
+msi_setup_entry
+	Sub added
+		affd                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'irq_affinity'}}}
+__pci_enable_msi_range
+	Sub added
+		affd                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'irq_affinity'}}}
+	Sub removed
+		flags               : {'kind': 'INT', 'name': 'unsigned int'}
+vgacon_scroll
+	Sub type changed
+		t                   : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+		b                   : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+		dir                 : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'ENUM', 'name': 'con_scroll', 'size': 4}
+		lines               : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+	Return type changed
+		                    : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'bool'}
+fbcon_scroll
+	Sub type changed
+		t                   : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+		b                   : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+		dir                 : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'ENUM', 'name': 'con_scroll', 'size': 4}
+		count               : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+	Return type changed
+		                    : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'bool'}
+map_madt_entry
+	Sub added
+		ignore_disabled     : {'kind': 'TYPEDEF', 'name': 'bool'}
+ec_install_handlers
+	Sub added
+		handle_events       : {'kind': 'TYPEDEF', 'name': 'bool'}
+acpi_create_platform_device
+	Sub added
+		properties          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'property_entry'}}
+acpi_table_attr_init
+	Sub added
+		tables_obj          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kobject'}}
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+acpi_ev_initialize_region
+	Sub removed
+		acpi_ns_locked      : {'kind': 'TYPEDEF', 'name': 'u8'}
+acpi_ex_add_table
+	Sub removed
+		parent_node         : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'acpi_namespace_node'}}
+acpi_get_table_by_index
+	Sub added
+		out_table           : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'acpi_table_header'}}}
+	Sub removed
+		table               : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'acpi_table_header'}}}
+acpi_ut_strtoul64
+	Sub added
+		flags               : {'kind': 'TYPEDEF', 'name': 'u32'}
+		return_value        : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}
+	Sub removed
+		base                : {'kind': 'TYPEDEF', 'name': 'u32'}
+		max_integer_byte_width: {'kind': 'TYPEDEF', 'name': 'u32'}
+		ret_integer         : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}
+acpi_processor_reevaluate_tstate
+	Sub added
+		is_dead             : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Sub removed
+		action              : {'kind': 'INT', 'name': 'long unsigned int'}
+acpi_processor_ppc_has_changed
+	Return type changed
+		                    : {'kind': 'INT', 'name': 'int'}
+		                    ->{'name': 'void', 'kind': 'VOID'}
+acpi_ioapic_add
+	Sub added
+		root_handle         : {'kind': 'TYPEDEF', 'name': 'acpi_handle'}
+	Sub removed
+		root                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'acpi_pci_root'}}
+xen_acpi_processor_resume
+	Sub removed
+		nb                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'notifier_block'}}
+		action              : {'kind': 'INT', 'name': 'long unsigned int'}
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Return type changed
+		                    : {'kind': 'INT', 'name': 'int'}
+		                    ->{'name': 'void', 'kind': 'VOID'}
+regulator_mode_constrain
+	Sub type changed
+		mode                : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+name_show
+	Sub added
+		kobj                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kobject'}}
+	Sub removed
+		dev                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+	Sub type changed
+		attr                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device_attribute'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kobj_attribute'}}
+uart_parse_earlycon
+	Sub type changed
+		addr                : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'resource_size_t'}}
+serial8250_set_isa_configurator
+	Sub type changed
+		v                   : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'uart_port'}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'short unsigned int'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'uart_port'}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+tpm_getcap
+	Sub type changed
+		subcap_id           : {'kind': 'TYPEDEF', 'name': '__be32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u32'}
+tpm_chip_alloc
+	Sub added
+		pdev                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+	Sub removed
+		dev                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+tpm_bios_log_setup
+	Sub added
+		chip                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'tpm_chip'}}
+	Sub removed
+		name                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+	Return type changed
+		                    : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}
+		                    ->{'kind': 'INT', 'name': 'int'}
+tpm_bios_log_teardown
+	Sub added
+		chip                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'tpm_chip'}}
+	Sub removed
+		lst                 : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}
+iommu_device_link
+	Sub added
+		iommu               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_device'}}
+	Sub removed
+		dev                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+iommu_device_unlink
+	Sub added
+		iommu               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'iommu_device'}}
+	Sub removed
+		dev                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+modify_irte
+	Sub type changed
+		irte                : {'kind': 'UNION', 'name': 'irte'}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'irte'}}
+nvm_unregister
+	Sub added
+		dev                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_dev'}}
+	Sub removed
+		disk_name           : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+nvm_submit_io
+	Sub added
+		tgt_dev             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_tgt_dev'}}
+	Sub removed
+		dev                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_dev'}}
+nvm_erase_blk
+	Sub added
+		tgt_dev             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_tgt_dev'}}
+		p                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ppa_addr'}}
+		flags               : {'kind': 'INT', 'name': 'int'}
+	Sub removed
+		dev                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_dev'}}
+		blk                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_block'}}
+nvm_erase_ppa
+	Sub added
+		flags               : {'kind': 'INT', 'name': 'int'}
+nvm_register
+	Sub added
+		dev                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_dev'}}
+	Sub removed
+		q                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request_queue'}}
+		disk_name           : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+		ops                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nvm_dev_ops'}}
+nvm_set_bb_tbl
+	Sub added
+		ppas                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ppa_addr'}}
+		nr_ppas             : {'kind': 'INT', 'name': 'int'}
+	Sub removed
+		s                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sysblk_scan'}}
+pm860x_probe
+	Sub removed
+		id                  : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'i2c_device_id'}}}
+nd_blk_available_dpa
+	Sub added
+		nd_region           : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nd_region'}}
+	Sub removed
+		nd_mapping          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nd_mapping'}}
+create_namespace_blk
+	Sub added
+		nd_label            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nd_namespace_label'}}
+		count               : {'kind': 'INT', 'name': 'int'}
+	Return type changed
+		                    : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device'}}
+dma_buf_poll_cb
+	Sub type changed
+		fence               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+		cb                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence_cb'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence_cb'}}
+reservation_object_add_shared_fence
+	Sub type changed
+		fence               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+reservation_object_get_fences_rcu
+	Sub type changed
+		pfence_excl         : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}}
+		pshared             : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}}}
+reservation_object_add_excl_fence
+	Sub type changed
+		fence               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+seqno_fence_get_driver_name
+	Sub type changed
+		fence               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+seqno_fence_get_timeline_name
+	Sub type changed
+		fence               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+seqno_enable_signaling
+	Sub type changed
+		fence               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+seqno_signaled
+	Sub type changed
+		fence               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+seqno_wait
+	Sub type changed
+		fence               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+seqno_release
+	Sub type changed
+		fence               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+fence_check_cb_func
+	Sub type changed
+		f                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+		cb                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence_cb'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence_cb'}}
+sync_file_alloc
+	Sub removed
+		size                : {'kind': 'INT', 'name': 'int'}
+sync_file_create
+	Sub type changed
+		fence               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fence'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_fence'}}
+scsi_internal_device_block
+	Sub added
+		wait                : {'kind': 'TYPEDEF', 'name': 'bool'}
+scsi_execute_req_flags
+	Sub added
+		rq_flags            : {'kind': 'TYPEDEF', 'name': 'req_flags_t'}
+ata_build_rw_tf
+	Sub added
+		class               : {'kind': 'INT', 'name': 'int'}
+phy_trigger_machine
+	Sub added
+		sync                : {'kind': 'TYPEDEF', 'name': 'bool'}
+phy_change
+	Sub added
+		phydev              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'phy_device'}}
+	Sub removed
+		work                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'work_struct'}}
+td_to_noop
+	Sub added
+		td                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'xhci_td'}}
+	Sub removed
+		cur_td              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'xhci_td'}}
+xhci_handle_command_timeout
+	Sub added
+		work                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'work_struct'}}
+	Sub removed
+		data                : {'kind': 'INT', 'name': 'long unsigned int'}
+finish_td
+	Sub added
+		ep_trb              : {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'xhci_trb'}}
+	Sub removed
+		event_trb           : {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'xhci_trb'}}
+thermal_zone_device_update
+	Sub added
+		event               : {'kind': 'ENUM', 'name': 'thermal_notify_event', 'size': 4}
+md_super_wait
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+dm_wait_for_completion
+	Sub added
+		task_state          : {'kind': 'INT', 'name': 'long int'}
+	Sub removed
+		interruptible       : {'kind': 'INT', 'name': 'int'}
+__dm_suspend
+	Sub added
+		task_state          : {'kind': 'INT', 'name': 'long int'}
+	Sub removed
+		interruptible       : {'kind': 'INT', 'name': 'int'}
+dm_requeue_original_request
+	Sub added
+		tio                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dm_rq_target_io'}}
+		delay_requeue       : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Sub removed
+		md                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mapped_device'}}
+		rq                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request'}}
+map_request
+	Sub removed
+		rq                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request'}}
+		md                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mapped_device'}}
+cpufreq_offline
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+cpufreq_update_policy
+	Return type changed
+		                    : {'kind': 'INT', 'name': 'int'}
+		                    ->{'name': 'void', 'kind': 'VOID'}
+dbs_update_util_handler
+	Sub added
+		flags               : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		util                : {'kind': 'INT', 'name': 'long unsigned int'}
+		max                 : {'kind': 'INT', 'name': 'long unsigned int'}
+intel_pstate_update_util
+	Sub added
+		flags               : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		util                : {'kind': 'INT', 'name': 'long unsigned int'}
+		max                 : {'kind': 'INT', 'name': 'long unsigned int'}
+mmc_start_req
+	Sub added
+		ret_stat            : {'kind': 'PTR', 'type': {'kind': 'ENUM', 'name': 'mmc_blk_status', 'size': 4}}
+	Sub removed
+		error               : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+__mmc_switch
+	Sub added
+		timing              : {'kind': 'INT', 'name': 'unsigned char'}
+		retry_crc_err       : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Sub removed
+		ignore_crc          : {'kind': 'TYPEDEF', 'name': 'bool'}
+efivar_entry_iter_begin
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+efivar_entry_add
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+efivar_entry_remove
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+cper_estatus_print_section
+	Sub type changed
+		gdata               : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'acpi_hest_generic_data'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'acpi_hest_generic_data'}}
+acpi_pm_read
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+acpi_pm_read_slow
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': 'cycle_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+extcon_set_state
+	Sub added
+		id                  : {'kind': 'INT', 'name': 'unsigned int'}
+		cable_state         : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Sub removed
+		state               : {'kind': 'TYPEDEF', 'name': 'u32'}
+vme_lm_attach
+	Sub added
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Sub type changed
+		callback            : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+__skb_complete_tx_timestamp
+	Sub added
+		opt_stats           : {'kind': 'TYPEDEF', 'name': 'bool'}
+skb_splice_bits
+	Sub removed
+		splice_cb           : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pipe_inode_info'}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'splice_pipe_desc'}}}], 'ret_type': {'kind': 'TYPEDEF', 'name': 'ssize_t'}}}
+__skb_try_recv_datagram
+	Sub added
+		destructor          : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+__skb_recv_datagram
+	Sub added
+		destructor          : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+gnet_stats_copy_rate_est
+	Sub added
+		rate_est            : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}}
+	Sub removed
+		b                   : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_basic_packed'}}}
+		r                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}}
+gen_kill_estimator
+	Sub removed
+		bstats              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_basic_packed'}}
+	Sub type changed
+		rate_est            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}}
+gen_estimator_active
+	Sub removed
+		bstats              : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_basic_packed'}}}
+	Sub type changed
+		rate_est            : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}}
+gen_new_estimator
+	Sub type changed
+		rate_est            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}}
+gen_replace_estimator
+	Sub type changed
+		rate_est            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gnet_stats_rate_est64'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_rate_estimator'}}}
+secure_tcpv6_sequence_number
+	Sub added
+		tsoff               : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': '__u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u32'}
+secure_tcp_sequence_number
+	Sub added
+		tsoff               : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': '__u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u32'}
+__skb_get_hash_symmetric
+	Sub type changed
+		skb                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}
+__napi_complete
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'bool'}
+__netdev_adjacent_dev_insert
+	Sub removed
+		ref_nr              : {'kind': 'TYPEDEF', 'name': 'u16'}
+flush_backlog
+	Sub added
+		work                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'work_struct'}}
+	Sub removed
+		arg                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+remove_xps_queue
+	Sub added
+		tci                 : {'kind': 'INT', 'name': 'int'}
+	Sub removed
+		cpu                 : {'kind': 'INT', 'name': 'int'}
+	Return type changed
+		                    : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'xps_map'}}
+		                    ->{'kind': 'TYPEDEF', 'name': 'bool'}
+dev_change_xdp_fd
+	Sub added
+		flags               : {'kind': 'TYPEDEF', 'name': 'u32'}
+napi_complete_done
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'bool'}
+ndo_dflt_fdb_dump
+	Sub type changed
+		idx                 : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+__get_raw_cpu_id
+	Sub added
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_5              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		ctx                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		a                   : {'kind': 'TYPEDEF', 'name': 'u64'}
+		x                   : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_get_route_realm
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_under_cgroup
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		map                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		idx                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_redirect
+	Sub added
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_change_type
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		pkt_type            : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_get_tunnel_opt
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		to                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_set_tunnel_opt
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		from                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+__skb_get_nlattr_nest
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		ctx                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+__skb_get_nlattr
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		ctx                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+__skb_get_pay_offset
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		ctx                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		a                   : {'kind': 'TYPEDEF', 'name': 'u64'}
+		x                   : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_csum_diff
+	Sub added
+		from                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		to                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_l4_csum_replace
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		offset              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_l3_csum_replace
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		offset              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_store_bytes
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		offset              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		from                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		len                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_event_output
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		map                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		meta                : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_get_hash_recalc
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_get_tunnel_key
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		to                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_get_cgroup_classid
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_set_tunnel_key
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		from                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_clone_redirect
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_load_bytes
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		offset              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		to                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		len                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_change_proto
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		proto               : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_vlan_pop
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_3              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_4              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r3                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+bpf_skb_vlan_push
+	Sub added
+		skb                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+		vlan_proto          : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		__ur_2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Sub removed
+		r1                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r2                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r4                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+		r5                  : {'kind': 'TYPEDEF', 'name': 'u64'}
+tfilter_notify
+	Sub added
+		unicast             : {'kind': 'TYPEDEF', 'name': 'bool'}
+genl_family_find_byname
+	Return type changed
+		                    : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+genlmsg_put
+	Sub type changed
+		family              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+genl_family_rcv_msg
+	Sub type changed
+		family              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+genlmsg_multicast_allns
+	Sub type changed
+		family              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+genl_notify
+	Sub type changed
+		family              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+ctrl_fill_info
+	Sub type changed
+		family              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+ctrl_build_family_msg
+	Sub type changed
+		family              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+genl_ctrl_event
+	Sub type changed
+		family              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+genl_unregister_family
+	Sub type changed
+		family              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'genl_family'}}}
+nf_hook_slow
+	Sub added
+		entry               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_entry'}}
+nf_log_set
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+nf_queue_nf_hook_drop
+	Sub added
+		entry               : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_entry'}}}
+	Sub removed
+		ops                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_ops'}}
+nf_queue
+	Sub added
+		entryp              : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_entry'}}}
+		verdict             : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		elem                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nf_hook_ops'}}
+		queuenum            : {'kind': 'INT', 'name': 'unsigned int'}
+ip_cmsg_recv_offset
+	Sub added
+		sk                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}
+compute_score
+	Sub added
+		exact_dif           : {'kind': 'TYPEDEF', 'name': 'bool'}
+inet_csk_bind_conflict
+	Sub added
+		reuseport_ok        : {'kind': 'TYPEDEF', 'name': 'bool'}
+tcp_clean_rtx_queue
+	Sub added
+		now                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'skb_mstamp'}}
+tcp_collapse
+	Sub added
+		root                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rb_root'}}
+__pskb_trim_head
+	Return type changed
+		                    : {'name': 'void', 'kind': 'VOID'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+tcp_v4_init_sequence
+	Sub added
+		tsoff               : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': '__u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u32'}
+tcp_v4_send_ack
+	Sub added
+		sk                  : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}
+	Sub removed
+		net                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}
+fib_table_insert
+	Sub added
+		net                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}
+fib_table_delete
+	Sub added
+		net                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}
+fib_table_flush
+	Sub added
+		net                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net'}}
+ip6_xmit
+	Sub added
+		mark                : {'kind': 'TYPEDEF', 'name': '__u32'}
+ipv6_regen_rndid
+	Sub added
+		idev                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inet6_dev'}}
+	Sub removed
+		data                : {'kind': 'INT', 'name': 'long unsigned int'}
+rt6_get_route_info
+	Sub added
+		dev                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}
+	Sub removed
+		ifindex             : {'kind': 'INT', 'name': 'int'}
+ip6_update_pmtu
+	Sub added
+		uid                 : {'kind': 'TYPEDEF', 'name': 'kuid_t'}
+rt6_add_route_info
+	Sub added
+		dev                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'net_device'}}
+	Sub removed
+		ifindex             : {'kind': 'INT', 'name': 'int'}
+ip6_redirect
+	Sub added
+		uid                 : {'kind': 'TYPEDEF', 'name': 'kuid_t'}
+ndisc_send_ns
+	Sub added
+		nonce               : {'kind': 'TYPEDEF', 'name': 'u64'}
+tcp_v6_init_sequence
+	Sub added
+		tsoff               : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+	Return type changed
+		                    : {'kind': 'TYPEDEF', 'name': '__u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u32'}
+ipv6_push_nfrag_opts
+	Sub added
+		saddr               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'in6_addr'}}
+inet6_csk_bind_conflict
+	Sub added
+		reuseport_ok        : {'kind': 'TYPEDEF', 'name': 'bool'}
+mif6_delete
+	Sub added
+		notify              : {'kind': 'INT', 'name': 'int'}
+net_ctl_header_lookup
+	Sub removed
+		namespaces          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'nsproxy'}}
+switchdev_port_fdb_dump
+	Sub type changed
+		idx                 : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'int'}}
+ncsi_alloc_request
+	Sub added
+		req_flags           : {'kind': 'INT', 'name': 'unsigned int'}
+	Sub removed
+		driven              : {'kind': 'TYPEDEF', 'name': 'bool'}

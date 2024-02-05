@@ -1,0 +1,399 @@
+Old Kind.ENUM (1153): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'l1tf_mitigations', 'x86_legacy_i8042_state', 'fixed_addresses', 'uprobe_task_state', 'apic_intr_mode_id', 'pcpu_fc', 'numa_stat_item']
+New Kind.ENUM (1178): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'l1tf_mitigations', 'x86_legacy_i8042_state', 'fixed_addresses', 'uprobe_task_state', 'apic_intr_mode_id', 'pcpu_fc', 'numa_stat_item']
+Added Kind.ENUM (32): ['netdev_ml_priv_type', 'perf_event_sample_format', 'freq_qos_req_type', 'lockdown_reason', 'meminit_context', 'map_type', 'backlight_scale', 'uv_bau_version', 'uv_bios_cmd', 'uv_memprotect']
+Removed Kind.ENUM (7): ['memmap_context', 'hmm_update_event', 'userfaultfd_state', 'pcie_data_rate', 'si_sm_result', 'nvdimm_security_state', 'evdev_clock_type']
+Common Kind.ENUM (1146): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'l1tf_mitigations', 'x86_legacy_i8042_state', 'fixed_addresses', 'uprobe_task_state', 'apic_intr_mode_id', 'pcpu_fc', 'numa_stat_item']
+Changed Kind.ENUM (33): ['node_stat_item', 'cpuhp_state', 'bpf_map_type', 'bpf_func_id', 'wb_reason', 'memcg_stat_item', 'tc_setup_type', 'flow_dissector_key_id', 'skb_ext_id', 'hrtimer_mode']
+Reasons Kind.ENUM (3): [('Sub added', 31), ('Sub removed', 2), ('Value changed', 19)]
+node_stat_item
+	Sub added
+		NR_FILE_THPS                            : 23
+		NR_FILE_PMDMAPPED                       : 24
+	Value changed
+		NR_ANON_THPS                            : 23 -> 25
+		NR_UNSTABLE_NFS                         : 24 -> 26
+		NR_VMSCAN_WRITE                         : 25 -> 27
+		NR_VMSCAN_IMMEDIATE                     : 26 -> 28
+		NR_DIRTIED                              : 27 -> 29
+		NR_WRITTEN                              : 28 -> 30
+		NR_KERNEL_MISC_RECLAIMABLE              : 29 -> 31
+		NR_VM_NODE_STAT_ITEMS                   : 30 -> 32
+cpuhp_state
+	Sub added
+		CPUHP_PADATA_DEAD                       : 35
+		CPUHP_AP_OMAP_DM_TIMER_STARTING         : 114
+	Value changed
+		CPUHP_WORKQUEUE_PREP                    : 35 -> 36
+		CPUHP_POWER_NUMA_PREPARE                : 36 -> 37
+		CPUHP_HRTIMERS_PREPARE                  : 37 -> 38
+		CPUHP_PROFILE_PREPARE                   : 38 -> 39
+		CPUHP_X2APIC_PREPARE                    : 39 -> 40
+		CPUHP_SMPCFD_PREPARE                    : 40 -> 41
+		CPUHP_RELAY_PREPARE                     : 41 -> 42
+		CPUHP_SLAB_PREPARE                      : 42 -> 43
+		CPUHP_MD_RAID5_PREPARE                  : 43 -> 44
+		CPUHP_RCUTREE_PREP                      : 44 -> 45
+		CPUHP_CPUIDLE_COUPLED_PREPARE           : 45 -> 46
+		CPUHP_POWERPC_PMAC_PREPARE              : 46 -> 47
+		CPUHP_POWERPC_MMU_CTX_PREPARE           : 47 -> 48
+		CPUHP_XEN_PREPARE                       : 48 -> 49
+		CPUHP_XEN_EVTCHN_PREPARE                : 49 -> 50
+		CPUHP_ARM_SHMOBILE_SCU_PREPARE          : 50 -> 51
+		CPUHP_SH_SH3X_PREPARE                   : 51 -> 52
+		CPUHP_NET_FLOW_PREPARE                  : 52 -> 53
+		CPUHP_TOPOLOGY_PREPARE                  : 53 -> 54
+		CPUHP_NET_IUCV_PREPARE                  : 54 -> 55
+		CPUHP_ARM_BL_PREPARE                    : 55 -> 56
+		CPUHP_TRACE_RB_PREPARE                  : 56 -> 57
+		CPUHP_MM_ZS_PREPARE                     : 57 -> 58
+		CPUHP_MM_ZSWP_MEM_PREPARE               : 58 -> 59
+		CPUHP_MM_ZSWP_POOL_PREPARE              : 59 -> 60
+		CPUHP_KVM_PPC_BOOK3S_PREPARE            : 60 -> 61
+		CPUHP_ZCOMP_PREPARE                     : 61 -> 62
+		CPUHP_TIMERS_PREPARE                    : 62 -> 63
+		CPUHP_MIPS_SOC_PREPARE                  : 63 -> 64
+		CPUHP_BP_PREPARE_DYN                    : 64 -> 65
+		CPUHP_BP_PREPARE_DYN_END                : 84 -> 85
+		CPUHP_BRINGUP_CPU                       : 85 -> 86
+		CPUHP_AP_IDLE_DEAD                      : 86 -> 87
+		CPUHP_AP_OFFLINE                        : 87 -> 88
+		CPUHP_AP_SCHED_STARTING                 : 88 -> 89
+		CPUHP_AP_RCUTREE_DYING                  : 89 -> 90
+		CPUHP_AP_IRQ_GIC_STARTING               : 90 -> 91
+		CPUHP_AP_IRQ_HIP04_STARTING             : 91 -> 92
+		CPUHP_AP_IRQ_ARMADA_XP_STARTING         : 92 -> 93
+		CPUHP_AP_IRQ_BCM2836_STARTING           : 93 -> 94
+		CPUHP_AP_IRQ_MIPS_GIC_STARTING          : 94 -> 95
+		CPUHP_AP_ARM_MVEBU_COHERENCY            : 95 -> 96
+		CPUHP_AP_MICROCODE_LOADER               : 96 -> 97
+		CPUHP_AP_PERF_X86_AMD_UNCORE_STARTING   : 97 -> 98
+		CPUHP_AP_PERF_X86_STARTING              : 98 -> 99
+		CPUHP_AP_PERF_X86_AMD_IBS_STARTING      : 99 -> 100
+		CPUHP_AP_PERF_X86_CQM_STARTING          : 100 -> 101
+		CPUHP_AP_PERF_X86_CSTATE_STARTING       : 101 -> 102
+		CPUHP_AP_PERF_XTENSA_STARTING           : 102 -> 103
+		CPUHP_AP_MIPS_OP_LOONGSON3_STARTING     : 103 -> 104
+		CPUHP_AP_ARM_SDEI_STARTING              : 104 -> 105
+		CPUHP_AP_ARM_VFP_STARTING               : 105 -> 106
+		CPUHP_AP_ARM64_DEBUG_MONITORS_STARTING  : 106 -> 107
+		CPUHP_AP_PERF_ARM_HW_BREAKPOINT_STARTING: 107 -> 108
+		CPUHP_AP_PERF_ARM_ACPI_STARTING         : 108 -> 109
+		CPUHP_AP_PERF_ARM_STARTING              : 109 -> 110
+		CPUHP_AP_ARM_L2X0_STARTING              : 110 -> 111
+		CPUHP_AP_EXYNOS4_MCT_TIMER_STARTING     : 111 -> 112
+		CPUHP_AP_ARM_ARCH_TIMER_STARTING        : 112 -> 113
+		CPUHP_AP_ARM_GLOBAL_TIMER_STARTING      : 113 -> 115
+		CPUHP_AP_JCORE_TIMER_STARTING           : 114 -> 116
+		CPUHP_AP_ARM_TWD_STARTING               : 115 -> 117
+		CPUHP_AP_QCOM_TIMER_STARTING            : 116 -> 118
+		CPUHP_AP_TEGRA_TIMER_STARTING           : 117 -> 119
+		CPUHP_AP_ARMADA_TIMER_STARTING          : 118 -> 120
+		CPUHP_AP_MARCO_TIMER_STARTING           : 119 -> 121
+		CPUHP_AP_MIPS_GIC_TIMER_STARTING        : 120 -> 122
+		CPUHP_AP_ARC_TIMER_STARTING             : 121 -> 123
+		CPUHP_AP_RISCV_TIMER_STARTING           : 122 -> 124
+		CPUHP_AP_CSKY_TIMER_STARTING            : 123 -> 125
+		CPUHP_AP_KVM_STARTING                   : 124 -> 126
+		CPUHP_AP_KVM_ARM_VGIC_INIT_STARTING     : 125 -> 127
+		CPUHP_AP_KVM_ARM_VGIC_STARTING          : 126 -> 128
+		CPUHP_AP_KVM_ARM_TIMER_STARTING         : 127 -> 129
+		CPUHP_AP_DUMMY_TIMER_STARTING           : 128 -> 130
+		CPUHP_AP_ARM_XEN_STARTING               : 129 -> 131
+		CPUHP_AP_ARM_CORESIGHT_STARTING         : 130 -> 132
+		CPUHP_AP_ARM64_ISNDEP_STARTING          : 131 -> 133
+		CPUHP_AP_SMPCFD_DYING                   : 132 -> 134
+		CPUHP_AP_X86_TBOOT_DYING                : 133 -> 135
+		CPUHP_AP_ARM_CACHE_B15_RAC_DYING        : 134 -> 136
+		CPUHP_AP_ONLINE                         : 135 -> 137
+		CPUHP_TEARDOWN_CPU                      : 136 -> 138
+		CPUHP_AP_ONLINE_IDLE                    : 137 -> 139
+		CPUHP_AP_SMPBOOT_THREADS                : 138 -> 140
+		CPUHP_AP_X86_VDSO_VMA_ONLINE            : 139 -> 141
+		CPUHP_AP_IRQ_AFFINITY_ONLINE            : 140 -> 142
+		CPUHP_AP_ARM_MVEBU_SYNC_CLOCKS          : 141 -> 143
+		CPUHP_AP_X86_INTEL_EPB_ONLINE           : 142 -> 144
+		CPUHP_AP_PERF_ONLINE                    : 143 -> 145
+		CPUHP_AP_PERF_X86_ONLINE                : 144 -> 146
+		CPUHP_AP_PERF_X86_UNCORE_ONLINE         : 145 -> 147
+		CPUHP_AP_PERF_X86_AMD_UNCORE_ONLINE     : 146 -> 148
+		CPUHP_AP_PERF_X86_AMD_POWER_ONLINE      : 147 -> 149
+		CPUHP_AP_PERF_X86_RAPL_ONLINE           : 148 -> 150
+		CPUHP_AP_PERF_X86_CQM_ONLINE            : 149 -> 151
+		CPUHP_AP_PERF_X86_CSTATE_ONLINE         : 150 -> 152
+		CPUHP_AP_PERF_S390_CF_ONLINE            : 151 -> 153
+		CPUHP_AP_PERF_S390_SF_ONLINE            : 152 -> 154
+		CPUHP_AP_PERF_ARM_CCI_ONLINE            : 153 -> 155
+		CPUHP_AP_PERF_ARM_CCN_ONLINE            : 154 -> 156
+		CPUHP_AP_PERF_ARM_HISI_DDRC_ONLINE      : 155 -> 157
+		CPUHP_AP_PERF_ARM_HISI_HHA_ONLINE       : 156 -> 158
+		CPUHP_AP_PERF_ARM_HISI_L3_ONLINE        : 157 -> 159
+		CPUHP_AP_PERF_ARM_L2X0_ONLINE           : 158 -> 160
+		CPUHP_AP_PERF_ARM_QCOM_L2_ONLINE        : 159 -> 161
+		CPUHP_AP_PERF_ARM_QCOM_L3_ONLINE        : 160 -> 162
+		CPUHP_AP_PERF_ARM_APM_XGENE_ONLINE      : 161 -> 163
+		CPUHP_AP_PERF_ARM_CAVIUM_TX2_UNCORE_ONLINE: 162 -> 164
+		CPUHP_AP_PERF_POWERPC_NEST_IMC_ONLINE   : 163 -> 165
+		CPUHP_AP_PERF_POWERPC_CORE_IMC_ONLINE   : 164 -> 166
+		CPUHP_AP_PERF_POWERPC_THREAD_IMC_ONLINE : 165 -> 167
+		CPUHP_AP_PERF_POWERPC_TRACE_IMC_ONLINE  : 166 -> 168
+		CPUHP_AP_WATCHDOG_ONLINE                : 167 -> 169
+		CPUHP_AP_WORKQUEUE_ONLINE               : 168 -> 170
+		CPUHP_AP_RCUTREE_ONLINE                 : 169 -> 171
+		CPUHP_AP_BASE_CACHEINFO_ONLINE          : 170 -> 172
+		CPUHP_AP_ONLINE_DYN                     : 171 -> 173
+		CPUHP_AP_ONLINE_DYN_END                 : 201 -> 203
+		CPUHP_AP_X86_HPET_ONLINE                : 202 -> 204
+		CPUHP_AP_X86_KVM_CLK_ONLINE             : 203 -> 205
+		CPUHP_AP_ACTIVE                         : 204 -> 206
+		CPUHP_ONLINE                            : 205 -> 207
+bpf_map_type
+	Sub added
+		BPF_MAP_TYPE_DEVMAP_HASH                : 25
+bpf_func_id
+	Sub added
+		BPF_FUNC_tcp_gen_syncookie              : 110
+	Value changed
+		__BPF_FUNC_MAX_ID                       : 110 -> 111
+wb_reason
+	Sub added
+		WB_REASON_FOREIGN_FLUSH                 : 8
+	Value changed
+		WB_REASON_MAX                           : 8 -> 9
+memcg_stat_item
+	Value changed
+		MEMCG_CACHE                             : 30 -> 32
+		MEMCG_RSS                               : 31 -> 33
+		MEMCG_RSS_HUGE                          : 32 -> 34
+		MEMCG_SWAP                              : 33 -> 35
+		MEMCG_SOCK                              : 34 -> 36
+		MEMCG_KERNEL_STACK_KB                   : 35 -> 37
+		MEMCG_NR_STAT                           : 36 -> 38
+tc_setup_type
+	Sub added
+		TC_SETUP_QDISC_TAPRIO                   : 13
+flow_dissector_key_id
+	Sub added
+		FLOW_DISSECTOR_KEY_PORTS_RANGE          : 5
+	Value changed
+		FLOW_DISSECTOR_KEY_ICMP                 : 5 -> 6
+		FLOW_DISSECTOR_KEY_ETH_ADDRS            : 6 -> 7
+		FLOW_DISSECTOR_KEY_TIPC                 : 7 -> 8
+		FLOW_DISSECTOR_KEY_ARP                  : 8 -> 9
+		FLOW_DISSECTOR_KEY_VLAN                 : 9 -> 10
+		FLOW_DISSECTOR_KEY_FLOW_LABEL           : 10 -> 11
+		FLOW_DISSECTOR_KEY_GRE_KEYID            : 11 -> 12
+		FLOW_DISSECTOR_KEY_MPLS_ENTROPY         : 12 -> 13
+		FLOW_DISSECTOR_KEY_ENC_KEYID            : 13 -> 14
+		FLOW_DISSECTOR_KEY_ENC_IPV4_ADDRS       : 14 -> 15
+		FLOW_DISSECTOR_KEY_ENC_IPV6_ADDRS       : 15 -> 16
+		FLOW_DISSECTOR_KEY_ENC_CONTROL          : 16 -> 17
+		FLOW_DISSECTOR_KEY_ENC_PORTS            : 17 -> 18
+		FLOW_DISSECTOR_KEY_MPLS                 : 18 -> 19
+		FLOW_DISSECTOR_KEY_TCP                  : 19 -> 20
+		FLOW_DISSECTOR_KEY_IP                   : 20 -> 21
+		FLOW_DISSECTOR_KEY_CVLAN                : 21 -> 22
+		FLOW_DISSECTOR_KEY_ENC_IP               : 22 -> 23
+		FLOW_DISSECTOR_KEY_ENC_OPTS             : 23 -> 24
+		FLOW_DISSECTOR_KEY_META                 : 24 -> 25
+		FLOW_DISSECTOR_KEY_CT                   : 25 -> 26
+		FLOW_DISSECTOR_KEY_MAX                  : 26 -> 27
+skb_ext_id
+	Sub added
+		TC_SKB_EXT                              : 2
+	Value changed
+		SKB_EXT_NUM                             : 2 -> 3
+hrtimer_mode
+	Sub added
+		HRTIMER_MODE_HARD                       : 8
+		HRTIMER_MODE_ABS_HARD                   : 8
+		HRTIMER_MODE_REL_HARD                   : 9
+		HRTIMER_MODE_ABS_PINNED_HARD            : 10
+		HRTIMER_MODE_REL_PINNED_HARD            : 11
+dev_pm_qos_req_type
+	Sub removed
+		DEV_PM_QOS_MIN_FREQUENCY                : 3
+		DEV_PM_QOS_MAX_FREQUENCY                : 4
+	Value changed
+		DEV_PM_QOS_FLAGS                        : 5 -> 3
+smca_bank_types
+	Sub added
+		SMCA_LS_V2                              : 1
+	Value changed
+		SMCA_IF                                 : 1 -> 2
+		SMCA_L2_CACHE                           : 2 -> 3
+		SMCA_DE                                 : 3 -> 4
+		SMCA_RESERVED                           : 4 -> 5
+		SMCA_EX                                 : 5 -> 6
+		SMCA_FP                                 : 6 -> 7
+		SMCA_L3_CACHE                           : 7 -> 8
+		SMCA_CS                                 : 8 -> 9
+		SMCA_CS_V2                              : 9 -> 10
+		SMCA_PIE                                : 10 -> 11
+		SMCA_UMC                                : 11 -> 12
+		SMCA_PB                                 : 12 -> 13
+		SMCA_PSP                                : 13 -> 14
+		SMCA_PSP_V2                             : 14 -> 15
+		SMCA_SMU                                : 15 -> 16
+		SMCA_SMU_V2                             : 16 -> 17
+		SMCA_MP5                                : 17 -> 18
+		SMCA_NBIO                               : 18 -> 19
+		SMCA_PCIE                               : 19 -> 20
+		N_SMCA_BANK_TYPES                       : 20 -> 21
+req_opf
+	Sub added
+		REQ_OP_ZONE_RESET_ALL                   : 8
+req_flag_bits
+	Sub added
+		__REQ_NOWAIT_INLINE                     : 22
+	Value changed
+		__REQ_CGROUP_PUNT                       : 22 -> 23
+		__REQ_NOUNMAP                           : 23 -> 24
+		__REQ_HIPRI                             : 24 -> 25
+		__REQ_DRV                               : 25 -> 26
+		__REQ_SWAP                              : 26 -> 27
+		__REQ_NR_BITS                           : 27 -> 28
+fetch_op
+	Sub added
+		FETCH_OP_DATA                           : 9
+	Value changed
+		FETCH_OP_DEREF                          : 9 -> 10
+		FETCH_OP_UDEREF                         : 10 -> 11
+		FETCH_OP_ST_RAW                         : 11 -> 12
+		FETCH_OP_ST_MEM                         : 12 -> 13
+		FETCH_OP_ST_UMEM                        : 13 -> 14
+		FETCH_OP_ST_STRING                      : 14 -> 15
+		FETCH_OP_ST_USTRING                     : 15 -> 16
+		FETCH_OP_MOD_BF                         : 16 -> 17
+		FETCH_OP_LP_ARRAY                       : 17 -> 18
+		FETCH_OP_END                            : 18 -> 19
+		FETCH_NOP_SYMBOL                        : 19 -> 20
+bpf_cmd
+	Sub added
+		BPF_BTF_GET_NEXT_ID                     : 23
+ttu_flags
+	Sub added
+		TTU_SYNC                                : 512
+scan_result
+	Sub added
+		SCAN_PAGE_HAS_PRIVATE                   : 24
+vfs_get_super_keying
+	Sub added
+		vfs_get_single_reconf_super             : 1
+	Value changed
+		vfs_get_keyed_super                     : 1 -> 2
+		vfs_get_independent_super               : 2 -> 3
+fuse_opcode
+	Sub added
+		FUSE_SETUPMAPPING                       : 48
+		FUSE_REMOVEMAPPING                      : 49
+		CUSE_INIT_BSWAP_RESERVED                : 1048576
+		FUSE_INIT_BSWAP_RESERVED                : 436207616
+fuse_req_flag
+	Sub added
+		FR_ASYNC                                : 11
+tpm_pcrs
+	Sub added
+		TPM_PCR10                               : 10
+rq_qos_id
+	Sub added
+		RQ_QOS_LATENCY                          : 1
+		RQ_QOS_COST                             : 2
+	Sub removed
+		RQ_QOS_CGROUP                           : 1
+pci_board_num_t
+	Sub added
+		pbn_fintek_F81504A                      : 99
+		pbn_fintek_F81508A                      : 100
+		pbn_fintek_F81512A                      : 101
+		pbn_moxa8250_2p                         : 113
+		pbn_moxa8250_4p                         : 114
+		pbn_moxa8250_8p                         : 115
+	Value changed
+		pbn_wch382_2                            : 99 -> 102
+		pbn_wch384_4                            : 100 -> 103
+		pbn_pericom_PI7C9X7951                  : 101 -> 104
+		pbn_pericom_PI7C9X7952                  : 102 -> 105
+		pbn_pericom_PI7C9X7954                  : 103 -> 106
+		pbn_pericom_PI7C9X7958                  : 104 -> 107
+		pbn_sunix_pci_1s                        : 105 -> 108
+		pbn_sunix_pci_2s                        : 106 -> 109
+		pbn_sunix_pci_4s                        : 107 -> 110
+		pbn_sunix_pci_8s                        : 108 -> 111
+		pbn_sunix_pci_16s                       : 109 -> 112
+ata_completion_errors
+	Sub added
+		AC_ERR_OK                               : 0
+dsa_tag_protocol
+	Sub added
+		DSA_TAG_PROTO_KSZ8795                   : 14
+qdisc_state_t
+	Sub added
+		__QDISC_STATE_MISSED                    : 2
+phy_tunable_id
+	Sub added
+		ETHTOOL_PHY_EDPD                        : 3
+	Value changed
+		__ETHTOOL_PHY_TUNABLE_COUNT             : 3 -> 4
+flow_action_id
+	Sub added
+		FLOW_ACTION_REDIRECT_INGRESS            : 6
+		FLOW_ACTION_MIRRED_INGRESS              : 7
+		FLOW_ACTION_PTYPE                       : 17
+		FLOW_ACTION_MPLS_PUSH                   : 23
+		FLOW_ACTION_MPLS_POP                    : 24
+		FLOW_ACTION_MPLS_MANGLE                 : 25
+		NUM_FLOW_ACTIONS                        : 26
+	Value changed
+		FLOW_ACTION_VLAN_PUSH                   : 6 -> 8
+		FLOW_ACTION_VLAN_POP                    : 7 -> 9
+		FLOW_ACTION_VLAN_MANGLE                 : 8 -> 10
+		FLOW_ACTION_TUNNEL_ENCAP                : 9 -> 11
+		FLOW_ACTION_TUNNEL_DECAP                : 10 -> 12
+		FLOW_ACTION_MANGLE                      : 11 -> 13
+		FLOW_ACTION_ADD                         : 12 -> 14
+		FLOW_ACTION_CSUM                        : 13 -> 15
+		FLOW_ACTION_MARK                        : 14 -> 16
+		FLOW_ACTION_WAKE                        : 15 -> 18
+		FLOW_ACTION_QUEUE                       : 16 -> 19
+		FLOW_ACTION_SAMPLE                      : 17 -> 20
+		FLOW_ACTION_POLICE                      : 18 -> 21
+		FLOW_ACTION_CT                          : 19 -> 22
+devlink_command
+	Sub added
+		DEVLINK_CMD_TRAP_GET                    : 61
+		DEVLINK_CMD_TRAP_SET                    : 62
+		DEVLINK_CMD_TRAP_NEW                    : 63
+		DEVLINK_CMD_TRAP_DEL                    : 64
+		DEVLINK_CMD_TRAP_GROUP_GET              : 65
+		DEVLINK_CMD_TRAP_GROUP_SET              : 66
+		DEVLINK_CMD_TRAP_GROUP_NEW              : 67
+		DEVLINK_CMD_TRAP_GROUP_DEL              : 68
+	Value changed
+		__DEVLINK_CMD_MAX                       : 61 -> 69
+		DEVLINK_CMD_MAX                         : 60 -> 68
+devlink_attr
+	Sub added
+		DEVLINK_ATTR_STATS                      : 129
+		DEVLINK_ATTR_TRAP_NAME                  : 130
+		DEVLINK_ATTR_TRAP_ACTION                : 131
+		DEVLINK_ATTR_TRAP_TYPE                  : 132
+		DEVLINK_ATTR_TRAP_GENERIC               : 133
+		DEVLINK_ATTR_TRAP_METADATA              : 134
+		DEVLINK_ATTR_TRAP_GROUP_NAME            : 135
+		DEVLINK_ATTR_RELOAD_FAILED              : 136
+	Value changed
+		DEVLINK_ATTR_HEALTH_REPORTER_DUMP_TS_NS : 129 -> 137
+		__DEVLINK_ATTR_MAX                      : 130 -> 138
+		DEVLINK_ATTR_MAX                        : 129 -> 137
+devlink_param_generic_id
+	Sub added
+		DEVLINK_PARAM_GENERIC_ID_RESET_DEV_ON_DRV_PROBE: 8
+		DEVLINK_PARAM_GENERIC_ID_ENABLE_ROCE    : 9
+	Value changed
+		__DEVLINK_PARAM_GENERIC_ID_MAX          : 8 -> 10
+		DEVLINK_PARAM_GENERIC_ID_MAX            : 7 -> 9
+nl80211_band
+	Sub added
+		NL80211_BAND_6GHZ                       : 3
+	Value changed
+		NUM_NL80211_BANDS                       : 3 -> 4
