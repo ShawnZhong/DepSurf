@@ -3,42 +3,21 @@
 Install 
 
 ```sh
-sudo apt install cmake clang pkg-config libelf-dev
+sudo apt install make cmake clang-12 llvm-12 pkg-config libelf-dev binutils-dev libcap-dev g++
 ```
 
-```sh
-sudo apt install -y make cmake clang llvm libelf-dev linux-tools-$(uname -r)
+Set clang-12 and clang++-12  to be the default clang
 ```
+sudo update-alternatives --install /usr/bin/clang clang /usr/bin/clang-12 100
+sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-12 100
+```
+
 
 Install `bpftrace` on Ubuntu:
 
 ```sh
 sudo apt install bpftrace
 ```
-
-
-<details>
-<summary>Install `bpftrace-dbgsym` on Ubuntu:</summary>
-
-Add debug symbol packages:
-
-https://wiki.ubuntu.com/Debug%20Symbol%20Packages
-
-```sh
-echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe multiverse
-deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse
-deb http://ddebs.ubuntu.com $(lsb_release -cs)-proposed main restricted universe multiverse" | \
-sudo tee -a /etc/apt/sources.list.d/ddebs.list
-
-sudo apt install ubuntu-dbgsym-keyring
-
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F2EDC64DC5AEE1F6B9C621F0C8CAB6595FDFF622
-
-sudo apt-get update
-
-sudo apt install bpftrace-dbgsym
-```
-</details>
 
 # Hello World for `bpftrace`: 
 

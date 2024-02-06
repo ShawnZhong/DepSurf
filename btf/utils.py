@@ -1,30 +1,23 @@
 from enum import Enum
 
+class TermColor:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 def system(cmd):
     import subprocess
 
-    print(f"Running: `{cmd}`")
-    subprocess.run(cmd, shell=True, check=True)
+    print(f'Running command: "{TermColor.OKGREEN}{cmd}{TermColor.ENDC}"')
+    subprocess.run(cmd, shell=True, check=True, executable="/bin/bash")
 
 
-class Kind(str, Enum):
-    INT = "INT"
-    PTR = "PTR"
-    ARRAY = "ARRAY"
-    STRUCT = "STRUCT"
-    UNION = "UNION"
-    ENUM = "ENUM"
-    FWD = "FWD"
-    TYPEDEF = "TYPEDEF"
-    VOLATILE = "VOLATILE"
-    CONST = "CONST"
-    RESTRICT = "RESTRICT"
-    FUNC = "FUNC"
-    FUNC_PROTO = "FUNC_PROTO"
-    VAR = "VAR"
-    DATASEC = "DATASEC"
-    FLOAT = "FLOAT"
-    DECL_TAG = "DECL_TAG"
-    TYPE_TAG = "TYPE_TAG"
-    ENUM64 = "ENUM64"
+
+
+

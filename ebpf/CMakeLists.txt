@@ -65,7 +65,7 @@ add_dependencies(ebpf_skel libbpf-build bpftool-build)
 
 # Add BPF skeleton to target
 add_executable(ebpf ebpf.cpp)
-target_link_libraries(ebpf ebpf_skel)
+target_link_libraries(ebpf ebpf_skel pthread)
 
 # For highlighting in IDE
 add_library(ebpf_bpf OBJECT ${BPF_C_FILE})
