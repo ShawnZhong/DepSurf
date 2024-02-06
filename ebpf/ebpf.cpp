@@ -34,15 +34,8 @@ class BPF {
     if (ebpf_bpf__load(skel))
       throw std::runtime_error("Failed to load BPF skeleton");
 
-    const char *sec_name = bpf_program__section_name(skel->progs.prog);
-    if (std::string_view(sec_name) == "xdp") {
-      int ifindex = if_nametoindex("eth0");
-      if (bpf_program__attach_xdp(skel->progs.prog, ifindex) == nullptr)
-        throw std::runtime_error("Failed to attach XDP program");
-    } else {
-      if (ebpf_bpf__attach(skel))
-        throw std::runtime_error("Failed to attach BPF skeleton");
-    }
+    if (ebpf_bpf__attach(skel))
+      throw std::runtime_error("Failed to attach BPF skeleton");
   }
 
   ~BPF() { ebpf_bpf__destroy(skel); }
@@ -63,7 +56,14 @@ void print_output() {
     ssize_t n = read(fd, buf, sizeof(buf) - 1);
     if (n <= 0) break;
     buf[n] = '\0';
-    printf("%s", buf);
+    char* curr = buf;
+    char* next = strchr(curr, '\n');
+    while (next != NULL) {
+      *next = '\0';
+      printf("\033[1;32m[TRACE]\033[0m %s\n", curr);
+      curr = next + 1;
+      next = strchr(curr, '\n');
+    }
   }
 }
 
@@ -72,10 +72,18 @@ int main() {
 
   BPF bpf;
 
-  std::thread t(print_output);
+  std::thread t1(print_output);
+  t1.detach();
 
-  for (int i = 0;; i++) {
-    uprobed_sub(i * i, i);
-    sleep(1);
-  }
+  std::thread t2([]() {
+    system("sh");
+  });
+  t2.join();
+
+
+
+  // for (int i = 0;; i++) {
+  //   uprobed_sub(i * i, i);
+  //   sleep(1);
+  // }
 }
