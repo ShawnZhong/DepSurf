@@ -1,0 +1,22 @@
+Added FUNC (6): ['security_ib_pkey_access', 'security_ib_endport_manage_subnet', 'security_ib_alloc_security', 'security_ib_free_security', 'security_task_alloc', 'security_task_prlimit']
+Removed FUNC (1): ['security_task_wait']
+Changed FUNC (3): ['security_sb_clone_mnt_opts', 'security_getprocattr', 'security_setprocattr']
+Reasons FUNC (5): [('Param added', 3), ('Param removed', 1), ('Param type changed', 1), ('Param reordered', 1), ('Return type changed', 0)]
+security_sb_clone_mnt_opts
+	Param added
+		kern_flags          : {'kind': 'INT', 'name': 'long unsigned int'}
+		set_kern_flags      : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+security_getprocattr
+	Param added
+		lsm                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+	Param reordered
+		                     ['p', 'name', 'value']
+		                     ['p', 'lsm', 'name', 'value']
+security_setprocattr
+	Param added
+		lsm                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+	Param removed
+		p                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}
+	Param type changed
+		name                : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}

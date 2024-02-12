@@ -1,35 +1,59 @@
-                            5.0->5.3
-struct common                   7762
-       added                     432
-       removed                    92
-       changed                   655
-       Sub added                 352
-       Sub removed               183
-       Sub reordered              24
-       Sub type changed          112
-       Layout changed            168
-func   common                  44821
-       added                    2089
-       removed                   781
-       changed                   478
-       Sub added                 250
-       Sub removed               193
-       Sub reordered               0
-       Sub type changed          107
-       Return type changed        71
-enum   common                   1057
-       added                      96
-       removed                    18
-       changed                    72
-       Sub added                  65
-       Sub removed                14
-       Value changed              36
-union  common                    106
-       added                       7
-       removed                     2
-       changed                     5
-       Sub added                   4
-       Sub removed                 1
-       Sub reordered               0
-       Sub type changed            2
-       Layout changed              0
+                                   5.0->5.3
+trace_event common                   444   
+            added                     24   
+            removed                    1   
+            changed                    8   
+            - Field added              5   
+            - Field removed            5   
+            - Field type changed       1   
+            - Layout changed           7   
+raw_tp      common                   452   
+            added                     24   
+            removed                    1   
+            changed                    8   
+            - Param added              4   
+            - Param removed            4   
+            - Param type changed       2   
+            - Param reordered          2   
+            - Return type changed      0   
+lsm         common                   182   
+            added                      4   
+            removed                    0   
+            changed                    1   
+            - Param added              0   
+            - Param removed            1   
+            - Param type changed       0   
+            - Param reordered          0   
+            - Return type changed      0   
+func        common                 44821   
+            added                   2089   
+            removed                  781   
+            changed                  478   
+            - Param added            250   
+            - Param removed          193   
+            - Param type changed     107   
+            - Param reordered         92   
+            - Return type changed     71   
+struct      common                  7762   
+            added                    432   
+            removed                   92   
+            changed                  655   
+            - Field added            352   
+            - Field removed          183   
+            - Field type changed     112   
+            - Layout changed         612   
+union       common                   106   
+            added                      7   
+            removed                    2   
+            changed                    5   
+            - Field added              4   
+            - Field removed            1   
+            - Field type changed       2   
+            - Layout changed           4   
+enum        common                  1057   
+            added                     96   
+            removed                   18   
+            changed                   72   
+            - Elem added              65   
+            - Elem removed            14   
+            - Value changed           36   

@@ -1,0 +1,51 @@
+Added FUNC (21): ['perf_trace_xen_mmu_flush_tlb', 'perf_trace_x86_fpu', 'perf_trace_cpuhp_enter', 'perf_trace_cpuhp_exit', 'perf_trace_buf_alloc', 'perf_trace_buf_update', 'perf_trace_run_bpf_submit', 'perf_trace_mm_compaction_kcompactd_sleep', 'perf_trace_kcompactd_wake_template', 'perf_trace_mm_khugepaged_scan_pmd', 'perf_trace_mm_collapse_huge_page', 'perf_trace_mm_collapse_huge_page_isolate', 'perf_trace_mm_collapse_huge_page_swapin', 'perf_trace_test_pages_isolated', 'perf_trace_writeback_inode_template', 'perf_trace_locks_get_lock_context', 'perf_trace_filelock_lock', 'perf_trace_msr_trace_class', 'perf_trace_mmc_request_start', 'perf_trace_mmc_request_done', 'perf_trace_fib6_table_lookup']
+Removed FUNC (3): ['perf_trace_buf_prepare', 'perf_trace_writeback_lazytime_template', 'perf_trace_ext4_nfs_commit_metadata']
+Changed FUNC (9): ['perf_trace_tick_stop', 'perf_trace_mm_vmscan_kswapd_wake', 'perf_trace_mm_vmscan_direct_reclaim_begin_template', 'perf_trace_mm_vmscan_writepage', 'perf_trace_mm_vmscan_lru_shrink_inactive', 'perf_trace_mm_vmscan_lru_isolate_template', 'perf_trace_mm_compaction_try_to_compact_pages', 'perf_trace_writeback_queue_io', 'perf_trace_napi_poll']
+Reasons FUNC (5): [('Param added', 7), ('Param removed', 5), ('Param type changed', 0), ('Param reordered', 4), ('Return type changed', 0)]
+perf_trace_tick_stop
+	Param added
+		dependency          : {'kind': 'INT', 'name': 'int'}
+	Param removed
+		error_msg           : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+perf_trace_mm_vmscan_kswapd_wake
+	Param added
+		zid                 : {'kind': 'INT', 'name': 'int'}
+	Param reordered
+		                     ['__data', 'nid', 'order']
+		                     ['__data', 'nid', 'zid', 'order']
+perf_trace_mm_vmscan_direct_reclaim_begin_template
+	Param added
+		classzone_idx       : {'kind': 'INT', 'name': 'int'}
+perf_trace_mm_vmscan_writepage
+	Param removed
+		reclaim_flags       : {'kind': 'INT', 'name': 'int'}
+perf_trace_mm_vmscan_lru_shrink_inactive
+	Param added
+		file                : {'kind': 'INT', 'name': 'int'}
+	Param removed
+		zid                 : {'kind': 'INT', 'name': 'int'}
+		reclaim_flags       : {'kind': 'INT', 'name': 'int'}
+	Param reordered
+		                     ['__data', 'nid', 'zid', 'nr_scanned', 'nr_reclaimed', 'priority', 'reclaim_flags']
+		                     ['__data', 'nid', 'nr_scanned', 'nr_reclaimed', 'priority', 'file']
+perf_trace_mm_vmscan_lru_isolate_template
+	Param added
+		classzone_idx       : {'kind': 'INT', 'name': 'int'}
+	Param reordered
+		                     ['__data', 'order', 'nr_requested', 'nr_scanned', 'nr_taken', 'isolate_mode', 'file']
+		                     ['__data', 'classzone_idx', 'order', 'nr_requested', 'nr_scanned', 'nr_taken', 'isolate_mode', 'file']
+perf_trace_mm_compaction_try_to_compact_pages
+	Param added
+		prio                : {'kind': 'INT', 'name': 'int'}
+	Param removed
+		mode                : {'kind': 'ENUM', 'name': 'migrate_mode', 'size': 4}
+perf_trace_writeback_queue_io
+	Param removed
+		dirtied_before      : {'kind': 'INT', 'name': 'long unsigned int'}
+	Param reordered
+		                     ['__data', 'wb', 'work', 'dirtied_before', 'moved']
+		                     ['__data', 'wb', 'work', 'moved']
+perf_trace_napi_poll
+	Param added
+		work                : {'kind': 'INT', 'name': 'int'}
+		budget              : {'kind': 'INT', 'name': 'int'}

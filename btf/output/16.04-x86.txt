@@ -1,35 +1,59 @@
-                            4.4->4.8  4.8->4.10  4.10->4.13  4.13->4.15  4.4->4.15
-struct common                   6072       6432        6582        6881       5958
-       added                     410        228         384         374       1297
-       removed                   138         50          78          85        252
-       changed                   828        640         852         721       1391
-       Sub added                 404        247         381         339        780
-       Sub removed               286        113         199         164        459
-       Sub reordered              35          9          22          13         50
-       Sub type changed          165        112         218         145        428
-       Layout changed            214        279         253         234        271
-func   common                  35475      37538       38096       40100      34361
-       added                    2648       1507        2737        2573       8312
-       removed                  1372        585         949         733       2486
-       changed                   802        386         840         769       2009
-       Sub added                 395        224         518         472       1176
-       Sub removed               310        181         346         339        863
-       Sub reordered               0          0           5           1          3
-       Sub type changed          213        105         167         281        576
-       Return type changed       121         51         116          77        281
-enum   common                    740        783         819         879        743
-       added                      55         49          69          84        220
-       removed                    47         12          13           9         44
-       changed                    83         42          69          75        147
-       Sub added                  69         40          66          64        138
-       Sub removed                21         10          10          18         31
-       Value changed              42         24          44          39         79
-union  common                     80         82          88          92         79
-       added                       3          7           4           4         17
-       removed                     1          1           1           0          2
-       changed                     2          4           9           5         11
-       Sub added                   2          3           6           2          7
-       Sub removed                 1          2           2           2          3
-       Sub reordered               0          0           0           0          0
-       Sub type changed            1          0           1           1          1
-       Layout changed              0          0           2           2          2
+                                   4.4->4.8  4.8->4.10  4.10->4.13  4.13->4.15  Total
+trace_event common                   338       355        364         397         324
+            added                     19        16         44          32         105
+            removed                    2         2          7          11          16
+            changed                   16         4         10           5          27
+            - Field added             15         2          3           4          19
+            - Field removed           12         1          5           3          18
+            - Field type changed       0         1          3           0           3
+            - Layout changed          16         3          8           5          24
+raw_tp      common                   342       361        370         404         328
+            added                     21        16         44          32         108
+            removed                    3         2          7          10          17
+            changed                    9         2          6           3          15
+            - Param added              7         1          4           2          10
+            - Param removed            5         0          2           2           7
+            - Param type changed       0         1          2           0           3
+            - Param reordered          4         0          2           1           3
+            - Return type changed      0         0          0           0           0
+lsm         common                   165       168        170         174         162
+            added                      3         3          6           3          15
+            removed                    3         0          1           2           6
+            changed                   16         0          3           1          20
+            - Param added              0         0          3           1           4
+            - Param removed            0         0          1           0           1
+            - Param type changed      16         0          1           0          17
+            - Param reordered          0         0          1           0           1
+            - Return type changed      0         0          0           0           0
+func        common                 35475     37538      38096       40100       34361
+            added                   2648      1507       2737        2573        8312
+            removed                 1372       585        949         733        2486
+            changed                  802       386        840         769        2009
+            - Param added            395       224        518         472        1176
+            - Param removed          310       181        346         339         863
+            - Param type changed     213       105        167         281         576
+            - Param reordered        179        43        186         122         378
+            - Return type changed    121        51        116          77         281
+struct      common                  6072      6432       6582        6881        5958
+            added                    410       228        384         374        1297
+            removed                  138        50         78          85         252
+            changed                  828       640        852         721        1391
+            - Field added            404       247        381         339         780
+            - Field removed          286       113        199         164         459
+            - Field type changed     165       112        218         145         428
+            - Layout changed         775       592        757         668        1263
+union       common                    80        82         88          92          79
+            added                      3         7          4           4          17
+            removed                    1         1          1           0           2
+            changed                    2         4          9           5          11
+            - Field added              2         3          6           2           7
+            - Field removed            1         2          2           2           3
+            - Field type changed       1         0          1           1           1
+            - Layout changed           2         4          9           5          11
+enum        common                   740       783        819         879         743
+            added                     55        49         69          84         220
+            removed                   47        12         13           9          44
+            changed                   83        42         69          75         147
+            - Elem added              69        40         66          64         138
+            - Elem removed            21        10         10          18          31
+            - Value changed           42        24         44          39          79

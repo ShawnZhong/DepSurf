@@ -1,0 +1,72 @@
+Added FUNC (3): ['security_inode_invalidate_secctx', 'security_kernel_read_file', 'security_kernel_post_read_file']
+Removed FUNC (3): ['security_kernel_fw_from_file', 'security_settime', 'security_kernel_module_from_file']
+Changed FUNC (16): ['security_path_rename', 'security_dentry_init_security', 'security_path_mknod', 'security_path_mkdir', 'security_path_rmdir', 'security_path_unlink', 'security_path_symlink', 'security_path_link', 'security_path_truncate', 'security_path_chmod', 'security_path_chown', 'security_sb_mount', 'security_sb_pivotroot', 'security_path_chroot', 'security_inode_getsecurity', 'security_inode_getsecid']
+Reasons FUNC (5): [('Param added', 0), ('Param removed', 0), ('Param type changed', 16), ('Param reordered', 0), ('Return type changed', 0)]
+security_path_rename
+	Param type changed
+		old_dir             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+		new_dir             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_dentry_init_security
+	Param type changed
+		name                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'qstr'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'qstr'}}}
+security_path_mknod
+	Param type changed
+		dir                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_path_mkdir
+	Param type changed
+		dir                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_path_rmdir
+	Param type changed
+		dir                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_path_unlink
+	Param type changed
+		dir                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_path_symlink
+	Param type changed
+		dir                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_path_link
+	Param type changed
+		new_dir             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_path_truncate
+	Param type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_path_chmod
+	Param type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_path_chown
+	Param type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_sb_mount
+	Param type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_sb_pivotroot
+	Param type changed
+		old_path            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+		new_path            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_path_chroot
+	Param type changed
+		path                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'path'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}
+security_inode_getsecurity
+	Param type changed
+		inode               : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+security_inode_getsecid
+	Param type changed
+		inode               : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'inode'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}

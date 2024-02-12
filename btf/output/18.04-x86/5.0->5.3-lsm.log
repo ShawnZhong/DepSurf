@@ -1,0 +1,7 @@
+Added FUNC (4): ['security_kernfs_init_security', 'security_move_mount', 'security_fs_context_parse_param', 'security_fs_context_dup']
+Removed FUNC (0): []
+Changed FUNC (1): ['security_audit_rule_match']
+Reasons FUNC (5): [('Param added', 0), ('Param removed', 1), ('Param type changed', 0), ('Param reordered', 0), ('Return type changed', 0)]
+security_audit_rule_match
+	Param removed
+		actx                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'audit_context'}}

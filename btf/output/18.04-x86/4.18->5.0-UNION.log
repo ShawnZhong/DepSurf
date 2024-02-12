@@ -1,25 +1,23 @@
-Old Kind.UNION (102): ['fpregs_state', 'irq_stack_union', 'sigval', 'kernfs_node_id', 'thread_union', 'key_payload', 'perf_mem_data_src', 'flowi_uli', 'ethtool_flow_union', 'perf_capabilities']
-New Kind.UNION (108): ['fpregs_state', 'irq_stack_union', 'sigval', '__sifields', 'kernfs_node_id', 'thread_union', 'key_payload', 'perf_mem_data_src', 'bpf_attr', 'flowi_uli']
-Added Kind.UNION (8): ['__sifields', 'hv_gpa_page_range', 'apic_ir', 'fscrypt_iv', 'sidtab_entry_inner', 'phy_configure_opts', 'ec_response_get_next_data_v1', 'tls_crypto_context']
-Removed Kind.UNION (2): ['tpm2_cmd_params', 'ec_response_get_next_data']
-Common Kind.UNION (100): ['fpregs_state', 'irq_stack_union', 'sigval', 'kernfs_node_id', 'thread_union', 'key_payload', 'perf_mem_data_src', 'flowi_uli', 'ethtool_flow_union', 'perf_capabilities']
-Changed Kind.UNION (3): ['bpf_attr', 'proc_op', 'security_list_options']
-Reasons Kind.UNION (5): [('Sub added', 2), ('Sub removed', 1), ('Sub reordered', 0), ('Sub type changed', 1), ('Layout changed', 1)]
+Added UNION (8): ['__sifields', 'hv_gpa_page_range', 'apic_ir', 'fscrypt_iv', 'sidtab_entry_inner', 'phy_configure_opts', 'ec_response_get_next_data_v1', 'tls_crypto_context']
+Removed UNION (2): ['tpm2_cmd_params', 'ec_response_get_next_data']
+Changed UNION (3): ['bpf_attr', 'proc_op', 'security_list_options']
+Reasons UNION (4): [('Field added', 2), ('Field removed', 1), ('Field type changed', 1), ('Layout changed', 3)]
 bpf_attr
 	Layout changed
 proc_op
-	Sub added
+	Field added
 		lsm                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+	Layout changed
 security_list_options
-	Sub added
+	Field added
 		sb_free_mnt_opts    : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 		sb_eat_lsm_opts     : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		sb_add_mnt_opt      : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		kernel_load_data    : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'kernel_load_data_id', 'size': 4}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-	Sub removed
+	Field removed
 		sb_copy_data        : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		sb_parse_opts_str   : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'security_mnt_opts'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-	Sub type changed
+	Field type changed
 		capable             : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		sb_kern_mount       : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
@@ -30,3 +28,4 @@ security_list_options
 		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		task_kill           : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'siginfo'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kernel_siginfo'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+	Layout changed

@@ -1,12 +1,10 @@
-Old Kind.UNION (113): ['fpregs_state', 'sigval', '__sifields', 'kernfs_node_id', 'thread_union', 'key_payload', 'perf_mem_data_src', 'bpf_attr', 'flowi_uli', 'ethtool_flow_union']
-New Kind.UNION (126): ['fpregs_state', 'sigval', '__sifields', 'kernfs_node_id', 'thread_union', 'key_payload', 'perf_mem_data_src', 'bpf_attr', 'flowi_uli', 'ethtool_flow_union']
-Added Kind.UNION (15): ['uvh_node_id_u', 'uvh_rh_gam_alias210_overlay_config_2_mmr_u', 'uvh_rh_gam_alias210_redirect_config_2_mmr_u', 'uvh_rh_gam_config_mmr_u', 'uvh_rh_gam_gru_overlay_config_mmr_u', 'uvh_rh_gam_mmioh_overlay_config_mmr_u', 'uvh_rh_gam_mmr_overlay_config_mmr_u', 'uv1h_lb_target_physical_apic_id_mask_u', 'uv3h_gr0_gam_gr_config_u', 'uvh_apicid']
-Removed Kind.UNION (2): ['fuse_dentry', 'ipmi_smi_info_union']
-Common Kind.UNION (111): ['fpregs_state', 'sigval', '__sifields', 'kernfs_node_id', 'thread_union', 'key_payload', 'perf_mem_data_src', 'bpf_attr', 'flowi_uli', 'ethtool_flow_union']
-Changed Kind.UNION (1): ['security_list_options']
-Reasons Kind.UNION (5): [('Sub added', 1), ('Sub removed', 0), ('Sub reordered', 0), ('Sub type changed', 0), ('Layout changed', 0)]
+Added UNION (15): ['uvh_node_id_u', 'uvh_rh_gam_alias210_overlay_config_2_mmr_u', 'uvh_rh_gam_alias210_redirect_config_2_mmr_u', 'uvh_rh_gam_config_mmr_u', 'uvh_rh_gam_gru_overlay_config_mmr_u', 'uvh_rh_gam_mmioh_overlay_config_mmr_u', 'uvh_rh_gam_mmr_overlay_config_mmr_u', 'uv1h_lb_target_physical_apic_id_mask_u', 'uv3h_gr0_gam_gr_config_u', 'uvh_apicid', 'bau_msg_header', 'bau_payload_header', 'partition_info_u', 'fscrypt_policy', 'fscrypt_context']
+Removed UNION (2): ['fuse_dentry', 'ipmi_smi_info_union']
+Changed UNION (1): ['security_list_options']
+Reasons UNION (4): [('Field added', 1), ('Field removed', 0), ('Field type changed', 0), ('Layout changed', 1)]
 security_list_options
-	Sub added
+	Field added
 		path_notify         : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'path'}}}}, {'name': '(anon-1)', 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		locked_down         : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'ENUM', 'name': 'lockdown_reason', 'size': 4}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		lock_kernel_down    : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}, {'name': '(anon-1)', 'type': {'kind': 'ENUM', 'name': 'lockdown_reason', 'size': 4}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+	Layout changed

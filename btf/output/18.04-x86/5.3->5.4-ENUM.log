@@ -1,12 +1,9 @@
-Old Kind.ENUM (1153): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'l1tf_mitigations', 'x86_legacy_i8042_state', 'fixed_addresses', 'uprobe_task_state', 'apic_intr_mode_id', 'pcpu_fc', 'numa_stat_item']
-New Kind.ENUM (1178): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'l1tf_mitigations', 'x86_legacy_i8042_state', 'fixed_addresses', 'uprobe_task_state', 'apic_intr_mode_id', 'pcpu_fc', 'numa_stat_item']
-Added Kind.ENUM (32): ['netdev_ml_priv_type', 'perf_event_sample_format', 'freq_qos_req_type', 'lockdown_reason', 'meminit_context', 'map_type', 'backlight_scale', 'uv_bau_version', 'uv_bios_cmd', 'uv_memprotect']
-Removed Kind.ENUM (7): ['memmap_context', 'hmm_update_event', 'userfaultfd_state', 'pcie_data_rate', 'si_sm_result', 'nvdimm_security_state', 'evdev_clock_type']
-Common Kind.ENUM (1146): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'l1tf_mitigations', 'x86_legacy_i8042_state', 'fixed_addresses', 'uprobe_task_state', 'apic_intr_mode_id', 'pcpu_fc', 'numa_stat_item']
-Changed Kind.ENUM (33): ['node_stat_item', 'cpuhp_state', 'bpf_map_type', 'bpf_func_id', 'wb_reason', 'memcg_stat_item', 'tc_setup_type', 'flow_dissector_key_id', 'skb_ext_id', 'hrtimer_mode']
-Reasons Kind.ENUM (3): [('Sub added', 31), ('Sub removed', 2), ('Value changed', 19)]
+Added ENUM (32): ['netdev_ml_priv_type', 'perf_event_sample_format', 'freq_qos_req_type', 'lockdown_reason', 'meminit_context', 'map_type', 'backlight_scale', 'uv_bau_version', 'uv_bios_cmd', 'uv_memprotect', 'mutex_trylock_recursive_enum', 'perf_callchain_context', 'shmem_param', 'bio_post_read_step', 'ramfs_param', 'ioc_running', 'input_clock_type', 'nvdimm_security_bits', 'vfio_notify_type', 'fw_resource_type', 'rsc_handling_status', 'rproc_state', 'rproc_crash_type', 'devlink_trap_action', 'devlink_trap_type', 'net_dm_attr', 'net_dm_alert_mode', 'net_dm_origin', 'devlink_trap_generic_id', 'devlink_trap_group_generic_id', 'ip_conntrack_status', 'ieee80211_edmg_bw_config']
+Removed ENUM (7): ['memmap_context', 'hmm_update_event', 'userfaultfd_state', 'pcie_data_rate', 'si_sm_result', 'nvdimm_security_state', 'evdev_clock_type']
+Changed ENUM (33): ['node_stat_item', 'cpuhp_state', 'bpf_map_type', 'bpf_func_id', 'wb_reason', 'memcg_stat_item', 'tc_setup_type', 'flow_dissector_key_id', 'skb_ext_id', 'hrtimer_mode', 'dev_pm_qos_req_type', 'smca_bank_types', 'req_opf', 'req_flag_bits', 'fetch_op', 'bpf_cmd', 'ttu_flags', 'scan_result', 'vfs_get_super_keying', 'fuse_opcode', 'fuse_req_flag', 'tpm_pcrs', 'rq_qos_id', 'pci_board_num_t', 'ata_completion_errors', 'dsa_tag_protocol', 'qdisc_state_t', 'phy_tunable_id', 'flow_action_id', 'devlink_command', 'devlink_attr', 'devlink_param_generic_id', 'nl80211_band']
+Reasons ENUM (3): [('Elem added', 31), ('Elem removed', 2), ('Value changed', 19)]
 node_stat_item
-	Sub added
+	Elem added
 		NR_FILE_THPS                            : 23
 		NR_FILE_PMDMAPPED                       : 24
 	Value changed
@@ -19,7 +16,7 @@ node_stat_item
 		NR_KERNEL_MISC_RECLAIMABLE              : 29 -> 31
 		NR_VM_NODE_STAT_ITEMS                   : 30 -> 32
 cpuhp_state
-	Sub added
+	Elem added
 		CPUHP_PADATA_DEAD                       : 35
 		CPUHP_AP_OMAP_DM_TIMER_STARTING         : 114
 	Value changed
@@ -147,15 +144,15 @@ cpuhp_state
 		CPUHP_AP_ACTIVE                         : 204 -> 206
 		CPUHP_ONLINE                            : 205 -> 207
 bpf_map_type
-	Sub added
+	Elem added
 		BPF_MAP_TYPE_DEVMAP_HASH                : 25
 bpf_func_id
-	Sub added
+	Elem added
 		BPF_FUNC_tcp_gen_syncookie              : 110
 	Value changed
 		__BPF_FUNC_MAX_ID                       : 110 -> 111
 wb_reason
-	Sub added
+	Elem added
 		WB_REASON_FOREIGN_FLUSH                 : 8
 	Value changed
 		WB_REASON_MAX                           : 8 -> 9
@@ -169,10 +166,10 @@ memcg_stat_item
 		MEMCG_KERNEL_STACK_KB                   : 35 -> 37
 		MEMCG_NR_STAT                           : 36 -> 38
 tc_setup_type
-	Sub added
+	Elem added
 		TC_SETUP_QDISC_TAPRIO                   : 13
 flow_dissector_key_id
-	Sub added
+	Elem added
 		FLOW_DISSECTOR_KEY_PORTS_RANGE          : 5
 	Value changed
 		FLOW_DISSECTOR_KEY_ICMP                 : 5 -> 6
@@ -198,25 +195,25 @@ flow_dissector_key_id
 		FLOW_DISSECTOR_KEY_CT                   : 25 -> 26
 		FLOW_DISSECTOR_KEY_MAX                  : 26 -> 27
 skb_ext_id
-	Sub added
+	Elem added
 		TC_SKB_EXT                              : 2
 	Value changed
 		SKB_EXT_NUM                             : 2 -> 3
 hrtimer_mode
-	Sub added
+	Elem added
 		HRTIMER_MODE_HARD                       : 8
 		HRTIMER_MODE_ABS_HARD                   : 8
 		HRTIMER_MODE_REL_HARD                   : 9
 		HRTIMER_MODE_ABS_PINNED_HARD            : 10
 		HRTIMER_MODE_REL_PINNED_HARD            : 11
 dev_pm_qos_req_type
-	Sub removed
+	Elem removed
 		DEV_PM_QOS_MIN_FREQUENCY                : 3
 		DEV_PM_QOS_MAX_FREQUENCY                : 4
 	Value changed
 		DEV_PM_QOS_FLAGS                        : 5 -> 3
 smca_bank_types
-	Sub added
+	Elem added
 		SMCA_LS_V2                              : 1
 	Value changed
 		SMCA_IF                                 : 1 -> 2
@@ -240,10 +237,10 @@ smca_bank_types
 		SMCA_PCIE                               : 19 -> 20
 		N_SMCA_BANK_TYPES                       : 20 -> 21
 req_opf
-	Sub added
+	Elem added
 		REQ_OP_ZONE_RESET_ALL                   : 8
 req_flag_bits
-	Sub added
+	Elem added
 		__REQ_NOWAIT_INLINE                     : 22
 	Value changed
 		__REQ_CGROUP_PUNT                       : 22 -> 23
@@ -253,7 +250,7 @@ req_flag_bits
 		__REQ_SWAP                              : 26 -> 27
 		__REQ_NR_BITS                           : 27 -> 28
 fetch_op
-	Sub added
+	Elem added
 		FETCH_OP_DATA                           : 9
 	Value changed
 		FETCH_OP_DEREF                          : 9 -> 10
@@ -268,40 +265,40 @@ fetch_op
 		FETCH_OP_END                            : 18 -> 19
 		FETCH_NOP_SYMBOL                        : 19 -> 20
 bpf_cmd
-	Sub added
+	Elem added
 		BPF_BTF_GET_NEXT_ID                     : 23
 ttu_flags
-	Sub added
+	Elem added
 		TTU_SYNC                                : 512
 scan_result
-	Sub added
+	Elem added
 		SCAN_PAGE_HAS_PRIVATE                   : 24
 vfs_get_super_keying
-	Sub added
+	Elem added
 		vfs_get_single_reconf_super             : 1
 	Value changed
 		vfs_get_keyed_super                     : 1 -> 2
 		vfs_get_independent_super               : 2 -> 3
 fuse_opcode
-	Sub added
+	Elem added
 		FUSE_SETUPMAPPING                       : 48
 		FUSE_REMOVEMAPPING                      : 49
 		CUSE_INIT_BSWAP_RESERVED                : 1048576
 		FUSE_INIT_BSWAP_RESERVED                : 436207616
 fuse_req_flag
-	Sub added
+	Elem added
 		FR_ASYNC                                : 11
 tpm_pcrs
-	Sub added
+	Elem added
 		TPM_PCR10                               : 10
 rq_qos_id
-	Sub added
+	Elem added
 		RQ_QOS_LATENCY                          : 1
 		RQ_QOS_COST                             : 2
-	Sub removed
+	Elem removed
 		RQ_QOS_CGROUP                           : 1
 pci_board_num_t
-	Sub added
+	Elem added
 		pbn_fintek_F81504A                      : 99
 		pbn_fintek_F81508A                      : 100
 		pbn_fintek_F81512A                      : 101
@@ -321,21 +318,21 @@ pci_board_num_t
 		pbn_sunix_pci_8s                        : 108 -> 111
 		pbn_sunix_pci_16s                       : 109 -> 112
 ata_completion_errors
-	Sub added
+	Elem added
 		AC_ERR_OK                               : 0
 dsa_tag_protocol
-	Sub added
+	Elem added
 		DSA_TAG_PROTO_KSZ8795                   : 14
 qdisc_state_t
-	Sub added
+	Elem added
 		__QDISC_STATE_MISSED                    : 2
 phy_tunable_id
-	Sub added
+	Elem added
 		ETHTOOL_PHY_EDPD                        : 3
 	Value changed
 		__ETHTOOL_PHY_TUNABLE_COUNT             : 3 -> 4
 flow_action_id
-	Sub added
+	Elem added
 		FLOW_ACTION_REDIRECT_INGRESS            : 6
 		FLOW_ACTION_MIRRED_INGRESS              : 7
 		FLOW_ACTION_PTYPE                       : 17
@@ -359,7 +356,7 @@ flow_action_id
 		FLOW_ACTION_POLICE                      : 18 -> 21
 		FLOW_ACTION_CT                          : 19 -> 22
 devlink_command
-	Sub added
+	Elem added
 		DEVLINK_CMD_TRAP_GET                    : 61
 		DEVLINK_CMD_TRAP_SET                    : 62
 		DEVLINK_CMD_TRAP_NEW                    : 63
@@ -372,7 +369,7 @@ devlink_command
 		__DEVLINK_CMD_MAX                       : 61 -> 69
 		DEVLINK_CMD_MAX                         : 60 -> 68
 devlink_attr
-	Sub added
+	Elem added
 		DEVLINK_ATTR_STATS                      : 129
 		DEVLINK_ATTR_TRAP_NAME                  : 130
 		DEVLINK_ATTR_TRAP_ACTION                : 131
@@ -386,14 +383,14 @@ devlink_attr
 		__DEVLINK_ATTR_MAX                      : 130 -> 138
 		DEVLINK_ATTR_MAX                        : 129 -> 137
 devlink_param_generic_id
-	Sub added
+	Elem added
 		DEVLINK_PARAM_GENERIC_ID_RESET_DEV_ON_DRV_PROBE: 8
 		DEVLINK_PARAM_GENERIC_ID_ENABLE_ROCE    : 9
 	Value changed
 		__DEVLINK_PARAM_GENERIC_ID_MAX          : 8 -> 10
 		DEVLINK_PARAM_GENERIC_ID_MAX            : 7 -> 9
 nl80211_band
-	Sub added
+	Elem added
 		NL80211_BAND_6GHZ                       : 3
 	Value changed
 		NUM_NL80211_BANDS                       : 3 -> 4

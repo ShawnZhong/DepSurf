@@ -1,12 +1,9 @@
-Old Kind.ENUM (888): ['timespec_type', 'x86_hardware_subarch', 'x86_legacy_i8042_state', 'fixed_addresses', 'zone_stat_item', 'node_stat_item', 'zone_type', 'uprobe_task_state', 'page_entry_size', 'pid_type']
-New Kind.ENUM (963): ['timespec_type', 'x86_hardware_subarch', 'x86_legacy_i8042_state', 'fixed_addresses', 'numa_stat_item', 'zone_stat_item', 'node_stat_item', 'zone_type', 'uprobe_task_state', 'memory_type']
-Added Kind.ENUM (84): ['numa_stat_item', 'memory_type', 'perf_event_state', 's2idle_states', 'tc_setup_type', 'bpf_netdev_command', 'HV_GENERIC_SET_FORMAT', 'siginfo_layout', 'spectre_v2_user_mitigation', 'l1tf_mitigations']
-Removed Kind.ENUM (9): ['perf_event_active_state', 'fwnode_type', 'freeze_state', 'xdp_netdev_command', 'acpi_blacklist_predicates', 'tc_clsu32_command', 'tc_fl_command', 'tc_matchall_command', 'tc_clsbpf_command']
-Common Kind.ENUM (879): ['timespec_type', 'x86_hardware_subarch', 'x86_legacy_i8042_state', 'fixed_addresses', 'zone_stat_item', 'node_stat_item', 'zone_type', 'uprobe_task_state', 'page_entry_size', 'pid_type']
-Changed Kind.ENUM (75): ['zone_stat_item', 'node_stat_item', 'migrate_mode', 'vm_event_item', 'perf_branch_sample_type_shift', 'cpuhp_state', 'bpf_attach_type', 'memcg_stat_item', 'memcg_event_item', 'bpf_prog_type']
-Reasons Kind.ENUM (3): [('Sub added', 64), ('Sub removed', 18), ('Value changed', 39)]
+Added ENUM (84): ['numa_stat_item', 'memory_type', 'perf_event_state', 's2idle_states', 'tc_setup_type', 'bpf_netdev_command', 'HV_GENERIC_SET_FORMAT', 'siginfo_layout', 'spectre_v2_user_mitigation', 'l1tf_mitigations', 'mds_mitigations', 'taa_mitigations', 'cpuhp_smt_control', 'vmx_l1d_flush_state', 'srbds_mitigations', 'spectre_v1_mitigation', 'spectre_v2_user_cmd', 'tsx_ctrl_states', 'apic_intr_mode_id', 'pti_mode', 'pti_clone_level', 'cpu_mitigations', 'hk_flags', 'bpf_reg_liveness', 'sk_action', 'smap_psock_state', '__sk_action', 'perf_callchain_context', 'hmm_update_type', 'ib_uverbs_wr_opcode', 'ib_gid_type', 'rdma_link_layer', 'ib_atomic_cap', 'ib_mtu', 'ib_port_state', 'ib_event_type', 'ib_mr_type', 'ib_sig_err_type', 'rdma_ah_attr_type', 'ib_wc_status', 'ib_wc_opcode', 'ib_cq_notify_flags', 'ib_srq_type', 'ib_srq_attr_mask', 'ib_sig_type', 'ib_qp_type', 'ib_qp_state', 'ib_mig_state', 'ib_mw_type', 'ib_wr_opcode', 'rdma_remove_reason', 'ib_poll_context', 'ib_wq_type', 'ib_wq_state', 'port_pkey_state', 'ib_flow_attr_type', 'rdma_netdev_t', 'ipmi_addr_src', 'si_type', 'acpi_predicate', 'acpi_ex_debugger_commands', 'hest_status', 'crb_defaults', 'crb_loc_ctrl', 'crb_loc_state', 'crb_ctrl_req', 'crb_ctrl_sts', 'crb_start', 'crb_cancel', 'crb_status', 'nd_ioctl_mode', 'nd_label_flags', 'usb_charger_type', 'usb_charger_state', 'dbc_state', 'evtreturn', 'dev_pm_opp_event', 'opp_table_access', 'rtnl_link_flags', 'macvlan_mode', 'net_xmit_qdisc_t', 'tcf_block_binder_type', 'tc_block_command', 'tcp_queue']
+Removed ENUM (9): ['perf_event_active_state', 'fwnode_type', 'freeze_state', 'xdp_netdev_command', 'acpi_blacklist_predicates', 'tc_clsu32_command', 'tc_fl_command', 'tc_matchall_command', 'tc_clsbpf_command']
+Changed ENUM (75): ['zone_stat_item', 'node_stat_item', 'migrate_mode', 'vm_event_item', 'perf_branch_sample_type_shift', 'cpuhp_state', 'bpf_attach_type', 'memcg_stat_item', 'memcg_event_item', 'bpf_prog_type', 'flow_dissector_key_id', 'dma_transaction_type', 'ethtool_link_mode_bit_indices', 'perf_event_sample_format', 'perf_branch_sample_type', 'cpuid_leafs', 'spectre_v2_mitigation', 'kernfs_root_flag', 'kobject_action', 'smca_bank_types', 'ucode_state', 'kcore_type', 'address_markers_idx', 'bpf_map_type', 'bpf_func_id', 'bpf_arg_type', 'bpf_reg_type', 'KTHREAD_BITS', 'req_flag_bits', 'kernel_read_file_id', 'blktrace_act', 'blktrace_notify', 'xdp_action', 'bpf_cmd', 'membarrier_cmd', 'wb_state', 'ttu_flags', 'mc_target_type', 'mf_action_page_type', 'integrity_status', 'evm_ima_xattr_type', 'scsi_device_event', 'phy_mode', 'pin_config_param', 'gpiod_flags', 'of_gpio_flags', 'gpio_lookup_flags', 'pci_dev_flags', 'pci_bus_speed', 'dma_ctrl_flags', 'hdmi_extended_colorimetry', 'acpi_bus_device_type', 'thermal_notify_event', 'pci_board_num_t', 'tpm_timeout', 'tpm2_return_codes', 'iommu_attr', 'zbc_zone_type', 'ata_completion_errors', 'ata_lpm_policy', 'vga_switcheroo_client_id', 'netdev_priv_flags', 'mddev_flags', 'array_state', 'tcp_ca_event', 'flow_dissect_ret', 'netevent_notif_type', 'switchdev_attr_id', 'switchdev_obj_id', 'lwtunnel_encap_types', 'dsa_tag_protocol', 'netlink_skb_flags', 'fib_event_type', 'nl80211_mfp', 'nl80211_ext_feature_index']
+Reasons ENUM (3): [('Elem added', 64), ('Elem removed', 18), ('Value changed', 39)]
 zone_stat_item
-	Sub removed
+	Elem removed
 		NUMA_HIT                                : 12
 		NUMA_MISS                               : 13
 		NUMA_FOREIGN                            : 14
@@ -17,15 +14,15 @@ zone_stat_item
 		NR_FREE_CMA_PAGES                       : 18 -> 12
 		NR_VM_ZONE_STAT_ITEMS                   : 19 -> 13
 node_stat_item
-	Sub added
+	Elem added
 		NR_INDIRECTLY_RECLAIMABLE_BYTES         : 27
 	Value changed
 		NR_VM_NODE_STAT_ITEMS                   : 27 -> 28
 migrate_mode
-	Sub added
+	Elem added
 		MIGRATE_SYNC_NO_COPY                    : 3
 vm_event_item
-	Sub added
+	Elem added
 		THP_SWPOUT                              : 78
 		THP_SWPOUT_FALLBACK                     : 79
 		SWAP_RA                                 : 83
@@ -36,12 +33,12 @@ vm_event_item
 		BALLOON_MIGRATE                         : 80 -> 82
 		NR_VM_EVENT_ITEMS                       : 81 -> 85
 perf_branch_sample_type_shift
-	Sub added
+	Elem added
 		PERF_SAMPLE_BRANCH_TYPE_SAVE_SHIFT      : 16
 	Value changed
 		PERF_SAMPLE_BRANCH_MAX_SHIFT            : 16 -> 17
 cpuhp_state
-	Sub added
+	Elem added
 		CPUHP_INVALID                           : -1
 		CPUHP_TIMERS_PREPARE                    : 62
 		CPUHP_AP_IRQ_MIPS_GIC_STARTING          : 94
@@ -52,7 +49,7 @@ cpuhp_state
 		CPUHP_AP_PERF_ARM_HISI_L3_ONLINE        : 153
 		CPUHP_AP_PERF_ARM_CAVIUM_TX2_UNCORE_ONLINE: 157
 		CPUHP_AP_BASE_CACHEINFO_ONLINE          : 163
-	Sub removed
+	Elem removed
 		CPUHP_TIMERS_DEAD                       : 62
 	Value changed
 		CPUHP_AP_ARM_MVEBU_COHERENCY            : 94 -> 95
@@ -123,7 +120,7 @@ cpuhp_state
 		CPUHP_AP_ACTIVE                         : 189 -> 197
 		CPUHP_ONLINE                            : 190 -> 198
 bpf_attach_type
-	Sub added
+	Elem added
 		BPF_SK_SKB_STREAM_PARSER                : 4
 		BPF_SK_SKB_STREAM_VERDICT               : 5
 		BPF_CGROUP_DEVICE                       : 6
@@ -146,16 +143,16 @@ memcg_event_item
 		MEMCG_OOM                               : 84 -> 88
 		MEMCG_NR_EVENTS                         : 85 -> 89
 bpf_prog_type
-	Sub added
+	Elem added
 		BPF_PROG_TYPE_SK_SKB                    : 14
 		BPF_PROG_TYPE_CGROUP_DEVICE             : 15
 flow_dissector_key_id
-	Sub added
+	Elem added
 		FLOW_DISSECTOR_KEY_TIPC                 : 7
-	Sub removed
+	Elem removed
 		FLOW_DISSECTOR_KEY_TIPC_ADDRS           : 7
 dma_transaction_type
-	Sub removed
+	Elem removed
 		DMA_SG                                  : 8
 	Value changed
 		DMA_PRIVATE                             : 9 -> 8
@@ -165,34 +162,34 @@ dma_transaction_type
 		DMA_INTERLEAVE                          : 13 -> 12
 		DMA_TX_TYPE_END                         : 14 -> 13
 ethtool_link_mode_bit_indices
-	Sub added
+	Elem added
 		ETHTOOL_LINK_MODE_FEC_NONE_BIT          : 49
 		ETHTOOL_LINK_MODE_FEC_RS_BIT            : 50
 		ETHTOOL_LINK_MODE_FEC_BASER_BIT         : 51
 	Value changed
 		__ETHTOOL_LINK_MODE_LAST                : 48 -> 51
 perf_event_sample_format
-	Sub added
+	Elem added
 		PERF_SAMPLE_PHYS_ADDR                   : 524288
 	Value changed
 		PERF_SAMPLE_MAX                         : 524288 -> 1048576
 perf_branch_sample_type
-	Sub added
+	Elem added
 		PERF_SAMPLE_BRANCH_TYPE_SAVE            : 65536
 	Value changed
 		PERF_SAMPLE_BRANCH_MAX                  : 65536 -> 131072
 cpuid_leafs
-	Sub added
+	Elem added
 		CPUID_LNX_4                             : 11
 		CPUID_DUMMY                             : 12
 		CPUID_7_EDX                             : 18
-	Sub removed
+	Elem removed
 		CPUID_F_0_EDX                           : 11
 		CPUID_F_1_EDX                           : 12
 spectre_v2_mitigation
-	Sub added
+	Elem added
 		SPECTRE_V2_IBRS_ENHANCED                : 3
-	Sub removed
+	Elem removed
 		SPECTRE_V2_RETPOLINE_MINIMAL            : 1
 		SPECTRE_V2_RETPOLINE_MINIMAL_AMD        : 2
 		SPECTRE_V2_IBRS                         : 5
@@ -200,16 +197,16 @@ spectre_v2_mitigation
 		SPECTRE_V2_RETPOLINE_GENERIC            : 3 -> 1
 		SPECTRE_V2_RETPOLINE_AMD                : 4 -> 2
 kernfs_root_flag
-	Sub added
+	Elem added
 		KERNFS_ROOT_SUPPORT_EXPORTOP            : 4
 kobject_action
-	Sub added
+	Elem added
 		KOBJ_BIND                               : 6
 		KOBJ_UNBIND                             : 7
 	Value changed
 		KOBJ_MAX                                : 6 -> 8
 smca_bank_types
-	Sub added
+	Elem added
 		SMCA_RESERVED                           : 4
 	Value changed
 		SMCA_EX                                 : 4 -> 5
@@ -223,7 +220,7 @@ smca_bank_types
 		SMCA_SMU                                : 12 -> 13
 		N_SMCA_BANK_TYPES                       : 13 -> 14
 ucode_state
-	Sub added
+	Elem added
 		UCODE_NEW                               : 1
 		UCODE_UPDATED                           : 2
 	Value changed
@@ -231,7 +228,7 @@ ucode_state
 		UCODE_OK                                : 1 -> 0
 		UCODE_NFOUND                            : 2 -> 3
 kcore_type
-	Sub added
+	Elem added
 		KCORE_USER                              : 4
 	Value changed
 		KCORE_OTHER                             : 4 -> 5
@@ -243,12 +240,12 @@ address_markers_idx
 		CPU_ENTRY_AREA_NR                       : 5 -> 6
 		LDT_NR                                  : 6 -> 2
 bpf_map_type
-	Sub added
+	Elem added
 		BPF_MAP_TYPE_DEVMAP                     : 14
 		BPF_MAP_TYPE_SOCKMAP                    : 15
 		BPF_MAP_TYPE_CPUMAP                     : 16
 bpf_func_id
-	Sub added
+	Elem added
 		BPF_FUNC_redirect_map                   : 51
 		BPF_FUNC_sk_redirect_map                : 52
 		BPF_FUNC_sock_map_update                : 53
@@ -259,7 +256,7 @@ bpf_func_id
 	Value changed
 		__BPF_FUNC_MAX_ID                       : 51 -> 58
 bpf_arg_type
-	Sub added
+	Elem added
 		ARG_PTR_TO_MEM_OR_NULL                  : 5
 	Value changed
 		ARG_PTR_TO_UNINIT_MEM                   : 5 -> 6
@@ -268,10 +265,10 @@ bpf_arg_type
 		ARG_PTR_TO_CTX                          : 8 -> 9
 		ARG_ANYTHING                            : 9 -> 10
 bpf_reg_type
-	Sub added
+	Elem added
 		SCALAR_VALUE                            : 1
 		PTR_TO_PACKET_META                      : 7
-	Sub removed
+	Elem removed
 		UNKNOWN_VALUE                           : 1
 		FRAME_PTR                               : 6
 		CONST_IMM                               : 8
@@ -281,52 +278,52 @@ bpf_reg_type
 		PTR_TO_PACKET                           : 9 -> 8
 		PTR_TO_PACKET_END                       : 10 -> 9
 KTHREAD_BITS
-	Sub removed
+	Elem removed
 		KTHREAD_IS_PARKED                       : 3
 req_flag_bits
-	Sub added
+	Elem added
 		__REQ_DRV                               : 23
 	Value changed
 		__REQ_NOUNMAP                           : 21 -> 22
 		__REQ_NOWAIT                            : 22 -> 21
 		__REQ_NR_BITS                           : 23 -> 24
 kernel_read_file_id
-	Sub added
+	Elem added
 		READING_X509_CERTIFICATE                : 7
 	Value changed
 		READING_MAX_ID                          : 7 -> 8
 blktrace_act
-	Sub added
+	Elem added
 		__BLK_TA_CGROUP                         : 256
 blktrace_notify
-	Sub added
+	Elem added
 		__BLK_TN_CGROUP                         : 256
 xdp_action
-	Sub added
+	Elem added
 		XDP_REDIRECT                            : 4
 bpf_cmd
-	Sub added
+	Elem added
 		BPF_PROG_QUERY                          : 16
 membarrier_cmd
-	Sub added
+	Elem added
 		MEMBARRIER_CMD_PRIVATE_EXPEDITED        : 8
 		MEMBARRIER_CMD_REGISTER_PRIVATE_EXPEDITED: 16
 wb_state
-	Sub added
+	Elem added
 		WB_start_all                            : 3
-	Sub removed
+	Elem removed
 		WB_shutting_down                        : 1
 	Value changed
 		WB_writeback_running                    : 2 -> 1
 		WB_has_dirty_io                         : 3 -> 2
 ttu_flags
-	Sub added
+	Elem added
 		TTU_SPLIT_FREEZE                        : 256
 mc_target_type
-	Sub added
+	Elem added
 		MC_TARGET_DEVICE                        : 3
 mf_action_page_type
-	Sub added
+	Elem added
 		MF_MSG_NON_PMD_HUGE                     : 7
 	Value changed
 		MF_MSG_UNMAP_FAILED                     : 7 -> 8
@@ -343,7 +340,7 @@ mf_action_page_type
 		MF_MSG_BUDDY_2ND                        : 18 -> 19
 		MF_MSG_UNKNOWN                          : 19 -> 20
 integrity_status
-	Sub added
+	Elem added
 		INTEGRITY_PASS_IMMUTABLE                : 1
 	Value changed
 		INTEGRITY_FAIL                          : 1 -> 2
@@ -351,96 +348,96 @@ integrity_status
 		INTEGRITY_NOXATTRS                      : 3 -> 4
 		INTEGRITY_UNKNOWN                       : 4 -> 5
 evm_ima_xattr_type
-	Sub added
+	Elem added
 		EVM_XATTR_PORTABLE_DIGSIG               : 5
 	Value changed
 		IMA_XATTR_LAST                          : 5 -> 6
 scsi_device_event
-	Sub added
+	Elem added
 		SDEV_EVT_POWER_ON_RESET_OCCURRED        : 8
 	Value changed
 		SDEV_EVT_LAST                           : 7 -> 8
 		SDEV_EVT_MAXBITS                        : 8 -> 9
 phy_mode
-	Sub added
+	Elem added
 		PHY_MODE_SGMII                          : 4
 		PHY_MODE_10GKR                          : 5
 		PHY_MODE_UFS_HS_A                       : 6
 		PHY_MODE_UFS_HS_B                       : 7
 pin_config_param
-	Sub added
+	Elem added
 		PIN_CONFIG_SLEEP_HARDWARE_STATE         : 18
 		PIN_CONFIG_SKEW_DELAY                   : 20
 	Value changed
 		PIN_CONFIG_SLEW_RATE                    : 18 -> 19
 gpiod_flags
-	Sub added
+	Elem added
 		GPIOD_OUT_LOW_OPEN_DRAIN                : 11
 		GPIOD_OUT_HIGH_OPEN_DRAIN               : 15
 of_gpio_flags
-	Sub added
+	Elem added
 		OF_GPIO_SLEEP_MAY_LOSE_VALUE            : 8
-	Sub removed
+	Elem removed
 		OF_GPIO_SLEEP_MAY_LOOSE_VALUE           : 8
 gpio_lookup_flags
-	Sub added
+	Elem added
 		GPIO_SLEEP_MAY_LOSE_VALUE               : 8
-	Sub removed
+	Elem removed
 		GPIO_SLEEP_MAY_LOOSE_VALUE              : 8
 pci_dev_flags
-	Sub removed
+	Elem removed
 		PCI_DEV_FLAGS_NEEDS_RESUME              : 2048
 	Value changed
 		PCI_DEV_FLAGS_NO_RELAXED_ORDERING       : 4096 -> 2048
 pci_bus_speed
-	Sub added
+	Elem added
 		PCIE_SPEED_16_0GT                       : 23
 dma_ctrl_flags
-	Sub added
+	Elem added
 		DMA_PREP_CMD                            : 128
 hdmi_extended_colorimetry
-	Sub added
+	Elem added
 		HDMI_EXTENDED_COLORIMETRY_OPYCC_601     : 3
 		HDMI_EXTENDED_COLORIMETRY_OPRGB         : 4
-	Sub removed
+	Elem removed
 		HDMI_EXTENDED_COLORIMETRY_ADOBE_YCC_601 : 3
 		HDMI_EXTENDED_COLORIMETRY_ADOBE_RGB     : 4
 acpi_bus_device_type
-	Sub added
+	Elem added
 		ACPI_BUS_TYPE_ECDT_EC                   : 6
 	Value changed
 		ACPI_BUS_DEVICE_TYPE_COUNT              : 6 -> 7
 thermal_notify_event
-	Sub added
+	Elem added
 		THERMAL_TABLE_CHANGED                   : 7
 pci_board_num_t
-	Sub added
+	Elem added
 		pbn_sunix_pci_1s                        : 105
 		pbn_sunix_pci_2s                        : 106
 		pbn_sunix_pci_4s                        : 107
 		pbn_sunix_pci_8s                        : 108
 		pbn_sunix_pci_16s                       : 109
 tpm_timeout
-	Sub added
+	Elem added
 		TPM_TIMEOUT_RANGE_US                    : 300
 tpm2_return_codes
-	Sub added
+	Elem added
 		TPM2_RC_FAILURE                         : 257
 		TPM2_RC_COMMAND_CODE                    : 323
 		TPM2_RC_RETRY                           : 2338
 iommu_attr
-	Sub added
+	Elem added
 		DOMAIN_ATTR_DMA_USE_FLUSH_QUEUE         : 7
 	Value changed
 		DOMAIN_ATTR_MAX                         : 7 -> 8
 zbc_zone_type
-	Sub removed
+	Elem removed
 		ZBC_ZONE_TYPE_RESERVED                  : 4
 ata_completion_errors
-	Sub added
+	Elem added
 		AC_ERR_OK                               : 0
 ata_lpm_policy
-	Sub added
+	Elem added
 		ATA_LPM_MED_POWER_WITH_DIPM             : 3
 		ATA_LPM_MIN_POWER_WITH_PARTIAL          : 4
 	Value changed
@@ -449,51 +446,51 @@ vga_switcheroo_client_id
 	Value changed
 		VGA_SWITCHEROO_UNKNOWN_ID               : -1 -> 4096
 netdev_priv_flags
-	Sub added
+	Elem added
 		IFF_L3MDEV_RX_HANDLER                   : 268435456
 mddev_flags
-	Sub added
+	Elem added
 		MD_HAS_MULTIPLE_PPLS                    : 7
 		MD_ALLOW_SB_UPDATE                      : 8
 		MD_UPDATING_SB                          : 9
 		MD_NOT_READY                            : 10
 		MD_BROKEN                               : 11
 array_state
-	Sub added
+	Elem added
 		broken                                  : 9
 	Value changed
 		bad_word                                : 9 -> 10
 tcp_ca_event
-	Sub removed
+	Elem removed
 		CA_EVENT_DELAYED_ACK                    : 6
 		CA_EVENT_NON_DELAYED_ACK                : 7
 flow_dissect_ret
-	Sub added
+	Elem added
 		FLOW_DISSECT_RET_PROTO_AGAIN            : 2
 		FLOW_DISSECT_RET_IPPROTO_AGAIN          : 3
 		FLOW_DISSECT_RET_CONTINUE               : 4
-	Sub removed
+	Elem removed
 		FLOW_DISSECT_RET_OUT_PROTO_AGAIN        : 2
 netevent_notif_type
-	Sub added
+	Elem added
 		NETEVENT_MULTIPATH_HASH_UPDATE          : 4
 switchdev_attr_id
-	Sub added
+	Elem added
 		SWITCHDEV_ATTR_ID_BRIDGE_MROUTER        : 9
 switchdev_obj_id
-	Sub added
+	Elem added
 		SWITCHDEV_OBJ_ID_HOST_MDB               : 3
-	Sub removed
+	Elem removed
 		SWITCHDEV_OBJ_ID_PORT_FDB               : 2
 	Value changed
 		SWITCHDEV_OBJ_ID_PORT_MDB               : 3 -> 2
 lwtunnel_encap_types
-	Sub added
+	Elem added
 		LWTUNNEL_ENCAP_SEG6_LOCAL               : 7
 	Value changed
 		__LWTUNNEL_ENCAP_MAX                    : 7 -> 8
 dsa_tag_protocol
-	Sub added
+	Elem added
 		DSA_TAG_PROTO_BRCM_PREPEND              : 2
 	Value changed
 		DSA_TAG_PROTO_DSA                       : 2 -> 3
@@ -505,19 +502,19 @@ dsa_tag_protocol
 		DSA_TAG_PROTO_TRAILER                   : 8 -> 9
 		DSA_TAG_LAST                            : 9 -> 10
 netlink_skb_flags
-	Sub removed
+	Elem removed
 		NETLINK_SKB_MMAPED                      : 1
 		NETLINK_SKB_TX                          : 2
 		NETLINK_SKB_DELIVERED                   : 4
 fib_event_type
-	Sub added
+	Elem added
 		FIB_EVENT_VIF_ADD                       : 8
 		FIB_EVENT_VIF_DEL                       : 9
 nl80211_mfp
-	Sub added
+	Elem added
 		NL80211_MFP_OPTIONAL                    : 2
 nl80211_ext_feature_index
-	Sub added
+	Elem added
 		NL80211_EXT_FEATURE_FILS_MAX_CHANNEL_TIME: 17
 		NL80211_EXT_FEATURE_ACCEPT_BCAST_PROBE_RESP: 18
 		NL80211_EXT_FEATURE_OCE_PROBE_REQ_HIGH_TX_RATE: 19

@@ -1,0 +1,55 @@
+Added STRUCT (15): ['trace_event_raw_hyperv_nested_flush_guest_mapping', 'trace_event_raw_hyperv_nested_flush_guest_mapping_range', 'trace_event_raw_hyperv_send_ipi_mask', 'trace_event_raw_pseudo_lock_mem_latency', 'trace_event_raw_pseudo_lock_l2', 'trace_event_raw_pseudo_lock_l3', 'trace_event_raw_cpu_frequency_limits', 'trace_event_raw_ext4_nfs_commit_metadata', 'trace_event_raw_ext4_es_find_extent_range_enter', 'trace_event_raw_ext4_es_find_extent_range_exit', 'trace_event_raw_ext4_es_insert_delayed_block', 'trace_event_raw_clk_duty_cycle', 'trace_event_raw_hwmon_attr_class', 'trace_event_raw_hwmon_attr_show_string', 'trace_event_raw_net_dev_rx_exit_template']
+Removed STRUCT (3): ['trace_event_raw_mm_numa_migrate_ratelimit', 'trace_event_raw_ext4_es_find_delayed_extent_range_enter', 'trace_event_raw_ext4_es_find_delayed_extent_range_exit']
+Changed STRUCT (9): ['trace_event_raw_cgroup_migrate', 'trace_event_raw_filelock_lock', 'trace_event_raw_filelock_lease', 'trace_event_raw_ext4_remove_blocks', 'trace_event_raw_ext4_ext_rm_leaf', 'trace_event_raw_ext4_ext_remove_space_done', 'trace_event_raw_sock_exceed_buf_limit', 'trace_event_raw_tcp_event_sk_skb', 'trace_event_raw_fib_table_lookup']
+Reasons STRUCT (4): [('Field added', 7), ('Field removed', 5), ('Field type changed', 0), ('Layout changed', 9)]
+trace_event_raw_cgroup_migrate
+	Layout changed
+trace_event_raw_filelock_lock
+	Field added
+		fl_blocker          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}
+	Field removed
+		fl_next             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}
+	Layout changed
+trace_event_raw_filelock_lease
+	Field added
+		fl_blocker          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}
+	Field removed
+		fl_next             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file_lock'}}
+	Layout changed
+trace_event_raw_ext4_remove_blocks
+	Field added
+		pc_pclu             : {'kind': 'TYPEDEF', 'name': 'ext4_fsblk_t'}
+		pc_lblk             : {'kind': 'TYPEDEF', 'name': 'ext4_lblk_t'}
+		pc_state            : {'kind': 'INT', 'name': 'int'}
+	Field removed
+		partial             : {'kind': 'INT', 'name': 'long long int'}
+	Layout changed
+trace_event_raw_ext4_ext_rm_leaf
+	Field added
+		pc_pclu             : {'kind': 'TYPEDEF', 'name': 'ext4_fsblk_t'}
+		pc_lblk             : {'kind': 'TYPEDEF', 'name': 'ext4_lblk_t'}
+		pc_state            : {'kind': 'INT', 'name': 'int'}
+	Field removed
+		partial             : {'kind': 'INT', 'name': 'long long int'}
+	Layout changed
+trace_event_raw_ext4_ext_remove_space_done
+	Field added
+		pc_pclu             : {'kind': 'TYPEDEF', 'name': 'ext4_fsblk_t'}
+		pc_lblk             : {'kind': 'TYPEDEF', 'name': 'ext4_lblk_t'}
+		pc_state            : {'kind': 'INT', 'name': 'int'}
+	Field removed
+		partial             : {'kind': 'INT', 'name': 'long long int'}
+	Layout changed
+trace_event_raw_sock_exceed_buf_limit
+	Field added
+		sysctl_wmem         : {'kind': 'INT', 'name': 'int'}
+		wmem_alloc          : {'kind': 'INT', 'name': 'int'}
+		wmem_queued         : {'kind': 'INT', 'name': 'int'}
+		kind                : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_tcp_event_sk_skb
+	Field added
+		state               : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_fib_table_lookup
+	Layout changed

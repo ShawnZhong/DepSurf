@@ -1,0 +1,116 @@
+Added FUNC (94): ['perf_trace_xen_mmu_flush_tlb_multi', 'perf_trace_hyperv_send_ipi_one', 'perf_trace_hyperv_mmu_flush_tlb_multi', 'perf_trace_workqueue_execute_end', 'perf_trace_workqueue_activate_work', 'perf_trace_sched_numa_pair_template', 'perf_trace_sched_move_numa', 'perf_trace_sched_kthread_work_execute_end', 'perf_trace_sched_kthread_work_execute_start', 'perf_trace_sched_kthread_work_queue_work', 'perf_trace_rcu_stall_warning', 'perf_trace_sample_threshold', 'perf_trace_nmi_noise', 'perf_trace_irq_noise', 'perf_trace_softirq_noise', 'perf_trace_thread_noise', 'perf_trace_bpf_trace_printk', 'perf_trace_error_report_template', 'perf_trace_cpu_latency_qos_request', 'perf_trace_rss_stat', 'perf_trace_kmem_cache_free', 'perf_trace_kfree', 'perf_trace_mmap_lock_released', 'perf_trace_mmap_lock_acquire_returned', 'perf_trace_mmap_lock_start_locking', 'perf_trace_vm_unmapped_area', 'perf_trace_mm_migrate_pages_start', 'perf_trace_iomap_iter', 'perf_trace_iomap_class', 'perf_trace_iomap_range_class', 'perf_trace_iomap_readpage_class', 'perf_trace_ext4_fc_track_range', 'perf_trace_ext4_fc_track_inode', 'perf_trace_ext4_fc_track_unlink', 'perf_trace_ext4_fc_track_link', 'perf_trace_ext4_fc_track_create', 'perf_trace_ext4_fc_stats', 'perf_trace_ext4_fc_commit_stop', 'perf_trace_ext4_fc_commit_start', 'perf_trace_ext4_fc_replay', 'perf_trace_ext4_fc_replay_scan', 'perf_trace_ext4_lazy_itable_init', 'perf_trace_ext4_prefetch_bitmaps', 'perf_trace_ext4_read_block_bitmap_load', 'perf_trace_jbd2_shrink_checkpoint_list', 'perf_trace_jbd2_shrink_scan_exit', 'perf_trace_jbd2_journal_shrink', 'perf_trace_jbd2_handle_start_class', 'perf_trace_selinux_audited', 'perf_trace_block_bio', 'perf_trace_iocost_iocg_forgive_debt', 'perf_trace_iocost_iocg_state', 'perf_trace_io_uring_task_run', 'perf_trace_io_uring_task_add', 'perf_trace_io_uring_poll_wake', 'perf_trace_io_uring_poll_arm', 'perf_trace_io_uring_submit_sqe', 'perf_trace_io_uring_complete', 'perf_trace_io_uring_fail_link', 'perf_trace_io_uring_cqring_wait', 'perf_trace_io_uring_link', 'perf_trace_io_uring_defer', 'perf_trace_io_uring_queue_async_work', 'perf_trace_io_uring_file_get', 'perf_trace_io_uring_register', 'perf_trace_io_uring_create', 'perf_trace_pwm', 'perf_trace_clk_rate_range', 'perf_trace_prq_report', 'perf_trace_qi_submit', 'perf_trace_devres', 'perf_trace_spi_set_cs', 'perf_trace_spi_setup', 'perf_trace_xhci_log_doorbell', 'perf_trace_amd_pstate_perf', 'perf_trace_cros_ec_request_done', 'perf_trace_cros_ec_request_start', 'perf_trace_devfreq_frequency', 'perf_trace_icc_set_bw_end', 'perf_trace_icc_set_bw', 'perf_trace_page_pool_update_nid', 'perf_trace_page_pool_release', 'perf_trace_qdisc_create', 'perf_trace_qdisc_destroy', 'perf_trace_qdisc_reset', 'perf_trace_qdisc_enqueue', 'perf_trace_tcp_event_skb', 'perf_trace_inet_sk_error_report', 'perf_trace_devlink_trap_report', 'perf_trace_netlink_extack', 'perf_trace_subflow_check_data_avail', 'perf_trace_ack_update_msk', 'perf_trace_mptcp_dump_mpext', 'perf_trace_mptcp_subflow_get_send']
+Removed FUNC (34): ['perf_trace_xen_mmu_flush_tlb_others', 'perf_trace_xen_mmu_set_pte_at', 'perf_trace_hyperv_mmu_flush_tlb_others', 'perf_trace_mpx_new_bounds_table', 'perf_trace_mpx_range_trace', 'perf_trace_bounds_exception_mpx', 'perf_trace_mpx_bounds_register_exception', 'perf_trace_workqueue_work', 'perf_trace_sched_swap_numa', 'perf_trace_sched_move_task_template', 'perf_trace_pm_qos_update_request_timeout', 'perf_trace_pm_qos_request', 'perf_trace_mm_vmscan_inactive_list_is_low', 'perf_trace_kmem_free', 'perf_trace_cma_release', 'perf_trace_cma_alloc', 'perf_trace_open_exec', 'perf_trace_do_sys_open', 'perf_trace_ext4_get_reserved_cluster_alloc', 'perf_trace_ext4_find_delalloc_range', 'perf_trace_ext4_ext_in_cache', 'perf_trace_ext4_ext_put_in_cache', 'perf_trace_ext4_direct_IO_exit', 'perf_trace_ext4_direct_IO_enter', 'perf_trace_jbd2_handle_start', 'perf_trace_block_get_rq', 'perf_trace_block_bio_queue', 'perf_trace_block_bio_merge', 'perf_trace_block_bio_bounce', 'perf_trace_iocost_iocg_activate', 'perf_trace_dma_unmap', 'perf_trace_dma_map', 'perf_trace_cros_ec_cmd_class', 'perf_trace_page_pool_inflight']
+Changed FUNC (21): ['perf_trace_itimer_state', 'perf_trace_xdp_devmap_xmit', 'perf_trace_xdp_cpumap_kthread', 'perf_trace_xdp_redirect_template', 'perf_trace_mm_lru_insertion', 'perf_trace_mm_vmscan_lru_isolate', 'perf_trace_kcompactd_wake_template', 'perf_trace_mm_migrate_pages', 'perf_trace_ext4_journal_start', 'perf_trace_ext4_load_inode', 'perf_trace_ext4_discard_preallocations', 'perf_trace_block_rq_remap', 'perf_trace_block_bio_remap', 'perf_trace_block_split', 'perf_trace_block_bio_complete', 'perf_trace_block_rq', 'perf_trace_block_rq_requeue', 'perf_trace_iocost_ioc_vrate_adj', 'perf_trace_thermal_power_devfreq_get_power', 'perf_trace_br_fdb_update', 'perf_trace_kfree_skb']
+Reasons FUNC (5): [('Param added', 10), ('Param removed', 15), ('Param type changed', 1), ('Param reordered', 9), ('Return type changed', 0)]
+perf_trace_itimer_state
+	Param type changed
+		value               : {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'itimerval'}}}}
+		                    ->{'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'itimerspec64'}}}}
+perf_trace_xdp_devmap_xmit
+	Param removed
+		map                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'bpf_map'}}}
+		map_index           : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Param reordered
+		                     ['__data', 'map', 'map_index', 'sent', 'drops', 'from_dev', 'to_dev', 'err']
+		                     ['__data', 'from_dev', 'to_dev', 'sent', 'drops', 'err']
+perf_trace_xdp_cpumap_kthread
+	Param added
+		xdp_stats           : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'xdp_cpumap_stats'}}
+perf_trace_xdp_redirect_template
+	Param added
+		tgt                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'name': 'void', 'kind': 'VOID'}}}
+		map_type            : {'kind': 'ENUM', 'name': 'bpf_map_type', 'size': 4}
+		map_id              : {'kind': 'TYPEDEF', 'name': 'u32'}
+		index               : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Param removed
+		to_ifindex          : {'kind': 'INT', 'name': 'int'}
+		map                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'bpf_map'}}}
+		map_index           : {'kind': 'TYPEDEF', 'name': 'u32'}
+perf_trace_mm_lru_insertion
+	Param removed
+		lru                 : {'kind': 'INT', 'name': 'int'}
+perf_trace_mm_vmscan_lru_isolate
+	Param added
+		highest_zoneidx     : {'kind': 'INT', 'name': 'int'}
+	Param removed
+		classzone_idx       : {'kind': 'INT', 'name': 'int'}
+perf_trace_kcompactd_wake_template
+	Param added
+		highest_zoneidx     : {'kind': 'ENUM', 'name': 'zone_type', 'size': 4}
+	Param removed
+		classzone_idx       : {'kind': 'ENUM', 'name': 'zone_type', 'size': 4}
+perf_trace_mm_migrate_pages
+	Param added
+		thp_succeeded       : {'kind': 'INT', 'name': 'long unsigned int'}
+		thp_failed          : {'kind': 'INT', 'name': 'long unsigned int'}
+		thp_split           : {'kind': 'INT', 'name': 'long unsigned int'}
+	Param reordered
+		                     ['__data', 'succeeded', 'failed', 'mode', 'reason']
+		                     ['__data', 'succeeded', 'failed', 'thp_succeeded', 'thp_failed', 'thp_split', 'mode', 'reason']
+perf_trace_ext4_journal_start
+	Param added
+		revoke_creds        : {'kind': 'INT', 'name': 'int'}
+	Param reordered
+		                     ['__data', 'sb', 'blocks', 'rsv_blocks', 'IP']
+		                     ['__data', 'sb', 'blocks', 'rsv_blocks', 'revoke_creds', 'IP']
+perf_trace_ext4_load_inode
+	Param added
+		sb                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'super_block'}}
+		ino                 : {'kind': 'INT', 'name': 'long unsigned int'}
+	Param removed
+		inode               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'inode'}}
+perf_trace_ext4_discard_preallocations
+	Param added
+		len                 : {'kind': 'INT', 'name': 'unsigned int'}
+		needed              : {'kind': 'INT', 'name': 'unsigned int'}
+perf_trace_block_rq_remap
+	Param removed
+		q                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request_queue'}}
+	Param reordered
+		                     ['__data', 'q', 'rq', 'dev', 'from']
+		                     ['__data', 'rq', 'dev', 'from']
+perf_trace_block_bio_remap
+	Param removed
+		q                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request_queue'}}
+	Param reordered
+		                     ['__data', 'q', 'bio', 'dev', 'from']
+		                     ['__data', 'bio', 'dev', 'from']
+perf_trace_block_split
+	Param removed
+		q                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request_queue'}}
+	Param reordered
+		                     ['__data', 'q', 'bio', 'new_sector']
+		                     ['__data', 'bio', 'new_sector']
+perf_trace_block_bio_complete
+	Param removed
+		error               : {'kind': 'INT', 'name': 'int'}
+perf_trace_block_rq
+	Param removed
+		q                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request_queue'}}
+	Param reordered
+		                     ['__data', 'q', 'rq']
+		                     ['__data', 'rq']
+perf_trace_block_rq_requeue
+	Param removed
+		q                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request_queue'}}
+	Param reordered
+		                     ['__data', 'q', 'rq']
+		                     ['__data', 'rq']
+perf_trace_iocost_ioc_vrate_adj
+	Param removed
+		nr_surpluses        : {'kind': 'INT', 'name': 'int'}
+perf_trace_thermal_power_devfreq_get_power
+	Param removed
+		dynamic_power       : {'kind': 'TYPEDEF', 'name': 'u32'}
+		static_power        : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Param reordered
+		                     ['__data', 'cdev', 'status', 'freq', 'dynamic_power', 'static_power', 'power']
+		                     ['__data', 'cdev', 'status', 'freq', 'power']
+perf_trace_br_fdb_update
+	Param added
+		flags               : {'kind': 'INT', 'name': 'long unsigned int'}
+	Param removed
+		added_by_user       : {'kind': 'TYPEDEF', 'name': 'bool'}
+perf_trace_kfree_skb
+	Param added
+		reason              : {'kind': 'ENUM', 'name': 'skb_drop_reason', 'size': 4}

@@ -1,0 +1,18 @@
+Added STRUCT (9): ['trace_event_raw_inode_foreign_history', 'trace_event_raw_inode_switch_wbs', 'trace_event_raw_track_foreign_dirty', 'trace_event_raw_flush_foreign', 'trace_event_raw_iocost_iocg_activate', 'trace_event_raw_iocg_inuse_update', 'trace_event_raw_iocost_ioc_vrate_adj', 'trace_event_raw_dma_map', 'trace_event_raw_dma_unmap']
+Removed STRUCT (0): []
+Changed STRUCT (3): ['trace_event_raw_generic_add_lease', 'trace_event_raw_xhci_log_trb', 'trace_event_raw_xhci_log_portsc']
+Reasons STRUCT (4): [('Field added', 3), ('Field removed', 1), ('Field type changed', 0), ('Layout changed', 3)]
+trace_event_raw_generic_add_lease
+	Field added
+		rcount              : {'kind': 'INT', 'name': 'int'}
+	Field removed
+		dcount              : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_xhci_log_trb
+	Field added
+		__data_loc_str      : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_xhci_log_portsc
+	Field added
+		__data_loc_str      : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed

@@ -1,12 +1,9 @@
-Old Kind.ENUM (787): ['page_cache_mode', 'tlb_infos', 'node_states', 'fixed_addresses', 'pcpu_fc', 'zone_stat_item', 'lru_list', 'zone_watermarks', 'zone_type', 'uprobe_task_state']
-New Kind.ENUM (795): ['x86_hardware_subarch', 'fixed_addresses', 'zone_type', 'uprobe_task_state', 'pid_type', 'hrtimer_restart', 'rcu_sync_type', 'migrate_mode', 'quota_type', 'system_states']
-Added Kind.ENUM (55): ['x86_hardware_subarch', 'node_stat_item', 'memcg_kmem_state', 'dsa_tag_protocol', 'xdp_netdev_command', 'amd_ip_types', 'amd_core_mca_blocks', 'amd_df_mca_blocks', 'hv_cpuid_function', 'address_markers_idx']
-Removed Kind.ENUM (47): ['rpc_display_format_t', 'dma_attr', 'perf_cstate_core_id', 'perf_cstate_pkg_id', 'xen_contention_stat', 'spectre_v2_mitigation', 'spectre_v2_user_mitigation', 'ssb_mitigation', 'l1tf_mitigations', 'mds_mitigations']
-Common Kind.ENUM (740): ['page_cache_mode', 'tlb_infos', 'node_states', 'fixed_addresses', 'pcpu_fc', 'zone_stat_item', 'lru_list', 'zone_watermarks', 'zone_type', 'uprobe_task_state']
-Changed Kind.ENUM (83): ['fixed_addresses', 'zone_stat_item', 'vm_event_item', 'pid_type', 'cgroup_subsys_id', 'perf_branch_sample_type_shift', 'cpuhp_state', 'perf_event_active_state', 'mem_cgroup_stat_index', 'ethtool_link_mode_bit_indices']
-Reasons Kind.ENUM (3): [('Sub added', 69), ('Sub removed', 21), ('Value changed', 42)]
+Added ENUM (55): ['x86_hardware_subarch', 'node_stat_item', 'memcg_kmem_state', 'dsa_tag_protocol', 'xdp_netdev_command', 'amd_ip_types', 'amd_core_mca_blocks', 'amd_df_mca_blocks', 'hv_cpuid_function', 'address_markers_idx', 'tick_dep_bits', 'vcpu_state', 'qlock_stats', 'req_op', 'devkmsg_log_bits', 'devkmsg_log_masks', 'kernel_read_file_id', 'ftrace_bug_type', 'event_command_flags', 'hist_field_flags', 'extra_elem_state', 'compact_priority', 'pgdat_flags', 'scan_result', 'big_key_op', 'label_initialized', 'drbg_prefixes', 'phy_mode', 'single_ended_mode', 'i2c_slave_event', 'i2c_alert_protocol', 'rio_device_state', 'acpi_reconfig_event', 'cpufreq_table_sorting', 'regulator_active_discharge', 'TPM_OPS_FLAGS', 'tpm_tis_flags', 'gpd_status', 'blk_req_status', 'tps65912_irqs', 's2mps15_reg', 'nvdimm_event', 'scsi_scan_mode', 'ata_prot_flags', 'vga_switcheroo_handler_flags_t', 'acpi_preferred_pm_profiles', 'switchdev_obj_id', 'tc_fl_command', 'tc_matchall_command', 'tcp_synack_type', 'nl802154_cca_modes', 'nl802154_cca_opts', 'nl802154_supported_bool_states', 'nl80211_bss_select_attr', 'ieee80211_bss_type']
+Removed ENUM (47): ['rpc_display_format_t', 'dma_attr', 'perf_cstate_core_id', 'perf_cstate_pkg_id', 'xen_contention_stat', 'spectre_v2_mitigation', 'spectre_v2_user_mitigation', 'ssb_mitigation', 'l1tf_mitigations', 'mds_mitigations', 'taa_mitigations', 'cpuhp_smt_control', 'vmx_l1d_flush_state', 'srbds_mitigations', 'spectre_v1_mitigation', 'spectre_v2_mitigation_cmd', 'spectre_v2_user_cmd', 'ssb_mitigation_cmd', 'tsx_ctrl_states', 'pkey_algo', 'kvm_contention_stat', 'cpu_mitigations', 'perf_callchain_context', 'zone_flags', 'page_check_address_pmd_flag', 'cg_proto_flags', 'slow_d_compare', 'l2tp_debug_flags', 'key_state', 'GPIO_REG', 'rio_phy_type', 'tps65217_regulator_id', 'tps65217_bl_isel', 'tps65217_bl_fdim', 'hwparam_type', 'crb_defaults', 'crb_ca_status', 'crb_start', 'crb_cancel', 'crb_status', 'crb_flags', 'axp22x_irqs', 'axp288_irqs', 'ata_tf_protocols', 'qdisc___state_t', 'net_xmit_qdisc_t', 'ieee80211_band']
+Changed ENUM (83): ['fixed_addresses', 'zone_stat_item', 'vm_event_item', 'pid_type', 'cgroup_subsys_id', 'perf_branch_sample_type_shift', 'cpuhp_state', 'perf_event_active_state', 'mem_cgroup_stat_index', 'ethtool_link_mode_bit_indices', 'netdev_tx', 'bpf_prog_type', 'perf_branch_sample_type', 'ibs_states', 'perf_msr_id', 'pageflags', 'pt_capabilities', 'irq_domain_bus_token', 'xfeature', 'cpuid_leafs', 'context', 'acpi_hest_types', 'pkey_id_type', 'x86_pf_error_code', 'bpf_map_type', 'bpf_func_id', 'bpf_arg_type', 'rq_flag_bits', 'trace_iterator_bits', 'trace_flag_type', 'trace_iterator_flags', 'event_trigger_type', 'bpf_reg_type', 'event_type_t', 'mapping_flags', 'compound_dtor_id', 'compact_result', 'migrate_reason', 'wb_state', 'ttu_flags', 'fid_type', 'sgp_type', 'transparent_hugepage_flag', 'vma_resv_mode', 'res_type', 'fullness_group', 'zs_stat_type', 'fuse_opcode', 'sel_inos', 'ima_hooks', 'rsaprivkey_actions', 'asymmetric_payload_bits', 'pci_dev_flags', 'dmi_device_type', 'acpi_return_package_types', 'power_supply_type', 'acpi_erst_actions', 'acpi_hest_notify_types', 'pci_board_num_t', 'tpm_chip_flags', 'arizona_type', 'sec_device_type', 'nd_driver_flags', 'scsi_target_state', 'ata_completion_errors', 'ata_lpm_hints', 'netdev_priv_flags', 'sock_flags', 'ethtool_stringset', 'amd_chipset_gen', 'ehci_hrtimer_event', 'flag_bits', 'acpi_pcct_type', 'tcp_ca_event', 'qdisc_state_t', 'netevent_notif_type', 'rtattr_type_t', 'switchdev_attr_id', 'lwtunnel_ip_t', 'lwtunnel_ip6_t', 'in6_addr_gen_mode', 'nl80211_band', 'nl80211_ext_feature_index']
+Reasons ENUM (3): [('Elem added', 69), ('Elem removed', 21), ('Value changed', 42)]
 fixed_addresses
-	Sub removed
+	Elem removed
 		PVCLOCK_FIXMAP_BEGIN                    : 512
 		PVCLOCK_FIXMAP_END                      : 519
 	Value changed
@@ -21,7 +18,7 @@ fixed_addresses
 		FIX_TEXT_POKE0                          : 654 -> 646
 		__end_of_permanent_fixed_addresses      : 655 -> 647
 zone_stat_item
-	Sub added
+	Elem added
 		NR_ZONE_LRU_BASE                        : 1
 		NR_ZONE_INACTIVE_ANON                   : 1
 		NR_ZONE_ACTIVE_ANON                     : 2
@@ -31,7 +28,7 @@ zone_stat_item
 		NR_ZONE_WRITE_PENDING                   : 6
 		NR_KERNEL_STACK_KB                      : 11
 		NR_ZSPAGES                              : 13
-	Sub removed
+	Elem removed
 		NR_ALLOC_BATCH                          : 1
 		NR_LRU_BASE                             : 2
 		NR_INACTIVE_ANON                        : 2
@@ -74,7 +71,7 @@ zone_stat_item
 		NR_FREE_CMA_PAGES                       : 39 -> 20
 		NR_VM_ZONE_STAT_ITEMS                   : 40 -> 21
 vm_event_item
-	Sub added
+	Elem added
 		ALLOCSTALL_DMA                          : 8
 		ALLOCSTALL_DMA32                        : 9
 		ALLOCSTALL_NORMAL                       : 10
@@ -96,7 +93,7 @@ vm_event_item
 		THP_SPLIT_PAGE_FAILED                   : 68
 		THP_DEFERRED_SPLIT_PAGE                 : 69
 		THP_SPLIT_PMD                           : 70
-	Sub removed
+	Elem removed
 		PGREFILL_DMA                            : 13
 		PGREFILL_DMA32                          : 14
 		PGREFILL_NORMAL                         : 15
@@ -169,22 +166,22 @@ vm_event_item
 		BALLOON_MIGRATE                         : 76 -> 75
 		NR_VM_EVENT_ITEMS                       : 77 -> 76
 pid_type
-	Sub removed
+	Elem removed
 		__PIDTYPE_TGID                          : 4
 cgroup_subsys_id
-	Sub removed
+	Elem removed
 		CGROUP_CANFORK_START                    : 11
 		__unused_tag_CANFORK_START              : 10
 		CGROUP_CANFORK_END                      : 12
 		__unused_tag_CANFORK_END                : 11
 perf_branch_sample_type_shift
-	Sub added
+	Elem added
 		PERF_SAMPLE_BRANCH_NO_FLAGS_SHIFT       : 14
 		PERF_SAMPLE_BRANCH_NO_CYCLES_SHIFT      : 15
 	Value changed
 		PERF_SAMPLE_BRANCH_MAX_SHIFT            : 14 -> 16
 cpuhp_state
-	Sub added
+	Elem added
 		CPUHP_CREATE_THREADS                    : 1
 		CPUHP_PERF_PREPARE                      : 2
 		CPUHP_PERF_X86_PREPARE                  : 3
@@ -280,17 +277,17 @@ cpuhp_state
 	Value changed
 		CPUHP_ONLINE                            : 1 -> 122
 perf_event_active_state
-	Sub added
+	Elem added
 		PERF_EVENT_STATE_DEAD                   : -4
 mem_cgroup_stat_index
-	Sub added
+	Elem added
 		MEMCG_KERNEL_STACK_KB                   : 7
 		MEMCG_SLAB_RECLAIMABLE                  : 8
 		MEMCG_SLAB_UNRECLAIMABLE                : 9
 		MEMCG_SOCK                              : 10
 		MEMCG_NR_STAT                           : 11
 ethtool_link_mode_bit_indices
-	Sub added
+	Elem added
 		ETHTOOL_LINK_MODE_25000baseCR_Full_BIT  : 31
 		ETHTOOL_LINK_MODE_25000baseKR_Full_BIT  : 32
 		ETHTOOL_LINK_MODE_25000baseSR_Full_BIT  : 33
@@ -304,41 +301,41 @@ ethtool_link_mode_bit_indices
 	Value changed
 		__ETHTOOL_LINK_MODE_LAST                : 30 -> 40
 netdev_tx
-	Sub removed
+	Elem removed
 		NETDEV_TX_LOCKED                        : 32
 bpf_prog_type
-	Sub added
+	Elem added
 		BPF_PROG_TYPE_TRACEPOINT                : 5
 		BPF_PROG_TYPE_XDP                       : 6
 perf_branch_sample_type
-	Sub added
+	Elem added
 		PERF_SAMPLE_BRANCH_NO_FLAGS             : 16384
 		PERF_SAMPLE_BRANCH_NO_CYCLES            : 32768
 	Value changed
 		PERF_SAMPLE_BRANCH_MAX                  : 16384 -> 65536
 ibs_states
-	Sub added
+	Elem added
 		IBS_STOPPED                             : 3
 	Value changed
 		IBS_MAX_STATES                          : 3 -> 4
 perf_msr_id
-	Sub added
+	Elem added
 		PERF_MSR_PTSC                           : 5
 		PERF_MSR_IRPERF                         : 6
 	Value changed
 		PERF_MSR_EVENT_MAX                      : 5 -> 7
 pageflags
-	Sub added
+	Elem added
 		PG_double_map                           : 12
 		PG_isolated                             : 17
-	Sub removed
+	Elem removed
 		PG_compound_lock                        : 23
 	Value changed
 		PG_young                                : 24 -> 23
 		PG_idle                                 : 25 -> 24
 		__NR_PAGEFLAGS                          : 26 -> 25
 pt_capabilities
-	Sub added
+	Elem added
 		PT_CAP_ip_filtering                     : 3
 		PT_CAP_num_address_ranges               : 9
 	Value changed
@@ -351,7 +348,7 @@ pt_capabilities
 		PT_CAP_cycle_thresholds                 : 9 -> 11
 		PT_CAP_psb_periods                      : 10 -> 12
 irq_domain_bus_token
-	Sub added
+	Elem added
 		DOMAIN_BUS_WIRED                        : 1
 		DOMAIN_BUS_IPI                          : 5
 		DOMAIN_BUS_FSL_MC_MSI                   : 6
@@ -360,41 +357,41 @@ irq_domain_bus_token
 		DOMAIN_BUS_PLATFORM_MSI                 : 2 -> 3
 		DOMAIN_BUS_NEXUS                        : 3 -> 4
 xfeature
-	Sub added
+	Elem added
 		XFEATURE_PT_UNIMPLEMENTED_SO_FAR        : 8
 		XFEATURE_PKRU                           : 9
 	Value changed
 		XFEATURE_MAX                            : 8 -> 10
 cpuid_leafs
-	Sub added
+	Elem added
 		CPUID_F_0_EDX                           : 11
 		CPUID_F_1_EDX                           : 12
-	Sub removed
+	Elem removed
 		CPUID_LNX_4                             : 11
 		CPUID_DUMMY                             : 12
 		CPUID_7_EDX                             : 18
 context
-	Sub added
+	Elem added
 		IN_KERNEL_RECOV                         : 3
 acpi_hest_types
-	Sub added
+	Elem added
 		ACPI_HEST_TYPE_GENERIC_ERROR_V2         : 10
 	Value changed
 		ACPI_HEST_TYPE_RESERVED                 : 10 -> 11
 pkey_id_type
-	Sub removed
+	Elem removed
 		PKEY_ID_TYPE__LAST                      : 3
 x86_pf_error_code
-	Sub added
+	Elem added
 		PF_PK                                   : 32
 bpf_map_type
-	Sub added
+	Elem added
 		BPF_MAP_TYPE_PERCPU_HASH                : 5
 		BPF_MAP_TYPE_PERCPU_ARRAY               : 6
 		BPF_MAP_TYPE_STACK_TRACE                : 7
 		BPF_MAP_TYPE_CGROUP_ARRAY               : 8
 bpf_func_id
-	Sub added
+	Elem added
 		BPF_FUNC_skb_load_bytes                 : 26
 		BPF_FUNC_get_stackid                    : 27
 		BPF_FUNC_csum_diff                      : 28
@@ -409,7 +406,7 @@ bpf_func_id
 	Value changed
 		__BPF_FUNC_MAX_ID                       : 26 -> 37
 bpf_arg_type
-	Sub added
+	Elem added
 		ARG_PTR_TO_RAW_STACK                    : 5
 		ARG_CONST_STACK_SIZE_OR_ZERO            : 7
 	Value changed
@@ -417,9 +414,9 @@ bpf_arg_type
 		ARG_PTR_TO_CTX                          : 6 -> 8
 		ARG_ANYTHING                            : 7 -> 9
 rq_flag_bits
-	Sub added
+	Elem added
 		__REQ_PREFLUSH                          : 9
-	Sub removed
+	Elem removed
 		__REQ_WRITE                             : 0
 		__REQ_DISCARD                           : 7
 		__REQ_SECURE                            : 8
@@ -458,7 +455,7 @@ rq_flag_bits
 		__REQ_MQ_INFLIGHT                       : 33 -> 29
 		__REQ_NR_BITS                           : 35 -> 30
 trace_iterator_bits
-	Sub added
+	Elem added
 		TRACE_ITER_EVENT_FORK_BIT               : 20
 	Value changed
 		TRACE_ITER_FUNCTION_BIT                 : 20 -> 21
@@ -466,25 +463,25 @@ trace_iterator_bits
 		TRACE_ITER_STACKTRACE_BIT               : 22 -> 23
 		TRACE_ITER_LAST_BIT                     : 23 -> 24
 trace_flag_type
-	Sub added
+	Elem added
 		TRACE_FLAG_NMI                          : 64
 trace_iterator_flags
-	Sub added
+	Elem added
 		TRACE_ITER_EVENT_FORK                   : 1048576
 	Value changed
 		TRACE_ITER_FUNCTION                     : 1048576 -> 2097152
 		TRACE_ITER_DISPLAY_GRAPH                : 2097152 -> 4194304
 		TRACE_ITER_STACKTRACE                   : 4194304 -> 8388608
 event_trigger_type
-	Sub added
+	Elem added
 		ETT_EVENT_HIST                          : 16
 		ETT_HIST_ENABLE                         : 32
 bpf_reg_type
-	Sub added
+	Elem added
 		PTR_TO_PACKET                           : 9
 		PTR_TO_PACKET_END                       : 10
 event_type_t
-	Sub added
+	Elem added
 		EVENT_TIME                              : 4
 mapping_flags
 	Value changed
@@ -494,7 +491,7 @@ mapping_flags
 		AS_UNEVICTABLE                          : 29 -> 28
 		AS_EXITING                              : 30 -> 29
 compound_dtor_id
-	Sub added
+	Elem added
 		TRANSHUGE_PAGE_DTOR                     : 3
 	Value changed
 		NR_COMPOUND_DTORS                       : 3 -> 4
@@ -510,58 +507,58 @@ compact_result
 		COMPACT_NOT_SUITABLE_ZONE               : 7 -> 0
 		COMPACT_CONTENDED                       : 8 -> 7
 migrate_reason
-	Sub added
+	Elem added
 		MR_TYPES                                : 7
 wb_state
-	Sub removed
+	Elem removed
 		WB_shutting_down                        : 1
 	Value changed
 		WB_writeback_running                    : 2 -> 1
 		WB_has_dirty_io                         : 3 -> 2
 ttu_flags
-	Sub added
+	Elem added
 		TTU_LZFREE                              : 8
 		TTU_SPLIT_HUGE_PMD                      : 16
 		TTU_RMAP_LOCKED                         : 4096
 fid_type
-	Sub added
+	Elem added
 		FILEID_LUSTRE                           : 151
 sgp_type
-	Sub added
+	Elem added
 		SGP_NOHUGE                              : 2
 		SGP_HUGE                                : 3
-	Sub removed
+	Elem removed
 		SGP_DIRTY                               : 2
 	Value changed
 		SGP_WRITE                               : 3 -> 4
 		SGP_FALLOC                              : 4 -> 5
 transparent_hugepage_flag
-	Sub added
+	Elem added
 		TRANSPARENT_HUGEPAGE_DEFRAG_DIRECT_FLAG : 2
 		TRANSPARENT_HUGEPAGE_DEFRAG_KSWAPD_FLAG : 3
-	Sub removed
+	Elem removed
 		TRANSPARENT_HUGEPAGE_DEFRAG_FLAG        : 2
 	Value changed
 		TRANSPARENT_HUGEPAGE_DEFRAG_REQ_MADV_FLAG: 3 -> 4
 		TRANSPARENT_HUGEPAGE_DEFRAG_KHUGEPAGED_FLAG: 4 -> 5
 		TRANSPARENT_HUGEPAGE_USE_ZERO_PAGE_FLAG : 5 -> 6
 vma_resv_mode
-	Sub added
+	Elem added
 		VMA_ADD_RESV                            : 3
 res_type
-	Sub added
+	Elem added
 		_TCP                                    : 4
 fullness_group
-	Sub added
+	Elem added
 		NR_ZS_FULLNESS                          : 4
-	Sub removed
+	Elem removed
 		_ZS_NR_FULLNESS_GROUPS                  : 2
 	Value changed
 		ZS_ALMOST_FULL                          : 0 -> 2
 		ZS_EMPTY                                : 3 -> 0
 		ZS_FULL                                 : 4 -> 3
 zs_stat_type
-	Sub added
+	Elem added
 		CLASS_EMPTY                             : 0
 		CLASS_FULL                              : 3
 		NR_ZS_STAT_TYPE                         : 6
@@ -570,15 +567,15 @@ zs_stat_type
 		OBJ_USED                                : 1 -> 5
 		CLASS_ALMOST_EMPTY                      : 3 -> 1
 fuse_opcode
-	Sub added
+	Elem added
 		FUSE_LSEEK                              : 46
 sel_inos
-	Sub added
+	Elem added
 		SEL_VALIDATE_TRANS                      : 21
 	Value changed
 		SEL_INO_NEXT                            : 21 -> 22
 ima_hooks
-	Sub added
+	Elem added
 		KEXEC_KERNEL_CHECK                      : 7
 		KEXEC_INITRAMFS_CHECK                   : 8
 		POLICY_CHECK                            : 9
@@ -588,7 +585,7 @@ ima_hooks
 		FIRMWARE_CHECK                          : 5 -> 6
 		POST_SETATTR                            : 6 -> 4
 rsaprivkey_actions
-	Sub added
+	Elem added
 		ACT_rsa_get_dp                          : 1
 		ACT_rsa_get_dq                          : 2
 		ACT_rsa_get_p                           : 5
@@ -599,29 +596,29 @@ rsaprivkey_actions
 		ACT_rsa_get_n                           : 2 -> 4
 		NR__rsaprivkey_actions                  : 3 -> 8
 asymmetric_payload_bits
-	Sub added
+	Elem added
 		asym_auth                               : 3
 pci_dev_flags
-	Sub removed
+	Elem removed
 		PCI_DEV_FLAGS_DMA_ALIAS_DEVFN           : 16
 dmi_device_type
-	Sub added
+	Elem added
 		DMI_DEV_TYPE_DEV_SLOT                   : -4
 acpi_return_package_types
-	Sub added
+	Elem added
 		ACPI_PTYPE_CUSTOM                       : 13
 power_supply_type
-	Sub added
+	Elem added
 		POWER_SUPPLY_TYPE_USB_TYPE_C            : 8
 		POWER_SUPPLY_TYPE_USB_PD                : 9
 		POWER_SUPPLY_TYPE_USB_PD_DRP            : 10
 acpi_erst_actions
-	Sub added
+	Elem added
 		ACPI_ERST_EXECUTE_TIMINGS               : 16
 	Value changed
 		ACPI_ERST_ACTION_RESERVED               : 16 -> 17
 acpi_hest_notify_types
-	Sub added
+	Elem added
 		ACPI_HEST_NOTIFY_GPIO                   : 7
 		ACPI_HEST_NOTIFY_SEA                    : 8
 		ACPI_HEST_NOTIFY_SEI                    : 9
@@ -629,7 +626,7 @@ acpi_hest_notify_types
 	Value changed
 		ACPI_HEST_NOTIFY_RESERVED               : 7 -> 11
 pci_board_num_t
-	Sub removed
+	Elem removed
 		pbn_b0_4_1250000                        : 14
 	Value changed
 		pbn_b0_2_1843200                        : 15 -> 14
@@ -740,51 +737,51 @@ pci_board_num_t
 		pbn_pericom_PI7C9X7954                  : 120 -> 119
 		pbn_pericom_PI7C9X7958                  : 121 -> 120
 tpm_chip_flags
-	Sub added
+	Elem added
 		TPM_CHIP_FLAG_IRQ                       : 4
 		TPM_CHIP_FLAG_VIRTUAL                   : 8
-	Sub removed
+	Elem removed
 		TPM_CHIP_FLAG_ALWAYS_POWERED            : 32
 arizona_type
-	Sub added
+	Elem added
 		WM1831                                  : 7
 		CS47L24                                 : 8
 sec_device_type
-	Sub added
+	Elem added
 		S2MPS15X                                : 7
 	Value changed
 		S2MPU02                                 : 7 -> 8
 nd_driver_flags
-	Sub added
+	Elem added
 		ND_DRIVER_DAX_PMEM                      : 128
 scsi_target_state
-	Sub removed
+	Elem removed
 		STARGET_CREATED_REMOVE                  : 4
 	Value changed
 		STARGET_DEL                             : 5 -> 4
 ata_completion_errors
-	Sub removed
+	Elem removed
 		AC_ERR_OK                               : 0
 ata_lpm_hints
-	Sub added
+	Elem added
 		ATA_LPM_WAKE_ONLY                       : 4
 netdev_priv_flags
-	Sub added
+	Elem added
 		IFF_PHONY_HEADROOM                      : 67108864
 		IFF_MACSEC                              : 134217728
 sock_flags
-	Sub added
+	Elem added
 		SOCK_RCU_FREE                           : 24
 ethtool_stringset
-	Sub added
+	Elem added
 		ETH_SS_PHY_STATS                        : 7
 amd_chipset_gen
-	Sub removed
+	Elem removed
 		AMD_CHIPSET_TAISHAN                     : 7
 	Value changed
 		AMD_CHIPSET_UNKNOWN                     : 8 -> 7
 ehci_hrtimer_event
-	Sub added
+	Elem added
 		EHCI_HRTIMER_ACTIVE_UNLINK              : 5
 	Value changed
 		EHCI_HRTIMER_START_UNLINK_INTR          : 5 -> 6
@@ -795,51 +792,51 @@ ehci_hrtimer_event
 		EHCI_HRTIMER_IO_WATCHDOG                : 10 -> 11
 		EHCI_HRTIMER_NUM_EVENTS                 : 11 -> 12
 flag_bits
-	Sub added
+	Elem added
 		ClusterRemove                           : 13
 		RemoveSynchronized                      : 14
 acpi_pcct_type
-	Sub added
+	Elem added
 		ACPI_PCCT_TYPE_HW_REDUCED_SUBSPACE_TYPE2: 2
 	Value changed
 		ACPI_PCCT_TYPE_RESERVED                 : 2 -> 3
 tcp_ca_event
-	Sub added
+	Elem added
 		CA_EVENT_DELAYED_ACK                    : 6
 		CA_EVENT_NON_DELAYED_ACK                : 7
 qdisc_state_t
-	Sub removed
+	Elem removed
 		__QDISC_STATE_THROTTLED                 : 2
 netevent_notif_type
-	Sub added
+	Elem added
 		NETEVENT_DELAY_PROBE_TIME_UPDATE        : 3
 rtattr_type_t
-	Sub added
+	Elem added
 		RTA_EXPIRES                             : 23
 		RTA_PAD                                 : 24
 	Value changed
 		__RTA_MAX                               : 23 -> 25
 switchdev_attr_id
-	Sub added
+	Elem added
 		SWITCHDEV_ATTR_ID_BRIDGE_VLAN_FILTERING : 5
 lwtunnel_ip_t
-	Sub added
+	Elem added
 		LWTUNNEL_IP_PAD                         : 7
 	Value changed
 		__LWTUNNEL_IP_MAX                       : 7 -> 8
 lwtunnel_ip6_t
-	Sub added
+	Elem added
 		LWTUNNEL_IP6_PAD                        : 7
 	Value changed
 		__LWTUNNEL_IP6_MAX                      : 7 -> 8
 in6_addr_gen_mode
-	Sub added
+	Elem added
 		IN6_ADDR_GEN_MODE_RANDOM                : 3
 nl80211_band
-	Sub added
+	Elem added
 		NUM_NL80211_BANDS                       : 3
 nl80211_ext_feature_index
-	Sub added
+	Elem added
 		NL80211_EXT_FEATURE_RRM                 : 1
 		NL80211_EXT_FEATURE_MU_MIMO_AIR_SNIFFER : 2
 		NL80211_EXT_FEATURE_SCAN_START_TIME     : 3

@@ -1,0 +1,108 @@
+Added FUNC (76): ['perf_trace_initcall_finish', 'perf_trace_initcall_start', 'perf_trace_initcall_level', 'perf_trace_hyperv_send_ipi_mask', 'perf_trace_hyperv_nested_flush_guest_mapping_range', 'perf_trace_hyperv_nested_flush_guest_mapping', 'perf_trace_pseudo_lock_l3', 'perf_trace_pseudo_lock_l2', 'perf_trace_pseudo_lock_mem_latency', 'perf_trace_cgroup_event', 'perf_trace_event_init', 'perf_trace_cpu_frequency_limits', 'perf_trace_mem_return_failed', 'perf_trace_mem_connect', 'perf_trace_mem_disconnect', 'perf_trace_xdp_devmap_xmit', 'perf_trace_xdp_bulk_tx', 'perf_trace_rseq_ip_fixup', 'perf_trace_rseq_update', 'perf_trace_mm_vmscan_node_reclaim_begin', 'perf_trace_flush_foreign', 'perf_trace_track_foreign_dirty', 'perf_trace_inode_switch_wbs', 'perf_trace_inode_foreign_history', 'perf_trace_writeback_page_template', 'perf_trace_leases_conflict', 'perf_trace_ext4_error', 'perf_trace_ext4_shutdown', 'perf_trace_ext4_es_insert_delayed_block', 'perf_trace_ext4_es_find_extent_range_exit', 'perf_trace_ext4_es_find_extent_range_enter', 'perf_trace_iocost_ioc_vrate_adj', 'perf_trace_iocg_inuse_update', 'perf_trace_iocost_iocg_activate', 'perf_trace_clk_duty_cycle', 'perf_trace_urandom_read', 'perf_trace_random_read', 'perf_trace_random__extract_entropy', 'perf_trace_random__get_random_bytes', 'perf_trace_xfer_secondary_pool', 'perf_trace_add_disk_randomness', 'perf_trace_add_input_randomness', 'perf_trace_debit_entropy', 'perf_trace_push_to_pool', 'perf_trace_credit_entropy_bits', 'perf_trace_random__mix_pool_bytes', 'perf_trace_add_device_randomness', 'perf_trace_dma_unmap', 'perf_trace_dma_map', 'perf_trace_xhci_log_ctrl_ctx', 'perf_trace_rtc_timer_class', 'perf_trace_rtc_offset_class', 'perf_trace_rtc_alarm_irq_enable', 'perf_trace_rtc_irq_set_state', 'perf_trace_rtc_irq_set_freq', 'perf_trace_rtc_time_alarm_class', 'perf_trace_hwmon_attr_show_string', 'perf_trace_hwmon_attr_class', 'perf_trace_cros_ec_cmd_class', 'perf_trace_devfreq_monitor', 'perf_trace_neigh__update', 'perf_trace_neigh_update', 'perf_trace_neigh_create', 'perf_trace_page_pool_state_hold', 'perf_trace_page_pool_state_release', 'perf_trace_page_pool_inflight', 'perf_trace_tcp_probe', 'perf_trace_inet_sock_set_state', 'perf_trace_net_dev_rx_exit_template', 'perf_trace_net_dev_xmit_timeout', 'perf_trace_devlink_health_reporter_state_update', 'perf_trace_devlink_health_recover_aborted', 'perf_trace_devlink_health_report', 'perf_trace_devlink_hwerr', 'perf_trace_devlink_hwmsg', 'perf_trace_bpf_test_finish']
+Removed FUNC (15): ['perf_trace_bpf_map_next_key', 'perf_trace_bpf_map_delete_elem', 'perf_trace_bpf_map_keyval', 'perf_trace_bpf_obj_map', 'perf_trace_bpf_obj_prog', 'perf_trace_bpf_map_create', 'perf_trace_bpf_prog_load', 'perf_trace_bpf_prog_event', 'perf_trace_mm_numa_migrate_ratelimit', 'perf_trace_writeback_dirty_page', 'perf_trace_ext4_es_find_delayed_extent_range_exit', 'perf_trace_ext4_es_find_delayed_extent_range_enter', 'perf_trace_fib_validate_source', 'perf_trace_fib_table_lookup_nh', 'perf_trace_tcp_set_state']
+Changed FUNC (21): ['perf_trace_signal_deliver', 'perf_trace_signal_generate', 'perf_trace_hrtimer_start', 'perf_trace_timer_expire_entry', 'perf_trace_cgroup_migrate', 'perf_trace_cgroup', 'perf_trace_mm_vmscan_lru_shrink_inactive', 'perf_trace_mm_shrink_slab_start', 'perf_trace_mm_vmscan_direct_reclaim_begin_template', 'perf_trace_mm_vmscan_wakeup_kswapd', 'perf_trace_ext4_ext_remove_space_done', 'perf_trace_ext4_ext_rm_leaf', 'perf_trace_ext4_remove_blocks', 'perf_trace_smbus_reply', 'perf_trace_aer_event', 'perf_trace_non_standard_event', 'perf_trace_extlog_mem_event', 'perf_trace_fib6_table_lookup', 'perf_trace_fib_table_lookup', 'perf_trace_tcp_event_sk', 'perf_trace_sock_exceed_buf_limit']
+Reasons FUNC (5): [('Param added', 15), ('Param removed', 7), ('Param type changed', 5), ('Param reordered', 4), ('Return type changed', 0)]
+perf_trace_signal_deliver
+	Param type changed
+		info                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'siginfo'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kernel_siginfo'}}
+perf_trace_signal_generate
+	Param type changed
+		info                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'siginfo'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kernel_siginfo'}}
+perf_trace_hrtimer_start
+	Param added
+		mode                : {'kind': 'ENUM', 'name': 'hrtimer_mode', 'size': 4}
+perf_trace_timer_expire_entry
+	Param added
+		baseclk             : {'kind': 'INT', 'name': 'long unsigned int'}
+perf_trace_cgroup_migrate
+	Param added
+		path                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+	Param reordered
+		                     ['__data', 'dst_cgrp', 'task', 'threadgroup']
+		                     ['__data', 'dst_cgrp', 'path', 'task', 'threadgroup']
+perf_trace_cgroup
+	Param added
+		path                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+perf_trace_mm_vmscan_lru_shrink_inactive
+	Param added
+		stat                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'reclaim_stat'}}
+	Param removed
+		nr_dirty            : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_writeback        : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_congested        : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_immediate        : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_activate         : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_ref_keep         : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_unmap_fail       : {'kind': 'INT', 'name': 'long unsigned int'}
+	Param reordered
+		                     ['__data', 'nid', 'nr_scanned', 'nr_reclaimed', 'nr_dirty', 'nr_writeback', 'nr_congested', 'nr_immediate', 'nr_activate', 'nr_ref_keep', 'nr_unmap_fail', 'priority', 'file']
+		                     ['__data', 'nid', 'nr_scanned', 'nr_reclaimed', 'stat', 'priority', 'file']
+perf_trace_mm_shrink_slab_start
+	Param added
+		priority            : {'kind': 'INT', 'name': 'int'}
+	Param removed
+		pgs_scanned         : {'kind': 'INT', 'name': 'long unsigned int'}
+		lru_pgs             : {'kind': 'INT', 'name': 'long unsigned int'}
+	Param reordered
+		                     ['__data', 'shr', 'sc', 'nr_objects_to_shrink', 'pgs_scanned', 'lru_pgs', 'cache_items', 'delta', 'total_scan']
+		                     ['__data', 'shr', 'sc', 'nr_objects_to_shrink', 'cache_items', 'delta', 'total_scan', 'priority']
+perf_trace_mm_vmscan_direct_reclaim_begin_template
+	Param removed
+		may_writepage       : {'kind': 'INT', 'name': 'int'}
+		classzone_idx       : {'kind': 'INT', 'name': 'int'}
+	Param reordered
+		                     ['__data', 'order', 'may_writepage', 'gfp_flags', 'classzone_idx']
+		                     ['__data', 'order', 'gfp_flags']
+perf_trace_mm_vmscan_wakeup_kswapd
+	Param added
+		gfp_flags           : {'kind': 'TYPEDEF', 'name': 'gfp_t'}
+perf_trace_ext4_ext_remove_space_done
+	Param added
+		pc                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'partial_cluster'}}
+	Param removed
+		partial             : {'kind': 'INT', 'name': 'long long int'}
+perf_trace_ext4_ext_rm_leaf
+	Param added
+		pc                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'partial_cluster'}}
+	Param removed
+		partial_cluster     : {'kind': 'INT', 'name': 'long long int'}
+perf_trace_ext4_remove_blocks
+	Param added
+		pc                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'partial_cluster'}}
+	Param removed
+		partial_cluster     : {'kind': 'INT', 'name': 'long long int'}
+perf_trace_smbus_reply
+	Param added
+		res                 : {'kind': 'INT', 'name': 'int'}
+perf_trace_aer_event
+	Param added
+		tlp_header_valid    : {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'u8'}}
+		tlp                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'aer_header_log_regs'}}
+perf_trace_non_standard_event
+	Param type changed
+		sec_type            : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'uuid_le'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'guid_t'}}}
+		fru_id              : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'uuid_le'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'guid_t'}}}
+perf_trace_extlog_mem_event
+	Param type changed
+		fru_id              : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'uuid_le'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'guid_t'}}}
+perf_trace_fib6_table_lookup
+	Param added
+		res                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'fib6_result'}}}
+	Param removed
+		rt                  : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'rt6_info'}}}
+perf_trace_fib_table_lookup
+	Param added
+		nhc                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'fib_nh_common'}}}
+		err                 : {'kind': 'INT', 'name': 'int'}
+perf_trace_tcp_event_sk
+	Param type changed
+		sk                  : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}
+perf_trace_sock_exceed_buf_limit
+	Param added
+		kind                : {'kind': 'INT', 'name': 'int'}

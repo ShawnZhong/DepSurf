@@ -1,0 +1,52 @@
+Added FUNC (17): ['perf_trace_sample_threshold', 'perf_trace_nmi_noise', 'perf_trace_irq_noise', 'perf_trace_softirq_noise', 'perf_trace_thread_noise', 'perf_trace_iomap_iter', 'perf_trace_jbd2_shrink_checkpoint_list', 'perf_trace_jbd2_shrink_scan_exit', 'perf_trace_jbd2_journal_shrink', 'perf_trace_prq_report', 'perf_trace_devres', 'perf_trace_spi_set_cs', 'perf_trace_spi_setup', 'perf_trace_amd_pstate_perf', 'perf_trace_qdisc_enqueue', 'perf_trace_tcp_event_skb', 'perf_trace_inet_sk_error_report']
+Removed FUNC (15): ['perf_trace_mm_vmscan_inactive_list_is_low', 'perf_trace_iomap_apply', 'perf_trace_prandom_u32', 'perf_trace_urandom_read', 'perf_trace_random__extract_entropy', 'perf_trace_random__get_random_bytes', 'perf_trace_add_disk_randomness', 'perf_trace_add_input_randomness', 'perf_trace_debit_entropy', 'perf_trace_credit_entropy_bits', 'perf_trace_random__mix_pool_bytes', 'perf_trace_add_device_randomness', 'perf_trace_cros_ec_sensorhub_filter', 'perf_trace_cros_ec_sensorhub_data', 'perf_trace_cros_ec_sensorhub_timestamp']
+Changed FUNC (10): ['perf_trace_io_uring_task_run', 'perf_trace_io_uring_poll_arm', 'perf_trace_io_uring_submit_sqe', 'perf_trace_iomap_range_class', 'perf_trace_jbd2_checkpoint_stats', 'perf_trace_jbd2_run_stats', 'perf_trace_jbd2_handle_stats', 'perf_trace_jbd2_handle_extend', 'perf_trace_jbd2_handle_start_class', 'perf_trace_kfree_skb']
+Reasons FUNC (5): [('Param added', 4), ('Param removed', 0), ('Param type changed', 6), ('Param reordered', 3), ('Return type changed', 0)]
+perf_trace_io_uring_task_run
+	Param added
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Param reordered
+		                     ['__data', 'ctx', 'opcode', 'user_data']
+		                     ['__data', 'ctx', 'req', 'opcode', 'user_data']
+perf_trace_io_uring_poll_arm
+	Param added
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Param reordered
+		                     ['__data', 'ctx', 'opcode', 'user_data', 'mask', 'events']
+		                     ['__data', 'ctx', 'req', 'opcode', 'user_data', 'mask', 'events']
+perf_trace_io_uring_submit_sqe
+	Param added
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		flags               : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Param reordered
+		                     ['__data', 'ctx', 'opcode', 'user_data', 'force_nonblock', 'sq_thread']
+		                     ['__data', 'ctx', 'req', 'opcode', 'user_data', 'flags', 'force_nonblock', 'sq_thread']
+perf_trace_iomap_range_class
+	Param type changed
+		off                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'loff_t'}
+		len                 : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+perf_trace_jbd2_checkpoint_stats
+	Param type changed
+		tid                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+perf_trace_jbd2_run_stats
+	Param type changed
+		tid                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+perf_trace_jbd2_handle_stats
+	Param type changed
+		tid                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+perf_trace_jbd2_handle_extend
+	Param type changed
+		tid                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+perf_trace_jbd2_handle_start_class
+	Param type changed
+		tid                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+perf_trace_kfree_skb
+	Param added
+		reason              : {'kind': 'ENUM', 'name': 'skb_drop_reason', 'size': 4}

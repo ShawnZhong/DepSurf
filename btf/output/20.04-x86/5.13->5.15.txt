@@ -1,35 +1,59 @@
-                            5.13->5.15
-struct common                     9099
-       added                       283
-       removed                     117
-       changed                     656
-       Sub added                   365
-       Sub removed                 163
-       Sub reordered                20
-       Sub type changed            140
-       Layout changed              162
-func   common                    51214
-       added                      2121
-       removed                    1123
-       changed                     640
-       Sub added                   298
-       Sub removed                 194
-       Sub reordered                 2
-       Sub type changed            214
-       Return type changed         111
-enum   common                     1341
-       added                        49
-       removed                      20
-       changed                      66
-       Sub added                    60
-       Sub removed                  13
-       Value changed                35
-union  common                      147
-       added                         3
-       removed                       0
-       changed                       4
-       Sub added                     1
-       Sub removed                   1
-       Sub reordered                 0
-       Sub type changed              1
-       Layout changed                1
+                                   5.13->5.15
+trace_event common                   508     
+            added                     17     
+            removed                   15     
+            changed                   17     
+            - Field added              6     
+            - Field removed            2     
+            - Field type changed      10     
+            - Layout changed          14     
+raw_tp      common                   516     
+            added                     17     
+            removed                   15     
+            changed                   10     
+            - Param added              4     
+            - Param removed            0     
+            - Param type changed       6     
+            - Param reordered          3     
+            - Return type changed      0     
+lsm         common                   203     
+            added                      0     
+            removed                    0     
+            changed                    5     
+            - Param added              0     
+            - Param removed            1     
+            - Param type changed       4     
+            - Param reordered          0     
+            - Return type changed      0     
+func        common                 51214     
+            added                   2121     
+            removed                 1123     
+            changed                  640     
+            - Param added            298     
+            - Param removed          194     
+            - Param type changed     214     
+            - Param reordered        104     
+            - Return type changed    111     
+struct      common                  9099     
+            added                    283     
+            removed                  117     
+            changed                  656     
+            - Field added            365     
+            - Field removed          163     
+            - Field type changed     140     
+            - Layout changed         605     
+union       common                   147     
+            added                      3     
+            removed                    0     
+            changed                    4     
+            - Field added              1     
+            - Field removed            1     
+            - Field type changed       1     
+            - Layout changed           3     
+enum        common                  1341     
+            added                     49     
+            removed                   20     
+            changed                   66     
+            - Elem added              60     
+            - Elem removed            13     
+            - Value changed           35     

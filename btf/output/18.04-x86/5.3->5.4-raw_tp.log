@@ -1,0 +1,10 @@
+Added FUNC (9): ['perf_trace_flush_foreign', 'perf_trace_track_foreign_dirty', 'perf_trace_inode_switch_wbs', 'perf_trace_inode_foreign_history', 'perf_trace_iocost_ioc_vrate_adj', 'perf_trace_iocg_inuse_update', 'perf_trace_iocost_iocg_activate', 'perf_trace_dma_unmap', 'perf_trace_dma_map']
+Removed FUNC (0): []
+Changed FUNC (1): ['perf_trace_writeback_queue_io']
+Reasons FUNC (5): [('Param added', 1), ('Param removed', 0), ('Param type changed', 0), ('Param reordered', 1), ('Return type changed', 0)]
+perf_trace_writeback_queue_io
+	Param added
+		dirtied_before      : {'kind': 'INT', 'name': 'long unsigned int'}
+	Param reordered
+		                     ['__data', 'wb', 'work', 'moved']
+		                     ['__data', 'wb', 'work', 'dirtied_before', 'moved']

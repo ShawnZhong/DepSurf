@@ -1,35 +1,59 @@
-                            4.8->4.10
-struct common                    6432
-       added                      228
-       removed                     50
-       changed                    640
-       Sub added                  247
-       Sub removed                113
-       Sub reordered                9
-       Sub type changed           112
-       Layout changed             279
-func   common                   37538
-       added                     1507
-       removed                    585
-       changed                    386
-       Sub added                  224
-       Sub removed                181
-       Sub reordered                0
-       Sub type changed           105
-       Return type changed         51
-enum   common                     783
-       added                       49
-       removed                     12
-       changed                     42
-       Sub added                   40
-       Sub removed                 10
-       Value changed               24
-union  common                      82
-       added                        7
-       removed                      1
-       changed                      4
-       Sub added                    3
-       Sub removed                  2
-       Sub reordered                0
-       Sub type changed             0
-       Layout changed               0
+                                   4.8->4.10
+trace_event common                   355    
+            added                     16    
+            removed                    2    
+            changed                    4    
+            - Field added              2    
+            - Field removed            1    
+            - Field type changed       1    
+            - Layout changed           3    
+raw_tp      common                   361    
+            added                     16    
+            removed                    2    
+            changed                    2    
+            - Param added              1    
+            - Param removed            0    
+            - Param type changed       1    
+            - Param reordered          0    
+            - Return type changed      0    
+lsm         common                   168    
+            added                      3    
+            removed                    0    
+            changed                    0    
+            - Param added              0    
+            - Param removed            0    
+            - Param type changed       0    
+            - Param reordered          0    
+            - Return type changed      0    
+func        common                 37538    
+            added                   1507    
+            removed                  585    
+            changed                  386    
+            - Param added            224    
+            - Param removed          181    
+            - Param type changed     105    
+            - Param reordered         43    
+            - Return type changed     51    
+struct      common                  6432    
+            added                    228    
+            removed                   50    
+            changed                  640    
+            - Field added            247    
+            - Field removed          113    
+            - Field type changed     112    
+            - Layout changed         592    
+union       common                    82    
+            added                      7    
+            removed                    1    
+            changed                    4    
+            - Field added              3    
+            - Field removed            2    
+            - Field type changed       0    
+            - Layout changed           4    
+enum        common                   783    
+            added                     49    
+            removed                   12    
+            changed                   42    
+            - Elem added              40    
+            - Elem removed            10    
+            - Value changed           24    

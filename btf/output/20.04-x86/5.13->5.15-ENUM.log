@@ -1,17 +1,14 @@
-Old Kind.ENUM (1361): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'tlb_infos', 'l1tf_mitigations', 'pcpu_fc', 'node_states', 'uprobe_task_state', 'migratetype', 'numa_stat_item']
-New Kind.ENUM (1390): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'tlb_infos', 'l1tf_mitigations', 'pcpu_fc', 'node_states', 'uprobe_task_state', 'migratetype', 'numa_stat_item']
-Added Kind.ENUM (49): ['device_removable', 'bpf_type_flag', 'cgroup_bpf_attach_type', 'perf_uncore_spr_iio_freerunning_type_id', 'perf_uncore_spr_imc_freerunning_type_id', 'xstate_copy_mode', 'l1d_flush_mitigations', 'gds_mitigations', 'retbleed_mitigation', 'retbleed_mitigation_cmd']
-Removed Kind.ENUM (20): ['handler_type', 'log_flags', 'pcpu_chunk_type', 'usb_device_removable', 'arizona_type', 'sec_device_type', 's2mpa01_reg', 's2mps11_reg', 's2mps13_reg', 's2mps14_reg']
-Common Kind.ENUM (1341): ['system_states', 'timespec_type', 'x86_hardware_subarch', 'tlb_infos', 'l1tf_mitigations', 'pcpu_fc', 'node_states', 'uprobe_task_state', 'migratetype', 'numa_stat_item']
-Changed Kind.ENUM (66): ['numa_stat_item', 'vm_event_item', 'cpuhp_state', 'bpf_prog_type', 'bpf_attach_type', 'bpf_func_id', 'kmalloc_cache_type', 'bpf_arg_type', 'bpf_return_type', 'bpf_reg_type']
-Reasons Kind.ENUM (3): [('Sub added', 60), ('Sub removed', 13), ('Value changed', 35)]
+Added ENUM (49): ['device_removable', 'bpf_type_flag', 'cgroup_bpf_attach_type', 'perf_uncore_spr_iio_freerunning_type_id', 'perf_uncore_spr_imc_freerunning_type_id', 'xstate_copy_mode', 'l1d_flush_mitigations', 'gds_mitigations', 'retbleed_mitigation', 'retbleed_mitigation_cmd', 'srso_mitigation', 'srso_mitigation_cmd', 'mca_msr', 'resctrl_conf_type', 'resctrl_res_level', 'blake2s_lengths', 'sig_handler', 'dl_bw_request', 'printk_info_flags', 'cgroup_opt_features', 'skb_drop_reason', 'probe_print_type', 'kfence_object_state', 'kfence_error_type', 'kfence_counter_id', 'ext4_journal_trigger_type', 'Opt_errors', 'squashfs_param', 'nf_hook_ops_type', 'xfrm_replay_mode', 'drbg_seed_state', 'prio_policy', 'dd_data_dir', 'dd_prio', 'blake2s_iv', 'acpi_viot_node_type', 'icst_control_type', 'regulator_detection_severity', 'chacha_constants', 'latency_type', 'latency_count', 'iommu_page_response_code', 'sam_status', 'scsi_host_status', 'scsi_msg_byte', 'energy_perf_value_index', 'led_default_state', 'devlink_rate_type', 'packet_sock_flags']
+Removed ENUM (20): ['handler_type', 'log_flags', 'pcpu_chunk_type', 'usb_device_removable', 'arizona_type', 'sec_device_type', 's2mpa01_reg', 's2mps11_reg', 's2mps13_reg', 's2mps14_reg', 's2mps15_reg', 'S2MPU02_reg', 's5m8763_reg', 's5m8767_reg', 's2mps11_irq', 's2mps14_irq', 's2mpu02_irq', 's5m8767_irq', 's5m8763_irq', 'wwan_port_type']
+Changed ENUM (66): ['numa_stat_item', 'vm_event_item', 'cpuhp_state', 'bpf_prog_type', 'bpf_attach_type', 'bpf_func_id', 'kmalloc_cache_type', 'bpf_arg_type', 'bpf_return_type', 'bpf_reg_type', 'ucount_type', 'xfeature', 'tsx_ctrl_states', 'lockdown_reason', 'cpuid_leafs', 'spectre_v2_mitigation', 'spectre_v2_mitigation_cmd', 'split_lock_detect_state', 'smca_bank_types', 'mmu_notifier_event', 'kcore_type', 'siginfo_layout', 'req_opf', 'migrate_reason', 'bpf_link_type', 'audit_state', 'event_trigger_type', 'trace_type', 'hist_field_flags', 'fetch_op', 'bpf_cmd', 'perf_event_read_format', 'iter_type', 'ttu_flags', 'sgp_type', 'pgt_entry', 'zone_flags', 'hugetlb_page_flags', 'OID', 'ethtool_link_ext_substate_bad_signal_integrity', 'sctp_cid', 'sctp_event_timeout', 'integrity_status', 'ima_hooks', 'data_formats', 'rq_qos_id', 'rdma_driver_id', 'pin_config_param', 'dma_slave_buswidth', 'acpi_subtable_type', 'pci_board_num_t', 'io_pgtable_fmt', 'nvmem_type', 'mem_type', 'mmc_busy_cmd', 'dsa_tag_protocol', 'lwtunnel_encap_types', 'qdisc_state_t', 'devlink_command', 'devlink_attr', 'devlink_param_generic_id', 'sk_psock_state_bits', 'nl80211_ext_feature_index', 'switchdev_notifier_type', 'linux_mptcp_mib_field', 'mptcp_addr_signal_status']
+Reasons ENUM (3): [('Elem added', 60), ('Elem removed', 13), ('Value changed', 35)]
 numa_stat_item
-	Sub added
+	Elem added
 		NR_VM_NUMA_EVENT_ITEMS                  : 6
-	Sub removed
+	Elem removed
 		NR_VM_NUMA_STAT_ITEMS                   : 6
 vm_event_item
-	Sub added
+	Elem added
 		PGDEMOTE_KSWAPD                         : 27
 		PGDEMOTE_DIRECT                         : 28
 	Value changed
@@ -88,7 +85,7 @@ vm_event_item
 		DIRECT_MAP_LEVEL3_SPLIT                 : 97 -> 99
 		NR_VM_EVENT_ITEMS                       : 98 -> 100
 cpuhp_state
-	Sub added
+	Elem added
 		CPUHP_MM_DEMOTION_DEAD                  : 14
 		CPUHP_BIO_DEAD                          : 23
 		CPUHP_XFS_DEAD                          : 30
@@ -96,7 +93,7 @@ cpuhp_state
 		CPUHP_RANDOM_PREPARE                    : 40
 		CPUHP_AP_RANDOM_ONLINE                  : 190
 		CPUHP_AP_MM_DEMOTION_ONLINE             : 224
-	Sub removed
+	Elem removed
 		CPUHP_PAGE_ALLOC_DEAD                   : 30
 		CPUHP_AP_ARM_SDEI_STARTING              : 110
 		CPUHP_AP_PERF_S390_CFD_ONLINE           : 165
@@ -263,17 +260,17 @@ cpuhp_state
 		CPUHP_AP_ACTIVE                         : 224 -> 228
 		CPUHP_ONLINE                            : 225 -> 229
 bpf_prog_type
-	Sub added
+	Elem added
 		BPF_PROG_TYPE_SYSCALL                   : 31
 bpf_attach_type
-	Sub added
+	Elem added
 		BPF_SK_REUSEPORT_SELECT                 : 39
 		BPF_SK_REUSEPORT_SELECT_OR_MIGRATE      : 40
 		BPF_PERF_EVENT                          : 41
 	Value changed
 		__MAX_BPF_ATTACH_TYPE                   : 39 -> 42
 bpf_func_id
-	Sub added
+	Elem added
 		BPF_FUNC_sys_bpf                        : 166
 		BPF_FUNC_btf_find_by_name_kind          : 167
 		BPF_FUNC_sys_close                      : 168
@@ -287,14 +284,14 @@ bpf_func_id
 	Value changed
 		__BPF_FUNC_MAX_ID                       : 166 -> 176
 kmalloc_cache_type
-	Sub added
+	Elem added
 		KMALLOC_CGROUP                          : 1
 	Value changed
 		KMALLOC_RECLAIM                         : 1 -> 2
 		KMALLOC_DMA                             : 2 -> 3
 		NR_KMALLOC_TYPES                        : 3 -> 4
 bpf_arg_type
-	Sub added
+	Elem added
 		ARG_PTR_TO_STACK                        : 22
 		ARG_PTR_TO_TIMER                        : 24
 		__BPF_ARG_TYPE_LIMIT                    : 1023
@@ -325,14 +322,14 @@ bpf_arg_type
 		ARG_PTR_TO_CONST_STR                    : 28 -> 23
 		__BPF_ARG_TYPE_MAX                      : 29 -> 25
 bpf_return_type
-	Sub added
+	Elem added
 		RET_PTR_TO_SOCKET                       : 3
 		RET_PTR_TO_TCP_SOCK                     : 4
 		RET_PTR_TO_SOCK_COMMON                  : 5
 		RET_PTR_TO_ALLOC_MEM                    : 6
 		__BPF_RET_TYPE_MAX                      : 9
 		__BPF_RET_TYPE_LIMIT                    : 1023
-	Sub removed
+	Elem removed
 		RET_PTR_TO_MEM_OR_BTF_ID_OR_NULL        : 9
 	Value changed
 		RET_PTR_TO_MAP_VALUE_OR_NULL            : 3 -> 258
@@ -344,10 +341,10 @@ bpf_return_type
 		RET_PTR_TO_MEM_OR_BTF_ID                : 10 -> 7
 		RET_PTR_TO_BTF_ID                       : 11 -> 8
 bpf_reg_type
-	Sub added
+	Elem added
 		PTR_TO_BUF                              : 18
 		__BPF_REG_TYPE_LIMIT                    : 1023
-	Sub removed
+	Elem removed
 		PTR_TO_MEM_OR_NULL                      : 22
 		PTR_TO_RDONLY_BUF                       : 23
 		PTR_TO_RDONLY_BUF_OR_NULL               : 24
@@ -370,7 +367,7 @@ bpf_reg_type
 		PTR_TO_MAP_KEY                          : 29 -> 5
 		__BPF_REG_TYPE_MAX                      : 30 -> 21
 ucount_type
-	Sub added
+	Elem added
 		UCOUNT_RLIMIT_NPROC                     : 12
 		UCOUNT_RLIMIT_MSGQUEUE                  : 13
 		UCOUNT_RLIMIT_SIGPENDING                : 14
@@ -378,36 +375,36 @@ ucount_type
 	Value changed
 		UCOUNT_COUNTS                           : 12 -> 16
 xfeature
-	Sub added
+	Elem added
 		XFEATURE_RSRVD_COMP_16                  : 16
 		XFEATURE_XTILE_CFG                      : 17
 		XFEATURE_XTILE_DATA                     : 18
 	Value changed
 		XFEATURE_MAX                            : 16 -> 19
 tsx_ctrl_states
-	Sub added
+	Elem added
 		TSX_CTRL_RTM_ALWAYS_ABORT               : 2
 	Value changed
 		TSX_CTRL_NOT_SUPPORTED                  : 2 -> 3
 lockdown_reason
-	Sub added
+	Elem added
 		LOCKDOWN_BPF_READ_KERNEL                : 21
-	Sub removed
+	Elem removed
 		LOCKDOWN_BPF_READ                       : 21
 cpuid_leafs
-	Sub added
+	Elem added
 		CPUID_8000_0021_EAX                     : 20
 spectre_v2_mitigation
-	Sub added
+	Elem added
 		SPECTRE_V2_IBRS                         : 6
 spectre_v2_mitigation_cmd
-	Sub added
+	Elem added
 		SPECTRE_V2_CMD_IBRS                     : 9
 split_lock_detect_state
-	Sub added
+	Elem added
 		sld_ratelimit                           : 3
 smca_bank_types
-	Sub added
+	Elem added
 		SMCA_UMC_V2                             : 13
 		SMCA_PCIE_V2                            : 22
 		SMCA_XGMI_PCS                           : 23
@@ -424,45 +421,45 @@ smca_bank_types
 		SMCA_PCIE                               : 20 -> 21
 		N_SMCA_BANK_TYPES                       : 21 -> 26
 mmu_notifier_event
-	Sub added
+	Elem added
 		MMU_NOTIFY_EXCLUSIVE                    : 7
 kcore_type
-	Sub removed
+	Elem removed
 		KCORE_OTHER                             : 5
 		KCORE_REMAP                             : 6
 siginfo_layout
-	Sub added
+	Elem added
 		SIL_FAULT_PERF_EVENT                    : 8
-	Sub removed
+	Elem removed
 		SIL_PERF_EVENT                          : 8
 req_opf
-	Sub removed
+	Elem removed
 		REQ_OP_SCSI_IN                          : 32
 		REQ_OP_SCSI_OUT                         : 33
 migrate_reason
-	Sub added
+	Elem added
 		MR_DEMOTION                             : 8
 	Value changed
 		MR_TYPES                                : 8 -> 9
 bpf_link_type
-	Sub added
+	Elem added
 		BPF_LINK_TYPE_PERF_EVENT                : 7
 	Value changed
 		MAX_BPF_LINK_TYPE                       : 7 -> 8
 audit_state
-	Sub added
+	Elem added
 		AUDIT_STATE_DISABLED                    : 0
 		AUDIT_STATE_BUILD                       : 1
 		AUDIT_STATE_RECORD                      : 2
-	Sub removed
+	Elem removed
 		AUDIT_DISABLED                          : 0
 		AUDIT_BUILD_CONTEXT                     : 1
 		AUDIT_RECORD_CONTEXT                    : 2
 event_trigger_type
-	Sub added
+	Elem added
 		ETT_EVENT_EPROBE                        : 64
 trace_type
-	Sub added
+	Elem added
 		TRACE_OSNOISE                           : 16
 		TRACE_TIMERLAT                          : 17
 	Value changed
@@ -470,10 +467,10 @@ trace_type
 		TRACE_FUNC_REPEATS                      : 17 -> 19
 		__TRACE_LAST_TYPE                       : 18 -> 20
 hist_field_flags
-	Sub added
+	Elem added
 		HIST_FIELD_FL_BUCKET                    : 131072
 fetch_op
-	Sub added
+	Elem added
 		FETCH_OP_ST_SYMSTR                      : 17
 		FETCH_OP_TP_ARG                         : 20
 	Value changed
@@ -482,10 +479,10 @@ fetch_op
 		FETCH_OP_END                            : 19 -> 21
 		FETCH_NOP_SYMBOL                        : 20 -> 22
 bpf_cmd
-	Sub added
+	Elem added
 		BPF_PROG_RUN                            : 10
 perf_event_read_format
-	Sub added
+	Elem added
 		PERF_FORMAT_LOST                        : 16
 	Value changed
 		PERF_FORMAT_MAX                         : 16 -> 32
@@ -498,14 +495,14 @@ iter_type
 		ITER_DISCARD                            : 64 -> 5
 		ITER_XARRAY                             : 128 -> 4
 ttu_flags
-	Sub removed
+	Elem removed
 		TTU_MIGRATION                           : 1
 		TTU_MUNLOCK                             : 2
 		TTU_SPLIT_FREEZE                        : 256
 sgp_type
-	Sub added
+	Elem added
 		SGP_NOALLOC                             : 1
-	Sub removed
+	Elem removed
 		SGP_NOHUGE                              : 2
 		SGP_HUGE                                : 3
 	Value changed
@@ -513,18 +510,18 @@ sgp_type
 		SGP_WRITE                               : 4 -> 3
 		SGP_FALLOC                              : 5 -> 4
 pgt_entry
-	Sub added
+	Elem added
 		HPAGE_PUD                               : 3
 zone_flags
-	Sub added
+	Elem added
 		ZONE_RECLAIM_ACTIVE                     : 1
 hugetlb_page_flags
-	Sub added
+	Elem added
 		HPG_vmemmap_optimized                   : 4
 	Value changed
 		__NR_HPAGEFLAGS                         : 4 -> 5
 OID
-	Sub added
+	Elem added
 		OID_mskrb5                              : 30
 		OID_krb5                                : 31
 		OID_krb5u2u                             : 32
@@ -596,38 +593,38 @@ OID
 		OID_TPMSealedData                       : 87 -> 97
 		OID__NR                                 : 88 -> 98
 ethtool_link_ext_substate_bad_signal_integrity
-	Sub added
+	Elem added
 		ETHTOOL_LINK_EXT_SUBSTATE_BSI_SERDES_REFERENCE_CLOCK_LOST: 3
 		ETHTOOL_LINK_EXT_SUBSTATE_BSI_SERDES_ALOS: 4
 sctp_cid
-	Sub added
+	Elem added
 		SCTP_CID_PAD                            : 132
 sctp_event_timeout
-	Sub added
+	Elem added
 		SCTP_EVENT_TIMEOUT_PROBE                : 9
 	Value changed
 		SCTP_EVENT_TIMEOUT_SACK                 : 9 -> 10
 		SCTP_EVENT_TIMEOUT_AUTOCLOSE            : 10 -> 11
 integrity_status
-	Sub added
+	Elem added
 		INTEGRITY_FAIL_IMMUTABLE                : 3
 	Value changed
 		INTEGRITY_NOLABEL                       : 3 -> 4
 		INTEGRITY_NOXATTRS                      : 4 -> 5
 		INTEGRITY_UNKNOWN                       : 5 -> 6
 ima_hooks
-	Sub added
+	Elem added
 		SETXATTR_CHECK                          : 14
 	Value changed
 		MAX_CHECK                               : 14 -> 15
 data_formats
-	Sub added
+	Elem added
 		DATA_FMT_UINT                           : 4
 rq_qos_id
-	Sub added
+	Elem added
 		RQ_QOS_IOPRIO                           : 3
 rdma_driver_id
-	Sub added
+	Elem added
 		RDMA_DRIVER_IRDMA                       : 9
 pin_config_param
 	Value changed
@@ -637,13 +634,13 @@ pin_config_param
 		PIN_CONFIG_SLEW_RATE                    : 22 -> 23
 		PIN_CONFIG_SKEW_DELAY                   : 23 -> 21
 dma_slave_buswidth
-	Sub added
+	Elem added
 		DMA_SLAVE_BUSWIDTH_128_BYTES            : 128
 acpi_subtable_type
-	Sub added
+	Elem added
 		ACPI_SUBTABLE_PRMT                      : 2
 pci_board_num_t
-	Sub added
+	Elem added
 		pbn_b0_1_15625000                       : 14
 		pbn_oxsemi_1_15625000                   : 72
 		pbn_oxsemi_2_15625000                   : 73
@@ -653,7 +650,7 @@ pci_board_num_t
 		pbn_titan_2_4000000                     : 114
 		pbn_titan_4_4000000                     : 115
 		pbn_titan_8_4000000                     : 116
-	Sub removed
+	Elem removed
 		pbn_b0_1_4000000                        : 14
 		pbn_endrun_2_4000000                    : 71
 		pbn_oxsemi_1_4000000                    : 73
@@ -703,15 +700,15 @@ pci_board_num_t
 		pbn_moxa8250_4p                         : 115 -> 118
 		pbn_moxa8250_8p                         : 116 -> 119
 io_pgtable_fmt
-	Sub added
+	Elem added
 		APPLE_DART                              : 7
 	Value changed
 		IO_PGTABLE_NUM_FMTS                     : 7 -> 8
 nvmem_type
-	Sub added
+	Elem added
 		NVMEM_TYPE_FRAM                         : 4
 mem_type
-	Sub added
+	Elem added
 		MEM_RDDR5                               : 24
 		MEM_LRDDR5                              : 25
 		MEM_HBM2                                : 28
@@ -719,22 +716,22 @@ mem_type
 		MEM_NVDIMM                              : 24 -> 26
 		MEM_WIO2                                : 25 -> 27
 mmc_busy_cmd
-	Sub added
+	Elem added
 		MMC_BUSY_EXTR_SINGLE                    : 3
 		MMC_BUSY_IO                             : 4
 dsa_tag_protocol
-	Sub added
+	Elem added
 		DSA_TAG_PROTO_SJA1110                   : 23
 lwtunnel_encap_types
-	Sub added
+	Elem added
 		LWTUNNEL_ENCAP_IOAM6                    : 9
 	Value changed
 		__LWTUNNEL_ENCAP_MAX                    : 9 -> 10
 qdisc_state_t
-	Sub added
+	Elem added
 		__QDISC_STATE_DRAINING                  : 3
 devlink_command
-	Sub added
+	Elem added
 		DEVLINK_CMD_RATE_GET                    : 74
 		DEVLINK_CMD_RATE_SET                    : 75
 		DEVLINK_CMD_RATE_NEW                    : 76
@@ -743,7 +740,7 @@ devlink_command
 		__DEVLINK_CMD_MAX                       : 74 -> 78
 		DEVLINK_CMD_MAX                         : 73 -> 77
 devlink_attr
-	Sub added
+	Elem added
 		DEVLINK_ATTR_RATE_TYPE                  : 165
 		DEVLINK_ATTR_RATE_TX_SHARE              : 166
 		DEVLINK_ATTR_RATE_TX_MAX                : 167
@@ -753,7 +750,7 @@ devlink_attr
 		__DEVLINK_ATTR_MAX                      : 165 -> 170
 		DEVLINK_ATTR_MAX                        : 164 -> 169
 devlink_param_generic_id
-	Sub added
+	Elem added
 		DEVLINK_PARAM_GENERIC_ID_ENABLE_ETH     : 11
 		DEVLINK_PARAM_GENERIC_ID_ENABLE_RDMA    : 12
 		DEVLINK_PARAM_GENERIC_ID_ENABLE_VNET    : 13
@@ -761,20 +758,20 @@ devlink_param_generic_id
 		__DEVLINK_PARAM_GENERIC_ID_MAX          : 11 -> 14
 		DEVLINK_PARAM_GENERIC_ID_MAX            : 10 -> 13
 sk_psock_state_bits
-	Sub added
+	Elem added
 		SK_PSOCK_RX_STRP_ENABLED                : 1
 nl80211_ext_feature_index
-	Sub added
+	Elem added
 		NL80211_EXT_FEATURE_BSS_COLOR           : 58
 	Value changed
 		NUM_NL80211_EXT_FEATURES                : 58 -> 59
 		MAX_NL80211_EXT_FEATURES                : 57 -> 58
 switchdev_notifier_type
-	Sub added
+	Elem added
 		SWITCHDEV_BRPORT_OFFLOADED              : 15
 		SWITCHDEV_BRPORT_UNOFFLOADED            : 16
 linux_mptcp_mib_field
-	Sub added
+	Elem added
 		MPTCP_MIB_DSSTCPMISMATCH                : 17
 		MPTCP_MIB_DATACSUMERR                   : 18
 		MPTCP_MIB_ADDADDRDROP                   : 27
@@ -804,7 +801,7 @@ linux_mptcp_mib_field
 		MPTCP_MIB_RCVPRUNED                     : 34 -> 40
 		__MPTCP_MIB_MAX                         : 35 -> 43
 mptcp_addr_signal_status
-	Sub removed
+	Elem removed
 		MPTCP_ADD_ADDR_IPV6                     : 2
 		MPTCP_ADD_ADDR_PORT                     : 3
 	Value changed

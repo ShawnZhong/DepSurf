@@ -1,19 +1,17 @@
-Old Kind.UNION (125): ['fpregs_state', 'sigval', '__sifields', 'kernfs_node_id', 'thread_union', 'key_payload', 'perf_mem_data_src', 'bpf_attr', 'flowi_uli', 'ethtool_flow_union']
-New Kind.UNION (127): ['fpregs_state', 'sigval', '__sifields', 'rcu_special', 'thread_union', 'key_payload', 'perf_mem_data_src', 'bpf_attr', 'flowi_uli', 'ethtool_flow_union']
-Added Kind.UNION (5): ['rcu_special', 'text_poke_insn', 'aa_buffer', 'blk_crypto_iv', 'skb_entry']
-Removed Kind.UNION (3): ['kernfs_node_id', 'jump_code_union', 'ftrace_code_union']
-Common Kind.UNION (122): ['fpregs_state', 'sigval', '__sifields', 'thread_union', 'key_payload', 'perf_mem_data_src', 'bpf_attr', 'flowi_uli', 'ethtool_flow_union', 'perf_capabilities']
-Changed Kind.UNION (3): ['bpf_attr', 'security_list_options', 'phy_configure_opts']
-Reasons Kind.UNION (5): [('Sub added', 3), ('Sub removed', 1), ('Sub reordered', 0), ('Sub type changed', 1), ('Layout changed', 0)]
+Added UNION (5): ['rcu_special', 'text_poke_insn', 'aa_buffer', 'blk_crypto_iv', 'skb_entry']
+Removed UNION (3): ['kernfs_node_id', 'jump_code_union', 'ftrace_code_union']
+Changed UNION (3): ['bpf_attr', 'security_list_options', 'phy_configure_opts']
+Reasons UNION (4): [('Field added', 3), ('Field removed', 1), ('Field type changed', 1), ('Layout changed', 3)]
 bpf_attr
-	Sub added
+	Field added
 		batch               : {'kind': 'STRUCT', 'name': '(anon)'}
 		link_create         : {'kind': 'STRUCT', 'name': '(anon)'}
 		link_update         : {'kind': 'STRUCT', 'name': '(anon)'}
 		enable_stats        : {'kind': 'STRUCT', 'name': '(anon)'}
 		iter_create         : {'kind': 'STRUCT', 'name': '(anon)'}
+	Layout changed
 security_list_options
-	Sub added
+	Field added
 		bprm_creds_for_exec : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'linux_binprm'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		bprm_creds_from_file: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'linux_binprm'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		task_fix_setgid     : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
@@ -24,9 +22,9 @@ security_list_options
 		perf_event_free     : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'perf_event'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 		perf_event_read     : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'perf_event'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		perf_event_write    : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'perf_event'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-	Sub removed
+	Field removed
 		bprm_set_creds      : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'linux_binprm'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
-	Sub type changed
+	Field type changed
 		binder_set_context_mgr: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		binder_transaction  : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
@@ -37,6 +35,8 @@ security_list_options
 		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		key_permission      : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'key_ref_t'}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'key_ref_t'}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-2)', 'type': {'kind': 'ENUM', 'name': 'key_need_perm', 'size': 4}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+	Layout changed
 phy_configure_opts
-	Sub added
+	Field added
 		dp                  : {'kind': 'STRUCT', 'name': 'phy_configure_opts_dp'}
+	Layout changed

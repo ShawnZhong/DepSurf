@@ -1,29 +1,29 @@
-Old Kind.UNION (99): ['fpregs_state', 'irq_stack_union', 'sigval', 'kernfs_node_id', 'key_payload', 'thread_union', 'perf_mem_data_src', 'flowi_uli', 'ethtool_flow_union', 'perf_capabilities']
-New Kind.UNION (102): ['fpregs_state', 'irq_stack_union', 'sigval', 'kernfs_node_id', 'thread_union', 'key_payload', 'perf_mem_data_src', 'flowi_uli', 'ethtool_flow_union', 'perf_capabilities']
-Added Kind.UNION (6): ['sctp_sack_variable', 'sctp_addr', 'sctp_addr_param', 'sctp_params', 'ib_flow_spec', 'skb_entry']
-Removed Kind.UNION (3): ['nf_inet_addr', 'nf_conntrack_man_proto', 'nf_conntrack_proto']
-Common Kind.UNION (96): ['fpregs_state', 'irq_stack_union', 'sigval', 'kernfs_node_id', 'key_payload', 'thread_union', 'perf_mem_data_src', 'flowi_uli', 'ethtool_flow_union', 'perf_capabilities']
-Changed Kind.UNION (4): ['thread_union', 'bpf_attr', 'proc_op', 'security_list_options']
-Reasons Kind.UNION (5): [('Sub added', 3), ('Sub removed', 1), ('Sub reordered', 0), ('Sub type changed', 1), ('Layout changed', 0)]
+Added UNION (6): ['sctp_sack_variable', 'sctp_addr', 'sctp_addr_param', 'sctp_params', 'ib_flow_spec', 'skb_entry']
+Removed UNION (3): ['nf_inet_addr', 'nf_conntrack_man_proto', 'nf_conntrack_proto']
+Changed UNION (4): ['thread_union', 'bpf_attr', 'proc_op', 'security_list_options']
+Reasons UNION (4): [('Field added', 3), ('Field removed', 1), ('Field type changed', 1), ('Layout changed', 4)]
 thread_union
-	Sub added
+	Field added
 		task                : {'kind': 'STRUCT', 'name': 'task_struct'}
+	Layout changed
 bpf_attr
-	Sub added
+	Field added
 		raw_tracepoint      : {'kind': 'STRUCT', 'name': '(anon)'}
 		(anon-6)            : {'kind': 'STRUCT', 'name': '(anon)'}
 		task_fd_query       : {'kind': 'STRUCT', 'name': '(anon)'}
+	Layout changed
 proc_op
-	Sub removed
+	Field removed
 		lsm                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+	Layout changed
 security_list_options
-	Sub added
+	Field added
 		cred_getsecid       : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
 		socket_socketpair   : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'socket'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'socket'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		sctp_assoc_request  : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sctp_endpoint'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sk_buff'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		sctp_bind_connect   : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sockaddr'}}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		sctp_sk_clone       : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sctp_endpoint'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
-	Sub type changed
+	Field type changed
 		capable             : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		settime             : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'timespec'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'timezone'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
@@ -62,3 +62,4 @@ security_list_options
 		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kern_ipc_perm'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		sem_semop           : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sem_array'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sembuf'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
 		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kern_ipc_perm'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sembuf'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+	Layout changed

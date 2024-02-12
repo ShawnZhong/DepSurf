@@ -1,12 +1,9 @@
-Old Kind.ENUM (795): ['x86_hardware_subarch', 'fixed_addresses', 'zone_type', 'uprobe_task_state', 'pid_type', 'hrtimer_restart', 'rcu_sync_type', 'migrate_mode', 'quota_type', 'system_states']
-New Kind.ENUM (832): ['x86_hardware_subarch', 'x86_legacy_i8042_state', 'fixed_addresses', 'zone_type', 'uprobe_task_state', 'pid_type', 'hrtimer_restart', 'rcu_sync_type', 'migrate_mode', 'quota_type']
-Added Kind.ENUM (49): ['x86_legacy_i8042_state', 'bpf_attach_type', 'dl_dev_state', 'ucount_type', 'blk_zoned_model', 'ct_dccp_states', 'sctp_conntrack', 'udplite_conntrack', 'tsq_enum', 'cpuid_regs_idx']
-Removed Kind.ENUM (12): ['cpuid_regs', 'amd_ip_types', 'amd_core_mca_blocks', 'amd_df_mca_blocks', 'rq_flag_bits', 'req_op', 'perf_group_flag', 'oom_scan_t', 'i2c_slave_event', 'fence_flag_bits']
-Common Kind.ENUM (783): ['x86_hardware_subarch', 'fixed_addresses', 'zone_type', 'uprobe_task_state', 'pid_type', 'hrtimer_restart', 'rcu_sync_type', 'migrate_mode', 'quota_type', 'system_states']
-Changed Kind.ENUM (42): ['cpuhp_state', 'fwnode_type', 'dsa_tag_protocol', 'bpf_prog_type', 'pageflags', 'pt_capabilities', 'stack_type', 'flow_dissector_key_id', 'bpf_map_type', 'bpf_func_id']
-Reasons Kind.ENUM (3): [('Sub added', 40), ('Sub removed', 10), ('Value changed', 24)]
+Added ENUM (49): ['x86_legacy_i8042_state', 'bpf_attach_type', 'dl_dev_state', 'ucount_type', 'blk_zoned_model', 'ct_dccp_states', 'sctp_conntrack', 'udplite_conntrack', 'tsq_enum', 'cpuid_regs_idx', 'swiotlb_force', 'con_scroll', 'smca_bank_types', 'req_opf', 'req_flag_bits', 'bpf_lru_list_type', 'l2tp_debug_flags', 'wbt_flags', 'blk_zone_type', 'dmaengine_tx_result', 'thermal_notify_event', 'cppc_regs', 'amd_iommu_intr_mode_type', 'device_link_state', 'fw_status', 'dma_fence_flag_bits', 't10_dif_type', 'zbc_zone_type', 'zbc_zone_cond', 'hwmon_sensor_types', 'hwmon_chip_attributes', 'hwmon_temp_attributes', 'hwmon_in_attributes', 'hwmon_curr_attributes', 'hwmon_power_attributes', 'hwmon_energy_attributes', 'hwmon_humidity_attributes', 'hwmon_fan_attributes', 'hwmon_pwm_attributes', 'mddev_flags', 'mddev_sb_flags', 'recovery_flags', 'ppfear_regs', 'ec_mkbp_event', 'phy_tunable_id', 'tc_clsbpf_command', 'bpf_ret_code', 'tcp_chrono', 'fib_event_type']
+Removed ENUM (12): ['cpuid_regs', 'amd_ip_types', 'amd_core_mca_blocks', 'amd_df_mca_blocks', 'rq_flag_bits', 'req_op', 'perf_group_flag', 'oom_scan_t', 'i2c_slave_event', 'fence_flag_bits', 'sd_dif_target_protection_types', 'motionsensor_id']
+Changed ENUM (42): ['cpuhp_state', 'fwnode_type', 'dsa_tag_protocol', 'bpf_prog_type', 'pageflags', 'pt_capabilities', 'stack_type', 'flow_dissector_key_id', 'bpf_map_type', 'bpf_func_id', 'bpf_reg_type', 'alarmtimer_type', 'ethtool_link_mode_bit_indices', 'regex_type', 'trace_type', 'bpf_cmd', 'mapping_flags', 'compact_priority', 'compact_result', 'label_initialized', 'aafs_ns_type', 'crypto_attr_type_t', 'rq_atomic_flags', 'pci_bus_flags', 'hdmi_picture_aspect', 'pci_board_num_t', 'tpm_const', 'tpm_chip_flags', 'tpm_capabilities', 'tpm_sub_capabilities', 'tpm_tis_flags', 'ethtool_stringset', 'flag_bits', 'hw_event_mc_err_type', 'rtattr_type_t', 'switchdev_obj_id', 'lwtunnel_encap_types', 'ip_conntrack_info', 'tsq_flags', 'nl80211_iftype', 'nl80211_auth_type', 'nl80211_ext_feature_index']
+Reasons ENUM (3): [('Elem added', 40), ('Elem removed', 10), ('Value changed', 24)]
 cpuhp_state
-	Sub added
+	Elem added
 		CPUHP_X86_MCE_DEAD                      : 10
 		CPUHP_VIRT_NET_DEAD                     : 11
 		CPUHP_SLUB_DEAD                         : 12
@@ -65,7 +62,7 @@ cpuhp_state
 		CPUHP_AP_PERF_ARM_L2X0_ONLINE           : 151
 		CPUHP_AP_PERF_ARM_QCOM_L2_ONLINE        : 152
 		CPUHP_AP_PERF_ARM_QCOM_L3_ONLINE        : 153
-	Sub removed
+	Elem removed
 		CPUHP_PERF_X86_UNCORE_PREP              : 4
 		CPUHP_PERF_X86_RAPL_PREP                : 6
 		CPUHP_NOTIFY_PREPARE                    : 19
@@ -158,18 +155,18 @@ cpuhp_state
 		CPUHP_AP_ACTIVE                         : 121 -> 189
 		CPUHP_ONLINE                            : 122 -> 190
 fwnode_type
-	Sub added
+	Elem added
 		FWNODE_ACPI_STATIC                      : 4
 	Value changed
 		FWNODE_PDATA                            : 4 -> 5
 		FWNODE_IRQCHIP                          : 5 -> 6
 dsa_tag_protocol
-	Sub added
+	Elem added
 		DSA_TAG_PROTO_QCA                       : 5
 	Value changed
 		DSA_TAG_LAST                            : 5 -> 6
 bpf_prog_type
-	Sub added
+	Elem added
 		BPF_PROG_TYPE_PERF_EVENT                : 7
 		BPF_PROG_TYPE_CGROUP_SKB                : 8
 		BPF_PROG_TYPE_CGROUP_SOCK               : 9
@@ -177,7 +174,7 @@ bpf_prog_type
 		BPF_PROG_TYPE_LWT_OUT                   : 11
 		BPF_PROG_TYPE_LWT_XMIT                  : 12
 pageflags
-	Sub added
+	Elem added
 		PG_waiters                              : 7
 	Value changed
 		PG_slab                                 : 7 -> 8
@@ -196,7 +193,7 @@ pageflags
 		PG_slob_free                            : 11 -> 12
 		PG_double_map                           : 12 -> 13
 pt_capabilities
-	Sub added
+	Elem added
 		PT_CAP_ptwrite                          : 5
 		PT_CAP_power_event_trace                : 6
 	Value changed
@@ -209,20 +206,20 @@ pt_capabilities
 		PT_CAP_cycle_thresholds                 : 11 -> 13
 		PT_CAP_psb_periods                      : 12 -> 14
 stack_type
-	Sub added
+	Elem added
 		STACK_TYPE_UNKNOWN                      : 0
 		STACK_TYPE_TASK                         : 1
 		STACK_TYPE_IRQ                          : 2
 		STACK_TYPE_SOFTIRQ                      : 3
 		STACK_TYPE_EXCEPTION                    : 4
 		STACK_TYPE_EXCEPTION_LAST               : 7
-	Sub removed
+	Elem removed
 		STACK_IS_UNKNOWN                        : 0
 		STACK_IS_NORMAL                         : 1
 		STACK_IS_EXCEPTION                      : 2
 		STACK_IS_IRQ                            : 3
 flow_dissector_key_id
-	Sub added
+	Elem added
 		FLOW_DISSECTOR_KEY_ICMP                 : 5
 		FLOW_DISSECTOR_KEY_VLAN                 : 8
 		FLOW_DISSECTOR_KEY_ENC_KEYID            : 12
@@ -230,7 +227,7 @@ flow_dissector_key_id
 		FLOW_DISSECTOR_KEY_ENC_IPV6_ADDRS       : 14
 		FLOW_DISSECTOR_KEY_ENC_CONTROL          : 15
 		FLOW_DISSECTOR_KEY_ENC_PORTS            : 16
-	Sub removed
+	Elem removed
 		FLOW_DISSECTOR_KEY_VLANID               : 7
 	Value changed
 		FLOW_DISSECTOR_KEY_ETH_ADDRS            : 5 -> 6
@@ -240,11 +237,11 @@ flow_dissector_key_id
 		FLOW_DISSECTOR_KEY_MPLS_ENTROPY         : 10 -> 11
 		FLOW_DISSECTOR_KEY_MAX                  : 11 -> 17
 bpf_map_type
-	Sub added
+	Elem added
 		BPF_MAP_TYPE_LRU_HASH                   : 9
 		BPF_MAP_TYPE_LRU_PERCPU_HASH            : 10
 bpf_func_id
-	Sub added
+	Elem added
 		BPF_FUNC_current_task_under_cgroup      : 37
 		BPF_FUNC_skb_change_tail                : 38
 		BPF_FUNC_skb_pull_data                  : 39
@@ -256,14 +253,14 @@ bpf_func_id
 	Value changed
 		__BPF_FUNC_MAX_ID                       : 37 -> 45
 bpf_reg_type
-	Sub added
+	Elem added
 		PTR_TO_MAP_VALUE_ADJ                    : 11
 alarmtimer_type
-	Sub added
+	Elem added
 		ALARM_REALTIME_FREEZER                  : 3
 		ALARM_BOOTTIME_FREEZER                  : 4
 ethtool_link_mode_bit_indices
-	Sub added
+	Elem added
 		ETHTOOL_LINK_MODE_1000baseX_Full_BIT    : 41
 		ETHTOOL_LINK_MODE_10000baseCR_Full_BIT  : 42
 		ETHTOOL_LINK_MODE_10000baseSR_Full_BIT  : 43
@@ -275,20 +272,20 @@ ethtool_link_mode_bit_indices
 	Value changed
 		__ETHTOOL_LINK_MODE_LAST                : 40 -> 48
 regex_type
-	Sub added
+	Elem added
 		MATCH_GLOB                              : 4
 trace_type
-	Sub added
+	Elem added
 		TRACE_HWLAT                             : 15
 		TRACE_RAW_DATA                          : 16
 	Value changed
 		__TRACE_LAST_TYPE                       : 15 -> 17
 bpf_cmd
-	Sub added
+	Elem added
 		BPF_PROG_ATTACH                         : 8
 		BPF_PROG_DETACH                         : 9
 mapping_flags
-	Sub added
+	Elem added
 		AS_NO_WRITEBACK_TAGS                    : 5
 	Value changed
 		AS_EIO                                  : 25 -> 0
@@ -297,7 +294,7 @@ mapping_flags
 		AS_UNEVICTABLE                          : 28 -> 3
 		AS_EXITING                              : 29 -> 4
 compact_priority
-	Sub added
+	Elem added
 		COMPACT_PRIO_SYNC_FULL                  : 0
 		MIN_COMPACT_COSTLY_PRIORITY             : 1
 	Value changed
@@ -306,15 +303,15 @@ compact_priority
 		COMPACT_PRIO_ASYNC                      : 1 -> 2
 		INIT_COMPACT_PRIORITY                   : 1 -> 2
 compact_result
-	Sub added
+	Elem added
 		COMPACT_SUCCESS                         : 8
-	Sub removed
+	Elem removed
 		COMPACT_PARTIAL                         : 8
 label_initialized
-	Sub added
+	Elem added
 		LABEL_PENDING                           : 2
 aafs_ns_type
-	Sub added
+	Elem added
 		AAFS_NS_REVISION                        : 7
 	Value changed
 		AAFS_NS_COUNT                           : 7 -> 8
@@ -324,26 +321,26 @@ aafs_ns_type
 		AAFS_NS_OWNER                           : 11 -> 12
 		AAFS_NS_SIZEOF                          : 12 -> 13
 crypto_attr_type_t
-	Sub added
+	Elem added
 		CRYPTOCFGA_REPORT_ACOMP                 : 11
 	Value changed
 		__CRYPTOCFGA_MAX                        : 11 -> 12
 rq_atomic_flags
-	Sub added
+	Elem added
 		REQ_ATOM_POLL_SLEPT                     : 2
 pci_bus_flags
-	Sub added
+	Elem added
 		PCI_BUS_FLAGS_NO_AERSID                 : 4
 hdmi_picture_aspect
-	Sub added
+	Elem added
 		HDMI_PICTURE_ASPECT_64_27               : 3
 		HDMI_PICTURE_ASPECT_256_135             : 4
 	Value changed
 		HDMI_PICTURE_ASPECT_RESERVED            : 3 -> 5
 pci_board_num_t
-	Sub added
+	Elem added
 		pbn_b0_4_1250000                        : 14
-	Sub removed
+	Elem removed
 		pbn_byt                                 : 107
 		pbn_qrk                                 : 108
 	Value changed
@@ -453,18 +450,18 @@ pci_board_num_t
 		pbn_pericom_PI7C9X7954                  : 119 -> 118
 		pbn_pericom_PI7C9X7958                  : 120 -> 119
 tpm_const
-	Sub added
+	Elem added
 		TPM_NUM_EVENT_LOG_FILES                 : 3
 tpm_chip_flags
-	Sub added
+	Elem added
 		TPM_CHIP_FLAG_HAVE_TIMEOUTS             : 16
-	Sub removed
+	Elem removed
 		TPM_CHIP_FLAG_REGISTERED                : 1
 tpm_capabilities
-	Sub added
+	Elem added
 		TPM_CAP_VERSION_1_1                     : 6
 		TPM_CAP_VERSION_1_2                     : 26
-	Sub removed
+	Elem removed
 		CAP_VERSION_1_1                         : 100663296
 		CAP_VERSION_1_2                         : 436207616
 	Value changed
@@ -480,43 +477,43 @@ tpm_sub_capabilities
 		TPM_CAP_PROP_TIS_TIMEOUT                : 352387072 -> 277
 		TPM_CAP_PROP_TIS_DURATION               : 536936448 -> 288
 tpm_tis_flags
-	Sub added
+	Elem added
 		TPM_TIS_ITPM_WORKAROUND                 : 1
-	Sub removed
+	Elem removed
 		TPM_TIS_ITPM_POSSIBLE                   : 1
 ethtool_stringset
-	Sub added
+	Elem added
 		ETH_SS_PHY_TUNABLES                     : 8
 flag_bits
-	Sub added
+	Elem added
 		ExternalBbl                             : 15
 		FailFast                                : 16
 		LastDev                                 : 17
 hw_event_mc_err_type
-	Sub added
+	Elem added
 		HW_EVENT_ERR_DEFERRED                   : 2
 	Value changed
 		HW_EVENT_ERR_FATAL                      : 2 -> 3
 		HW_EVENT_ERR_INFO                       : 3 -> 4
 rtattr_type_t
-	Sub added
+	Elem added
 		RTA_UID                                 : 25
 	Value changed
 		__RTA_MAX                               : 25 -> 26
 switchdev_obj_id
-	Sub removed
+	Elem removed
 		SWITCHDEV_OBJ_ID_IPV4_FIB               : 2
 	Value changed
 		SWITCHDEV_OBJ_ID_PORT_FDB               : 3 -> 2
 		SWITCHDEV_OBJ_ID_PORT_MDB               : 4 -> 3
 lwtunnel_encap_types
-	Sub added
+	Elem added
 		LWTUNNEL_ENCAP_SEG6                     : 5
 		LWTUNNEL_ENCAP_BPF                      : 6
 	Value changed
 		__LWTUNNEL_ENCAP_MAX                    : 5 -> 7
 ip_conntrack_info
-	Sub added
+	Elem added
 		IP_CT_ESTABLISHED                       : 0
 		IP_CT_RELATED                           : 1
 		IP_CT_NEW                               : 2
@@ -525,14 +522,14 @@ ip_conntrack_info
 		IP_CT_RELATED_REPLY                     : 4
 		IP_CT_NUMBER                            : 5
 tsq_flags
-	Sub added
+	Elem added
 		TSQF_THROTTLED                          : 1
 		TSQF_QUEUED                             : 2
 		TCPF_TSQ_DEFERRED                       : 4
 		TCPF_WRITE_TIMER_DEFERRED               : 8
 		TCPF_DELACK_TIMER_DEFERRED              : 16
 		TCPF_MTU_REDUCED_DEFERRED               : 32
-	Sub removed
+	Elem removed
 		TSQ_THROTTLED                           : 0
 		TSQ_QUEUED                              : 1
 		TCP_TSQ_DEFERRED                        : 2
@@ -540,13 +537,13 @@ tsq_flags
 		TCP_DELACK_TIMER_DEFERRED               : 4
 		TCP_MTU_REDUCED_DEFERRED                : 5
 nl80211_iftype
-	Sub added
+	Elem added
 		NL80211_IFTYPE_NAN                      : 12
 	Value changed
 		NUM_NL80211_IFTYPES                     : 12 -> 13
 		NL80211_IFTYPE_MAX                      : 11 -> 12
 nl80211_auth_type
-	Sub added
+	Elem added
 		NL80211_AUTHTYPE_FILS_SK                : 5
 		NL80211_AUTHTYPE_FILS_SK_PFS            : 6
 		NL80211_AUTHTYPE_FILS_PK                : 7
@@ -555,7 +552,7 @@ nl80211_auth_type
 		NL80211_AUTHTYPE_MAX                    : 4 -> 7
 		NL80211_AUTHTYPE_AUTOMATIC              : 5 -> 8
 nl80211_ext_feature_index
-	Sub added
+	Elem added
 		NL80211_EXT_FEATURE_BEACON_RATE_LEGACY  : 6
 		NL80211_EXT_FEATURE_BEACON_RATE_HT      : 7
 		NL80211_EXT_FEATURE_BEACON_RATE_VHT     : 8

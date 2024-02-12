@@ -1,3 +1,5 @@
+from enum import Enum
+
 class Kind(str, Enum):
     INT = "INT"
     PTR = "PTR"
