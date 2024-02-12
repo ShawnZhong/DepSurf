@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from utils import system
-from vm_prep import KEY_PATH
+from prep import KEY_PATH
 import argparse
 
 

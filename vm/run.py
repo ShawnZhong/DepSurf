@@ -3,7 +3,7 @@
 import argparse
 import os
 
-from vm_prep import DISK_IMG_PATH, SEED_IMG_PATH, VM_DATA_PATH
+from prep import DISK_IMG_PATH, SEED_IMG_PATH, VM_DATA_PATH
 from utils import system
 from vm_utils import get_arch, Arch
 
