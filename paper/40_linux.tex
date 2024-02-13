@@ -1,0 +1,132 @@
+
+
+\section{Stability of eBPF Programs}
+\label{sec:stability}
+
+
+\begin{table*}[t]
+  \centering
+  \newcommand{\thead}[3]{\multicolumn{#1}{#2}{\bfseries #3}}
+  \newcommand{\mcol}[2]{\multicolumn{#1}{r||}{#2}}
+  \newcommand{\chead}[2]{\multirow{#1}{*}{\rotatebox[origin=c]{90}{\bfseries #2}}}
+  \newcommand{\ver}[2]{#1 $\rightarrow$ #2}
+
+  % \setlength{\tabcolsep}{5pt}
+
+  \begin{tabular}{c|l||r|r|r|r|r|l}
+     & \thead{1}{r||}{Distribution}
+    %  & \thead{5}{c||}{Ubuntu 18.04}
+     & \thead{5}{c|}{Ubuntu 20.04}
+     & \thead{1}{c}{Error}
+    \\ \hline
+
+
+     & \mcol{1}{Versions}           & \ver{5.4}{5.8} & \ver{5.8}{5.11} & \ver{5.11}{5.13} & \ver{5.13}{5.15} & Total         &          \\ \hline\hline
+
+    \chead{7}{Struct}
+     & Added                        & 529 ( 6.3\%)   & 513 ( 5.9\%)    & 233 ( 2.6\%)     & 283 ( 3.1\%)     & 1426 (17.0\%) & Compiler \\
+     & Removed                      & 203 ( 2.4\%)   & 156 ( 1.8\%)    & 96 ( 1.1\%)      & 117 ( 1.3\%)     & 440 ( 5.2\%)  & Compiler \\
+     & Changed                      & 973 (11.6\%)   & 771 ( 8.8\%)    & 476 ( 5.2\%)     & 656 ( 7.1\%)     & 1513 (18.0\%)            \\
+     & - Field added                & 485 ( 5.8\%)   & 439 ( 5.0\%)    & 272 ( 3.0\%)     & 365 ( 4.0\%)     & 944 (11.2\%)  & Compiler \\
+     & - Field removed              & 315 ( 3.8\%)   & 232 ( 2.7\%)    & 154 ( 1.7\%)     & 163 ( 1.8\%)     & 533 ( 6.3\%)  & Compiler \\
+     & - Field type changed         & 219 ( 2.6\%)   & 164 ( 1.9\%)    & 111 ( 1.2\%)     & 140 ( 1.5\%)     & 400 ( 4.8\%)  & Silent   \\
+     & - Layout changed             & 897 (10.7\%)   & 720 ( 8.3\%)    & 438 ( 4.8\%)     & 605 ( 6.6\%)     & 1408 (16.8\%)            \\
+    \hline
+    \chead{8}{Function}
+     & Added                        & 3564 ( 7.4\%)  & 3080 ( 6.2\%)   & 1343 ( 2.6\%)    & 2121 ( 4.1\%)    & 8958 (18.6\%) & Hook     \\
+     & Removed                      & 2000 ( 4.2\%)  & 1076 ( 2.2\%)   & 755 ( 1.5\%)     & 1123 ( 2.1\%)    & 3804 ( 7.9\%) & Hook     \\
+     & Changed                      & 932 ( 1.9\%)   & 1176 ( 2.4\%)   & 549 ( 1.1\%)     & 640 ( 1.2\%)     & 2385 ( 5.0\%)            \\
+     & - Param added                & 535 ( 1.1\%)   & 375 ( 0.8\%)    & 428 ( 0.8\%)     & 298 ( 0.6\%)     & 1194 ( 2.5\%) & Silent   \\
+     & - Param removed              & 475 ( 1.0\%)   & 343 ( 0.7\%)    & 172 ( 0.3\%)     & 194 ( 0.4\%)     & 848 ( 1.8\%)  & Silent   \\
+     & - Param type changed         & 208 ( 0.4\%)   & 623 ( 1.3\%)    & 42 ( 0.1\%)      & 214 ( 0.4\%)     & 799 ( 1.7\%)  & Silent   \\
+     & - Param reordered            & 132 ( 0.3\%)   & 163 ( 0.3\%)    & 280 ( 0.5\%)     & 104 ( 0.2\%)     & 544 ( 1.1\%)  & Silent   \\
+     & - Return type changed        & 130 ( 0.3\%)   & 82 ( 0.2\%)     & 51 ( 0.1\%)      & 111 ( 0.2\%)     & 276 ( 0.6\%)  & Silent   \\
+    \hline
+    \chead{7}{Tracepoint Event}
+     & Added                        & 51 (11.0\%)    & 31 ( 6.2\%)     & 13 ( 2.5\%)      & 17 ( 3.3\%)      & 94 (20.2\%)   & Compiler \\
+     & Removed                      & 16 ( 3.4\%)    & 6 ( 1.2\%)      & 15 ( 2.9\%)      & 15 ( 2.9\%)      & 34 ( 7.3\%)   & Compiler \\
+     & Changed                      & 36 ( 7.7\%)    & 14 ( 2.8\%)     & 10 ( 1.9\%)      & 17 ( 3.3\%)      & 47 (10.1\%)              \\
+     & - Field added                & 8 ( 1.7\%)     & 11 ( 2.2\%)     & 6 ( 1.1\%)       & 6 ( 1.1\%)       & 20 ( 4.3\%)   & Compiler \\
+     & - Field removed              & 8 ( 1.7\%)     & 3 ( 0.6\%)      & 1 ( 0.2\%)       & 2 ( 0.4\%)       & 11 ( 2.4\%)   & Compiler \\
+     & - Field type changed         & 25 ( 5.4\%)    & 0 ( 0.0\%)      & 5 ( 1.0\%)       & 10 ( 1.9\%)      & 21 ( 4.5\%)   & Silent   \\
+     & - Layout changed             & 31 ( 6.7\%)    & 14 ( 2.8\%)     & 9 ( 1.7\%)       & 14 ( 2.7\%)      & 43 ( 9.2\%)              \\
+    \hline
+    \chead{8}{LSM Hook}
+     & Added                        & 10 ( 5.3\%)    & 1 ( 0.5\%)      & 5 ( 2.5\%)       & 0 ( 0.0\%)       & 16 ( 8.5\%)   & Hook     \\
+     & Removed                      & 1 ( 0.5\%)     & 0 ( 0.0\%)      & 1 ( 0.5\%)       & 0 ( 0.0\%)       & 2 ( 1.1\%)    & Hook     \\
+     & Changed                      & 18 ( 9.5\%)    & 5 ( 2.5\%)      & 4 ( 2.0\%)       & 5 ( 2.5\%)       & 23 (12.2\%)              \\
+     & - Param added                & 13 ( 6.9\%)    & 4 ( 2.0\%)      & 4 ( 2.0\%)       & 0 ( 0.0\%)       & 20 (10.6\%)   & Silent   \\
+     & - Param removed              & 13 ( 6.9\%)    & 2 ( 1.0\%)      & 0 ( 0.0\%)       & 1 ( 0.5\%)       & 15 ( 7.9\%)   & Silent   \\
+     & - Param type changed         & 6 ( 3.2\%)     & 1 ( 0.5\%)      & 0 ( 0.0\%)       & 4 ( 2.0\%)       & 3 ( 1.6\%)    & Silent   \\
+     & - Param reordered            & 0 ( 0.0\%)     & 0 ( 0.0\%)      & 4 ( 2.0\%)       & 0 ( 0.0\%)       & 4 ( 2.1\%)    & Silent   \\
+  \end{tabular}
+  \caption{Linux kernel source code changes}
+  \label{tab:kernel_source_code_changes}
+\end{table*}
+
+The Linux kernel is a large and complex system, and it is constantly evolving.
+The kernel source code is updated frequently, and the changes can affect the eBPF programs.
+In this section, we analyze the stability of eBPF programs by examining the changes in the kernel source code.
+We compare the changes in the kernel source code between different versions and examine how the changes affect the eBPF programs.
+
+
+\minisec{Stable ABI of eBPF}
+The Linux kernel provides some guarantees about the stability of eBPF ABI (Application Binary Interface).
+The eBPF ISA (Instruction Set Architecture) and the calling convention of eBPF programs are considered stable,
+and the kernel developers are committed to maintaining backward compatibility~\cite{bpf-design, bpf-isa}.
+In addition to the low-level infrastructure, the definition of helper functions, arguments to the eBPF programs,
+and the recognized return values are also part of the stable ABI~\cite{bpf-design}.
+There are also attempts to standardize the format of the object file~\cite{bpf-elf} to enable the distribution of compiled eBPF programs.
+
+\minisec{Unstable ABI of eBPF}
+Despite all the efforts to maintain the stability of the eBPF ABI, the eBPF programs are still susceptible to changes in the kernel source code.
+First, the hooks for eBPF programs are not part of the stable ABI.
+This is especially true for dynamic instrumentation using kprobe,
+where the hooks are tens of thousands of kernel functions and are subject to frequent additions, removals, and changes.
+Therefore a kprobe that can be attached to a function in one version of the kernel may not be available in another version.
+For static instrumentation, tracepoints are often mistakenly considered stable~\cite{tcp-tracepoint, bpf-book}, but they are also subject to changes.
+
+In addition to the hooks, the content of the context argument passed to the eBPF programs is also unstable.
+For eBPF programs taking in \texttt{struct pt\_regs *} as the context argument (e.g., kprobe, uprobes, and LSM programs),
+the content in the \texttt{struct pt\_regs *} are merely a snapshot of the CPU registers at the time of the event.
+eBPF programs read the content of the registers as the arguments to the function,
+but the function signature can change.
+Therefore the eBPF programs that read the arguments of the function are also unstable.
+If the kernel developers change the function signature, the eBPF programs can silently read the wrong arguments.
+
+
+Finally, the eBPF programs that interact with the kernel data structures are also unstable.
+The helper function, \texttt{bpf\_probe\_read\_kernel},
+which allows eBPF programs to read arbitrary memory locations in the kernel,
+is available for all types of eBPF programs.
+It is often used to read a kernel data structure to a local buffer or struct in the eBPF program.
+Since kernel data structures constantly evolve, the eBPF programs may fail to read the expected data or read the wrong data.
+
+\minisec{CO-RE and BTF}
+\shawn{Let's see if we need to mention CO-RE and BTF here.
+  We can just talk about compatibility/stability in the context of the source code
+  (assuming that the eBPF programs are compiled with the same version of the kernel source code), as opposed to the binary compatibility.
+}
+
+\minisec{Program Types}
+Based on the three sources of instability above, we assess the stability of each type of eBPF program,
+and the result is summarized in Table~\ref{tab:ebpf_program_types}.
+Network programs are the most stable since they are attached to the well-defined hooks in the network stack,
+and the context argument points to packet data, which is relatively stable.
+Helper functions that read kernel memory are generally not used in network programs, although there is no restriction.
+
+Trace programs attached to kprobes are the least stable, for all three sources of instability.
+Programs attached to tracepoints are relatively more stable, since the tracepoints are better maintained to try to avoid breaking changes,
+and the context argument is a well-defined event struct, but such programs may still read internal kernel data structures.
+eBPF programs attached to LSM hooks are more stable than kprobes due to fewer well-maintained hooks, but still less stable than tracepoints.
+
+
+\minisec{Linux Source Code Evolution}
+To understand the stability of eBPF programs, we examine the changes in the Linux kernel source code.
+We use the popular Linux distribution, Ubuntu, as the reference, and compare all Linux kernel versions officially supported by Ubuntu 18.04 and 20.04.
+For all supported kernel versions, we extract the debug info from the compiled kernel and compare how the struct and function definitions have changed.
+The result of the comparison is summarized in Table~\ref{tab:kernel_source_code_changes}.
+
+
+
+\todo{Explain the result in the table.}

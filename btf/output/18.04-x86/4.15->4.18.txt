@@ -1,59 +1,73 @@
                                    4.15->4.18
-trace_event common                   405     
-            added                     28     
-            removed                   12     
-            changed                    9     
-            - Field added              7     
-            - Field removed            1     
-            - Field type changed       2     
-            - Layout changed           8     
-raw_tp      common                   412     
-            added                     29     
-            removed                   12     
-            changed                    9     
-            - Param added              7     
-            - Param removed            4     
-            - Param type changed       1     
-            - Param reordered          3     
-            - Return type changed      0     
-lsm         common                   177     
-            added                      5     
-            removed                    0     
-            changed                   14     
-            - Param added              1     
-            - Param removed            4     
-            - Param type changed      10     
-            - Param reordered          2     
-            - Return type changed      0     
-func        common                 40918     
-            added                   3613     
-            removed                 1801     
-            changed                 1062     
-            - Param added            545     
-            - Param removed          393     
-            - Param type changed     349     
-            - Param reordered        225     
-            - Return type changed    196     
-struct      common                  7193     
-            added                    426     
-            removed                  136     
-            changed                  785     
-            - Field added            354     
-            - Field removed          261     
-            - Field type changed     189     
-            - Layout changed         715     
-union       common                    96     
-            added                      6     
-            removed                    3     
-            changed                    4     
-            - Field added              3     
-            - Field removed            1     
-            - Field type changed       1     
-            - Layout changed           4     
-enum        common                   954     
-            added                     61     
-            removed                   25     
-            changed                   66     
-            - Elem added              57     
-            - Elem removed            23     
-            - Value changed           25     
+trace_event Old                           417
+            New                           433
+            Common                        405
+            Added                          28
+            Removed                        12
+            Changed                         9
+            - Field added                   7
+            - Field removed                 1
+            - Field type changed            2
+            - Layout changed                8
+raw_tp      Old                           424
+            New                           441
+            Common                        412
+            Added                          29
+            Removed                        12
+            Changed                         9
+            - Param added                   7
+            - Param removed                 4
+            - Param type changed            1
+            - Param reordered               3
+            - Return type changed           0
+lsm         Old                           177
+            New                           182
+            Common                        177
+            Added                           5
+            Removed                         0
+            Changed                        14
+            - Param added                   1
+            - Param removed                 4
+            - Param type changed           10
+            - Param reordered               2
+            - Return type changed           0
+func        Old                         42719
+            New                         44531
+            Common                      40918
+            Added                        3613
+            Removed                      1801
+            Changed                      1062
+            - Param added                 545
+            - Param removed               393
+            - Param type changed          349
+            - Param reordered             225
+            - Return type changed         196
+struct      Old                          7329
+            New                          7619
+            Common                       7193
+            Added                         426
+            Removed                       136
+            Changed                       785
+            - Field added                 354
+            - Field removed               261
+            - Field type changed          189
+            - Layout changed              715
+union       Old                            99
+            New                           102
+            Common                         96
+            Added                           6
+            Removed                         3
+            Changed                         4
+            - Field added                   3
+            - Field removed                 1
+            - Field type changed            1
+            - Layout changed                4
+enum        Old                           979
+            New                          1015
+            Common                        954
+            Added                          61
+            Removed                        25
+            Changed                        66
+            - Elem added                   57
+            - Elem removed                 23
+            - Value changed                25

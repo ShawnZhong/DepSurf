@@ -1,59 +1,73 @@
                                    Total
-trace_event common                   402
-            added                     75
-            removed                   15
-            changed                   25
+trace_event Old                      417
+            New                      477
+            Common                   402
+            Added                     75
+            Removed                   15
+            Changed                   25
             - Field added             21
             - Field removed           10
             - Field type changed       3
             - Layout changed          23
-raw_tp      common                   409
-            added                     76
-            removed                   15
-            changed                   21
+raw_tp      Old                      424
+            New                      485
+            Common                   409
+            Added                     76
+            Removed                   15
+            Changed                   21
             - Param added             15
             - Param removed            7
             - Param type changed       5
             - Param reordered          4
             - Return type changed      0
-lsm         common                   175
-            added                     14
-            removed                    2
-            changed                   16
+lsm         Old                      177
+            New                      189
+            Common                   175
+            Added                     14
+            Removed                    2
+            Changed                   16
             - Param added              3
             - Param removed            6
             - Param type changed      11
             - Param reordered          0
             - Return type changed      0
-func        common                 39572
-            added                   8389
-            removed                 3147
-            changed                 1755
+func        Old                    42719
+            New                    47961
+            Common                 39572
+            Added                   8389
+            Removed                 3147
+            Changed                 1755
             - Param added            918
             - Param removed          647
             - Param type changed     414
             - Param reordered        337
             - Return type changed    382
-struct      common                  7057
-            added                   1382
-            removed                  272
-            changed                 1293
+struct      Old                     7329
+            New                     8439
+            Common                  7057
+            Added                   1382
+            Removed                  272
+            Changed                 1293
             - Field added            779
             - Field removed          451
             - Field type changed     361
             - Layout changed        1195
-union       common                    93
-            added                     33
-            removed                    6
-            changed                    6
+union       Old                       99
+            New                      126
+            Common                    93
+            Added                     33
+            Removed                    6
+            Changed                    6
             - Field added              5
             - Field removed            1
             - Field type changed       2
             - Layout changed           5
-enum        common                   944
-            added                    234
-            removed                   35
-            changed                  130
+enum        Old                      979
+            New                     1178
+            Common                   944
+            Added                    234
+            Removed                   35
+            Changed                  130
             - Elem added             121
             - Elem removed            34
             - Value changed           65

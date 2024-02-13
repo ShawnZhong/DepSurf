@@ -1,124 +1,220 @@
-\section{Background}
+\section{eBPF Basics}
 
-\subsection{eBPF Introduction}
-eBPF is a new technology that allows users to write programs that run inside the Linux kernel. It is a safe, fast, and programmable way to extend the kernel's functionality. eBPF programs can be used to implement a variety of functionality, including tracing, security, and networking.
+% \subsection{Introduction to eBPF}
+eBPF is a technology that allows users to write programs that run inside the Linux kernel.
+It is a safe, fast, and programmable way to extend the kernel's functionality.
+eBPF programs can be used to implement a variety of functionality, including tracing, security, and networking.
 
-
-eBPF programs are mostly written in high-level languages, such as C, and compiled into eBPF bytecode that can be loaded into the kernel.
+Most eBPF programs are written in high-level front-end languages, such as C,
+and compiled into eBPF bytecode that can be loaded into the kernel.
 The kernel's verifier checks the bytecode for safety and then JIT compiles it into native code for fast execution.
 
-\begin{table*}[t]
-  \newcommand{\thead}[1]{\multicolumn{1}{|c}{\bfseries #1}}
+\minisec{Program Types and Hooks}
+eBPF programs operate in an event-driven manner.
+They are attached to hooks and are executed whenever the hooks are triggered.
+For example, a network eBPF program can be attached to the hook for incoming packets,
+and a tracing eBPF program can be attached to the hook for the entry of a kernel function.
+Table~\ref{tab:ebpf_program_types} lists the types of eBPF programs and their hooks.
+
+For kernel tracing, two typical hooks are kprobes and tracepoints.
+kprobes allows dynamic instrumentation at the entry and exit of almost all kernel functions in the symbol table of the kernel image.
+kprobes at the exit of a function are also called kretprobes.
+Since the kernel is constantly changing, kprobes are not stable across kernel versions.
+A more stable alternative is tracepoints, which are static hooks defined in the kernel source code.
+However, as we will show in Section~\ref{sec:stability}, tracepoints are also subject to change.
+The counterparts of kprobes and tracepoints in userspace are uprobes and USDT (User Statically Defined Tracing).
+
+% eBPF programs are attached to hooks and are executed whenever the hooks are triggered.
+% The types of hooks include tracepoints, kprobes, kretprobes, uprobes, and uretprobes.
+
+% kprobes are dynamic hooks that can be placed at almost any kernel code location~\footnote{A few kernel code locations are blacklisted because they are not safe to probe.}.
+% kretprobes are dynamic hooks placed at the return of any kernel functions.
+% Similarly, uprobes and uretprobes are dynamic hooks for user-space functions.
+
+In the network subsystem, eBPF programs can be attached to the XDP (eXpress Data Path) hook during NIC ingress,
+or to the tc (traffic control) hook after the network packet is received by the kernel.
+
+For security, eBPF programs can be attached to the Linux Security Module (LSM) hook to enforce access control policies or audit system behavior.
+
+\minisec{Helpers}
+The eBPF runtime provides a set of helper functions that can be called from eBPF programs.
+These helper functions are implemented in the kernel and are used to expose kernel functionality to eBPF programs.
+% For example, they can be used to read data from kernel addresses, update eBPF maps, and get the current timestamp.
+% For example, the \texttt{bpf\_probe\_read\_kernel} helper reads data from the kernel, and the \texttt{bpf\_map\_update\_elem} helper updates an element in an eBPF map.
+There are more than 200 helper functions defined, but not all of them are supported for all types of eBPF programs.
+A base set of helper functions is available for all types of eBPF programs,
+such as \texttt{bpf\_trace\_printk} for printing messages to the kernel log,
+and \texttt{bpf\_probe\_read\_kernel} for reading data from the kernel.
+Certain types of eBPF programs have additional helper functions that are specific to their use cases.
+For example, network eBPF programs have helper functions \texttt{bpf\_redirect} to redirect packets, and
+tracing programs have \texttt{bpf\_probe\_write\_user} to write data to userspace.
+Table~\ref{tab:ebpf_program_types} lists the helper functions that are supported for each type of eBPF program.
+
+\minisec{Minimal Example}
+Below is an example of an eBPF program attached to the kprobe \texttt{close\_fd}.
+The eBPF program named \texttt{prog} calls the helper function \texttt{bpf\_printk}
+to print a message to the kernel log whenever the kernel function \texttt{close\_fd} is called.
+
+\begin{minted}{c}
+SEC("kprobe/close_fd") // hook name
+int prog() { // program name
+    bpf_printk("close_fd called\n"); // helper fn
+}
+\end{minted}
+
+\minisec{Maps}
+It is often necessary to maintain state among invocations of eBPF programs.
+For example, a tracing eBPF program may need to keep track how many times a function is called.
+Kernel defines a set of data structures called eBPF maps for this purpose.
+Common types include hash maps, array, stack trace, and ring buffer.
+eBPF maps can be accessed from the eBPF programs via helper functions.
+% eBPF programs can access eBPF maps via helper functions.
+% eBPF maps are a
+Additionally, they can also be accessed from userspace applications, allowing data to be passed between the eBPF programs and userspace applications.
+% They are used to maintain state among invocations of eBPF programs, and to pass data between the eBPF programs and userspace applications.
+% The types of eBPF maps include hash maps, array, stack trace, and ring buffer.
+% eBPF programs can access eBPF maps stored in the kernel.
+% eBPF maps are data structures that can be accessed from both userspace and eBPF programs. eBPF maps are used to pass data between the eBPF programs and userspace applications, and maintain state among invocations of eBPF programs.
+
+\minisec{Arguments and Return Value}
+eBPF programs take in a context argument, and the type of the context depends on the type of the hook.
+For example, kprobes and LSM hooks take in \texttt{struct pt\_regs *} as the context argument,
+which contains the values of the CPU registers when the probe is triggered.
+The context argument for a tracepoint is a pointer to an event struct defined by each tracepoint.
+eBPF programs may also return a value, which can be used to modify the behavior of the kernel for certain types of hooks.
+For example, an XDP network program can return \texttt{XDP\_DROP} to drop the current packet.
+
+\minisec{Example}
+We continue the previous example and modify it to read the file descriptor being closed from the context argument.
+The struct \texttt{pt\_regs} is platform-specific, so we use the macro \texttt{PT\_REGS\_PARM1} to get the 1st argument.
+We then write the file descriptor to an eBPF map using a helper function.
+A userspace application can then read the file descriptor from the map and perform further processing.
+
+
+\begin{minted}{c}
+struct { // declare an eBPF map of type ring buffer
+  __uint(type, BPF_MAP_TYPE_RINGBUF);
+  __uint(max_entries, 1024); // with 1024 entries
+} rb SEC(".maps"); // the name of the map is `rb`
+
+SEC("kprobe/close_fd")
+int prog(struct pt_regs *ctx) { // context argument
+  int fd = PT_REGS_PARM1(ctx);  // get the 1st arg
+  bpf_ringbuf_output(&rb, &fd, sizeof(fd), 0);
+  return 0;  // not used
+}
+\end{minted}
+
+
+
+\begin{table*}[tbh]
+  % \newcommand{\theadl}[1]{\multicolumn{1}{|c}{\bfseries #1}}
+  % \newcommand{\theadr}[1]{\multicolumn{1}{c||}{\bfseries #1}}
+  \newcommand{\theadl}[1]{\multicolumn{1}{|c}{\multirow{2}{*}{\bfseries \shortstack{#1}}}}
+  \newcommand{\theadr}[1]{\multicolumn{1}{c||}{\multirow{2}{*}{\bfseries \shortstack{#1}}}}
+
   \newcommand{\stari}{\raisebox{-0.25em}{\FiveStar\FiveStarOpen\FiveStarOpen\FiveStarOpen\FiveStarOpen}}
   \newcommand{\starii}{\raisebox{-0.25em}{\FiveStar\FiveStar\FiveStarOpen\FiveStarOpen\FiveStarOpen}}
   \newcommand{\stariii}{\raisebox{-0.25em}{\FiveStar\FiveStar\FiveStar\FiveStarOpen\FiveStarOpen}}
   \newcommand{\stariv}{\raisebox{-0.25em}{\FiveStar\FiveStar\FiveStar\FiveStar\FiveStarOpen}}
 
-  \setlength{\tabcolsep}{4.5pt}
+  \setlength{\tabcolsep}{4.25pt}
 
   \centering
-  \begin{tabular}{c||l|l|l|l|l}
-     & \thead{Type}   & \thead{Hook}          & \thead{Capabilities}                                  & \thead{Use Cases}                    & \thead{Stability} \\ \hline \hline
+  \begin{tabular}{c||l|l|l|l|l|l}
+    % \theadr{Subsystem}
+     & \theadl{Program                                                                                                                                   \\ Type}
+     & \theadl{Hook Point}
+     & \theadl{Additional                                                                                                                                \\ Helper Functions}
+     & \theadl{Stability}
+     & \theadl{Use Cases}
+     & \theadl{Projects}                                                                                                                                 \\
+     &                     &                       &                      &          &                                                                   \\    \hline \hline
+    %
 
     \multirow{4}{*}{\textbf{Tracing}}
-     & kprobe         & kernel function       & \textbf{base} (e.g., read/write map, read kernel      & \multirow{2}{*}{kernel profiling}    & \stari            \\ \cline{2-3} \cline{6-6}
-     & tracepoint     & kernel static hook    & \quad  or userspace data, print message) +            &                                      & \starii           \\ \cline{2-3} \cline{5-6}
-     & uprobe         & userspace function    & \textbf{profiling} (e.g., write to userspace, get     & \multirow{2}{*}{userspace profiling} & \stari            \\ \cline{2-3} \cline{6-6}
-     & USDT           & userspace static hook & \quad process info, output perf event, etc.)          &                                      & \starii           \\ \hline
+     & kprobe              & kernel function       & write to userspace,  & \stari   & \multirow{2}{*}{kernel profiling}    & bpftrace~\cite{bpftrace},  \\ \cline{2-3} \cline{5-5}
+     & tracepoint          & kernel static hook    & get process info,    & \stariii &                                      & BCC~\cite{bcc}             \\ \cline{2-3} \cline{5-6}
+     & uprobe              & userspace function    & send signal,         & \stari   & \multirow{2}{*}{userspace profiling} & Falco~\cite{falco},        \\ \cline{2-3} \cline{5-5}
+     & USDT                & userspace static hook & get stack info, etc. & \stariii &                                      & Tracee~\cite{tracee}       \\ \hline
 
 
     \multirow{2}{*}{\textbf{Network}}
-     & XDP            & NIC ingress           & \textbf{base} + \textbf{network} (e.g., read, modify, & firewall, forwarding,                & \stariv           \\ \cline{2-3} \cline{6-6}
-     & tc             & network packet        & drop, redirect packets)                               & packet processing                    & \stariv           \\ \hline
+     & XDP                 & NIC ingress           & read, modify, drop,  & \stariv  & firewall, forwarding,                & Cilium~\cite{cilium},      \\ \cline{2-3} \cline{5-5}
+     & tc                  & network packet        & redirect packets     & \stariv  & packet processing                    & Calcio~\cite{calico}       \\ \hline
 
     \multirow{1}{*}{\textbf{Security}}
-     & LSM            & security hook         & \textbf{base} + deny operations                       & access control                       & \stariii          \\ \hline
+     & LSM                 & security hook         & None                 & \starii  & access control                       & KubeArmor~\cite{kubearmor} \\
+    %  \hline
 
-    % \multirow{3}{*}{\shortstack{\textbf{Research / }                                                                                             \\ \textbf{Experimental}}}
-    %  & scheduler~\cite{sched_ext} & \multirow{3}{*}{Defined by developer}                                 & process scheduling                   \\ \cline{2-2} \cline{4-4}
-    %  & hid~\cite{hid_bpf}         &                                                                       & tweak input devices                  \\ \cline{2-2} \cline{4-4}
-    \multirow{1}{*}{\textbf{Research}}
-     & XRP~\cite{xrp} & NVMe driver           & \textbf{base}                                         & offload storage func                 & \stariv           \\ \hline
+    % \multirow{1}{*}{\textbf{Storage}}
+    %  & XRP                   & NVMe driver           & \textbf{base}                                         & offload storage func                 & \stariv  \\ \hline
   \end{tabular}
   \caption{eBPF Program Types. }
   \label{tab:ebpf_program_types}
 \end{table*}
 
-\minisec{Hooks}
-eBPF programs are attached to hooks and are executed whenever the hooks are triggered. 
-The types of hooks include tracepoints, kprobes, kretprobes, uprobes, and uretprobes.
-Tracepoints are static hooks placed at specific locations in the kernel code.
-kprobes are dynamic hooks that can be placed at almost any kernel code location~\footnote{A few kernel code locations are blacklisted because they are not safe to probe.}.
-kretprobes are dynamic hooks placed at the return of any kernel functions.
-Similarly, uprobes and uretprobes are dynamic hooks for user-space functions.
+\minisec{Toolchain}
+There are several toolchains available to write and interact with eBPF programs.
+For all previous eBPF examples written in C, we assume to use the libbpf toolchain,
+which is now the standard way to write and operate eBPF programs,
+and is maintained as part of the Linux kernel source code.
+A simplified workflow of using the libbpf toolchain is as follows.
+First, write the eBPF program in C, with the libbpf header files included to provide definitions to the eBPF helper functions.
+Then, compile the program (including the definition of maps) into eBPF object file using the LLVM compiler.
+Finally, the userspace program is linked with the libbpf library to load the eBPF program into the kernel and interact with the program.
+
+Some higher-level libraries and toolchains provide a set of high-level APIs for compiling, loading, and interacting with eBPF programs.
+For example, BPF Compiler Collection (BCC) provides a python library for writing eBPF programs and the corresponding userspace programs.
+% bpftrace
 
 
 
-\minisec{Maps}
-eBPF maps are data structures stored in the kernel that can be accessed from both userspace and eBPF programs.
-They are used to maintain state among invocations of eBPF programs, and to pass data between the eBPF programs and userspace applications. 
-The types of eBPF maps include hash maps, array, stack trace, and ring buffer.
-% eBPF programs can access eBPF maps stored in the kernel.
-% eBPF maps are data structures that can be accessed from both userspace and eBPF programs. eBPF maps are used to pass data between the eBPF programs and userspace applications, and maintain state among invocations of eBPF programs.
+% \subsection{BPF Compiler Collection (BCC)}
+% BPF Compiler Collection (BCC) is a set of tools and libraries for creating efficient kernel tracing and manipulation programs.
 
-\minisec{Helpers}
-The Linux kernel provides a set of helper functions that can be called from eBPF programs. 
-These helper functions can be used to interact with the kernel and userspace applications.
-For example, they can be used to read data from kernel addresses, update eBPF maps, and get the current timestamp.
-% For example, the \texttt{bpf\_probe\_read\_kernel} helper reads data from the kernel, and the \texttt{bpf\_map\_update\_elem} helper updates an element in an eBPF map.
+% The BCC Python library provides a set of high-level APIs for compiling, loading, and attaching eBPF programs to hooks,
+% as well as for reading and processing the data that is collected by the programs.
+
+% BCC also includes a set of tools that can be used to trace and analyze the performance of the kernel and user-space applications.
 
 
-\minisec{Usage}
-
-\subsection{eBPF Toolchain}
-The eBPF toolchain is a set of tools that can be used to write, compile and load eBPF programs.
-
-\minisec{No toolchain}
-An eBPF program can be manually written in bytecode, and a userspace process loads it into the kernel with the \texttt{bpf(BPF\_PROG\_LOAD, ...)} system call. This is when the kernel's verifier checks the bytecode for safety and JIT compiles it into native code.
-To attach the program to a hook, the userspace process opens the hook via \texttt{perf\_event\_open} and attaches to the hook using \texttt{ioctl}.
-Modifying eBPF maps from userspace is done by \texttt{bpf(BPF\_MAP\_*, ...)}.
-Overall, this approach is very low-level and cumbersome, so most users use one of the toolchains described below.
-
-\minisec{libbpf}
-libbpf is a low-level C library for interacting with eBPF programs.
-It is part of the Linux kernel source tree under \texttt{tools/lib/bpf}.
-With libbpf, eBPF programs can be written in restricted C and compiled into eBPF bytecode using the LLVM compiler. \todo{}
 
 
 
 % libbpf provides a set of helper functions that make it easy to write eBPF programs. It also provides a set of tools that can be used to compile eBPF programs from C code, and generate skeleton code for eBPF programs.
 
-\begin{listing}[t]
-\begin{minted}{c}
+% \begin{listing}[t]
+%   \begin{minted}{c}
 
-struct {
-    __uint(type, BPF_MAP_TYPE_HASH);
-    __type(key, u32);
-    __type(value, long);
-    __uint(max_entries, 1024);
-} hash_map SEC(".maps");
+% struct {
+%     __uint(type, BPF_MAP_TYPE_HASH);
+%     __type(key, u32);
+%     __type(value, long);
+%     __uint(max_entries, 1024);
+% } hash_map SEC(".maps");
 
-SEC("kprobe/close_fd") 
-int enter_close_fd(struct pt_regs *ctx) {
-    u32 key = 0;
-    long ts = bpf_ktime_get_ns();
-    bpf_map_update_elem(&hash_map, &key, &ts, BPF_ANY);
-}
+% SEC("kprobe/close_fd") 
+% int enter_close_fd(struct pt_regs *ctx) {
+%     u32 key = 0;
+%     long ts = bpf_ktime_get_ns();
+%     bpf_map_update_elem(&hash_map, &key, &ts, BPF_ANY);
+% }
 
-SEC("kretprobe/close_fd") 
-int exit_close_fd(struct pt_regs *ctx) {
-    u32 key = 0;
-    long *ts = bpf_map_lookup_elem(&hash_map, &key);
-    if (ts) {
-        bpf_trace_printk("close fd: %d takes %d ns", 
-            PT_REGS_PARM1(ctx), bpf_ktime_get_ns() - *ts);
-        bpf_map_delete_elem(&hash_map, &key);
-    }
-}
-\end{minted}
-\caption{libbpf Example}
-\label{fig:libbpf_example}
-\end{listing}
+% SEC("kretprobe/close_fd") 
+% int exit_close_fd(struct pt_regs *ctx) {
+%     u32 key = 0;
+%     long *ts = bpf_map_lookup_elem(&hash_map, &key);
+%     if (ts) {
+%         bpf_trace_printk("close fd: %d takes %d ns", 
+%             PT_REGS_PARM1(ctx), bpf_ktime_get_ns() - *ts);
+%         bpf_map_delete_elem(&hash_map, &key);
+%     }
+% }
+% \end{minted}
+%   \caption{libbpf Example}
+%   \label{fig:libbpf_example}
+% \end{listing}
 
 % #include <linux/ptrace.h> 
 % #include <bpf/bpf_tracing.h>
@@ -143,15 +239,6 @@ int exit_close_fd(struct pt_regs *ctx) {
 % \label{fig:bcc_example}
 % \end{figure}
 
-\minisec{BCC} \todo{}
+% \minisec{BCC} \todo{}
 
-\minisec{bpftrace} \todo{}
-
-
-
-\subsection{BPF Compiler Collection (BCC)}
-BPF Compiler Collection (BCC) is a set of tools and libraries for creating efficient kernel tracing and manipulation programs. 
-
-The BCC Python library provides a set of high-level APIs for compiling, loading, and attaching eBPF programs to hooks, as well as for reading and processing the data that is collected by the programs.
-
-BCC also includes a set of tools that can be used to trace and analyze the performance of the kernel and user-space applications. 
+% \minisec{bpftrace} \todo{}

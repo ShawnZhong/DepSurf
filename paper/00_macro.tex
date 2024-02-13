@@ -1,13 +1,16 @@
 \usepackage{multirow}
 \usepackage{bbding} % for star rating
-% \usepackage{graphicx} % for rotate
+\usepackage{stfloats} % to fix floats
+\usepackage{graphicx} % for rotate
 
 %%%
 %%% Style
 %%%
 
 \usepackage{minted} % code formatting
+% \usemintedstyle{vs}
 % \usemintedstyle{emacs}
+\usemintedstyle{perldoc}
 \setminted{
   fontsize=\small,
   baselinestretch=1,
@@ -52,5 +55,6 @@
 % define \minisec{} command to get rid of paragraph indentation and bold the title
 \newcommand{\minisec}[1]{\vspace{0.25em}\noindent\textbf{#1. }}
 
-% define \todo{} command
+% define some macros for todo and shawn
 \newcommand{\todo}[1]{\textcolor{red}{TODO: #1}}
+\newcommand{\shawn}[1]{\textcolor{red}{Shawn: #1}}

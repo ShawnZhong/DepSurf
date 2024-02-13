@@ -1,4 +1,6 @@
 from enum import Enum
+from pathlib import Path
+
 
 class Kind(str, Enum):
     INT = "INT"
@@ -20,3 +22,19 @@ class Kind(str, Enum):
     DECL_TAG = "DECL_TAG"
     TYPE_TAG = "TYPE_TAG"
     ENUM64 = "ENUM64"
+
+
+def get_linux_tools_path():
+    parent = Path("/usr/lib/linux-tools")
+    versions = [x for x in parent.iterdir() if x.is_dir()]
+    if len(versions) == 0:
+        raise Exception("No linux-tools found")
+    versions.sort()
+    return parent / versions[-1]
+
+
+def get_bpftool_path():
+    path = get_linux_tools_path() / "bpftool"
+    if not path.exists():
+        raise Exception("bpftool not found")
+    return path
