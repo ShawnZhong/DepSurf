@@ -3,15 +3,14 @@
 import os
 from pathlib import Path
 
-from utils import system
-from vm_utils import get_arch, Arch
+from utils.arch import Arch, get_arch
+from utils.system import system
 
 VM_DATA_PATH = Path("data") / "vm"
 KEY_PATH = VM_DATA_PATH / "id_rsa"
 TMP_PATH = VM_DATA_PATH / "tmp"
 DISK_IMG_PATH = TMP_PATH / "cloudimg.img"
 SEED_IMG_PATH = TMP_PATH / "cloud-init-config.iso"
-
 
 
 def download(
@@ -74,8 +73,9 @@ def get_pub_key_local(key_path=KEY_PATH):
 
 
 def get_pub_key_gh(username):
-    import requests
     import json
+
+    import requests
 
     url = f"https://api.github.com/users/{username}/keys"
     resp = requests.get(url)

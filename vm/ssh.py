@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-from utils import system
-from prep import KEY_PATH
 import argparse
+
+from prep import KEY_PATH
+from utils.system import system
 
 
 def ssh(port, key_path):

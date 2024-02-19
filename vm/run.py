@@ -4,8 +4,8 @@ import argparse
 import os
 
 from prep import DISK_IMG_PATH, SEED_IMG_PATH, VM_DATA_PATH
-from utils import system
-from vm_utils import get_arch, Arch
+from utils.arch import Arch, get_arch
+from utils.system import system
 
 
 def get_qemu_path():
