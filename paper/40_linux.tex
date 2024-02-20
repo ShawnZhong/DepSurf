@@ -6,59 +6,62 @@
 
 \begin{table*}[t]
   \centering
-  \newcommand{\thead}[3]{\multicolumn{#1}{#2}{\bfseries #3}}
-  \newcommand{\mcol}[2]{\multicolumn{#1}{r||}{#2}}
+  \setlength{\tabcolsep}{4.5pt}
+  \small
+
   \newcommand{\chead}[2]{\multirow{#1}{*}{\rotatebox[origin=c]{90}{\bfseries #2}}}
-  \newcommand{\ver}[2]{#1 $\rightarrow$ #2}
+  \newcommand{\ver}[3]{\multicolumn{1}{c|}{\multirow{2}{*}{\shortstack{#1 \\ #2 $\rightarrow$ #3}}}}
+  \newcommand{\val}[2]{#1 (#2\%)}
 
-  % \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{c|l||r|r|r|r|r|r|l}
+    % \newcommand{\mcol}[2]{\multicolumn{#1}{r||}{#2}}
+    % \newcommand{\thead}[3]{\multicolumn{#1}{#2}{\bfseries #3}}
+    %  & \thead{1}{r||}{}
+    %  & \thead{5}{c|}{Ubuntu 20.04}
+    %  & \thead{1}{c|}{Arch}
+    %  & \thead{1}{c}{Error}
+    % \\ \hline
 
-  \begin{tabular}{c|l||r|r|r|r|r|l}
-     & \thead{1}{r||}{Distribution}
-    %  & \thead{5}{c||}{Ubuntu 18.04}
-     & \thead{5}{c|}{Ubuntu 20.04}
-     & \thead{1}{c}{Error}
-    \\ \hline
 
-
-     & \mcol{1}{Versions}           & \ver{5.4}{5.8} & \ver{5.8}{5.11} & \ver{5.11}{5.13} & \ver{5.13}{5.15} & Total         &          \\ \hline\hline
+     & \multirow{2}{*}{\bfseries Changes} & \ver{x86}{5.4}{5.8} & \ver{x86}{5.8}{5.11} & \ver{x86}{5.11}{5.13} & \ver{x86}{5.13}{5.15} & \ver{x86 Total}{5.4}{5.15} & \ver{Linux 5.8}{x86}{arm} & \multirow{2}{*}{\bfseries Error} \\
+     &                                    &                     &                      &                       &                       &                            &                           &                                  \\ \hline\hline
 
     \chead{7}{Struct}
-     & Added                        & 529 ( 6.3\%)   & 513 ( 5.9\%)    & 233 ( 2.6\%)     & 283 ( 3.1\%)     & 1426 (17.0\%) & Compiler \\
-     & Removed                      & 203 ( 2.4\%)   & 156 ( 1.8\%)    & 96 ( 1.1\%)      & 117 ( 1.3\%)     & 440 ( 5.2\%)  & Compiler \\
-     & Changed                      & 973 (11.6\%)   & 771 ( 8.8\%)    & 476 ( 5.2\%)     & 656 ( 7.1\%)     & 1513 (18.0\%)            \\
-     & - Field added                & 485 ( 5.8\%)   & 439 ( 5.0\%)    & 272 ( 3.0\%)     & 365 ( 4.0\%)     & 944 (11.2\%)  & Compiler \\
-     & - Field removed              & 315 ( 3.8\%)   & 232 ( 2.7\%)    & 154 ( 1.7\%)     & 163 ( 1.8\%)     & 533 ( 6.3\%)  & Compiler \\
-     & - Field type changed         & 219 ( 2.6\%)   & 164 ( 1.9\%)    & 111 ( 1.2\%)     & 140 ( 1.5\%)     & 400 ( 4.8\%)  & Silent   \\
-     & - Layout changed             & 897 (10.7\%)   & 720 ( 8.3\%)    & 438 ( 4.8\%)     & 605 ( 6.6\%)     & 1408 (16.8\%)            \\
+     & Added                              & \val{529}{ 6.3}     & \val{513}{ 5.9}      & \val{233}{ 2.6}       & \val{283}{ 3.1}       & \val{1426}{17.0}           & \val{1803}{20.7}          & Compiler                         \\
+     & Removed                            & \val{203}{ 2.4}     & \val{156}{ 1.8}      & \val{96}{ 1.1}        & \val{117}{ 1.3}       & \val{440}{ 5.2}            & \val{1033}{11.8}          & Compiler                         \\
+     & Changed                            & \val{973}{11.6}     & \val{771}{ 8.8}      & \val{476}{ 5.2}       & \val{656}{ 7.1}       & \val{1513}{18.0}           & \val{301}{ 3.5}           &                                  \\
+     & - Field added                      & \val{485}{ 5.8}     & \val{439}{ 5.0}      & \val{272}{ 3.0}       & \val{365}{ 4.0}       & \val{944}{11.2}            & \val{29}{ 0.3}            & Compiler                         \\
+     & - Field removed                    & \val{315}{ 3.8}     & \val{232}{ 2.7}      & \val{154}{ 1.7}       & \val{163}{ 1.8}       & \val{533}{ 6.3}            & \val{35}{ 0.4}            & Compiler                         \\
+     & - Field type changed               & \val{219}{ 2.6}     & \val{164}{ 1.9}      & \val{111}{ 1.2}       & \val{140}{ 1.5}       & \val{400}{ 4.8}            & \val{37}{ 0.4}            & Silent                           \\
+     & - Layout changed                   & \val{897}{10.7}     & \val{720}{ 8.3}      & \val{438}{ 4.8}       & \val{605}{ 6.6}       & \val{1408}{16.8}           & \val{294}{ 3.4}           &                                  \\
     \hline
     \chead{8}{Function}
-     & Added                        & 3564 ( 7.4\%)  & 3080 ( 6.2\%)   & 1343 ( 2.6\%)    & 2121 ( 4.1\%)    & 8958 (18.6\%) & Hook     \\
-     & Removed                      & 2000 ( 4.2\%)  & 1076 ( 2.2\%)   & 755 ( 1.5\%)     & 1123 ( 2.1\%)    & 3804 ( 7.9\%) & Hook     \\
-     & Changed                      & 932 ( 1.9\%)   & 1176 ( 2.4\%)   & 549 ( 1.1\%)     & 640 ( 1.2\%)     & 2385 ( 5.0\%)            \\
-     & - Param added                & 535 ( 1.1\%)   & 375 ( 0.8\%)    & 428 ( 0.8\%)     & 298 ( 0.6\%)     & 1194 ( 2.5\%) & Silent   \\
-     & - Param removed              & 475 ( 1.0\%)   & 343 ( 0.7\%)    & 172 ( 0.3\%)     & 194 ( 0.4\%)     & 848 ( 1.8\%)  & Silent   \\
-     & - Param type changed         & 208 ( 0.4\%)   & 623 ( 1.3\%)    & 42 ( 0.1\%)      & 214 ( 0.4\%)     & 799 ( 1.7\%)  & Silent   \\
-     & - Param reordered            & 132 ( 0.3\%)   & 163 ( 0.3\%)    & 280 ( 0.5\%)     & 104 ( 0.2\%)     & 544 ( 1.1\%)  & Silent   \\
-     & - Return type changed        & 130 ( 0.3\%)   & 82 ( 0.2\%)     & 51 ( 0.1\%)      & 111 ( 0.2\%)     & 276 ( 0.6\%)  & Silent   \\
+     & Added                              & \val{3564}{ 7.4}    & \val{3080}{ 6.2}     & \val{1343}{ 2.6}      & \val{2121}{ 4.1}      & \val{8958}{18.6}           & \val{9936}{20.0}          & Hook                             \\
+     & Removed                            & \val{2000}{ 4.2}    & \val{1076}{ 2.2}     & \val{755}{ 1.5}       & \val{1123}{ 2.1}      & \val{3804}{ 7.9}           & \val{8031}{16.1}          & Hook                             \\
+     & Changed                            & \val{932}{ 1.9}     & \val{1176}{ 2.4}     & \val{549}{ 1.1}       & \val{640}{ 1.2}       & \val{2385}{ 5.0}           & \val{111}{ 0.2}           &                                  \\
+     & - Param added                      & \val{535}{ 1.1}     & \val{375}{ 0.8}      & \val{428}{ 0.8}       & \val{298}{ 0.6}       & \val{1194}{ 2.5}           & \val{58}{ 0.1}            & Silent                           \\
+     & - Param removed                    & \val{475}{ 1.0}     & \val{343}{ 0.7}      & \val{172}{ 0.3}       & \val{194}{ 0.4}       & \val{848}{ 1.8}            & \val{58}{ 0.1}            & Silent                           \\
+     & - Param type changed               & \val{208}{ 0.4}     & \val{623}{ 1.3}      & \val{42}{ 0.1}        & \val{214}{ 0.4}       & \val{799}{ 1.7}            & \val{52}{ 0.1}            & Silent                           \\
+     & - Param reordered                  & \val{132}{ 0.3}     & \val{163}{ 0.3}      & \val{280}{ 0.5}       & \val{104}{ 0.2}       & \val{544}{ 1.1}            & \val{2}{ 0.0}             & Silent                           \\
+     & - Return type changed              & \val{130}{ 0.3}     & \val{82}{ 0.2}       & \val{51}{ 0.1}        & \val{111}{ 0.2}       & \val{276}{ 0.6}            & \val{7}{ 0.0}             & Silent                           \\
     \hline
     \chead{7}{Tracepoint Event}
-     & Added                        & 51 (11.0\%)    & 31 ( 6.2\%)     & 13 ( 2.5\%)      & 17 ( 3.3\%)      & 94 (20.2\%)   & Compiler \\
-     & Removed                      & 16 ( 3.4\%)    & 6 ( 1.2\%)      & 15 ( 2.9\%)      & 15 ( 2.9\%)      & 34 ( 7.3\%)   & Compiler \\
-     & Changed                      & 36 ( 7.7\%)    & 14 ( 2.8\%)     & 10 ( 1.9\%)      & 17 ( 3.3\%)      & 47 (10.1\%)              \\
-     & - Field added                & 8 ( 1.7\%)     & 11 ( 2.2\%)     & 6 ( 1.1\%)       & 6 ( 1.1\%)       & 20 ( 4.3\%)   & Compiler \\
-     & - Field removed              & 8 ( 1.7\%)     & 3 ( 0.6\%)      & 1 ( 0.2\%)       & 2 ( 0.4\%)       & 11 ( 2.4\%)   & Compiler \\
-     & - Field type changed         & 25 ( 5.4\%)    & 0 ( 0.0\%)      & 5 ( 1.0\%)       & 10 ( 1.9\%)      & 21 ( 4.5\%)   & Silent   \\
-     & - Layout changed             & 31 ( 6.7\%)    & 14 ( 2.8\%)     & 9 ( 1.7\%)       & 14 ( 2.7\%)      & 43 ( 9.2\%)              \\
+     & Added                              & \val{51}{11.0}      & \val{31}{ 6.2}       & \val{13}{ 2.5}        & \val{17}{ 3.3}        & \val{94}{20.2}             & \val{49}{ 9.8}            & Compiler                         \\
+     & Removed                            & \val{16}{ 3.4}      & \val{6}{ 1.2}        & \val{15}{ 2.9}        & \val{15}{ 2.9}        & \val{34}{ 7.3}             & \val{56}{11.2}            & Compiler                         \\
+     & Changed                            & \val{36}{ 7.7}      & \val{14}{ 2.8}       & \val{10}{ 1.9}        & \val{17}{ 3.3}        & \val{47}{10.1}             & \val{0}{ 0.0}             &                                  \\
+     & - Field added                      & \val{8}{ 1.7}       & \val{11}{ 2.2}       & \val{6}{ 1.1}         & \val{6}{ 1.1}         & \val{20}{ 4.3}             & \val{0}{ 0.0}             & Compiler                         \\
+     & - Field removed                    & \val{8}{ 1.7}       & \val{3}{ 0.6}        & \val{1}{ 0.2}         & \val{2}{ 0.4}         & \val{11}{ 2.4}             & \val{0}{ 0.0}             & Compiler                         \\
+     & - Field type changed               & \val{25}{ 5.4}      & \val{0}{ 0.0}        & \val{5}{ 1.0}         & \val{10}{ 1.9}        & \val{21}{ 4.5}             & \val{0}{ 0.0}             & Silent                           \\
+     & - Layout changed                   & \val{31}{ 6.7}      & \val{14}{ 2.8}       & \val{9}{ 1.7}         & \val{14}{ 2.7}        & \val{43}{ 9.2}             & \val{0}{ 0.0}             &                                  \\
     \hline
     \chead{8}{LSM Hook}
-     & Added                        & 10 ( 5.3\%)    & 1 ( 0.5\%)      & 5 ( 2.5\%)       & 0 ( 0.0\%)       & 16 ( 8.5\%)   & Hook     \\
-     & Removed                      & 1 ( 0.5\%)     & 0 ( 0.0\%)      & 1 ( 0.5\%)       & 0 ( 0.0\%)       & 2 ( 1.1\%)    & Hook     \\
-     & Changed                      & 18 ( 9.5\%)    & 5 ( 2.5\%)      & 4 ( 2.0\%)       & 5 ( 2.5\%)       & 23 (12.2\%)              \\
-     & - Param added                & 13 ( 6.9\%)    & 4 ( 2.0\%)      & 4 ( 2.0\%)       & 0 ( 0.0\%)       & 20 (10.6\%)   & Silent   \\
-     & - Param removed              & 13 ( 6.9\%)    & 2 ( 1.0\%)      & 0 ( 0.0\%)       & 1 ( 0.5\%)       & 15 ( 7.9\%)   & Silent   \\
-     & - Param type changed         & 6 ( 3.2\%)     & 1 ( 0.5\%)      & 0 ( 0.0\%)       & 4 ( 2.0\%)       & 3 ( 1.6\%)    & Silent   \\
-     & - Param reordered            & 0 ( 0.0\%)     & 0 ( 0.0\%)      & 4 ( 2.0\%)       & 0 ( 0.0\%)       & 4 ( 2.1\%)    & Silent   \\
+     & Added                              & \val{10}{ 5.3}      & \val{1}{ 0.5}        & \val{5}{ 2.5}         & \val{0}{ 0.0}         & \val{16}{ 8.5}             & \val{0}{ 0.0}             & Hook                             \\
+     & Removed                            & \val{1}{ 0.5}       & \val{0}{ 0.0}        & \val{1}{ 0.5}         & \val{0}{ 0.0}         & \val{2}{ 1.1}              & \val{0}{ 0.0}             & Hook                             \\
+     & Changed                            & \val{18}{ 9.5}      & \val{5}{ 2.5}        & \val{4}{ 2.0}         & \val{5}{ 2.5}         & \val{23}{12.2}             & \val{0}{ 0.0}             &                                  \\
+     & - Param added                      & \val{13}{ 6.9}      & \val{4}{ 2.0}        & \val{4}{ 2.0}         & \val{0}{ 0.0}         & \val{20}{10.6}             & \val{0}{ 0.0}             & Silent                           \\
+     & - Param removed                    & \val{13}{ 6.9}      & \val{2}{ 1.0}        & \val{0}{ 0.0}         & \val{1}{ 0.5}         & \val{15}{ 7.9}             & \val{0}{ 0.0}             & Silent                           \\
+     & - Param type changed               & \val{6}{ 3.2}       & \val{1}{ 0.5}        & \val{0}{ 0.0}         & \val{4}{ 2.0}         & \val{3}{ 1.6}              & \val{0}{ 0.0}             & Silent                           \\
+     & - Param reordered                  & \val{0}{ 0.0}       & \val{0}{ 0.0}        & \val{4}{ 2.0}         & \val{0}{ 0.0}         & \val{4}{ 2.1}              & \val{0}{ 0.0}             & Silent                           \\
   \end{tabular}
   \caption{Linux kernel source code changes}
   \label{tab:kernel_source_code_changes}
