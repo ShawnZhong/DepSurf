@@ -1,0 +1,148 @@
+Added Kind.STRUCT (105): ['trace_event_raw_xen_mmu_set_p4d', 'trace_event_raw_xen_mmu_flush_tlb_one_user', 'trace_event_raw_hyperv_mmu_flush_tlb_others', 'trace_event_raw_vector_config', 'trace_event_raw_vector_mod', 'trace_event_raw_vector_reserve', 'trace_event_raw_vector_alloc', 'trace_event_raw_vector_alloc_managed', 'trace_event_raw_vector_activate', 'trace_event_raw_vector_teardown', 'trace_event_raw_vector_setup', 'trace_event_raw_vector_free_moved', 'trace_event_raw_x86_fpu', 'trace_event_raw_cpuhp_enter', 'trace_event_raw_cpuhp_multi_enter', 'trace_event_raw_cpuhp_exit', 'trace_event_raw_irq_matrix_global', 'trace_event_raw_irq_matrix_global_update', 'trace_event_raw_irq_matrix_cpu', 'trace_event_raw_alarmtimer_suspend', 'trace_event_raw_alarm_class', 'trace_event_raw_cgroup_root', 'trace_event_raw_cgroup', 'trace_event_raw_cgroup_migrate', 'trace_event_raw_bpf_prog_event', 'trace_event_raw_bpf_prog_load', 'trace_event_raw_bpf_map_create', 'trace_event_raw_bpf_obj_prog', 'trace_event_raw_bpf_obj_map', 'trace_event_raw_bpf_map_keyval', 'trace_event_raw_bpf_map_delete_elem', 'trace_event_raw_bpf_map_next_key', 'trace_event_raw_xdp_exception', 'trace_event_raw_xdp_redirect_template', 'trace_event_raw_xdp_cpumap_kthread', 'trace_event_raw_xdp_cpumap_enqueue', 'trace_event_raw_filemap_set_wb_err', 'trace_event_raw_file_check_and_advance_wb_err', 'trace_event_raw_reclaim_retry_zone', 'trace_event_raw_mark_victim', 'trace_event_raw_wake_reaper', 'trace_event_raw_start_task_reaping', 'trace_event_raw_finish_task_reaping', 'trace_event_raw_skip_task_reaping', 'trace_event_raw_compact_retry', 'trace_event_raw_mm_vmscan_lru_isolate', 'trace_event_raw_mm_vmscan_lru_shrink_active', 'trace_event_raw_mm_vmscan_inactive_list_is_low', 'trace_event_raw_percpu_alloc_percpu', 'trace_event_raw_percpu_free_percpu', 'trace_event_raw_percpu_alloc_percpu_fail', 'trace_event_raw_percpu_create_chunk', 'trace_event_raw_percpu_destroy_chunk', 'trace_event_raw_mm_compaction_kcompactd_sleep', 'trace_event_raw_kcompactd_wake_template', 'trace_event_raw_mm_khugepaged_scan_pmd', 'trace_event_raw_mm_collapse_huge_page', 'trace_event_raw_mm_collapse_huge_page_isolate', 'trace_event_raw_mm_collapse_huge_page_swapin', 'trace_event_raw_test_pages_isolated', 'trace_event_raw_writeback_inode_template', 'trace_event_raw_dax_pmd_fault_class', 'trace_event_raw_dax_pmd_load_hole_class', 'trace_event_raw_dax_pmd_insert_mapping_class', 'trace_event_raw_dax_pte_fault_class', 'trace_event_raw_dax_insert_mapping', 'trace_event_raw_dax_writeback_range_class', 'trace_event_raw_dax_writeback_one', 'trace_event_raw_locks_get_lock_context', 'trace_event_raw_filelock_lock', 'trace_event_raw_ext4_fsmap_class', 'trace_event_raw_ext4_getfsmap_class', 'trace_event_raw_block_rq_requeue', 'trace_event_raw_wbt_stat', 'trace_event_raw_wbt_lat', 'trace_event_raw_wbt_step', 'trace_event_raw_wbt_timer', 'trace_event_raw_msr_trace_class', 'trace_event_raw_dma_fence', 'trace_event_raw_sync_timeline', 'trace_event_raw_spi_controller', 'trace_event_raw_mdio_access', 'trace_event_raw_xhci_log_trb', 'trace_event_raw_xhci_log_free_virt_dev', 'trace_event_raw_xhci_log_virt_dev', 'trace_event_raw_xhci_log_urb', 'trace_event_raw_xhci_log_ep_ctx', 'trace_event_raw_xhci_log_slot_ctx', 'trace_event_raw_xhci_log_ring', 'trace_event_raw_xhci_log_portsc', 'trace_event_raw_xhci_dbc_log_request', 'trace_event_raw_mmc_request_start', 'trace_event_raw_mmc_request_done', 'trace_event_raw_arm_event', 'trace_event_raw_non_standard_event', 'trace_event_raw_tcp_event_sk_skb', 'trace_event_raw_tcp_event_sk', 'trace_event_raw_tcp_set_state', 'trace_event_raw_tcp_retransmit_synack', 'trace_event_raw_qdisc_dequeue', 'trace_event_raw_fib6_table_lookup', 'trace_event_raw_br_fdb_add', 'trace_event_raw_br_fdb_external_learn_add', 'trace_event_raw_fdb_delete', 'trace_event_raw_br_fdb_update']
+Removed Kind.STRUCT (16): ['trace_event_raw_xen_mmu_set_domain_pte', 'trace_event_raw_xen_mmu_pte_clear', 'trace_event_raw_xen_mmu_pmd_clear', 'trace_event_raw_xen_mmu_set_pgd', 'trace_event_raw_xen_mmu_pud_clear', 'trace_event_raw_xen_mmu_pgd_clear', 'trace_event_raw_xen_mmu_flush_tlb_single', 'trace_event_raw_mm_vmscan_lru_isolate_template', 'trace_event_raw_writeback_lazytime_template', 'trace_event_raw_block_rq_with_error', 'trace_event_raw_fence_annotate_wait_on', 'trace_event_raw_fence', 'trace_event_raw_spi_master', 'trace_event_raw_xhci_log_event', 'trace_event_raw_thermal_power_cpu_get_power', 'trace_event_raw_thermal_power_cpu_limit']
+Changed Kind.STRUCT (27): ['trace_event_raw_mce_record', 'trace_event_raw_itimer_state', 'trace_event_raw_itimer_expire', 'trace_event_raw_tick_stop', 'trace_event_raw_pstate_sample', 'trace_event_raw_mm_vmscan_kswapd_wake', 'trace_event_raw_mm_vmscan_direct_reclaim_begin_template', 'trace_event_raw_mm_vmscan_lru_shrink_inactive', 'trace_event_raw_mm_page_free_batched', 'trace_event_raw_mm_compaction_try_to_compact_pages', 'trace_event_raw_writeback_write_inode_template', 'trace_event_raw_writeback_work_class', 'trace_event_raw_writeback_class', 'trace_event_raw_wbc_class', 'trace_event_raw_writeback_queue_io', 'trace_event_raw_bdi_dirty_ratelimit', 'trace_event_raw_balance_dirty_pages', 'trace_event_raw_writeback_sb_inodes_requeue', 'trace_event_raw_writeback_single_inode_template', 'trace_event_raw_ext4_alloc_da_blocks', 'trace_event_raw_ext4_da_update_reserve_space', 'trace_event_raw_ext4_da_reserve_space', 'trace_event_raw_ext4_da_release_space', 'trace_event_raw_block_rq_complete', 'trace_event_raw_swiotlb_bounced', 'trace_event_raw_thermal_power_devfreq_get_power', 'trace_event_raw_napi_poll']
+Reasons Kind.STRUCT (4): [('Field added', 19), ('Field removed', 18), ('Field type changed', 3), ('Layout changed', 24)]
+trace_event_raw_mce_record
+	Field added
+		synd                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		ipid                : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Layout changed
+trace_event_raw_itimer_state
+	Field type changed
+		expires             : {'kind': 'TYPEDEF', 'name': 'cputime_t'}
+		                    ->{'kind': 'INT', 'name': 'long long unsigned int'}
+trace_event_raw_itimer_expire
+	Field type changed
+		now                 : {'kind': 'TYPEDEF', 'name': 'cputime_t'}
+		                    ->{'kind': 'INT', 'name': 'long long unsigned int'}
+trace_event_raw_tick_stop
+	Field added
+		dependency          : {'kind': 'INT', 'name': 'int'}
+	Field removed
+		__data_loc_msg      : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_pstate_sample
+	Field added
+		io_boost            : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_mm_vmscan_kswapd_wake
+	Field added
+		zid                 : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_mm_vmscan_direct_reclaim_begin_template
+	Field added
+		classzone_idx       : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_mm_vmscan_lru_shrink_inactive
+	Field added
+		nr_dirty            : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_writeback        : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_congested        : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_immediate        : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_activate         : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_ref_keep         : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_unmap_fail       : {'kind': 'INT', 'name': 'long unsigned int'}
+	Field removed
+		zid                 : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_mm_page_free_batched
+	Field removed
+		cold                : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_mm_compaction_try_to_compact_pages
+	Field added
+		prio                : {'kind': 'INT', 'name': 'int'}
+	Field removed
+		mode                : {'kind': 'ENUM', 'name': 'migrate_mode', 'size': 4}
+	Layout changed
+trace_event_raw_writeback_write_inode_template
+	Field added
+		cgroup_ino          : {'kind': 'INT', 'name': 'unsigned int'}
+	Field removed
+		__data_loc_cgroup   : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_writeback_work_class
+	Field added
+		cgroup_ino          : {'kind': 'INT', 'name': 'unsigned int'}
+	Field removed
+		__data_loc_cgroup   : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_writeback_class
+	Field added
+		cgroup_ino          : {'kind': 'INT', 'name': 'unsigned int'}
+	Field removed
+		__data_loc_cgroup   : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_wbc_class
+	Field added
+		cgroup_ino          : {'kind': 'INT', 'name': 'unsigned int'}
+	Field removed
+		__data_loc_cgroup   : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_writeback_queue_io
+	Field added
+		cgroup_ino          : {'kind': 'INT', 'name': 'unsigned int'}
+	Field removed
+		__data_loc_cgroup   : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_bdi_dirty_ratelimit
+	Field added
+		cgroup_ino          : {'kind': 'INT', 'name': 'unsigned int'}
+	Field removed
+		__data_loc_cgroup   : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_balance_dirty_pages
+	Field added
+		cgroup_ino          : {'kind': 'INT', 'name': 'unsigned int'}
+	Field removed
+		__data_loc_cgroup   : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_writeback_sb_inodes_requeue
+	Field added
+		cgroup_ino          : {'kind': 'INT', 'name': 'unsigned int'}
+	Field removed
+		__data_loc_cgroup   : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_writeback_single_inode_template
+	Field added
+		cgroup_ino          : {'kind': 'INT', 'name': 'unsigned int'}
+	Field removed
+		__data_loc_cgroup   : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_ext4_alloc_da_blocks
+	Field removed
+		meta_blocks         : {'kind': 'INT', 'name': 'unsigned int'}
+	Layout changed
+trace_event_raw_ext4_da_update_reserve_space
+	Field removed
+		reserved_meta_blocks: {'kind': 'INT', 'name': 'int'}
+		allocated_meta_blocks: {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_ext4_da_reserve_space
+	Field removed
+		reserved_meta_blocks: {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_ext4_da_release_space
+	Field removed
+		reserved_meta_blocks: {'kind': 'INT', 'name': 'int'}
+		allocated_meta_blocks: {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_block_rq_complete
+	Field added
+		error               : {'kind': 'INT', 'name': 'int'}
+	Field removed
+		errors              : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_swiotlb_bounced
+	Field type changed
+		swiotlb_force       : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'ENUM', 'name': 'swiotlb_force', 'size': 4}
+trace_event_raw_thermal_power_devfreq_get_power
+	Field added
+		power               : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_napi_poll
+	Field added
+		work                : {'kind': 'INT', 'name': 'int'}
+		budget              : {'kind': 'INT', 'name': 'int'}
+	Layout changed

@@ -1,0 +1,32 @@
+Added Kind.UNION (4): ['kernfs_node_id', 'ib_gid', 'grant_entry_v2', 'device_attr_group_devres']
+Removed Kind.UNION (0): []
+Changed Kind.UNION (5): ['bpf_attr', 'security_list_options', 'acpi_parse_object', 'acpi_descriptor', 'tpm2_cmd_params']
+Reasons Kind.UNION (4): [('Field added', 2), ('Field removed', 2), ('Field type changed', 1), ('Layout changed', 5)]
+bpf_attr
+	Field added
+		query               : {'kind': 'STRUCT', 'name': '(anon)'}
+	Layout changed
+security_list_options
+	Field added
+		bpf                 : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'UNION', 'name': 'bpf_attr'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		bpf_map             : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_map'}}}, {'name': '(anon-1)', 'type': {'kind': 'TYPEDEF', 'name': 'fmode_t'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		bpf_prog            : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_prog'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		bpf_map_alloc_security: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_map'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		bpf_map_free_security: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_map'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+		bpf_prog_alloc_security: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_prog_aux'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		bpf_prog_free_security: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'bpf_prog_aux'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+	Field removed
+		bprm_secureexec     : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'linux_binprm'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		task_create         : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+	Field type changed
+		capable             : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}}, {'name': '(anon-2)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-3)', 'type': {'kind': 'INT', 'name': 'unsigned int'}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+	Layout changed
+acpi_parse_object
+	Layout changed
+acpi_descriptor
+	Layout changed
+tpm2_cmd_params
+	Field removed
+		selftest_in         : {'kind': 'STRUCT', 'name': 'tpm2_self_test_in'}
+	Layout changed

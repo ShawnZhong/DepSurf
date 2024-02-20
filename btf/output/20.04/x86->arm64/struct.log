@@ -1,0 +1,1098 @@
+Added Kind.STRUCT (1803): ['arm64_ftr_bits', 'arm64_ftr_reg', 'user_pt_regs', 'user_fpsimd_state', 'arch_hw_breakpoint_ctrl', 'secondary_data', 'ptrauth_key', 'ptrauth_keys_user', 'ptrauth_keys_kernel', 'debug_info', 'cpu_context', 'arch_timer_erratum_workaround', 'arch_probe_insn', 'bp_hardening_data', 'cpu_topology', 'mod_plt_sec', 'plt_entry', 'nmi_ctx', 'psci_operations', 'mpidr_hash', 'kprobe_step_ctx', 'step_hook', 'break_hook', 'midr_range', 'arm64_midr_revidr', 'arm64_cpu_capabilities', 'fpsimd_last_state_struct', 'stackframe', 'user_sve_header', 'user_pac_mask', 'user_pac_address_keys', 'user_pac_generic_keys', 'cpuinfo_arm64', 'cpu_operations', 'sigcontext', '_aarch64_ctx', 'fpsimd_context', 'esr_context', 'extra_context', 'sve_context', 'frame_record', 'rt_sigframe_user_layout', 'user_ctxs', 'stack_trace', 'stack_trace_data', 'undef_hook', 'sys64_hook', 'vdso_abi_info', 'aarch64_insn_patch', 'return_address_data', 'arm_smccc_res', 'ssbd_options', '__ftr_reg_entry', 'alt_region', 'kvm_regs', 'kvm_guest_debug_arch', 'kvm_debug_exit_arch', 'kvm_sync_regs', 'kvm_arch_memory_slot', 'kvm_irq_level', 'kvm_hyperv_exit', 'kvm_run', 'kvm_coalesced_mmio', 'kvm_coalesced_mmio_ring', 'kvm_device_attr', 'kvm_memory_slot', 'kvm_io_device_ops', 'kvm_vcpu', 'kvm_io_device', 'its_vm', 'its_vpe', 'vgic_global', 'vgic_irq', 'vgic_its', 'vgic_io_device', 'kvm_device', 'vgic_redist_region', 'vgic_dist', 'vgic_v2_cpu_if', 'vgic_v3_cpu_if', 'vgic_cpu', 'arch_timer_context', 'arch_timer_cpu', 'kvm_pmc', 'kvm_pmu', 'kvm_vmid', 'kvm_arch', 'kvm_mmu_memory_cache', 'kvm_vcpu_fault_info', 'kvm_cpu_context', 'kvm_pmu_events', 'kvm_host_data', 'vcpu_reset_state', 'kvm_vcpu_arch', 'kvm_vm_stat', 'kvm_vcpu_stat', 'kvm_io_range', 'kvm_io_bus', 'kvm_mmio_fragment', 'kvm', 'kvm_irq_routing_table', 'kvm_memslots', 'kvm_stat_data', 'kvm_stats_debugfs_item', 'kvm_device_ops', 'trace_event_raw_ipi_raise', 'trace_event_raw_ipi_handler', 'trace_event_data_offsets_ipi_raise', 'trace_event_data_offsets_ipi_handler', 'compat_sigcontext', 'compat_ucontext', 'compat_sigframe', 'compat_rt_sigframe', 'compat_user_vfp', 'compat_user_vfp_exc', 'compat_vfp_sigframe', 'compat_aux_sigframe', 'frame_tail', 'compat_frame_tail', 'pmu_hw_events', 'arm_pmu', 'armv8pmu_probe_info', 'cpu_suspend_ctx', 'sleep_stack_data', 'pci_ecam_ops', 'pci_config_window', 'acpi_pci_generic_root_info', 'trace_event_raw_instruction_emulation', 'trace_event_data_offsets_instruction_emulation', 'insn_emulation_ops', 'insn_emulation', 'parking_protocol_mailbox', 'cpu_mailbox_entry', 'pvclock_vcpu_stolen_time', 'pv_time_stolen_time_region', 'fdt_header', 'arm64_image_header', 'sdei_registered_event', 'fault_info', 'page_change_data', 'ptdump_info', 'prot_bits', 'pg_level', 'jit_ctx', 'arm64_jit_data', 'gfn_to_hva_cache', 'gfn_to_pfn_cache', 'kvm_sregs', 'kvm_fpu', 'kvm_userspace_memory_region', 'kvm_coalesced_mmio_zone', 'kvm_translation', 'kvm_dirty_log', 'kvm_clear_dirty_log', 'kvm_signal_mask', 'kvm_mp_state', 'kvm_guest_debug', 'kvm_ioeventfd', 'kvm_enable_cap', 'kvm_irq_routing_irqchip', 'kvm_irq_routing_msi', 'kvm_irq_routing_s390_adapter', 'kvm_irq_routing_hv_sint', 'kvm_irq_routing_entry', 'kvm_irq_routing', 'kvm_irqfd', 'kvm_msi', 'kvm_create_device', 'kvm_host_map', 'trace_event_raw_kvm_userspace_exit', 'trace_event_raw_kvm_vcpu_wakeup', 'trace_event_raw_kvm_set_irq', 'trace_event_raw_kvm_ack_irq', 'trace_event_raw_kvm_mmio', 'trace_event_raw_kvm_fpu', 'trace_event_raw_kvm_age_page', 'trace_event_raw_kvm_halt_poll_ns', 'trace_event_data_offsets_kvm_userspace_exit', 'trace_event_data_offsets_kvm_vcpu_wakeup', 'trace_event_data_offsets_kvm_set_irq', 'trace_event_data_offsets_kvm_ack_irq', 'trace_event_data_offsets_kvm_mmio', 'trace_event_data_offsets_kvm_fpu', 'trace_event_data_offsets_kvm_age_page', 'trace_event_data_offsets_kvm_halt_poll_ns', 'kvm_cpu_compat_check', 'kvm_vm_worker_thread_context', 'kvm_coalesced_mmio_dev', 'kvm_s390_adapter_int', 'kvm_hv_sint', 'kvm_kernel_irq_routing_entry', 'kvm_irq_ack_notifier', 'kvm_kernel_irqfd_resampler', 'kvm_kernel_irqfd', '_ioeventfd', 'kvm_vfio_group', 'kvm_vfio', 'kvm_vcpu_init', 'kvm_vcpu_events', 'kvm_reg_list', 'kvm_one_reg', 'kvm_arm_device_addr', 'timer_map', 'trace_event_raw_kvm_entry', 'trace_event_raw_kvm_exit', 'trace_event_raw_kvm_guest_fault', 'trace_event_raw_kvm_access_fault', 'trace_event_raw_kvm_irq_line', 'trace_event_raw_kvm_mmio_emulate', 'trace_event_raw_kvm_unmap_hva_range', 'trace_event_raw_kvm_set_spte_hva', 'trace_event_raw_kvm_age_hva', 'trace_event_raw_kvm_test_age_hva', 'trace_event_raw_kvm_set_way_flush', 'trace_event_raw_kvm_toggle_cache', 'trace_event_raw_kvm_timer_update_irq', 'trace_event_raw_kvm_get_timer_map', 'trace_event_raw_kvm_timer_save_state', 'trace_event_raw_kvm_timer_restore_state', 'trace_event_raw_kvm_timer_hrtimer_expire', 'trace_event_raw_kvm_timer_emulate', 'trace_event_data_offsets_kvm_entry', 'trace_event_data_offsets_kvm_exit', 'trace_event_data_offsets_kvm_guest_fault', 'trace_event_data_offsets_kvm_access_fault', 'trace_event_data_offsets_kvm_irq_line', 'trace_event_data_offsets_kvm_mmio_emulate', 'trace_event_data_offsets_kvm_unmap_hva_range', 'trace_event_data_offsets_kvm_set_spte_hva', 'trace_event_data_offsets_kvm_age_hva', 'trace_event_data_offsets_kvm_test_age_hva', 'trace_event_data_offsets_kvm_set_way_flush', 'trace_event_data_offsets_kvm_toggle_cache', 'trace_event_data_offsets_kvm_timer_update_irq', 'trace_event_data_offsets_kvm_get_timer_map', 'trace_event_data_offsets_kvm_timer_save_state', 'trace_event_data_offsets_kvm_timer_restore_state', 'trace_event_data_offsets_kvm_timer_hrtimer_expire', 'trace_event_data_offsets_kvm_timer_emulate', 'sys_reg_desc', 'sys_reg_params', 'trace_event_raw_kvm_wfx_arm64', 'trace_event_raw_kvm_hvc_arm64', 'trace_event_raw_kvm_arm_setup_debug', 'trace_event_raw_kvm_arm_clear_debug', 'trace_event_raw_kvm_arm_set_dreg32', 'trace_event_raw_kvm_arm_set_regset', 'trace_event_raw_trap_reg', 'trace_event_raw_kvm_handle_sys_reg', 'trace_event_raw_kvm_sys_access', 'trace_event_raw_kvm_set_guest_debug', 'trace_event_data_offsets_kvm_wfx_arm64', 'trace_event_data_offsets_kvm_hvc_arm64', 'trace_event_data_offsets_kvm_arm_setup_debug', 'trace_event_data_offsets_kvm_arm_clear_debug', 'trace_event_data_offsets_kvm_arm_set_dreg32', 'trace_event_data_offsets_kvm_arm_set_regset', 'trace_event_data_offsets_trap_reg', 'trace_event_data_offsets_kvm_handle_sys_reg', 'trace_event_data_offsets_kvm_sys_access', 'trace_event_data_offsets_kvm_set_guest_debug', 'sve_state_reg_region', '__va_list', 'kvm_sys_reg_table', 'kvm_sys_reg_target_table', 'vgic_vmcr', 'arch_timer_kvm_info', 'trace_event_raw_vgic_update_irq_pending', 'trace_event_data_offsets_vgic_update_irq_pending', 'gic_kvm_info', 'its_vlpi_map', 'vgic_register_region', 'vgic_reg_attr', 'its_device', 'its_collection', 'its_ite', 'vgic_translation_cache_entry', 'vgic_its_abi', 'vgic_state_iter', 'tlb_inv_context', 'xen_p2m_entry', 'gnttab_cache_flush', 'msi_alloc_info', 'reserved_mem', 'reserved_mem_ops', 'dma_coherent_mem', 'clock_read_data', 'clock_data', 'cma', 'trace_event_raw_cma_alloc', 'trace_event_raw_cma_release', 'trace_event_data_offsets_cma_alloc', 'trace_event_data_offsets_cma_release', 'gnu_property', 'sg_splitter', 'fdt_reserve_entry', 'fdt_node_header', 'fdt_property', 'fdt_errtabent', 'al_fic', 'armctrl_ic', 'bcm2836_arm_irqchip_intc', 'sun4i_irq_chip_data', 'sunxi_sc_nmi_reg_offs', 'gic_chip_data', 'gic_quirk', 'acpi_madt_generic_msi_frame', 'v2m_data', 'acpi_madt_generic_redistributor', 'rdists', 'partition_affinity', 'redist_region', 'mbi_range', 'acpi_madt_generic_translator', 'acpi_srat_gic_its_affinity', 'its_cmd_info', 'its_baser', 'its_node', 'its_cmd_block', 'event_lpi_map', 'cpu_lpi_count', 'its_cmd_desc', 'lpi_range', 'its_srat_map', 'partition_desc', 'mbigen_device', 'irqc_irq', 'irqc_priv', 'bcm7038_l1_chip', 'bcm7038_l1_cpu', 'brcmstb_intc_init_params', 'brcmstb_l2_intc_data', 'mtk_sysirq_chip_data', 'mtk_cirq_chip_data', 'gpcv2_irqchip_data', 'mvebu_gicp_spi_range', 'mvebu_gicp', 'mvebu_icu_subset_data', 'mvebu_icu', 'mvebu_icu_msi_data', 'mvebu_icu_irq_data', 'odmi_data', 'mvebu_pic', 'mvebu_sei_interrupt_range', 'mvebu_sei_caps', 'mvebu_sei', 'ls_extirq_data', 'ls_scfg_msi_cfg', 'ls_scfg_msir', 'ls_scfg_msi', 'combiner_reg', 'combiner', 'get_registers_context', 'exiu_irq_data', 'irq_ctl_ops', 'meson_gpio_irq_controller', 'meson_gpio_irq_params', 'pdc_pin_region', 'irqsteer_data', 'intmux_irqchip_data', 'intmux_data', 'ti_sci_version_info', 'ti_sci_core_ops', 'ti_sci_handle', 'ti_sci_dev_ops', 'ti_sci_clk_ops', 'ti_sci_rm_core_ops', 'ti_sci_rm_irq_ops', 'ti_sci_rm_ringacc_ops', 'ti_sci_rm_psil_ops', 'ti_sci_msg_rm_udmap_tx_ch_cfg', 'ti_sci_msg_rm_udmap_rx_ch_cfg', 'ti_sci_msg_rm_udmap_flow_cfg', 'ti_sci_rm_udmap_ops', 'ti_sci_proc_ops', 'ti_sci_ops', 'ti_sci_resource_desc', 'ti_sci_resource', 'ti_sci_intr_irq_domain', 'ti_sci_inta_event_desc', 'ti_sci_inta_vint_desc', 'ti_sci_inta_irq_domain', 'lpc_cycle_para', 'hisi_lpc_dev', 'hisi_lpc_acpi_cell', 'brcmstb_gisb_arb_device', 'fsl_mc_device_id', 'fsl_mc_driver', 'fsl_mc_resource_pool', 'mc_cmd_header', 'fsl_mc_command', 'fsl_mc_version', 'dpmng_rsp_get_version', 'dprc_attributes', 'dprc_region_desc', 'dprc_endpoint', 'fsl_mc_bus', 'fsl_mc', 'fsl_mc_addr_translation_range', 'dpbp_attr', 'dpbp_cmd_open', 'dpbp_rsp_get_attributes', 'dpcon_attr', 'dpcon_notification_cfg', 'dpcon_cmd_open', 'dpcon_rsp_get_attr', 'dpcon_cmd_set_notification', 'mc_rsp_create', 'mc_rsp_api_ver', 'dprc_cmd_open', 'dprc_cmd_set_irq', 'dprc_cmd_set_irq_enable', 'dprc_cmd_set_irq_mask', 'dprc_cmd_get_irq_status', 'dprc_rsp_get_irq_status', 'dprc_cmd_clear_irq_status', 'dprc_rsp_get_attributes', 'dprc_rsp_get_obj_count', 'dprc_cmd_get_obj', 'dprc_rsp_get_obj', 'dprc_cmd_get_obj_region', 'dprc_rsp_get_obj_region', 'dprc_cmd_set_obj_irq', 'dprc_cmd_get_connection', 'dprc_rsp_get_connection', 'dprc_irq_cfg', 'fsl_mc_child_objs', 'dpmcp_cmd_open', 'imx_weim_devtype', 'cs_timing', 'cs_timing_state', 'cs_data', 'ebi2_xmem_prop', 'vexpress_syscfg', 'vexpress_syscfg_func', 'vexpress_config_bridge_ops', 'vexpress_config_bridge', 'xgene_sata_override_param', 'xgene_phy_ctx', 'phy_axg_pcie_priv', 'phy_axg_mipi_pcie_analog_priv', 'brcm_sata_port', 'brcm_sata_phy', 'group_desc', 'function_desc', 'pinctrl_dt_map', 'as3722', 'as3722_pin_function', 'as3722_gpio_pin_control', 'as3722_pingroup', 'as3722_pctrl_info', 'bm1880_pinctrl', 'bm1880_pctrl_group', 'bm1880_pinmux_function', 'bm1880_pinconf_data', 'meson_pmx_group', 'meson_pmx_func', 'meson_reg_desc', 'meson_bank', 'meson_pinctrl_data', 'meson_pinctrl', 'meson8_pmx_data', 'meson_pmx_bank', 'meson_axg_pmx_data', 'meson_pmx_axg_data', 'palmas_pin_function', 'palmas_pctrl_chip_info', 'palmas_pingroup', 'palmas_pins_pullup_dn_info', 'palmas_pins_od_info', 'palmas_pin_info', 'palmas_pinctrl_data', 'rockchip_iomux', 'rockchip_drv', 'rockchip_pin_bank', 'rockchip_pinctrl', 'rockchip_mux_recalced_data', 'rockchip_mux_route_data', 'rockchip_pin_ctrl', 'rockchip_pin_config', 'rockchip_pin_group', 'rockchip_pmx_func', 'pcs_pdata', 'pcs_func_vals', 'pcs_conf_vals', 'pcs_conf_type', 'pcs_function', 'pcs_gpiofunc_range', 'pcs_data', 'pcs_soc_data', 'pcs_device', 'pcs_interrupt', 'ocelot_pmx_func', 'ocelot_pin_caps', 'ocelot_pinctrl', 'owl_pullctl', 'owl_st', 'owl_pingroup', 'owl_padinfo', 'owl_pinmux_func', 'owl_gpio_port', 'owl_pinctrl_soc_data', 'owl_pinctrl', 'bcm2835_pinctrl', 'bcm_plat_data', 'iproc_gpio', 'ns2_mux', 'ns2_mux_log', 'ns2_pin_group', 'ns2_pin_function', 'ns2_pinctrl', 'ns2_pinconf', 'ns2_pin', 'berlin_desc_function', 'berlin_desc_group', 'berlin_pinctrl_desc', 'berlin_pinctrl_function', 'berlin_pinctrl', 'imx_pin_mmio', 'imx_pin_scu', 'imx_pin', 'imx_pin_reg', 'imx_cfg_params_decode', 'imx_pinctrl_soc_info', 'imx_pinctrl', 'imx_sc_rpc_msg', 'imx_sc_msg_req_pad_set', 'imx_sc_msg_req_pad_get', 'imx_sc_msg_resp_pad_get', 'mvebu_mpp_ctrl_data', 'mvebu_mpp_ctrl', 'mvebu_mpp_ctrl_setting', 'mvebu_mpp_mode', 'mvebu_pinctrl_soc_info', 'mvebu_pinctrl_function', 'mvebu_pinctrl_group', 'mvebu_pinctrl', 'armada_37xx_pin_group', 'armada_37xx_pin_data', 'armada_37xx_pmx_func', 'armada_37xx_pm_state', 'armada_37xx_pinctrl', 'msm_function', 'msm_pingroup', 'msm_gpio_wakeirq_map', 'msm_pinctrl_soc_data', 'msm_pinctrl', 'sh_pfc_pin', 'sh_pfc_pin_group', 'sh_pfc_function', 'pinmux_cfg_reg', 'pinmux_drive_reg_field', 'pinmux_drive_reg', 'pinmux_bias_reg', 'pinmux_ioctrl_reg', 'pinmux_data_reg', 'pinmux_irq', 'pinmux_range', 'sh_pfc_window', 'sh_pfc', 'sh_pfc_soc_info', 'sh_pfc_pin_range', 'sh_pfc_soc_operations', 'sh_pfc_pin_config', 'sh_pfc_pinctrl', 'sprd_pins_info', 'sprd_pin', 'sprd_pin_group', 'sprd_pinctrl_soc_info', 'sprd_pinctrl', 'sunxi_desc_function', 'sunxi_desc_pin', 'sunxi_pinctrl_desc', 'sunxi_pinctrl_function', 'sunxi_pinctrl_group', 'sunxi_pinctrl_regulator', 'sunxi_pinctrl', 'mtk_eint_regs', 'mtk_eint_hw', 'mtk_eint_xt', 'mtk_eint', 'mtk_desc_function', 'mtk_desc_eint', 'mtk_desc_pin', 'mtk_pinctrl_group', 'mtk_drv_group_desc', 'mtk_pin_drv_grp', 'mtk_pin_spec_pupd_set_samereg', 'mtk_pin_ies_smt_set', 'mtk_pinctrl_devdata', 'mtk_pinctrl', 'mtk_pin_field', 'mtk_pin_field_calc', 'mtk_pin_reg_calc', 'mtk_func_desc', 'mtk_eint_desc', 'mtk_pin_desc', 'mtk_pin_soc', 'mtk_drive_desc', 'of_reconfig_data', 'of_mm_gpio_chip', 'bgpio_pdata', 'davinci_gpio_platform_data', 'davinci_gpio_regs', 'davinci_gpio_irq_data', 'davinci_gpio_controller', 'ftgpio_gpio', 'mpc8xxx_gpio_chip', 'mpc8xxx_gpio_devtype', 'mvebu_pwm', 'mvebu_gpio_chip', 'mxc_gpio_hwdata', 'mxc_gpio_reg_saved', 'mxc_gpio_port', 'amba_id', 'amba_cs_uci_id', 'amba_device', 'amba_driver', 'pl061_context_save_regs', 'pl061', 'sifive_gpio', 'stmpe', 'stmpe_gpio', 'tc3589x', 'tc3589x_platform_data', 'tc3589x_gpio', 'xgene_gpio', 'stmpe_pwm', 'of_pci_range_parser', 'of_pci_range', 'pci_bridge_emul_conf', 'pci_bridge_emul_pcie_conf', 'pci_bridge_emul_ops', 'pci_bridge_emul', 'pci_bridge_reg_behavior', 'cdns_pcie', 'cdns_pcie_rc', 'cdns_pcie_ep', 'cdns_plat_pcie', 'cdns_plat_pcie_of_data', 'faraday_pci_variant', 'faraday_pci', 'advk_pcie', 'rcar_pcie', 'rcar_msi', 'rcar_pcie_host', 'rcar_pcie_endpoint', 'xilinx_pcie_port', 'nwl_msi', 'nwl_pcie', 'xgene_msi_group', 'xgene_msi', 'iproc_pcie_ob', 'iproc_pcie_ib', 'iproc_pcie', 'iproc_msi', 'iproc_msi_grp', 'altera_pcie', 'altera_pcie_data', 'altera_pcie_ops', 'tlp_rp_regpair_t', 'altera_msi', 'rockchip_pcie', 'rockchip_pcie_ep', 'mtk_pcie_soc', 'mtk_pcie_port', 'mtk_pcie', 'imx6_pcie_drvdata', 'imx6_pcie', 'ks_pcie_of_data', 'keystone_pcie', 'ls_pcie_drvdata', 'ls_pcie', 'ls_pcie_ep', 'qcom_pcie_resources_2_1_0', 'qcom_pcie_resources_1_0_0', 'qcom_pcie_resources_2_3_2', 'qcom_pcie_resources_2_4_0', 'qcom_pcie_resources_2_3_3', 'qcom_pcie_resources_2_7_0', 'qcom_pcie_ops', 'qcom_pcie', 'armada8k_pcie', 'kirin_pcie', 'histb_pcie', 'al_pcie_acpi', 'al_pcie_reg_offsets', 'al_pcie_target_bus_cfg', 'al_pcie', 'pcie_soc_ops', 'hisi_pcie', 'thunder_pem_pci', 'xgene_pcie_port', 'clcd_panel', 'clcd_regs', 'clcd_board', 'clcd_fb', 'idmac_video_param', 'idmac_tx_desc', 'idmac_channel', 'mx3fb_platform_data', 'ipu_di_signal_cfg', 'mx3fb_data', 'dma_chan_request', 'mx3fb_info', 'di_mapping', 'acpi_irq_parse_one_ctx', 'mcfg_entry', 'mcfg_fixup', 'acpi_pptt_processor', 'acpi_pptt_cache', 'acpi_table_iort', 'acpi_iort_node', 'acpi_iort_id_mapping', 'acpi_iort_its_group', 'acpi_iort_named_component', 'acpi_iort_root_complex', 'acpi_iort_smmu', 'acpi_iort_smmu_v3', 'acpi_iort_pmcg', 'iort_its_msi_chip', 'iort_fwnode', 'iort_pci_alias_info', 'iort_dev_config', 'arch_timer_mem_frame', 'arch_timer_mem', 'acpi_table_gtdt', 'acpi_gtdt_header', 'acpi_gtdt_timer_block', 'acpi_gtdt_timer_entry', 'acpi_gtdt_watchdog', 'acpi_gtdt_descriptor', 'deferred_device', 'find_data', 'clk_onecell_data', 'clk_hw_onecell_data', 'of_clk_provider', 'clock_provider', 'bm1880_clock_data', 'bm1880_gate_clock', 'bm1880_mux_clock', 'bm1880_div_clock', 'bm1880_div_hw_clock', 'bm1880_composite_clock', 'bm1880_pll_clock', 'bm1880_pll_hw_clock', 'fsl_sai_clk', 'ccsr_guts', 'clockgen_pll_div', 'clockgen_pll', 'clockgen_sourceinfo', 'clockgen_muxinfo', 'clockgen_chipinfo', 'clockgen', 'mux_hwclock', 'xgene_clk_pll', 'xgene_clk_pmd', 'xgene_dev_parameters', 'xgene_clk', 'owl_clk_common', 'owl_clk_desc', 'owl_gate_hw', 'owl_gate', 'owl_mux_hw', 'owl_mux', 'owl_divider_hw', 'owl_divider', 'clk_factor_table', 'owl_factor_hw', 'owl_factor', 'owl_composite', 'clk_pll_table', 'owl_pll_hw', 'owl_pll', 'owl_reset_map', 'owl_reset', 'iproc_arm_pll', 'iproc_pll_vco_param', 'iproc_clk_reg_op', 'iproc_asiu_gate', 'iproc_pll_aon_pwr_ctrl', 'iproc_pll_reset_ctrl', 'iproc_pll_dig_filter_ctrl', 'iproc_pll_sw_ctrl', 'iproc_pll_vco_ctrl', 'iproc_pll_ctrl', 'iproc_clk_enable_ctrl', 'iproc_clk_ctrl', 'iproc_pll', 'iproc_clk', 'iproc_asiu_div', 'iproc_asiu_clk', 'iproc_asiu', 'bcm2835_cprman', 'cprman_plat_data', 'bcm2835_pll_data', 'bcm2835_pll_ana_bits', 'bcm2835_pll_divider_data', 'bcm2835_clock_data', 'bcm2835_gate_data', 'bcm2835_pll', 'bcm2835_pll_divider', 'bcm2835_clock', 'bcm2835_clk_desc', 'berlin2_avpll_vco', 'berlin2_avpll_channel', 'berlin2_pll_map', 'berlin2_pll', 'berlin2_div_map', 'berlin2_div', 'hisi_clock_data', 'hisi_fixed_rate_clock', 'hisi_fixed_factor_clock', 'hisi_mux_clock', 'hisi_phase_clock', 'hisi_divider_clock', 'hi6220_divider_clock', 'hisi_gate_clock', 'clkgate_separated', 'hi6220_clk_divider', 'clk_hisi_phase', 'hisi_reset_controller', 'hi6220_stub_clk', 'hi6220_mbox_msg', 'hi3660_stub_clk_chan', 'hi3660_stub_clk', 'imx_pll14xx_rate_table', 'imx_pll14xx_clk', 'clk_busy_divider', 'clk_busy_mux', 'clk_cpu', 'clk_divider_gate', 'clk_fixup_div', 'clk_fixup_mux', 'clk_frac_pll', 'clk_gate_exclusive', 'clk_gate2', 'clk_pfd', 'clk_pfdv2', 'clk_pllv1', 'clk_pllv2', 'clk_pllv3', 'clk_pllv3_vf610_mf', 'clk_pllv4', 'clk_sscg_pll_setup', 'clk_sscg_pll', 'clk_pll14xx', 'clk_scu', 'imx_sc_msg_req_set_clock_rate', 'req_get_clock_rate', 'resp_get_clock_rate', 'imx_sc_msg_get_clock_rate', 'req_get_clock_parent', 'resp_get_clock_parent', 'imx_sc_msg_get_clock_parent', 'imx_sc_msg_set_clock_parent', 'imx_sc_msg_req_clock_enable', 'clk_lpcg_scu', 'imx8qxp_lpcg_data', 'imx8qxp_ss_lpcg', 'ti_syscon_gate_clk_priv', 'ti_syscon_gate_clk_data', 'mtk_fixed_clk', 'mtk_fixed_factor', 'mtk_composite', 'mtk_gate_regs', 'mtk_gate', 'mtk_clk_divider', 'mtk_pll_div_table', 'mtk_pll_data', 'mtk_clk_pll', 'mtk_clk_gate', 'mtk_ref2usb_tx', 'mtk_clk_cpumux', 'mtk_reset', 'mtk_clk_mux', 'mtk_mux', 'mtk_clk_usb', 'clk_mt8173_mm_driver_data', 'clk_regmap', 'meson_aoclk_data', 'meson_aoclk_reset_controller', 'parm', 'meson_clk_cpu_dyndiv_data', 'meson_clk_dualdiv_param', 'meson_clk_dualdiv_data', 'meson_eeclkc_data', 'meson_clk_mpll_data', 'pll_params_table', 'pll_mult_range', 'meson_clk_pll_data', 'clk_regmap_gate_data', 'clk_regmap_div_data', 'clk_regmap_mux_data', 'meson_vid_pll_div_data', 'vid_pll_div', 'g12a_cpu_clk_postmux_nb_data', 'g12a_sys_pll_nb_data', 'meson_g12a_data', 'tbg_def', 'clk_periph_driver_data', 'clk_double_div', 'clk_pm_cpu', 'clk_periph_data', 'cpu_dfs_regs', 'ap_cpu_clk', 'cp110_gate_clk', 'cpg_core_clk', 'mssr_mod_clk', 'cpg_mssr_info', 'rcar_gen3_cpg_pll_config', 'mssr_mod_reparent', 'r9a06g032_gate', 'r9a06g032_clkdesc', 'r9a06g032_priv', 'r9a06g032_clk_gate', 'r9a06g032_clk_div', 'r9a06g032_clk_bitsel', 'r9a06g032_clk_dualgate', 'cpg_simple_notifier', 'cpg_z_clk', 'sd_div_table', 'sd_clock', 'rpc_clock', 'rpcd2_clock', 'usb2_clock_sel_priv', 'cpg_mssr_priv', 'mstp_clock', 'cpg_mssr_clk_domain', 'div6_clock', 'rockchip_clk_provider', 'rockchip_pll_rate_table', 'rockchip_pll_clock', 'rockchip_cpuclk_clksel', 'rockchip_cpuclk_rate_table', 'rockchip_cpuclk_reg_data', 'rockchip_clk_branch', 'rockchip_clk_frac', 'rockchip_clk_pll', 'rockchip_cpuclk', 'rockchip_inv_clock', 'rockchip_mmc_clock', 'rockchip_muxgrf_clock', 'rockchip_ddrclk', 'rockchip_softrst', 'stratix10_clock_data', 'stratix10_pll_clock', 'stratix10_perip_c_clock', 'stratix10_perip_cnt_clock', 'stratix10_gate_clock', 'socfpga_pll', 'socfpga_periph_clk', 'socfpga_gate_clk', 'clk_factors_config', 'factors_request', 'factors_data', 'clk_factors', 'mux_data', 'div_data', 'divs_data', 've_reset_data', 'mmc_phase', 'sun4i_a10_display_clk_data', 'reset_data', 'tcon_ch1_clk', 'sun9i_mmc_clk_data', 'usb_reset_data', 'usb_clk_data', 'sun9i_a80_cpus_clk', 'gates_data', 'ccu_common', 'sunxi_ccu_desc', 'ccu_reset_map', 'ccu_pll_nb', 'ccu_reset', 'ccu_mux_fixed_prediv', 'ccu_mux_var_prediv', 'ccu_mux_internal', 'ccu_div_internal', 'ccu_div', 'ccu_frac_internal', 'ccu_gate', 'ccu_mux', 'ccu_mux_nb', 'ccu_mult_internal', 'ccu_mult', '_ccu_mult', 'ccu_phase', 'ccu_sdm_setting', 'ccu_sdm_internal', 'ccu_nk', '_ccu_nk', 'ccu_nkm', '_ccu_nkm', 'ccu_nkmp', '_ccu_nkmp', 'ccu_nm', '_ccu_nm', 'ccu_mp', 'icst_params', 'icst_vco', 'clk_icst_desc', 'clk_icst', 'clk_sp810_timerclken', 'clk_sp810', 'vexpress_osc', 'clock_topology', 'zynqmp_pll', 'zynqmp_clk_gate', 'zynqmp_pm_query_data', 'zynqmp_clk_divider', 'zynqmp_clk_mux', 'clock_parent', 'zynqmp_clock', 'name_resp', 'topology_resp', 'parents_resp', 'attr_resp', 'dmaengine_desc_callback', 'virt_dma_desc', 'virt_dma_chan', 'of_dma', 'of_dma_filter_info', 'pl08x_channel_data', 'pl08x_platform_data', 'vendor_data', 'pl08x_bus_data', 'pl08x_phy_chan', 'pl08x_dma_chan', 'pl08x_sg', 'pl08x_txd', 'pl08x_driver_data', 'pl08x_lli_build_data', 'burst_table', 'bcm2835_dmadev', 'bcm2835_dma_cb', 'bcm2835_cb_entry', 'bcm2835_chan', 'bcm2835_desc', 'mbus_dram_window', 'mbus_dram_target_info', 'mv_xor_channel_data', 'mv_xor_platform_data', 'mv_xor_device', 'mv_xor_chan', 'mv_xor_desc_slot', 'mv_xor_desc', 'mv_xor_v2_descriptor', 'mv_xor_v2_device', 'mv_xor_v2_sw_desc', 'mxs_dma_ccw', 'mxs_dma_chan', 'mxs_dma_engine', 'mxs_dma_type', 'mxs_dma_filter_param', 'idmac', 'ipu', 'ipu_irq_bank', 'ipu_irq_map', 'chan_param_mem_planar', 'chan_param_mem_interleaved', 'k3_ring_cfg', 'cppi5_desc_hdr_t', 'cppi5_host_desc_t', 'cppi5_tr_type1_t', 'cppi5_tr_type15_t', 'cppi5_tr_resp_t', 'udma_tisci_rm', 'psil_endpoint_config', 'psil_ep', 'psil_ep_map', 'udma_static_tr', 'udma_tchan', 'udma_rflow', 'udma_rchan', 'udma_match_data', 'udma_hwdesc', 'udma_rx_flush', 'udma_dev', 'udma_chan', 'udma_desc', 'udma_tx_drain', 'udma_chan_config', 'udma_filter_param', 'k3_udma_glue_tx_channel_cfg', 'k3_udma_glue_rx_flow_cfg', 'k3_udma_glue_rx_channel_cfg', 'k3_udma_glue_common', 'k3_udma_glue_tx_channel', 'k3_udma_glue_rx_flow', 'k3_udma_glue_rx_channel', 'genpd_onecell_data', 'owl_sps_domain_info', 'owl_sps_info', 'owl_sps', 'owl_sps_domain', 'bcm2835_pm', 'bcm2835_power_domain', 'bcm2835_power', 'rpi_power_domain', 'rpi_power_domains', 'rpi_power_domain_packet', 'bman_hwerr_txt', 'qm_ecir', 'qm_ecir2', 'qm_eadr', 'qman_hwerr_txt', 'qman_error_info_mdata', 'bm_portal_config', 'qm_portal_config', 'bm_buffer', 'bm_rcr_entry', 'bm_rcr', 'bm_mc_command', 'bm_mc', 'bm_addr', 'bm_portal', 'bman_portal', 'bman_pool', 'qm_fd', 'qm_dqrr_entry', 'qm_fqd_stashing', 'qm_fqd_oac', 'qm_fqd', 'qm_cgr_wr_parm', 'qm_cgr_cs_thres', '__qm_mc_cgr', 'qm_mcc_initfq', 'qm_mcc_initcgr', 'qman_portal', 'qman_fq', 'qman_fq_cb', 'qman_cgr', 'qm_mcr_queryfq_np', 'qm_mcr_querywq', '__qm_mcr_querycongestion', 'qm_mcr_querycongestion', 'qm_mcr_querycgr', 'qman_cgrs', 'qm_eqcr_entry', 'qm_eqcr', 'qm_dqrr', 'qm_mr', 'qm_mcc_fq', 'qm_mcc_cgr', 'qm_mcr_queryfq', 'qm_mcr_alterfq', 'qm_mc', 'qm_addr', 'qm_portal', 'qe_iram', 'qe_ic_regs', 'cp_qe', 'qe_mux', 'qe_timers', 'qe_brg', 'spi', 'si1', 'sir', 'qe_usb_ctlr', 'qe_mcc', 'ucc_slow', 'ucc_fast', 'ucc', 'upc', 'sdma', 'dbg', 'rsp', 'qe_immap', 'qe_header', 'qe_microcode', 'qe_firmware', 'qe_firmware_info', 'muram_block', 'qe_ic', 'qe_ic_info', 'qe_pio_regs', 'qe_bd', 'ucc_slow_pram', 'ucc_slow_info', 'ucc_slow_private', 'ucc_fast_info', 'ucc_fast_private', 'si_mode_info', 'ucc_tdm_info', 'ucc_tdm', 'rcpm', 'guts', 'fsl_soc_die_attr', 'imx_pgc_domain', 'imx_pgc_domain_data', 'imx8_soc_data', 'imx_sc_msg_misc_get_soc_id', 'imx_sc_msg_misc_get_soc_uid', 'scp_domain_data', 'scp_domain', 'scp', 'scp_ctrl_reg', 'scp_subdomain', 'scp_soc_data', 'mtk_mmsys_driver_data', 'meson_msr_id', 'meson_msr', 'meson_gx_soc_id', 'meson_gx_package_id', 'meson_gx_pwrc_vpu', 'meson_ee_pwrc_mem_domain', 'meson_ee_pwrc_top_domain', 'meson_ee_pwrc_domain_desc', 'meson_ee_pwrc_domain', 'meson_ee_pwrc_domain_data', 'meson_ee_pwrc', 'meson_secure_pwrc_domain', 'meson_secure_pwrc', 'meson_secure_pwrc_domain_desc', 'meson_secure_pwrc_domain_data', 'entry_header', 'rsc_hdr', 'cmd_db_header', 'tcs_cmd', 'tcs_request', 'tcs_group', 'rsc_drv', 'rpmh_ctrlr', 'trace_event_raw_rpmh_tx_done', 'trace_event_raw_rpmh_send_msg', 'trace_event_data_offsets_rpmh_tx_done', 'trace_event_data_offsets_rpmh_send_msg', 'tcs_type_config', 'rpmh_request', 'cache_req', 'batch_cache_req', 'qcom_smem_state_ops', 'qcom_smem_state', 'rpmhpd', 'rpmhpd_desc', 'renesas_family', 'renesas_soc', 'rcar_sysc_area', 'rcar_sysc_info', 'rst_config', 'rcar_sysc_ch', 'rcar_sysc_pd', 'rcar_pm_domains', 'rockchip_grf_value', 'rockchip_grf_info', 'rockchip_domain_info', 'rockchip_pmu_info', 'rockchip_pm_domain', 'rockchip_pmu', 'sunxi_sram_func', 'sunxi_sram_data', 'sunxi_sram_desc', 'sunxi_sramc_variant', 'k3_ring_rt_regs', 'k3_ring_fifo_regs', 'k3_ringacc_proxy_gcfg_regs', 'k3_ringacc_proxy_target_regs', 'k3_ring_ops', 'k3_ring', 'k3_ringacc', 'zynqmp_ipi_message', 'zynqmp_pm_work_struct', 'zynqmp_pm_domain', 'of_regulator_match', 'devm_of_regulator_matches', 'berlin_reset_priv', 'imx7_src_signal', 'imx7_src_variant', 'imx7_src', 'intel_reset_soc', 'intel_reset_data', 'meson_reset_param', 'meson_reset', 'qcom_aoss_reset_map', 'qcom_aoss_desc', 'qcom_aoss_reset_data', 'reset_simple_data', 'reset_simple_devdata', 'zynqmp_reset_data', 'dw8250_data', 'mtk8250_data', 'of_serial_info', 'amba_pl011_data', 'pl011_sgbuf', 'pl011_dmarx_data', 'pl011_dmatx_data', 'uart_amba_port', 'imxuart_platform_data', 'imx_uart_data', 'imx_port', 'imx_port_ucrs', 'msm_dma', 'msm_port', 'msm_baud_map', 'uart_regs_layout', 'uart_flags', 'mvebu_uart_driver_data', 'mvebu_uart_pm_regs', 'mvebu_uart', 'owl_uart_info', 'owl_uart_port', 'iommu_flush_ops', 'io_pgtable_cfg', 'io_pgtable_ops', 'io_pgtable', 'io_pgtable_init_fns', 'arm_lpae_io_pgtable', 'of_pci_iommu_alias_info', 'arm_smmu_device', 'arm_smmu_impl', 'arm_smmu_cb', 'arm_smmu_smr', 'arm_smmu_s2cr', 'arm_smmu_cfg', 'arm_smmu_domain', 'arm_smmu_master_cfg', 'arm_smmu_match_data', 'cavium_smmu', 'qcom_smmu', 'arm_smmu_cmdq_ent', 'arm_smmu_ll_queue', 'arm_smmu_queue', 'arm_smmu_queue_poll', 'arm_smmu_cmdq', 'arm_smmu_cmdq_batch', 'arm_smmu_evtq', 'arm_smmu_priq', 'arm_smmu_strtab_l1_desc', 'arm_smmu_ctx_desc', 'arm_smmu_l1_ctx_desc', 'arm_smmu_ctx_desc_cfg', 'arm_smmu_s1_cfg', 'arm_smmu_s2_cfg', 'arm_smmu_strtab_cfg', 'arm_smmu_master', 'arm_smmu_option_prop', 'rk_iommu_domain', 'rk_iommu', 'rk_iommudata', 'sun50i_iommu', 'sun50i_iommu_domain', 'qcom_iommu_dev', 'qcom_iommu_ctx', 'qcom_iommu_domain', 'virtio_iommu_range_64', 'virtio_iommu_range_32', 'virtio_iommu_config', 'virtio_iommu_req_head', 'virtio_iommu_req_tail', 'virtio_iommu_req_attach', 'virtio_iommu_req_map', 'virtio_iommu_req_unmap', 'virtio_iommu_probe_property', 'virtio_iommu_probe_resv_mem', 'virtio_iommu_req_probe', 'virtio_iommu_fault', 'viommu_dev', 'viommu_mapping', 'viommu_domain', 'viommu_endpoint', 'viommu_request', 'viommu_event', 'cache_type_info', 'of_phandle_iterator', 'of_genpd_provider', 'soc_device', 'stmpe_client_info', 'stmpe_variant_info', 'stmpe_platform_data', 'stmpe_variant_block', 'prcm_data', 'lochnagar', 'lochnagar_config', 'max77620_chip', 'max77686_dev', 'altr_sysmgr', 'cma_heap', 'sensor_device_attribute', 'thermal_zone_of_device_ops', 'ahci_host_priv', 'imx_ahci_priv', 'reg_value', 'reg_property', 'ahci_cmd_hdr', 'ahci_sg', 'ahci_em_priv', 'ahci_port_priv', 'fsl_spi_platform_data', 'mpc8xxx_spi', 'mpc8xxx_spi_probe_info', 'spi_mpc8xxx_cs', 'fsl_spi_reg', 'fsl_spi_match_data', 'omap2_mcspi_platform_config', 'omap2_mcspi_device_config', 'omap2_mcspi_dma', 'omap2_mcspi_regs', 'omap2_mcspi', 'omap2_mcspi_cs', 'mii_if_info', 'mdio_mux_parent_bus', 'mdio_mux_child_bus', 'iproc_mdiomux_desc', 'bcma_device_id', 'bcma_chipcommon_pmu', 'bcma_device', 'bcma_sflash', 'bcma_drv_cc', 'bcma_drv_cc_b', 'bcma_drv_pci', 'bcma_drv_pcie2', 'bcma_drv_mips', 'bcma_drv_gmac_cmn', 'ssb_sprom_core_pwr_info', 'ssb_sprom', 'bcma_chipinfo', 'bcma_boardinfo', 'bcma_host_ops', 'bcma_bus', 'bgmac_slot_info', 'bgmac_dma_desc', 'bgmac_dma_ring', 'bgmac_rx_header', 'bgmac', 'bgmac_stat', 'fec_platform_data', 'bufdesc', 'bufdesc_ex', 'bufdesc_prop', 'fec_enet_priv_tx_q', 'fec_enet_priv_rx_q', 'fec_stop_mode_gpr', 'fec_enet_private', 'fec_devinfo', 'fec_stat', 'tgec_mdio_controller', 'mdio_fsl_priv', 'muram_info', 'fman_rev_info', 'fman_intr_src', 'fman', 'fman_dts_params', 'fman_fpm_regs', 'fman_bmi_regs', 'fman_qmi_regs', 'fman_dma_regs', 'fman_hwp_regs', 'fman_state_struct', 'fman_cfg', 'fman_port_init_params', 'fman_iram_regs', 'fman_buffer_prefix_content', 'fman_ext_pool_params', 'fman_ext_pools', 'fman_sp_int_context_data_copy', 'fman_sp_buf_margins', 'fman_sp_buffer_offsets', 'fman_kg_scheme_regs', 'fman_kg_pe_regs', 'fman_kg_regs', 'keygen_scheme', 'fman_keygen', 'fman_buf_pool_depletion', 'fman_port_rx_params', 'fman_port_non_rx_params', 'fman_port_params', 'fman_port_rx_bmi_regs', 'fman_port_tx_bmi_regs', 'fman_port_qmi_regs', 'fman_port_hwp_regs', 'fman_port_rsrc', 'fman_port_bpools', 'fman_port_cfg', 'fman_port_rx_pools_params', 'fman_port_dts_params', 'fman_port', 'fman_mac_params', 'mac_device', 'mac_priv_s', 'dpaa_eth_data', 'eth_hash_entry', 'eth_hash_t', 'dtsec_regs', 'dtsec_cfg', 'fman_mac', 'memac_regs', 'memac_cfg', 'tgec_regs', 'tgec_cfg', 'smc91x_platdata', 'smc_local', 'mdio_platform_data', 'davinci_mdio_of_param', 'davinci_mdio_regs', 'davinci_mdio_data', 'mxs_phy_data', 'mxs_phy', 'ulpi_info', 'orion_ehci_data', 'orion_ehci_hcd', 'mu3h_sch_tt', 'mu3h_sch_bw_info', 'mu3h_sch_ep_info', 'mu3c_ippc_regs', 'xhci_hcd_mtk', 'usb_role_switch', 'usb_role_switch_desc', 'rtc_plat_data', 'rtd119x_rtc', 'sun6i_rtc_clk_data', 'sun6i_rtc_dev', 'xgene_rtc_dev', 'omap_i2c_bus_platform_data', 'omap_i2c_dev', 'sprd_i2c', 'as3722_poweroff', 'gpio_restart', 'ltc2952_poweroff', 'syscon_reboot_context', 'hwmon_thermal_data', 'trace_event_raw_thermal_power_cpu_get_power', 'trace_event_raw_thermal_power_cpu_limit', 'trace_event_data_offsets_thermal_power_cpu_get_power', 'trace_event_data_offsets_thermal_power_cpu_limit', 'thermal_trip', '__thermal_cooling_bind_param', '__thermal_bind_params', '__thermal_zone', 'time_in_idle', 'cpufreq_cooling_device', 'cpuidle_cooling_device', 'clock_cooling_device', 'armada_thermal_priv', 'armada_thermal_data', 'armada_drvdata', 'armada_thermal_sensor', 'rtd119x_watchdog_device', 'altr_sdram_prv_data', 'altr_sdram_mc_data', 'edac_device_prv_data', 'altr_edac_device_dev', 'altr_arria10_edac', 'cpufreq_dt_platform_data', 'private_data', 'cpuidle_driver_kobj', 'cpuidle_driver_attr', 'psci_cpuidle_data', 'psci_pd_provider', 'mmc_ioc_cmd', 'mmc_ioc_multi_cmd', 'mmc_blk_request', 'mmc_queue_req', 'mmc_queue', 'mmc_blk_data', 'mmc_rpmb_data', 'mmc_blk_ioc_data', 'mmci_platform_data', 'variant_data', 'mmci_host', 'mmci_host_ops', 'mmci_dmae_next', 'mmci_dmae_priv', 'sdmmc_lli_desc', 'sdmmc_idma', 'sdmmc_dlyb', 'syscon_led', 'sdei_event', 'sdei_crosscall_args', 'rpi_firmware_property_tag_header', 'rpi_firmware', 'qcom_scm_hdcp_req', 'qcom_scm_vmperm', 'qcom_scm_desc', 'qcom_scm_res', 'qcom_scm', 'qcom_scm_current_perm_info', 'qcom_scm_mem_map_info', 'qcom_scm_wb_entry', 'arm_smccc_quirk', 'arm_smccc_args', 'scm_legacy_command', 'scm_legacy_response', 'ti_msgmgr_message', 'ti_sci_msg_hdr', 'ti_sci_msg_resp_version', 'ti_sci_msg_req_reboot', 'ti_sci_msg_req_set_device_state', 'ti_sci_msg_req_get_device_state', 'ti_sci_msg_resp_get_device_state', 'ti_sci_msg_req_set_device_resets', 'ti_sci_msg_req_set_clock_state', 'ti_sci_msg_req_get_clock_state', 'ti_sci_msg_resp_get_clock_state', 'ti_sci_msg_req_set_clock_parent', 'ti_sci_msg_req_get_clock_parent', 'ti_sci_msg_resp_get_clock_parent', 'ti_sci_msg_req_get_clock_num_parents', 'ti_sci_msg_resp_get_clock_num_parents', 'ti_sci_msg_req_query_clock_freq', 'ti_sci_msg_resp_query_clock_freq', 'ti_sci_msg_req_set_clock_freq', 'ti_sci_msg_req_get_clock_freq', 'ti_sci_msg_resp_get_clock_freq', 'ti_sci_msg_req_get_resource_range', 'ti_sci_msg_resp_get_resource_range', 'ti_sci_msg_req_manage_irq', 'ti_sci_msg_rm_ring_cfg_req', 'ti_sci_msg_rm_ring_get_cfg_req', 'ti_sci_msg_rm_ring_get_cfg_resp', 'ti_sci_msg_psil_pair', 'ti_sci_msg_psil_unpair', 'ti_sci_msg_rm_udmap_tx_ch_cfg_req', 'ti_sci_msg_rm_udmap_rx_ch_cfg_req', 'ti_sci_msg_rm_udmap_flow_cfg_req', 'ti_sci_msg_req_proc_request', 'ti_sci_msg_req_proc_release', 'ti_sci_msg_req_proc_handover', 'ti_sci_msg_req_set_config', 'ti_sci_msg_req_set_ctrl', 'ti_sci_msg_req_get_status', 'ti_sci_msg_resp_get_status', 'ti_sci_xfer', 'ti_sci_xfers_info', 'ti_sci_rm_type_map', 'ti_sci_desc', 'ti_sci_info', 'scmi_revision_info', 'scmi_clock_info', 'scmi_clk_ops', 'scmi_handle', 'scmi_perf_ops', 'scmi_power_ops', 'scmi_sensor_info', 'scmi_sensor_ops', 'scmi_reset_ops', 'scmi_device', 'scmi_device_id', 'scmi_driver', 'scmi_msg_hdr', 'scmi_msg', 'scmi_xfer', 'scmi_chan_info', 'scmi_transport_ops', 'scmi_desc', 'trace_event_raw_scmi_xfer_begin', 'trace_event_raw_scmi_xfer_end', 'trace_event_raw_scmi_rx_done', 'trace_event_data_offsets_scmi_xfer_begin', 'trace_event_data_offsets_scmi_xfer_end', 'trace_event_data_offsets_scmi_rx_done', 'scmi_xfers_info', 'scmi_info', 'scmi_prot_devnames', 'scmi_msg_resp_base_attributes', 'scmi_msg_resp_clock_protocol_attributes', 'scmi_msg_resp_clock_attributes', 'scmi_clock_set_config', 'scmi_msg_clock_describe_rates', 'scmi_msg_resp_clock_describe_rates', 'scmi_clock_set_rate', 'clock_info', 'scmi_opp', 'scmi_msg_resp_perf_attributes', 'scmi_msg_resp_perf_domain_attributes', 'scmi_msg_perf_describe_levels', 'scmi_perf_set_limits', 'scmi_perf_get_limits', 'scmi_perf_set_level', 'scmi_msg_resp_perf_describe_levels', 'scmi_perf_get_fc_info', 'scmi_msg_resp_perf_desc_fc', 'scmi_fc_db_info', 'scmi_fc_info', 'perf_dom_info', 'scmi_perf_info', 'scmi_msg_resp_power_attributes', 'scmi_msg_resp_power_domain_attributes', 'scmi_power_set_state', 'power_dom_info', 'scmi_power_info', 'scmi_msg_resp_reset_domain_attributes', 'scmi_msg_reset_domain_reset', 'reset_dom_info', 'scmi_reset_info', 'scmi_msg_resp_sensor_attributes', 'scmi_msg_resp_sensor_description', 'scmi_msg_sensor_trip_point_notify', 'scmi_msg_set_sensor_trip_point', 'scmi_msg_sensor_reading_get', 'sensors_info', 'scmi_shared_mem', 'scmi_mailbox', 'scmi_smc', 'meson_sm_cmd', 'meson_sm_chip', 'meson_sm_firmware', 'cper_arm_err_info', 'cper_arm_ctx_info', 'imx_sc_chan', 'imx_sc_ipc', 'imx_sc_msg_req_misc_set_ctrl', 'imx_sc_msg_req_cpu_start', 'imx_sc_msg_req_misc_get_ctrl', 'imx_sc_msg_resp_misc_get_ctrl', 'imx_sc_msg_irq_get_status', 'imx_sc_msg_irq_enable', 'imx_sc_msg_req_set_resource_power_mode', 'imx_sc_pm_domain', 'imx_sc_pd_range', 'imx_sc_pd_soc', 'pm_api_feature_data', 'zynqmp_pm_shutdown_scope', 'of_timer_irq', 'of_timer_base', 'of_timer_clk', 'timer_of', 'sh_timer_config', 'sh_cmt_info', 'sh_cmt_channel', 'sh_cmt_device', 'sh_tmu_channel', 'sh_tmu_device', 'clocksource_mmio', 'dw_apb_timer', 'dw_apb_clock_event_device', 'dw_apb_clocksource', 'rk_timer', 'rk_clkevt', 'arch_timer', 'ate_acpi_oem_info', 'mchp_pit64b_timer', 'mchp_pit64b_clkevt', 'alias_prop', 'of_endpoint', 'supplier_bindings', 'of_changeset_entry', 'of_changeset', 'of_bus', 'of_intc_desc', 'rmem_assigned_device', 'of_overlay_notify_data', 'target', 'fragment', 'overlay_changeset', 'rockchip_mbox_msg', 'rockchip_mbox_data', 'rockchip_mbox_chan', 'rockchip_mbox', 'bcm2835_mbox', 'ti_msgmgr_valid_queue_desc', 'ti_msgmgr_desc', 'ti_queue_inst', 'ti_msgmgr_inst', 'zynqmp_ipi_mchan', 'zynqmp_ipi_mbox', 'zynqmp_ipi_pdata', 'sun6i_msgbox', 'qcom_ipcc_chan_info', 'qcom_ipcc', 'dpfe_firmware_header', 'init_data', 'dpfe_api', 'brcmstb_dpfe_priv', 'fsl_ifc_nand', 'fsl_ifc_nor', 'fsl_ifc_gpcm', 'fsl_ifc_global', 'fsl_ifc_runtime', 'fsl_ifc_ctrl', 'mtk_smi_larb_iommu', 'mtk_smi_common_plat', 'mtk_smi_larb_gen', 'mtk_smi', 'mtk_smi_larb', 'event_range', 'cci_pmu_hw_events', 'cci_pmu_model', 'cci_pmu', 'arm_ccn_component', 'arm_ccn_dt', 'arm_ccn', 'arm_ccn_pmu_event', 'pmu_probe_info', 'hisi_uncore_ops', 'hisi_pmu', 'hisi_pmu_hwevents', 'l2cache_pmu', 'cluster_pmu', 'l3cache_pmu', 'l3cache_event_ops', 'hw_pmu_info', 'xgene_pmu_dev', 'xgene_pmu', 'xgene_pmu_ops', 'xgene_pmu_dev_ctx', 'xgene_pmu_data', 'zynqmp_nvmem_data', 'efi_boot_memmap', 'exit_boot_struct', 'efi_file_protocol', 'efi_simple_file_system_protocol', 'finfo']
+Removed Kind.STRUCT (1033): ['apm_bios_info', 'apm_info', 'edd_device_params', 'edd_info', 'edd', 'ist_info', 'edid_info', 'setup_header', 'sys_desc_table', 'olpc_ofw_header', 'efi_info', 'boot_e820_entry', 'boot_params', 'desc_struct', 'idt_bits', 'gate_struct', 'desc_ptr', 'pgprot', 'paravirt_callee_save', 'pv_info', 'pv_init_ops', 'pv_lazy_ops', 'pv_cpu_ops', 'pv_irq_ops', 'pv_mmu_ops', 'flush_tlb_info', 'pv_lock_ops', 'paravirt_patch_site', 'math_emu_info', 'fregs_state', 'fxregs_state', 'swregs_state', 'xstate_header', 'xregs_state', 'fpu', 'cpuinfo_x86', 'x86_hw_tss', 'entry_stack', 'entry_stack_page', 'x86_io_bitmap', 'tss_struct', 'irq_stack', 'fixed_percpu_data', 'mpc_table', 'mpc_cpu', 'mpc_bus', 'mpc_intsrc', 'x86_init_mpparse', 'x86_init_resources', 'x86_init_irqs', 'x86_init_oem', 'x86_init_paging', 'x86_init_timers', 'x86_init_iommu', 'x86_init_pci', 'x86_hyper_init', 'x86_init_acpi', 'x86_init_ops', 'x86_cpuinit_ops', 'x86_legacy_devices', 'x86_legacy_features', 'x86_hyper_runtime', 'x86_platform_ops', 'x86_msi_ops', 'x86_apic_ops', 'physid_mask', 'arch_tlbflush_unmap_batch', 'apic', 'smp_ops', 'debug_store', 'debug_store_buffers', 'cea_exception_stacks', 'cpu_entry_area', 'gdt_page', 'tlb_context', 'tlb_state', 'e820_entry', 'e820_table', 'boot_params_to_save', 'cpu_signature', 'ucode_cpu_info', 'vdso_image', 'va_alignment', 'klp_modinfo', 'pbe', 'io_bitmap', '__large_struct', 'pvclock_vsyscall_time_info', 'hv_nested_enlightenments_control', 'hv_vp_assist_page', 'ms_hyperv_tsc_page', 'ms_hyperv_info', 'trace_event_raw_emulate_vsyscall', 'trace_event_data_offsets_emulate_vsyscall', 'ldt_struct', 'x86_pmu_capability', 'stack_frame', 'stack_frame_ia32', 'perf_guest_switch_msr', 'perf_pmu_events_ht_attr', 'nmiaction', 'cyc2ns_data', 'unwind_state', 'event_constraint', 'amd_nb', 'er_account', 'intel_shared_regs', 'intel_excl_states', 'intel_excl_cntrs', 'cpu_hw_events', 'x86_perf_task_context', 'extra_reg', 'x86_pmu_quirk', 'x86_pmu', 'sched_state', 'perf_sched', 'perf_msr', 'amd_uncore', 'cpu_perf_ibs', 'perf_ibs', 'perf_ibs_data', 'perf_amd_iommu', 'amd_iommu_event_desc', 'x86_cpu_desc', 'bts_ctx', 'bts_phys', 'bts_buffer', 'pebs_basic', 'pebs_meminfo', 'pebs_gprs', 'pebs_xmm', 'pebs_lbr_entry', 'pebs_lbr', 'x86_perf_regs', 'insn_field', 'insn', 'pebs_record_core', 'pebs_record_nhm', 'pebs_record_skl', 'bts_record', 'p4_event_bind', 'p4_pebs_bind', 'p4_event_alias', 'topa_entry', 'pt_pmu', 'pt_buffer', 'topa', 'pt_filter', 'pt_filters', 'pt', 'pt_cap_desc', 'pt_address_range', 'topa_page', 'x86_cpu_id', 'pci_sysdata', 'pci_extra_dev', 'intel_uncore_type', 'intel_uncore_pmu', 'intel_uncore_ops', 'uncore_event_desc', 'freerunning_counters', 'intel_uncore_box', 'intel_uncore_extra_reg', 'pci2phy_map', 'intel_uncore_init_fun', 'imc_uncore_pci_dev', 'sched_pin_override', 'xmaddr', 'xpaddr', 'vcpu_time_info', 'vcpu_set_singleshot_timer', 'vcpu_register_time_memory_area', 'xen_clock_event_device', 'gnttab_vm_area', 'machine_ops', 'hypervisor_x86', 'xen_hvm_pagetable_dying', 'xen_hvm_get_mem_type', 'mmu_update', 'callback_register', 'xen_memory_map', 'physdev_apic', 'xen_pmu_amd_ctxt', 'xen_pmu_cntr_pair', 'xen_pmu_intel_ctxt', 'xen_pmu_regs', 'xen_pmu_arch', 'xen_pmu_params', 'xen_pmu_data', 'xenpmu', 'trap_info', 'mmuext_op', 'multicall_entry', 'dom0_vga_console_info', 'physdev_set_iopl', 'physdev_set_iobitmap', 'xen_extraversion', 'xen_pci_frontend_ops', 'pci_raw_ops', 'multicall_space', 'cpu_dev', 'tls_descs', 'trap_array_entry', 'xen_memory_exchange', 'xen_machphys_mapping', 'callback', 'mc_buffer', 'trace_event_raw_xen_mc__batch', 'trace_event_raw_xen_mc_entry', 'trace_event_raw_xen_mc_entry_alloc', 'trace_event_raw_xen_mc_callback', 'trace_event_raw_xen_mc_flush_reason', 'trace_event_raw_xen_mc_flush', 'trace_event_raw_xen_mc_extend_args', 'trace_event_raw_xen_mmu__set_pte', 'trace_event_raw_xen_mmu_set_pte_at', 'trace_event_raw_xen_mmu_set_pmd', 'trace_event_raw_xen_mmu_set_pud', 'trace_event_raw_xen_mmu_set_p4d', 'trace_event_raw_xen_mmu_ptep_modify_prot', 'trace_event_raw_xen_mmu_alloc_ptpage', 'trace_event_raw_xen_mmu_release_ptpage', 'trace_event_raw_xen_mmu_pgd', 'trace_event_raw_xen_mmu_flush_tlb_one_user', 'trace_event_raw_xen_mmu_flush_tlb_others', 'trace_event_raw_xen_mmu_write_cr3', 'trace_event_raw_xen_cpu_write_ldt_entry', 'trace_event_raw_xen_cpu_write_idt_entry', 'trace_event_raw_xen_cpu_load_idt', 'trace_event_raw_xen_cpu_write_gdt_entry', 'trace_event_raw_xen_cpu_set_ldt', 'trace_event_data_offsets_xen_mc__batch', 'trace_event_data_offsets_xen_mc_entry', 'trace_event_data_offsets_xen_mc_entry_alloc', 'trace_event_data_offsets_xen_mc_callback', 'trace_event_data_offsets_xen_mc_flush_reason', 'trace_event_data_offsets_xen_mc_flush', 'trace_event_data_offsets_xen_mc_extend_args', 'trace_event_data_offsets_xen_mmu__set_pte', 'trace_event_data_offsets_xen_mmu_set_pte_at', 'trace_event_data_offsets_xen_mmu_set_pmd', 'trace_event_data_offsets_xen_mmu_set_pud', 'trace_event_data_offsets_xen_mmu_set_p4d', 'trace_event_data_offsets_xen_mmu_ptep_modify_prot', 'trace_event_data_offsets_xen_mmu_alloc_ptpage', 'trace_event_data_offsets_xen_mmu_release_ptpage', 'trace_event_data_offsets_xen_mmu_pgd', 'trace_event_data_offsets_xen_mmu_flush_tlb_one_user', 'trace_event_data_offsets_xen_mmu_flush_tlb_others', 'trace_event_data_offsets_xen_mmu_write_cr3', 'trace_event_data_offsets_xen_cpu_write_ldt_entry', 'trace_event_data_offsets_xen_cpu_write_idt_entry', 'trace_event_data_offsets_xen_cpu_load_idt', 'trace_event_data_offsets_xen_cpu_write_gdt_entry', 'trace_event_data_offsets_xen_cpu_set_ldt', 'xen_common_irq', 'cpu_user_regs', 'vcpu_guest_context', 'iommu_table_entry', 'hvm_modlist_entry', 'hvm_memmap_table_entry', 'hv_reenlightenment_control', 'hv_tsc_emulation_control', 'hv_tsc_emulation_status', 'hyperv_pci_block_ops', 'hv_vpset', 'hv_tlb_flush', 'hv_tlb_flush_ex', 'trace_event_raw_hyperv_mmu_flush_tlb_others', 'trace_event_raw_hyperv_nested_flush_guest_mapping', 'trace_event_raw_hyperv_nested_flush_guest_mapping_range', 'trace_event_raw_hyperv_send_ipi_mask', 'trace_event_raw_hyperv_send_ipi_one', 'trace_event_data_offsets_hyperv_mmu_flush_tlb_others', 'trace_event_data_offsets_hyperv_nested_flush_guest_mapping', 'trace_event_data_offsets_hyperv_nested_flush_guest_mapping_range', 'trace_event_data_offsets_hyperv_send_ipi_mask', 'trace_event_data_offsets_hyperv_send_ipi_one', 'hv_guest_mapping_flush', 'hv_guest_mapping_flush_list', 'hv_send_ipi', 'hv_send_ipi_ex', 'real_mode_header', 'trampoline_header', 'pkru_state', 'resctrl_pqr_state', 'sigcontext_64', 'mce', 'smca_hwid', 'smca_bank', 'kernel_vm86_regs', 'ucontext_x32', 'rt_sigframe_x32', 'bad_iret_stack', 'idt_data', 'trace_event_raw_x86_irq_vector', 'trace_event_raw_vector_config', 'trace_event_raw_vector_mod', 'trace_event_raw_vector_reserve', 'trace_event_raw_vector_alloc', 'trace_event_raw_vector_alloc_managed', 'trace_event_raw_vector_activate', 'trace_event_raw_vector_teardown', 'trace_event_raw_vector_setup', 'trace_event_raw_vector_free_moved', 'trace_event_data_offsets_x86_irq_vector', 'trace_event_data_offsets_vector_config', 'trace_event_data_offsets_vector_mod', 'trace_event_data_offsets_vector_reserve', 'trace_event_data_offsets_vector_alloc', 'trace_event_data_offsets_vector_alloc_managed', 'trace_event_data_offsets_vector_activate', 'trace_event_data_offsets_vector_teardown', 'trace_event_data_offsets_vector_setup', 'trace_event_data_offsets_vector_free_moved', 'estack_pages', 'legacy_pic', 'trace_event_raw_nmi_handler', 'trace_event_data_offsets_nmi_handler', 'nmi_desc', 'nmi_stats', 'user_desc', 'setup_data', 'setup_indirect', 'acpi_table_ibft', 'efi_scratch', 'mmap_arg_struct32', 'change_member', 'x86_cpu', 'smp_alt_module', 'text_poke_loc', 'bp_patching_desc', 'user_i387_struct', 'user_regs_struct', 'user', 'cyc2ns', 'muldiv', 'freq_desc', 'sfi_rtc_table_entry', 'ldttss_desc', 'inactive_task_frame', 'fork_frame', 'ssb_state', 'trace_event_raw_x86_fpu', 'trace_event_data_offsets_x86_fpu', '_fpreg', '_fpxreg', 'user_i387_ia32_struct', '_fpx_sw_bytes', '_xmmreg', '_fpstate_32', 'tboot_mac_region', 'tboot_acpi_generic_address', 'tboot_acpi_sleep_info', 'tboot', 'wakeup_header', 'sha1_hash', 'sinit_mle_data', 'stack_frame_user', 'amd_nb_bus_dev_range', 'amd_l3_cache', 'threshold_block', 'threshold_bank', 'amd_northbridge', '_cache_table', '_cpuid4_info_regs', 'cpuid_bit', 'cpuid_dependent_feature', 'aperfmperf_sample', 'cpuid_dep', '_tlb_table', 'sku_microcode', 'cpuid_regs', 'mce_evt_llist', 'mca_config', 'mce_vendor_flags', 'mca_msr_regs', 'trace_event_raw_mce_record', 'trace_event_data_offsets_mce_record', 'mce_bank', 'mce_bank_dev', 'severity', 'smca_bank_name', 'thresh_restart', 'threshold_attr', '_thermal_state', 'thermal_state', 'cper_mce_record', 'mce_log_buffer', 'mtrr_var_range', 'mtrr_state_type', 'mtrr_ops', 'set_mtrr_data', 'mtrr_value', 'mtrr_sentry', 'mtrr_gentry', 'mtrr_sentry32', 'mtrr_gentry32', 'fixed_range_block', 'var_mtrr_range_state', 'var_mtrr_state', 'mtrr_cleanup_result', 'microcode_ops', 'cpu_info_ctx', 'ucode_patch', 'microcode_header_intel', 'microcode_intel', 'extended_signature', 'extended_sigtable', 'equiv_cpu_entry', 'microcode_header_amd', 'microcode_amd', 'equiv_cpu_table', 'cont_desc', 'rdtgroup', 'rdt_resource', 'rdt_domain', 'mongroup', 'pseudo_lock_region', 'mbm_state', 'msr_param', 'rdt_cache', 'rdt_membw', 'rdt_parse_data', 'rdt_options', '__va_list_tag', 'rdt_fs_context', 'mon_evt', 'rmid_read', 'rftype', 'rmid_entry', 'trace_event_raw_pseudo_lock_mem_latency', 'trace_event_raw_pseudo_lock_l2', 'trace_event_raw_pseudo_lock_l3', 'trace_event_data_offsets_pseudo_lock_mem_latency', 'trace_event_data_offsets_pseudo_lock_l2', 'trace_event_data_offsets_pseudo_lock_l3', 'pseudo_lock_pm_req', 'residency_counts', 'vmware_steal_time', 'IO_APIC_route_entry', 'acpi_table_boot', 'acpi_table_hpet', 'irq_alloc_info', 'ioapic_domain_cfg', 'acpi_hest_ia_error_bank', 'cstate_entry', 'intel_early_ops', 'chipset', 'tsc_adjust', 'mpf_intel', 'mpc_ioapic', 'mpc_lintsrc', 'irq_cfg', 'apic_chip_data', 'IR_IO_APIC_route_entry', 'irq_pin_list', 'mp_chip_data', 'mp_ioapic_gsi', 'ioapic', 'io_apic', 'uvh_node_id_s', 'uv1h_node_id_s', 'uvxh_node_id_s', 'uv2h_node_id_s', 'uv3h_node_id_s', 'uv4h_node_id_s', 'uvh_rh_gam_alias210_overlay_config_2_mmr_s', 'uv1h_rh_gam_alias210_overlay_config_2_mmr_s', 'uvxh_rh_gam_alias210_overlay_config_2_mmr_s', 'uv2h_rh_gam_alias210_overlay_config_2_mmr_s', 'uv3h_rh_gam_alias210_overlay_config_2_mmr_s', 'uv4h_rh_gam_alias210_overlay_config_2_mmr_s', 'uvh_rh_gam_alias210_redirect_config_2_mmr_s', 'uv1h_rh_gam_alias210_redirect_config_2_mmr_s', 'uvxh_rh_gam_alias210_redirect_config_2_mmr_s', 'uv2h_rh_gam_alias210_redirect_config_2_mmr_s', 'uv3h_rh_gam_alias210_redirect_config_2_mmr_s', 'uv4h_rh_gam_alias210_redirect_config_2_mmr_s', 'uvh_rh_gam_config_mmr_s', 'uv1h_rh_gam_config_mmr_s', 'uvxh_rh_gam_config_mmr_s', 'uv2h_rh_gam_config_mmr_s', 'uv3h_rh_gam_config_mmr_s', 'uv4h_rh_gam_config_mmr_s', 'uvh_rh_gam_gru_overlay_config_mmr_s', 'uv1h_rh_gam_gru_overlay_config_mmr_s', 'uvxh_rh_gam_gru_overlay_config_mmr_s', 'uv2h_rh_gam_gru_overlay_config_mmr_s', 'uv3h_rh_gam_gru_overlay_config_mmr_s', 'uv4h_rh_gam_gru_overlay_config_mmr_s', 'uv1h_rh_gam_mmioh_overlay_config_mmr_s', 'uv2h_rh_gam_mmioh_overlay_config_mmr_s', 'uvh_rh_gam_mmr_overlay_config_mmr_s', 'uv1h_rh_gam_mmr_overlay_config_mmr_s', 'uvxh_rh_gam_mmr_overlay_config_mmr_s', 'uv2h_rh_gam_mmr_overlay_config_mmr_s', 'uv3h_rh_gam_mmr_overlay_config_mmr_s', 'uv4h_rh_gam_mmr_overlay_config_mmr_s', 'uv1h_lb_target_physical_apic_id_mask_s', 'uv3h_gr0_gam_gr_config_s', 'uv_gam_parameters', 'uv_gam_range_entry', 'uv_systab', 'uv_scir_s', 'uv_gam_range_s', 'uv_hub_info_s', 'uv_cpu_info_s', 'uvh_apicid_s', 'uv_hub_nmi_s', 'uv_cpu_nmi_s', 'mn', 'cluster_mask', 'x86_mapping_info', 'init_pgtable_data', 'crash_memmap_data', 'kexec_entry64_regs', 'efi_setup_data', 'bzimage64_data', '__arch_relative_insn', 'arch_optimized_insn', 'optimized_kprobe', 'hw_breakpoint', 'hpet_data', 'hpet_channel', 'hpet_base', 'amd_northbridge_info', 'kvm_steal_time', 'kvm_vcpu_pv_apf_data', 'kvm_task_sleep_node', 'kvm_task_sleep_head', 'branch', 'patch_xxl', 'patch_lock', 'jailhouse_setup_data', 'scan_area', 'uprobe_xol_ops', 'efifb_dmi_info', 'agp_version', 'agp_kern_info', 'pci_hostbridge_probe', 'trace_event_raw_tlb_flush', 'trace_event_data_offsets_tlb_flush', 'map_range', 'trace_event_raw_x86_exceptions', 'trace_event_data_offsets_x86_exceptions', 'ioremap_desc', 'exception_stacks', 'cpa_data', 'memtype', 'pagerange_state', 'kmmio_probe', 'kmmio_fault_page', 'kmmio_delayed_release', 'kmmio_context', 'prefix_bits', 'mmiotrace_rw', 'mmiotrace_map', 'trap_reason', 'remap_trace', 'numa_memblk', 'numa_meminfo', 'kaslr_memory_region', 'sme_populate_pgd_data', 'sigcontext_32', 'ucontext_ia32', 'sigframe_ia32', 'rt_sigframe_ia32', 'sfi_table_header', 'sfi_table_simple', 'sfi_cpu_table_entry', 'sfi_apic_table_entry', 'pnmask', 'uv1_2_3_bau_msg_payload', 'uv4_bau_msg_payload', 'uv1_bau_msg_header', 'uv2_3_bau_msg_header', 'bau_desc', 'bau_pq_entry', 'msg_desc', 'reset_args', 'ptc_stats', 'tunables', 'hub_and_pnode', 'socket_desc', 'uvhub_desc', 'bau_control', 'bau_operations', 'atomic_short', 'uv_IO_APIC_route_entry', 'uv_irq_2_mmr_pnode', 'uv_rtc_timer_head', 'nmi_action', 'init_nmi', 'jit_context', 'x64_jit_data', 'oldold_utsname', 'old_utsname', 'sched_clock_data', 'pv_node', 'pv_hash_entry', 'platform_hibernation_ops', 'swsusp_info', 'snapshot_handle', 'linked_page', 'chain_allocator', 'rtree_node', 'mem_zone_bm_rtree', 'bm_position', 'memory_bitmap', 'mem_extent', 'nosave_region', 'swap_map_page', 'swap_map_page_list', 'swap_map_handle', 'swsusp_header', 'swsusp_extent', 'hib_bio_batch', 'crc_data', 'cmp_data', 'dec_data', 'resume_swap_area', 'snapshot_data', 'compat_resume_swap_area', 'cpumap', 'irq_matrix', 'trace_event_raw_irq_matrix_global', 'trace_event_raw_irq_matrix_global_update', 'trace_event_raw_irq_matrix_cpu', 'trace_event_data_offsets_irq_matrix_global', 'trace_event_data_offsets_irq_matrix_global_update', 'trace_event_data_offsets_irq_matrix_cpu', 'klp_func', 'klp_callbacks', 'klp_object', 'klp_state', 'klp_patch', 'klp_find_arg', 'klp_ops', 'klp_shadow', 'stacktrace_cookie', 'proc_timens_offset', 'ftrace_direct_func', 'trace_mmiotrace_rw', 'trace_mmiotrace_map', 'header_iter', 'compat_blk_user_trace_setup', 'user_return_notifier', 'wp_walk', 'clean_walk', '__old_kernel_stat', 'space_resv_32', 'old_linux_dirent', 'readdir_callback', 'utimbuf', 'compat_if_dqblk', 'compat_fs_qfilestat', 'compat_fs_quota_stat', 'compat_ipc_kludge', 'msr', 'msr_info', 'msr_regs_info', 'msr_info_completion', 'trace_event_raw_msr_trace_class', 'trace_event_data_offsets_msr_trace_class', 'intel_pingroup', 'intel_function', 'intel_padgroup', 'intel_community', 'intel_pinctrl_soc_data', 'intel_pinctrl_context', 'intel_pad_context', 'intel_pinctrl', 'chv_community', 'chv_pin_context', 'chv_pinctrl', 'intel_soc_pmic', 'crystalcove_gpio', 'intel_msic_gpio_pdata', 'msic_gpio', 'crystalcove_pwm', 'pwm_lpss_chip', 'pwm_lpss_boardinfo', 'pci_filp_private', 'vgastate', 'vesafb_par', 'idle_cpu', 'acpi_table_facs', 'acpi_debugger_ops', 'acpi_debugger', 'acpi_fixed_event_handler', 'acpi_fixed_event_info', 'nvs_page', 'lpi_device_info', 'lpi_device_constraint', 'lpi_constraints', 'lpss_clk_data', 'lpss_device_desc', 'lpss_private_data', 'lpss_device_links', 'hid_uid', 'st_clk_data', 'acpi_dlayer', 'acpi_dlevel', 'always_present_id', 'acpi_table_lpit', 'acpi_lpit_header', 'acpi_lpit_native', 'lpit_residency_info', 'acpi_gpe_walk_info', 'acpi_gpe_device_info', 'acpi_exdump_info', 'acpi_gpe_block_status_context', 'acpi_walk_info', 'acpi_rsdump_info', 'acpi_handler_info', 'acpi_db_method_info', 'history_info', 'acpi_db_command_info', 'acpi_db_command_help', 'acpi_db_execute_walk', 'acpi_integrity_info', 'acpi_object_info', 'acpi_region_walk_info', 'acpi_db_argument_info', 'throttling_tstate', 'acpi_processor_throttling_arg', 'acpi_pci_ioapic', 'acpi_aml_io', 'pmic_table', 'intel_pmic_opregion_data', 'intel_pmic_regs_handler_ctx', 'intel_pmic_opregion', 'axp20x_dev', 'acpi_table_xsdt', 'sfi_table_key', 'sfi_table_attr', 'pmc_clk', 'pmc_clk_data', 'clk_plt_fixed', 'clk_plt', 'clk_plt_data', 'suspend_info', 'physdev_pirq_eoi_gmfn', 'physdev_pci_mmcfg_reserved', 'pci_mmcfg_region', 'pcpu', 'pmu_mode', 'mcinfo_common', 'mcinfo_global', 'mcinfo_bank', 'mcinfo_msr', 'mc_info', 'mcinfo_logical_cpu', 'xen_mc_fetch', 'xen_mc_notifydomain', 'xen_mc_physcpuinfo', 'xen_mc_msrinject', 'xen_mc_mceinject', 'xen_mc', 'xen_mce', 'xen_mce_log', 'hpet_info', 'hpet_timer', 'hpet', 'hpet_dev', 'hpets', 'compat_hpet_info', 'agp_memory', 'agp_bridge_data', 'gatt_mask', 'aper_size_info_16', 'agp_bridge_driver', 'agp_info', 'agp_setup', 'agp_segment', 'agp_segment_priv', 'agp_region', 'agp_allocate', 'agp_bind', 'agp_unbind', 'agp_client', 'agp_controller', 'agp_file_private', 'agp_front_data', 'aper_size_info_8', 'aper_size_info_32', 'aper_size_info_lvl2', 'aper_size_info_fixed', 'agp_3_5_dev', 'isoch_data', 'agp_info32', 'agp_segment32', 'agp_region32', 'agp_allocate32', 'agp_bind32', 'agp_unbind32', 'intel_agp_driver_description', 'intel_gtt_driver', '_intel_private', 'intel_gtt_driver_description', 'agp_device_ids', 'ioasid_set', 'ioasid_allocator_ops', 'ioasid_data', 'ioasid_allocator_data', 'amd_iommu_pi_data', 'vcpu_data', 'amd_iommu_device_info', 'irq_remap_table', 'amd_iommu_fault', 'protection_domain', 'domain_pgtable', 'amd_iommu', 'amd_irte_ops', 'acpihid_map_entry', 'devid_map', 'iommu_dev_data', 'dev_table_entry', 'unity_map_entry', 'irte_ga', 'irq_2_irte', 'amd_ir_data', 'irq_remap_ops', 'iommu_cmd', 'ivhd_header', 'ivhd_entry', 'ivmd_header', 'ivrs_quirk_entry', 'acpi_table_dmar', 'acpi_dmar_header', 'acpi_dmar_device_scope', 'acpi_dmar_pci_path', 'acpi_dmar_hardware_unit', 'acpi_dmar_reserved_memory', 'acpi_dmar_atsr', 'acpi_dmar_rhsa', 'acpi_dmar_andd', 'dmar_dev_scope', 'dmar_drhd_unit', 'intel_iommu', 'dmar_pci_path', 'dmar_pci_notify_info', 'irte', 'qi_desc', 'q_inval', 'ir_table', 'iommu_flush', 'root_entry', 'dmar_domain', 'dma_pte', 'dmar_res_callback', 'context_entry', 'device_domain_info', 'pasid_table', 'dmar_rmrr_unit', 'dmar_atsr_unit', 'domain_context_mapping_data', 'pasid_dir_entry', 'pasid_entry', 'pasid_table_opaque', 'trace_event_raw_dma_map', 'trace_event_raw_dma_unmap', 'trace_event_raw_dma_map_sg', 'trace_event_data_offsets_dma_map', 'trace_event_data_offsets_dma_unmap', 'trace_event_data_offsets_dma_map_sg', 'page_req_dsc', 'intel_svm_dev', 'svm_dev_ops', 'intel_svm', 'ioapic_scope', 'hpet_scope', 'irq_2_iommu', 'intel_ir_data', 'set_msi_sid_data', 'isa_driver', 'isa_dev', 'intel_msic_ocd_pdata', 'intel_msic_platform_data', 'intel_msic', 'intel_soc_pmic_config', 'piix_map_db', 'piix_host_priv', 'ich_laptop', 'sis_chipset', 'sis_laptop', 'vga_switcheroo_handler', 'vga_switcheroo_client_ops', 'vga_switcheroo_client', 'vgasr_priv', 'vfio_info_cap_header', 'vfio_group_status', 'vfio_irq_set', 'vfio_device_ops', 'vfio_iommu_driver_ops', 'vfio_info_cap', 'vfio', 'vfio_iommu_driver', 'vfio_container', 'vfio_unbound_dev', 'vfio_group', 'vfio_device', 'vfio_group_put_work', 'virqfd', 'vfio_iommu_type1_info', 'vfio_iova_range', 'vfio_iommu_type1_info_cap_iova_range', 'vfio_iommu_type1_info_cap_migration', 'vfio_iommu_type1_info_dma_avail', 'vfio_iommu_type1_dma_map', 'vfio_bitmap', 'vfio_iommu_type1_dma_unmap', 'vfio_iommu_type1_dirty_bitmap', 'vfio_iommu_type1_dirty_bitmap_get', 'vfio_iommu', 'vfio_domain', 'vfio_dma', 'vfio_iova', 'vfio_pfn', 'vfio_regions', 'vfio_device_info', 'vfio_region_info', 'vfio_region_info_cap_type', 'vfio_irq_info', 'vfio_pci_dependent_device', 'vfio_pci_hot_reset_info', 'vfio_pci_hot_reset', 'vfio_device_ioeventfd', 'vfio_device_feature', 'vfio_pci_ioeventfd', 'vfio_pci_device', 'vfio_pci_irq_ctx', 'vfio_pci_regops', 'vfio_pci_region', 'vfio_pci_dummy_resource', 'vfio_pci_reflck', 'vfio_pci_vf_token', 'vfio_pci_mmap_vma', 'vfio_pci_fill_info', 'vfio_pci_group_entry', 'vfio_pci_group_info', 'vfio_pci_walk_info', 'vfio_devices', 'perm_bits', 'usb_ehci_pdata', 'ehci_platform_priv', 'usb_ohci_pdata', 'ohci_platform_priv', 'usb_debug_descriptor', 'ehci_dev', 'xdbc_regs', 'xdbc_trb', 'xdbc_erst_entry', 'xdbc_info_context', 'xdbc_ep_context', 'xdbc_context', 'xdbc_strings', 'xdbc_segment', 'xdbc_ring', 'xdbc_state', 'i8042_port', 'elants_data', 'elants_version_attribute', 'cmos_rtc_board_info', 'cmos_rtc', 'eisa_device_id', 'eisa_device', 'eisa_driver', 'eisa_root_device', 'eisa_device_info', 'acpi_cpufreq_data', 'drv_cmd', 'powernow_k8_data', 'psb_s', 'pst_s', 'powernowk8_target_arg', 'init_on_cpu', 'pcc_register_resource', 'pcc_memory_resource', 'pcc_header', 'pcc_cpu', 'cpu_id', 'cpu_model', 'sample', 'pstate_data', 'vid_data', 'global_params', 'cpudata', 'pstate_funcs', 'edd_device', 'edd_attribute', 'cper_sec_proc_ia', 'efi_runtime_map_entry', 'map_attribute', 'efi_acpi_dev_path', 'efi_pci_dev_path', 'efi_dev_path', 'acpi_hid_uid', 'dev_header', 'properties_header', 'efi_embedded_fw', 'efi_embedded_fw_desc', 'cper_ia_err_info', 'cper_ia_proc_ctx', 'ts_dmi_data', 'pmc_bit_map', 'pmc_reg_map', 'pmc_dev', 'intel_scu_ipc_data', 'intel_scu_ipc_dev', 'intel_scu_ipc_devres', 'pmc_data', 'trace_event_raw_extlog_mem_event', 'trace_event_data_offsets_extlog_mem_event', 'ce_array', 'pcibios_fwaddrmap', 'pci_check_idx_range', 'pci_mmcfg_hostbridge_probe', 'physdev_restore_msi', 'physdev_setup_gsi', 'xen_device_domain_owner', 'pci_root_info', 'irq_routing_table', 'irq_router', 'irq_router_handler', 'pci_setup_rom', 'pci_root_res', 'amd_hostbridge', 'saved_msr', 'saved_msrs', 'saved_context', 'restore_data_record']
+Changed Kind.STRUCT (301): ['task_struct', 'pt_regs', 'pv_time_ops', 'thread_struct', 'cpumask', 'mm_struct', 'paravirt_patch_template', 'thread_info', 'device', 'tlbflush_unmap_batch', 'arch_uprobe_task', 'free_area', 'pglist_data', 'zone', 'zonelist', 'mem_section_usage', 'vm_event_state', 'srcu_struct', 'mem_cgroup', 'mempolicy', 'module', 'mod_arch_specific', 'exception_table_entry', 'ftrace_ret_stack', 'hd_struct', 'gendisk', 'arch_hw_breakpoint', 'device_node', 'perf_sample_data', 'trace_iterator', 'property', 'arch_specific_insn', 'prev_kprobe', 'kprobe', 'kprobe_ctlblk', 'memcg_vmstats_percpu', 'kgdb_arch', 'net_device', 'kimage_arch', 'kimage', 'irq_affinity_desc', 'arch_shared_info', 'arch_vcpu_info', 'pvclock_wall_clock', 'vcpu_info', 'irq_desc', 'irq_common_data', 'shared_info', 'alt_instr', 'stack_info', 'pci_dev', 'pci_bus', 'clocksource', 'cpuidle_device', 'cpufreq_policy', 'thermal_cooling_device', 'thermal_zone_device', 'acpi_processor_performance', 'acpi_processor_throttling', 'acpi_processor', 'ucontext', 'rt_sigframe', 'hstate', 'stat64', 'cpu', 'platform_device', 'pnp_card', 'pnp_protocol', 'pnp_dev', 'cacheinfo', 'acpi_device', 'kretprobe', 'kgdb_bkpt', 'arch_uprobe', 'backlight_device', 'pg_state', 'addr_marker', 'crypto_tfm', 'crypto_alg', 'crypto_shash', 'shash_alg', 'crypto_instance', 'warn_args', 'workqueue_attrs', 'wq_device', 'srcu_notifier_head', 'root_domain', 'cpupri_vec', 'cpupri', 'cpudl', 'qnode', 'rcu_state', 'rtc_device', 'call_function_data', 'elf_prstatus', 'cpuset', 'tmpmasks', 'cpuset_migrate_mm_work', 'trace_array', 'trace_buffer', 'ftrace_buffer_info', 'blk_mq_hw_ctx', 'bpf_perf_event_data', 'bpf_trace_sample_data', 'bpf_nested_pt_regs', 'bpf_raw_tp_regs', 'trace_kprobe', 'bpf_ctx_convert', 'uprobe', 'parallel_data', 'padata_cpumask', 'padata_instance', 'kmem_cache', 'crypto_comp', 'hugetlb_cgroup', 'node_hstate', 'nodemask_scratch', 'location', 'memory_block', 'mem_cgroup_tree', 'stat', 'compat_stat', 'compat_flock64', 'epoll_event', 'io_epoll', 'skcipher_request', 'crypto_skcipher', 'skcipher_alg', 'crypto_ahash', 'ahash_request', 'hash_alg_common', 'arch_elf_state', 'elf_thread_core_info', 'compat_elf_prstatus', 'numa_maps', 'numa_maps_private', 'compat_ext4_new_group_input', 'semid64_ds', 'kpp_request', 'crypto_kpp', 'kpp_alg', 'tpm_chip', 'crypto_larval', 'crypto_cipher', 'aead_request', 'aead_alg', 'crypto_aead', 'aead_instance', 'rng_alg', 'crypto_rng', 'crypto_sync_skcipher', 'skcipher_instance', 'ahash_alg', 'ahash_instance', 'ahash_request_priv', 'shash_instance', 'akcipher_request', 'crypto_akcipher', 'akcipher_alg', 'akcipher_instance', 'pkcs1pad_request', 'acomp_req', 'crypto_acomp', 'acomp_alg', 'crypto_scomp', 'scomp_alg', 'crypto_cts_reqctx', 'rctx', 'crypto_rfc3686_req_ctx', 'crypto_rfc4106_req_ctx', 'crypto_rfc4543_req_ctx', 'crypto_gcm_req_priv_ctx', 'virtio_device', 'ib_device', 'ib_core_device', 'phy', 'gpio_chip', 'pinctrl_dev', 'amd_gpio', 'i2c_client', 'i2c_adapter', 'i2c_algorithm', 'sx150x_pinctrl', 'gpio_device', 'gpio_desc', 'regulator_dev', 'palmas_gpio', 'rc5t583_gpio', 'tps6586x_gpio', 'tps65910_gpio', 'tps68470_gpio_data', 'xgpio_instance', 'pwm_export', 'pci_host_bridge', 'pcie_device', 'pci_epf', 'pci_epc', 'dma_chan_dev', 'dma_async_tx_descriptor', 'rio_dev', 'rio_mport', 'rio_net', 'simplefb_par', 'acpi_opcode_info', 'acpi_parse_obj_common', 'acpi_parse_obj_named', 'acpi_parse_obj_asl', 'acpi_power_resource', 'power_supply', 'input_dev', 'container_dev', 'cppc_cpudata', 'clk_notifier', 'virtio_mmio_device', 'virtio_pci_device', 'irq_info', 'xenbus_device', 'usb_interface', 'usb_device', 'fixed_regulator_data', 'spi_device', 'spi_controller', 'max310x_port', 'serdev_device', 'serdev_controller', 'fsl_mc_device', 'fsl_mc_resource', 'root_device', 'platform_object', 'devres', 'internal_container', 'phy_device', 'mdio_device', 'mii_bus', 'generic_pm_domain', 'fw_sysfs', 'node_access_nodes', 'node_cache_info', 'devcd_entry', 'platform_msi_priv_data', 'loop_info', 'htcpld_chip', 'wm8400', 'wm8350_rtc', 'nvdimm', 'nvdimm_bus', 'nd_region', 'nd_namespace_common', 'nd_namespace_io', 'nd_btt', 'nd_pfn', 'nd_dax', 'nd_blk_region', 'nd_namespace_pmem', 'nd_namespace_blk', 'dev_dax', 'scsi_device', 'Scsi_Host', 'scsi_target', 'scsi_disk', 'ata_link', 'ata_port', 'ata_device', 'mipi_dsi_device', 'wpan_phy', 'usb_port', 'ep_device', 'usb_gadget', 'serio', 'mousedev', 'evdev', 'i2c_dev', 'dw_i2c_dev', 'ptp_clock', 'hwmon_device', 'devfreq', 'watchdog_core_data', 'mapped_device', 'dm_stat', 'dimm_info', 'mem_ctl_info', 'csrow_info', 'mmc_card', 'mmc_host', 'sdio_func', 'sdhci_pci_data', 'cros_ec_dev', 'rproc', 'rproc_vdev', 'devfreq_event_dev', 'extcon_dev', 'vme_dev', 'powercap_control_type', 'powercap_zone', 'nvmem_device', 'compat_ethtool_rx_flow_spec', 'compat_ethtool_rxnfc', 'dsa_switch_ops', 'tls_rec', 'wiphy', 'rfkill']
+Reasons Kind.STRUCT (4): [('Field added', 29), ('Field removed', 35), ('Field type changed', 37), ('Layout changed', 294)]
+task_struct
+	Field removed
+		restore_sigmask     : {'kind': 'INT', 'name': 'unsigned int'}
+		closid              : {'kind': 'TYPEDEF', 'name': 'u32'}
+		rmid                : {'kind': 'TYPEDEF', 'name': 'u32'}
+		patch_state         : {'kind': 'INT', 'name': 'int'}
+		mce_addr            : {'kind': 'TYPEDEF', 'name': 'u64'}
+		mce_ripv            : {'kind': 'TYPEDEF', 'name': '__u64'}
+		mce_whole_page      : {'kind': 'TYPEDEF', 'name': '__u64'}
+		__mce_reserved      : {'kind': 'TYPEDEF', 'name': '__u64'}
+		mce_kill_me         : {'kind': 'STRUCT', 'name': 'callback_head'}
+	Layout changed
+pt_regs
+	Field added
+		(anon)              : {'kind': 'UNION', 'name': '(anon)'}
+		orig_x0             : {'kind': 'TYPEDEF', 'name': 'u64'}
+		syscallno           : {'kind': 'TYPEDEF', 'name': 's32'}
+		unused2             : {'kind': 'TYPEDEF', 'name': 'u32'}
+		orig_addr_limit     : {'kind': 'TYPEDEF', 'name': 'u64'}
+		pmr_save            : {'kind': 'TYPEDEF', 'name': 'u64'}
+		stackframe          : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'TYPEDEF', 'name': 'u64'}}
+	Field removed
+		r15                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		r14                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		r13                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		r12                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		bp                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		bx                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		r11                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		r10                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		r9                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		r8                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		ax                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		cx                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		dx                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		si                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		di                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		orig_ax             : {'kind': 'INT', 'name': 'long unsigned int'}
+		ip                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		cs                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		flags               : {'kind': 'INT', 'name': 'long unsigned int'}
+		sp                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		ss                  : {'kind': 'INT', 'name': 'long unsigned int'}
+	Layout changed
+pv_time_ops
+	Field removed
+		sched_clock         : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [], 'ret_type': {'kind': 'INT', 'name': 'long long unsigned int'}}}
+	Layout changed
+thread_struct
+	Field added
+		cpu_context         : {'kind': 'STRUCT', 'name': 'cpu_context'}
+		uw                  : {'kind': 'STRUCT', 'name': '(anon)'}
+		fpsimd_cpu          : {'kind': 'INT', 'name': 'unsigned int'}
+		sve_state           : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		sve_vl              : {'kind': 'INT', 'name': 'unsigned int'}
+		sve_vl_onexec       : {'kind': 'INT', 'name': 'unsigned int'}
+		fault_address       : {'kind': 'INT', 'name': 'long unsigned int'}
+		fault_code          : {'kind': 'INT', 'name': 'long unsigned int'}
+		debug               : {'kind': 'STRUCT', 'name': 'debug_info'}
+		keys_user           : {'kind': 'STRUCT', 'name': 'ptrauth_keys_user'}
+		keys_kernel         : {'kind': 'STRUCT', 'name': 'ptrauth_keys_kernel'}
+	Field removed
+		tls_array           : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'STRUCT', 'name': 'desc_struct'}}
+		sp                  : {'kind': 'INT', 'name': 'long unsigned int'}
+		es                  : {'kind': 'INT', 'name': 'short unsigned int'}
+		ds                  : {'kind': 'INT', 'name': 'short unsigned int'}
+		fsindex             : {'kind': 'INT', 'name': 'short unsigned int'}
+		gsindex             : {'kind': 'INT', 'name': 'short unsigned int'}
+		fsbase              : {'kind': 'INT', 'name': 'long unsigned int'}
+		gsbase              : {'kind': 'INT', 'name': 'long unsigned int'}
+		ptrace_bps          : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'perf_event'}}}
+		debugreg6           : {'kind': 'INT', 'name': 'long unsigned int'}
+		ptrace_dr7          : {'kind': 'INT', 'name': 'long unsigned int'}
+		cr2                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		trap_nr             : {'kind': 'INT', 'name': 'long unsigned int'}
+		error_code          : {'kind': 'INT', 'name': 'long unsigned int'}
+		io_bitmap           : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'io_bitmap'}}
+		iopl_emul           : {'kind': 'INT', 'name': 'long unsigned int'}
+		addr_limit          : {'kind': 'TYPEDEF', 'name': 'mm_segment_t'}
+		sig_on_uaccess_err  : {'kind': 'INT', 'name': 'unsigned int'}
+		fpu                 : {'kind': 'STRUCT', 'name': 'fpu'}
+	Layout changed
+cpumask
+	Field type changed
+		bits                : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 128, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+	Layout changed
+mm_struct
+	Layout changed
+paravirt_patch_template
+	Field removed
+		init                : {'kind': 'STRUCT', 'name': 'pv_init_ops'}
+		cpu                 : {'kind': 'STRUCT', 'name': 'pv_cpu_ops'}
+		irq                 : {'kind': 'STRUCT', 'name': 'pv_irq_ops'}
+		mmu                 : {'kind': 'STRUCT', 'name': 'pv_mmu_ops'}
+		lock                : {'kind': 'STRUCT', 'name': 'pv_lock_ops'}
+	Layout changed
+thread_info
+	Field added
+		addr_limit          : {'kind': 'TYPEDEF', 'name': 'mm_segment_t'}
+		ttbr0               : {'kind': 'TYPEDEF', 'name': 'u64'}
+		(anon)              : {'kind': 'UNION', 'name': '(anon)'}
+	Field removed
+		status              : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+device
+	Field added
+		dma_mem             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_coherent_mem'}}
+		cma_area            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cma'}}
+		dma_coherent        : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Layout changed
+tlbflush_unmap_batch
+	Field removed
+		arch                : {'kind': 'STRUCT', 'name': 'arch_tlbflush_unmap_batch'}
+		flush_required      : {'kind': 'TYPEDEF', 'name': 'bool'}
+		writable            : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Layout changed
+arch_uprobe_task
+	Field removed
+		saved_scratch_register: {'kind': 'INT', 'name': 'long unsigned int'}
+		saved_trap_nr       : {'kind': 'INT', 'name': 'unsigned int'}
+		saved_tf            : {'kind': 'INT', 'name': 'unsigned int'}
+	Layout changed
+free_area
+	Field type changed
+		free_list           : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 5, 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 6, 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+	Layout changed
+pglist_data
+	Layout changed
+zone
+	Field type changed
+		free_area           : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 11, 'type': {'kind': 'STRUCT', 'name': 'free_area'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 13, 'type': {'kind': 'STRUCT', 'name': 'free_area'}}
+	Layout changed
+zonelist
+	Field type changed
+		_zonerefs           : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 5121, 'type': {'kind': 'STRUCT', 'name': 'zoneref'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 321, 'type': {'kind': 'STRUCT', 'name': 'zoneref'}}
+	Layout changed
+mem_section_usage
+	Field type changed
+		subsection_map      : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 8, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+	Layout changed
+vm_event_state
+	Field type changed
+		event               : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 92, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 91, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+	Layout changed
+srcu_struct
+	Field type changed
+		node                : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 521, 'type': {'kind': 'STRUCT', 'name': 'srcu_node'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 17, 'type': {'kind': 'STRUCT', 'name': 'srcu_node'}}
+		level               : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'srcu_node'}}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'srcu_node'}}}
+	Layout changed
+mem_cgroup
+	Field type changed
+		vmevents            : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 92, 'type': {'kind': 'TYPEDEF', 'name': 'atomic_long_t'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 91, 'type': {'kind': 'TYPEDEF', 'name': 'atomic_long_t'}}
+	Layout changed
+mempolicy
+	Layout changed
+module
+	Field removed
+		klp                 : {'kind': 'TYPEDEF', 'name': 'bool'}
+		klp_alive           : {'kind': 'TYPEDEF', 'name': 'bool'}
+		klp_info            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'klp_modinfo'}}
+	Layout changed
+mod_arch_specific
+	Field added
+		core                : {'kind': 'STRUCT', 'name': 'mod_plt_sec'}
+		init                : {'kind': 'STRUCT', 'name': 'mod_plt_sec'}
+		ftrace_trampolines  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'plt_entry'}}
+	Layout changed
+exception_table_entry
+	Field removed
+		handler             : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+ftrace_ret_stack
+	Field added
+		fp                  : {'kind': 'INT', 'name': 'long unsigned int'}
+	Field removed
+		retp                : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+	Layout changed
+hd_struct
+	Layout changed
+gendisk
+	Layout changed
+arch_hw_breakpoint
+	Field added
+		trigger             : {'kind': 'TYPEDEF', 'name': 'u64'}
+		ctrl                : {'kind': 'STRUCT', 'name': 'arch_hw_breakpoint_ctrl'}
+	Field removed
+		mask                : {'kind': 'INT', 'name': 'long unsigned int'}
+		len                 : {'kind': 'TYPEDEF', 'name': 'u8'}
+		type                : {'kind': 'TYPEDEF', 'name': 'u8'}
+	Field type changed
+		address             : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+	Layout changed
+device_node
+	Field added
+		kobj                : {'kind': 'STRUCT', 'name': 'kobject'}
+	Layout changed
+perf_sample_data
+	Layout changed
+trace_iterator
+	Layout changed
+property
+	Field added
+		_flags              : {'kind': 'INT', 'name': 'long unsigned int'}
+		attr                : {'kind': 'STRUCT', 'name': 'bin_attribute'}
+	Layout changed
+arch_specific_insn
+	Field added
+		api                 : {'kind': 'STRUCT', 'name': 'arch_probe_insn'}
+	Field removed
+		insn                : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'kprobe_opcode_t'}}
+		boostable           : {'kind': 'TYPEDEF', 'name': 'bool'}
+		if_modifier         : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Layout changed
+prev_kprobe
+	Field removed
+		old_flags           : {'kind': 'INT', 'name': 'long unsigned int'}
+		saved_flags         : {'kind': 'INT', 'name': 'long unsigned int'}
+	Field type changed
+		status              : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+	Layout changed
+kprobe
+	Layout changed
+kprobe_ctlblk
+	Field added
+		saved_irqflag       : {'kind': 'INT', 'name': 'long unsigned int'}
+		ss_ctx              : {'kind': 'STRUCT', 'name': 'kprobe_step_ctx'}
+	Field removed
+		kprobe_old_flags    : {'kind': 'INT', 'name': 'long unsigned int'}
+		kprobe_saved_flags  : {'kind': 'INT', 'name': 'long unsigned int'}
+	Field type changed
+		kprobe_status       : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+	Layout changed
+memcg_vmstats_percpu
+	Field type changed
+		events              : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 92, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 91, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+	Layout changed
+kgdb_arch
+	Field type changed
+		gdb_bpt_instr       : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1, 'type': {'kind': 'INT', 'name': 'unsigned char'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'INT', 'name': 'unsigned char'}}
+net_device
+	Layout changed
+kimage_arch
+	Field added
+		dtb                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		dtb_mem             : {'kind': 'INT', 'name': 'long unsigned int'}
+		elf_headers_mem     : {'kind': 'INT', 'name': 'long unsigned int'}
+	Field removed
+		p4d                 : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'p4d_t'}}
+		pud                 : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pud_t'}}
+		pmd                 : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pmd_t'}}
+		pte                 : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'pte_t'}}
+		elf_load_addr       : {'kind': 'INT', 'name': 'long unsigned int'}
+	Layout changed
+kimage
+	Layout changed
+irq_affinity_desc
+	Layout changed
+arch_shared_info
+	Field removed
+		max_pfn             : {'kind': 'INT', 'name': 'long unsigned int'}
+		pfn_to_mfn_frame_list_list: {'kind': 'TYPEDEF', 'name': 'xen_pfn_t'}
+		nmi_reason          : {'kind': 'INT', 'name': 'long unsigned int'}
+		p2m_cr3             : {'kind': 'INT', 'name': 'long unsigned int'}
+		p2m_vaddr           : {'kind': 'INT', 'name': 'long unsigned int'}
+		p2m_generation      : {'kind': 'INT', 'name': 'long unsigned int'}
+	Layout changed
+arch_vcpu_info
+	Field removed
+		cr2                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		pad                 : {'kind': 'INT', 'name': 'long unsigned int'}
+	Layout changed
+pvclock_wall_clock
+	Field added
+		sec_hi              : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+vcpu_info
+	Layout changed
+irq_desc
+	Field removed
+		pending_mask        : {'kind': 'TYPEDEF', 'name': 'cpumask_var_t'}
+	Layout changed
+irq_common_data
+	Layout changed
+shared_info
+	Field type changed
+		vcpu_info           : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 32, 'type': {'kind': 'STRUCT', 'name': 'vcpu_info'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1, 'type': {'kind': 'STRUCT', 'name': 'vcpu_info'}}
+	Layout changed
+alt_instr
+	Field added
+		orig_offset         : {'kind': 'TYPEDEF', 'name': 's32'}
+		alt_offset          : {'kind': 'TYPEDEF', 'name': 's32'}
+		cpufeature          : {'kind': 'TYPEDEF', 'name': 'u16'}
+		orig_len            : {'kind': 'TYPEDEF', 'name': 'u8'}
+		alt_len             : {'kind': 'TYPEDEF', 'name': 'u8'}
+	Field removed
+		instr_offset        : {'kind': 'TYPEDEF', 'name': 's32'}
+		repl_offset         : {'kind': 'TYPEDEF', 'name': 's32'}
+		cpuid               : {'kind': 'TYPEDEF', 'name': 'u16'}
+		instrlen            : {'kind': 'TYPEDEF', 'name': 'u8'}
+		replacementlen      : {'kind': 'TYPEDEF', 'name': 'u8'}
+		padlen              : {'kind': 'TYPEDEF', 'name': 'u8'}
+	Layout changed
+stack_info
+	Field added
+		low                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		high                : {'kind': 'INT', 'name': 'long unsigned int'}
+	Field removed
+		begin               : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		end                 : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		next_sp             : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+	Layout changed
+pci_dev
+	Layout changed
+pci_bus
+	Field added
+		domain_nr           : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+clocksource
+	Field removed
+		wd_list             : {'kind': 'STRUCT', 'name': 'list_head'}
+		cs_last             : {'kind': 'TYPEDEF', 'name': 'u64'}
+		wd_last             : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Layout changed
+cpuidle_device
+	Field type changed
+		kobj_driver         : {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'cpuidle_driver_kobj', 'fwd_kind': 'struct'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cpuidle_driver_kobj'}}
+cpufreq_policy
+	Layout changed
+thermal_cooling_device
+	Layout changed
+thermal_zone_device
+	Layout changed
+acpi_processor_performance
+	Layout changed
+acpi_processor_throttling
+	Layout changed
+acpi_processor
+	Layout changed
+ucontext
+	Field added
+		__unused            : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 120, 'type': {'kind': 'TYPEDEF', 'name': '__u8'}}
+	Field type changed
+		uc_mcontext         : {'kind': 'STRUCT', 'name': 'sigcontext_64'}
+		                    ->{'kind': 'STRUCT', 'name': 'sigcontext'}
+	Layout changed
+rt_sigframe
+	Field removed
+		pretcode            : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+	Layout changed
+hstate
+	Field type changed
+		hugepage_freelists  : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+		nr_huge_pages_node  : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+		free_huge_pages_node: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+		surplus_huge_pages_node: {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+	Layout changed
+stat64
+	Field type changed
+		st_dev              : {'kind': 'INT', 'name': 'long long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_u64'}
+		__st_ino            : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_mode             : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_uint_t'}
+		st_nlink            : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_uint_t'}
+		st_uid              : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_gid              : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_rdev             : {'kind': 'INT', 'name': 'long long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_u64'}
+		st_size             : {'kind': 'INT', 'name': 'long long int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_s64'}
+		st_blksize          : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_blocks           : {'kind': 'INT', 'name': 'long long int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_u64'}
+		st_atime            : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_atime_nsec       : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_mtime            : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_mtime_nsec       : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_ctime            : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_ctime_nsec       : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_ino              : {'kind': 'INT', 'name': 'long long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_u64'}
+	Layout changed
+cpu
+	Layout changed
+platform_device
+	Layout changed
+pnp_card
+	Layout changed
+pnp_protocol
+	Layout changed
+pnp_dev
+	Layout changed
+cacheinfo
+	Layout changed
+acpi_device
+	Layout changed
+kretprobe
+	Layout changed
+kgdb_bkpt
+	Field type changed
+		saved_instr         : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1, 'type': {'kind': 'INT', 'name': 'unsigned char'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'INT', 'name': 'unsigned char'}}
+arch_uprobe
+	Field added
+		api                 : {'kind': 'STRUCT', 'name': 'arch_probe_insn'}
+		simulate            : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Field removed
+		ops                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'uprobe_xol_ops'}}}
+		(anon-1)            : {'kind': 'UNION', 'name': '(anon)'}
+	Layout changed
+backlight_device
+	Layout changed
+pg_state
+	Field added
+		uxn_pages           : {'kind': 'INT', 'name': 'long unsigned int'}
+	Field removed
+		effective_prot      : {'kind': 'TYPEDEF', 'name': 'pgprotval_t'}
+		prot_levels         : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 5, 'type': {'kind': 'TYPEDEF', 'name': 'pgprotval_t'}}
+		lines               : {'kind': 'INT', 'name': 'long unsigned int'}
+		to_dmesg            : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Field type changed
+		current_prot        : {'kind': 'TYPEDEF', 'name': 'pgprotval_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+	Layout changed
+addr_marker
+	Field removed
+		max_lines           : {'kind': 'INT', 'name': 'long unsigned int'}
+	Field type changed
+		name                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+	Layout changed
+crypto_tfm
+	Layout changed
+crypto_alg
+	Layout changed
+crypto_shash
+	Layout changed
+shash_alg
+	Layout changed
+crypto_instance
+	Layout changed
+warn_args
+	Layout changed
+workqueue_attrs
+	Layout changed
+wq_device
+	Layout changed
+srcu_notifier_head
+	Layout changed
+root_domain
+	Layout changed
+cpupri_vec
+	Layout changed
+cpupri
+	Layout changed
+cpudl
+	Layout changed
+qnode
+	Field removed
+		reserved            : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'INT', 'name': 'long int'}}
+	Layout changed
+rcu_state
+	Field type changed
+		node                : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 521, 'type': {'kind': 'STRUCT', 'name': 'rcu_node'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 17, 'type': {'kind': 'STRUCT', 'name': 'rcu_node'}}
+		level               : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rcu_node'}}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rcu_node'}}}
+	Layout changed
+rtc_device
+	Layout changed
+call_function_data
+	Layout changed
+elf_prstatus
+	Layout changed
+cpuset
+	Layout changed
+tmpmasks
+	Layout changed
+cpuset_migrate_mm_work
+	Layout changed
+trace_array
+	Layout changed
+trace_buffer
+	Layout changed
+ftrace_buffer_info
+	Layout changed
+blk_mq_hw_ctx
+	Layout changed
+bpf_perf_event_data
+	Layout changed
+bpf_trace_sample_data
+	Layout changed
+bpf_nested_pt_regs
+	Layout changed
+bpf_raw_tp_regs
+	Layout changed
+trace_kprobe
+	Layout changed
+bpf_ctx_convert
+	Layout changed
+uprobe
+	Layout changed
+parallel_data
+	Layout changed
+padata_cpumask
+	Layout changed
+padata_instance
+	Layout changed
+kmem_cache
+	Field type changed
+		node                : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kmem_cache_node'}}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kmem_cache_node'}}}
+	Layout changed
+crypto_comp
+	Layout changed
+hugetlb_cgroup
+	Field type changed
+		hugepage            : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'STRUCT', 'name': 'page_counter'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'STRUCT', 'name': 'page_counter'}}
+		rsvd_hugepage       : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'STRUCT', 'name': 'page_counter'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'STRUCT', 'name': 'page_counter'}}
+		events              : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'TYPEDEF', 'name': 'atomic_long_t'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'TYPEDEF', 'name': 'atomic_long_t'}}
+		events_local        : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'TYPEDEF', 'name': 'atomic_long_t'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'TYPEDEF', 'name': 'atomic_long_t'}}
+		events_file         : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'STRUCT', 'name': 'cgroup_file'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'STRUCT', 'name': 'cgroup_file'}}
+		events_local_file   : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'STRUCT', 'name': 'cgroup_file'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'STRUCT', 'name': 'cgroup_file'}}
+	Layout changed
+node_hstate
+	Field type changed
+		hstate_kobjs        : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kobject'}}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kobject'}}}
+	Layout changed
+nodemask_scratch
+	Layout changed
+location
+	Field type changed
+		cpus                : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 128, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+	Layout changed
+memory_block
+	Layout changed
+mem_cgroup_tree
+	Field type changed
+		rb_tree_per_node    : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mem_cgroup_tree_per_node'}}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mem_cgroup_tree_per_node'}}}
+	Layout changed
+stat
+	Field added
+		__pad1              : {'kind': 'INT', 'name': 'long unsigned int'}
+		__pad2              : {'kind': 'INT', 'name': 'int'}
+		__unused4           : {'kind': 'INT', 'name': 'unsigned int'}
+		__unused5           : {'kind': 'INT', 'name': 'unsigned int'}
+	Field removed
+		__pad0              : {'kind': 'INT', 'name': 'unsigned int'}
+		__unused            : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'TYPEDEF', 'name': '__kernel_long_t'}}
+	Field type changed
+		st_dev              : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+		st_ino              : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+		st_nlink            : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+		st_rdev             : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+		st_size             : {'kind': 'TYPEDEF', 'name': '__kernel_long_t'}
+		                    ->{'kind': 'INT', 'name': 'long int'}
+		st_blksize          : {'kind': 'TYPEDEF', 'name': '__kernel_long_t'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+		st_blocks           : {'kind': 'TYPEDEF', 'name': '__kernel_long_t'}
+		                    ->{'kind': 'INT', 'name': 'long int'}
+		st_atime            : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long int'}
+		st_atime_nsec       : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+		st_mtime            : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long int'}
+		st_mtime_nsec       : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+		st_ctime            : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long int'}
+		st_ctime_nsec       : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+	Layout changed
+compat_stat
+	Field removed
+		__pad1              : {'kind': 'TYPEDEF', 'name': 'u16'}
+		__pad2              : {'kind': 'TYPEDEF', 'name': 'u16'}
+		__unused5           : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Field type changed
+		st_nlink            : {'kind': 'TYPEDEF', 'name': 'compat_nlink_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ushort_t'}
+		st_uid              : {'kind': 'TYPEDEF', 'name': '__compat_uid_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': '__compat_uid16_t'}
+		st_gid              : {'kind': 'TYPEDEF', 'name': '__compat_gid_t'}
+		                    ->{'kind': 'TYPEDEF', 'name': '__compat_gid16_t'}
+		st_size             : {'kind': 'TYPEDEF', 'name': 'u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_off_t'}
+		st_blksize          : {'kind': 'TYPEDEF', 'name': 'u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_off_t'}
+		st_blocks           : {'kind': 'TYPEDEF', 'name': 'u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_off_t'}
+		st_atime            : {'kind': 'TYPEDEF', 'name': 'u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'old_time32_t'}
+		st_atime_nsec       : {'kind': 'TYPEDEF', 'name': 'u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_mtime            : {'kind': 'TYPEDEF', 'name': 'u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'old_time32_t'}
+		st_mtime_nsec       : {'kind': 'TYPEDEF', 'name': 'u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		st_ctime            : {'kind': 'TYPEDEF', 'name': 'u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'old_time32_t'}
+		st_ctime_nsec       : {'kind': 'TYPEDEF', 'name': 'u32'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}
+		__unused4           : {'kind': 'TYPEDEF', 'name': 'u32'}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 2, 'type': {'kind': 'TYPEDEF', 'name': 'compat_ulong_t'}}
+	Layout changed
+compat_flock64
+	Layout changed
+epoll_event
+	Layout changed
+io_epoll
+	Layout changed
+skcipher_request
+	Layout changed
+crypto_skcipher
+	Layout changed
+skcipher_alg
+	Layout changed
+crypto_ahash
+	Layout changed
+ahash_request
+	Layout changed
+hash_alg_common
+	Layout changed
+arch_elf_state
+	Field added
+		flags               : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+elf_thread_core_info
+	Layout changed
+compat_elf_prstatus
+	Layout changed
+numa_maps
+	Field type changed
+		node                : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 1024, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 64, 'type': {'kind': 'INT', 'name': 'long unsigned int'}}
+	Layout changed
+numa_maps_private
+	Layout changed
+compat_ext4_new_group_input
+	Layout changed
+semid64_ds
+	Field removed
+		__unused1           : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		__unused2           : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+	Field type changed
+		sem_otime           : {'kind': 'TYPEDEF', 'name': '__kernel_long_t'}
+		                    ->{'kind': 'INT', 'name': 'long int'}
+		sem_ctime           : {'kind': 'TYPEDEF', 'name': '__kernel_long_t'}
+		                    ->{'kind': 'INT', 'name': 'long int'}
+		sem_nsems           : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+		__unused3           : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+		__unused4           : {'kind': 'TYPEDEF', 'name': '__kernel_ulong_t'}
+		                    ->{'kind': 'INT', 'name': 'long unsigned int'}
+	Layout changed
+kpp_request
+	Layout changed
+crypto_kpp
+	Layout changed
+kpp_alg
+	Layout changed
+tpm_chip
+	Layout changed
+crypto_larval
+	Layout changed
+crypto_cipher
+	Layout changed
+aead_request
+	Layout changed
+aead_alg
+	Layout changed
+crypto_aead
+	Layout changed
+aead_instance
+	Layout changed
+rng_alg
+	Layout changed
+crypto_rng
+	Layout changed
+crypto_sync_skcipher
+	Layout changed
+skcipher_instance
+	Layout changed
+ahash_alg
+	Layout changed
+ahash_instance
+	Layout changed
+ahash_request_priv
+	Layout changed
+shash_instance
+	Layout changed
+akcipher_request
+	Layout changed
+crypto_akcipher
+	Layout changed
+akcipher_alg
+	Layout changed
+akcipher_instance
+	Layout changed
+pkcs1pad_request
+	Layout changed
+acomp_req
+	Layout changed
+crypto_acomp
+	Layout changed
+acomp_alg
+	Layout changed
+crypto_scomp
+	Layout changed
+scomp_alg
+	Layout changed
+crypto_cts_reqctx
+	Layout changed
+rctx
+	Layout changed
+crypto_rfc3686_req_ctx
+	Layout changed
+crypto_rfc4106_req_ctx
+	Layout changed
+crypto_rfc4543_req_ctx
+	Layout changed
+crypto_gcm_req_priv_ctx
+	Layout changed
+virtio_device
+	Layout changed
+ib_device
+	Layout changed
+ib_core_device
+	Layout changed
+phy
+	Layout changed
+gpio_chip
+	Field added
+		of_node             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device_node'}}
+		of_gpio_n_cells     : {'kind': 'INT', 'name': 'unsigned int'}
+		of_xlate            : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'gpio_chip'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'of_phandle_args'}}}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+	Layout changed
+pinctrl_dev
+	Field added
+		pin_group_tree      : {'kind': 'STRUCT', 'name': 'xarray'}
+		num_groups          : {'kind': 'INT', 'name': 'unsigned int'}
+		pin_function_tree   : {'kind': 'STRUCT', 'name': 'xarray'}
+		num_functions       : {'kind': 'INT', 'name': 'unsigned int'}
+	Layout changed
+amd_gpio
+	Layout changed
+i2c_client
+	Field added
+		slave_cb            : {'kind': 'TYPEDEF', 'name': 'i2c_slave_cb_t'}
+	Layout changed
+i2c_adapter
+	Layout changed
+i2c_algorithm
+	Field added
+		reg_slave           : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'i2c_client'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		unreg_slave         : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'i2c_client'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+	Layout changed
+sx150x_pinctrl
+	Layout changed
+gpio_device
+	Layout changed
+gpio_desc
+	Field added
+		hog                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'device_node'}}
+	Layout changed
+regulator_dev
+	Layout changed
+palmas_gpio
+	Layout changed
+rc5t583_gpio
+	Layout changed
+tps6586x_gpio
+	Layout changed
+tps65910_gpio
+	Layout changed
+tps68470_gpio_data
+	Layout changed
+xgpio_instance
+	Layout changed
+pwm_export
+	Layout changed
+pci_host_bridge
+	Layout changed
+pcie_device
+	Layout changed
+pci_epf
+	Layout changed
+pci_epc
+	Layout changed
+dma_chan_dev
+	Layout changed
+dma_async_tx_descriptor
+	Field added
+		next                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_async_tx_descriptor'}}
+		parent              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dma_async_tx_descriptor'}}
+		lock                : {'kind': 'TYPEDEF', 'name': 'spinlock_t'}
+	Layout changed
+rio_dev
+	Layout changed
+rio_mport
+	Layout changed
+rio_net
+	Layout changed
+simplefb_par
+	Field added
+		clks_enabled        : {'kind': 'TYPEDEF', 'name': 'bool'}
+		clk_count           : {'kind': 'INT', 'name': 'unsigned int'}
+		clks                : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'clk'}}}
+		regulators_enabled  : {'kind': 'TYPEDEF', 'name': 'bool'}
+		regulator_count     : {'kind': 'TYPEDEF', 'name': 'u32'}
+		regulators          : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'regulator'}}}
+	Layout changed
+acpi_opcode_info
+	Field removed
+		name                : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+	Layout changed
+acpi_parse_obj_common
+	Field removed
+		disasm_flags        : {'kind': 'TYPEDEF', 'name': 'u16'}
+		disasm_opcode       : {'kind': 'TYPEDEF', 'name': 'u8'}
+		operator_symbol     : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+		aml_op_name         : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 16, 'type': {'kind': 'INT', 'name': 'char'}}
+	Layout changed
+acpi_parse_obj_named
+	Field removed
+		disasm_flags        : {'kind': 'TYPEDEF', 'name': 'u16'}
+		disasm_opcode       : {'kind': 'TYPEDEF', 'name': 'u8'}
+		operator_symbol     : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+		aml_op_name         : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 16, 'type': {'kind': 'INT', 'name': 'char'}}
+	Layout changed
+acpi_parse_obj_asl
+	Field removed
+		disasm_flags        : {'kind': 'TYPEDEF', 'name': 'u16'}
+		disasm_opcode       : {'kind': 'TYPEDEF', 'name': 'u8'}
+		operator_symbol     : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+		aml_op_name         : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 16, 'type': {'kind': 'INT', 'name': 'char'}}
+	Layout changed
+acpi_power_resource
+	Layout changed
+power_supply
+	Layout changed
+input_dev
+	Layout changed
+container_dev
+	Layout changed
+cppc_cpudata
+	Layout changed
+clk_notifier
+	Layout changed
+virtio_mmio_device
+	Layout changed
+virtio_pci_device
+	Layout changed
+irq_info
+	Field added
+		node                : {'kind': 'STRUCT', 'name': 'hlist_node'}
+		lock                : {'kind': 'TYPEDEF', 'name': 'spinlock_t'}
+		head                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+	Field removed
+		bus                 : {'kind': 'TYPEDEF', 'name': 'u8'}
+		devfn               : {'kind': 'TYPEDEF', 'name': 'u8'}
+		slot                : {'kind': 'TYPEDEF', 'name': 'u8'}
+		rfu                 : {'kind': 'TYPEDEF', 'name': 'u8'}
+	Field type changed
+		irq                 : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'STRUCT', 'name': '(anon)'}}
+		                    ->{'kind': 'INT', 'name': 'int'}
+	Layout changed
+xenbus_device
+	Layout changed
+usb_interface
+	Layout changed
+usb_device
+	Layout changed
+fixed_regulator_data
+	Layout changed
+spi_device
+	Layout changed
+spi_controller
+	Layout changed
+max310x_port
+	Layout changed
+serdev_device
+	Layout changed
+serdev_controller
+	Layout changed
+fsl_mc_device
+	Layout changed
+fsl_mc_resource
+	Field type changed
+		parent_pool         : {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'fsl_mc_resource_pool', 'fwd_kind': 'struct'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fsl_mc_resource_pool'}}
+root_device
+	Layout changed
+platform_object
+	Layout changed
+devres
+	Layout changed
+internal_container
+	Layout changed
+phy_device
+	Layout changed
+mdio_device
+	Layout changed
+mii_bus
+	Layout changed
+generic_pm_domain
+	Layout changed
+fw_sysfs
+	Layout changed
+node_access_nodes
+	Layout changed
+node_cache_info
+	Layout changed
+devcd_entry
+	Layout changed
+platform_msi_priv_data
+	Layout changed
+loop_info
+	Layout changed
+htcpld_chip
+	Layout changed
+wm8400
+	Layout changed
+wm8350_rtc
+	Field type changed
+		rtc                 : {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'rtc_device', 'fwd_kind': 'struct'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'rtc_device'}}
+nvdimm
+	Layout changed
+nvdimm_bus
+	Layout changed
+nd_region
+	Layout changed
+nd_namespace_common
+	Layout changed
+nd_namespace_io
+	Layout changed
+nd_btt
+	Layout changed
+nd_pfn
+	Layout changed
+nd_dax
+	Layout changed
+nd_blk_region
+	Layout changed
+nd_namespace_pmem
+	Layout changed
+nd_namespace_blk
+	Layout changed
+dev_dax
+	Layout changed
+scsi_device
+	Layout changed
+Scsi_Host
+	Layout changed
+scsi_target
+	Layout changed
+scsi_disk
+	Layout changed
+ata_link
+	Layout changed
+ata_port
+	Layout changed
+ata_device
+	Layout changed
+mipi_dsi_device
+	Layout changed
+wpan_phy
+	Layout changed
+usb_port
+	Layout changed
+ep_device
+	Layout changed
+usb_gadget
+	Layout changed
+serio
+	Layout changed
+mousedev
+	Layout changed
+evdev
+	Layout changed
+i2c_dev
+	Layout changed
+dw_i2c_dev
+	Layout changed
+ptp_clock
+	Layout changed
+hwmon_device
+	Layout changed
+devfreq
+	Layout changed
+watchdog_core_data
+	Layout changed
+mapped_device
+	Layout changed
+dm_stat
+	Field type changed
+		stat_percpu         : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 8192, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dm_stat_percpu'}}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 256, 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dm_stat_percpu'}}}
+	Layout changed
+dimm_info
+	Layout changed
+mem_ctl_info
+	Layout changed
+csrow_info
+	Layout changed
+mmc_card
+	Layout changed
+mmc_host
+	Layout changed
+sdio_func
+	Layout changed
+sdhci_pci_data
+	Field type changed
+		pdev                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'pci_dev'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'pci_dev', 'fwd_kind': 'struct'}}
+cros_ec_dev
+	Layout changed
+rproc
+	Layout changed
+rproc_vdev
+	Layout changed
+devfreq_event_dev
+	Layout changed
+extcon_dev
+	Layout changed
+vme_dev
+	Layout changed
+powercap_control_type
+	Layout changed
+powercap_zone
+	Layout changed
+nvmem_device
+	Layout changed
+compat_ethtool_rx_flow_spec
+	Layout changed
+compat_ethtool_rxnfc
+	Layout changed
+dsa_switch_ops
+	Field type changed
+		fixed_link_update   : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dsa_switch'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'FWD', 'name': 'fixed_phy_status', 'fwd_kind': 'struct'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dsa_switch'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'fixed_phy_status'}}}], 'ret_type': {'name': 'void', 'kind': 'VOID'}}}
+tls_rec
+	Layout changed
+wiphy
+	Layout changed
+rfkill
+	Layout changed

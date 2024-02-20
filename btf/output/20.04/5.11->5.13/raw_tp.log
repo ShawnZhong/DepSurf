@@ -1,0 +1,22 @@
+Added Kind.FUNC (13): ['perf_trace_xen_mmu_flush_tlb_multi', 'perf_trace_hyperv_mmu_flush_tlb_multi', 'perf_trace_rcu_stall_warning', 'perf_trace_error_report_template', 'perf_trace_kmem_cache_free', 'perf_trace_kfree', 'perf_trace_mm_migrate_pages_start', 'perf_trace_qi_submit', 'perf_trace_netlink_extack', 'perf_trace_subflow_check_data_avail', 'perf_trace_ack_update_msk', 'perf_trace_mptcp_dump_mpext', 'perf_trace_mptcp_subflow_get_send']
+Removed Kind.FUNC (15): ['perf_trace_xen_mmu_flush_tlb_others', 'perf_trace_hyperv_mmu_flush_tlb_others', 'perf_trace_kmem_free', 'perf_trace_ext4_get_reserved_cluster_alloc', 'perf_trace_ext4_find_delalloc_range', 'perf_trace_ext4_ext_in_cache', 'perf_trace_ext4_ext_put_in_cache', 'perf_trace_ext4_direct_IO_exit', 'perf_trace_ext4_direct_IO_enter', 'perf_trace_random_read', 'perf_trace_xfer_secondary_pool', 'perf_trace_push_to_pool', 'perf_trace_dma_map_sg', 'perf_trace_dma_unmap', 'perf_trace_dma_map']
+Changed Kind.FUNC (3): ['perf_trace_xdp_redirect_template', 'perf_trace_mm_lru_insertion', 'perf_trace_io_uring_complete']
+Reasons Kind.FUNC (5): [('Param added', 2), ('Param removed', 2), ('Param type changed', 1), ('Param reordered', 1), ('Return type changed', 0)]
+perf_trace_xdp_redirect_template
+	Param added
+		map_type            : {'kind': 'ENUM', 'name': 'bpf_map_type', 'size': 4}
+		map_id              : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Param removed
+		map                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'bpf_map'}}}
+	Param reordered
+		                     ['__data', 'dev', 'xdp', 'tgt', 'err', 'map', 'index']
+		                     ['__data', 'dev', 'xdp', 'tgt', 'err', 'map_type', 'map_id', 'index']
+perf_trace_mm_lru_insertion
+	Param removed
+		lru                 : {'kind': 'INT', 'name': 'int'}
+perf_trace_io_uring_complete
+	Param added
+		cflags              : {'kind': 'INT', 'name': 'unsigned int'}
+	Param type changed
+		res                 : {'kind': 'INT', 'name': 'long int'}
+		                    ->{'kind': 'INT', 'name': 'int'}

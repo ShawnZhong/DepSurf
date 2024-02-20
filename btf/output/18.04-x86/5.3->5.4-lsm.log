@@ -1,4 +1,0 @@
-Added FUNC (3): ['security_lock_kernel_down', 'security_locked_down', 'security_path_notify']
-Removed FUNC (0): []
-Changed FUNC (0): []
-Reasons FUNC (5): [('Param added', 0), ('Param removed', 0), ('Param type changed', 0), ('Param reordered', 0), ('Return type changed', 0)]

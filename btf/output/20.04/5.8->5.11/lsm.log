@@ -1,0 +1,24 @@
+Added Kind.FUNC (1): ['security_kernel_post_load_data']
+Removed Kind.FUNC (0): []
+Changed Kind.FUNC (5): ['security_xfrm_state_pol_flow_match', 'security_inet_conn_request', 'security_req_classify_flow', 'security_kernel_load_data', 'security_kernel_read_file']
+Reasons Kind.FUNC (5): [('Param added', 4), ('Param removed', 2), ('Param type changed', 1), ('Param reordered', 0), ('Return type changed', 0)]
+security_xfrm_state_pol_flow_match
+	Param added
+		flic                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'flowi_common'}}}
+	Param removed
+		fl                  : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'flowi'}}}
+security_inet_conn_request
+	Param type changed
+		sk                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}
+security_req_classify_flow
+	Param added
+		flic                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'flowi_common'}}
+	Param removed
+		fl                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'flowi'}}
+security_kernel_load_data
+	Param added
+		contents            : {'kind': 'TYPEDEF', 'name': 'bool'}
+security_kernel_read_file
+	Param added
+		contents            : {'kind': 'TYPEDEF', 'name': 'bool'}

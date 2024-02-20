@@ -1,0 +1,124 @@
+Added Kind.FUNC (16): ['security_perf_event_write', 'security_perf_event_read', 'security_perf_event_free', 'security_perf_event_alloc', 'security_perf_event_open', 'security_watch_key', 'security_post_notification', 'security_task_getsecid_obj', 'security_task_getsecid_subj', 'security_task_fix_setgid', 'security_kernel_post_load_data', 'security_inode_init_security_anon', 'security_sb_mnt_opts_compat', 'security_sb_delete', 'security_bprm_creds_from_file', 'security_bprm_creds_for_exec']
+Removed Kind.FUNC (2): ['security_task_getsecid', 'security_bprm_set_creds']
+Changed Kind.FUNC (23): ['security_audit_rule_match', 'security_audit_rule_free', 'security_key_permission', 'security_xfrm_state_pol_flow_match', 'security_xfrm_policy_lookup', 'security_secmark_relabel_packet', 'security_inet_conn_request', 'security_req_classify_flow', 'security_socket_getpeersec_dgram', 'security_inode_getsecctx', 'security_release_secctx', 'security_secctx_to_secid', 'security_secid_to_secctx', 'security_ipc_getsecid', 'security_kernel_load_data', 'security_kernel_read_file', 'security_kernel_act_as', 'security_cred_getsecid', 'security_inode_getsecid', 'security_inode_getsecurity', 'security_inode_killpriv', 'security_inode_removexattr', 'security_inode_setxattr']
+Reasons Kind.FUNC (5): [('Param added', 20), ('Param removed', 15), ('Param type changed', 3), ('Param reordered', 4), ('Return type changed', 0)]
+security_audit_rule_match
+	Param added
+		blob                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmblob'}}
+	Param removed
+		secid               : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Param type changed
+		lsmrule             : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}
+security_audit_rule_free
+	Param type changed
+		lsmrule             : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}
+security_key_permission
+	Param added
+		need_perm           : {'kind': 'ENUM', 'name': 'key_need_perm', 'size': 4}
+	Param removed
+		perm                : {'kind': 'INT', 'name': 'unsigned int'}
+security_xfrm_state_pol_flow_match
+	Param added
+		flic                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'flowi_common'}}}
+	Param removed
+		fl                  : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'flowi'}}}
+security_xfrm_policy_lookup
+	Param removed
+		dir                 : {'kind': 'TYPEDEF', 'name': 'u8'}
+security_secmark_relabel_packet
+	Param added
+		blob                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmblob'}}
+	Param removed
+		secid               : {'kind': 'TYPEDEF', 'name': 'u32'}
+security_inet_conn_request
+	Param type changed
+		sk                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sock'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'sock'}}}
+security_req_classify_flow
+	Param added
+		flic                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'flowi_common'}}
+	Param removed
+		fl                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'flowi'}}
+security_socket_getpeersec_dgram
+	Param added
+		blob                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmblob'}}
+	Param removed
+		secid               : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+security_inode_getsecctx
+	Param added
+		cp                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmcontext'}}
+	Param removed
+		ctx                 : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}
+		ctxlen              : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+security_release_secctx
+	Param added
+		cp                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmcontext'}}
+	Param removed
+		secdata             : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}
+		seclen              : {'kind': 'TYPEDEF', 'name': 'u32'}
+security_secctx_to_secid
+	Param added
+		blob                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmblob'}}
+	Param removed
+		secid               : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+security_secid_to_secctx
+	Param added
+		blob                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmblob'}}
+		cp                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmcontext'}}
+		display             : {'kind': 'INT', 'name': 'int'}
+	Param removed
+		secid               : {'kind': 'TYPEDEF', 'name': 'u32'}
+		secdata             : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}
+		seclen              : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+security_ipc_getsecid
+	Param added
+		blob                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmblob'}}
+	Param removed
+		secid               : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+security_kernel_load_data
+	Param added
+		contents            : {'kind': 'TYPEDEF', 'name': 'bool'}
+security_kernel_read_file
+	Param added
+		contents            : {'kind': 'TYPEDEF', 'name': 'bool'}
+security_kernel_act_as
+	Param added
+		blob                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmblob'}}
+	Param removed
+		secid               : {'kind': 'TYPEDEF', 'name': 'u32'}
+security_cred_getsecid
+	Param added
+		blob                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmblob'}}
+	Param removed
+		secid               : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+security_inode_getsecid
+	Param added
+		blob                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmblob'}}
+	Param removed
+		secid               : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+security_inode_getsecurity
+	Param added
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+	Param reordered
+		                     ['inode', 'name', 'buffer', 'alloc']
+		                     ['mnt_userns', 'inode', 'name', 'buffer', 'alloc']
+security_inode_killpriv
+	Param added
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+	Param reordered
+		                     ['dentry']
+		                     ['mnt_userns', 'dentry']
+security_inode_removexattr
+	Param added
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+	Param reordered
+		                     ['dentry', 'name']
+		                     ['mnt_userns', 'dentry', 'name']
+security_inode_setxattr
+	Param added
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+	Param reordered
+		                     ['dentry', 'name', 'value', 'size', 'flags']
+		                     ['mnt_userns', 'dentry', 'name', 'value', 'size', 'flags']

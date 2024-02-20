@@ -1,0 +1,91 @@
+Added Kind.STRUCT (17): ['trace_event_raw_thread_noise', 'trace_event_raw_softirq_noise', 'trace_event_raw_irq_noise', 'trace_event_raw_nmi_noise', 'trace_event_raw_sample_threshold', 'trace_event_raw_iomap_iter', 'trace_event_raw_jbd2_journal_shrink', 'trace_event_raw_jbd2_shrink_scan_exit', 'trace_event_raw_jbd2_shrink_checkpoint_list', 'trace_event_raw_prq_report', 'trace_event_raw_devres', 'trace_event_raw_spi_setup', 'trace_event_raw_spi_set_cs', 'trace_event_raw_amd_pstate_perf', 'trace_event_raw_inet_sk_error_report', 'trace_event_raw_tcp_event_skb', 'trace_event_raw_qdisc_enqueue']
+Removed Kind.STRUCT (15): ['trace_event_raw_mm_vmscan_inactive_list_is_low', 'trace_event_raw_iomap_apply', 'trace_event_raw_add_device_randomness', 'trace_event_raw_random__mix_pool_bytes', 'trace_event_raw_credit_entropy_bits', 'trace_event_raw_debit_entropy', 'trace_event_raw_add_input_randomness', 'trace_event_raw_add_disk_randomness', 'trace_event_raw_random__get_random_bytes', 'trace_event_raw_random__extract_entropy', 'trace_event_raw_urandom_read', 'trace_event_raw_prandom_u32', 'trace_event_raw_cros_ec_sensorhub_timestamp', 'trace_event_raw_cros_ec_sensorhub_data', 'trace_event_raw_cros_ec_sensorhub_filter']
+Changed Kind.STRUCT (17): ['trace_event_raw_sched_wakeup_template', 'trace_event_raw_mm_vmscan_lru_isolate', 'trace_event_raw_io_uring_submit_sqe', 'trace_event_raw_io_uring_poll_arm', 'trace_event_raw_io_uring_task_run', 'trace_event_raw_iomap_range_class', 'trace_event_raw_ext4_fc_stats', 'trace_event_raw_jbd2_commit', 'trace_event_raw_jbd2_end_commit', 'trace_event_raw_jbd2_handle_start_class', 'trace_event_raw_jbd2_handle_extend', 'trace_event_raw_jbd2_handle_stats', 'trace_event_raw_jbd2_run_stats', 'trace_event_raw_jbd2_checkpoint_stats', 'trace_event_raw_kfree_skb', 'trace_event_raw_sock_exceed_buf_limit', 'trace_event_raw_mptcp_dump_mpext']
+Reasons Kind.STRUCT (4): [('Field added', 6), ('Field removed', 2), ('Field type changed', 10), ('Layout changed', 14)]
+trace_event_raw_sched_wakeup_template
+	Field removed
+		success             : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_mm_vmscan_lru_isolate
+	Field type changed
+		isolate_mode        : {'kind': 'TYPEDEF', 'name': 'isolate_mode_t'}
+		                    ->{'kind': 'INT', 'name': 'unsigned int'}
+trace_event_raw_io_uring_submit_sqe
+	Field added
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		flags               : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_io_uring_poll_arm
+	Field added
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Layout changed
+trace_event_raw_io_uring_task_run
+	Field added
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Layout changed
+trace_event_raw_iomap_range_class
+	Field type changed
+		offset              : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'loff_t'}
+		length              : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+	Layout changed
+trace_event_raw_ext4_fc_stats
+	Field added
+		fc_ineligible_rc    : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 10, 'type': {'kind': 'INT', 'name': 'unsigned int'}}
+		fc_commits          : {'kind': 'INT', 'name': 'long unsigned int'}
+		fc_ineligible_commits: {'kind': 'INT', 'name': 'long unsigned int'}
+		fc_numblks          : {'kind': 'INT', 'name': 'long unsigned int'}
+	Field removed
+		sbi                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'ext4_sb_info'}}
+		count               : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_jbd2_commit
+	Field type changed
+		transaction         : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+trace_event_raw_jbd2_end_commit
+	Field type changed
+		transaction         : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+		head                : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+trace_event_raw_jbd2_handle_start_class
+	Field type changed
+		tid                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+	Layout changed
+trace_event_raw_jbd2_handle_extend
+	Field type changed
+		tid                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+	Layout changed
+trace_event_raw_jbd2_handle_stats
+	Field type changed
+		tid                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+	Layout changed
+trace_event_raw_jbd2_run_stats
+	Field type changed
+		tid                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+	Layout changed
+trace_event_raw_jbd2_checkpoint_stats
+	Field type changed
+		tid                 : {'kind': 'INT', 'name': 'long unsigned int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'tid_t'}
+	Layout changed
+trace_event_raw_kfree_skb
+	Field added
+		reason              : {'kind': 'ENUM', 'name': 'skb_drop_reason', 'size': 4}
+	Layout changed
+trace_event_raw_sock_exceed_buf_limit
+	Field type changed
+		sysctl_mem          : {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'long int'}}
+		                    ->{'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 3, 'type': {'kind': 'INT', 'name': 'long int'}}
+	Layout changed
+trace_event_raw_mptcp_dump_mpext
+	Field added
+		csum                : {'kind': 'TYPEDEF', 'name': 'u16'}
+		csum_reqd           : {'kind': 'TYPEDEF', 'name': 'u8'}
+	Layout changed

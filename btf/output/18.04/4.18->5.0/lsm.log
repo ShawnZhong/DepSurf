@@ -1,0 +1,40 @@
+Added Kind.FUNC (2): ['security_kernel_load_data', 'security_sb_eat_lsm_opts']
+Removed Kind.FUNC (2): ['security_sb_parse_opts_str', 'security_sb_copy_data']
+Changed Kind.FUNC (8): ['security_setprocattr', 'security_getprocattr', 'security_task_kill', 'security_file_open', 'security_sb_set_mnt_opts', 'security_sb_kern_mount', 'security_sb_remount', 'security_capable']
+Reasons Kind.FUNC (5): [('Param added', 5), ('Param removed', 4), ('Param type changed', 1), ('Param reordered', 2), ('Return type changed', 0)]
+security_setprocattr
+	Param added
+		lsm                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+	Param reordered
+		                     ['name', 'value', 'size']
+		                     ['lsm', 'name', 'value', 'size']
+security_getprocattr
+	Param added
+		lsm                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+	Param reordered
+		                     ['p', 'name', 'value']
+		                     ['p', 'lsm', 'name', 'value']
+security_task_kill
+	Param type changed
+		info                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'siginfo'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'kernel_siginfo'}}
+security_file_open
+	Param removed
+		cred                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}
+security_sb_set_mnt_opts
+	Param added
+		mnt_opts            : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Param removed
+		opts                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'security_mnt_opts'}}
+security_sb_kern_mount
+	Param removed
+		flags               : {'kind': 'INT', 'name': 'int'}
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+security_sb_remount
+	Param added
+		mnt_opts            : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Param removed
+		data                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+security_capable
+	Param added
+		opts                : {'kind': 'INT', 'name': 'unsigned int'}

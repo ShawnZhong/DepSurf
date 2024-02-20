@@ -1,0 +1,24 @@
+Added Kind.UNION (7): ['cpuid_0x10_1_eax', 'cpuid_0x10_1_edx', 'fuse_dentry', 'irte_ga_lo', 'irte_ga_hi', 'ec_response_get_next_data', 'extcon_property_value']
+Removed Kind.UNION (1): ['ktime']
+Changed Kind.UNION (4): ['thread_union', 'bpf_attr', 'security_list_options', 'tcp_cc_info']
+Reasons Kind.UNION (4): [('Field added', 3), ('Field removed', 2), ('Field type changed', 0), ('Layout changed', 4)]
+thread_union
+	Field removed
+		thread_info         : {'kind': 'STRUCT', 'name': 'thread_info'}
+	Layout changed
+bpf_attr
+	Field added
+		(anon-4)            : {'kind': 'STRUCT', 'name': '(anon)'}
+	Layout changed
+security_list_options
+	Field added
+		dentry_create_files_as: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon-1)', 'type': {'kind': 'INT', 'name': 'int'}}, {'name': '(anon-2)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'qstr'}}}, {'name': '(anon-3)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}, {'name': '(anon-4)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		inode_copy_up       : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'dentry'}}}, {'name': '(anon-1)', 'type': {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'cred'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+		inode_copy_up_xattr : {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+	Field removed
+		kernel_module_from_file: {'kind': 'PTR', 'type': {'kind': 'FUNC_PROTO', 'params': [{'name': '(anon)', 'type': {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'file'}}}], 'ret_type': {'kind': 'INT', 'name': 'int'}}}
+	Layout changed
+tcp_cc_info
+	Field added
+		bbr                 : {'kind': 'STRUCT', 'name': 'tcp_bbr_info'}
+	Layout changed

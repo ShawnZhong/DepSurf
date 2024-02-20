@@ -1,0 +1,52 @@
+Added Kind.STRUCT (13): ['trace_event_raw_xen_mmu_flush_tlb_multi', 'trace_event_raw_hyperv_mmu_flush_tlb_multi', 'trace_event_raw_rcu_stall_warning', 'trace_event_raw_error_report_template', 'trace_event_raw_kfree', 'trace_event_raw_kmem_cache_free', 'trace_event_raw_mm_migrate_pages_start', 'trace_event_raw_qi_submit', 'trace_event_raw_netlink_extack', 'trace_event_raw_mptcp_subflow_get_send', 'trace_event_raw_mptcp_dump_mpext', 'trace_event_raw_ack_update_msk', 'trace_event_raw_subflow_check_data_avail']
+Removed Kind.STRUCT (15): ['trace_event_raw_xen_mmu_flush_tlb_others', 'trace_event_raw_hyperv_mmu_flush_tlb_others', 'trace_event_raw_kmem_free', 'trace_event_raw_ext4_direct_IO_enter', 'trace_event_raw_ext4_direct_IO_exit', 'trace_event_raw_ext4_ext_put_in_cache', 'trace_event_raw_ext4_ext_in_cache', 'trace_event_raw_ext4_find_delalloc_range', 'trace_event_raw_ext4_get_reserved_cluster_alloc', 'trace_event_raw_push_to_pool', 'trace_event_raw_xfer_secondary_pool', 'trace_event_raw_random_read', 'trace_event_raw_dma_map', 'trace_event_raw_dma_unmap', 'trace_event_raw_dma_map_sg']
+Changed Kind.STRUCT (10): ['trace_event_raw_workqueue_queue_work', 'trace_event_raw_cgroup', 'trace_event_raw_cgroup_migrate', 'trace_event_raw_cgroup_event', 'trace_event_raw_mm_lru_insertion', 'trace_event_raw_io_uring_complete', 'trace_event_raw_tcp_event_sk_skb', 'trace_event_raw_tcp_event_sk', 'trace_event_raw_tcp_retransmit_synack', 'trace_event_raw_tcp_probe']
+Reasons Kind.STRUCT (4): [('Field added', 6), ('Field removed', 1), ('Field type changed', 5), ('Layout changed', 9)]
+trace_event_raw_workqueue_queue_work
+	Field added
+		__data_loc_workqueue: {'kind': 'TYPEDEF', 'name': 'u32'}
+	Field removed
+		workqueue           : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Layout changed
+trace_event_raw_cgroup
+	Field type changed
+		id                  : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+	Layout changed
+trace_event_raw_cgroup_migrate
+	Field type changed
+		dst_id              : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+	Layout changed
+trace_event_raw_cgroup_event
+	Field type changed
+		id                  : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'u64'}
+	Layout changed
+trace_event_raw_mm_lru_insertion
+	Field type changed
+		lru                 : {'kind': 'INT', 'name': 'int'}
+		                    ->{'kind': 'ENUM', 'name': 'lru_list', 'size': 4}
+trace_event_raw_io_uring_complete
+	Field added
+		cflags              : {'kind': 'INT', 'name': 'unsigned int'}
+	Field type changed
+		res                 : {'kind': 'INT', 'name': 'long int'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_tcp_event_sk_skb
+	Field added
+		family              : {'kind': 'TYPEDEF', 'name': '__u16'}
+	Layout changed
+trace_event_raw_tcp_event_sk
+	Field added
+		family              : {'kind': 'TYPEDEF', 'name': '__u16'}
+	Layout changed
+trace_event_raw_tcp_retransmit_synack
+	Field added
+		family              : {'kind': 'TYPEDEF', 'name': '__u16'}
+	Layout changed
+trace_event_raw_tcp_probe
+	Field added
+		family              : {'kind': 'TYPEDEF', 'name': '__u16'}
+	Layout changed

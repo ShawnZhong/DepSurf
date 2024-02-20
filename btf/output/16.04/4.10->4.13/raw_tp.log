@@ -1,0 +1,40 @@
+Added Kind.FUNC (44): ['perf_trace_xen_mmu_set_p4d', 'perf_trace_bpf_prog_event', 'perf_trace_bpf_map_create', 'perf_trace_bpf_map_keyval', 'perf_trace_bpf_map_delete_elem', 'perf_trace_bpf_map_next_key', 'perf_trace_bpf_prog_load', 'perf_trace_xdp_exception', 'perf_trace_bpf_obj_map', 'perf_trace_bpf_obj_prog', 'perf_trace_filemap_set_wb_err', 'perf_trace_file_check_and_advance_wb_err', 'perf_trace_reclaim_retry_zone', 'perf_trace_mark_victim', 'perf_trace_wake_reaper', 'perf_trace_start_task_reaping', 'perf_trace_finish_task_reaping', 'perf_trace_skip_task_reaping', 'perf_trace_compact_retry', 'perf_trace_mm_vmscan_lru_isolate', 'perf_trace_mm_vmscan_lru_shrink_active', 'perf_trace_mm_vmscan_inactive_list_is_low', 'perf_trace_percpu_alloc_percpu', 'perf_trace_percpu_free_percpu', 'perf_trace_percpu_alloc_percpu_fail', 'perf_trace_percpu_create_chunk', 'perf_trace_percpu_destroy_chunk', 'perf_trace_dax_pmd_fault_class', 'perf_trace_dax_pmd_load_hole_class', 'perf_trace_dax_pmd_insert_mapping_class', 'perf_trace_dax_pte_fault_class', 'perf_trace_dax_insert_mapping', 'perf_trace_dax_writeback_range_class', 'perf_trace_dax_writeback_one', 'perf_trace_ext4_fsmap_class', 'perf_trace_ext4_getfsmap_class', 'perf_trace_block_rq_requeue', 'perf_trace_spi_controller', 'perf_trace_xhci_log_trb', 'perf_trace_xhci_log_virt_dev', 'perf_trace_xhci_log_urb', 'perf_trace_xhci_log_ep_ctx', 'perf_trace_xhci_log_slot_ctx', 'perf_trace_xhci_log_ring']
+Removed Kind.FUNC (7): ['perf_trace_xen_mmu_set_pgd', 'perf_trace_x86_irq_vector', 'perf_trace_x86_exceptions', 'perf_trace_mm_vmscan_lru_isolate_template', 'perf_trace_block_rq_with_error', 'perf_trace_spi_master', 'perf_trace_xhci_log_event']
+Changed Kind.FUNC (6): ['perf_trace_sched_pi_setprio', 'perf_trace_itimer_state', 'perf_trace_itimer_expire', 'perf_trace_mm_vmscan_lru_shrink_inactive', 'perf_trace_block_rq_complete', 'perf_trace_thermal_power_devfreq_get_power']
+Reasons Kind.FUNC (5): [('Param added', 4), ('Param removed', 2), ('Param type changed', 2), ('Param reordered', 2), ('Return type changed', 0)]
+perf_trace_sched_pi_setprio
+	Param added
+		pi_task             : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'task_struct'}}
+	Param removed
+		newprio             : {'kind': 'INT', 'name': 'int'}
+perf_trace_itimer_state
+	Param type changed
+		expires             : {'kind': 'TYPEDEF', 'name': 'cputime_t'}
+		                    ->{'kind': 'INT', 'name': 'long long unsigned int'}
+perf_trace_itimer_expire
+	Param type changed
+		now                 : {'kind': 'TYPEDEF', 'name': 'cputime_t'}
+		                    ->{'kind': 'INT', 'name': 'long long unsigned int'}
+perf_trace_mm_vmscan_lru_shrink_inactive
+	Param added
+		nr_dirty            : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_writeback        : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_congested        : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_immediate        : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_activate         : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_ref_keep         : {'kind': 'INT', 'name': 'long unsigned int'}
+		nr_unmap_fail       : {'kind': 'INT', 'name': 'long unsigned int'}
+	Param reordered
+		                     ['__data', 'nid', 'nr_scanned', 'nr_reclaimed', 'priority', 'file']
+		                     ['__data', 'nid', 'nr_scanned', 'nr_reclaimed', 'nr_dirty', 'nr_writeback', 'nr_congested', 'nr_immediate', 'nr_activate', 'nr_ref_keep', 'nr_unmap_fail', 'priority', 'file']
+perf_trace_block_rq_complete
+	Param added
+		error               : {'kind': 'INT', 'name': 'int'}
+	Param removed
+		q                   : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'request_queue'}}
+	Param reordered
+		                     ['__data', 'q', 'rq', 'nr_bytes']
+		                     ['__data', 'rq', 'error', 'nr_bytes']
+perf_trace_thermal_power_devfreq_get_power
+	Param added
+		power               : {'kind': 'TYPEDEF', 'name': 'u32'}

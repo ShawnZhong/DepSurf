@@ -1,7 +1,0 @@
-Added FUNC (3): ['security_bpf', 'security_bpf_map', 'security_bpf_prog']
-Removed FUNC (2): ['security_bprm_secureexec', 'security_task_create']
-Changed FUNC (1): ['security_capable']
-Reasons FUNC (5): [('Param added', 1), ('Param removed', 0), ('Param type changed', 0), ('Param reordered', 0), ('Return type changed', 0)]
-security_capable
-	Param added
-		opts                : {'kind': 'INT', 'name': 'unsigned int'}

@@ -1,0 +1,47 @@
+Added Kind.STRUCT (24): ['trace_event_raw_cgroup_event', 'trace_event_raw_xdp_bulk_tx', 'trace_event_raw_mem_disconnect', 'trace_event_raw_mem_connect', 'trace_event_raw_mem_return_failed', 'trace_event_raw_mm_vmscan_node_reclaim_begin', 'trace_event_raw_writeback_page_template', 'trace_event_raw_leases_conflict', 'trace_event_raw_xhci_log_ctrl_ctx', 'trace_event_raw_cros_ec_cmd_class', 'trace_event_raw_devfreq_monitor', 'trace_event_raw_net_dev_xmit_timeout', 'trace_event_raw_page_pool_inflight', 'trace_event_raw_page_pool_state_release', 'trace_event_raw_page_pool_state_hold', 'trace_event_raw_neigh_create', 'trace_event_raw_neigh_update', 'trace_event_raw_neigh__update', 'trace_event_raw_devlink_hwmsg', 'trace_event_raw_devlink_hwerr', 'trace_event_raw_devlink_health_report', 'trace_event_raw_devlink_health_recover_aborted', 'trace_event_raw_devlink_health_reporter_state_update', 'trace_event_raw_bpf_test_finish']
+Removed Kind.STRUCT (1): ['trace_event_raw_writeback_dirty_page']
+Changed Kind.STRUCT (8): ['trace_event_raw_x86_fpu', 'trace_event_raw_timer_expire_entry', 'trace_event_raw_mm_vmscan_direct_reclaim_begin_template', 'trace_event_raw_mm_vmscan_lru_shrink_inactive', 'trace_event_raw_credit_entropy_bits', 'trace_event_raw_spi_transfer', 'trace_event_raw_extlog_mem_event', 'trace_event_raw_fib_table_lookup']
+Reasons Kind.STRUCT (4): [('Field added', 5), ('Field removed', 5), ('Field type changed', 1), ('Layout changed', 7)]
+trace_event_raw_x86_fpu
+	Field added
+		load_fpu            : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Field removed
+		initialized         : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Layout changed
+trace_event_raw_timer_expire_entry
+	Field added
+		baseclk             : {'kind': 'INT', 'name': 'long unsigned int'}
+	Layout changed
+trace_event_raw_mm_vmscan_direct_reclaim_begin_template
+	Field removed
+		may_writepage       : {'kind': 'INT', 'name': 'int'}
+		classzone_idx       : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_mm_vmscan_lru_shrink_inactive
+	Field added
+		nr_activate0        : {'kind': 'INT', 'name': 'unsigned int'}
+		nr_activate1        : {'kind': 'INT', 'name': 'unsigned int'}
+	Field removed
+		nr_activate         : {'kind': 'INT', 'name': 'long unsigned int'}
+	Layout changed
+trace_event_raw_credit_entropy_bits
+	Field removed
+		entropy_total       : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_spi_transfer
+	Field added
+		__data_loc_rx_buf   : {'kind': 'TYPEDEF', 'name': 'u32'}
+		__data_loc_tx_buf   : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_extlog_mem_event
+	Field type changed
+		fru_id              : {'kind': 'TYPEDEF', 'name': 'uuid_le'}
+		                    ->{'kind': 'TYPEDEF', 'name': 'guid_t'}
+trace_event_raw_fib_table_lookup
+	Field added
+		gw4                 : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'TYPEDEF', 'name': '__u8'}}
+		gw6                 : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 16, 'type': {'kind': 'TYPEDEF', 'name': '__u8'}}
+	Field removed
+		gw                  : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'TYPEDEF', 'name': '__u8'}}
+		saddr               : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 4, 'type': {'kind': 'TYPEDEF', 'name': '__u8'}}
+	Layout changed

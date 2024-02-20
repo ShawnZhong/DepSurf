@@ -1,0 +1,71 @@
+Added Kind.STRUCT (31): ['trace_event_raw_sched_kthread_work_queue_work', 'trace_event_raw_sched_kthread_work_execute_start', 'trace_event_raw_sched_kthread_work_execute_end', 'trace_event_raw_bpf_trace_printk', 'trace_event_raw_mmap_lock_start_locking', 'trace_event_raw_mmap_lock_acquire_returned', 'trace_event_raw_mmap_lock_released', 'trace_event_raw_ext4_read_block_bitmap_load', 'trace_event_raw_ext4_prefetch_bitmaps', 'trace_event_raw_ext4_lazy_itable_init', 'trace_event_raw_ext4_fc_replay_scan', 'trace_event_raw_ext4_fc_replay', 'trace_event_raw_ext4_fc_commit_start', 'trace_event_raw_ext4_fc_commit_stop', 'trace_event_raw_ext4_fc_stats', 'trace_event_raw_ext4_fc_track_create', 'trace_event_raw_ext4_fc_track_link', 'trace_event_raw_ext4_fc_track_unlink', 'trace_event_raw_ext4_fc_track_inode', 'trace_event_raw_ext4_fc_track_range', 'trace_event_raw_selinux_audited', 'trace_event_raw_block_bio', 'trace_event_raw_iocost_iocg_state', 'trace_event_raw_iocost_iocg_forgive_debt', 'trace_event_raw_clk_rate_range', 'trace_event_raw_prandom_u32', 'trace_event_raw_cros_ec_sensorhub_timestamp', 'trace_event_raw_cros_ec_sensorhub_data', 'trace_event_raw_cros_ec_sensorhub_filter', 'trace_event_raw_devfreq_frequency', 'trace_event_raw_devlink_trap_report']
+Removed Kind.STRUCT (6): ['trace_event_raw_xen_mmu_set_pte_at', 'trace_event_raw_block_bio_bounce', 'trace_event_raw_block_bio_merge', 'trace_event_raw_block_bio_queue', 'trace_event_raw_block_get_rq', 'trace_event_raw_iocost_iocg_activate']
+Changed Kind.STRUCT (14): ['trace_event_raw_xdp_cpumap_kthread', 'trace_event_raw_mm_migrate_pages', 'trace_event_raw_iocost_ioc_vrate_adj', 'trace_event_raw_regcache_sync', 'trace_event_raw_xhci_log_trb', 'trace_event_raw_xhci_log_ep_ctx', 'trace_event_raw_xhci_log_slot_ctx', 'trace_event_raw_xhci_log_ctrl_ctx', 'trace_event_raw_xhci_log_portsc', 'trace_event_raw_xhci_log_doorbell', 'trace_event_raw_thermal_power_devfreq_get_power', 'trace_event_raw_cros_ec_request_start', 'trace_event_raw_cros_ec_request_done', 'trace_event_raw_extlog_mem_event']
+Reasons Kind.STRUCT (4): [('Field added', 11), ('Field removed', 3), ('Field type changed', 0), ('Layout changed', 14)]
+trace_event_raw_xdp_cpumap_kthread
+	Field added
+		xdp_pass            : {'kind': 'INT', 'name': 'unsigned int'}
+		xdp_drop            : {'kind': 'INT', 'name': 'unsigned int'}
+		xdp_redirect        : {'kind': 'INT', 'name': 'unsigned int'}
+	Layout changed
+trace_event_raw_mm_migrate_pages
+	Field added
+		thp_succeeded       : {'kind': 'INT', 'name': 'long unsigned int'}
+		thp_failed          : {'kind': 'INT', 'name': 'long unsigned int'}
+		thp_split           : {'kind': 'INT', 'name': 'long unsigned int'}
+	Layout changed
+trace_event_raw_iocost_ioc_vrate_adj
+	Field removed
+		nr_surpluses        : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_regcache_sync
+	Field removed
+		type                : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_xhci_log_trb
+	Field added
+		__data_loc_str      : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_xhci_log_ep_ctx
+	Field added
+		__data_loc_str      : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_xhci_log_slot_ctx
+	Field added
+		__data_loc_str      : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_xhci_log_ctrl_ctx
+	Field added
+		__data_loc_str      : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_xhci_log_portsc
+	Field added
+		__data_loc_str      : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_xhci_log_doorbell
+	Field added
+		__data_loc_str      : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_thermal_power_devfreq_get_power
+	Field added
+		busy_time           : {'kind': 'TYPEDEF', 'name': 'u32'}
+		total_time          : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Field removed
+		load                : {'kind': 'TYPEDEF', 'name': 'u32'}
+		dynamic_power       : {'kind': 'TYPEDEF', 'name': 'u32'}
+		static_power        : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_cros_ec_request_start
+	Field added
+		offset              : {'kind': 'TYPEDEF', 'name': 'uint32_t'}
+		outsize             : {'kind': 'TYPEDEF', 'name': 'uint32_t'}
+		insize              : {'kind': 'TYPEDEF', 'name': 'uint32_t'}
+	Layout changed
+trace_event_raw_cros_ec_request_done
+	Field added
+		offset              : {'kind': 'TYPEDEF', 'name': 'uint32_t'}
+		outsize             : {'kind': 'TYPEDEF', 'name': 'uint32_t'}
+		insize              : {'kind': 'TYPEDEF', 'name': 'uint32_t'}
+	Layout changed
+trace_event_raw_extlog_mem_event
+	Layout changed

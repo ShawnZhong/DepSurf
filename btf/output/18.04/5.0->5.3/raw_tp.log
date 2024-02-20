@@ -1,0 +1,43 @@
+Added Kind.FUNC (24): ['perf_trace_cgroup_event', 'perf_trace_mem_return_failed', 'perf_trace_mem_connect', 'perf_trace_mem_disconnect', 'perf_trace_xdp_bulk_tx', 'perf_trace_mm_vmscan_node_reclaim_begin', 'perf_trace_writeback_page_template', 'perf_trace_leases_conflict', 'perf_trace_xhci_log_ctrl_ctx', 'perf_trace_cros_ec_cmd_class', 'perf_trace_devfreq_monitor', 'perf_trace_neigh__update', 'perf_trace_neigh_update', 'perf_trace_neigh_create', 'perf_trace_page_pool_state_hold', 'perf_trace_page_pool_state_release', 'perf_trace_page_pool_inflight', 'perf_trace_net_dev_xmit_timeout', 'perf_trace_devlink_health_reporter_state_update', 'perf_trace_devlink_health_recover_aborted', 'perf_trace_devlink_health_report', 'perf_trace_devlink_hwerr', 'perf_trace_devlink_hwmsg', 'perf_trace_bpf_test_finish']
+Removed Kind.FUNC (1): ['perf_trace_writeback_dirty_page']
+Changed Kind.FUNC (8): ['perf_trace_timer_expire_entry', 'perf_trace_mm_vmscan_direct_reclaim_begin_template', 'perf_trace_credit_entropy_bits', 'perf_trace_smbus_reply', 'perf_trace_non_standard_event', 'perf_trace_extlog_mem_event', 'perf_trace_fib_table_lookup', 'perf_trace_fib6_table_lookup']
+Reasons Kind.FUNC (5): [('Param added', 4), ('Param removed', 4), ('Param type changed', 2), ('Param reordered', 2), ('Return type changed', 0)]
+perf_trace_timer_expire_entry
+	Param added
+		baseclk             : {'kind': 'INT', 'name': 'long unsigned int'}
+perf_trace_mm_vmscan_direct_reclaim_begin_template
+	Param removed
+		may_writepage       : {'kind': 'INT', 'name': 'int'}
+		classzone_idx       : {'kind': 'INT', 'name': 'int'}
+	Param reordered
+		                     ['__data', 'order', 'may_writepage', 'gfp_flags', 'classzone_idx']
+		                     ['__data', 'order', 'gfp_flags']
+perf_trace_credit_entropy_bits
+	Param removed
+		entropy_total       : {'kind': 'INT', 'name': 'int'}
+	Param reordered
+		                     ['__data', 'pool_name', 'bits', 'entropy_count', 'entropy_total', 'IP']
+		                     ['__data', 'pool_name', 'bits', 'entropy_count', 'IP']
+perf_trace_smbus_reply
+	Param added
+		res                 : {'kind': 'INT', 'name': 'int'}
+perf_trace_non_standard_event
+	Param type changed
+		sec_type            : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'uuid_le'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'guid_t'}}}
+		fru_id              : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'uuid_le'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'guid_t'}}}
+perf_trace_extlog_mem_event
+	Param type changed
+		fru_id              : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'uuid_le'}}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'TYPEDEF', 'name': 'guid_t'}}}
+perf_trace_fib_table_lookup
+	Param added
+		nhc                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'fib_nh_common'}}}
+	Param removed
+		nh                  : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'fib_nh'}}}
+perf_trace_fib6_table_lookup
+	Param added
+		res                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'fib6_result'}}}
+	Param removed
+		f6i                 : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'fib6_info'}}}
