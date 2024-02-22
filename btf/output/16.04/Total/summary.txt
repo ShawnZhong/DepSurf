@@ -1,4 +1,4 @@
-                                       0
+                                   Total
 trace_event Old                      340
             New                      429
             Common                   324

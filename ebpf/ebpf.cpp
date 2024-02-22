@@ -91,8 +91,8 @@ int main() {
   std::thread t1(print_trace);
   t1.detach();
 
-  std::thread t3([bpf]() { print_ringbuf(bpf.skel->maps.rb); });
-  t3.detach();
+  // std::thread t3([bpf]() { print_ringbuf(bpf.skel->maps.rb); });
+  // t3.detach();
 
   std::thread t2([]() { system("sh"); });
   t2.join();

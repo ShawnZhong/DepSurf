@@ -68,13 +68,13 @@
 }
 
 @misc{falco,
-  title        = {{Falco}},
+  title        = {{Falco: Cloud Native Runtime Security}},
   howpublished = {\url{https://github.com/falcosecurity/falco}},
   author       = {Sysdig and others}
 }
 
 @misc{tracee,
-  title        = {{Tracee}},
+  title        = {{Tracee: Linux Runtime Security and Forensics using eBPF}},
   howpublished = {\url{https://github.com/aquasecurity/tracee}},
   author       = {Aqua Security and others}
 }
@@ -96,4 +96,137 @@
   title        = {{KubeArmor}},
   howpublished = {\url{https://kubearmor.io/}},
   author       = {KubeArmor and others}
+}
+
+
+@misc{github-k8s-debug,
+  title        = {{Debugging network stalls on Kubernetes}},
+  howpublished = {\url{https://github.blog/2019-11-21-debugging-network-stalls-on-kubernetes/}},
+  author       = {GitHub}
+}
+@misc{ebpf-real-debugging,
+  title        = {{Real World Debugging with eBPF}},
+  howpublished = {\url{https://www.usenix.org/system/files/srecon23apac_slides-liang_zhichuan.pdf}},
+  author       = {Liang, Zhichuan}
+}
+
+
+@misc{tetragon,
+  title        = {{Tetragon: eBPF-based Security Observability and Runtime Enforcement}},
+  howpublished = {\url{https://github.com/cilium/tetragon}},
+  author       = {Cilium and others}
+}
+
+@misc{pixie,
+  title        = {{Pixie: Instant Kubernetes-Native Application Observability}},
+  howpublished = {\url{https://github.com/pixie-io/pixie}},
+  author       = {Pixie and others}
+}
+
+
+@misc{cloudflare-ebpf,
+  title        = {{Live-patching security vulnerabilities inside the Linux kernel with eBPF Linux Security Module}},
+  howpublished = {\url{https://blog.cloudflare.com/live-patch-security-vulnerabilities-with-ebpf-lsm}},
+  author       = {Cloudflare}
+}
+
+
+
+@misc{ebpfguard,
+  title        = {{eBPFGuard: Rust library for writing Linux security policies using eBPF}},
+  howpublished = {\url{https://github.com/deepfence/ebpfguard}},
+  author       = {Deepfence}
+}
+
+@misc{ebpfguard2,
+  title        = {{Introducing eBPFGuard: A Library for Inline Mitigation of Threats using LSM Hooks}},
+  howpublished = {\url{https://www.deepfence.io/blog/ebpfguard-a-library-for-inline-mitigation-of-threats}},
+  author       = {Deepfence}
+}
+
+
+@misc{lockc,
+  title        = {{Lockc: Making containers more secure with eBPF and Linux Security Modules (LSM)}},
+  howpublished = {\url{https://github.com/lockc-project/lockc}},
+  author       = {Lockc and others}
+}
+
+@misc{xdp,
+  title        = {{XDP: eXpress Data Path}},
+  howpublished = {\url{https://www.iovisor.org/technology/xdp}},
+  author       = {IO Visor Project}
+}
+
+
+@misc{xdp-programming,
+  title        = {{XDP: Programmable Data Path in the Linux Kernel}},
+  howpublished = {\url{https://www.usenix.org/system/files/login/articles/login_spring18_05_choudhury.pdf}},
+  author       = {Diptanu Gon Choudhury}
+}
+
+@inproceedings{xdp-paper,
+  title     = {{The eXpress Data Path: Fast Programmable Packet Processing in the Operating System Kernel}},
+  author    = {H{\o}iland-J{\o}rgensen, Toke and Brouer, Jesper Dangaard and Borkmann, Daniel and Fastabend, John and Herbert, Tom and Ahern, David and Miller, David},
+  booktitle = {Proceedings of the 14th international conference on emerging networking experiments and technologies},
+  pages     = {54--66},
+  year      = {2018}
+}
+
+
+@misc{katran,
+  title        = {{Katran: High-Performance Layer 4 Load Balancing}},
+  howpublished = {\url{https://github.com/facebookincubator/katran}},
+  author       = {Facebook}
+}
+
+
+
+@misc{android-ebpf,
+  title        = {{Examples of eBPF in Android}},
+  howpublished = {\url{https://source.android.com/docs/core/architecture/kernel/bpf#androidebpf}},
+  author       = {Android Open Source Project}
+}
+
+
+@misc{bpf-stability-so,
+  title        = {{How unstable are networking-related kprobes in practice?}},
+  howpublished = {\url{https://stackoverflow.com/questions/61903521/how-unstable-are-networking-related-kprobes-in-practice}},
+  author       = {Stack Overflow}
+}
+
+
+@misc{bcc-bio-bug,
+  title        = {{biotop and biosnoop do not work under 5.19 kernel due to missing blk\_account\_io\_start kprobe}},
+  howpublished = {\url{https://github.com/iovisor/bcc/issues/4261}},
+  author       = {BCC Project}
+}
+
+@misc{block-tracepoints,
+  title        = {{block: introduce block\_io\_start/block\_io\_done tracepoints}},
+  howpublished = {\url{https://github.com/torvalds/linux/commit/5a80bd075f3bce24793ae1aeb06066895ec5aef0}},
+  author       = {Hengqi Chen}
+}
+
+
+
+@misc{bcc-bio-fix,
+  title        = {{tools: Add support for the new block\_io\_* tracepoints}},
+  howpublished = {\url{https://github.com/iovisor/bcc/pull/4691}},
+  author       = {Jerome Marchand}
+}
+
+
+@misc{lsm-stability,
+  title        = {{Some freshness with Linux security modules and eBPF}},
+  howpublished = {\url{https://medium.com/@lumontec/some-freshness-with-linux-security-modules-and-ebpf-676ac363a135}},
+  author       = {Lumontec}
+}
+
+
+% bpf-lsm-stability
+
+@misc{bpf-lsm-stability,
+  title        = {{Re: [PATCH bpf-next v1 00/13] MAC and Audit policy using eBPF (KRSI)}},
+  howpublished = {\url{https://lwn.net/ml/linux-kernel/CACYkzJ5nYh7eGuru4vQ=2ZWumGPszBRbgqxmhd4WQRXktAUKkQ@mail.gmail.com/}},
+  author       = {KP Singh}
 }

@@ -20,4 +20,5 @@ if __name__ == "__main__":
     from system import system
 
     bpftool_path = get_bpftool_path()
-    system(f"sudo {bpftool_path} feature probe full")
+    print(bpftool_path)
+    # system(f"sudo {bpftool_path} feature probe full")

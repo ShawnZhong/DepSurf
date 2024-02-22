@@ -1,73 +1,73 @@
-                                       0
-trace_event Old                      500
-            New                      493
-            Common                   444
-            Added                     49
-            Removed                   56
-            Changed                    0
-            - Field added              0
-            - Field removed            0
-            - Field type changed       0
-            - Layout changed           0
-raw_tp      Old                      508
-            New                      501
-            Common                   452
-            Added                     49
-            Removed                   56
-            Changed                    0
-            - Param added              0
-            - Param removed            0
-            - Param type changed       0
-            - Param reordered          0
-            - Return type changed      0
-lsm         Old                      198
-            New                      198
-            Common                   198
-            Added                      0
-            Removed                    0
-            Changed                    0
-            - Param added              0
-            - Param removed            0
-            - Param type changed       0
-            - Param reordered          0
-            - Return type changed      0
-func        Old                    49745
-            New                    51650
-            Common                 41714
-            Added                   9936
-            Removed                 8031
-            Changed                  111
-            - Param added             58
-            - Param removed           58
-            - Param type changed      52
-            - Param reordered          2
-            - Return type changed      7
-struct      Old                     8722
-            New                     9492
-            Common                  7689
-            Added                   1803
-            Removed                 1033
-            Changed                  301
-            - Field added             29
-            - Field removed           35
-            - Field type changed      37
-            - Layout changed         294
-union       Old                      127
-            New                      106
-            Common                    81
-            Added                     25
-            Removed                   46
-            Changed                    2
-            - Field added              0
-            - Field removed            0
-            - Field type changed       0
-            - Layout changed           2
-enum        Old                     1237
-            New                     1420
-            Common                  1118
-            Added                    302
-            Removed                  119
-            Changed                   10
-            - Elem added               7
-            - Elem removed             8
-            - Value changed            7
+                                   x86->arm64
+trace_event Old                           500
+            New                           493
+            Common                        444
+            Added                          49
+            Removed                        56
+            Changed                         0
+            - Field added                   0
+            - Field removed                 0
+            - Field type changed            0
+            - Layout changed                0
+raw_tp      Old                           508
+            New                           501
+            Common                        452
+            Added                          49
+            Removed                        56
+            Changed                         0
+            - Param added                   0
+            - Param removed                 0
+            - Param type changed            0
+            - Param reordered               0
+            - Return type changed           0
+lsm         Old                           198
+            New                           198
+            Common                        198
+            Added                           0
+            Removed                         0
+            Changed                         0
+            - Param added                   0
+            - Param removed                 0
+            - Param type changed            0
+            - Param reordered               0
+            - Return type changed           0
+func        Old                         49745
+            New                         51650
+            Common                      41714
+            Added                        9936
+            Removed                      8031
+            Changed                       111
+            - Param added                  58
+            - Param removed                58
+            - Param type changed           52
+            - Param reordered               2
+            - Return type changed           7
+struct      Old                          8722
+            New                          9492
+            Common                       7689
+            Added                        1803
+            Removed                      1033
+            Changed                       301
+            - Field added                  29
+            - Field removed                35
+            - Field type changed           37
+            - Layout changed              294
+union       Old                           127
+            New                           106
+            Common                         81
+            Added                          25
+            Removed                        46
+            Changed                         2
+            - Field added                   0
+            - Field removed                 0
+            - Field type changed            0
+            - Layout changed                2
+enum        Old                          1237
+            New                          1420
+            Common                       1118
+            Added                         302
+            Removed                       119
+            Changed                        10
+            - Elem added                    7
+            - Elem removed                  8
+            - Value changed                 7

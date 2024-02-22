@@ -1,4 +1,5 @@
 \section{Bug Analysis on eBPF Programs}
+\label{sec:case_study}
 
 \todo{Some sort of transition here.}
 
@@ -66,20 +67,25 @@ With the above information, we can answer the following questions:
 % \minisec{BCC/Python}
 % \todo{}
 
-\section{Bug Analysis}
-In this section, we analyze the bugs in the programs we studied.
-We first describe the types of bugs we found.
-We then describe each type of bugs in detail, including the root cause of the bugs and the fixes for the bugs.
-\todo{Finally, we describe the fixes for the bugs.}
+% \section{Bug Analysis}
+% In this section, we analyze the bugs in the programs we studied.
+% We first describe the types of bugs we found.
+% We then describe each type of bugs in detail, including the root cause of the bugs and the fixes for the bugs.
+% \todo{Finally, we describe the fixes for the bugs.}
 
 \subsection{Bug Types}
 We classify the bugs into the following types:
 \begin{itemize}
-  \item \textbf{Kernel source code changes}: The bug is caused by a change in kernel source code, such as a semantic change in the kernel data structure or a rename of a kernel function.
-  \item \textbf{Insufficient eBPF infrastructure}: The bug is caused by the lack of support for certain eBPF features (e.g., synchronization primitives, helper functions).
-  \item \textbf{Kernel compiler issues}: The bug is caused by either the compiler of the eBPF program or the compiler of the kernel. For example, the compiler may generate incorrect code for the eBPF program, or the kernel compiler may perform inlining on the kernel functions, which breaks the eBPF program.
-  \item \textbf{Assumptions on kernel configuration}: The program assumes that the kernel is always configured in a certain way, which is not always true. For example, a program may assume that it is always running on a x86 machine, and thus uses x86-specific definitions.
-  \item \textbf{Generic programming errors}: The cause of the bug is not unique to eBPF programs.
+  \item \textbf{Kernel source code changes}:
+        The bug is caused by a change in kernel source code, such as a semantic change in the kernel data structure or a rename of a kernel function.
+  \item \textbf{Kernel compiler issues}:
+        The bug is caused by either the compiler of the eBPF program or the compiler of the kernel. For example, the compiler may generate incorrect code for the eBPF program, or the kernel compiler may perform inlining on the kernel functions, which breaks the eBPF program.
+  \item \textbf{Assumptions on kernel configuration}:
+        The program assumes that the kernel is always configured in a certain way, which is not always true. For example, a program may assume that it is always running on a x86 machine, and thus uses x86-specific definitions.
+  \item \textbf{Insufficient eBPF infrastructure}:
+        The bug is caused by the lack of support for certain eBPF features (e.g., synchronization primitives, helper functions).
+  \item \textbf{Generic programming errors}:
+        The cause of the bug is not unique to eBPF programs.
 \end{itemize}
 
 % create a table for each type of bug with the following columns:
@@ -379,4 +385,3 @@ However, there are still many other generic programming errors that are not caug
 \minisec{Forgetting to check return value}
 \todo{There are some cases where the return value of a helper function is not checked, but not that interesting.}
 
-\section{Discussion}
