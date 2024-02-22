@@ -4,3 +4,6 @@
 [submodule "ebpf/bcc"]
 	path = ebpf/bcc
 	url = git@github.com:iovisor/bcc.git
+[submodule "paper"]
+	path = paper
+	url = https://git.overleaf.com/65d75bc228ad6eadf9e46c42
