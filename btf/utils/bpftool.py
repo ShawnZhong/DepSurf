@@ -16,9 +16,37 @@ def get_bpftool_path():
     return path
 
 
-if __name__ == "__main__":
-    from system import system
+BPFTOOL_PATH = get_bpftool_path()
 
-    bpftool_path = get_bpftool_path()
-    print(bpftool_path)
-    # system(f"sudo {bpftool_path} feature probe full")
+
+def gen_min_btf(obj_file, overwrite=False):
+    from .system import system
+
+    btf_file = obj_file.with_suffix(".btf")
+    if btf_file.exists() and not overwrite:
+        print(f"{btf_file} already exists")
+        return btf_file
+
+    kernel_btf = "/sys/kernel/btf/vmlinux"
+    system(f"{BPFTOOL_PATH} gen min_core_btf {kernel_btf} {btf_file} {obj_file}")
+
+
+def dump_btf(file, overwrite=False):
+    from .system import system
+
+    for ext, cmd in [
+        (".h", "format c"),
+        (".txt", "format raw"),
+        (".json", "--json"),
+    ]:
+        result = file.with_suffix(ext)
+
+        if result.exists() and not overwrite:
+            print(f"{result} already exists")
+            continue
+
+        system(f"{BPFTOOL_PATH} btf dump file {file} {cmd} > {result}")
+
+
+if __name__ == "__main__":
+    print(BPFTOOL_PATH)

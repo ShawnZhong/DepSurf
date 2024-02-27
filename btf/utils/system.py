@@ -15,3 +15,6 @@ def system(cmd):
 
     print(f'Running command: "{TermColor.OKGREEN}{cmd}{TermColor.ENDC}"')
     subprocess.run(cmd, shell=True, check=True, executable="/bin/bash")
+
+
+__all__ = ["system"]
