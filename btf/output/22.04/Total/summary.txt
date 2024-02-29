@@ -1,0 +1,73 @@
+                                   Total
+trace_event Old                      525
+            New                      591
+            Common                   507
+            Added                     84
+            Removed                   18
+            Changed                   46
+            - Field added             29
+            - Field removed           19
+            - Field type changed       9
+            - Layout changed          44
+raw_tp      Old                      533
+            New                      601
+            Common                   515
+            Added                     86
+            Removed                   18
+            Changed                   32
+            - Param added             22
+            - Param removed           19
+            - Param type changed       6
+            - Param reordered         13
+            - Return type changed      0
+lsm         Old                      203
+            New                      214
+            Common                   202
+            Added                     12
+            Removed                    1
+            Changed                   18
+            - Param added             17
+            - Param removed           16
+            - Param type changed       2
+            - Param reordered          1
+            - Return type changed      0
+func        Old                    54295
+            New                    60424
+            Common                 51042
+            Added                   9382
+            Removed                 3253
+            Changed                 2512
+            - Param added           1458
+            - Param removed         1364
+            - Param type changed     473
+            - Param reordered        489
+            - Return type changed    367
+struct      Old                     9353
+            New                    10018
+            Common                  9068
+            Added                    950
+            Removed                  285
+            Changed                 1374
+            - Field added            886
+            - Field removed          545
+            - Field type changed     354
+            - Layout changed        1280
+union       Old                      148
+            New                      172
+            Common                   146
+            Added                     26
+            Removed                    2
+            Changed                   11
+            - Field added              9
+            - Field removed            3
+            - Field type changed       1
+            - Layout changed          11
+enum        Old                     1391
+            New                     1530
+            Common                  1356
+            Added                    174
+            Removed                   35
+            Changed                  188
+            - Elem added             172
+            - Elem removed            36
+            - Value changed          105

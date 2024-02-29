@@ -3,4 +3,5 @@ tmp
 *.h
 *.txt
 *.jsonl
+*.pkl
 vm

@@ -1,0 +1,49 @@
+Added Kind.FUNC (2): ['security_fs_context_submount', 'security_mptcp_add_subflow']
+Removed Kind.FUNC (0): []
+Changed Kind.FUNC (9): ['security_key_getsecurity', 'security_inode_getsecurity', 'security_inode_killpriv', 'security_inode_removexattr', 'security_inode_remove_acl', 'security_inode_get_acl', 'security_inode_set_acl', 'security_inode_setxattr', 'security_inode_setattr']
+Reasons Kind.FUNC (5): [('Param added', 9), ('Param removed', 9), ('Param type changed', 0), ('Param reordered', 0), ('Return type changed', 0)]
+security_key_getsecurity
+	Param added
+		buffer              : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}
+	Param removed
+		_buffer             : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'INT', 'name': 'char'}}}
+security_inode_getsecurity
+	Param added
+		idmap               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mnt_idmap'}}
+	Param removed
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+security_inode_killpriv
+	Param added
+		idmap               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mnt_idmap'}}
+	Param removed
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+security_inode_removexattr
+	Param added
+		idmap               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mnt_idmap'}}
+	Param removed
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+security_inode_remove_acl
+	Param added
+		idmap               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mnt_idmap'}}
+	Param removed
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+security_inode_get_acl
+	Param added
+		idmap               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mnt_idmap'}}
+	Param removed
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+security_inode_set_acl
+	Param added
+		idmap               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mnt_idmap'}}
+	Param removed
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+security_inode_setxattr
+	Param added
+		idmap               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mnt_idmap'}}
+	Param removed
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}
+security_inode_setattr
+	Param added
+		idmap               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'mnt_idmap'}}
+	Param removed
+		mnt_userns          : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'user_namespace'}}

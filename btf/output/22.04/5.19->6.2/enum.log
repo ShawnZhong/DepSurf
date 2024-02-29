@@ -1,0 +1,1071 @@
+Added Kind.ENUM (67): ['ftrace_ops_cmd', 'req_op', 'insn_mmio_type', 'rlimit_type', 'hv_tlb_flush_fifos', 'msi_domain_ids', 'resctrl_event_id', 'bpf_cgroup_iter_order', 'bpf_iter_task_type', 'filter_pred_fn', 'states_wwnr', 'events_wwnr', 'folio_references', 'key_lookup_flag', 'rq_end_io_ret', 'class_map_type', 'support_mode', 'pci_p2pdma_map_type', 'dw_pcie_app_clk', 'dw_pcie_core_clk', 'dw_pcie_app_rst', 'dw_pcie_core_rst', 'translation_map', 'scsi_timeout_action', 'ethtool_podl_pse_admin_state', 'ethtool_podl_pse_pw_d_status', 'md_ro_state', 'mmc_err_stat', 'rproc_features', 'macsec_validation_type', 'macsec_offload', 'packet_sock_flags', 'x86_regset_32', 'x86_regset_64', 'gds_mitigations', 'srso_mitigation', 'srso_mitigation_cmd', 'scsi_ml_status', 'pr_status', 'vcap_type', 'vcap_keyfield_set', 'vcap_key_field', 'vcap_actionfield_set', 'vcap_action_field', 'vcap_user', 'vcap_field_type', 'vcap_selection', 'vcap_command', 'vcap_rule_error', 'devlink_attr_selftest_id', 'devlink_selftest_status', 'devlink_attr_selftest_result', 'devlink_port_fn_attr_cap', 'devlink_info_version_type', 'maple_type', 'prs_errcode', 'hist_field_fn', 'kfunc_ptr_arg_type', 'special_kfunc_type', 'apparmor_notif_type', 'amd_functions', 'tpm2_pt_props', 'ieee802154_filtering_level', 'dl_bw_request', 'osnoise_options_index', 'opal_lock_flags', 'vcap_bit']
+Removed Kind.ENUM (18): ['mmio_type', 'x86_regset', 'btf_kfunc_type', 'bpf_kptr_type', 'req_opf', 'page_references', 'vmemmap_optimize_mode', 'vfs_get_super_keying', 'dw_pcie_region_type', 'dw_pcie_as_type', 'twl4030_usb_mode', 'of_gpio_flags', 'wwan_port_type', 'vfio_device_mig_state', 'vfio_notify_type', 'vfio_group_type', 'vfio_iommu_notify_type', 'macvlan_mode']
+Changed Kind.ENUM (106): ['node_stat_item', 'kmalloc_cache_type', 'vm_event_item', 'cpuhp_state', 'irq_domain_bus_token', 'memcg_stat_item', 'memory_type', 'flow_dissector_key_id', 'pageflags', 'tc_setup_type', 'perf_branch_sample_type_shift', 'vm_fault_reason', 'ucount_type', 'cpu_usage_stat', 'cgroup_bpf_attach_type', 'psi_task_count', 'perf_event_sample_format', 'perf_branch_sample_type', 'acpi_irq_model_id', 'lockdown_reason', 'iommu_cap', 'insn_type', 'cpuid_leafs', 'bpf_type_flag', 'bpf_arg_type', 'bpf_return_type', 'bpf_reg_type', 'retbleed_mitigation', 'retbleed_mitigation_cmd', 'vmx_feature_leafs', 'mf_flags', 'sgx_return_code', 'sgx_attribute', 'acpi_madt_type', 'bpf_map_type', 'bpf_attach_type', 'uts_proc', 'sys_off_mode', 'ctx_state', 'kvm_apicv_inhibit', 'cgroup1_param', 'cgroup2_param', 'subparts_cmd', 'skb_drop_reason', 'blk_crypto_mode_num', 'fetch_op', 'hist_field_flags', 'bpf_func_id', 'bpf_core_relo_kind', 'netdev_priv_flags', 'netdev_cmd', 'btf_kfunc_hook', 'btf_field_type', 'perf_event_read_format', 'iter_type', 'ttu_flags', 'hugetlb_page_flags', 'slab_modes', 'migrate_vma_direction', 'scan_result', 'mf_action_page_type', 'kernfs_node_flag', 'squashfs_param', 'fuse_opcode', 'ethtool_link_mode_bit_indices', 'ib_uverbs_wc_opcode', 'ib_uverbs_wr_opcode', 'ib_uverbs_device_cap_flags', 'ib_uverbs_access_flags', 'audit_type', 'aafs_prof_type', 'rq_qos_id', 'tg_state_flags', 'rdma_driver_id', 'ib_wc_opcode', 'ib_wr_opcode', 'io_uring_cmd_flags', 'io_uring_op', 'gpio_lookup_flags', 'dma_transaction_type', 'acpi_cedt_type', 'pxa_ssp_type', 'thermal_trend', 'tpm_chip_flags', 'tpm_tis_flags', 'io_pgtable_fmt', 'nvdimmsec_op_ids', 'scsi_host_status', 'mddev_flags', 'simatic_ipc_station_ids', 'bpf_ret_code', 'flow_action_id', 'dsa_tag_protocol', 'lwtunnel_encap_types', 'metadata_type', 'sk_psock_state_bits', 'devlink_command', 'devlink_attr', 'devlink_port_function_attr', 'devlink_trap_generic_id', 'devlink_trap_group_generic_id', 'nlmsgerr_attrs', 'nl80211_ext_feature_index', 'ieee_attrs', 'ieee_attrs_app', 'mptcp_event_type']
+Reasons Kind.ENUM (3): [('Elem added', 93), ('Elem removed', 19), ('Value changed', 63)]
+node_stat_item
+	Elem added
+		NR_SECONDARY_PAGETABLE                  : 39
+		PGPROMOTE_CANDIDATE                     : 42
+	Value changed
+		NR_SWAPCACHE                            : 39 -> 40
+		PGPROMOTE_SUCCESS                       : 40 -> 41
+		NR_VM_NODE_STAT_ITEMS                   : 41 -> 43
+kmalloc_cache_type
+	Value changed
+		KMALLOC_CGROUP                          : 1 -> 3
+		KMALLOC_RECLAIM                         : 2 -> 1
+		KMALLOC_DMA                             : 3 -> 2
+vm_event_item
+	Elem added
+		PGALLOC_DEVICE                          : 8
+		ALLOCSTALL_DEVICE                       : 13
+		PGSCAN_SKIP_DEVICE                      : 18
+		PGSTEAL_KHUGEPAGED                      : 30
+		PGDEMOTE_KHUGEPAGED                     : 33
+		PGSCAN_KHUGEPAGED                       : 36
+	Value changed
+		ALLOCSTALL_DMA                          : 8 -> 9
+		ALLOCSTALL_DMA32                        : 9 -> 10
+		ALLOCSTALL_NORMAL                       : 10 -> 11
+		ALLOCSTALL_MOVABLE                      : 11 -> 12
+		PGSCAN_SKIP_DMA                         : 12 -> 14
+		PGSCAN_SKIP_DMA32                       : 13 -> 15
+		PGSCAN_SKIP_NORMAL                      : 14 -> 16
+		PGSCAN_SKIP_MOVABLE                     : 15 -> 17
+		PGFREE                                  : 16 -> 19
+		PGACTIVATE                              : 17 -> 20
+		PGDEACTIVATE                            : 18 -> 21
+		PGLAZYFREE                              : 19 -> 22
+		PGFAULT                                 : 20 -> 23
+		PGMAJFAULT                              : 21 -> 24
+		PGLAZYFREED                             : 22 -> 25
+		PGREFILL                                : 23 -> 26
+		PGREUSE                                 : 24 -> 27
+		PGSTEAL_KSWAPD                          : 25 -> 28
+		PGSTEAL_DIRECT                          : 26 -> 29
+		PGDEMOTE_KSWAPD                         : 27 -> 31
+		PGDEMOTE_DIRECT                         : 28 -> 32
+		PGSCAN_KSWAPD                           : 29 -> 34
+		PGSCAN_DIRECT                           : 30 -> 35
+		PGSCAN_DIRECT_THROTTLE                  : 31 -> 37
+		PGSCAN_ANON                             : 32 -> 38
+		PGSCAN_FILE                             : 33 -> 39
+		PGSTEAL_ANON                            : 34 -> 40
+		PGSTEAL_FILE                            : 35 -> 41
+		PGSCAN_ZONE_RECLAIM_FAILED              : 36 -> 42
+		PGINODESTEAL                            : 37 -> 43
+		SLABS_SCANNED                           : 38 -> 44
+		KSWAPD_INODESTEAL                       : 39 -> 45
+		KSWAPD_LOW_WMARK_HIT_QUICKLY            : 40 -> 46
+		KSWAPD_HIGH_WMARK_HIT_QUICKLY           : 41 -> 47
+		PAGEOUTRUN                              : 42 -> 48
+		PGROTATED                               : 43 -> 49
+		DROP_PAGECACHE                          : 44 -> 50
+		DROP_SLAB                               : 45 -> 51
+		OOM_KILL                                : 46 -> 52
+		NUMA_PTE_UPDATES                        : 47 -> 53
+		NUMA_HUGE_PTE_UPDATES                   : 48 -> 54
+		NUMA_HINT_FAULTS                        : 49 -> 55
+		NUMA_HINT_FAULTS_LOCAL                  : 50 -> 56
+		NUMA_PAGE_MIGRATE                       : 51 -> 57
+		PGMIGRATE_SUCCESS                       : 52 -> 58
+		PGMIGRATE_FAIL                          : 53 -> 59
+		THP_MIGRATION_SUCCESS                   : 54 -> 60
+		THP_MIGRATION_FAIL                      : 55 -> 61
+		THP_MIGRATION_SPLIT                     : 56 -> 62
+		COMPACTMIGRATE_SCANNED                  : 57 -> 63
+		COMPACTFREE_SCANNED                     : 58 -> 64
+		COMPACTISOLATED                         : 59 -> 65
+		COMPACTSTALL                            : 60 -> 66
+		COMPACTFAIL                             : 61 -> 67
+		COMPACTSUCCESS                          : 62 -> 68
+		KCOMPACTD_WAKE                          : 63 -> 69
+		KCOMPACTD_MIGRATE_SCANNED               : 64 -> 70
+		KCOMPACTD_FREE_SCANNED                  : 65 -> 71
+		HTLB_BUDDY_PGALLOC                      : 66 -> 72
+		HTLB_BUDDY_PGALLOC_FAIL                 : 67 -> 73
+		UNEVICTABLE_PGCULLED                    : 68 -> 74
+		UNEVICTABLE_PGSCANNED                   : 69 -> 75
+		UNEVICTABLE_PGRESCUED                   : 70 -> 76
+		UNEVICTABLE_PGMLOCKED                   : 71 -> 77
+		UNEVICTABLE_PGMUNLOCKED                 : 72 -> 78
+		UNEVICTABLE_PGCLEARED                   : 73 -> 79
+		UNEVICTABLE_PGSTRANDED                  : 74 -> 80
+		THP_FAULT_ALLOC                         : 75 -> 81
+		THP_FAULT_FALLBACK                      : 76 -> 82
+		THP_FAULT_FALLBACK_CHARGE               : 77 -> 83
+		THP_COLLAPSE_ALLOC                      : 78 -> 84
+		THP_COLLAPSE_ALLOC_FAILED               : 79 -> 85
+		THP_FILE_ALLOC                          : 80 -> 86
+		THP_FILE_FALLBACK                       : 81 -> 87
+		THP_FILE_FALLBACK_CHARGE                : 82 -> 88
+		THP_FILE_MAPPED                         : 83 -> 89
+		THP_SPLIT_PAGE                          : 84 -> 90
+		THP_SPLIT_PAGE_FAILED                   : 85 -> 91
+		THP_DEFERRED_SPLIT_PAGE                 : 86 -> 92
+		THP_SPLIT_PMD                           : 87 -> 93
+		THP_SCAN_EXCEED_NONE_PTE                : 88 -> 94
+		THP_SCAN_EXCEED_SWAP_PTE                : 89 -> 95
+		THP_SCAN_EXCEED_SHARED_PTE              : 90 -> 96
+		THP_SPLIT_PUD                           : 91 -> 97
+		THP_ZERO_PAGE_ALLOC                     : 92 -> 98
+		THP_ZERO_PAGE_ALLOC_FAILED              : 93 -> 99
+		THP_SWPOUT                              : 94 -> 100
+		THP_SWPOUT_FALLBACK                     : 95 -> 101
+		BALLOON_INFLATE                         : 96 -> 102
+		BALLOON_DEFLATE                         : 97 -> 103
+		BALLOON_MIGRATE                         : 98 -> 104
+		SWAP_RA                                 : 99 -> 105
+		SWAP_RA_HIT                             : 100 -> 106
+		KSM_SWPIN_COPY                          : 101 -> 107
+		COW_KSM                                 : 102 -> 108
+		ZSWPIN                                  : 103 -> 109
+		ZSWPOUT                                 : 104 -> 110
+		DIRECT_MAP_LEVEL2_SPLIT                 : 105 -> 111
+		DIRECT_MAP_LEVEL3_SPLIT                 : 106 -> 112
+		NR_VM_EVENT_ITEMS                       : 107 -> 113
+cpuhp_state
+	Elem added
+		CPUHP_IBMVNIC_DEAD                      : 11
+		CPUHP_AP_CACHECTRL_STARTING             : 96
+		CPUHP_AP_IRQ_LOONGARCH_STARTING         : 107
+		CPUHP_AP_PERF_ARM_HNS3_PMU_ONLINE       : 183
+	Elem removed
+		CPUHP_AP_ARM_SDEI_STARTING              : 115
+	Value changed
+		CPUHP_SLUB_DEAD                         : 11 -> 12
+		CPUHP_DEBUG_OBJ_DEAD                    : 12 -> 13
+		CPUHP_MM_WRITEBACK_DEAD                 : 13 -> 14
+		CPUHP_MM_DEMOTION_DEAD                  : 14 -> 15
+		CPUHP_MM_VMSTAT_DEAD                    : 15 -> 16
+		CPUHP_SOFTIRQ_DEAD                      : 16 -> 17
+		CPUHP_NET_MVNETA_DEAD                   : 17 -> 18
+		CPUHP_CPUIDLE_DEAD                      : 18 -> 19
+		CPUHP_ARM64_FPSIMD_DEAD                 : 19 -> 20
+		CPUHP_ARM_OMAP_WAKE_DEAD                : 20 -> 21
+		CPUHP_IRQ_POLL_DEAD                     : 21 -> 22
+		CPUHP_BLOCK_SOFTIRQ_DEAD                : 22 -> 23
+		CPUHP_BIO_DEAD                          : 23 -> 24
+		CPUHP_ACPI_CPUDRV_DEAD                  : 24 -> 25
+		CPUHP_S390_PFAULT_DEAD                  : 25 -> 26
+		CPUHP_BLK_MQ_DEAD                       : 26 -> 27
+		CPUHP_FS_BUFF_DEAD                      : 27 -> 28
+		CPUHP_PRINTK_DEAD                       : 28 -> 29
+		CPUHP_MM_MEMCQ_DEAD                     : 29 -> 30
+		CPUHP_XFS_DEAD                          : 30 -> 31
+		CPUHP_PERCPU_CNT_DEAD                   : 31 -> 32
+		CPUHP_RADIX_DEAD                        : 32 -> 33
+		CPUHP_PAGE_ALLOC                        : 33 -> 34
+		CPUHP_NET_DEV_DEAD                      : 34 -> 35
+		CPUHP_PCI_XGENE_DEAD                    : 35 -> 36
+		CPUHP_IOMMU_IOVA_DEAD                   : 36 -> 37
+		CPUHP_LUSTRE_CFS_DEAD                   : 37 -> 38
+		CPUHP_AP_ARM_CACHE_B15_RAC_DEAD         : 38 -> 39
+		CPUHP_PADATA_DEAD                       : 39 -> 40
+		CPUHP_AP_DTPM_CPU_DEAD                  : 40 -> 41
+		CPUHP_RANDOM_PREPARE                    : 41 -> 42
+		CPUHP_WORKQUEUE_PREP                    : 42 -> 43
+		CPUHP_POWER_NUMA_PREPARE                : 43 -> 44
+		CPUHP_HRTIMERS_PREPARE                  : 44 -> 45
+		CPUHP_PROFILE_PREPARE                   : 45 -> 46
+		CPUHP_X2APIC_PREPARE                    : 46 -> 47
+		CPUHP_SMPCFD_PREPARE                    : 47 -> 48
+		CPUHP_RELAY_PREPARE                     : 48 -> 49
+		CPUHP_SLAB_PREPARE                      : 49 -> 50
+		CPUHP_MD_RAID5_PREPARE                  : 50 -> 51
+		CPUHP_RCUTREE_PREP                      : 51 -> 52
+		CPUHP_CPUIDLE_COUPLED_PREPARE           : 52 -> 53
+		CPUHP_POWERPC_PMAC_PREPARE              : 53 -> 54
+		CPUHP_POWERPC_MMU_CTX_PREPARE           : 54 -> 55
+		CPUHP_XEN_PREPARE                       : 55 -> 56
+		CPUHP_XEN_EVTCHN_PREPARE                : 56 -> 57
+		CPUHP_ARM_SHMOBILE_SCU_PREPARE          : 57 -> 58
+		CPUHP_SH_SH3X_PREPARE                   : 58 -> 59
+		CPUHP_NET_FLOW_PREPARE                  : 59 -> 60
+		CPUHP_TOPOLOGY_PREPARE                  : 60 -> 61
+		CPUHP_NET_IUCV_PREPARE                  : 61 -> 62
+		CPUHP_ARM_BL_PREPARE                    : 62 -> 63
+		CPUHP_TRACE_RB_PREPARE                  : 63 -> 64
+		CPUHP_MM_ZS_PREPARE                     : 64 -> 65
+		CPUHP_MM_ZSWP_MEM_PREPARE               : 65 -> 66
+		CPUHP_MM_ZSWP_POOL_PREPARE              : 66 -> 67
+		CPUHP_KVM_PPC_BOOK3S_PREPARE            : 67 -> 68
+		CPUHP_ZCOMP_PREPARE                     : 68 -> 69
+		CPUHP_TIMERS_PREPARE                    : 69 -> 70
+		CPUHP_MIPS_SOC_PREPARE                  : 70 -> 71
+		CPUHP_BP_PREPARE_DYN                    : 71 -> 72
+		CPUHP_BP_PREPARE_DYN_END                : 91 -> 92
+		CPUHP_BRINGUP_CPU                       : 92 -> 93
+		CPUHP_AP_IDLE_DEAD                      : 93 -> 94
+		CPUHP_AP_OFFLINE                        : 94 -> 95
+		CPUHP_AP_SCHED_STARTING                 : 95 -> 97
+		CPUHP_AP_RCUTREE_DYING                  : 96 -> 98
+		CPUHP_AP_CPU_PM_STARTING                : 97 -> 99
+		CPUHP_AP_IRQ_GIC_STARTING               : 98 -> 100
+		CPUHP_AP_IRQ_HIP04_STARTING             : 99 -> 101
+		CPUHP_AP_IRQ_APPLE_AIC_STARTING         : 100 -> 102
+		CPUHP_AP_IRQ_ARMADA_XP_STARTING         : 101 -> 103
+		CPUHP_AP_IRQ_BCM2836_STARTING           : 102 -> 104
+		CPUHP_AP_IRQ_MIPS_GIC_STARTING          : 103 -> 105
+		CPUHP_AP_IRQ_RISCV_STARTING             : 104 -> 106
+		CPUHP_AP_IRQ_SIFIVE_PLIC_STARTING       : 105 -> 108
+		CPUHP_AP_ARM_MVEBU_COHERENCY            : 106 -> 109
+		CPUHP_AP_MICROCODE_LOADER               : 107 -> 110
+		CPUHP_AP_PERF_X86_AMD_UNCORE_STARTING   : 108 -> 111
+		CPUHP_AP_PERF_X86_STARTING              : 109 -> 112
+		CPUHP_AP_PERF_X86_AMD_IBS_STARTING      : 110 -> 113
+		CPUHP_AP_PERF_X86_CQM_STARTING          : 111 -> 114
+		CPUHP_AP_PERF_X86_CSTATE_STARTING       : 112 -> 115
+		CPUHP_AP_PERF_XTENSA_STARTING           : 113 -> 116
+		CPUHP_AP_MIPS_OP_LOONGSON3_STARTING     : 114 -> 117
+		CPUHP_AP_ARM_VFP_STARTING               : 116 -> 118
+		CPUHP_AP_ARM64_DEBUG_MONITORS_STARTING  : 117 -> 119
+		CPUHP_AP_PERF_ARM_HW_BREAKPOINT_STARTING: 118 -> 120
+		CPUHP_AP_PERF_ARM_ACPI_STARTING         : 119 -> 121
+		CPUHP_AP_PERF_ARM_STARTING              : 120 -> 122
+		CPUHP_AP_PERF_RISCV_STARTING            : 121 -> 123
+		CPUHP_AP_ARM_L2X0_STARTING              : 122 -> 124
+		CPUHP_AP_EXYNOS4_MCT_TIMER_STARTING     : 123 -> 125
+		CPUHP_AP_ARM_ARCH_TIMER_STARTING        : 124 -> 126
+		CPUHP_AP_ARM_GLOBAL_TIMER_STARTING      : 125 -> 127
+		CPUHP_AP_JCORE_TIMER_STARTING           : 126 -> 128
+		CPUHP_AP_ARM_TWD_STARTING               : 127 -> 129
+		CPUHP_AP_QCOM_TIMER_STARTING            : 128 -> 130
+		CPUHP_AP_TEGRA_TIMER_STARTING           : 129 -> 131
+		CPUHP_AP_ARMADA_TIMER_STARTING          : 130 -> 132
+		CPUHP_AP_MARCO_TIMER_STARTING           : 131 -> 133
+		CPUHP_AP_MIPS_GIC_TIMER_STARTING        : 132 -> 134
+		CPUHP_AP_ARC_TIMER_STARTING             : 133 -> 135
+		CPUHP_AP_RISCV_TIMER_STARTING           : 134 -> 136
+		CPUHP_AP_CLINT_TIMER_STARTING           : 135 -> 137
+		CPUHP_AP_CSKY_TIMER_STARTING            : 136 -> 138
+		CPUHP_AP_TI_GP_TIMER_STARTING           : 137 -> 139
+		CPUHP_AP_HYPERV_TIMER_STARTING          : 138 -> 140
+		CPUHP_AP_KVM_STARTING                   : 139 -> 141
+		CPUHP_AP_KVM_ARM_VGIC_INIT_STARTING     : 140 -> 142
+		CPUHP_AP_KVM_ARM_VGIC_STARTING          : 141 -> 143
+		CPUHP_AP_KVM_ARM_TIMER_STARTING         : 142 -> 144
+		CPUHP_AP_DUMMY_TIMER_STARTING           : 143 -> 145
+		CPUHP_AP_ARM_XEN_STARTING               : 144 -> 146
+		CPUHP_AP_ARM_CORESIGHT_STARTING         : 145 -> 147
+		CPUHP_AP_ARM_CORESIGHT_CTI_STARTING     : 146 -> 148
+		CPUHP_AP_ARM64_ISNDEP_STARTING          : 147 -> 149
+		CPUHP_AP_SMPCFD_DYING                   : 148 -> 150
+		CPUHP_AP_X86_TBOOT_DYING                : 149 -> 151
+		CPUHP_AP_ARM_CACHE_B15_RAC_DYING        : 150 -> 152
+		CPUHP_AP_ONLINE                         : 151 -> 153
+		CPUHP_TEARDOWN_CPU                      : 152 -> 154
+		CPUHP_AP_ONLINE_IDLE                    : 153 -> 155
+		CPUHP_AP_SCHED_WAIT_EMPTY               : 154 -> 156
+		CPUHP_AP_SMPBOOT_THREADS                : 155 -> 157
+		CPUHP_AP_X86_VDSO_VMA_ONLINE            : 156 -> 158
+		CPUHP_AP_IRQ_AFFINITY_ONLINE            : 157 -> 159
+		CPUHP_AP_BLK_MQ_ONLINE                  : 158 -> 160
+		CPUHP_AP_ARM_MVEBU_SYNC_CLOCKS          : 159 -> 161
+		CPUHP_AP_X86_INTEL_EPB_ONLINE           : 160 -> 162
+		CPUHP_AP_PERF_ONLINE                    : 161 -> 163
+		CPUHP_AP_PERF_X86_ONLINE                : 162 -> 164
+		CPUHP_AP_PERF_X86_UNCORE_ONLINE         : 163 -> 165
+		CPUHP_AP_PERF_X86_AMD_UNCORE_ONLINE     : 164 -> 166
+		CPUHP_AP_PERF_X86_AMD_POWER_ONLINE      : 165 -> 167
+		CPUHP_AP_PERF_X86_RAPL_ONLINE           : 166 -> 168
+		CPUHP_AP_PERF_X86_CQM_ONLINE            : 167 -> 169
+		CPUHP_AP_PERF_X86_CSTATE_ONLINE         : 168 -> 170
+		CPUHP_AP_PERF_X86_IDXD_ONLINE           : 169 -> 171
+		CPUHP_AP_PERF_S390_CF_ONLINE            : 170 -> 172
+		CPUHP_AP_PERF_S390_SF_ONLINE            : 171 -> 173
+		CPUHP_AP_PERF_ARM_CCI_ONLINE            : 172 -> 174
+		CPUHP_AP_PERF_ARM_CCN_ONLINE            : 173 -> 175
+		CPUHP_AP_PERF_ARM_HISI_CPA_ONLINE       : 174 -> 176
+		CPUHP_AP_PERF_ARM_HISI_DDRC_ONLINE      : 175 -> 177
+		CPUHP_AP_PERF_ARM_HISI_HHA_ONLINE       : 176 -> 178
+		CPUHP_AP_PERF_ARM_HISI_L3_ONLINE        : 177 -> 179
+		CPUHP_AP_PERF_ARM_HISI_PA_ONLINE        : 178 -> 180
+		CPUHP_AP_PERF_ARM_HISI_SLLC_ONLINE      : 179 -> 181
+		CPUHP_AP_PERF_ARM_HISI_PCIE_PMU_ONLINE  : 180 -> 182
+		CPUHP_AP_PERF_ARM_L2X0_ONLINE           : 181 -> 184
+		CPUHP_AP_PERF_ARM_QCOM_L2_ONLINE        : 182 -> 185
+		CPUHP_AP_PERF_ARM_QCOM_L3_ONLINE        : 183 -> 186
+		CPUHP_AP_PERF_ARM_APM_XGENE_ONLINE      : 184 -> 187
+		CPUHP_AP_PERF_ARM_CAVIUM_TX2_UNCORE_ONLINE: 185 -> 188
+		CPUHP_AP_PERF_ARM_MARVELL_CN10K_DDR_ONLINE: 186 -> 189
+		CPUHP_AP_PERF_POWERPC_NEST_IMC_ONLINE   : 187 -> 190
+		CPUHP_AP_PERF_POWERPC_CORE_IMC_ONLINE   : 188 -> 191
+		CPUHP_AP_PERF_POWERPC_THREAD_IMC_ONLINE : 189 -> 192
+		CPUHP_AP_PERF_POWERPC_TRACE_IMC_ONLINE  : 190 -> 193
+		CPUHP_AP_PERF_POWERPC_HV_24x7_ONLINE    : 191 -> 194
+		CPUHP_AP_PERF_POWERPC_HV_GPCI_ONLINE    : 192 -> 195
+		CPUHP_AP_PERF_CSKY_ONLINE               : 193 -> 196
+		CPUHP_AP_WATCHDOG_ONLINE                : 194 -> 197
+		CPUHP_AP_WORKQUEUE_ONLINE               : 195 -> 198
+		CPUHP_AP_RANDOM_ONLINE                  : 196 -> 199
+		CPUHP_AP_RCUTREE_ONLINE                 : 197 -> 200
+		CPUHP_AP_BASE_CACHEINFO_ONLINE          : 198 -> 201
+		CPUHP_AP_ONLINE_DYN                     : 199 -> 202
+		CPUHP_AP_ONLINE_DYN_END                 : 229 -> 232
+		CPUHP_AP_MM_DEMOTION_ONLINE             : 230 -> 233
+		CPUHP_AP_X86_HPET_ONLINE                : 231 -> 234
+		CPUHP_AP_X86_KVM_CLK_ONLINE             : 232 -> 235
+		CPUHP_AP_ACTIVE                         : 233 -> 236
+		CPUHP_ONLINE                            : 234 -> 237
+irq_domain_bus_token
+	Elem added
+		DOMAIN_BUS_PCI_DEVICE_MSI               : 11
+		DOMAIN_BUS_PCI_DEVICE_MSIX              : 12
+		DOMAIN_BUS_DMAR                         : 13
+		DOMAIN_BUS_AMDVI                        : 14
+		DOMAIN_BUS_PCI_DEVICE_IMS               : 15
+memcg_stat_item
+	Value changed
+		MEMCG_SWAP                              : 41 -> 43
+		MEMCG_SOCK                              : 42 -> 44
+		MEMCG_PERCPU_B                          : 43 -> 45
+		MEMCG_VMALLOC                           : 44 -> 46
+		MEMCG_KMEM                              : 45 -> 47
+		MEMCG_ZSWAP_B                           : 46 -> 48
+		MEMCG_ZSWAPPED                          : 47 -> 49
+		MEMCG_NR_STAT                           : 48 -> 50
+memory_type
+	Elem added
+		MEMORY_DEVICE_COHERENT                  : 2
+	Value changed
+		MEMORY_DEVICE_FS_DAX                    : 2 -> 3
+		MEMORY_DEVICE_GENERIC                   : 3 -> 4
+		MEMORY_DEVICE_PCI_P2PDMA                : 4 -> 5
+flow_dissector_key_id
+	Elem added
+		FLOW_DISSECTOR_KEY_PPPOE                : 29
+		FLOW_DISSECTOR_KEY_L2TPV3               : 30
+	Value changed
+		FLOW_DISSECTOR_KEY_MAX                  : 29 -> 31
+pageflags
+	Elem added
+		PG_vmemmap_self_hosted                  : 10
+	Elem removed
+		PG_arch_2                               : 26
+		PG_double_map                           : 6
+	Value changed
+		__NR_PAGEFLAGS                          : 27 -> 26
+tc_setup_type
+	Elem added
+		TC_QUERY_CAPS                           : 0
+	Value changed
+		TC_SETUP_QDISC_MQPRIO                   : 0 -> 1
+		TC_SETUP_CLSU32                         : 1 -> 2
+		TC_SETUP_CLSFLOWER                      : 2 -> 3
+		TC_SETUP_CLSMATCHALL                    : 3 -> 4
+		TC_SETUP_CLSBPF                         : 4 -> 5
+		TC_SETUP_BLOCK                          : 5 -> 6
+		TC_SETUP_QDISC_CBS                      : 6 -> 7
+		TC_SETUP_QDISC_RED                      : 7 -> 8
+		TC_SETUP_QDISC_PRIO                     : 8 -> 9
+		TC_SETUP_QDISC_MQ                       : 9 -> 10
+		TC_SETUP_QDISC_ETF                      : 10 -> 11
+		TC_SETUP_ROOT_QDISC                     : 11 -> 12
+		TC_SETUP_QDISC_GRED                     : 12 -> 13
+		TC_SETUP_QDISC_TAPRIO                   : 13 -> 14
+		TC_SETUP_FT                             : 14 -> 15
+		TC_SETUP_QDISC_ETS                      : 15 -> 16
+		TC_SETUP_QDISC_TBF                      : 16 -> 17
+		TC_SETUP_QDISC_FIFO                     : 17 -> 18
+		TC_SETUP_QDISC_HTB                      : 18 -> 19
+		TC_SETUP_ACT                            : 19 -> 20
+perf_branch_sample_type_shift
+	Elem added
+		PERF_SAMPLE_BRANCH_PRIV_SAVE_SHIFT      : 18
+	Value changed
+		PERF_SAMPLE_BRANCH_MAX_SHIFT            : 18 -> 19
+vm_fault_reason
+	Elem added
+		VM_FAULT_COMPLETED                      : 16384
+	Elem removed
+		VM_FAULT_WRITE                          : 8
+ucount_type
+	Elem removed
+		UCOUNT_RLIMIT_NPROC                     : 12
+		UCOUNT_RLIMIT_MSGQUEUE                  : 13
+		UCOUNT_RLIMIT_SIGPENDING                : 14
+		UCOUNT_RLIMIT_MEMLOCK                   : 15
+	Value changed
+		UCOUNT_COUNTS                           : 16 -> 12
+cpu_usage_stat
+	Elem added
+		CPUTIME_FORCEIDLE                       : 10
+	Value changed
+		NR_STATS                                : 10 -> 11
+cgroup_bpf_attach_type
+	Elem added
+		CGROUP_LSM_START                        : 23
+		CGROUP_LSM_END                          : 32
+	Value changed
+		MAX_CGROUP_BPF_ATTACH_TYPE              : 23 -> 33
+psi_task_count
+	Elem removed
+		NR_ONCPU                                : 3
+	Value changed
+		NR_MEMSTALL_RUNNING                     : 4 -> 3
+		NR_PSI_TASK_COUNTS                      : 5 -> 4
+perf_event_sample_format
+	Elem removed
+		__PERF_SAMPLE_CALLCHAIN_EARLY           : 0
+perf_branch_sample_type
+	Elem added
+		PERF_SAMPLE_BRANCH_PRIV_SAVE            : 262144
+	Value changed
+		PERF_SAMPLE_BRANCH_MAX                  : 262144 -> 524288
+acpi_irq_model_id
+	Elem added
+		ACPI_IRQ_MODEL_LPIC                     : 5
+	Value changed
+		ACPI_IRQ_MODEL_COUNT                    : 5 -> 6
+lockdown_reason
+	Elem added
+		LOCKDOWN_DEVICE_TREE                    : 10
+		LOCKDOWN_RTAS_ERROR_INJECTION           : 19
+	Value changed
+		LOCKDOWN_PCMCIA_CIS                     : 10 -> 11
+		LOCKDOWN_TIOCSSERIAL                    : 11 -> 12
+		LOCKDOWN_MODULE_PARAMETERS              : 12 -> 13
+		LOCKDOWN_MMIOTRACE                      : 13 -> 14
+		LOCKDOWN_DEBUGFS                        : 14 -> 15
+		LOCKDOWN_XMON_WR                        : 15 -> 16
+		LOCKDOWN_BPF_WRITE_USER                 : 16 -> 17
+		LOCKDOWN_DBG_WRITE_KERNEL               : 17 -> 18
+		LOCKDOWN_INTEGRITY_MAX                  : 18 -> 20
+		LOCKDOWN_KCORE                          : 19 -> 21
+		LOCKDOWN_KPROBES                        : 20 -> 22
+		LOCKDOWN_BPF_READ_KERNEL                : 21 -> 23
+		LOCKDOWN_DBG_READ_KERNEL                : 22 -> 24
+		LOCKDOWN_PERF                           : 23 -> 25
+		LOCKDOWN_TRACEFS                        : 24 -> 26
+		LOCKDOWN_XMON_RW                        : 25 -> 27
+		LOCKDOWN_XFRM_SECRET                    : 26 -> 28
+		LOCKDOWN_CONFIDENTIALITY_MAX            : 27 -> 29
+iommu_cap
+	Elem added
+		IOMMU_CAP_ENFORCE_CACHE_COHERENCY       : 4
+insn_type
+	Elem added
+		JCC                                     : 4
+cpuid_leafs
+	Elem added
+		CPUID_8000_0021_EAX                     : 20
+bpf_type_flag
+	Elem added
+		MEM_RINGBUF                             : 1024
+		PTR_TRUSTED                             : 1048576
+		MEM_RCU                                 : 2097152
+		NON_OWN_REF                             : 4194304
+	Value changed
+		MEM_ALLOC                               : 1024 -> 524288
+		__BPF_TYPE_FLAG_MAX                     : 262145 -> 4194305
+		__BPF_TYPE_LAST_FLAG                    : 262144 -> 4194304
+bpf_arg_type
+	Elem added
+		ARG_PTR_TO_RINGBUF_MEM                  : 15
+	Elem removed
+		ARG_PTR_TO_ALLOC_MEM                    : 15
+		ARG_PTR_TO_ALLOC_MEM_OR_NULL            : 271
+	Value changed
+		__BPF_ARG_TYPE_LIMIT                    : 524287 -> 8388607
+bpf_return_type
+	Elem added
+		RET_PTR_TO_MEM                          : 6
+		RET_PTR_TO_RINGBUF_MEM_OR_NULL          : 1286
+		RET_PTR_TO_BTF_ID_TRUSTED               : 1048584
+	Elem removed
+		RET_PTR_TO_ALLOC_MEM                    : 6
+		RET_PTR_TO_ALLOC_MEM_OR_NULL            : 1286
+	Value changed
+		__BPF_RET_TYPE_LIMIT                    : 524287 -> 8388607
+bpf_reg_type
+	Elem added
+		CONST_PTR_TO_DYNPTR                     : 20
+	Value changed
+		__BPF_REG_TYPE_MAX                      : 20 -> 21
+		__BPF_REG_TYPE_LIMIT                    : 524287 -> 8388607
+retbleed_mitigation
+	Elem added
+		RETBLEED_MITIGATION_STUFF               : 5
+retbleed_mitigation_cmd
+	Elem added
+		RETBLEED_CMD_STUFF                      : 4
+vmx_feature_leafs
+	Elem added
+		TERTIARY_CTLS_LOW                       : 3
+		TERTIARY_CTLS_HIGH                      : 4
+	Value changed
+		NR_VMX_FEATURE_WORDS                    : 3 -> 5
+mf_flags
+	Elem added
+		MF_NO_RETRY                             : 64
+sgx_return_code
+	Elem added
+		SGX_EPC_PAGE_CONFLICT                   : 7
+		SGX_PAGE_NOT_MODIFIABLE                 : 20
+sgx_attribute
+	Elem added
+		SGX_ATTR_ASYNC_EXIT_NOTIFY              : 1024
+acpi_madt_type
+	Elem added
+		ACPI_MADT_TYPE_CORE_PIC                 : 17
+		ACPI_MADT_TYPE_LIO_PIC                  : 18
+		ACPI_MADT_TYPE_HT_PIC                   : 19
+		ACPI_MADT_TYPE_EIO_PIC                  : 20
+		ACPI_MADT_TYPE_MSI_PIC                  : 21
+		ACPI_MADT_TYPE_BIO_PIC                  : 22
+		ACPI_MADT_TYPE_LPC_PIC                  : 23
+	Value changed
+		ACPI_MADT_TYPE_RESERVED                 : 17 -> 24
+bpf_map_type
+	Elem added
+		BPF_MAP_TYPE_CGROUP_STORAGE_DEPRECATED  : 19
+		BPF_MAP_TYPE_USER_RINGBUF               : 31
+		BPF_MAP_TYPE_CGRP_STORAGE               : 32
+bpf_attach_type
+	Elem added
+		BPF_LSM_CGROUP                          : 43
+	Value changed
+		__MAX_BPF_ATTACH_TYPE                   : 43 -> 44
+uts_proc
+	Elem added
+		UTS_PROC_ARCH                           : 0
+	Value changed
+		UTS_PROC_OSTYPE                         : 0 -> 1
+		UTS_PROC_OSRELEASE                      : 1 -> 2
+		UTS_PROC_VERSION                        : 2 -> 3
+		UTS_PROC_HOSTNAME                       : 3 -> 4
+		UTS_PROC_DOMAINNAME                     : 4 -> 5
+sys_off_mode
+	Elem added
+		SYS_OFF_MODE_RESTART_PREPARE            : 2
+	Value changed
+		SYS_OFF_MODE_RESTART                    : 2 -> 3
+ctx_state
+	Elem added
+		CONTEXT_IDLE                            : 1
+		CONTEXT_MAX                             : 4
+	Value changed
+		CONTEXT_USER                            : 1 -> 2
+		CONTEXT_GUEST                           : 2 -> 3
+kvm_apicv_inhibit
+	Elem removed
+		APICV_INHIBIT_REASON_X2APIC             : 9
+	Value changed
+		APICV_INHIBIT_REASON_SEV                : 10 -> 9
+cgroup1_param
+	Elem added
+		Opt_favordynmods                        : 8
+		Opt_nofavordynmods                      : 9
+cgroup2_param
+	Elem added
+		Opt_favordynmods                        : 1
+	Value changed
+		Opt_memory_localevents                  : 1 -> 2
+		Opt_memory_recursiveprot                : 2 -> 3
+		nr__cgroup2_params                      : 3 -> 4
+subparts_cmd
+	Elem added
+		partcmd_invalidate                      : 3
+skb_drop_reason
+	Elem added
+		SKB_CONSUMED                            : 1
+		SKB_DROP_REASON_DUP_FRAG                : 66
+		SKB_DROP_REASON_FRAG_REASM_TIMEOUT      : 67
+		SKB_DROP_REASON_FRAG_TOO_FAR            : 68
+	Value changed
+		SKB_DROP_REASON_NOT_SPECIFIED           : 1 -> 2
+		SKB_DROP_REASON_NO_SOCKET               : 2 -> 3
+		SKB_DROP_REASON_PKT_TOO_SMALL           : 3 -> 4
+		SKB_DROP_REASON_TCP_CSUM                : 4 -> 5
+		SKB_DROP_REASON_SOCKET_FILTER           : 5 -> 6
+		SKB_DROP_REASON_UDP_CSUM                : 6 -> 7
+		SKB_DROP_REASON_NETFILTER_DROP          : 7 -> 8
+		SKB_DROP_REASON_OTHERHOST               : 8 -> 9
+		SKB_DROP_REASON_IP_CSUM                 : 9 -> 10
+		SKB_DROP_REASON_IP_INHDR                : 10 -> 11
+		SKB_DROP_REASON_IP_RPFILTER             : 11 -> 12
+		SKB_DROP_REASON_UNICAST_IN_L2_MULTICAST : 12 -> 13
+		SKB_DROP_REASON_XFRM_POLICY             : 13 -> 14
+		SKB_DROP_REASON_IP_NOPROTO              : 14 -> 15
+		SKB_DROP_REASON_SOCKET_RCVBUFF          : 15 -> 16
+		SKB_DROP_REASON_PROTO_MEM               : 16 -> 17
+		SKB_DROP_REASON_TCP_MD5NOTFOUND         : 17 -> 18
+		SKB_DROP_REASON_TCP_MD5UNEXPECTED       : 18 -> 19
+		SKB_DROP_REASON_TCP_MD5FAILURE          : 19 -> 20
+		SKB_DROP_REASON_SOCKET_BACKLOG          : 20 -> 21
+		SKB_DROP_REASON_TCP_FLAGS               : 21 -> 22
+		SKB_DROP_REASON_TCP_ZEROWINDOW          : 22 -> 23
+		SKB_DROP_REASON_TCP_OLD_DATA            : 23 -> 24
+		SKB_DROP_REASON_TCP_OVERWINDOW          : 24 -> 25
+		SKB_DROP_REASON_TCP_OFOMERGE            : 25 -> 26
+		SKB_DROP_REASON_TCP_RFC7323_PAWS        : 26 -> 27
+		SKB_DROP_REASON_TCP_INVALID_SEQUENCE    : 27 -> 28
+		SKB_DROP_REASON_TCP_RESET               : 28 -> 29
+		SKB_DROP_REASON_TCP_INVALID_SYN         : 29 -> 30
+		SKB_DROP_REASON_TCP_CLOSE               : 30 -> 31
+		SKB_DROP_REASON_TCP_FASTOPEN            : 31 -> 32
+		SKB_DROP_REASON_TCP_OLD_ACK             : 32 -> 33
+		SKB_DROP_REASON_TCP_TOO_OLD_ACK         : 33 -> 34
+		SKB_DROP_REASON_TCP_ACK_UNSENT_DATA     : 34 -> 35
+		SKB_DROP_REASON_TCP_OFO_QUEUE_PRUNE     : 35 -> 36
+		SKB_DROP_REASON_TCP_OFO_DROP            : 36 -> 37
+		SKB_DROP_REASON_IP_OUTNOROUTES          : 37 -> 38
+		SKB_DROP_REASON_BPF_CGROUP_EGRESS       : 38 -> 39
+		SKB_DROP_REASON_IPV6DISABLED            : 39 -> 40
+		SKB_DROP_REASON_NEIGH_CREATEFAIL        : 40 -> 41
+		SKB_DROP_REASON_NEIGH_FAILED            : 41 -> 42
+		SKB_DROP_REASON_NEIGH_QUEUEFULL         : 42 -> 43
+		SKB_DROP_REASON_NEIGH_DEAD              : 43 -> 44
+		SKB_DROP_REASON_TC_EGRESS               : 44 -> 45
+		SKB_DROP_REASON_QDISC_DROP              : 45 -> 46
+		SKB_DROP_REASON_CPU_BACKLOG             : 46 -> 47
+		SKB_DROP_REASON_XDP                     : 47 -> 48
+		SKB_DROP_REASON_TC_INGRESS              : 48 -> 49
+		SKB_DROP_REASON_UNHANDLED_PROTO         : 49 -> 50
+		SKB_DROP_REASON_SKB_CSUM                : 50 -> 51
+		SKB_DROP_REASON_SKB_GSO_SEG             : 51 -> 52
+		SKB_DROP_REASON_SKB_UCOPY_FAULT         : 52 -> 53
+		SKB_DROP_REASON_DEV_HDR                 : 53 -> 54
+		SKB_DROP_REASON_DEV_READY               : 54 -> 55
+		SKB_DROP_REASON_FULL_RING               : 55 -> 56
+		SKB_DROP_REASON_NOMEM                   : 56 -> 57
+		SKB_DROP_REASON_HDR_TRUNC               : 57 -> 58
+		SKB_DROP_REASON_TAP_FILTER              : 58 -> 59
+		SKB_DROP_REASON_TAP_TXFILTER            : 59 -> 60
+		SKB_DROP_REASON_ICMP_CSUM               : 60 -> 61
+		SKB_DROP_REASON_INVALID_PROTO           : 61 -> 62
+		SKB_DROP_REASON_IP_INADDRERRORS         : 62 -> 63
+		SKB_DROP_REASON_IP_INNOROUTES           : 63 -> 64
+		SKB_DROP_REASON_PKT_TOO_BIG             : 64 -> 65
+		SKB_DROP_REASON_MAX                     : 65 -> 69
+blk_crypto_mode_num
+	Elem added
+		BLK_ENCRYPTION_MODE_SM4_XTS             : 4
+	Value changed
+		BLK_ENCRYPTION_MODE_MAX                 : 4 -> 5
+fetch_op
+	Elem added
+		FETCH_OP_ST_SYMSTR                      : 17
+	Value changed
+		FETCH_OP_MOD_BF                         : 17 -> 18
+		FETCH_OP_LP_ARRAY                       : 18 -> 19
+		FETCH_OP_TP_ARG                         : 19 -> 20
+		FETCH_OP_END                            : 20 -> 21
+		FETCH_NOP_SYMBOL                        : 21 -> 22
+hist_field_flags
+	Elem added
+		HIST_FIELD_FL_PERCENT                   : 524288
+		HIST_FIELD_FL_GRAPH                     : 1048576
+bpf_func_id
+	Elem added
+		BPF_FUNC_tcp_raw_gen_syncookie_ipv4     : 204
+		BPF_FUNC_tcp_raw_gen_syncookie_ipv6     : 205
+		BPF_FUNC_tcp_raw_check_syncookie_ipv4   : 206
+		BPF_FUNC_tcp_raw_check_syncookie_ipv6   : 207
+		BPF_FUNC_ktime_get_tai_ns               : 208
+		BPF_FUNC_user_ringbuf_drain             : 209
+		BPF_FUNC_cgrp_storage_get               : 210
+		BPF_FUNC_cgrp_storage_delete            : 211
+	Value changed
+		__BPF_FUNC_MAX_ID                       : 204 -> 212
+bpf_core_relo_kind
+	Elem added
+		BPF_CORE_TYPE_MATCHES                   : 12
+netdev_priv_flags
+	Elem added
+		IFF_NO_ADDRCONF                         : 1073741824
+	Elem removed
+		IFF_LIVE_RENAME_OK                      : 1073741824
+netdev_cmd
+	Elem added
+		NETDEV_PRE_UNINIT                       : 18
+	Value changed
+		NETDEV_RELEASE                          : 18 -> 19
+		NETDEV_NOTIFY_PEERS                     : 19 -> 20
+		NETDEV_JOIN                             : 20 -> 21
+		NETDEV_CHANGEUPPER                      : 21 -> 22
+		NETDEV_RESEND_IGMP                      : 22 -> 23
+		NETDEV_PRECHANGEMTU                     : 23 -> 24
+		NETDEV_CHANGEINFODATA                   : 24 -> 25
+		NETDEV_BONDING_INFO                     : 25 -> 26
+		NETDEV_PRECHANGEUPPER                   : 26 -> 27
+		NETDEV_CHANGELOWERSTATE                 : 27 -> 28
+		NETDEV_UDP_TUNNEL_PUSH_INFO             : 28 -> 29
+		NETDEV_UDP_TUNNEL_DROP_INFO             : 29 -> 30
+		NETDEV_CHANGE_TX_QUEUE_LEN              : 30 -> 31
+		NETDEV_CVLAN_FILTER_PUSH_INFO           : 31 -> 32
+		NETDEV_CVLAN_FILTER_DROP_INFO           : 32 -> 33
+		NETDEV_SVLAN_FILTER_PUSH_INFO           : 33 -> 34
+		NETDEV_SVLAN_FILTER_DROP_INFO           : 34 -> 35
+		NETDEV_OFFLOAD_XSTATS_ENABLE            : 35 -> 36
+		NETDEV_OFFLOAD_XSTATS_DISABLE           : 36 -> 37
+		NETDEV_OFFLOAD_XSTATS_REPORT_USED       : 37 -> 38
+		NETDEV_OFFLOAD_XSTATS_REPORT_DELTA      : 38 -> 39
+btf_kfunc_hook
+	Elem added
+		BTF_KFUNC_HOOK_COMMON                   : 0
+		BTF_KFUNC_HOOK_FMODRET                  : 6
+	Value changed
+		BTF_KFUNC_HOOK_XDP                      : 0 -> 1
+		BTF_KFUNC_HOOK_TC                       : 1 -> 2
+		BTF_KFUNC_HOOK_STRUCT_OPS               : 2 -> 3
+		BTF_KFUNC_HOOK_TRACING                  : 3 -> 4
+		BTF_KFUNC_HOOK_SYSCALL                  : 4 -> 5
+		BTF_KFUNC_HOOK_MAX                      : 5 -> 7
+btf_field_type
+	Elem added
+		BPF_SPIN_LOCK                           : 1
+		BPF_TIMER                               : 2
+		BPF_KPTR_UNREF                          : 4
+		BPF_KPTR_REF                            : 8
+		BPF_KPTR                                : 12
+		BPF_LIST_HEAD                           : 16
+		BPF_LIST_NODE                           : 32
+		BPF_RB_ROOT                             : 64
+		BPF_RB_NODE                             : 128
+		BPF_GRAPH_NODE_OR_ROOT                  : 240
+	Elem removed
+		BTF_FIELD_SPIN_LOCK                     : 0
+		BTF_FIELD_TIMER                         : 1
+		BTF_FIELD_KPTR                          : 2
+perf_event_read_format
+	Elem added
+		PERF_FORMAT_LOST                        : 16
+	Value changed
+		PERF_FORMAT_MAX                         : 16 -> 32
+iter_type
+	Elem added
+		ITER_UBUF                               : 6
+ttu_flags
+	Elem added
+		TTU_HWPOISON                            : 32
+	Elem removed
+		TTU_IGNORE_HWPOISON                     : 32
+hugetlb_page_flags
+	Elem added
+		HPG_raw_hwp_unreliable                  : 5
+	Value changed
+		__NR_HPAGEFLAGS                         : 5 -> 6
+slab_modes
+	Elem removed
+		M_FULL                                  : 2
+	Value changed
+		M_FREE                                  : 3 -> 2
+		M_FULL_NOLIST                           : 4 -> 3
+migrate_vma_direction
+	Elem added
+		MIGRATE_VMA_SELECT_DEVICE_COHERENT      : 4
+scan_result
+	Elem added
+		SCAN_PMD_NONE                           : 3
+		SCAN_PMD_MAPPED                         : 4
+		SCAN_PTE_MAPPED_HUGEPAGE                : 10
+	Value changed
+		SCAN_EXCEED_NONE_PTE                    : 3 -> 5
+		SCAN_EXCEED_SWAP_PTE                    : 4 -> 6
+		SCAN_EXCEED_SHARED_PTE                  : 5 -> 7
+		SCAN_PTE_NON_PRESENT                    : 6 -> 8
+		SCAN_PTE_UFFD_WP                        : 7 -> 9
+		SCAN_PAGE_RO                            : 8 -> 11
+		SCAN_LACK_REFERENCED_PAGE               : 9 -> 12
+		SCAN_PAGE_NULL                          : 10 -> 13
+		SCAN_SCAN_ABORT                         : 11 -> 14
+		SCAN_PAGE_COUNT                         : 12 -> 15
+		SCAN_PAGE_LRU                           : 13 -> 16
+		SCAN_PAGE_LOCK                          : 14 -> 17
+		SCAN_PAGE_ANON                          : 15 -> 18
+		SCAN_PAGE_COMPOUND                      : 16 -> 19
+		SCAN_ANY_PROCESS                        : 17 -> 20
+		SCAN_VMA_NULL                           : 18 -> 21
+		SCAN_VMA_CHECK                          : 19 -> 22
+		SCAN_ADDRESS_RANGE                      : 20 -> 23
+		SCAN_DEL_PAGE_LRU                       : 21 -> 24
+		SCAN_ALLOC_HUGE_PAGE_FAIL               : 22 -> 25
+		SCAN_CGROUP_CHARGE_FAIL                 : 23 -> 26
+		SCAN_TRUNCATED                          : 24 -> 27
+		SCAN_PAGE_HAS_PRIVATE                   : 25 -> 28
+mf_action_page_type
+	Elem removed
+		MF_MSG_NON_PMD_HUGE                     : 6
+	Value changed
+		MF_MSG_UNMAP_FAILED                     : 7 -> 6
+		MF_MSG_DIRTY_SWAPCACHE                  : 8 -> 7
+		MF_MSG_CLEAN_SWAPCACHE                  : 9 -> 8
+		MF_MSG_DIRTY_MLOCKED_LRU                : 10 -> 9
+		MF_MSG_CLEAN_MLOCKED_LRU                : 11 -> 10
+		MF_MSG_DIRTY_UNEVICTABLE_LRU            : 12 -> 11
+		MF_MSG_CLEAN_UNEVICTABLE_LRU            : 13 -> 12
+		MF_MSG_DIRTY_LRU                        : 14 -> 13
+		MF_MSG_CLEAN_LRU                        : 15 -> 14
+		MF_MSG_TRUNCATED_LRU                    : 16 -> 15
+		MF_MSG_BUDDY                            : 17 -> 16
+		MF_MSG_DAX                              : 18 -> 17
+		MF_MSG_UNSPLIT_THP                      : 19 -> 18
+		MF_MSG_UNKNOWN                          : 20 -> 19
+kernfs_node_flag
+	Elem added
+		KERNFS_HIDDEN                           : 512
+		KERNFS_REMOVING                         : 16384
+squashfs_param
+	Elem added
+		Opt_threads                             : 1
+fuse_opcode
+	Elem added
+		FUSE_TMPFILE                            : 51
+ethtool_link_mode_bit_indices
+	Elem added
+		ETHTOOL_LINK_MODE_800000baseCR8_Full_BIT: 93
+		ETHTOOL_LINK_MODE_800000baseKR8_Full_BIT: 94
+		ETHTOOL_LINK_MODE_800000baseDR8_Full_BIT: 95
+		ETHTOOL_LINK_MODE_800000baseDR8_2_Full_BIT: 96
+		ETHTOOL_LINK_MODE_800000baseSR8_Full_BIT: 97
+		ETHTOOL_LINK_MODE_800000baseVR8_Full_BIT: 98
+	Value changed
+		__ETHTOOL_LINK_MODE_MASK_NBITS          : 93 -> 99
+ib_uverbs_wc_opcode
+	Elem added
+		IB_UVERBS_WC_FLUSH                      : 8
+		IB_UVERBS_WC_ATOMIC_WRITE               : 9
+ib_uverbs_wr_opcode
+	Elem added
+		IB_UVERBS_WR_FLUSH                      : 14
+		IB_UVERBS_WR_ATOMIC_WRITE               : 15
+ib_uverbs_device_cap_flags
+	Elem added
+		IB_UVERBS_DEVICE_FLUSH_GLOBAL           : 0
+		IB_UVERBS_DEVICE_FLUSH_PERSISTENT       : 0
+		IB_UVERBS_DEVICE_ATOMIC_WRITE           : 0
+ib_uverbs_access_flags
+	Elem added
+		IB_UVERBS_ACCESS_FLUSH_GLOBAL           : 256
+		IB_UVERBS_ACCESS_FLUSH_PERSISTENT       : 512
+audit_type
+	Elem added
+		AUDIT_APPARMOR_USER                     : 7
+	Value changed
+		AUDIT_APPARMOR_AUTO                     : 7 -> 8
+aafs_prof_type
+	Elem added
+		AAFS_PROF_LEARNING_COUNT                : 9
+	Value changed
+		AAFS_PROF_SIZEOF                        : 9 -> 10
+rq_qos_id
+	Elem removed
+		RQ_QOS_IOPRIO                           : 3
+tg_state_flags
+	Elem removed
+		THROTL_TG_HAS_IOPS_LIMIT                : 4
+	Value changed
+		THROTL_TG_CANCELING                     : 8 -> 4
+rdma_driver_id
+	Elem added
+		RDMA_DRIVER_ERDMA                       : 19
+		RDMA_DRIVER_MANA                        : 20
+ib_wc_opcode
+	Elem added
+		IB_WC_ATOMIC_WRITE                      : 9
+		IB_WC_FLUSH                             : 8
+	Value changed
+		IB_WC_REG_MR                            : 8 -> 10
+		IB_WC_MASKED_COMP_SWAP                  : 9 -> 11
+		IB_WC_MASKED_FETCH_ADD                  : 10 -> 12
+ib_wr_opcode
+	Elem added
+		IB_WR_FLUSH                             : 14
+		IB_WR_ATOMIC_WRITE                      : 15
+io_uring_cmd_flags
+	Elem added
+		IO_URING_F_MULTISHOT                    : 4
+		IO_URING_F_IOWQ                         : 8
+	Value changed
+		IO_URING_F_SQE128                       : 4 -> 256
+		IO_URING_F_CQE32                        : 8 -> 512
+		IO_URING_F_IOPOLL                       : 16 -> 1024
+io_uring_op
+	Elem added
+		IORING_OP_SEND_ZC                       : 47
+		IORING_OP_SENDMSG_ZC                    : 48
+	Value changed
+		IORING_OP_LAST                          : 47 -> 49
+gpio_lookup_flags
+	Elem added
+		GPIO_PULL_DISABLE                       : 64
+dma_transaction_type
+	Elem removed
+		DMA_MEMCPY_SG                           : 1
+	Value changed
+		DMA_XOR                                 : 2 -> 1
+		DMA_PQ                                  : 3 -> 2
+		DMA_XOR_VAL                             : 4 -> 3
+		DMA_PQ_VAL                              : 5 -> 4
+		DMA_MEMSET                              : 6 -> 5
+		DMA_MEMSET_SG                           : 7 -> 6
+		DMA_INTERRUPT                           : 8 -> 7
+		DMA_PRIVATE                             : 9 -> 8
+		DMA_ASYNC_TX                            : 10 -> 9
+		DMA_SLAVE                               : 11 -> 10
+		DMA_CYCLIC                              : 12 -> 11
+		DMA_INTERLEAVE                          : 13 -> 12
+		DMA_COMPLETION_NO_ORDER                 : 14 -> 13
+		DMA_REPEAT                              : 15 -> 14
+		DMA_LOAD_EOT                            : 16 -> 15
+		DMA_TX_TYPE_END                         : 17 -> 16
+acpi_cedt_type
+	Elem added
+		ACPI_CEDT_TYPE_CXIMS                    : 2
+		ACPI_CEDT_TYPE_RDPAS                    : 3
+	Value changed
+		ACPI_CEDT_TYPE_RESERVED                 : 2 -> 4
+pxa_ssp_type
+	Elem added
+		SSP_MAX                                 : 17
+thermal_trend
+	Elem removed
+		THERMAL_TREND_RAISE_FULL                : 3
+		THERMAL_TREND_DROP_FULL                 : 4
+tpm_chip_flags
+	Elem added
+		TPM_CHIP_FLAG_BOOTSTRAPPED              : 1
+		TPM_CHIP_FLAG_SUSPENDED                 : 256
+		TPM_CHIP_FLAG_HWRNG_DISABLED            : 512
+tpm_tis_flags
+	Elem added
+		TPM_TIS_DEFAULT_CANCELLATION            : 2
+		TPM_TIS_IRQ_TESTED                      : 3
+	Value changed
+		TPM_TIS_ITPM_WORKAROUND                 : 1 -> 0
+		TPM_TIS_INVALID_STATUS                  : 2 -> 1
+io_pgtable_fmt
+	Elem added
+		AMD_IOMMU_V2                            : 7
+		APPLE_DART2                             : 9
+	Value changed
+		APPLE_DART                              : 7 -> 8
+		IO_PGTABLE_NUM_FMTS                     : 8 -> 10
+nvdimmsec_op_ids
+	Elem added
+		OP_DISABLE_MASTER                       : 2
+	Value changed
+		OP_UPDATE                               : 2 -> 3
+		OP_ERASE                                : 3 -> 4
+		OP_OVERWRITE                            : 4 -> 5
+		OP_MASTER_UPDATE                        : 5 -> 6
+		OP_MASTER_ERASE                         : 6 -> 7
+scsi_host_status
+	Elem removed
+		DID_TARGET_FAILURE                      : 16
+		DID_NEXUS_FAILURE                       : 17
+		DID_ALLOC_FAILURE                       : 18
+		DID_MEDIUM_ERROR                        : 19
+mddev_flags
+	Elem added
+		MD_DELETED                              : 12
+simatic_ipc_station_ids
+	Elem added
+		SIMATIC_IPC_IPC227G                     : 3841
+		SIMATIC_IPC_IPCBX_39A                   : 4097
+		SIMATIC_IPC_IPCPX_39A                   : 4098
+bpf_ret_code
+	Elem added
+		BPF_FLOW_DISSECTOR_CONTINUE             : 129
+flow_action_id
+	Elem added
+		FLOW_ACTION_RX_QUEUE_MAPPING            : 19
+	Value changed
+		FLOW_ACTION_WAKE                        : 19 -> 20
+		FLOW_ACTION_QUEUE                       : 20 -> 21
+		FLOW_ACTION_SAMPLE                      : 21 -> 22
+		FLOW_ACTION_POLICE                      : 22 -> 23
+		FLOW_ACTION_CT                          : 23 -> 24
+		FLOW_ACTION_CT_METADATA                 : 24 -> 25
+		FLOW_ACTION_MPLS_PUSH                   : 25 -> 26
+		FLOW_ACTION_MPLS_POP                    : 26 -> 27
+		FLOW_ACTION_MPLS_MANGLE                 : 27 -> 28
+		FLOW_ACTION_GATE                        : 28 -> 29
+		FLOW_ACTION_PPPOE_PUSH                  : 29 -> 30
+		FLOW_ACTION_JUMP                        : 30 -> 31
+		FLOW_ACTION_PIPE                        : 31 -> 32
+		FLOW_ACTION_VLAN_PUSH_ETH               : 32 -> 33
+		FLOW_ACTION_VLAN_POP_ETH                : 33 -> 34
+		FLOW_ACTION_CONTINUE                    : 34 -> 35
+		NUM_FLOW_ACTIONS                        : 35 -> 36
+dsa_tag_protocol
+	Elem added
+		DSA_TAG_PROTO_RZN1_A5PSW                : 26
+		DSA_TAG_PROTO_LAN937X                   : 27
+lwtunnel_encap_types
+	Elem added
+		LWTUNNEL_ENCAP_XFRM                     : 10
+	Value changed
+		__LWTUNNEL_ENCAP_MAX                    : 10 -> 11
+metadata_type
+	Elem added
+		METADATA_MACSEC                         : 2
+		METADATA_XFRM                           : 3
+sk_psock_state_bits
+	Elem added
+		SK_PSOCK_RX_STRP_ENABLED                : 1
+devlink_command
+	Elem added
+		DEVLINK_CMD_SELFTESTS_GET               : 82
+		DEVLINK_CMD_SELFTESTS_RUN               : 83
+	Value changed
+		__DEVLINK_CMD_MAX                       : 82 -> 84
+		DEVLINK_CMD_MAX                         : 81 -> 83
+devlink_attr
+	Elem added
+		DEVLINK_ATTR_NESTED_DEVLINK             : 175
+		DEVLINK_ATTR_SELFTESTS                  : 176
+		DEVLINK_ATTR_RATE_TX_PRIORITY           : 177
+		DEVLINK_ATTR_RATE_TX_WEIGHT             : 178
+		DEVLINK_ATTR_REGION_DIRECT              : 179
+	Value changed
+		__DEVLINK_ATTR_MAX                      : 175 -> 180
+		DEVLINK_ATTR_MAX                        : 174 -> 179
+devlink_port_function_attr
+	Elem added
+		DEVLINK_PORT_FN_ATTR_CAPS               : 4
+	Value changed
+		__DEVLINK_PORT_FUNCTION_ATTR_MAX        : 4 -> 5
+		DEVLINK_PORT_FUNCTION_ATTR_MAX          : 3 -> 4
+devlink_trap_generic_id
+	Elem added
+		DEVLINK_TRAP_GENERIC_ID_EAPOL           : 92
+		DEVLINK_TRAP_GENERIC_ID_LOCKED_PORT     : 93
+	Value changed
+		__DEVLINK_TRAP_GENERIC_ID_MAX           : 92 -> 94
+		DEVLINK_TRAP_GENERIC_ID_MAX             : 91 -> 93
+devlink_trap_group_generic_id
+	Elem added
+		DEVLINK_TRAP_GROUP_GENERIC_ID_EAPOL     : 26
+	Value changed
+		__DEVLINK_TRAP_GROUP_GENERIC_ID_MAX     : 26 -> 27
+		DEVLINK_TRAP_GROUP_GENERIC_ID_MAX       : 25 -> 26
+nlmsgerr_attrs
+	Elem added
+		NLMSGERR_ATTR_MISS_TYPE                 : 5
+		NLMSGERR_ATTR_MISS_NEST                 : 6
+	Value changed
+		__NLMSGERR_ATTR_MAX                     : 5 -> 7
+		NLMSGERR_ATTR_MAX                       : 4 -> 6
+nl80211_ext_feature_index
+	Elem added
+		NL80211_EXT_FEATURE_POWERED_ADDR_CHANGE : 61
+	Value changed
+		NUM_NL80211_EXT_FEATURES                : 61 -> 62
+		MAX_NL80211_EXT_FEATURES                : 60 -> 61
+ieee_attrs
+	Elem added
+		DCB_ATTR_DCB_APP_TRUST_TABLE            : 11
+	Value changed
+		__DCB_ATTR_IEEE_MAX                     : 11 -> 12
+ieee_attrs_app
+	Elem added
+		DCB_ATTR_DCB_APP                        : 2
+	Value changed
+		__DCB_ATTR_IEEE_APP_MAX                 : 2 -> 3
+mptcp_event_type
+	Elem added
+		MPTCP_EVENT_LISTENER_CREATED            : 15
+		MPTCP_EVENT_LISTENER_CLOSED             : 16

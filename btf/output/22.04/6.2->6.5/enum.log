@@ -1,0 +1,974 @@
+Added Kind.ENUM (54): ['mod_mem_type', 'kvm_apic_logical_mode', 'bus_notifier_event', 'cpuhp_sync_state', 'xdp_rss_hash_type', 'pool_workqueue_stats', 'user_reg_flag', 'bpf_iter_state', 'netdev_xdp_act', 'page_walk_lock', 'mfill_atomic_mode', 'criteria', 'ethtool_mac_stats_src', 'ethtool_mm_verify_status', 'dw_edma_map_format', 'dw_edma_chip_flags', 'cons_flags', 'fw_upload_err', 'fw_upload_prog', 'usb_wireless_status', 'ps2_disposition', 'pmc_index', 'skb_drop_reason_subsys', 'handshake_handler_class', 'handshake_msg_type', 'handshake_auth', 'hp_flags_bits', 'vhost_task_flags', 'zswap_init_type', 'mnt_tree_flags_t', 'xprtsec_policies', 'fuse_ext_type', 'vcap_rule_state', 'mm_cid_state', 'dax_driver_type', 'poison_cmd_enabled_bits', 'security_cmd_enabled_bits', 'scsi_pr_type', 'vcap_is2_arp_opcode', 'vcap_arp_opcode', 'amd_pstate_mode', 'hid_report_type', 'hid_bpf_attach_flags', 'hid_bpf_prog_type', 'hid_type', 'hid_battery_status', 'seg6_local_pktinfo', 'seg6_local_flv_action', 'hn_flags_bits', 'fail_dup_mod_reason', 'shrink_type', 'hid_class_request', 'wiphy_flags', 'hr_flags_bits']
+Removed Kind.ENUM (9): ['netdev_priv_flags', 'mcopy_atomic_mode', 'ib_uverbs_device_cap_flags', 'pci_notify_event', 'skb_free_reason', 'perf_callchain_context', 'tpm2_pt_props', 'hmm_pfn_flags', 'psp_i2c_req_type']
+Changed Kind.ENUM (76): ['fault_flag', 'cpuhp_state', 'flow_dissector_key_id', 'pageflags', 'cc_vendor', 'zone_stat_item', 'extra_reg_type', 'kvm_apicv_inhibit', 'iommu_cap', 'energy_perf_value_index', 'resctrl_res_level', 'bpf_prog_type', 'bpf_attach_type', 'bpf_link_type', 'btf_field_type', 'bpf_reg_type', 'bpf_arg_type', 'bpf_return_type', 'bpf_type_flag', 'audit_nfcfgop', 'trace_iterator_bits', 'trace_iterator_flags', 'filter_pred_fn', 'bpf_dynptr_type', 'skb_drop_reason', 'iter_type', 'lruvec_flags', 'fullness_group', 'class_stat_type', 'req_flag_bits', 'lsm_order', 'nf_hook_ops_type', 'ethtool_link_mode_bit_indices', 'label_flags', 'aa_sfs_type', 'ima_hooks', 'acpi_madt_type', 'intel_cht_wc_models', 'regcache_type', 'twl6030_module_ids', 'phy_state', 'hwmon_temp_attributes', 'hwmon_in_attributes', 'hwmon_curr_attributes', 'flag_bits', 'acpi_preferred_pm_profiles', 'netdev_cmd', 'ethtool_supported_ring_param', 'packet_sock_flags', 'linux_mptcp_mib_field', 'btf_kfunc_hook', 'bpf_struct_ops_state', 'transparent_hugepage_flag', 'blk_default_limits', 'scsi_ml_status', 'vcap_type', 'vcap_keyfield_set', 'vcap_key_field', 'vcap_actionfield_set', 'vcap_action_field', 'hwmon_chip_attributes', 'hwmon_fan_attributes', 'batadv_packettype', 'membarrier_cmd', 'hist_field_fn', 'bpf_stack_slot_type', 'kfunc_ptr_arg_type', 'special_kfunc_type', 'scan_result', 'apparmor_notif_type', 'tpm2_cc_attrs', 'nl80211_ext_feature_index', 'shmem_param', 'prio_policy', 'opal_uid', 'ieee_attrs']
+Reasons Kind.ENUM (3): [('Elem added', 69), ('Elem removed', 21), ('Value changed', 41)]
+fault_flag
+	Elem added
+		FAULT_FLAG_VMA_LOCK                     : 4096
+cpuhp_state
+	Elem added
+		CPUHP_BP_KICK_AP                        : 93
+		CPUHP_AP_HYPERV_ONLINE                  : 153
+		CPUHP_AP_KVM_ONLINE                     : 154
+	Elem removed
+		CPUHP_AP_KVM_STARTING                   : 141
+		CPUHP_AP_KVM_ARM_VGIC_INIT_STARTING     : 142
+		CPUHP_AP_KVM_ARM_VGIC_STARTING          : 143
+		CPUHP_AP_KVM_ARM_TIMER_STARTING         : 144
+	Value changed
+		CPUHP_BRINGUP_CPU                       : 93 -> 94
+		CPUHP_AP_IDLE_DEAD                      : 94 -> 95
+		CPUHP_AP_OFFLINE                        : 95 -> 96
+		CPUHP_AP_CACHECTRL_STARTING             : 96 -> 97
+		CPUHP_AP_SCHED_STARTING                 : 97 -> 98
+		CPUHP_AP_RCUTREE_DYING                  : 98 -> 99
+		CPUHP_AP_CPU_PM_STARTING                : 99 -> 100
+		CPUHP_AP_IRQ_GIC_STARTING               : 100 -> 101
+		CPUHP_AP_IRQ_HIP04_STARTING             : 101 -> 102
+		CPUHP_AP_IRQ_APPLE_AIC_STARTING         : 102 -> 103
+		CPUHP_AP_IRQ_ARMADA_XP_STARTING         : 103 -> 104
+		CPUHP_AP_IRQ_BCM2836_STARTING           : 104 -> 105
+		CPUHP_AP_IRQ_MIPS_GIC_STARTING          : 105 -> 106
+		CPUHP_AP_IRQ_RISCV_STARTING             : 106 -> 107
+		CPUHP_AP_IRQ_LOONGARCH_STARTING         : 107 -> 108
+		CPUHP_AP_IRQ_SIFIVE_PLIC_STARTING       : 108 -> 109
+		CPUHP_AP_ARM_MVEBU_COHERENCY            : 109 -> 110
+		CPUHP_AP_MICROCODE_LOADER               : 110 -> 111
+		CPUHP_AP_PERF_X86_AMD_UNCORE_STARTING   : 111 -> 112
+		CPUHP_AP_PERF_X86_STARTING              : 112 -> 113
+		CPUHP_AP_PERF_X86_AMD_IBS_STARTING      : 113 -> 114
+		CPUHP_AP_PERF_X86_CQM_STARTING          : 114 -> 115
+		CPUHP_AP_PERF_X86_CSTATE_STARTING       : 115 -> 116
+		CPUHP_AP_PERF_XTENSA_STARTING           : 116 -> 117
+		CPUHP_AP_MIPS_OP_LOONGSON3_STARTING     : 117 -> 118
+		CPUHP_AP_ARM_VFP_STARTING               : 118 -> 119
+		CPUHP_AP_ARM64_DEBUG_MONITORS_STARTING  : 119 -> 120
+		CPUHP_AP_PERF_ARM_HW_BREAKPOINT_STARTING: 120 -> 121
+		CPUHP_AP_PERF_ARM_ACPI_STARTING         : 121 -> 122
+		CPUHP_AP_PERF_ARM_STARTING              : 122 -> 123
+		CPUHP_AP_PERF_RISCV_STARTING            : 123 -> 124
+		CPUHP_AP_ARM_L2X0_STARTING              : 124 -> 125
+		CPUHP_AP_EXYNOS4_MCT_TIMER_STARTING     : 125 -> 126
+		CPUHP_AP_ARM_ARCH_TIMER_STARTING        : 126 -> 127
+		CPUHP_AP_ARM_GLOBAL_TIMER_STARTING      : 127 -> 128
+		CPUHP_AP_JCORE_TIMER_STARTING           : 128 -> 129
+		CPUHP_AP_ARM_TWD_STARTING               : 129 -> 130
+		CPUHP_AP_QCOM_TIMER_STARTING            : 130 -> 131
+		CPUHP_AP_TEGRA_TIMER_STARTING           : 131 -> 132
+		CPUHP_AP_ARMADA_TIMER_STARTING          : 132 -> 133
+		CPUHP_AP_MARCO_TIMER_STARTING           : 133 -> 134
+		CPUHP_AP_MIPS_GIC_TIMER_STARTING        : 134 -> 135
+		CPUHP_AP_ARC_TIMER_STARTING             : 135 -> 136
+		CPUHP_AP_RISCV_TIMER_STARTING           : 136 -> 137
+		CPUHP_AP_CLINT_TIMER_STARTING           : 137 -> 138
+		CPUHP_AP_CSKY_TIMER_STARTING            : 138 -> 139
+		CPUHP_AP_TI_GP_TIMER_STARTING           : 139 -> 140
+		CPUHP_AP_HYPERV_TIMER_STARTING          : 140 -> 141
+		CPUHP_AP_DUMMY_TIMER_STARTING           : 145 -> 142
+		CPUHP_AP_ARM_XEN_STARTING               : 146 -> 143
+		CPUHP_AP_ARM_CORESIGHT_STARTING         : 147 -> 144
+		CPUHP_AP_ARM_CORESIGHT_CTI_STARTING     : 148 -> 145
+		CPUHP_AP_ARM64_ISNDEP_STARTING          : 149 -> 146
+		CPUHP_AP_SMPCFD_DYING                   : 150 -> 147
+		CPUHP_AP_X86_TBOOT_DYING                : 151 -> 148
+		CPUHP_AP_ARM_CACHE_B15_RAC_DYING        : 152 -> 149
+		CPUHP_AP_ONLINE                         : 153 -> 150
+		CPUHP_TEARDOWN_CPU                      : 154 -> 151
+		CPUHP_AP_ONLINE_IDLE                    : 155 -> 152
+		CPUHP_AP_SCHED_WAIT_EMPTY               : 156 -> 155
+		CPUHP_AP_SMPBOOT_THREADS                : 157 -> 156
+		CPUHP_AP_X86_VDSO_VMA_ONLINE            : 158 -> 157
+		CPUHP_AP_IRQ_AFFINITY_ONLINE            : 159 -> 158
+		CPUHP_AP_BLK_MQ_ONLINE                  : 160 -> 159
+		CPUHP_AP_ARM_MVEBU_SYNC_CLOCKS          : 161 -> 160
+		CPUHP_AP_X86_INTEL_EPB_ONLINE           : 162 -> 161
+		CPUHP_AP_PERF_ONLINE                    : 163 -> 162
+		CPUHP_AP_PERF_X86_ONLINE                : 164 -> 163
+		CPUHP_AP_PERF_X86_UNCORE_ONLINE         : 165 -> 164
+		CPUHP_AP_PERF_X86_AMD_UNCORE_ONLINE     : 166 -> 165
+		CPUHP_AP_PERF_X86_AMD_POWER_ONLINE      : 167 -> 166
+		CPUHP_AP_PERF_X86_RAPL_ONLINE           : 168 -> 167
+		CPUHP_AP_PERF_X86_CQM_ONLINE            : 169 -> 168
+		CPUHP_AP_PERF_X86_CSTATE_ONLINE         : 170 -> 169
+		CPUHP_AP_PERF_X86_IDXD_ONLINE           : 171 -> 170
+		CPUHP_AP_PERF_S390_CF_ONLINE            : 172 -> 171
+		CPUHP_AP_PERF_S390_SF_ONLINE            : 173 -> 172
+		CPUHP_AP_PERF_ARM_CCI_ONLINE            : 174 -> 173
+		CPUHP_AP_PERF_ARM_CCN_ONLINE            : 175 -> 174
+		CPUHP_AP_PERF_ARM_HISI_CPA_ONLINE       : 176 -> 175
+		CPUHP_AP_PERF_ARM_HISI_DDRC_ONLINE      : 177 -> 176
+		CPUHP_AP_PERF_ARM_HISI_HHA_ONLINE       : 178 -> 177
+		CPUHP_AP_PERF_ARM_HISI_L3_ONLINE        : 179 -> 178
+		CPUHP_AP_PERF_ARM_HISI_PA_ONLINE        : 180 -> 179
+		CPUHP_AP_PERF_ARM_HISI_SLLC_ONLINE      : 181 -> 180
+		CPUHP_AP_PERF_ARM_HISI_PCIE_PMU_ONLINE  : 182 -> 181
+		CPUHP_AP_PERF_ARM_HNS3_PMU_ONLINE       : 183 -> 182
+		CPUHP_AP_PERF_ARM_L2X0_ONLINE           : 184 -> 183
+		CPUHP_AP_PERF_ARM_QCOM_L2_ONLINE        : 185 -> 184
+		CPUHP_AP_PERF_ARM_QCOM_L3_ONLINE        : 186 -> 185
+		CPUHP_AP_PERF_ARM_APM_XGENE_ONLINE      : 187 -> 186
+		CPUHP_AP_PERF_ARM_CAVIUM_TX2_UNCORE_ONLINE: 188 -> 187
+		CPUHP_AP_PERF_ARM_MARVELL_CN10K_DDR_ONLINE: 189 -> 188
+		CPUHP_AP_PERF_POWERPC_NEST_IMC_ONLINE   : 190 -> 189
+		CPUHP_AP_PERF_POWERPC_CORE_IMC_ONLINE   : 191 -> 190
+		CPUHP_AP_PERF_POWERPC_THREAD_IMC_ONLINE : 192 -> 191
+		CPUHP_AP_PERF_POWERPC_TRACE_IMC_ONLINE  : 193 -> 192
+		CPUHP_AP_PERF_POWERPC_HV_24x7_ONLINE    : 194 -> 193
+		CPUHP_AP_PERF_POWERPC_HV_GPCI_ONLINE    : 195 -> 194
+		CPUHP_AP_PERF_CSKY_ONLINE               : 196 -> 195
+		CPUHP_AP_WATCHDOG_ONLINE                : 197 -> 196
+		CPUHP_AP_WORKQUEUE_ONLINE               : 198 -> 197
+		CPUHP_AP_RANDOM_ONLINE                  : 199 -> 198
+		CPUHP_AP_RCUTREE_ONLINE                 : 200 -> 199
+		CPUHP_AP_BASE_CACHEINFO_ONLINE          : 201 -> 200
+		CPUHP_AP_ONLINE_DYN                     : 202 -> 201
+		CPUHP_AP_ONLINE_DYN_END                 : 232 -> 231
+		CPUHP_AP_MM_DEMOTION_ONLINE             : 233 -> 232
+		CPUHP_AP_X86_HPET_ONLINE                : 234 -> 233
+		CPUHP_AP_X86_KVM_CLK_ONLINE             : 235 -> 234
+		CPUHP_AP_ACTIVE                         : 236 -> 235
+		CPUHP_ONLINE                            : 237 -> 236
+flow_dissector_key_id
+	Elem added
+		FLOW_DISSECTOR_KEY_CFM                  : 31
+	Value changed
+		FLOW_DISSECTOR_KEY_MAX                  : 31 -> 32
+pageflags
+	Elem removed
+		PG_slob_free                            : 13
+cc_vendor
+	Elem removed
+		CC_VENDOR_HYPERV                        : 2
+	Value changed
+		CC_VENDOR_INTEL                         : 3 -> 2
+zone_stat_item
+	Elem added
+		NR_UNACCEPTED                           : 11
+	Value changed
+		NR_VM_ZONE_STAT_ITEMS                   : 11 -> 12
+extra_reg_type
+	Elem added
+		EXTRA_REG_SNOOP_0                       : 5
+		EXTRA_REG_SNOOP_1                       : 6
+	Value changed
+		EXTRA_REG_MAX                           : 5 -> 7
+kvm_apicv_inhibit
+	Elem added
+		APICV_INHIBIT_REASON_PHYSICAL_ID_ALIASED: 4
+		APICV_INHIBIT_REASON_LOGICAL_ID_ALIASED : 11
+	Value changed
+		APICV_INHIBIT_REASON_APIC_ID_MODIFIED   : 4 -> 5
+		APICV_INHIBIT_REASON_APIC_BASE_MODIFIED : 5 -> 6
+		APICV_INHIBIT_REASON_NESTED             : 6 -> 7
+		APICV_INHIBIT_REASON_IRQWIN             : 7 -> 8
+		APICV_INHIBIT_REASON_PIT_REINJ          : 8 -> 9
+		APICV_INHIBIT_REASON_SEV                : 9 -> 10
+iommu_cap
+	Elem added
+		IOMMU_CAP_DEFERRED_FLUSH                : 4
+	Elem removed
+		IOMMU_CAP_INTR_REMAP                    : 1
+	Value changed
+		IOMMU_CAP_NOEXEC                        : 2 -> 1
+		IOMMU_CAP_PRE_BOOT_PROTECTION           : 3 -> 2
+		IOMMU_CAP_ENFORCE_CACHE_COHERENCY       : 4 -> 3
+energy_perf_value_index
+	Elem added
+		EPB_INDEX_PERFORMANCE                   : 0
+		EPB_INDEX_BALANCE_PERFORMANCE           : 1
+		EPB_INDEX_NORMAL                        : 2
+		EPB_INDEX_BALANCE_POWERSAVE             : 3
+		EPB_INDEX_POWERSAVE                     : 4
+	Elem removed
+		EPP_INDEX_DEFAULT                       : 0
+		EPP_INDEX_PERFORMANCE                   : 1
+		EPP_INDEX_BALANCE_PERFORMANCE           : 2
+		EPP_INDEX_BALANCE_POWERSAVE             : 3
+		EPP_INDEX_POWERSAVE                     : 4
+resctrl_res_level
+	Elem added
+		RDT_RESOURCE_SMBA                       : 3
+	Value changed
+		RDT_NUM_RESOURCES                       : 3 -> 4
+bpf_prog_type
+	Elem added
+		BPF_PROG_TYPE_NETFILTER                 : 32
+bpf_attach_type
+	Elem added
+		BPF_STRUCT_OPS                          : 44
+		BPF_NETFILTER                           : 45
+	Value changed
+		__MAX_BPF_ATTACH_TYPE                   : 44 -> 46
+bpf_link_type
+	Elem added
+		BPF_LINK_TYPE_NETFILTER                 : 10
+	Value changed
+		MAX_BPF_LINK_TYPE                       : 10 -> 11
+btf_field_type
+	Elem added
+		BPF_REFCOUNT                            : 256
+bpf_reg_type
+	Value changed
+		__BPF_REG_TYPE_LIMIT                    : 8388607 -> 33554431
+bpf_arg_type
+	Value changed
+		__BPF_ARG_TYPE_LIMIT                    : 8388607 -> 33554431
+bpf_return_type
+	Value changed
+		__BPF_RET_TYPE_LIMIT                    : 8388607 -> 33554431
+bpf_type_flag
+	Elem added
+		DYNPTR_TYPE_SKB                         : 8388608
+		DYNPTR_TYPE_XDP                         : 16777216
+	Value changed
+		__BPF_TYPE_FLAG_MAX                     : 4194305 -> 16777217
+		__BPF_TYPE_LAST_FLAG                    : 4194304 -> 16777216
+audit_nfcfgop
+	Elem added
+		AUDIT_NFT_OP_SETELEM_RESET              : 19
+		AUDIT_NFT_OP_RULE_RESET                 : 20
+	Value changed
+		AUDIT_NFT_OP_INVALID                    : 19 -> 21
+trace_iterator_bits
+	Elem added
+		TRACE_ITER_FIELDS_BIT                   : 8
+	Value changed
+		TRACE_ITER_PRINTK_BIT                   : 8 -> 9
+		TRACE_ITER_ANNOTATE_BIT                 : 9 -> 10
+		TRACE_ITER_USERSTACKTRACE_BIT           : 10 -> 11
+		TRACE_ITER_SYM_USEROBJ_BIT              : 11 -> 12
+		TRACE_ITER_PRINTK_MSGONLY_BIT           : 12 -> 13
+		TRACE_ITER_CONTEXT_INFO_BIT             : 13 -> 14
+		TRACE_ITER_LATENCY_FMT_BIT              : 14 -> 15
+		TRACE_ITER_RECORD_CMD_BIT               : 15 -> 16
+		TRACE_ITER_RECORD_TGID_BIT              : 16 -> 17
+		TRACE_ITER_OVERWRITE_BIT                : 17 -> 18
+		TRACE_ITER_STOP_ON_FREE_BIT             : 18 -> 19
+		TRACE_ITER_IRQ_INFO_BIT                 : 19 -> 20
+		TRACE_ITER_MARKERS_BIT                  : 20 -> 21
+		TRACE_ITER_EVENT_FORK_BIT               : 21 -> 22
+		TRACE_ITER_PAUSE_ON_TRACE_BIT           : 22 -> 23
+		TRACE_ITER_HASH_PTR_BIT                 : 23 -> 24
+		TRACE_ITER_FUNCTION_BIT                 : 24 -> 25
+		TRACE_ITER_FUNC_FORK_BIT                : 25 -> 26
+		TRACE_ITER_DISPLAY_GRAPH_BIT            : 26 -> 27
+		TRACE_ITER_STACKTRACE_BIT               : 27 -> 28
+		TRACE_ITER_LAST_BIT                     : 28 -> 29
+trace_iterator_flags
+	Elem added
+		TRACE_ITER_FIELDS                       : 256
+	Value changed
+		TRACE_ITER_PRINTK                       : 256 -> 512
+		TRACE_ITER_ANNOTATE                     : 512 -> 1024
+		TRACE_ITER_USERSTACKTRACE               : 1024 -> 2048
+		TRACE_ITER_SYM_USEROBJ                  : 2048 -> 4096
+		TRACE_ITER_PRINTK_MSGONLY               : 4096 -> 8192
+		TRACE_ITER_CONTEXT_INFO                 : 8192 -> 16384
+		TRACE_ITER_LATENCY_FMT                  : 16384 -> 32768
+		TRACE_ITER_RECORD_CMD                   : 32768 -> 65536
+		TRACE_ITER_RECORD_TGID                  : 65536 -> 131072
+		TRACE_ITER_OVERWRITE                    : 131072 -> 262144
+		TRACE_ITER_STOP_ON_FREE                 : 262144 -> 524288
+		TRACE_ITER_IRQ_INFO                     : 524288 -> 1048576
+		TRACE_ITER_MARKERS                      : 1048576 -> 2097152
+		TRACE_ITER_EVENT_FORK                   : 2097152 -> 4194304
+		TRACE_ITER_PAUSE_ON_TRACE               : 4194304 -> 8388608
+		TRACE_ITER_HASH_PTR                     : 8388608 -> 16777216
+		TRACE_ITER_FUNCTION                     : 16777216 -> 33554432
+		TRACE_ITER_FUNC_FORK                    : 33554432 -> 67108864
+		TRACE_ITER_DISPLAY_GRAPH                : 67108864 -> 134217728
+		TRACE_ITER_STACKTRACE                   : 134217728 -> 268435456
+filter_pred_fn
+	Elem added
+		FILTER_PRED_FN_FUNCTION                 : 20
+	Value changed
+		FILTER_PRED_FN_                         : 20 -> 21
+		FILTER_PRED_TEST_VISITED                : 21 -> 22
+bpf_dynptr_type
+	Elem added
+		BPF_DYNPTR_TYPE_SKB                     : 3
+		BPF_DYNPTR_TYPE_XDP                     : 4
+skb_drop_reason
+	Elem added
+		SKB_DROP_REASON_TCP_MINTTL              : 69
+		SKB_DROP_REASON_IPV6_BAD_EXTHDR         : 70
+		SKB_DROP_REASON_IPV6_NDISC_FRAG         : 71
+		SKB_DROP_REASON_IPV6_NDISC_HOP_LIMIT    : 72
+		SKB_DROP_REASON_IPV6_NDISC_BAD_CODE     : 73
+		SKB_DROP_REASON_IPV6_NDISC_BAD_OPTIONS  : 74
+		SKB_DROP_REASON_IPV6_NDISC_NS_OTHERHOST : 75
+		SKB_DROP_REASON_SUBSYS_MASK             : -65536
+	Value changed
+		SKB_DROP_REASON_MAX                     : 69 -> 76
+iter_type
+	Elem removed
+		ITER_PIPE                               : 3
+	Value changed
+		ITER_XARRAY                             : 4 -> 3
+		ITER_DISCARD                            : 5 -> 4
+		ITER_UBUF                               : 6 -> 5
+lruvec_flags
+	Elem added
+		LRUVEC_CGROUP_CONGESTED                 : 0
+		LRUVEC_NODE_CONGESTED                   : 1
+	Elem removed
+		LRUVEC_CONGESTED                        : 0
+fullness_group
+	Elem added
+		ZS_INUSE_RATIO_0                        : 0
+		ZS_INUSE_RATIO_10                       : 1
+		ZS_INUSE_RATIO_99                       : 10
+		ZS_INUSE_RATIO_100                      : 11
+		NR_FULLNESS_GROUPS                      : 12
+	Elem removed
+		ZS_EMPTY                                : 0
+		ZS_ALMOST_EMPTY                         : 1
+		ZS_ALMOST_FULL                          : 2
+		ZS_FULL                                 : 3
+		NR_ZS_FULLNESS                          : 4
+class_stat_type
+	Elem added
+		ZS_OBJS_ALLOCATED                       : 12
+		ZS_OBJS_INUSE                           : 13
+		NR_CLASS_STAT_TYPES                     : 14
+	Elem removed
+		CLASS_EMPTY                             : 0
+		CLASS_ALMOST_EMPTY                      : 1
+		CLASS_ALMOST_FULL                       : 2
+		CLASS_FULL                              : 3
+		OBJ_ALLOCATED                           : 4
+		OBJ_USED                                : 5
+		NR_ZS_STAT_TYPE                         : 6
+req_flag_bits
+	Elem added
+		__REQ_FS_PRIVATE                        : 26
+	Elem removed
+		__REQ_CGROUP_PUNT                       : 22
+	Value changed
+		__REQ_POLLED                            : 23 -> 22
+		__REQ_ALLOC_CACHE                       : 24 -> 23
+		__REQ_SWAP                              : 25 -> 24
+		__REQ_DRV                               : 26 -> 25
+lsm_order
+	Elem added
+		LSM_ORDER_LAST                          : 1
+nf_hook_ops_type
+	Elem added
+		NF_HOOK_OP_BPF                          : 2
+ethtool_link_mode_bit_indices
+	Elem added
+		ETHTOOL_LINK_MODE_10baseT1S_Full_BIT    : 99
+		ETHTOOL_LINK_MODE_10baseT1S_Half_BIT    : 100
+		ETHTOOL_LINK_MODE_10baseT1S_P2MP_Half_BIT: 101
+	Value changed
+		__ETHTOOL_LINK_MODE_MASK_NBITS          : 99 -> 102
+label_flags
+	Elem added
+		FLAG_INTERRUPTIBLE                      : 4096
+	Elem removed
+		FLAG_RENAMED                            : 4096
+aa_sfs_type
+	Elem added
+		AA_SFS_TYPE_INTPTR                      : 3
+	Value changed
+		AA_SFS_TYPE_FOPS                        : 3 -> 4
+		AA_SFS_TYPE_DIR                         : 4 -> 5
+ima_hooks
+	Elem added
+		MMAP_CHECK_REQPROT                      : 3
+	Value changed
+		BPRM_CHECK                              : 3 -> 4
+		CREDS_CHECK                             : 4 -> 5
+		POST_SETATTR                            : 5 -> 6
+		MODULE_CHECK                            : 6 -> 7
+		FIRMWARE_CHECK                          : 7 -> 8
+		KEXEC_KERNEL_CHECK                      : 8 -> 9
+		KEXEC_INITRAMFS_CHECK                   : 9 -> 10
+		POLICY_CHECK                            : 10 -> 11
+		KEXEC_CMDLINE                           : 11 -> 12
+		KEY_CHECK                               : 12 -> 13
+		CRITICAL_DATA                           : 13 -> 14
+		SETXATTR_CHECK                          : 14 -> 15
+		MAX_CHECK                               : 15 -> 16
+acpi_madt_type
+	Elem added
+		ACPI_MADT_TYPE_RINTC                    : 24
+	Value changed
+		ACPI_MADT_TYPE_RESERVED                 : 24 -> 25
+intel_cht_wc_models
+	Elem added
+		INTEL_CHT_WC_LENOVO_YT3_X90             : 4
+regcache_type
+	Elem added
+		REGCACHE_MAPLE                          : 3
+	Elem removed
+		REGCACHE_COMPRESSED                     : 2
+	Value changed
+		REGCACHE_FLAT                           : 3 -> 2
+twl6030_module_ids
+	Elem added
+		TWL6032_MODULE_CHARGE                   : 14
+	Value changed
+		TWL6030_MODULE_LAST                     : 14 -> 15
+phy_state
+	Elem added
+		PHY_ERROR                               : 3
+	Value changed
+		PHY_UP                                  : 3 -> 4
+		PHY_RUNNING                             : 4 -> 5
+		PHY_NOLINK                              : 5 -> 6
+		PHY_CABLETEST                           : 6 -> 7
+hwmon_temp_attributes
+	Elem added
+		hwmon_temp_beep                         : 27
+hwmon_in_attributes
+	Elem added
+		hwmon_in_beep                           : 18
+hwmon_curr_attributes
+	Elem added
+		hwmon_curr_beep                         : 18
+flag_bits
+	Elem added
+		Holder                                  : 19
+acpi_preferred_pm_profiles
+	Elem added
+		NR_PM_PROFILES                          : 9
+netdev_cmd
+	Elem added
+		NETDEV_XDP_FEAT_CHANGE                  : 40
+ethtool_supported_ring_param
+	Elem added
+		ETHTOOL_RING_USE_RX_PUSH                : 8
+		ETHTOOL_RING_USE_TX_PUSH_BUF_LEN        : 16
+packet_sock_flags
+	Elem added
+		PACKET_SOCK_TX_HAS_OFF                  : 2
+		PACKET_SOCK_TP_LOSS                     : 3
+		PACKET_SOCK_RUNNING                     : 4
+		PACKET_SOCK_PRESSURE                    : 5
+		PACKET_SOCK_QDISC_BYPASS                : 6
+linux_mptcp_mib_field
+	Elem added
+		MPTCP_MIB_ADDADDRTX                     : 26
+		MPTCP_MIB_ADDADDRTXDROP                 : 27
+		MPTCP_MIB_ECHOADDTX                     : 29
+		MPTCP_MIB_ECHOADDTXDROP                 : 30
+		MPTCP_MIB_RMADDRTX                      : 40
+		MPTCP_MIB_RMADDRTXDROP                  : 41
+	Value changed
+		MPTCP_MIB_ECHOADD                       : 26 -> 28
+		MPTCP_MIB_PORTADD                       : 27 -> 31
+		MPTCP_MIB_ADDADDRDROP                   : 28 -> 32
+		MPTCP_MIB_JOINPORTSYNRX                 : 29 -> 33
+		MPTCP_MIB_JOINPORTSYNACKRX              : 30 -> 34
+		MPTCP_MIB_JOINPORTACKRX                 : 31 -> 35
+		MPTCP_MIB_MISMATCHPORTSYNRX             : 32 -> 36
+		MPTCP_MIB_MISMATCHPORTACKRX             : 33 -> 37
+		MPTCP_MIB_RMADDR                        : 34 -> 38
+		MPTCP_MIB_RMADDRDROP                    : 35 -> 39
+		MPTCP_MIB_RMSUBFLOW                     : 36 -> 42
+		MPTCP_MIB_MPPRIOTX                      : 37 -> 43
+		MPTCP_MIB_MPPRIORX                      : 38 -> 44
+		MPTCP_MIB_MPFAILTX                      : 39 -> 45
+		MPTCP_MIB_MPFAILRX                      : 40 -> 46
+		MPTCP_MIB_MPFASTCLOSETX                 : 41 -> 47
+		MPTCP_MIB_MPFASTCLOSERX                 : 42 -> 48
+		MPTCP_MIB_MPRSTTX                       : 43 -> 49
+		MPTCP_MIB_MPRSTRX                       : 44 -> 50
+		MPTCP_MIB_RCVPRUNED                     : 45 -> 51
+		MPTCP_MIB_SUBFLOWSTALE                  : 46 -> 52
+		MPTCP_MIB_SUBFLOWRECOVER                : 47 -> 53
+		MPTCP_MIB_SNDWNDSHARED                  : 48 -> 54
+		MPTCP_MIB_RCVWNDSHARED                  : 49 -> 55
+		MPTCP_MIB_RCVWNDCONFLICTUPDATE          : 50 -> 56
+		MPTCP_MIB_RCVWNDCONFLICT                : 51 -> 57
+		__MPTCP_MIB_MAX                         : 52 -> 58
+btf_kfunc_hook
+	Elem added
+		BTF_KFUNC_HOOK_CGROUP_SKB               : 7
+		BTF_KFUNC_HOOK_SCHED_ACT                : 8
+		BTF_KFUNC_HOOK_SK_SKB                   : 9
+		BTF_KFUNC_HOOK_SOCKET_FILTER            : 10
+		BTF_KFUNC_HOOK_LWT                      : 11
+		BTF_KFUNC_HOOK_NETFILTER                : 12
+	Value changed
+		BTF_KFUNC_HOOK_MAX                      : 7 -> 13
+bpf_struct_ops_state
+	Elem added
+		BPF_STRUCT_OPS_STATE_READY              : 3
+transparent_hugepage_flag
+	Elem added
+		TRANSPARENT_HUGEPAGE_UNSUPPORTED        : 0
+	Elem removed
+		TRANSPARENT_HUGEPAGE_NEVER_DAX          : 0
+blk_default_limits
+	Elem removed
+		BLK_DEF_MAX_SECTORS                     : 2560
+scsi_ml_status
+	Elem added
+		SCSIML_STAT_DL_TIMEOUT                  : 5
+vcap_type
+	Elem added
+		VCAP_TYPE_ES0                           : 0
+		VCAP_TYPE_IS1                           : 3
+	Value changed
+		VCAP_TYPE_ES2                           : 0 -> 1
+		VCAP_TYPE_IS0                           : 1 -> 2
+		VCAP_TYPE_IS2                           : 2 -> 4
+		VCAP_TYPE_MAX                           : 3 -> 5
+vcap_keyfield_set
+	Elem added
+		VCAP_KFS_5TUPLE_IP4                     : 1
+		VCAP_KFS_5TUPLE_IP6                     : 2
+		VCAP_KFS_7TUPLE                         : 3
+		VCAP_KFS_DBL_VID                        : 5
+		VCAP_KFS_DMAC_VID                       : 6
+		VCAP_KFS_ISDX                           : 16
+		VCAP_KFS_NORMAL_IP6                     : 24
+		VCAP_KFS_RT                             : 27
+		VCAP_KFS_VID                            : 30
+	Elem removed
+		VCAP_KFS_MLL                            : 11
+		VCAP_KFS_TRI_VID                        : 16
+	Value changed
+		VCAP_KFS_ARP                            : 1 -> 4
+		VCAP_KFS_ETAG                           : 2 -> 7
+		VCAP_KFS_IP4_OTHER                      : 3 -> 8
+		VCAP_KFS_IP4_TCP_UDP                    : 4 -> 9
+		VCAP_KFS_IP4_VID                        : 5 -> 10
+		VCAP_KFS_IP6_STD                        : 6 -> 12
+		VCAP_KFS_IP6_VID                        : 7 -> 14
+		VCAP_KFS_IP_7TUPLE                      : 8 -> 15
+		VCAP_KFS_LL_FULL                        : 9 -> 17
+		VCAP_KFS_MAC_ETYPE                      : 10 -> 18
+		VCAP_KFS_NORMAL                         : 12 -> 21
+		VCAP_KFS_NORMAL_5TUPLE_IP4              : 13 -> 22
+		VCAP_KFS_NORMAL_7TUPLE                  : 14 -> 23
+		VCAP_KFS_PURE_5TUPLE_IP4                : 15 -> 26
+		VCAP_KFS_MAC_LLC                        : 17 -> 19
+		VCAP_KFS_MAC_SNAP                       : 18 -> 20
+		VCAP_KFS_OAM                            : 19 -> 25
+		VCAP_KFS_IP6_TCP_UDP                    : 20 -> 13
+		VCAP_KFS_IP6_OTHER                      : 21 -> 11
+		VCAP_KFS_SMAC_SIP4                      : 22 -> 28
+		VCAP_KFS_SMAC_SIP6                      : 23 -> 29
+vcap_key_field
+	Elem added
+		VCAP_KF_8021CB_R_TAGGED_IS              : 7
+		VCAP_KF_8021Q_TPID                      : 16
+		VCAP_KF_8021Q_VLAN_DBL_TAGGED_IS        : 24
+		VCAP_KF_IF_EGR_PORT_NO                  : 42
+		VCAP_KF_IP_PAYLOAD_S1_IP6               : 52
+		VCAP_KF_L2_MAC                          : 61
+		VCAP_KF_L3_IP6_DIP_MSB                  : 80
+		VCAP_KF_L3_IP6_SIP_MSB                  : 82
+		VCAP_KF_LOOKUP_INDEX                    : 106
+		VCAP_KF_MIRROR_PROBE                    : 108
+		VCAP_KF_PDU_TYPE                        : 117
+		VCAP_KF_RTP_ID                          : 119
+		VCAP_KF_RT_FRMID                        : 120
+		VCAP_KF_RT_TYPE                         : 121
+		VCAP_KF_RT_VLAN_IDX                     : 122
+	Elem removed
+		VCAP_KF_DST_ENTRY                       : 33
+		VCAP_KF_ETYPE_MPLS                      : 37
+		VCAP_KF_L3_DMAC_DIP_MATCH               : 59
+		VCAP_KF_L3_SMAC_SIP_MATCH               : 73
+		VCAP_KF_MIRROR_ENA                      : 92
+	Value changed
+		VCAP_KF_8021Q_DEI0                      : 7 -> 8
+		VCAP_KF_8021Q_DEI1                      : 8 -> 9
+		VCAP_KF_8021Q_DEI2                      : 9 -> 10
+		VCAP_KF_8021Q_DEI_CLS                   : 10 -> 11
+		VCAP_KF_8021Q_PCP0                      : 11 -> 12
+		VCAP_KF_8021Q_PCP1                      : 12 -> 13
+		VCAP_KF_8021Q_PCP2                      : 13 -> 14
+		VCAP_KF_8021Q_PCP_CLS                   : 14 -> 15
+		VCAP_KF_8021Q_TPID0                     : 15 -> 17
+		VCAP_KF_8021Q_TPID1                     : 16 -> 18
+		VCAP_KF_8021Q_TPID2                     : 17 -> 19
+		VCAP_KF_8021Q_VID0                      : 18 -> 20
+		VCAP_KF_8021Q_VID1                      : 19 -> 21
+		VCAP_KF_8021Q_VID2                      : 20 -> 22
+		VCAP_KF_8021Q_VID_CLS                   : 21 -> 23
+		VCAP_KF_8021Q_VLAN_TAGGED_IS            : 22 -> 25
+		VCAP_KF_8021Q_VLAN_TAGS                 : 23 -> 26
+		VCAP_KF_ACL_GRP_ID                      : 24 -> 27
+		VCAP_KF_ARP_ADDR_SPACE_OK_IS            : 25 -> 28
+		VCAP_KF_ARP_LEN_OK_IS                   : 26 -> 29
+		VCAP_KF_ARP_OPCODE                      : 27 -> 30
+		VCAP_KF_ARP_OPCODE_UNKNOWN_IS           : 28 -> 31
+		VCAP_KF_ARP_PROTO_SPACE_OK_IS           : 29 -> 32
+		VCAP_KF_ARP_SENDER_MATCH_IS             : 30 -> 33
+		VCAP_KF_ARP_TGT_MATCH_IS                : 31 -> 34
+		VCAP_KF_COSID_CLS                       : 32 -> 35
+		VCAP_KF_ES0_ISDX_KEY_ENA                : 34 -> 36
+		VCAP_KF_ETYPE                           : 35 -> 37
+		VCAP_KF_ETYPE_LEN_IS                    : 36 -> 38
+		VCAP_KF_IF_EGR_PORT_MASK                : 38 -> 40
+		VCAP_KF_IF_EGR_PORT_MASK_RNG            : 39 -> 41
+		VCAP_KF_IF_IGR_PORT                     : 40 -> 43
+		VCAP_KF_IF_IGR_PORT_MASK                : 41 -> 44
+		VCAP_KF_IF_IGR_PORT_MASK_L3             : 42 -> 45
+		VCAP_KF_IF_IGR_PORT_MASK_RNG            : 43 -> 46
+		VCAP_KF_IF_IGR_PORT_MASK_SEL            : 44 -> 47
+		VCAP_KF_IF_IGR_PORT_SEL                 : 45 -> 48
+		VCAP_KF_IP4_IS                          : 46 -> 49
+		VCAP_KF_IP_MC_IS                        : 47 -> 50
+		VCAP_KF_IP_PAYLOAD_5TUPLE               : 48 -> 51
+		VCAP_KF_IP_SNAP_IS                      : 49 -> 53
+		VCAP_KF_ISDX_CLS                        : 50 -> 54
+		VCAP_KF_ISDX_GT0_IS                     : 51 -> 55
+		VCAP_KF_L2_BC_IS                        : 52 -> 56
+		VCAP_KF_L2_DMAC                         : 53 -> 57
+		VCAP_KF_L2_FWD_IS                       : 54 -> 59
+		VCAP_KF_L2_MC_IS                        : 55 -> 62
+		VCAP_KF_L2_PAYLOAD_ETYPE                : 56 -> 66
+		VCAP_KF_L2_SMAC                         : 57 -> 67
+		VCAP_KF_L3_DIP_EQ_SIP_IS                : 58 -> 69
+		VCAP_KF_L3_DPL_CLS                      : 60 -> 70
+		VCAP_KF_L3_DSCP                         : 61 -> 71
+		VCAP_KF_L3_DST_IS                       : 62 -> 72
+		VCAP_KF_L3_FRAGMENT_TYPE                : 63 -> 74
+		VCAP_KF_L3_FRAG_INVLD_L4_LEN            : 64 -> 75
+		VCAP_KF_L3_IP4_DIP                      : 65 -> 77
+		VCAP_KF_L3_IP4_SIP                      : 66 -> 78
+		VCAP_KF_L3_IP6_DIP                      : 67 -> 79
+		VCAP_KF_L3_IP6_SIP                      : 68 -> 81
+		VCAP_KF_L3_IP_PROTO                     : 69 -> 83
+		VCAP_KF_L3_OPTIONS_IS                   : 70 -> 84
+		VCAP_KF_L3_PAYLOAD                      : 71 -> 85
+		VCAP_KF_L3_RT_IS                        : 72 -> 86
+		VCAP_KF_L3_TOS                          : 74 -> 87
+		VCAP_KF_L3_TTL_GT0                      : 75 -> 88
+		VCAP_KF_L4_ACK                          : 76 -> 91
+		VCAP_KF_L4_DPORT                        : 77 -> 92
+		VCAP_KF_L4_FIN                          : 78 -> 93
+		VCAP_KF_L4_PAYLOAD                      : 79 -> 94
+		VCAP_KF_L4_PSH                          : 80 -> 95
+		VCAP_KF_L4_RNG                          : 81 -> 96
+		VCAP_KF_L4_RST                          : 82 -> 97
+		VCAP_KF_L4_SEQUENCE_EQ0_IS              : 83 -> 98
+		VCAP_KF_L4_SPORT                        : 84 -> 99
+		VCAP_KF_L4_SPORT_EQ_DPORT_IS            : 85 -> 100
+		VCAP_KF_L4_SYN                          : 86 -> 101
+		VCAP_KF_L4_URG                          : 87 -> 102
+		VCAP_KF_LOOKUP_FIRST_IS                 : 88 -> 103
+		VCAP_KF_LOOKUP_GEN_IDX                  : 89 -> 104
+		VCAP_KF_LOOKUP_GEN_IDX_SEL              : 90 -> 105
+		VCAP_KF_LOOKUP_PAG                      : 91 -> 107
+		VCAP_KF_OAM_CCM_CNTS_EQ0                : 93 -> 109
+		VCAP_KF_OAM_MEL_FLAGS                   : 94 -> 112
+		VCAP_KF_OAM_Y1731_IS                    : 95 -> 116
+		VCAP_KF_PROT_ACTIVE                     : 96 -> 118
+		VCAP_KF_TCP_IS                          : 97 -> 123
+		VCAP_KF_TCP_UDP_IS                      : 98 -> 124
+		VCAP_KF_TYPE                            : 99 -> 125
+		VCAP_KF_HOST_MATCH                      : 100 -> 39
+		VCAP_KF_L2_FRM_TYPE                     : 101 -> 58
+		VCAP_KF_L2_PAYLOAD0                     : 102 -> 63
+		VCAP_KF_L2_PAYLOAD1                     : 103 -> 64
+		VCAP_KF_L2_PAYLOAD2                     : 104 -> 65
+		VCAP_KF_L2_LLC                          : 105 -> 60
+		VCAP_KF_L3_FRAGMENT                     : 106 -> 73
+		VCAP_KF_L3_FRAG_OFS_GT0                 : 107 -> 76
+		VCAP_KF_L2_SNAP                         : 108 -> 68
+		VCAP_KF_L4_1588_DOM                     : 109 -> 89
+		VCAP_KF_L4_1588_VER                     : 110 -> 90
+		VCAP_KF_OAM_MEPID                       : 111 -> 113
+		VCAP_KF_OAM_OPCODE                      : 112 -> 114
+		VCAP_KF_OAM_VER                         : 113 -> 115
+		VCAP_KF_OAM_FLAGS                       : 114 -> 111
+		VCAP_KF_OAM_DETECTED                    : 115 -> 110
+vcap_actionfield_set
+	Elem added
+		VCAP_AFS_ES0                            : 4
+		VCAP_AFS_S1                             : 6
+		VCAP_AFS_VID                            : 8
+	Elem removed
+		VCAP_AFS_MLBS                           : 5
+		VCAP_AFS_MLBS_REDUCED                   : 6
+	Value changed
+		VCAP_AFS_FULL                           : 4 -> 5
+vcap_action_field
+	Elem added
+		VCAP_AF_CPU_QU                          : 7
+		VCAP_AF_CUSTOM_ACE_TYPE_ENA             : 9
+		VCAP_AF_DEI_A_VAL                       : 10
+		VCAP_AF_DEI_B_VAL                       : 11
+		VCAP_AF_DEI_C_VAL                       : 12
+		VCAP_AF_DLR_SEL                         : 15
+		VCAP_AF_DSCP_SEL                        : 19
+		VCAP_AF_ESDX                            : 22
+		VCAP_AF_FWD_SEL                         : 25
+		VCAP_AF_ISDX_ADD_VAL                    : 31
+		VCAP_AF_ISDX_REPLACE_ENA                : 33
+		VCAP_AF_LOOP_ENA                        : 35
+		VCAP_AF_MRP_SEL                         : 46
+		VCAP_AF_OAM_SEL                         : 49
+		VCAP_AF_PCP_A_VAL                       : 52
+		VCAP_AF_PCP_B_VAL                       : 53
+		VCAP_AF_PCP_C_VAL                       : 54
+		VCAP_AF_PIPELINE_ACT                    : 57
+		VCAP_AF_POP_VAL                         : 64
+		VCAP_AF_PUSH_CUSTOMER_TAG               : 66
+		VCAP_AF_PUSH_INNER_TAG                  : 67
+		VCAP_AF_PUSH_OUTER_TAG                  : 68
+		VCAP_AF_SFID_ENA                        : 73
+		VCAP_AF_SFID_VAL                        : 74
+		VCAP_AF_SGID_ENA                        : 75
+		VCAP_AF_SGID_VAL                        : 76
+		VCAP_AF_SWAP_MACS_ENA                   : 77
+		VCAP_AF_TAG_A_DEI_SEL                   : 78
+		VCAP_AF_TAG_A_PCP_SEL                   : 79
+		VCAP_AF_TAG_A_TPID_SEL                  : 80
+		VCAP_AF_TAG_A_VID_SEL                   : 81
+		VCAP_AF_TAG_B_DEI_SEL                   : 82
+		VCAP_AF_TAG_B_PCP_SEL                   : 83
+		VCAP_AF_TAG_B_TPID_SEL                  : 84
+		VCAP_AF_TAG_B_VID_SEL                   : 85
+		VCAP_AF_TAG_C_DEI_SEL                   : 86
+		VCAP_AF_TAG_C_PCP_SEL                   : 87
+		VCAP_AF_TAG_C_TPID_SEL                  : 88
+		VCAP_AF_TAG_C_VID_SEL                   : 89
+		VCAP_AF_UNTAG_VID_ENA                   : 91
+		VCAP_AF_VID_A_VAL                       : 92
+		VCAP_AF_VID_B_VAL                       : 93
+		VCAP_AF_VID_C_VAL                       : 94
+		VCAP_AF_VID_REPLACE_ENA                 : 95
+	Elem removed
+		VCAP_AF_ACL_MAC                         : 1
+		VCAP_AF_ACL_RT_MODE                     : 2
+		VCAP_AF_COSID_ENA                       : 7
+		VCAP_AF_COSID_VAL                       : 8
+		VCAP_AF_CPU_DIS                         : 10
+		VCAP_AF_CPU_ENA                         : 11
+		VCAP_AF_CPU_Q                           : 12
+		VCAP_AF_CUSTOM_ACE_ENA                  : 14
+		VCAP_AF_CUSTOM_ACE_OFFSET               : 15
+		VCAP_AF_DLB_OFFSET                      : 18
+		VCAP_AF_DMAC_OFFSET_ENA                 : 19
+		VCAP_AF_EGR_ACL_ENA                     : 24
+		VCAP_AF_FWD_DIS                         : 26
+		VCAP_AF_FWD_TYPE                        : 28
+		VCAP_AF_GVID_ADD_REPLACE_SEL            : 29
+		VCAP_AF_IGR_ACL_ENA                     : 32
+		VCAP_AF_INJ_MASQ_ENA                    : 33
+		VCAP_AF_INJ_MASQ_LPORT                  : 34
+		VCAP_AF_INJ_MASQ_PORT                   : 35
+		VCAP_AF_IS_INNER_ACL                    : 39
+		VCAP_AF_L3_MAC_UPDATE_DIS               : 40
+		VCAP_AF_LOG_MSG_INTERVAL                : 41
+		VCAP_AF_LPM_AFFIX_ENA                   : 42
+		VCAP_AF_LPM_AFFIX_VAL                   : 43
+		VCAP_AF_LPORT_ENA                       : 44
+		VCAP_AF_MIP_SEL                         : 52
+		VCAP_AF_MPLS_IP_CTRL_ENA                : 55
+		VCAP_AF_MPLS_MEP_ENA                    : 56
+		VCAP_AF_MPLS_MIP_ENA                    : 57
+		VCAP_AF_MPLS_OAM_FLAVOR                 : 58
+		VCAP_AF_MPLS_OAM_TYPE                   : 59
+		VCAP_AF_NUM_VLD_LABELS                  : 60
+		VCAP_AF_NXT_KEY_TYPE                    : 63
+		VCAP_AF_NXT_NORMALIZE                   : 64
+		VCAP_AF_NXT_NORM_W16_OFFSET             : 65
+		VCAP_AF_NXT_NORM_W32_OFFSET             : 66
+		VCAP_AF_NXT_OFFSET_FROM_TYPE            : 67
+		VCAP_AF_NXT_TYPE_AFTER_OFFSET           : 68
+		VCAP_AF_OAM_IP_BFD_ENA                  : 69
+		VCAP_AF_OAM_TWAMP_ENA                   : 70
+		VCAP_AF_OAM_Y1731_SEL                   : 71
+		VCAP_AF_PIPELINE_ACT_SEL                : 76
+		VCAP_AF_PIPELINE_PT_REDUCED             : 79
+		VCAP_AF_PTP_MASTER_SEL                  : 84
+		VCAP_AF_REW_CMD                         : 87
+		VCAP_AF_RLEG_DMAC_CHK_DIS               : 88
+		VCAP_AF_RLEG_STAT_IDX                   : 89
+		VCAP_AF_RSDX_ENA                        : 90
+		VCAP_AF_RSDX_VAL                        : 91
+		VCAP_AF_RSVD_LBL_VAL                    : 92
+		VCAP_AF_RT_SEL                          : 94
+		VCAP_AF_S2_KEY_SEL_ENA                  : 95
+		VCAP_AF_S2_KEY_SEL_IDX                  : 96
+		VCAP_AF_SAM_SEQ_ENA                     : 97
+		VCAP_AF_SIP_IDX                         : 98
+		VCAP_AF_SWAP_MAC_ENA                    : 99
+		VCAP_AF_TCP_UDP_DPORT                   : 100
+		VCAP_AF_TCP_UDP_ENA                     : 101
+		VCAP_AF_TCP_UDP_SPORT                   : 102
+		VCAP_AF_TC_ENA                          : 103
+		VCAP_AF_TC_LABEL                        : 104
+		VCAP_AF_TPID_SEL                        : 105
+		VCAP_AF_TTL_DECR_DIS                    : 106
+		VCAP_AF_TTL_ENA                         : 107
+		VCAP_AF_TTL_LABEL                       : 108
+		VCAP_AF_TTL_UPDATE_ENA                  : 109
+		VCAP_AF_VLAN_PUSH_CNT                   : 114
+		VCAP_AF_VLAN_PUSH_CNT_ENA               : 115
+		VCAP_AF_VLAN_WAS_TAGGED                 : 116
+	Value changed
+		VCAP_AF_CLS_VID_SEL                     : 3 -> 2
+		VCAP_AF_CNT_ID                          : 4 -> 3
+		VCAP_AF_COPY_PORT_NUM                   : 5 -> 4
+		VCAP_AF_COPY_QUEUE_NUM                  : 6 -> 5
+		VCAP_AF_CPU_COPY_ENA                    : 9 -> 6
+		VCAP_AF_CPU_QUEUE_NUM                   : 13 -> 8
+		VCAP_AF_DEI_ENA                         : 16 -> 13
+		VCAP_AF_DEI_VAL                         : 17 -> 14
+		VCAP_AF_DP_ENA                          : 20 -> 16
+		VCAP_AF_DP_VAL                          : 21 -> 17
+		VCAP_AF_DSCP_ENA                        : 22 -> 18
+		VCAP_AF_DSCP_VAL                        : 23 -> 20
+		VCAP_AF_ES2_REW_CMD                     : 25 -> 21
+		VCAP_AF_FWD_MODE                        : 27 -> 24
+		VCAP_AF_HIT_ME_ONCE                     : 30 -> 26
+		VCAP_AF_IGNORE_PIPELINE_CTRL            : 31 -> 28
+		VCAP_AF_INTR_ENA                        : 36 -> 29
+		VCAP_AF_ISDX_ADD_REPLACE_SEL            : 37 -> 30
+		VCAP_AF_ISDX_VAL                        : 38 -> 34
+		VCAP_AF_LRN_DIS                         : 45 -> 36
+		VCAP_AF_MAP_IDX                         : 46 -> 37
+		VCAP_AF_MAP_KEY                         : 47 -> 38
+		VCAP_AF_MAP_LOOKUP_SEL                  : 48 -> 39
+		VCAP_AF_MASK_MODE                       : 49 -> 40
+		VCAP_AF_MATCH_ID                        : 50 -> 41
+		VCAP_AF_MATCH_ID_MASK                   : 51 -> 42
+		VCAP_AF_MIRROR_PROBE                    : 53 -> 44
+		VCAP_AF_MIRROR_PROBE_ID                 : 54 -> 45
+		VCAP_AF_NXT_IDX                         : 61 -> 47
+		VCAP_AF_NXT_IDX_CTRL                    : 62 -> 48
+		VCAP_AF_PAG_OVERRIDE_MASK               : 72 -> 50
+		VCAP_AF_PAG_VAL                         : 73 -> 51
+		VCAP_AF_PCP_ENA                         : 74 -> 55
+		VCAP_AF_PCP_VAL                         : 75 -> 56
+		VCAP_AF_PIPELINE_FORCE_ENA              : 77 -> 58
+		VCAP_AF_PIPELINE_PT                     : 78 -> 59
+		VCAP_AF_POLICE_ENA                      : 80 -> 60
+		VCAP_AF_POLICE_IDX                      : 81 -> 61
+		VCAP_AF_POLICE_REMARK                   : 82 -> 62
+		VCAP_AF_PORT_MASK                       : 83 -> 65
+		VCAP_AF_QOS_ENA                         : 85 -> 69
+		VCAP_AF_QOS_VAL                         : 86 -> 70
+		VCAP_AF_RT_DIS                          : 93 -> 72
+		VCAP_AF_TYPE                            : 110 -> 90
+		VCAP_AF_VID_VAL                         : 111 -> 96
+		VCAP_AF_VLAN_POP_CNT                    : 112 -> 97
+		VCAP_AF_VLAN_POP_CNT_ENA                : 113 -> 98
+		VCAP_AF_MIRROR_ENA                      : 117 -> 43
+		VCAP_AF_POLICE_VCAP_ONLY                : 118 -> 63
+		VCAP_AF_REW_OP                          : 119 -> 71
+		VCAP_AF_ISDX_ENA                        : 120 -> 32
+		VCAP_AF_ACL_ID                          : 121 -> 1
+		VCAP_AF_FWD_KILL_ENA                    : 122 -> 23
+		VCAP_AF_HOST_MATCH                      : 123 -> 27
+hwmon_chip_attributes
+	Elem added
+		hwmon_chip_beep_enable                  : 12
+hwmon_fan_attributes
+	Elem added
+		hwmon_fan_beep                          : 12
+batadv_packettype
+	Elem added
+		BATADV_MCAST                            : 5
+membarrier_cmd
+	Elem added
+		MEMBARRIER_CMD_GET_REGISTRATIONS        : 512
+hist_field_fn
+	Elem added
+		HIST_FIELD_FN_STACK                     : 29
+bpf_stack_slot_type
+	Elem added
+		STACK_ITER                              : 5
+kfunc_ptr_arg_type
+	Elem added
+		KF_ARG_PTR_TO_REFCOUNTED_KPTR           : 2
+		KF_ARG_PTR_TO_ITER                      : 4
+	Elem removed
+		KF_ARG_PTR_TO_KPTR                      : 2
+	Value changed
+		KF_ARG_PTR_TO_LIST_HEAD                 : 4 -> 5
+		KF_ARG_PTR_TO_LIST_NODE                 : 5 -> 6
+		KF_ARG_PTR_TO_BTF_ID                    : 6 -> 7
+		KF_ARG_PTR_TO_MEM                       : 7 -> 8
+		KF_ARG_PTR_TO_MEM_SIZE                  : 8 -> 9
+		KF_ARG_PTR_TO_CALLBACK                  : 9 -> 10
+		KF_ARG_PTR_TO_RB_ROOT                   : 10 -> 11
+		KF_ARG_PTR_TO_RB_NODE                   : 11 -> 12
+special_kfunc_type
+	Elem added
+		KF_bpf_refcount_acquire_impl            : 2
+		KF_bpf_list_push_front_impl             : 3
+		KF_bpf_list_push_back_impl              : 4
+		KF_bpf_rbtree_add_impl                  : 12
+		KF_bpf_dynptr_from_skb                  : 14
+		KF_bpf_dynptr_from_xdp                  : 15
+		KF_bpf_dynptr_slice                     : 16
+		KF_bpf_dynptr_slice_rdwr                : 17
+		KF_bpf_dynptr_clone                     : 18
+	Elem removed
+		KF_bpf_list_push_front                  : 2
+		KF_bpf_list_push_back                   : 3
+		KF_bpf_rbtree_add                       : 11
+	Value changed
+		KF_bpf_list_pop_front                   : 4 -> 5
+		KF_bpf_list_pop_back                    : 5 -> 6
+		KF_bpf_cast_to_kern_ctx                 : 6 -> 7
+		KF_bpf_rdonly_cast                      : 7 -> 8
+		KF_bpf_rcu_read_lock                    : 8 -> 9
+		KF_bpf_rcu_read_unlock                  : 9 -> 10
+		KF_bpf_rbtree_remove                    : 10 -> 11
+		KF_bpf_rbtree_first                     : 12 -> 13
+scan_result
+	Elem added
+		SCAN_STORE_FAILED                       : 29
+		SCAN_COPY_MC                            : 30
+		SCAN_PAGE_FILLED                        : 31
+apparmor_notif_type
+	Elem added
+		APPARMOR_NOTIF_RESP_PERM                : 0
+		APPARMOR_NOTIF_RESP_NAME                : 5
+	Elem removed
+		APPARMOR_NOTIF_RESP                     : 0
+tpm2_cc_attrs
+	Elem added
+		TPM2_CC_ATTR_VENDOR                     : 29
+nl80211_ext_feature_index
+	Elem added
+		NL80211_EXT_FEATURE_PUNCT               : 62
+		NL80211_EXT_FEATURE_SECURE_NAN          : 63
+		NL80211_EXT_FEATURE_AUTH_AND_DEAUTH_RANDOM_TA: 64
+	Value changed
+		NUM_NL80211_EXT_FEATURES                : 62 -> 65
+		MAX_NL80211_EXT_FEATURES                : 61 -> 64
+shmem_param
+	Elem added
+		Opt_noswap                              : 10
+prio_policy
+	Elem added
+		POLICY_PROMOTE_TO_RT                    : 1
+	Value changed
+		POLICY_NONE_TO_RT                       : 1 -> 4
+opal_uid
+	Elem added
+		OPAL_LOCKINGRANGE_ACE_START_TO_KEY      : 15
+	Value changed
+		OPAL_LOCKINGRANGE_ACE_RDLOCKED          : 15 -> 16
+		OPAL_LOCKINGRANGE_ACE_WRLOCKED          : 16 -> 17
+		OPAL_MBRCONTROL                         : 17 -> 18
+		OPAL_MBR                                : 18 -> 19
+		OPAL_AUTHORITY_TABLE                    : 19 -> 20
+		OPAL_C_PIN_TABLE                        : 20 -> 21
+		OPAL_LOCKING_INFO_TABLE                 : 21 -> 22
+		OPAL_ENTERPRISE_LOCKING_INFO_TABLE      : 22 -> 23
+		OPAL_DATASTORE                          : 23 -> 24
+		OPAL_C_PIN_MSID                         : 24 -> 25
+		OPAL_C_PIN_SID                          : 25 -> 26
+		OPAL_C_PIN_ADMIN1                       : 26 -> 27
+		OPAL_HALF_UID_AUTHORITY_OBJ_REF         : 27 -> 28
+		OPAL_HALF_UID_BOOLEAN_ACE               : 28 -> 29
+		OPAL_UID_HEXFF                          : 29 -> 30
+ieee_attrs
+	Elem added
+		DCB_ATTR_DCB_REWR_TABLE                 : 12
+	Value changed
+		__DCB_ATTR_IEEE_MAX                     : 12 -> 13

@@ -1,0 +1,198 @@
+Added Kind.FUNC (86): ['perf_trace_clk_rate_request', 'perf_trace_csd_function', 'perf_trace_csd_queue_cpu', 'perf_trace_ksm_enter_exit_template', 'perf_trace_ksm_merge_one_page', 'perf_trace_ksm_merge_with_ksm_page', 'perf_trace_ksm_remove_ksm_page', 'perf_trace_ksm_remove_rmap_item', 'perf_trace_ksm_scan_template', 'perf_trace_scsi_prepare_zone_append', 'perf_trace_scsi_zone_wp_update', 'perf_trace_tasklet', 'perf_trace_block_rq_completion', 'perf_trace_br_mdb_full', 'perf_trace_cpu_idle_miss', 'perf_trace_event_reg', 'perf_trace_event_unreg', 'perf_trace_guest_halt_poll_ns', 'perf_trace_handshake_complete', 'perf_trace_handshake_error_class', 'perf_trace_handshake_event_class', 'perf_trace_handshake_fd_class', 'perf_trace_hugepage_set_pmd', 'perf_trace_hugepage_update', 'perf_trace_ipi_handler', 'perf_trace_ipi_raise', 'perf_trace_ipi_send_cpu', 'perf_trace_ipi_send_cpumask', 'perf_trace_ma_op', 'perf_trace_ma_read', 'perf_trace_ma_write', 'perf_trace_migration_pmd', 'perf_trace_sk_data_ready', 'perf_trace_sock_msg_length', 'perf_trace_tcp_cong_state_set', 'perf_trace_watchdog_set_timeout', 'perf_trace_watchdog_template', 'perf_trace_alloc_vmap_area', 'perf_trace_contention_begin', 'perf_trace_contention_end', 'perf_trace_error_da_monitor_id', 'perf_trace_event_da_monitor_id', 'perf_trace_exit_mmap', 'perf_trace_free_vmap_area_noflush', 'perf_trace_io_uring_cqe_overflow', 'perf_trace_io_uring_local_work_run', 'perf_trace_io_uring_req_failed', 'perf_trace_io_uring_short_write', 'perf_trace_io_uring_submit_req', 'perf_trace_io_uring_task_work_run', 'perf_trace_iomap_dio_complete', 'perf_trace_iomap_dio_rw_begin', 'perf_trace_kmalloc', 'perf_trace_kmem_cache_alloc', 'perf_trace_mm_khugepaged_collapse_file', 'perf_trace_mm_khugepaged_scan_file', 'perf_trace_purge_vmap_area_lazy', 'perf_trace_vma_mas_szero', 'perf_trace_vma_store', 'perf_trace_writeback_folio_template', 'perf_trace_ata_bmdma_status', 'perf_trace_ata_eh_action_template', 'perf_trace_ata_exec_command_template', 'perf_trace_ata_link_reset_begin_template', 'perf_trace_ata_link_reset_end_template', 'perf_trace_ata_port_eh_begin_template', 'perf_trace_ata_qc_issue_template', 'perf_trace_ata_sff_hsm_template', 'perf_trace_ata_sff_template', 'perf_trace_ata_tf_load', 'perf_trace_ata_transfer_data_template', 'perf_trace_ext4__folio_op', 'perf_trace_ext4_fc_cleanup', 'perf_trace_ext4_fc_track_dentry', 'perf_trace_ext4_invalidate_folio_op', 'perf_trace_ext4_journal_start_inode', 'perf_trace_ext4_journal_start_sb', 'perf_trace_ext4_update_sb', 'perf_trace_mctp_key_acquire', 'perf_trace_mctp_key_release', 'perf_trace_migration_pte', 'perf_trace_mm_vmscan_throttled', 'perf_trace_mm_vmscan_write_folio', 'perf_trace_mmap_lock', 'perf_trace_notifier_info', 'perf_trace_regmap_bulk']
+Removed Kind.FUNC (18): ['perf_trace_mm_vmscan_writepage', 'perf_trace_kmem_alloc_node', 'perf_trace_kmem_alloc', 'perf_trace_mmap_lock_released', 'perf_trace_mmap_lock_start_locking', 'perf_trace_writeback_congest_waited_template', 'perf_trace_writeback_page_template', 'perf_trace_ext4_fc_track_unlink', 'perf_trace_ext4_fc_track_link', 'perf_trace_ext4_fc_track_create', 'perf_trace_ext4_journal_start', 'perf_trace_ext4_invalidatepage_op', 'perf_trace_ext4__page_op', 'perf_trace_block_rq_complete', 'perf_trace_io_uring_task_run', 'perf_trace_io_uring_poll_wake', 'perf_trace_io_uring_submit_sqe', 'perf_trace_ata_qc_issue']
+Changed Kind.FUNC (32): ['perf_trace_workqueue_queue_work', 'perf_trace_sched_switch', 'perf_trace_swiotlb_bounced', 'perf_trace_mm_filemap_op_page_cache', 'perf_trace_mm_lru_activate', 'perf_trace_mm_lru_insertion', 'perf_trace_percpu_alloc_percpu', 'perf_trace_rss_stat', 'perf_trace_mm_page', 'perf_trace_kmem_cache_free', 'perf_trace_mm_compaction_end', 'perf_trace_mm_compaction_begin', 'perf_trace_mm_compaction_migratepages', 'perf_trace_track_foreign_dirty', 'perf_trace_ext4_fc_track_range', 'perf_trace_ext4_fc_track_inode', 'perf_trace_ext4_fc_commit_stop', 'perf_trace_ext4_fc_commit_start', 'perf_trace_ext4__write_begin', 'perf_trace_jbd2_write_superblock', 'perf_trace_io_uring_task_add', 'perf_trace_io_uring_poll_arm', 'perf_trace_io_uring_complete', 'perf_trace_io_uring_fail_link', 'perf_trace_io_uring_link', 'perf_trace_io_uring_defer', 'perf_trace_io_uring_queue_async_work', 'perf_trace_io_uring_file_get', 'perf_trace_io_uring_register', 'perf_trace_pwm', 'perf_trace_amd_pstate_perf', 'perf_trace_consume_skb']
+Reasons Kind.FUNC (5): [('Param added', 22), ('Param removed', 19), ('Param type changed', 6), ('Param reordered', 13), ('Return type changed', 0)]
+perf_trace_workqueue_queue_work
+	Param type changed
+		req_cpu             : {'kind': 'INT', 'name': 'unsigned int'}
+		                    ->{'kind': 'INT', 'name': 'int'}
+perf_trace_sched_switch
+	Param added
+		prev_state          : {'kind': 'INT', 'name': 'unsigned int'}
+perf_trace_swiotlb_bounced
+	Param removed
+		swiotlb_force       : {'kind': 'ENUM', 'name': 'swiotlb_force', 'size': 4}
+perf_trace_mm_filemap_op_page_cache
+	Param added
+		folio               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'folio'}}
+	Param removed
+		page                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+perf_trace_mm_lru_activate
+	Param added
+		folio               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'folio'}}
+	Param removed
+		page                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+perf_trace_mm_lru_insertion
+	Param added
+		folio               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'folio'}}
+	Param removed
+		page                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+perf_trace_percpu_alloc_percpu
+	Param added
+		call_site           : {'kind': 'INT', 'name': 'long unsigned int'}
+		bytes_alloc         : {'kind': 'TYPEDEF', 'name': 'size_t'}
+		gfp_flags           : {'kind': 'TYPEDEF', 'name': 'gfp_t'}
+	Param reordered
+		                     ['__data', 'reserved', 'is_atomic', 'size', 'align', 'base_addr', 'off', 'ptr']
+		                     ['__data', 'call_site', 'reserved', 'is_atomic', 'size', 'align', 'base_addr', 'off', 'ptr', 'bytes_alloc', 'gfp_flags']
+perf_trace_rss_stat
+	Param removed
+		count               : {'kind': 'INT', 'name': 'long int'}
+perf_trace_mm_page
+	Param added
+		percpu_refill       : {'kind': 'INT', 'name': 'int'}
+perf_trace_kmem_cache_free
+	Param added
+		s                   : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'STRUCT', 'name': 'kmem_cache'}}}
+	Param removed
+		name                : {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}
+perf_trace_mm_compaction_end
+	Param added
+		cc                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'compact_control'}}
+	Param removed
+		migrate_pfn         : {'kind': 'INT', 'name': 'long unsigned int'}
+		free_pfn            : {'kind': 'INT', 'name': 'long unsigned int'}
+	Param reordered
+		                     ['__data', 'zone_start', 'migrate_pfn', 'free_pfn', 'zone_end', 'sync', 'status']
+		                     ['__data', 'cc', 'zone_start', 'zone_end', 'sync', 'status']
+perf_trace_mm_compaction_begin
+	Param added
+		cc                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'compact_control'}}
+	Param removed
+		migrate_pfn         : {'kind': 'INT', 'name': 'long unsigned int'}
+		free_pfn            : {'kind': 'INT', 'name': 'long unsigned int'}
+	Param reordered
+		                     ['__data', 'zone_start', 'migrate_pfn', 'free_pfn', 'zone_end', 'sync']
+		                     ['__data', 'cc', 'zone_start', 'zone_end', 'sync']
+perf_trace_mm_compaction_migratepages
+	Param added
+		cc                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'compact_control'}}
+		nr_succeeded        : {'kind': 'INT', 'name': 'unsigned int'}
+	Param removed
+		nr_all              : {'kind': 'INT', 'name': 'long unsigned int'}
+		migrate_rc          : {'kind': 'INT', 'name': 'int'}
+		migratepages        : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'list_head'}}
+perf_trace_track_foreign_dirty
+	Param added
+		folio               : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'folio'}}
+	Param removed
+		page                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'page'}}
+perf_trace_ext4_fc_track_range
+	Param added
+		handle              : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'handle_t'}}
+	Param reordered
+		                     ['__data', 'inode', 'start', 'end', 'ret']
+		                     ['__data', 'handle', 'inode', 'start', 'end', 'ret']
+perf_trace_ext4_fc_track_inode
+	Param added
+		handle              : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'handle_t'}}
+	Param reordered
+		                     ['__data', 'inode', 'ret']
+		                     ['__data', 'handle', 'inode', 'ret']
+perf_trace_ext4_fc_commit_stop
+	Param added
+		commit_tid          : {'kind': 'TYPEDEF', 'name': 'tid_t'}
+perf_trace_ext4_fc_commit_start
+	Param added
+		commit_tid          : {'kind': 'TYPEDEF', 'name': 'tid_t'}
+perf_trace_ext4__write_begin
+	Param removed
+		flags               : {'kind': 'INT', 'name': 'unsigned int'}
+perf_trace_jbd2_write_superblock
+	Param added
+		write_flags         : {'kind': 'TYPEDEF', 'name': 'blk_opf_t'}
+	Param removed
+		write_op            : {'kind': 'INT', 'name': 'int'}
+perf_trace_io_uring_task_add
+	Param added
+		req                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'io_kiocb'}}
+	Param removed
+		ctx                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		opcode              : {'kind': 'TYPEDEF', 'name': 'u8'}
+		user_data           : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Param reordered
+		                     ['__data', 'ctx', 'opcode', 'user_data', 'mask']
+		                     ['__data', 'req', 'mask']
+perf_trace_io_uring_poll_arm
+	Param removed
+		ctx                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		opcode              : {'kind': 'TYPEDEF', 'name': 'u8'}
+		user_data           : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Param reordered
+		                     ['__data', 'ctx', 'req', 'opcode', 'user_data', 'mask', 'events']
+		                     ['__data', 'req', 'mask', 'events']
+	Param type changed
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'io_kiocb'}}
+perf_trace_io_uring_complete
+	Param added
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		extra1              : {'kind': 'TYPEDEF', 'name': 'u64'}
+		extra2              : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Param reordered
+		                     ['__data', 'ctx', 'user_data', 'res', 'cflags']
+		                     ['__data', 'ctx', 'req', 'user_data', 'res', 'cflags', 'extra1', 'extra2']
+perf_trace_io_uring_fail_link
+	Param type changed
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'io_kiocb'}}
+		link                : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'io_kiocb'}}
+perf_trace_io_uring_link
+	Param removed
+		ctx                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+	Param reordered
+		                     ['__data', 'ctx', 'req', 'target_req']
+		                     ['__data', 'req', 'target_req']
+	Param type changed
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'io_kiocb'}}
+		target_req          : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'io_kiocb'}}
+perf_trace_io_uring_defer
+	Param removed
+		ctx                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		user_data           : {'kind': 'INT', 'name': 'long long unsigned int'}
+	Param reordered
+		                     ['__data', 'ctx', 'req', 'user_data']
+		                     ['__data', 'req']
+	Param type changed
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'io_kiocb'}}
+perf_trace_io_uring_queue_async_work
+	Param removed
+		ctx                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		work                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'io_wq_work'}}
+		flags               : {'kind': 'INT', 'name': 'unsigned int'}
+	Param reordered
+		                     ['__data', 'ctx', 'rw', 'req', 'work', 'flags']
+		                     ['__data', 'req', 'rw']
+	Param type changed
+		req                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+		                    ->{'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'io_kiocb'}}
+perf_trace_io_uring_file_get
+	Param added
+		req                 : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'io_kiocb'}}
+	Param removed
+		ctx                 : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
+perf_trace_io_uring_register
+	Param removed
+		eventfd             : {'kind': 'TYPEDEF', 'name': 'bool'}
+	Param reordered
+		                     ['__data', 'ctx', 'opcode', 'nr_files', 'nr_bufs', 'eventfd', 'ret']
+		                     ['__data', 'ctx', 'opcode', 'nr_files', 'nr_bufs', 'ret']
+perf_trace_pwm
+	Param added
+		err                 : {'kind': 'INT', 'name': 'int'}
+perf_trace_amd_pstate_perf
+	Param added
+		freq                : {'kind': 'TYPEDEF', 'name': 'u64'}
+		mperf               : {'kind': 'TYPEDEF', 'name': 'u64'}
+		aperf               : {'kind': 'TYPEDEF', 'name': 'u64'}
+		tsc                 : {'kind': 'TYPEDEF', 'name': 'u64'}
+	Param reordered
+		                     ['__data', 'min_perf', 'target_perf', 'capacity', 'cpu_id', 'changed', 'fast_switch']
+		                     ['__data', 'min_perf', 'target_perf', 'capacity', 'freq', 'mperf', 'aperf', 'tsc', 'cpu_id', 'changed', 'fast_switch']
+perf_trace_consume_skb
+	Param added
+		location            : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}

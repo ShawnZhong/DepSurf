@@ -130,11 +130,17 @@ class BTFNormalizer:
 
 def normalize_btf(file, overwrite=False):
     import json
+    from collections import defaultdict
+    import pickle
 
     jsonl_path = file.with_suffix(".jsonl")
-    if jsonl_path.exists() and not overwrite:
+    pkl_path = file.with_suffix(".pkl")
+
+    if jsonl_path.exists() and pkl_path.exists() and not overwrite:
         print(f"{jsonl_path} already exists")
-        return jsonl_path
+        print(f"{pkl_path} already exists")
+        with open(pkl_path, "rb") as f:
+            return pickle.load(f)
 
     json_path = file.with_suffix(".json")
     assert json_path.exists()
@@ -142,20 +148,25 @@ def normalize_btf(file, overwrite=False):
     with open(json_path) as f:
         data = json.load(f)["types"]
         normalizer = BTFNormalizer(data)
-        result = [normalizer.normalize(i) for i in range(1, len(data) + 1)]
+
+        result = []
+        result_by_kind = defaultdict(dict)
+        for i in range(1, len(data) + 1):
+            t = normalizer.normalize(i)
+            result.append(t)
+            if "name" not in t:
+                continue
+            name = t["name"]
+            if name != "(anon)":
+                result_by_kind[t["kind"]][name] = t
+
         print(f"Writing {jsonl_path}")
         with open(jsonl_path, "w") as f:
             for elem in result:
                 f.write(json.dumps(elem) + "\n")
 
-    return jsonl_path
+        print(f"Writing {pkl_path}")
+        with open(pkl_path, "wb") as f:
+            pickle.dump(dict(result_by_kind), f)
 
-
-def read_jsonl(jsonl_path):
-    import json
-
-    assert jsonl_path.exists()
-    assert jsonl_path.suffix == ".jsonl"
-
-    with open(jsonl_path) as f:
-        return [json.loads(line) for line in f]
+        return result_by_kind

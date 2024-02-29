@@ -1,0 +1,55 @@
+Added Kind.STRUCT (33): ['trace_event_raw_alloc_vmap_area', 'trace_event_raw_purge_vmap_area_lazy', 'trace_event_raw_free_vmap_area_noflush', 'trace_event_raw_scsi_prepare_zone_append', 'trace_event_raw_scsi_zone_wp_update', 'trace_event_raw_event_da_monitor_id', 'trace_event_raw_error_da_monitor_id', 'trace_event_raw_kmem_cache_alloc', 'trace_event_raw_kmalloc', 'trace_event_raw_vma_mas_szero', 'trace_event_raw_vma_store', 'trace_event_raw_exit_mmap', 'trace_event_raw_io_uring_task_work_run', 'trace_event_raw_io_uring_short_write', 'trace_event_raw_io_uring_local_work_run', 'trace_event_raw_regmap_bulk', 'trace_event_raw_ma_op', 'trace_event_raw_ma_read', 'trace_event_raw_ma_write', 'trace_event_raw_cpu_idle_miss', 'trace_event_raw_guest_halt_poll_ns', 'trace_event_raw_mm_khugepaged_scan_file', 'trace_event_raw_mm_khugepaged_collapse_file', 'trace_event_raw_thread_noise', 'trace_event_raw_softirq_noise', 'trace_event_raw_irq_noise', 'trace_event_raw_nmi_noise', 'trace_event_raw_sample_threshold', 'trace_event_raw_ext4_journal_start_sb', 'trace_event_raw_ext4_journal_start_inode', 'trace_event_raw_clk_rate_request', 'trace_event_raw_watchdog_template', 'trace_event_raw_watchdog_set_timeout']
+Removed Kind.STRUCT (3): ['trace_event_raw_kmem_alloc', 'trace_event_raw_kmem_alloc_node', 'trace_event_raw_ext4_journal_start']
+Changed Kind.STRUCT (10): ['trace_event_raw_jbd2_write_superblock', 'trace_event_raw_jbd2_shrink_checkpoint_list', 'trace_event_raw_pwm', 'trace_event_raw_scsi_dispatch_cmd_start', 'trace_event_raw_scsi_dispatch_cmd_error', 'trace_event_raw_scsi_cmd_done_timeout_template', 'trace_event_raw_tcp_cong_state_set', 'trace_event_raw_fib_table_lookup', 'trace_event_raw_devlink_trap_report', 'trace_event_raw_fib6_table_lookup']
+Reasons Kind.STRUCT (4): [('Field added', 9), ('Field removed', 5), ('Field type changed', 0), ('Layout changed', 10)]
+trace_event_raw_jbd2_write_superblock
+	Field added
+		write_flags         : {'kind': 'TYPEDEF', 'name': 'blk_opf_t'}
+	Field removed
+		write_op            : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_jbd2_shrink_checkpoint_list
+	Field removed
+		nr_scanned          : {'kind': 'INT', 'name': 'long unsigned int'}
+	Layout changed
+trace_event_raw_pwm
+	Field added
+		err                 : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_scsi_dispatch_cmd_start
+	Field added
+		driver_tag          : {'kind': 'INT', 'name': 'int'}
+		scheduler_tag       : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_scsi_dispatch_cmd_error
+	Field added
+		driver_tag          : {'kind': 'INT', 'name': 'int'}
+		scheduler_tag       : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_scsi_cmd_done_timeout_template
+	Field added
+		driver_tag          : {'kind': 'INT', 'name': 'int'}
+		scheduler_tag       : {'kind': 'INT', 'name': 'int'}
+	Layout changed
+trace_event_raw_tcp_cong_state_set
+	Field added
+		family              : {'kind': 'TYPEDEF', 'name': '__u16'}
+	Layout changed
+trace_event_raw_fib_table_lookup
+	Field added
+		name                : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 16, 'type': {'kind': 'INT', 'name': 'char'}}
+	Field removed
+		__data_loc_name     : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_devlink_trap_report
+	Field added
+		input_dev_name      : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 16, 'type': {'kind': 'INT', 'name': 'char'}}
+	Field removed
+		__data_loc_input_dev_name: {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed
+trace_event_raw_fib6_table_lookup
+	Field added
+		name                : {'kind': 'ARRAY', 'name': '(anon)', 'nr_elems': 16, 'type': {'kind': 'INT', 'name': 'char'}}
+	Field removed
+		__data_loc_name     : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Layout changed

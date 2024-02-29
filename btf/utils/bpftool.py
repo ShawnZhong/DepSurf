@@ -1,6 +1,7 @@
-def get_linux_tools_path():
-    from pathlib import Path
+from pathlib import Path
 
+
+def get_linux_tools_path():
     parent = Path("/usr/lib/linux-tools")
     versions = [x for x in parent.iterdir() if x.is_dir()]
     if len(versions) == 0:

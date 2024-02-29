@@ -1,0 +1,51 @@
+Added Kind.FUNC (5): ['security_uring_cmd', 'security_uring_sqpoll', 'security_uring_override_creds', 'security_sctp_assoc_established', 'security_current_getsecid_subj']
+Removed Kind.FUNC (1): ['security_task_getsecid_subj']
+Changed Kind.FUNC (9): ['security_audit_rule_match', 'security_audit_rule_free', 'security_audit_rule_init', 'security_sctp_sk_clone', 'security_sctp_assoc_request', 'security_secmark_relabel_packet', 'security_socket_getpeersec_dgram', 'security_secid_to_secctx', 'security_dentry_init_security']
+Reasons Kind.FUNC (5): [('Param added', 9), ('Param removed', 9), ('Param type changed', 0), ('Param reordered', 0), ('Return type changed', 0)]
+security_audit_rule_match
+	Param added
+		lsmrules            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'audit_lsm_rules'}}
+	Param removed
+		lsmrule             : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}
+security_audit_rule_free
+	Param added
+		lsmrules            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'audit_lsm_rules'}}
+	Param removed
+		lsmrule             : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}
+security_audit_rule_init
+	Param added
+		lsmrules            : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'audit_lsm_rules'}}
+	Param removed
+		lsmrule             : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}
+security_sctp_sk_clone
+	Param added
+		asoc                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sctp_association'}}
+	Param removed
+		ep                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sctp_endpoint'}}
+security_sctp_assoc_request
+	Param added
+		asoc                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sctp_association'}}
+	Param removed
+		ep                  : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'sctp_endpoint'}}
+security_secmark_relabel_packet
+	Param added
+		secid               : {'kind': 'TYPEDEF', 'name': 'u32'}
+	Param removed
+		blob                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmblob'}}
+security_socket_getpeersec_dgram
+	Param added
+		secid               : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}
+	Param removed
+		blob                : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmblob'}}
+security_secid_to_secctx
+	Param added
+		ilsm                : {'kind': 'INT', 'name': 'int'}
+	Param removed
+		display             : {'kind': 'INT', 'name': 'int'}
+security_dentry_init_security
+	Param added
+		xattr_name          : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'kind': 'CONST', 'name': '(anon)', 'type': {'kind': 'INT', 'name': 'char'}}}}
+		lsmctx              : {'kind': 'PTR', 'type': {'kind': 'STRUCT', 'name': 'lsmcontext'}}
+	Param removed
+		ctx                 : {'kind': 'PTR', 'type': {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}}
+		ctxlen              : {'kind': 'PTR', 'type': {'kind': 'TYPEDEF', 'name': 'u32'}}

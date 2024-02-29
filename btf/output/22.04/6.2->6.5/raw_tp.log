@@ -1,0 +1,7 @@
+Added Kind.FUNC (26): ['perf_trace_csd_function', 'perf_trace_csd_queue_cpu', 'perf_trace_ksm_enter_exit_template', 'perf_trace_ksm_merge_one_page', 'perf_trace_ksm_merge_with_ksm_page', 'perf_trace_ksm_remove_ksm_page', 'perf_trace_ksm_remove_rmap_item', 'perf_trace_ksm_scan_template', 'perf_trace_tasklet', 'perf_trace_br_mdb_full', 'perf_trace_event_unreg', 'perf_trace_handshake_complete', 'perf_trace_handshake_error_class', 'perf_trace_handshake_event_class', 'perf_trace_handshake_fd_class', 'perf_trace_ipi_handler', 'perf_trace_ipi_raise', 'perf_trace_ipi_send_cpu', 'perf_trace_ipi_send_cpumask', 'perf_trace_sk_data_ready', 'perf_trace_sock_msg_length', 'perf_trace_io_uring_submit_req', 'perf_trace_iomap_dio_complete', 'perf_trace_iomap_dio_rw_begin', 'perf_trace_ext4__folio_op', 'perf_trace_notifier_info']
+Removed Kind.FUNC (2): ['perf_trace_io_uring_submit_sqe', 'perf_trace_ext4__page_op']
+Changed Kind.FUNC (1): ['perf_trace_consume_skb']
+Reasons Kind.FUNC (5): [('Param added', 1), ('Param removed', 0), ('Param type changed', 0), ('Param reordered', 0), ('Return type changed', 0)]
+perf_trace_consume_skb
+	Param added
+		location            : {'kind': 'PTR', 'type': {'name': 'void', 'kind': 'VOID'}}
