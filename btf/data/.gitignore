@@ -1,7 +1,2 @@
-tmp
-*.json
-*.h
-*.txt
-*.jsonl
-*.pkl
-vm
+*
+!*.btf
