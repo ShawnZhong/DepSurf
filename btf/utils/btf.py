@@ -1,7 +1,7 @@
 from enum import Enum
 from pathlib import Path
 
-from .linux_version import get_linux_version_short, get_linux_version_tuple
+from .linux.version import get_linux_version_short, get_linux_version_tuple
 
 
 class Kind(str, Enum):

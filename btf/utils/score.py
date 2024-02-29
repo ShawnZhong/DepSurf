@@ -1,16 +1,17 @@
 def get_structs(obj_file):
-    from .btf import Kind
+    from .btf import Kind, BTF
     from .btf_normalize import normalize_btf
     from .bpftool import gen_min_btf, dump_btf
 
     btf_file = gen_min_btf(obj_file)
     dump_btf(btf_file)
-    data = normalize_btf(btf_file)
+    pkl_path = normalize_btf(btf_file)
 
-    if Kind.STRUCT not in data:
+    btf = BTF(pkl_path)
+    if Kind.STRUCT not in btf.data:
         return []
 
-    return [e for e in data[Kind.STRUCT].keys() if e != "user_pt_regs"]
+    return [e for e in btf.data[Kind.STRUCT].keys() if e != "user_pt_regs"]
 
 
 def normalize_hook_name(name):

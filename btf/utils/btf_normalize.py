@@ -139,8 +139,7 @@ def normalize_btf(file, overwrite=False):
     if jsonl_path.exists() and pkl_path.exists() and not overwrite:
         print(f"{jsonl_path} already exists")
         print(f"{pkl_path} already exists")
-        with open(pkl_path, "rb") as f:
-            return pickle.load(f)
+        return pkl_path
 
     json_path = file.with_suffix(".json")
     assert json_path.exists()
@@ -169,4 +168,4 @@ def normalize_btf(file, overwrite=False):
         with open(pkl_path, "wb") as f:
             pickle.dump(dict(result_by_kind), f)
 
-        return result_by_kind
+    return pkl_path
