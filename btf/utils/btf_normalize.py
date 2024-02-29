@@ -1,4 +1,4 @@
-from .btf_kind import Kind
+from .btf import Kind
 
 
 class BTFNormalizer:
