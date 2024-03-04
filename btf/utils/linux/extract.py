@@ -31,6 +31,8 @@ def extract_vmlinux_files(vmlinuz_paths, result_path):
         vmlinux_path = result_path / f"vmlinux-{name}"
         if not vmlinux_path.exists():
             print(f"Extracting {vmlinuz_path} to {vmlinux_path}")
+            # system(f"zcat {vmlinuz_path} > {vmlinux_path}")
+            # system(f"extract-vmlinux {vmlinuz_path} > {vmlinux_path}")
             with open(vmlinuz_path, "rb") as fin, open(vmlinux_path, "wb") as fout:
                 fout.write(obtain_raw_kernel_from_file(fin.read()))
             if vmlinux_path.stat().st_size == 0:
