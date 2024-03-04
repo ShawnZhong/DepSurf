@@ -1,5 +1,6 @@
 {
     "python.analysis.extraPaths": [
-        "bcc/src/python"
+        "bcc/src/python",
+        "${env:HOME}/.local/lib/python3.11/site-packages"
     ]
 }
