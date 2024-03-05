@@ -1,3 +1,5 @@
+import logging
+
 from .btf import Kind
 
 
@@ -137,8 +139,8 @@ def normalize_btf(file, overwrite=False):
     pkl_path = file.with_suffix(".pkl")
 
     if jsonl_path.exists() and pkl_path.exists() and not overwrite:
-        print(f"{jsonl_path} already exists")
-        print(f"{pkl_path} already exists")
+        logging.info(f"{jsonl_path} already exists")
+        logging.info(f"{pkl_path} already exists")
         return pkl_path
 
     json_path = file.with_suffix(".json")

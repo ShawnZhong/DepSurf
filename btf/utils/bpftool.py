@@ -1,4 +1,5 @@
 from pathlib import Path
+import logging
 
 
 def get_linux_tools_path():
@@ -25,7 +26,7 @@ def gen_min_btf(obj_file, overwrite=False):
 
     btf_file = obj_file.with_suffix(".btf")
     if btf_file.exists() and not overwrite:
-        print(f"{btf_file} already exists")
+        logging.info(f"{btf_file} already exists")
         return btf_file
 
     kernel_btf = "/sys/kernel/btf/vmlinux"
@@ -43,7 +44,7 @@ def dump_btf(file, overwrite=False):
         result = file.with_suffix(ext)
 
         if result.exists() and not overwrite:
-            print(f"{result} already exists")
+            logging.info(f"{result} already exists")
             continue
 
         system(f"{BPFTOOL_PATH} btf dump file {file} {cmd} > {result}")

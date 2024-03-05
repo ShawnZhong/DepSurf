@@ -8,7 +8,7 @@ def extract_vmlinuz_files(deb_paths, result_path):
 
     results = {}
     for name, deb_path in deb_paths.items():
-        vmlinuz_path = result_path / f"vmlinuz-{name}"
+        vmlinuz_path = result_path / f"{name}.vmlinuz"
         if not vmlinuz_path.exists():
             print(f"Extracting {deb_path} to {vmlinuz_path}")
             # system(f"dpkg -x {deb_path} {tmp_path}")
@@ -28,7 +28,7 @@ def extract_vmlinux_files(vmlinuz_paths, result_path):
 
     results = {}
     for name, vmlinuz_path in vmlinuz_paths.items():
-        vmlinux_path = result_path / f"vmlinux-{name}"
+        vmlinux_path = result_path / f"{name}.vmlinux"
         if not vmlinux_path.exists():
             print(f"Extracting {vmlinuz_path} to {vmlinux_path}")
             # system(f"zcat {vmlinuz_path} > {vmlinux_path}")

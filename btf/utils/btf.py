@@ -44,6 +44,9 @@ class BTF:
 
         print()
 
+    def __repr__(self):
+        return f"BTF({self.path})"
+
     @property
     def short_version(self):
         return get_linux_version_short(self.path.stem)
