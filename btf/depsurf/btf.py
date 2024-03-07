@@ -1,5 +1,6 @@
 from enum import Enum
 from pathlib import Path
+import logging
 
 from .linux.version import get_linux_version_short, get_linux_version_tuple
 
@@ -34,18 +35,15 @@ class BTF:
         assert self.path.exists()
         assert self.path.suffix == ".pkl"
         with open(self.path, "rb") as f:
+            logging.info(f"Loading {self.path}")
             self.data = pickle.load(f)
 
-    def print(self):
-        print(f"File: {self.path}")
-        print("Sample:")
-        for kind, d in self.data.items():
-            print(f"\t{kind:10} ({len(d):5}): {list(d.values())[0]}")
-
-        print()
-
     def __repr__(self):
-        return f"BTF({self.path})"
+        result = f"File: {self.path}\n"
+        result += "Sample:\n"
+        for kind, d in self.data.items():
+            result += f"\t{kind:10} ({len(d):5}): {list(d.values())[0]}\n"
+        return result
 
     @property
     def short_version(self):

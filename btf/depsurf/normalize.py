@@ -130,13 +130,19 @@ class BTFNormalizer:
         return self.normalize_impl(type_id, recurse=True)
 
 
-def normalize_btf(file, overwrite=False):
+def normalize_btf(file, result_path=None, overwrite=False):
     import json
     from collections import defaultdict
     import pickle
 
-    jsonl_path = file.with_suffix(".jsonl")
-    pkl_path = file.with_suffix(".pkl")
+    if result_path is None:
+        result_path = file.parent
+
+    if not result_path.exists():
+        result_path.mkdir(parents=True)
+
+    jsonl_path = result_path / file.with_suffix(".jsonl").name
+    pkl_path = result_path / file.with_suffix(".pkl").name
 
     if jsonl_path.exists() and pkl_path.exists() and not overwrite:
         logging.info(f"{jsonl_path} already exists")
@@ -161,12 +167,12 @@ def normalize_btf(file, overwrite=False):
             if name != "(anon)":
                 result_by_kind[t["kind"]][name] = t
 
-        print(f"Writing {jsonl_path}")
+        logging.info(f"Writing {jsonl_path}")
         with open(jsonl_path, "w") as f:
             for elem in result:
                 f.write(json.dumps(elem) + "\n")
 
-        print(f"Writing {pkl_path}")
+        logging.info(f"Writing {pkl_path}")
         with open(pkl_path, "wb") as f:
             pickle.dump(dict(result_by_kind), f)
 

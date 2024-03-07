@@ -1,3 +1,6 @@
+import logging
+
+
 class TermColor:
     HEADER = "\033[95m"
     OKBLUE = "\033[94m"
@@ -13,7 +16,7 @@ class TermColor:
 def system(cmd):
     import subprocess
 
-    print(f'Running command: "{TermColor.OKGREEN}{cmd}{TermColor.ENDC}"')
+    logging.info(f'Running command: "{TermColor.OKGREEN}{cmd}{TermColor.ENDC}"')
     subprocess.run(cmd, shell=True, check=True, executable="/bin/bash")
 
 

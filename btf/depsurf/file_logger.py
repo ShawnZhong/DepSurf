@@ -1,9 +1,10 @@
 import sys
+import logging
 
 
 class FileLogger:
     def __init__(self, path):
-        # print(f"Logging to {path}")
+        logging.debug(f"Logging to {path}")
 
         self.stdout = sys.stdout
         path.parent.mkdir(parents=True, exist_ok=True)

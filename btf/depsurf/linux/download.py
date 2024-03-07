@@ -1,3 +1,6 @@
+import logging
+
+
 def download_package_index(package_url, result_path):
     import urllib.request
     import gzip
@@ -6,19 +9,19 @@ def download_package_index(package_url, result_path):
     gz_path = result_path / "Packages.gz"
 
     if not gz_path.exists():
-        print(f"Downloading {package_url} to {gz_path}")
+        logging.info(f"Downloading {package_url} to {gz_path}")
         urllib.request.urlretrieve(package_url, gz_path)
     else:
-        print(f"Using {gz_path}")
+        logging.info(f"Using {gz_path}")
 
     package_path = gz_path.with_suffix("")
     if not package_path.with_suffix("").exists():
-        print(f"Unzipping {gz_path} to {package_path}")
+        logging.info(f"Unzipping {gz_path} to {package_path}")
         with gzip.open(gz_path, "rb") as f_in:
             with open(package_path, "wb") as f_out:
                 f_out.write(f_in.read())
     else:
-        print(f"Using {package_path}")
+        logging.info(f"Using {package_path}")
 
     return package_path
 
@@ -66,10 +69,10 @@ def download_deb_files(linux_versions, url_prefix, result_path):
         url = f"{url_prefix}/{path}"
         file_path = result_path / path.split("/")[-1]
         if not file_path.exists():
-            print(f"Downloading {url} to {file_path}")
+            logging.info(f"Downloading {url} to {file_path}")
             urllib.request.urlretrieve(url, file_path)
         else:
-            print(f"Using {file_path}")
+            logging.info(f"Using {file_path}")
 
         results[name] = file_path
 
