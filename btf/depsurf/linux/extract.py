@@ -2,7 +2,7 @@ import logging
 
 
 def extract_vmlinuz_files(deb_paths, result_path):
-    from ..system import system
+    from ..utils.system import system
 
     result_path.mkdir(parents=True, exist_ok=True)
 

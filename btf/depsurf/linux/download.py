@@ -1,27 +1,38 @@
 import logging
 
 
-def download_package_index(package_url, result_path):
-    import urllib.request
-    import gzip
+def download(url, path):
+    if not path.exists():
+        import urllib.request
 
-    result_path.mkdir(parents=True, exist_ok=True)
-    gz_path = result_path / "Packages.gz"
-
-    if not gz_path.exists():
-        logging.info(f"Downloading {package_url} to {gz_path}")
-        urllib.request.urlretrieve(package_url, gz_path)
+        logging.info(f"Downloading {url} to {path}")
+        urllib.request.urlretrieve(url, path)
     else:
-        logging.info(f"Using {gz_path}")
+        logging.info(f"Using {path}")
 
-    package_path = gz_path.with_suffix("")
-    if not package_path.with_suffix("").exists():
-        logging.info(f"Unzipping {gz_path} to {package_path}")
+
+def unzip_gz(gz_path, result_path):
+    if not result_path.exists():
+        import gzip
+
+        logging.info(f"Unzipping {gz_path} to {result_path}")
         with gzip.open(gz_path, "rb") as f_in:
-            with open(package_path, "wb") as f_out:
+            with open(result_path, "wb") as f_out:
                 f_out.write(f_in.read())
     else:
-        logging.info(f"Using {package_path}")
+        logging.info(f"Using {result_path}")
+
+
+def download_package_index(package_url, result_path):
+    result_path.mkdir(parents=True, exist_ok=True)
+
+    # download
+    gz_path = result_path / "Packages.gz"
+    download(package_url, gz_path)
+
+    # unzip
+    package_path = gz_path.with_suffix("")
+    unzip_gz(gz_path, package_path)
 
     return package_path
 
@@ -60,20 +71,13 @@ def filter_linux_images(package_index):
 
 
 def download_deb_files(linux_versions, url_prefix, result_path):
-    import urllib.request
-
     result_path.mkdir(parents=True, exist_ok=True)
 
     results = {}
     for name, path in linux_versions:
         url = f"{url_prefix}/{path}"
         file_path = result_path / path.split("/")[-1]
-        if not file_path.exists():
-            logging.info(f"Downloading {url} to {file_path}")
-            urllib.request.urlretrieve(url, file_path)
-        else:
-            logging.info(f"Using {file_path}")
-
+        download(url, file_path)
         results[name] = file_path
 
     return results

@@ -19,7 +19,7 @@ def get_all_x86_paths(ext=".pkl"):
     paths = []
     dirs = sorted(DATA_PATH.glob("*-x86"))
     for d in dirs:
-        p = get_sorted_linux_paths(d.glob(f"*{ext}"))
+        p = get_sorted_linux_paths(d.glob(f"**/*{ext}"))
         if d == dirs[-1]:
             paths.extend(p)
         else:

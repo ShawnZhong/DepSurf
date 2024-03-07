@@ -22,7 +22,7 @@ BPFTOOL_PATH = get_bpftool_path()
 
 
 def gen_min_btf(obj_file, overwrite=False):
-    from .system import system
+    from .utils.system import system
 
     btf_file = obj_file.with_suffix(".btf")
     if btf_file.exists() and not overwrite:
@@ -34,7 +34,7 @@ def gen_min_btf(obj_file, overwrite=False):
 
 
 def dump_btf(file, overwrite=False):
-    from .system import system
+    from .utils.system import system
 
     for ext, cmd in [
         (".h", "format c"),
