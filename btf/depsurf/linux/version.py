@@ -25,15 +25,6 @@ class UbuntuVersion:
         return DATA_PATH / f"{self.version}-{self.arch}"
 
     @property
-    def version_name(self):
-        return {
-            "16.04": "xenial",
-            "18.04": "bionic",
-            "20.04": "focal",
-            "22.04": "jammy",
-        }[self.version]
-
-    @property
     def url_prefix(self):
         return {
             "x86": "http://security.ubuntu.com/ubuntu",
@@ -42,7 +33,19 @@ class UbuntuVersion:
 
     @property
     def url(self):
-        return f"{self.url_prefix}/dists/{self.version_name}-security/main/binary-{self.arch}/Packages.gz"
+        v = {
+            "16.04": "xenial",
+            "18.04": "bionic",
+            "20.04": "focal",
+            "22.04": "jammy",
+        }[self.version]
+
+        a = {
+            "x86": "amd64",
+            "arm64": "arm64",
+        }[self.arch]
+
+        return f"{self.url_prefix}/dists/{v}-security/main/binary-{a}/Packages.gz"
 
     @property
     def index_path(self):
