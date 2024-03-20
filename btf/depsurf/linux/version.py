@@ -17,6 +17,7 @@ def get_linux_version_short(name):
 class UbuntuVersion:
     version: str
     arch: str
+    debug: bool = False
 
     @property
     def path(self):
@@ -26,10 +27,13 @@ class UbuntuVersion:
 
     @property
     def url_prefix(self):
-        return {
-            "x86": "http://security.ubuntu.com/ubuntu",
-            "arm64": "http://ports.ubuntu.com/ubuntu-ports",
-        }[self.arch]
+        if self.debug:
+            return "http://ddebs.ubuntu.com"
+        else:
+            return {
+                "x86": "http://security.ubuntu.com/ubuntu",
+                "arm64": "http://ports.ubuntu.com/ubuntu-ports",
+            }[self.arch]
 
     @property
     def url(self):
@@ -40,28 +44,33 @@ class UbuntuVersion:
             "22.04": "jammy",
         }[self.version]
 
+        if self.debug:
+            v += "-updates"
+        else:
+            v += "-security"
+
         a = {
             "x86": "amd64",
             "arm64": "arm64",
         }[self.arch]
 
-        return f"{self.url_prefix}/dists/{v}-security/main/binary-{a}/Packages.gz"
+        return f"{self.url_prefix}/dists/{v}/main/binary-{a}/Packages.gz"
 
     @property
     def index_path(self):
-        return self.path / "index"
+        return self.path / ("index_dbg" if self.debug else "index")
 
     @property
     def deb_path(self):
-        return self.path / "debs"
+        return self.path / ("debs_dbg" if self.debug else "debs")
 
     @property
     def vmlinux_path(self):
-        return self.path / "vmlinux"
+        return self.path / ("vmlinux_dbg" if self.debug else "vmlinux")
 
     @property
     def vmlinuz_path(self):
-        return self.path / "vmlinuz"
+        return self.path / ("vmlinuz_dbg" if self.debug else "vmlinuz")
 
     @property
     def btf_path(self):

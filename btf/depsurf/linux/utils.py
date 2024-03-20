@@ -1,8 +1,8 @@
 import logging
 
 
-def download(url, path):
-    if not path.exists():
+def download(url, path, overwrite):
+    if not path.exists() or overwrite:
         import urllib.request
 
         logging.info(f"Downloading {url} to {path}")
@@ -11,8 +11,8 @@ def download(url, path):
         logging.info(f"Using {path}")
 
 
-def unzip_gz(gz_path, result_path):
-    if not result_path.exists():
+def unzip_gz(gz_path, result_path, overwrite):
+    if not result_path.exists() or overwrite:
         import gzip
 
         logging.info(f"Unzipping {gz_path} to {result_path}")

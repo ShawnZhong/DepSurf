@@ -60,13 +60,12 @@ class BTF:
             return {k: v for k, v in self.data[kind].items() if name_filter_fn(k)}
 
     def get(self, arg1, arg2=None):
-        if isinstance(arg1, Kind):
-            kind = arg1
-            name = arg2
-        elif isinstance(arg1, tuple):
+        if isinstance(arg1, tuple):
+            assert arg2 is None
             kind, name = arg1
         else:
-            raise ValueError(f"Invalid arguments: {arg1}, {arg2}")
+            kind = arg1
+            name = arg2
 
         if name is None:
             return self.data[kind]

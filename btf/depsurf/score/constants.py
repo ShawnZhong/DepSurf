@@ -15,15 +15,15 @@ class Category(str, Enum):
     @property
     def color(self):
         return {
-            Category.BLOCK: "orange",
-            Category.CPU: "red",
-            Category.FILESYSTEM: "green",
-            Category.GENERIC: "blue",
-            Category.MEMORY: "purple",
-            Category.NETWORK: "cyan",
-            Category.OTHER: "gray",
-            Category.PROC: "yellow",
-            Category.USERSPACE: "magenta",
+            Category.BLOCK: "tab:blue",
+            Category.CPU: "tab:orange",
+            Category.FILESYSTEM: "tab:green",
+            Category.GENERIC: "tab:red",
+            Category.MEMORY: "tab:purple",
+            Category.NETWORK: "tab:brown",
+            Category.OTHER: "tab:pink",
+            Category.PROC: "tab:gray",
+            Category.USERSPACE: "tab:olive",
         }[self]
 
 
@@ -73,7 +73,7 @@ category_map = {
     "kvmexit": Category.PROC,
     "llcstat": Category.CPU,
     "mdflush": Category.BLOCK,
-    "memleak": Category.OTHER,
+    "memleak": Category.MEMORY,
     "mountsnoop": Category.FILESYSTEM,
     "mysqld_qslower": Category.USERSPACE,
     "netqtop": Category.NETWORK,
@@ -132,7 +132,7 @@ category_map = {
     "fsslower": Category.FILESYSTEM,
     "futexctn": Category.PROC,
     "javagc": Category.USERSPACE,
-    "ksnoop": Category.GENERIC,
+    "ksnoop": Category.OTHER,
     "numamove": Category.MEMORY,
     "sigsnoop": Category.PROC,
     "tcppktlat": Category.NETWORK,

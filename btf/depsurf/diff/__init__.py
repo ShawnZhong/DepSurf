@@ -13,16 +13,13 @@ class Consequence(str, Enum):
     SLIENT = "Silent"
     CORE = "CO-RE"
 
-
-class GenericChange(str, Enum):
-    ADD = "Added"
-    REMOVE = "Removed"
-
     @property
-    def consequence(self):
+    def weight(self):
         return {
-            self.ADD: Consequence.COMPILER,
-            self.REMOVE: Consequence.COMPILER,
+            self.COMPILER: 1,
+            self.RUNTIME: 2,
+            self.SLIENT: 7,
+            self.CORE: 0,
         }[self]
 
 
