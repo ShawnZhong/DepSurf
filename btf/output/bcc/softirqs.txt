@@ -1,0 +1,12 @@
+=================================== softirqs ===================================
+tracepoint: softirq_exit
+	Availability: ❌❌❌❌❌❌❌❌❌❌❌✅✅✅✅✅✅ (6/17 = 35%)
+		Versions: 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+tracepoint: softirq_entry
+	Availability: ❌❌❌❌❌❌❌❌❌❌❌✅✅✅✅✅✅ (6/17 = 35%)
+		Versions: 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+Summary
+	Function unavailable   22 times ==> Runtime error
+

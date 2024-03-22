@@ -1,0 +1,4 @@
+==================================== ksnoop ====================================
+kprobe: foo
+		Function foo is a dummy function
+

@@ -21,7 +21,7 @@ class UbuntuVersion:
 
     @property
     def path(self):
-        from ..paths import DATA_PATH
+        from depsurf.paths import DATA_PATH
 
         return DATA_PATH / f"{self.version}-{self.arch}"
 

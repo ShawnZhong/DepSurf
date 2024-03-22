@@ -1,0 +1,18 @@
+=================================== profile ====================================
+perf_event: 
+		Unsupported hook type: perf_event
+struct: bpf_perf_event_data
+	Availability: ❌❌❌✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (14/17 = 82%)
+		Versions: 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: 2 versions 💥
+		4.13 -> 4.15 💥
+			Field type changed   ==> Silent error
+				regs                    : struct pt_regs  ->  bpf_user_pt_regs_t
+		4.15 -> 4.18 💥
+			Field added          ==> Compiler error
+				addr                    : __u64
+Summary
+	Struct unavailable      3 times ==> Compiler error
+	Field type changed      1 times ==> Silent error
+	Field added             1 times ==> Compiler error
+

@@ -1,0 +1,61 @@
+=================================== vfsstat ====================================
+kprobe: vfs_open
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Linkage: Non-static ✅
+	Inline: Partial 💥
+		Inline callers: 1 (dentry_open)
+		Func callers: 2 (path_openat, do_last)
+	Changes: 1 versions 💥
+		4.18 -> 5.0 💥
+			Param removed        ==> Silent error
+				cred                    : const (anon) *
+kprobe: vfs_read
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Linkage: Non-static ✅
+	Inline: Partial 💥
+		Inline callers: 1 (vfs_read)
+		Func callers: 5 (ksys_pread64, ksys_read, ksys_read, kernel_read, read_code)
+	Changes: None ✅
+kprobe: vfs_create
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Linkage: Non-static ✅
+	Inline: Partial 💥
+		Inline callers: 1 (vfs_create)
+		Func callers: 2 (do_mknodat, ecryptfs_create)
+	Changes: 2 versions 💥
+		5.11 -> 5.13 💥
+			Param added          ==> Silent error
+				mnt_userns              : struct user_namespace *
+			Param reordered      ==> Silent error
+				  ['dir', 'dentry', 'mode', 'want_excl']
+				->['mnt_userns', 'dir', 'dentry', 'mode', 'want_excl']
+		6.2 -> 6.5 💥
+			Param added          ==> Silent error
+				idmap                   : struct mnt_idmap *
+			Param removed        ==> Silent error
+				mnt_userns              : struct user_namespace *
+kprobe: vfs_write
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Linkage: Non-static ✅
+	Inline: Partial 💥
+		Inline callers: 1 (vfs_write)
+		Func callers: 5 (ksys_pwrite64, ksys_write, ksys_write, kernel_write, redirected_tty_write)
+	Changes: None ✅
+kprobe: vfs_fsync
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Linkage: Non-static ✅
+	Inline: Partial 💥
+		Inline callers: 1 (do_fsync)
+		Func callers: 7 (__compiletime_assert_1591, iomap_swapfile_activate, ecryptfs_fsync, __compiletime_assert_2014, __loop_update_dio, __loop_update_dio, __compiletime_assert_1820)
+	Changes: None ✅
+Summary
+	Partial inline          5 times ==> Silent error
+	Param removed           2 times ==> Silent error
+	Param added             2 times ==> Silent error
+	Param reordered         1 times ==> Silent error
+

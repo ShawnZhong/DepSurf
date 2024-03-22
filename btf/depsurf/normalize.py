@@ -1,6 +1,7 @@
 import logging
+from collections import defaultdict
 
-from .btf import Kind
+from depsurf.btf import Kind
 
 
 class BTFNormalizer:
@@ -57,25 +58,37 @@ class BTFNormalizer:
                 elem[type_key] = self.normalize_impl(elem[type_id])
             del elem[type_id]
 
-    def get_new_list(self, old_list):
+    def get_new_list(self, old_list, expand_anon):
+        new_list = []
+
         anon_count = 0
+        for elem in old_list:
+            t = self.normalize_impl(elem["type_id"])
+            is_anon = elem["name"] == "(anon)"
 
-        def new_item(item):
-            name = item["name"]
-            if name == "(anon)":
-                nonlocal anon_count
+            if is_anon and expand_anon and (t["kind"] in (Kind.STRUCT, Kind.UNION)):
+                t = self.get_raw(elem["type_id"])
+                sub_list = self.get_new_list(t["members"], expand_anon=True)
+                for sub_item in sub_list:
+                    sub_item["bits_offset"] += elem["bits_offset"]
+                    new_list.append(sub_item)
+                continue
 
+            name = elem["name"]
+            if is_anon:
                 if anon_count > 0:
                     name = f"(anon-{anon_count})"
                 anon_count += 1
 
-            return {
-                "name": name,
-                **{k: v for k, v in item.items() if k not in ["name", "type_id"]},
-                "type": self.normalize_impl(item["type_id"]),
-            }
+            new_list.append(
+                {
+                    "name": name,
+                    **{k: v for k, v in elem.items() if k not in ["name", "type_id"]},
+                    "type": t,
+                }
+            )
 
-        return [new_item(item) for item in old_list]
+        return new_list
 
     def normalize_list(self, elem, recurse):
         for list_key in ["params", "members"]:
@@ -86,18 +99,23 @@ class BTFNormalizer:
             del elem["vlen"]
 
             if recurse:
-                elem[list_key] = self.get_new_list(elem[list_key])
+                expand_anon = list_key == "members"
+                elem[list_key] = self.get_new_list(elem[list_key], expand_anon)
             else:
                 del elem[list_key]
                 if list_key == "members":
                     del elem["size"]
 
-    def normalize_impl(self, type_id, recurse=False):
-        if type_id == 0:
-            return {"name": "void", "kind": "VOID"}
-
+    def get_raw(self, type_id):
         elem = self.raw_data[type_id - 1]
         assert elem["id"] == type_id
+        return elem
+
+    def normalize_impl(self, type_id, recurse=False):
+        if type_id == 0:
+            return {"name": "void", "kind": Kind.VOID.value}
+
+        elem = self.get_raw(type_id)
 
         kind = elem["kind"]
 
@@ -130,9 +148,15 @@ class BTFNormalizer:
         return self.normalize_impl(type_id, recurse=True)
 
 
+def load_btf_json(path):
+    import json
+
+    with open(path) as f:
+        return json.load(f)["types"]
+
+
 def normalize_btf(file, result_path=None, overwrite=False):
     import json
-    from collections import defaultdict
     import pickle
 
     if result_path is None:
@@ -153,7 +177,7 @@ def normalize_btf(file, result_path=None, overwrite=False):
     assert json_path.exists()
 
     with open(json_path) as f:
-        data = json.load(f)["types"]
+        data = load_btf_json(json_path)
         normalizer = BTFNormalizer(data)
 
         result = []

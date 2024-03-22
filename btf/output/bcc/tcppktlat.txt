@@ -1,0 +1,282 @@
+================================== tcppktlat ===================================
+tracepoint: tcp_rcv_space_adjust
+	Availability: ❌❌❌❌❌❌❌❌❌❌❌✅✅✅✅✅✅ (6/17 = 35%)
+		Versions: 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+tracepoint: tcp_destroy_sock
+	Availability: ❌❌❌❌❌❌❌❌❌❌❌✅✅✅✅✅✅ (6/17 = 35%)
+		Versions: 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+tracepoint: tcp_probe
+	Availability: ❌❌❌❌❌❌❌❌❌❌❌✅✅✅✅✅✅ (6/17 = 35%)
+		Versions: 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+struct: in6_addr
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+struct: sk_buff
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: 14 versions 💥
+		4.4 -> 4.8 💥
+			Field added          ==> Compiler error
+				offload_fwd_mark        : __u32
+			Field removed        ==> Compiler error
+				ip_defrag_offset        : int
+				dst_pending_confirm     : __u8
+		4.8 -> 4.10 💥
+			Field added          ==> Compiler error
+				dev_scratch             : long unsigned int
+				__cloned_offset         : __u8[0]
+				__unused                : __u8
+				dst_pending_confirm     : __u8
+			Field type changed   ==> Silent error
+				offload_fwd_mark        : __u32  ->  __u8
+		4.10 -> 4.13 💥
+			Field added          ==> Compiler error
+				_nfct                   : long unsigned int
+				csum_not_inet           : __u8
+				tc_skip_classify        : __u8
+				tc_at_ingress           : __u8
+				tc_redirected           : __u8
+				tc_from_ingress         : __u8
+			Field removed        ==> Compiler error
+				nfct                    : struct nf_conntrack *
+				nfctinfo                : __u8
+				csum_bad                : __u8
+				tc_verd                 : __u16
+			Field type changed   ==> Silent error
+				skb_mstamp              : struct skb_mstamp  ->  u64
+				users                   : atomic_t  ->  refcount_t
+		4.13 -> 4.15 💥
+			Field added          ==> Compiler error
+				list                    : struct list_head
+				ip_defrag_offset        : int
+				tcp_tsorted_anchor      : struct list_head
+				offload_mr_fwd_mark     : __u8
+			Field removed        ==> Compiler error
+				__unused                : __u8
+		4.15 -> 4.18 💥
+			Field removed        ==> Compiler error
+				list                    : struct list_head
+		4.18 -> 5.0 💥
+			Field added          ==> Compiler error
+				list                    : struct list_head
+				skb_mstamp_ns           : u64
+				active_extensions       : __u8
+				__pkt_vlan_present_offset: __u8[0]
+				vlan_present            : __u8
+				offload_l3_fwd_mark     : __u8
+				redirected              : __u8
+				from_ingress            : __u8
+				decrypted               : __u8
+				extensions              : struct skb_ext *
+			Field removed        ==> Compiler error
+				skb_mstamp              : u64
+				sp                      : struct sec_path *
+				nf_bridge               : struct nf_bridge_info *
+				offload_mr_fwd_mark     : __u8
+				tc_redirected           : __u8
+				tc_from_ingress         : __u8
+		5.0 -> 5.3 💥
+			Field removed        ==> Compiler error
+				xmit_more               : __u8
+		5.3 -> 5.4 💥
+			Field added          ==> Compiler error
+				scm_io_uring            : __u8
+		5.4 -> 5.8 💥
+			Field removed        ==> Compiler error
+				scm_io_uring            : __u8
+		5.11 -> 5.13 💥
+			Field added          ==> Compiler error
+				_sk_redir               : long unsigned int
+		5.13 -> 5.15 💥
+			Field added          ==> Compiler error
+				pp_recycle              : __u8
+				slow_gro                : __u8
+				scm_io_uring            : __u8
+		5.15 -> 5.19 💥
+			Field added          ==> Compiler error
+				ll_node                 : struct llist_node
+				mono_delivery_time      : __u8
+				nf_skip_egress          : __u8
+				alloc_cpu               : u16
+				headers                 : struct (anon)
+			Field removed        ==> Compiler error
+				headers_start           : __u32[0]
+				headers_end             : __u32[0]
+		5.19 -> 6.2 💥
+			Field added          ==> Compiler error
+				vlan_all                : u32
+			Field removed        ==> Compiler error
+				vlan_present            : __u8
+		6.2 -> 6.5 💥
+			Field added          ==> Compiler error
+				__mono_tc_offset        : __u8[0]
+			Field removed        ==> Compiler error
+				__pkt_vlan_present_offset: __u8[0]
+				scm_io_uring            : __u8
+struct: sock
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: 15 versions 💥
+		4.4 -> 4.8 💥
+			Field added          ==> Compiler error
+				sk_padding              : unsigned int
+				sk_cgrp_data            : struct sock_cgroup_data
+				sk_memcg                : struct mem_cgroup *
+				sk_reuseport_cb         : struct sock_reuseport *
+				sk_rcu                  : struct callback_head
+			Field removed        ==> Compiler error
+				sk_dst_pending_confirm  : __u32
+				sk_cgrp_prioidx         : __u32
+				sk_classid              : u32
+				sk_cgrp                 : struct cg_proto *
+			Field type changed   ==> Silent error
+				sk_shutdown             : unsigned int  ->  u8
+		4.8 -> 4.10 💥
+			Field added          ==> Compiler error
+				sk_tsq_flags            : long unsigned int
+				sk_dst_pending_confirm  : __u32
+				__sk_flags_offset       : unsigned int[0]
+				sk_uid                  : kuid_t
+		4.10 -> 4.13 💥
+			Field added          ==> Compiler error
+				sk_pacing_status        : u32
+				sk_kern_sock            : unsigned int
+			Field type changed   ==> Silent error
+				sk_wmem_alloc           : atomic_t  ->  refcount_t
+		4.13 -> 4.15 💥
+			Field added          ==> Compiler error
+				tcp_rtx_queue           : struct rb_root
+				sk_pacing_shift         : u8
+				sk_peer_lock            : spinlock_t
+				sk_zckey                : atomic_t
+		4.15 -> 4.18 💥
+			Field added          ==> Compiler error
+				sk_route_forced_caps    : netdev_features_t
+				sk_validate_xmit_skb    : struct sk_buff * (*)(struct sock *, struct net_device *, struct sk_buff *)
+			Field removed        ==> Compiler error
+				sk_peer_lock            : spinlock_t
+		4.18 -> 5.0 💥
+			Field added          ==> Compiler error
+				sk_clockid              : u8
+				sk_txtime_deadline_mode : u8
+				sk_txtime_report_errors : u8
+				sk_txtime_unused        : u8
+			Field type changed   ==> Silent error
+				sk_pacing_rate          : u32  ->  long unsigned int
+				sk_max_pacing_rate      : u32  ->  long unsigned int
+		5.0 -> 5.3 💥
+			Field added          ==> Compiler error
+				sk_rx_skb_cache         : struct sk_buff *
+				sk_tx_skb_cache         : struct sk_buff *
+				sk_bpf_storage          : struct bpf_sk_storage *
+		5.3 -> 5.4 💥
+			Field added          ==> Compiler error
+				sk_peer_lock            : spinlock_t
+		5.4 -> 5.4 💥
+			Field added          ==> Compiler error
+				sk_wait_pending         : int
+		5.4 -> 5.8 💥
+			Field removed        ==> Compiler error
+				sk_wait_pending         : int
+				__sk_flags_offset       : unsigned int[0]
+				sk_peer_lock            : spinlock_t
+			Field type changed   ==> Silent error
+				sk_padding              : unsigned int  ->  u8
+				sk_kern_sock            : unsigned int  ->  u8
+				sk_no_check_tx          : unsigned int  ->  u8
+				sk_no_check_rx          : unsigned int  ->  u8
+				sk_userlocks            : unsigned int  ->  u8
+				sk_protocol             : unsigned int  ->  u16
+				sk_type                 : unsigned int  ->  u16
+		5.8 -> 5.11 💥
+			Field added          ==> Compiler error
+				sk_prefer_busy_poll     : u8
+				sk_busy_poll_budget     : u16
+				sk_peer_lock            : spinlock_t
+			Field type changed   ==> Silent error
+				sk_bpf_storage          : struct bpf_sk_storage *  ->  struct bpf_local_storage *
+		5.11 -> 5.13 💥
+			Field added          ==> Compiler error
+				sk_rx_dst_ifindex       : int
+				sk_rx_dst_cookie        : u32
+		5.13 -> 5.15 💥
+			Field added          ==> Compiler error
+				sk_wait_pending         : int
+				sk_bind_phc             : int
+			Field type changed   ==> Silent error
+				sk_tskey                : u32  ->  atomic_t
+		5.15 -> 5.19 💥
+			Field added          ==> Compiler error
+				sk_reserved_mem         : u32
+				sk_gso_disabled         : u8
+				sk_txrehash             : u8
+				ns_tracker              : netns_tracker
+			Field removed        ==> Compiler error
+				sk_rx_skb_cache         : struct sk_buff *
+				sk_wait_pending         : int
+				sk_tx_skb_cache         : struct sk_buff *
+				sk_route_nocaps         : netdev_features_t
+				sk_route_forced_caps    : netdev_features_t
+				sk_padding              : u8
+		5.19 -> 6.2 💥
+			Field added          ==> Compiler error
+				sk_wait_pending         : int
+				sk_use_task_frag        : bool
+				sk_bind2_node           : struct hlist_node
+			Field type changed   ==> Silent error
+				sk_tsflags              : u16  ->  u32
+struct: sock_common
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: 3 versions 💥
+		4.4 -> 4.8 💥
+			Field type changed   ==> Silent error
+				skc_portaddr_node       : struct hlist_nulls_node  ->  struct hlist_node
+		4.10 -> 4.13 💥
+			Field type changed   ==> Silent error
+				skc_refcnt              : atomic_t  ->  refcount_t
+		4.18 -> 5.0 💥
+			Field added          ==> Compiler error
+				skc_rx_queue_mapping    : short unsigned int
+			Field type changed   ==> Silent error
+				skc_tx_queue_mapping    : int  ->  short unsigned int
+struct: inet_sock
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: 4 versions 💥
+		4.10 -> 4.13 💥
+			Field added          ==> Compiler error
+				defer_connect           : __u8
+		5.8 -> 5.11 💥
+			Field added          ==> Compiler error
+				recverr_rfc4884         : __u8
+		5.11 -> 5.13 💥
+			Field removed        ==> Compiler error
+				rx_dst_ifindex          : int
+		5.19 -> 6.2 💥
+			Field added          ==> Compiler error
+				local_port_range        : struct (anon)
+			Field type changed   ==> Silent error
+				inet_id                 : __u16  ->  atomic_t
+struct: tcphdr
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+struct: bpf_ringbuf
+	Availability: ❌❌❌❌❌❌❌❌❌❌✅✅✅✅✅✅✅ (7/17 = 41%)
+		Versions: 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: 1 versions 💥
+		5.19 -> 6.2 💥
+			Field added          ==> Compiler error
+				busy                    : atomic_t
+Summary
+	Function unavailable   33 times ==> Runtime error
+	Field added            82 times ==> Compiler error
+	Field removed          36 times ==> Compiler error
+	Field type changed     21 times ==> Silent error
+	Struct unavailable     10 times ==> Compiler error
+

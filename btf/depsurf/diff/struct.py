@@ -1,31 +1,15 @@
-from enum import Enum
-from ..btf import Kind
-from .impl import diff_dict, DiffChanges
+from depsurf.btf import Kind
+from depsurf.cause import StructChange
+
+from .changes import DiffChanges
+from .utils import diff_dict
 
 
-class StructChange(str, Enum):
-    ADD = "Field added"
-    REMOVE = "Field removed"
-    TYPE = "Field type changed"
-    LAYOUT = "Layout changed"
-
-    @property
-    def consequence(self):
-        from . import Consequence
-
-        return {
-            StructChange.ADD: Consequence.COMPILER,
-            StructChange.REMOVE: Consequence.COMPILER,
-            StructChange.TYPE: Consequence.SLIENT,
-            StructChange.LAYOUT: Consequence.CORE,
-        }[self]
-
-
-def diff_struct(old, new):
+def diff_struct(old, new, assert_diff=False):
     assert old["kind"] == new["kind"]
     assert old["kind"] in (Kind.STRUCT, Kind.UNION)
 
-    result = DiffChanges()
+    changes = DiffChanges()
 
     old_members = {m["name"]: m for m in old["members"]}
     new_members = {m["name"]: m for m in new["members"]}
@@ -34,41 +18,35 @@ def diff_struct(old, new):
 
     # added field
     if added:
-        result.add(
+        changes.add(
             StructChange.ADD,
-            [f"{name:20}: {value['type']}" for name, value in added.items()],
+            [(name, value["type"]) for name, value in added.items()],
         )
 
     # removed field
     if removed:
-        result.add(
+        changes.add(
             StructChange.REMOVE,
-            [f"{name:20}: {value['type']}" for name, value in removed.items()],
+            [(name, value["type"]) for name, value in removed.items()],
         )
 
     # fields changed type
-    changed_types = {
-        name: (old_value["type"], new_value["type"])
+    changed_types = [
+        (name, old_value["type"], new_value["type"])
         for name, (old_value, new_value) in common.items()
         if old_value["type"] != new_value["type"]
-    }
+    ]
     if changed_types:
-        result.add(
-            StructChange.TYPE,
-            [
-                f"{name:20}: {old_type}\n{'':20}->{new_type}"
-                for name, (old_type, new_type) in changed_types.items()
-            ],
-        )
+        changes.add(StructChange.TYPE, changed_types)
 
     # fields changed offset
+    offset_changed = False
     old_offset = {name: old_members[name]["bits_offset"] for name in old_members}
     new_offset = {name: new_members[name]["bits_offset"] for name in new_members}
     if old_offset != new_offset or old["size"] != new["size"]:
-        result.add(
-            StructChange.LAYOUT,
-            [],
-        )
+        # result.add(StructChange.LAYOUT, [])
+        offset_changed = True
 
-    assert result, f"\n{old}\n{new}"
-    return result
+    if assert_diff:
+        assert changes or offset_changed, f"\n{old}\n{new}"
+    return changes

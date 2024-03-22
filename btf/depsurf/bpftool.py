@@ -1,5 +1,6 @@
 from pathlib import Path
 import logging
+from depsurf.utils import system
 
 
 def get_linux_tools_path():
@@ -22,8 +23,6 @@ BPFTOOL_PATH = get_bpftool_path()
 
 
 def gen_min_btf(obj_file, overwrite=False):
-    from .utils.system import system
-
     btf_file = obj_file.with_suffix(".btf")
     if btf_file.exists() and not overwrite:
         logging.info(f"{btf_file} already exists")
@@ -31,11 +30,10 @@ def gen_min_btf(obj_file, overwrite=False):
 
     kernel_btf = "/sys/kernel/btf/vmlinux"
     system(f"{BPFTOOL_PATH} gen min_core_btf {kernel_btf} {btf_file} {obj_file}")
+    return btf_file
 
 
 def dump_btf(file, overwrite=False):
-    from .utils.system import system
-
     for ext, cmd in [
         (".h", "format c"),
         (".txt", "format raw"),

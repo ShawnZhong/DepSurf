@@ -1,0 +1,63 @@
+================================= slabratetop ==================================
+kprobe: kmem_cache_alloc
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Linkage: Non-static ✅
+	Inline: None ✅
+		Func callers: 224 (kvm_arch_vcpu_create, __compiletime_assert_2063, __compiletime_assert_2063, dup_mm, mm_alloc, vm_area_dup, vm_area_alloc, alloc_uid, __sigqueue_alloc, alloc_pid, create_new_namespaces, prepare_kernel_cred, prepare_creds, cred_alloc_blank, sched_create_group, do_timer_create, copy_utsname, create_user_ns, copy_pid_ns, audit_log_start, tag_mount, delayacct_init, __delayacct_tsk_init, taskstats_exit, trace_create_new_event, __trace_define_field, mempool_alloc_slab, shmem_alloc_inode, create_kmalloc_cache, create_cache, __kmem_cache_alloc_bulk, anon_vma_fork, anon_vma_fork, __compiletime_assert_267, __compiletime_assert_267, __anon_vma_prepare, __anon_vma_prepare, pcpu_get_vm_areas, pcpu_get_vm_areas, pcpu_get_vm_areas, alloc_vmap_area, vmalloc_init, vmalloc_init, vmalloc_init, __compiletime_assert_1064, mpol_set_shared_policy, mpol_set_shared_policy, mpol_set_shared_policy, __mpol_dup, mpol_new, __ksm_enter, ksm_scan_thread, cmp_and_merge_page, alloc_stable_node_chain, __compiletime_assert_4232, slab_memory_callback, __khugepaged_enter, zs_malloc, zs_malloc, __alloc_file, __compiletime_assert_1222, getname_kernel, getname_flags, fasync_helper, fasync_alloc, __compiletime_assert_1724, alloc_inode, __compiletime_assert_358, alloc_vfsmnt, seq_open, __arm64_sys_getcwd, copy_fs_struct, alloc_buffer_head, bdev_alloc_inode, do_blockdev_direct_IO, __compiletime_assert_598, __compiletime_assert_320, __compiletime_assert_320, __arm64_sys_inotify_add_watch, fanotify_alloc_event, fanotify_alloc_event, fanotify_add_mark, ep_ptable_queue_proc, ep_insert, __arm64_sys_userfaultfd, __compiletime_assert_683, io_submit_one, ioctx_alloc, io_get_req, io_get_req, fscrypt_initialize, fscrypt_get_ctx, fscrypt_get_encryption_info, fsverity_create_info, locks_alloc_lock, __compiletime_assert_273, __compiletime_assert_101, dquot_alloc, proc_reg_open, proc_alloc_inode, __proc_create, proc_net_ns_init, __kernfs_iattrs, __kernfs_new_node, configfs_new_dirent, get_dcookie, __compiletime_assert_122, __compiletime_assert_1864, __compiletime_assert_757, ext4_inode_attach_jinode, ext4_free_blocks, ext4_mb_new_blocks, ext4_mb_new_group_pa, __compiletime_assert_3717, ext4_mb_add_groupinfo, ext4_init_io_end, ext4_alloc_inode, start_this_handle, jbd2__journal_start, jbd2__journal_start, jbd2_journal_init_revoke_table, insert_revoke_hash, jbd2_journal_add_journal_head, jbd2_journal_add_journal_head, jbd2_alloc, squashfs_alloc_inode, hugetlbfs_alloc_inode, fat_cache_add, fat_parse_long, fat_alloc_inode, vfat_build_slots, ecryptfs_open, ecryptfs_dir_open, ecryptfs_lookup, ecryptfs_mount, ecryptfs_mount, ecryptfs_alloc_inode, ecryptfs_write_inode_size_to_metadata, ecryptfs_add_new_key_tfm, ecryptfs_read_metadata, ecryptfs_add_global_auth_tok, ecryptfs_add_keysig, __compiletime_assert_2420, ecryptfs_parse_packet_set, ecryptfs_parse_packet_set, fuse_request_alloc, fuse_alloc_inode, mqueue_alloc_inode, key_alloc, key_alloc, __compiletime_assert_1474, __compiletime_assert_997, lsm_inode_alloc, avc_alloc_node, avc_xperms_decision_alloc, avc_xperms_decision_alloc, avc_xperms_decision_alloc, avc_xperms_decision_alloc, avc_xperms_populate, ebitmap_read, ebitmap_read, ebitmap_set_bit, ebitmap_netlbl_import, ebitmap_netlbl_import, ebitmap_cpy, hashtab_insert, hashtab_insert, hashtab_insert, avtab_insert_node, avtab_insert_node, smack_cred_prepare, __compiletime_assert_225, __compiletime_assert_114, ima_d_path, bvec_alloc, btree_alloc, acpi_ns_create_node, acpi_os_acquire_object, acpi_ut_allocate_object_desc_dbg, acpi_ut_create_generic_state, split_and_remove_iova, split_and_remove_iova, split_and_remove_iova, __compiletime_assert_676, alloc_iova, alloc_iova_mem, fw_get_filesystem_firmware, dax_alloc_inode, __compiletime_assert_2603, dwc2_hcd_qh_init_ddma, uhci_urb_enqueue, dm_path_uevent, sock_alloc_inode, sk_prot_alloc, skb_ext_add, skb_ext_add, __compiletime_assert_1432, __build_skb, copy_net_ns, dst_alloc, inet_getpeer, inet_bind_bucket_create, inet_twsk_alloc, inet_reqsk_alloc, __compiletime_assert_1754, __compiletime_assert_1178, __compiletime_assert_1178, __compiletime_assert_1079, inet_frag_create, __compiletime_assert_1270, __compiletime_assert_1127, xfrm_state_alloc, node_alloc, __compiletime_assert_1466, __compiletime_assert_1138, __radix_tree_preload, radix_tree_node_alloc, radix_tree_node_alloc, xas_alloc, __xas_nomem, __xas_nomem, __xas_nomem, __xas_nomem, xas_nomem)
+	Changes: None ✅
+struct: kmem_cache
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: 7 versions 💥
+		4.4 -> 4.8 💥
+			Field added          ==> Compiler error
+				red_left_pad            : int
+				random_seq              : unsigned int *
+			Field type changed   ==> Silent error
+				cpu_partial             : unsigned int  ->  int
+		4.8 -> 4.10 💥
+			Field type changed   ==> Silent error
+				node                    : struct kmem_cache_node *[64]  ->  struct kmem_cache_node *[1024]
+		4.10 -> 4.13 💥
+			Field added          ==> Compiler error
+				kobj_remove_work        : struct work_struct
+		4.13 -> 4.15 💥
+			Field added          ==> Compiler error
+				random                  : long unsigned int
+			Field type changed   ==> Silent error
+				flags                   : long unsigned int  ->  slab_flags_t
+				cpu_partial             : int  ->  unsigned int
+		4.15 -> 4.18 💥
+			Field added          ==> Compiler error
+				useroffset              : unsigned int
+				usersize                : unsigned int
+			Field removed        ==> Compiler error
+				reserved                : int
+			Field type changed   ==> Silent error
+				size                    : int  ->  unsigned int
+				object_size             : int  ->  unsigned int
+				offset                  : int  ->  unsigned int
+				inuse                   : int  ->  unsigned int
+				align                   : int  ->  unsigned int
+				red_left_pad            : int  ->  unsigned int
+				max_attr_size           : int  ->  unsigned int
+				remote_node_defrag_ratio: int  ->  unsigned int
+		5.8 -> 5.11 💥
+			Field added          ==> Compiler error
+				reciprocal_size         : struct reciprocal_value
+			Field removed        ==> Compiler error
+				kobj_remove_work        : struct work_struct
+				memcg_params            : struct memcg_cache_params
+				max_attr_size           : unsigned int
+				memcg_kset              : struct kset *
+		5.15 -> 5.19 💥
+			Field added          ==> Compiler error
+				cpu_partial_slabs       : unsigned int
+			Field removed        ==> Compiler error
+				max                     : struct kmem_cache_order_objects
+Summary
+	Field added             8 times ==> Compiler error
+	Field type changed     12 times ==> Silent error
+	Field removed           6 times ==> Compiler error
+

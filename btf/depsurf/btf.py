@@ -2,10 +2,11 @@ from enum import Enum
 from pathlib import Path
 import logging
 
-from .linux.version import get_linux_version_short, get_linux_version_tuple
+from depsurf.linux.version import get_linux_version_short, get_linux_version_tuple
 
 
 class Kind(str, Enum):
+    VOID = "VOID"
     INT = "INT"
     PTR = "PTR"
     ARRAY = "ARRAY"

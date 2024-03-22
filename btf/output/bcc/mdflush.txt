@@ -1,0 +1,187 @@
+=================================== mdflush ====================================
+kprobe: md_flush_request
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Linkage: Non-static ✅
+	Inline: None ✅
+	Changes: 3 versions 💥
+		4.13 -> 4.15 💥
+			Return type changed  ==> Silent error
+				void  ->  bool
+		4.15 -> 4.18 💥
+			Return type changed  ==> Silent error
+				bool  ->  void
+		4.18 -> 5.0 💥
+			Return type changed  ==> Silent error
+				void  ->  bool
+struct: gendisk
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: 10 versions 💥
+		4.4 -> 4.8 💥
+			Field added          ==> Compiler error
+				bb                      : struct badblocks *
+			Field removed        ==> Compiler error
+				driverfs_dev            : struct device *
+		4.13 -> 4.15 💥
+			Field added          ==> Compiler error
+				lockdep_map             : struct lockdep_map
+		4.15 -> 4.18 💥
+			Field added          ==> Compiler error
+				lookup_sem              : struct rw_semaphore
+		5.0 -> 5.3 💥
+			Field added          ==> Compiler error
+				event_flags             : short unsigned int
+			Field removed        ==> Compiler error
+				async_events            : unsigned int
+			Field type changed   ==> Silent error
+				events                  : unsigned int  ->  short unsigned int
+		5.4 -> 5.8 💥
+			Field added          ==> Compiler error
+				cdi                     : struct cdrom_device_info *
+			Field removed        ==> Compiler error
+				devnode                 : char * (*)(struct gendisk *, umode_t *)
+		5.8 -> 5.11 💥
+			Field added          ==> Compiler error
+				state                   : long unsigned int
+			Field removed        ==> Compiler error
+				lookup_sem              : struct rw_semaphore
+			Field type changed   ==> Silent error
+				part0                   : struct hd_struct  ->  struct block_device *
+		5.11 -> 5.13 💥
+			Field type changed   ==> Silent error
+				part_tbl                : struct disk_part_tbl *  ->  struct xarray
+		5.13 -> 5.15 💥
+			Field added          ==> Compiler error
+				open_mutex              : struct mutex
+				open_partitions         : unsigned int
+				bdi                     : struct backing_dev_info *
+				slave_bdevs             : struct list_head
+				diskseq                 : u64
+		5.19 -> 6.2 💥
+			Field added          ==> Compiler error
+				bio_split               : struct bio_set
+				queue_kobj              : struct kobject
+				nr_zones                : unsigned int
+				max_open_zones          : unsigned int
+				max_active_zones        : unsigned int
+				conv_zones_bitmap       : long unsigned int *
+				seq_zones_wlock         : long unsigned int *
+				ia_ranges               : struct blk_independent_access_ranges *
+		6.2 -> 6.5 💥
+			Field added          ==> Compiler error
+				open_mode               : blk_mode_t
+			Field removed        ==> Compiler error
+				integrity_kobj          : struct kobject
+struct: block_device
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: 7 versions 💥
+		4.4 -> 4.8 💥
+			Field removed        ==> Compiler error
+				bd_inodes               : struct list_head
+				bd_bdi                  : struct backing_dev_info *
+		4.10 -> 4.13 💥
+			Field added          ==> Compiler error
+				bd_bdi                  : struct backing_dev_info *
+		4.13 -> 4.15 💥
+			Field added          ==> Compiler error
+				bd_partno               : u8
+		5.8 -> 5.11 💥
+			Field added          ==> Compiler error
+				bd_start_sect           : sector_t
+				bd_stats                : struct disk_stats *
+				bd_stamp                : long unsigned int
+				bd_read_only            : bool
+				bd_device               : struct device
+				bd_holder_dir           : struct kobject *
+				bd_size_lock            : spinlock_t
+				bd_fsfreeze_sb          : struct super_block *
+				bd_meta_info            : struct partition_meta_info *
+			Field removed        ==> Compiler error
+				bd_contains             : struct block_device *
+				bd_block_size           : unsigned int
+				bd_part                 : struct hd_struct *
+				bd_invalidated          : int
+				bd_queue                : struct request_queue *
+				bd_list                 : struct list_head
+				bd_private              : long unsigned int
+		5.13 -> 5.15 💥
+			Field removed        ==> Compiler error
+				bd_mutex                : struct mutex
+				bd_holder_disks         : struct list_head
+				bd_part_count           : unsigned int
+				bd_bdi                  : struct backing_dev_info *
+		5.15 -> 5.19 💥
+			Field added          ==> Compiler error
+				bd_nr_sectors           : sector_t
+				bd_queue                : struct request_queue *
+			Field type changed   ==> Silent error
+				bd_openers              : int  ->  atomic_t
+		6.2 -> 6.5 💥
+			Field added          ==> Compiler error
+				bd_has_submit_bio       : bool
+				bd_holder_ops           : const (anon) *
+				bd_holder_lock          : struct mutex
+struct: bio
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: 10 versions 💥
+		4.4 -> 4.8 💥
+			Field added          ==> Compiler error
+				bi_opf                  : unsigned int
+				bi_ioprio               : short unsigned int
+			Field removed        ==> Compiler error
+				bi_rw                   : long unsigned int
+			Field type changed   ==> Silent error
+				bi_flags                : unsigned int  ->  short unsigned int
+		4.10 -> 4.13 💥
+			Field added          ==> Compiler error
+				bi_status               : blk_status_t
+				bi_write_hint           : short unsigned int
+			Field removed        ==> Compiler error
+				bi_error                : int
+		4.13 -> 4.15 💥
+			Field added          ==> Compiler error
+				bi_disk                 : struct gendisk *
+				bi_partno               : u8
+			Field removed        ==> Compiler error
+				bi_bdev                 : struct block_device *
+		4.18 -> 5.0 💥
+			Field added          ==> Compiler error
+				bi_blkg                 : struct blkcg_gq *
+				bi_issue                : struct bio_issue
+			Field removed        ==> Compiler error
+				bi_ioc                  : struct io_context *
+				bi_css                  : struct cgroup_subsys_state *
+		5.0 -> 5.3 💥
+			Field removed        ==> Compiler error
+				bi_phys_segments        : unsigned int
+				bi_seg_front_size       : unsigned int
+				bi_seg_back_size        : unsigned int
+		5.3 -> 5.4 💥
+			Field added          ==> Compiler error
+				bi_iocost_cost          : u64
+		5.4 -> 5.8 💥
+			Field added          ==> Compiler error
+				bi_crypt_context        : struct bio_crypt_ctx *
+		5.11 -> 5.13 💥
+			Field added          ==> Compiler error
+				bi_bdev                 : struct block_device *
+			Field removed        ==> Compiler error
+				bi_disk                 : struct gendisk *
+				bi_partno               : u8
+		5.15 -> 5.19 💥
+			Field added          ==> Compiler error
+				bi_cookie               : blk_qc_t
+			Field removed        ==> Compiler error
+				bi_write_hint           : short unsigned int
+		5.19 -> 6.2 💥
+			Field type changed   ==> Silent error
+				bi_opf                  : unsigned int  ->  blk_opf_t
+Summary
+	Field added            48 times ==> Compiler error
+	Field removed          29 times ==> Compiler error
+	Field type changed      6 times ==> Silent error
+	Return type changed     3 times ==> Silent error
+

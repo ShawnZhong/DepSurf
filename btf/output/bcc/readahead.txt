@@ -1,0 +1,25 @@
+================================== readahead ===================================
+kprobe: __page_cache_alloc
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅❌❌❌ (14/17 = 82%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15
+	Linkage: Non-static ✅
+	Inline: Partial 💥
+		Inline callers: 1 (__page_cache_alloc)
+		Func callers: 4 (do_read_cache_page, generic_file_buffered_read, pagecache_get_page, __do_page_cache_readahead)
+	Changes: None ✅
+kprobe: do_page_cache_ra
+	Availability: ❌❌❌❌❌❌❌❌❌❌❌✅✅✅❌❌❌ (3/17 = 18%)
+		Versions: 5.11, 5.13, 5.15
+	Funcion symbol: do_page_cache_ra not found in DWARF
+	Changes: None ✅
+kprobe: mark_page_accessed
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Linkage: Non-static ✅
+	Inline: None ✅
+		Func callers: 15 (kvm_set_pfn_accessed, do_read_cache_page, generic_file_buffered_read, pagecache_get_page, shmem_put_link, shmem_file_read_iter, shmem_getpage_gfp, shmem_swapin_page, follow_page_pte, unmap_page_range, try_to_merge_one_page, touch_buffer, touch_buffer, __find_get_block, iomap_zero_range_actor)
+	Changes: None ✅
+Summary
+	Function unavailable   17 times ==> Runtime error
+	Partial inline          1 times ==> Silent error
+

@@ -1,7 +1,7 @@
 def parse_structs(obj_file):
-    from ..btf import Kind, BTF
-    from ..normalize import normalize_btf
-    from ..bpftool import gen_min_btf, dump_btf
+    from depsurf.btf import Kind, BTF
+    from depsurf.normalize import normalize_btf
+    from depsurf.bpftool import gen_min_btf, dump_btf
 
     btf_file = gen_min_btf(obj_file)
     dump_btf(btf_file)

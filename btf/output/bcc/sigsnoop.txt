@@ -1,0 +1,44 @@
+=================================== sigsnoop ===================================
+tracepoint: sys_enter_tgkill
+	Availability: ❌❌❌❌❌✅✅✅✅✅✅✅✅✅✅✅✅ (12/17 = 71%)
+		Versions: 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+tracepoint: sys_enter_kill
+	Availability: ❌❌❌❌❌✅✅✅✅✅✅✅✅✅✅✅✅ (12/17 = 71%)
+		Versions: 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+tracepoint: signal_generate
+	Availability: ❌❌❌❌❌❌❌❌❌❌❌✅✅✅✅✅✅ (6/17 = 35%)
+		Versions: 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+tracepoint: sys_exit_tgkill
+	Availability: ❌❌❌❌❌✅✅✅✅✅✅✅✅✅✅✅✅ (12/17 = 71%)
+		Versions: 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+tracepoint: sys_exit_tkill
+	Availability: ❌❌❌❌❌✅✅✅✅✅✅✅✅✅✅✅✅ (12/17 = 71%)
+		Versions: 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+tracepoint: sys_enter_tkill
+	Availability: ❌❌❌❌❌✅✅✅✅✅✅✅✅✅✅✅✅ (12/17 = 71%)
+		Versions: 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+tracepoint: sys_exit_kill
+	Availability: ❌❌❌❌❌✅✅✅✅✅✅✅✅✅✅✅✅ (12/17 = 71%)
+		Versions: 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+struct: trace_event_raw_signal_generate
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+struct: syscall_trace_enter
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+struct: syscall_trace_exit
+	Availability: ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅ (17/17 = 100%)
+		Versions: 4.4, 4.8, 4.10, 4.13, 4.15, 4.18, 5.0, 5.3, 5.4, 5.4, 5.8, 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+Summary
+	Function unavailable   41 times ==> Runtime error
+

@@ -18,21 +18,16 @@ def setup_logging():
     )
 
 
+setup_logging()
+
+
 def setup_pandas():
-    try:
-        import pandas as pd
-    except ImportError:
-        logging.warning("pandas is not installed")
-        return
+    import pandas as pd
 
     pd.set_option("display.min_rows", 300)
     pd.set_option("display.max_rows", 300)
     pd.set_option("display.width", 1000)
     pd.set_option("display.max_colwidth", 1000)
-
-
-setup_pandas()
-setup_logging()
 
 
 def reload_depsurf():
@@ -45,4 +40,4 @@ def reload_depsurf():
 
     import depsurf
 
-    return reload(depsurf)
+    reload(depsurf)

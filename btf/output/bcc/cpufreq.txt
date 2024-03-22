@@ -1,0 +1,10 @@
+=================================== cpufreq ====================================
+tracepoint: cpu_frequency
+	Availability: ❌❌❌❌❌❌❌❌❌❌❌✅✅✅✅✅✅ (6/17 = 35%)
+		Versions: 5.11, 5.13, 5.15, 5.19, 6.2, 6.5
+	Changes: None ✅
+perf_event: 
+		Unsupported hook type: perf_event
+Summary
+	Function unavailable   11 times ==> Runtime error
+

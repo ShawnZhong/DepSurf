@@ -6,16 +6,34 @@
 
 char LICENSE[] SEC("license") = "GPL";
 
-static __always_inline int strncmp(const char *s1, const char *s2,
-                                   unsigned long n) {
-  int i;
-  for (i = 0; i < n; i++) {
-    if (s1[i] != s2[i]) {
-      return s1[i] - s2[i];
-    }
-  }
-  return 0;
+struct task_struct___foo {
+  union {
+    struct {
+      struct {
+        int foo;
+        int bar;
+        unsigned int __state;
+      };
+    };
+  };
+} __attribute__((preserve_access_index));
+
+SEC("kprobe/close_fd")
+int prog(struct pt_regs* ctx) {
+  struct task_struct___foo* t = (void*)PT_REGS_PARM1(ctx);  // get the 1st arg
+  return t->__state;
 }
+
+// static __always_inline int strncmp(const char *s1, const char *s2,
+//                                    unsigned long n) {
+//   int i;
+//   for (i = 0; i < n; i++) {
+//     if (s1[i] != s2[i]) {
+//       return s1[i] - s2[i];
+//     }
+//   }
+//   return 0;
+// }
 
 // SEC("lsm/inode_setxattr")
 // int prog(struct pt_regs *ctx) {
@@ -58,12 +76,12 @@ static __always_inline int strncmp(const char *s1, const char *s2,
 //   return 0;  // not used
 // }
 
-SEC("kprobe/do_execveat_common")
-int prog(struct pt_regs *ctx) {
-  // unsigned long arg1 = ctx->di;
-  unsigned long arg1 = PT_REGS_PARM2(ctx);
-  struct filename *f = (void *)arg1;
-  const char *str;
-  bpf_probe_read(&str, sizeof(str), &f->name);
-  bpf_printk("execve: %s", name);
-}
+// SEC("kprobe/do_execveat_common")
+// int prog(struct pt_regs *ctx) {
+//   // unsigned long arg1 = ctx->di;
+//   unsigned long arg1 = PT_REGS_PARM2(ctx);
+//   struct filename *f = (void *)arg1;
+//   const char *str;
+//   bpf_probe_read(&str, sizeof(str), &f->name);
+//   bpf_printk("execve: %s", name);
+// }
