@@ -28,7 +28,7 @@ class UbuntuVersion:
     @property
     def url_prefix(self):
         if self.debug:
-            return "http://ddebs.ubuntu.com"
+            return "https://ppa.launchpadcontent.net/canonical-kernel-team/ppa/ubuntu/"
         else:
             return {
                 "x86": "http://security.ubuntu.com/ubuntu",

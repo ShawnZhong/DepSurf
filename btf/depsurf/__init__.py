@@ -1,11 +1,9 @@
 import logging
 
-from .bpftool import *
 from .btf import *
-from .dwarf import *
+from .elf import *
 from .diff import *
 from .linux import *
-from .normalize import *
 from .paths import *
 from .score import *
 from .utils import *

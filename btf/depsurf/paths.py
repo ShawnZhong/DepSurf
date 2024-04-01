@@ -8,6 +8,13 @@ assert DATA_PATH.exists()
 OUTPUT_PATH = PROJ_PATH / "output"
 assert OUTPUT_PATH.exists()
 
+DBGSYM_PATH = DATA_PATH / "dbgsym"
+
+BCC_PATH = PROJ_PATH.parent / "bcc"
+assert BCC_PATH.exists()
+
+BCC_OUTPUT_PATH = BCC_PATH / "libbpf-tools" / ".output"
+
 
 def get_sorted_linux_paths(paths):
     from .linux.version import get_linux_version_tuple

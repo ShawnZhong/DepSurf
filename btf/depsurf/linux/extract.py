@@ -1,22 +1,15 @@
+from .utils import extract_deb
+
 import logging
 
 
 def extract_vmlinuz_files(deb_paths, result_path):
-    from depsurf.utils.system import system
-
     result_path.mkdir(parents=True, exist_ok=True)
 
     results = {}
     for name, deb_path in deb_paths.items():
         vmlinuz_path = result_path / f"{name}.vmlinuz"
-        if not vmlinuz_path.exists():
-            logging.info(f"Extracting {deb_path} to {vmlinuz_path}")
-            # system(f"dpkg -x {deb_path} {tmp_path}")
-            system(
-                f"dpkg --fsys-tarfile {deb_path} | tar -xO ./boot/vmlinuz-{name} > {vmlinuz_path}"
-            )
-        else:
-            logging.info(f"Using {vmlinuz_path}")
+        extract_deb(deb_path, f"./boot/vmlinuz-{name}", vmlinuz_path)
         results[name] = vmlinuz_path
     return results
 

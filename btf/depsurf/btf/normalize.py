@@ -1,7 +1,8 @@
 import logging
 from collections import defaultdict
 
-from depsurf.btf import Kind
+from .kind import Kind
+from .raw import load_btf_json
 
 
 class BTFNormalizer:
@@ -146,13 +147,6 @@ class BTFNormalizer:
 
     def normalize(self, type_id):
         return self.normalize_impl(type_id, recurse=True)
-
-
-def load_btf_json(path):
-    import json
-
-    with open(path) as f:
-        return json.load(f)["types"]
 
 
 def normalize_btf(file, result_path=None, overwrite=False):

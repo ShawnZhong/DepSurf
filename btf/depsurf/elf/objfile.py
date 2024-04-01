@@ -1,21 +1,11 @@
-from elftools.dwarf.compileunit import CompileUnit
-from elftools.dwarf.die import DIE
+from pathlib import Path
+
 from elftools.elf.elffile import ELFFile
-
-
-def disable_dwarf_cache():
-    from elftools.dwarf.dwarfinfo import CompileUnit
-
-    def _get_cached_DIE(self: CompileUnit, offset):
-        top_die_stream = self.get_top_DIE().stream
-        return DIE(cu=self, stream=top_die_stream, offset=offset)
-
-    CompileUnit._get_cached_DIE = _get_cached_DIE
 
 
 def arg_elf_or_path(func):
     def wrapper(file, *args, **kwargs):
-        if isinstance(file, str):
+        if isinstance(file, (str, Path)):
             with open(file, "rb") as f:
                 elffile = ELFFile(f)
                 return func(elffile, *args, **kwargs)
@@ -28,10 +18,10 @@ def arg_elf_or_path(func):
 
 
 @arg_elf_or_path
-def get_symbol_info_impl(elffile: ELFFile):
+def get_symbol_info(elffile: ELFFile):
     import pandas as pd
 
-    symtab = elffile.get_section_by_name(".0")
+    symtab = elffile.get_section_by_name(".symtab")
     if symtab is None:
         raise ValueError("No symbol table found. Perhaps this is a stripped binary?")
 
@@ -48,7 +38,7 @@ def get_symbol_info_impl(elffile: ELFFile):
                 ),
                 **sym.entry.st_info,
                 **sym.entry.st_other,
-                "value": sym.entry.st_value,
+                "value": f"{sym.entry.st_value:x}",
                 "size": sym.entry.st_size,
                 # **{k: v for k, v in sym.entry.items() if k not in ("st_info", "st_other", "st_name", "st_shndx")},
             }
@@ -63,17 +53,38 @@ def get_symbol_info_impl(elffile: ELFFile):
 
 
 @arg_elf_or_path
-def get_section_info_impl(elffile: ELFFile):
+def get_section_info(elffile: ELFFile):
     import pandas as pd
 
     df = pd.DataFrame(
         [
             {
                 "name": s.name,
-                **{k: v for k, v in s.header.items() if k != "sh_name"},
+                **{
+                    k.removeprefix("sh_"): v
+                    for k, v in s.header.items()
+                    if k not in ("sh_name", "sh_addr")
+                },
+                "addr": f"{s.header.sh_addr:x}",
                 "data": s.data()[:15],
             }
             for s in elffile.iter_sections()
         ]
     )
     return df
+
+
+class ObjectFile:
+    def __init__(self, path):
+        self.path = Path(path)
+        self.file = open(path, "rb")
+        self.elf = ELFFile(self.file)
+
+    def __del__(self):
+        self.file.close()
+
+    def get_symbol_info(self):
+        return get_symbol_info(self.elf)
+
+    def get_section_info(self):
+        return get_section_info(self.elf)
