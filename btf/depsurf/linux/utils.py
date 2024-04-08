@@ -1,9 +1,10 @@
 import logging
+from pathlib import Path
 
 from depsurf.utils import system
 
 
-def download(url, result_path, overwrite):
+def download(url: str, result_path: Path, overwrite: bool):
     result_path.parent.mkdir(parents=True, exist_ok=True)
 
     if result_path.exists() and not overwrite:
@@ -16,7 +17,7 @@ def download(url, result_path, overwrite):
     urllib.request.urlretrieve(url, result_path)
 
 
-def unzip_gz(gz_path, result_path, overwrite):
+def unzip_gz(gz_path: Path, result_path: Path, overwrite: bool):
     result_path.parent.mkdir(parents=True, exist_ok=True)
 
     if result_path.exists() and not overwrite:
@@ -31,7 +32,11 @@ def unzip_gz(gz_path, result_path, overwrite):
             f_out.write(f_in.read())
 
 
-def extract_deb(deb_path, file_path, result_path, overwrite=False):
+def list_deb(deb_path: Path):
+    system(f"dpkg -c {deb_path}")
+
+
+def extract_deb(deb_path: Path, file_path: Path, result_path: Path, overwrite: bool):
     result_path.parent.mkdir(parents=True, exist_ok=True)
 
     if result_path.exists() and not overwrite:
@@ -43,11 +48,11 @@ def extract_deb(deb_path, file_path, result_path, overwrite=False):
     system(f"dpkg --fsys-tarfile {deb_path} | tar -xO {file_path} > {result_path}")
 
 
-def extract_btf(vmlinux_path, btf_path, overwrite=False):
-    btf_path.parent.mkdir(parents=True, exist_ok=True)
+def extract_btf(vmlinux_path: Path, result_path: Path, overwrite: bool):
+    result_path.parent.mkdir(parents=True, exist_ok=True)
 
-    if btf_path.exists() and not overwrite:
-        logging.info(f"Using {btf_path}")
+    if result_path.exists() and not overwrite:
+        logging.info(f"Using {result_path}")
         return
 
     from elftools.elf.elffile import ELFFile
@@ -57,8 +62,8 @@ def extract_btf(vmlinux_path, btf_path, overwrite=False):
 
         btf = elf.get_section_by_name(".BTF")
         if btf:
-            logging.info(f"Extracting .BTF from {vmlinux_path} to {btf_path}")
-            with open(btf_path, "wb") as f:
+            logging.info(f"Extracting .BTF from {vmlinux_path} to {result_path}")
+            with open(result_path, "wb") as f:
                 f.write(btf.data())
             # system(
             #     f"objcopy -I elf64-little {vmlinux_path} --dump-section .BTF={btf_path}"
@@ -66,7 +71,24 @@ def extract_btf(vmlinux_path, btf_path, overwrite=False):
             return
 
         if elf.has_dwarf_info():
-            system(f"pahole --btf_encode_detached {btf_path} {vmlinux_path}")
+            system(f"pahole --btf_encode_detached {result_path} {vmlinux_path}")
             return
 
         logging.warning(f"No BTF or DWARF in {vmlinux_path}")
+
+
+def extract_vmlinux(vmlinuz_path: Path, vmlinux_path: Path, overwrite: bool):
+    if vmlinux_path.exists() and not overwrite:
+        logging.info(f"Using {vmlinux_path}")
+        return
+
+    from vmlinux_to_elf.vmlinuz_decompressor import obtain_raw_kernel_from_file
+
+    logging.info(f"Extracting {vmlinuz_path} to {vmlinux_path}")
+    # system(f"zcat {vmlinuz_path} > {vmlinux_path}")
+    # system(f"extract-vmlinux {vmlinuz_path} > {vmlinux_path}")
+    with open(vmlinuz_path, "rb") as fin, open(vmlinux_path, "wb") as fout:
+        fout.write(obtain_raw_kernel_from_file(fin.read()))
+    if vmlinux_path.stat().st_size == 0:
+        logging.warning(f"Failing to extract {vmlinuz_path} to {vmlinux_path}")
+        vmlinux_path.unlink()

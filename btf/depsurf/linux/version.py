@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from pathlib import Path
 
 from depsurf.paths import DATA_PATH
 
@@ -23,16 +24,21 @@ class BuildVersion:
     arch: str
 
     @classmethod
-    def from_path(cls, path):
-        name = path.stem
-        name = name.removeprefix("linux-image-").removeprefix("unsigned-")
-        version, revision, flavor, others = name.split("-", 3)
+    def from_path(cls, path: Path):
+        name = (
+            path.name.removeprefix("linux-image-")
+            .removeprefix("unsigned-")
+            .removesuffix(".deb")
+            .removesuffix(".ddeb")
+            .replace("_", "-")
+        )
+        version, revision, flavor, *others, arch = name.split("-")
 
         return cls(
             version=tuple(map(int, version.split("."))),
             revision=int(revision),
             flavor=flavor,
-            arch=others.rsplit("_")[-1],
+            arch=arch,
         )
 
     @property
@@ -48,11 +54,11 @@ class BuildVersion:
         return f"{self.name}-{self.arch}"
 
     @property
-    def compressed_vmlinux_path(self):
+    def vmlinux_deb_path(self):
         return f"./usr/lib/debug/boot/vmlinux-{self.name}"
 
     @property
-    def compressed_vmlinuz_path(self):
+    def vmlinuz_deb_path(self):
         return f"./boot/vmlinuz-{self.name}"
 
     @property
@@ -66,3 +72,19 @@ class BuildVersion:
     @property
     def btf_path(self):
         return DATA_PATH / "btf" / f"{self.full_name}.btf"
+
+    @property
+    def btf_json_path(self):
+        return self.btf_path.with_suffix(".json")
+
+    @property
+    def btf_header_path(self):
+        return self.btf_path.with_suffix(".h")
+
+    @property
+    def btf_txt_path(self):
+        return self.btf_path.with_suffix(".txt")
+
+    @property
+    def btf_normalized_path(self):
+        return self.btf_path.with_suffix(".pkl")

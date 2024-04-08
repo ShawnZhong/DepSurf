@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from typing import Tuple, Optional
 
 from depsurf.utils import system
 
@@ -14,7 +15,7 @@ def get_linux_tools_path():
 
 
 def get_bpftool_path():
-    return "/Users/szhong/Downloads/bpf-study/bcc/libbpf-tools/bpftool/src/bpftool"
+    # return "/Users/szhong/Downloads/bpf-study/bcc/libbpf-tools/bpftool/src/bpftool"
     path = get_linux_tools_path() / "bpftool"
     if not path.exists():
         raise Exception("bpftool not found")
@@ -34,19 +35,24 @@ def gen_min_btf(obj_file, overwrite=False):
     return btf_file
 
 
-def dump_btf(file, exts=(".h", ".txt", ".json"), overwrite=False):
-    for ext, cmd in [
-        (".h", "format c"),
-        (".txt", "format raw"),
-        (".json", "--json"),
-    ]:
-        if ext not in exts:
+def dump_btf(
+    btf_path: Path, overwrite: bool, result_paths: Optional[Tuple[Path]] = None
+):
+    cmd_map = {
+        ".h": "format c",
+        ".txt": "format raw",
+        ".json": "--json",
+    }
+
+    if result_paths is None:
+        result_paths = (btf_path.with_suffix(suffix) for suffix in cmd_map.keys())
+
+    for result_path in result_paths:
+        cmd = cmd_map.get(result_path.suffix)
+        assert cmd is not None, f"Unknown suffix: {result_path.suffix}"
+
+        if result_path.exists() and not overwrite:
+            logging.info(f"Using {result_path}")
             continue
 
-        result = file.with_suffix(ext)
-
-        if result.exists() and not overwrite:
-            logging.info(f"Using {result}")
-            continue
-
-        system(f"{get_bpftool_path()} btf dump file {file} {cmd} > {result}")
+        system(f"{get_bpftool_path()} btf dump file {btf_path} {cmd} > {result_path}")

@@ -1,7 +1,9 @@
+from pathlib import Path
+
 from .kind import Kind
 
 
-def load_btf_json(path):
+def load_btf_json(path: Path):
     import json
 
     with open(path) as f:

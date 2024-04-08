@@ -9,6 +9,13 @@ class BTFNormalizer(RawBTF):
     def __init__(self, raw_types):
         super().__init__(raw_types)
 
+    @classmethod
+    def from_json_path(cls, file):
+        assert file.suffix == ".json"
+        assert file.exists()
+
+        return cls(load_btf_json(file))
+
     RECURSE_KINDS = {
         Kind.CONST,
         Kind.VOLATILE,
@@ -56,7 +63,7 @@ class BTFNormalizer(RawBTF):
                 continue
 
             if recurse:
-                elem[type_key] = self.normalize_impl(elem[type_id])
+                elem[type_key] = self.normalize(elem[type_id], recurse=False)
             del elem[type_id]
 
     def get_new_list(self, old_list, expand_anon):
@@ -64,7 +71,7 @@ class BTFNormalizer(RawBTF):
 
         anon_count = 0
         for elem in old_list:
-            t = self.normalize_impl(elem["type_id"])
+            t = self.normalize(elem["type_id"], recurse=False)
             is_anon = elem["name"] == "(anon)"
 
             if is_anon and expand_anon and (t["kind"] in (Kind.STRUCT, Kind.UNION)):
@@ -107,7 +114,7 @@ class BTFNormalizer(RawBTF):
                 if list_key == "members":
                     del elem["size"]
 
-    def normalize_impl(self, type_id, recurse=False):
+    def normalize(self, type_id, recurse):
         if type_id == 0:
             return {"name": "void", "kind": Kind.VOID.value}
 
@@ -140,39 +147,36 @@ class BTFNormalizer(RawBTF):
 
         return elem
 
-    def normalize(self, type_id):
-        return self.normalize_impl(type_id, recurse=True)
+    def get_results_by_kind(self):
+        results_by_kind = {}
+        for i in range(1, len(self.data) + 1):
+            t = self.normalize(i, recurse=True)
+
+            name = t.get("name")
+            if name is None or name == "(anon)":
+                continue
+
+            kind = t["kind"]
+            group = results_by_kind.get(kind)
+            if group is None:
+                results_by_kind[kind] = {t}
+            else:
+                group.add(t)
+        return results_by_kind
 
 
-def normalize_btf(file, overwrite=False):
+def normalize_btf(json_path, result_path, overwrite):
+    if result_path.exists() and not overwrite:
+        logging.info(f"Using {result_path}")
+        return result_path
+
     import pickle
 
-    pkl_path = file.with_suffix(".pkl")
+    normalizer = BTFNormalizer.from_json_path(json_path)
+    results = normalizer.get_results_by_kind()
 
-    if pkl_path.exists() and not overwrite:
-        logging.info(f"Using {pkl_path}")
-        return pkl_path
+    logging.info(f"Writing {result_path}")
+    with open(result_path, "wb") as f:
+        pickle.dump(results, f)
 
-    json_path = file.with_suffix(".json")
-    assert json_path.exists()
-
-    with open(json_path) as f:
-        data = load_btf_json(json_path)
-        normalizer = BTFNormalizer(data)
-
-        result = []
-        result_by_kind = defaultdict(dict)
-        for i in range(1, len(data) + 1):
-            t = normalizer.normalize(i)
-            result.append(t)
-            if "name" not in t:
-                continue
-            name = t["name"]
-            if name != "(anon)":
-                result_by_kind[t["kind"]][name] = t
-
-        logging.info(f"Writing {pkl_path}")
-        with open(pkl_path, "wb") as f:
-            pickle.dump(dict(result_by_kind), f)
-
-    return pkl_path
+    return result_path
