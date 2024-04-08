@@ -14,6 +14,7 @@ def get_linux_tools_path():
 
 
 def get_bpftool_path():
+    return "/Users/szhong/Downloads/bpf-study/bcc/libbpf-tools/bpftool/src/bpftool"
     path = get_linux_tools_path() / "bpftool"
     if not path.exists():
         raise Exception("bpftool not found")
@@ -21,26 +22,31 @@ def get_bpftool_path():
 
 
 def gen_min_btf(obj_file, overwrite=False):
-    btf_file = obj_file.with_suffix(".btf")
+    btf_file = obj_file.with_suffix(".min.btf")
     if btf_file.exists() and not overwrite:
         logging.info(f"{btf_file} already exists")
         return btf_file
 
     kernel_btf = "/sys/kernel/btf/vmlinux"
-    system(f"{get_bpftool_path()} gen min_core_btf {kernel_btf} {btf_file} {obj_file}")
+    system(
+        f"{get_bpftool_path()} -d gen min_core_btf {kernel_btf} {btf_file} {obj_file}"
+    )
     return btf_file
 
 
-def dump_btf(file, overwrite=False):
+def dump_btf(file, exts=(".h", ".txt", ".json"), overwrite=False):
     for ext, cmd in [
         (".h", "format c"),
         (".txt", "format raw"),
         (".json", "--json"),
     ]:
+        if ext not in exts:
+            continue
+
         result = file.with_suffix(ext)
 
         if result.exists() and not overwrite:
-            logging.info(f"{result} already exists")
+            logging.info(f"Using {result}")
             continue
 
         system(f"{get_bpftool_path()} btf dump file {file} {cmd} > {result}")

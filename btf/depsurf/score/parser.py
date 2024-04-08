@@ -1,11 +1,11 @@
-def parse_structs(obj_file):
-    from depsurf.btf import Kind, BTF
-    from btf.depsurf.btf.normalize import normalize_btf
-    from depsurf.btf import gen_min_btf, dump_btf
+def parse_structs(obj_file, overwrite=False):
+    from depsurf.btf import Kind, BTF, normalize_btf, gen_min_btf, dump_btf
 
-    btf_file = gen_min_btf(obj_file)
-    dump_btf(btf_file)
-    pkl_path = normalize_btf(btf_file)
+    btf_file = gen_min_btf(obj_file, overwrite=overwrite)
+    dump_btf(btf_file, overwrite=overwrite)
+    pkl_path = btf_file.with_suffix(".pkl")
+
+    normalize_btf(btf_file, overwrite=overwrite)
 
     btf = BTF(pkl_path)
     if Kind.STRUCT not in btf.data:

@@ -1,11 +1,9 @@
-from .utils import extract_deb
+from .utils import extract_deb, extract_btf
 
 import logging
 
 
 def extract_vmlinuz_files(deb_paths, result_path):
-    result_path.mkdir(parents=True, exist_ok=True)
-
     results = {}
     for name, deb_path in deb_paths.items():
         vmlinuz_path = result_path / f"{name}.vmlinuz"
@@ -38,32 +36,10 @@ def extract_vmlinux_files(vmlinuz_paths, result_path):
 
 
 def extract_btf_files(vmlinux_paths, result_path):
-    from elftools.elf.elffile import ELFFile
-
-    result_path.mkdir(parents=True, exist_ok=True)
-
     results = {}
     for name, vmlinux_path in vmlinux_paths.items():
-        with open(vmlinux_path, "rb") as f:
-            elf = ELFFile(f)
-            btf = elf.get_section_by_name(".BTF")
-            if not btf:
-                logging.warning(f"No .BTF section in {vmlinux_path}")
-                continue
-            btf_path = result_path / f"{name}.btf"
-            if btf_path.exists() and btf_path.stat().st_size == btf.data_size:
-                logging.info(f"Using {btf_path}")
-            else:
-                logging.info(f"Extracting BTF from {vmlinux_path} to {btf_path}")
-                with open(btf_path, "wb") as f:
-                    f.write(btf.data())
-                # system(
-                #     f"objcopy -I elf64-little {vmlinux_path} --dump-section .BTF={btf_path}"
-                # )
-                # we use objcopy instead of pahole because pahole sometimes fails with
-                # "btf_encoder__new: cannot get ELF header", and pahole seems does more
-                # processing than we need
-                # system(f"pahole --btf_encode_detached {btf_path} {vmlinux_path}")
+        btf_path = result_path / f"{name}.btf"
+        extract_btf(vmlinux_path, btf_path)
         results[name] = btf_path
 
     return results

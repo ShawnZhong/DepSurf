@@ -1,23 +1,10 @@
 from pathlib import Path
 
+from depsurf.utils import system
+
 from elftools.elf.elffile import ELFFile
 
 
-def arg_elf_or_path(func):
-    def wrapper(file, *args, **kwargs):
-        if isinstance(file, (str, Path)):
-            with open(file, "rb") as f:
-                elffile = ELFFile(f)
-                return func(elffile, *args, **kwargs)
-        elif isinstance(file, ELFFile):
-            return func(file, *args, **kwargs)
-        else:
-            raise ValueError(f"Invalid file type: {type(file)}")
-
-    return wrapper
-
-
-@arg_elf_or_path
 def get_symbol_info(elffile: ELFFile):
     import pandas as pd
 
@@ -52,7 +39,6 @@ def get_symbol_info(elffile: ELFFile):
     return df
 
 
-@arg_elf_or_path
 def get_section_info(elffile: ELFFile):
     import pandas as pd
 
@@ -74,6 +60,18 @@ def get_section_info(elffile: ELFFile):
     return df
 
 
+def get_objdump_path():
+    import shutil
+
+    canidates = ["llvm-objdump-18", "llvm-objdump", "objdump"]
+    for prog in canidates:
+        path = shutil.which(prog)
+        if path:
+            return path
+    else:
+        raise FileNotFoundError(f"None of {canidates} found")
+
+
 class ObjectFile:
     def __init__(self, path):
         self.path = Path(path)
@@ -88,3 +86,11 @@ class ObjectFile:
 
     def get_section_info(self):
         return get_section_info(self.elf)
+
+    def objdump(self):
+        system(
+            f"{get_objdump_path()} --disassemble --reloc --source {self.path}",
+        )
+
+    def hexdump(self):
+        system(f"hexdump -C {self.path}")

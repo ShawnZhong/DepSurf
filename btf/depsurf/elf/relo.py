@@ -1,9 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum
-from pprint import pformat
-from typing import List
 
-from depsurf.btf import dump_btf, load_btf_json
+from depsurf.btf import Kind, dump_btf, RawBTF
 from elftools.elf.elffile import ELFFile
 
 from .objfile import ObjectFile
@@ -49,45 +47,131 @@ class BTFCoreReloKind(Enum):
     ENUMVAL_VALUE = 11  # enum value integer value
     TYPE_MATCHES = 12  # type match in target kernel
 
+    @property
+    def name(self):
+        return {
+            BTFCoreReloKind.FIELD_BYTE_OFFSET: "byte_off",
+            BTFCoreReloKind.FIELD_BYTE_SIZE: "byte_sz",
+            BTFCoreReloKind.FIELD_EXISTS: "field_exists",
+            BTFCoreReloKind.FIELD_SIGNED: "signed",
+            BTFCoreReloKind.FIELD_LSHIFT_U64: "lshift_u64",
+            BTFCoreReloKind.FIELD_RSHIFT_U64: "rshift_u64",
+            BTFCoreReloKind.TYPE_ID_LOCAL: "local_type_id",
+            BTFCoreReloKind.TYPE_ID_TARGET: "target_type_id",
+            BTFCoreReloKind.TYPE_EXISTS: "type_exists",
+            BTFCoreReloKind.TYPE_SIZE: "type_size",
+            BTFCoreReloKind.ENUMVAL_EXISTS: "enumval_exists",
+            BTFCoreReloKind.ENUMVAL_VALUE: "enumval_value",
+            BTFCoreReloKind.TYPE_MATCHES: "type_matches",
+        }[self]
 
-@dataclass
+
+@dataclass(eq=True, frozen=True, order=True, repr=False)
+class Dep:
+    kind: Kind
+    name: str
+    member: str = ""
+
+    @classmethod
+    def from_t(cls, t, member=""):
+        return cls(t["kind"], t["name"].split("___")[0], member)
+
+    def __repr__(self):
+        s = f"{self.kind.lower()} {self.name}"
+        if self.member != "":
+            s += f"::{self.member}"
+        return s
+
+
 class BTFReloEntry:
-    insn_off: int
-    types: list
-    access_str: str
-    kind: BTFCoreReloKind
-
-    def __init__(self, data, strtab: BTFStrtab, btf_types):
+    def __init__(self, data, strtab: BTFStrtab, btf_types: RawBTF):
         header = bpf_core_relo_t.parse(data)
-        self.insn_off = header.insn_off
-        self.kind = BTFCoreReloKind(header.kind)
 
+        self.insn_off = header.insn_off
+        self.type_id = header.type_id
         self.access_str = strtab.get(header.access_str_off)
+        self.kind = BTFCoreReloKind(header.kind)
+        self.btf_types = btf_types
+
+        t = btf_types.get_raw(header.type_id)
+        self.string = f"{Dep.from_t(t)}"
+
         access_nums = [int(num) for num in self.access_str.split(":")]
 
-        self.types = []
+        if t["kind"] == Kind.ENUM:
+            assert len(access_nums) == 1
+            num = access_nums[0]
+            value = t["values"][num]
+            name = value["name"]
+            self.string += f".{name}"
+            self.deps = [Dep.from_t(t, name)]
+            return
+
         assert access_nums[0] == 0
-        t = btf_types[header.type_id - 1]
+        if len(access_nums) == 1:
+            self.deps = [Dep.from_t(t)]
+            return
+
+        deps = []
         for num in access_nums[1:]:
+            t = self.handle(num, t, deps)
+
+        self.deps = self.normalize_deps(deps)
+
+    def normalize_deps(self, deps):
+        new_deps = []
+
+        for dep in deps:
+            is_type_anon = dep.name == "(anon)"
+            is_member_anon = dep.member == "(anon)"
+
+            if is_member_anon and is_type_anon:
+                continue
+
+            if is_type_anon:
+                new_deps.append(Dep(named_dep.kind, named_dep.name, dep.member))
+                named_dep = None
+                continue
+            else:
+                named_dep = dep
+
+            if is_member_anon:
+                continue
+
+            new_deps.append(dep)
+
+        return new_deps
+
+    def handle(self, num, t, deps):
+        if "members" in t:
             member = t["members"][num]
-            self.types.append((t["kind"], t["name"], member["name"]))
-            t = btf_types[member["type_id"] - 1]
+            name = member["name"]
+            self.string += f".{name}"
+            deps.append(Dep.from_t(t, name))
+            return self.btf_types.get_raw(member["type_id"])
+        elif t["kind"] == Kind.ARRAY:
+            self.string += f"[{num}]"
+            return self.btf_types.get_raw(t["type_id"]), None
+        elif t["kind"] == Kind.TYPEDEF:
+            deps.append(Dep.from_t(t))
+            real_t = self.btf_types.get_raw(t["type_id"])
+            return self.handle(num, real_t, deps)
+
+        assert False, f"Unhandled type: {t['kind']}"
+
+    def __repr__(self):
+        return f"{self.insn_off:04x}: CO-RE <{self.kind.name}> [{self.type_id}] {self.string} ({self.access_str})\n\t\t deps on {self.deps}"
 
 
-@dataclass
 class BTFReloSection:
-    sec_name: str
-    relocations: List[BTFReloEntry]
-
-    def __init__(self, data, strtab: BTFStrtab, btf_types):
+    def __init__(self, data, strtab: BTFStrtab, btf_types: RawBTF):
         header = btf_ext_info_sec_t.parse(data)
 
         self.sec_name = strtab.get(header.sec_name_off)
-
-        self.relocations = []
-        for i in range(header.num_info):
-            rec = data[self.get_off(i) : self.get_off(i + 1)]
-            self.relocations.append(BTFReloEntry(rec, strtab, btf_types))
+        self.relocations = [
+            BTFReloEntry(data[self.get_off(i) : self.get_off(i + 1)], strtab, btf_types)
+            for i in range(header.num_info)
+        ]
 
     def get_off(self, i):
         return btf_ext_info_sec_t.sizeof() + i * bpf_core_relo_t.sizeof()
@@ -96,47 +180,72 @@ class BTFReloSection:
     def size(self):
         return self.get_off(len(self.relocations))
 
+    def __repr__(self):
+        s = f"Relocation for {self.sec_name}:\n\t"
+        s += "\n\t".join(map(str, self.relocations))
+        return s
 
-@dataclass
+
 class BTFReloInfo:
-    relo_sections: List[BTFReloSection]
+    def __init__(self, data, strtab: BTFStrtab, btf_types: RawBTF):
+        self.relo_sections = []
 
-    def __init__(self, data, strtab: BTFStrtab, btf_types):
+        if len(data) == 0:
+            return
+
         assert rec_size_t.parse(data) == bpf_core_relo_t.sizeof()
         data = data[rec_size_t.sizeof() :]
-
-        self.relo_sections = []
         while len(data) > 0:
             sec = BTFReloSection(data, strtab, btf_types)
             self.relo_sections.append(sec)
             data = data[sec.size :]
 
+    def get_deps(self):
+        return sorted(
+            {
+                dep
+                for sec in self.relo_sections
+                for relo in sec.relocations
+                for dep in relo.deps
+            }
+        )
+
     def __repr__(self):
-        return pformat(self.relo_sections, sort_dicts=False)
+        return "\n".join(map(str, self.relo_sections))
+
+
+@dataclass
+class BTFExtSection:
+    func_info: bytes
+    line_info: bytes
+    relo_info: bytes
+
+    @classmethod
+    def from_elf(cls, elf: ELFFile):
+        btf_ext = elf.get_section_by_name(".BTF.ext").data()
+        header = btf_ext_header_t.parse(btf_ext)
+
+        def get_slice(off, size):
+            off += header.hdr_len
+            return btf_ext[off : off + size]
+
+        return cls(
+            get_slice(header.func_info_off, header.func_info_len),
+            get_slice(header.line_info_off, header.line_info_len),
+            get_slice(header.core_relo_off, header.core_relo_len),
+        )
 
 
 class BPFObjectFile(ObjectFile):
     def __init__(self, path):
         super().__init__(path)
 
-        self.strtab = BTFStrtab(self.elf)
+    def dump_btf(self, overwrite=False):
+        dump_btf(self.path, overwrite=overwrite)
 
-        btf_ext = self.elf.get_section_by_name(".BTF.ext")
-        header = btf_ext_header_t.parse(btf_ext.data())
-
-        def get_slice(off, size):
-            off += header.hdr_len
-            return btf_ext.data()[off : off + size]
-
-        self.func_info = get_slice(header.func_info_off, header.func_info_len)
-        self.line_info = get_slice(header.line_info_off, header.line_info_len)
-        self.core_relo = get_slice(header.core_relo_off, header.core_relo_len)
-
-        self.btf_types = None
-
-    def get_relo_info(self):
-        if self.btf_types is None:
-            dump_btf(self.path, overwrite=True)
-            self.btf_types = load_btf_json(self.path.with_suffix(".json"))
-
-        return BTFReloInfo(self.core_relo, self.strtab, self.btf_types)
+    def get_relo(self):
+        return BTFReloInfo(
+            BTFExtSection.from_elf(self.elf).relo_info,
+            BTFStrtab(self.elf),
+            RawBTF.load(self.path.with_suffix(".json")),
+        )

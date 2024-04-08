@@ -2,12 +2,12 @@ import logging
 from collections import defaultdict
 
 from .kind import Kind
-from .raw import load_btf_json
+from .raw import load_btf_json, RawBTF
 
 
-class BTFNormalizer:
-    def __init__(self, raw_data):
-        self.raw_data = raw_data
+class BTFNormalizer(RawBTF):
+    def __init__(self, raw_types):
+        super().__init__(raw_types)
 
     RECURSE_KINDS = {
         Kind.CONST,
@@ -107,11 +107,6 @@ class BTFNormalizer:
                 if list_key == "members":
                     del elem["size"]
 
-    def get_raw(self, type_id):
-        elem = self.raw_data[type_id - 1]
-        assert elem["id"] == type_id
-        return elem
-
     def normalize_impl(self, type_id, recurse=False):
         if type_id == 0:
             return {"name": "void", "kind": Kind.VOID.value}
@@ -149,22 +144,13 @@ class BTFNormalizer:
         return self.normalize_impl(type_id, recurse=True)
 
 
-def normalize_btf(file, result_path=None, overwrite=False):
-    import json
+def normalize_btf(file, overwrite=False):
     import pickle
 
-    if result_path is None:
-        result_path = file.parent
+    pkl_path = file.with_suffix(".pkl")
 
-    if not result_path.exists():
-        result_path.mkdir(parents=True)
-
-    jsonl_path = result_path / file.with_suffix(".jsonl").name
-    pkl_path = result_path / file.with_suffix(".pkl").name
-
-    if jsonl_path.exists() and pkl_path.exists() and not overwrite:
-        logging.info(f"{jsonl_path} already exists")
-        logging.info(f"{pkl_path} already exists")
+    if pkl_path.exists() and not overwrite:
+        logging.info(f"Using {pkl_path}")
         return pkl_path
 
     json_path = file.with_suffix(".json")
@@ -184,11 +170,6 @@ def normalize_btf(file, result_path=None, overwrite=False):
             name = t["name"]
             if name != "(anon)":
                 result_by_kind[t["kind"]][name] = t
-
-        logging.info(f"Writing {jsonl_path}")
-        with open(jsonl_path, "w") as f:
-            for elem in result:
-                f.write(json.dumps(elem) + "\n")
 
         logging.info(f"Writing {pkl_path}")
         with open(pkl_path, "wb") as f:

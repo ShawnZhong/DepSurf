@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from depsurf.paths import DATA_PATH
+
 
 def get_linux_version_tuple(name):
     """5.13.0-52-generic -> (5, 13, 0)"""
@@ -13,65 +15,54 @@ def get_linux_version_short(name):
     return f"{t[0]}.{t[1]}"
 
 
-@dataclass(frozen=True)
-class UbuntuVersion:
-    version: str
+@dataclass
+class BuildVersion:
+    version: tuple[int, int, int]
+    revision: int
+    flavor: str
     arch: str
-    debug: bool = False
+
+    @classmethod
+    def from_path(cls, path):
+        name = path.stem
+        name = name.removeprefix("linux-image-").removeprefix("unsigned-")
+        version, revision, flavor, others = name.split("-", 3)
+
+        return cls(
+            version=tuple(map(int, version.split("."))),
+            revision=int(revision),
+            flavor=flavor,
+            arch=others.rsplit("_")[-1],
+        )
 
     @property
-    def path(self):
-        from depsurf.paths import DATA_PATH
-
-        return DATA_PATH / f"{self.version}-{self.arch}"
+    def version_str(self):
+        return ".".join(map(str, self.version))
 
     @property
-    def url_prefix(self):
-        if self.debug:
-            return "https://ppa.launchpadcontent.net/canonical-kernel-team/ppa/ubuntu/"
-        else:
-            return {
-                "x86": "http://security.ubuntu.com/ubuntu",
-                "arm64": "http://ports.ubuntu.com/ubuntu-ports",
-            }[self.arch]
+    def name(self):
+        return f"{self.version_str}-{self.revision}-{self.flavor}"
 
     @property
-    def url(self):
-        v = {
-            "16.04": "xenial",
-            "18.04": "bionic",
-            "20.04": "focal",
-            "22.04": "jammy",
-        }[self.version]
-
-        if self.debug:
-            v += "-updates"
-        else:
-            v += "-security"
-
-        a = {
-            "x86": "amd64",
-            "arm64": "arm64",
-        }[self.arch]
-
-        return f"{self.url_prefix}/dists/{v}/main/binary-{a}/Packages.gz"
+    def full_name(self):
+        return f"{self.name}-{self.arch}"
 
     @property
-    def index_path(self):
-        return self.path / ("index_dbg" if self.debug else "index")
+    def compressed_vmlinux_path(self):
+        return f"./usr/lib/debug/boot/vmlinux-{self.name}"
 
     @property
-    def deb_path(self):
-        return self.path / ("debs_dbg" if self.debug else "debs")
+    def compressed_vmlinuz_path(self):
+        return f"./boot/vmlinuz-{self.name}"
 
     @property
     def vmlinux_path(self):
-        return self.path / ("vmlinux_dbg" if self.debug else "vmlinux")
+        return DATA_PATH / "vmlinux" / self.full_name
 
     @property
     def vmlinuz_path(self):
-        return self.path / ("vmlinuz_dbg" if self.debug else "vmlinuz")
+        return DATA_PATH / "vmlinuz" / self.full_name
 
     @property
     def btf_path(self):
-        return self.path / "btf"
+        return DATA_PATH / "btf" / f"{self.full_name}.btf"

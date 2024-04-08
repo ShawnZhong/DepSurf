@@ -12,6 +12,10 @@ class DiffChanges:
             assert isinstance(t, tuple)
         self.changes.append((reason, detail))
 
+    @property
+    def reasons(self):
+        return [reason for reason, _ in self.changes]
+
     def repr(self, nindent=0):
         indent = "\t" * nindent
         result = ""
@@ -20,19 +24,33 @@ class DiffChanges:
             for t in detail:
                 if len(t) == 2 and isinstance(t[0], str):
                     k, v = t
-                    result += f"{indent}\t{k:24}: {get_btf_type_str(v)}"
+                    if isinstance(v, dict):
+                        result += f"{indent}\t{k:24}: {get_btf_type_str(v)}"
+                    elif isinstance(v, int):
+                        result += f"{indent}\t{k:24}: {v}"
+                    else:
+                        raise ValueError(f"Unknown type: {v}")
                 elif len(t) == 2 and isinstance(t[0], list) and isinstance(t[1], list):
                     l1, l2 = t
                     result += f"{indent}\t  {l1}\n"
                     result += f"{indent}\t->{l2}"
                 elif len(t) == 2:
                     v1, v2 = t
-                    result += (
-                        f"{indent}\t{get_btf_type_str(v1)}  ->  {get_btf_type_str(v2)}"
-                    )
+                    if isinstance(v1, dict) and isinstance(v2, dict):
+                        result += f"{indent}\t{get_btf_type_str(v1)}  ->  {get_btf_type_str(v2)}"
+                    elif isinstance(v1, int) and isinstance(v2, int):
+                        result += f"{indent}\t{v1}  ->  {v2}"
+                    else:
+                        raise ValueError(f"Unknown type: {v1} or {v2}")
                 elif len(t) == 3:
                     k, v1, v2 = t
-                    result += f"{indent}\t{k:24}: {get_btf_type_str(v1)}  ->  {get_btf_type_str(v2)}"
+                    if isinstance(v1, dict) and isinstance(v2, dict):
+                        result += f"{indent}\t{k:24}: {get_btf_type_str(v1)}  ->  {get_btf_type_str(v2)}"
+                    elif isinstance(v1, int) and isinstance(v2, int):
+                        result += f"{indent}\t{k:24}: {v1}  ->  {v2}"
+                    else:
+                        raise ValueError(f"Unknown type: {v1} or {v2}")
+
                 result += "\n"
         return result
 

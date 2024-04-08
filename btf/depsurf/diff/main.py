@@ -66,7 +66,7 @@ def check_diff_impl(dict1, dict2, kind, diff_fn, reason_enum) -> DiffSummary:
 
     reasons = {r.value: 0 for r in reason_enum}
     for changes in changed.values():
-        for reason in changes.reasons():
+        for reason in changes.reasons:
             reasons[reason.value] += 1
     print_as_list(f"Reasons {kind}", reasons.items())
 
