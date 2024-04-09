@@ -12,7 +12,7 @@ from .utils import *
 def setup_logging():
     logging.basicConfig(
         level=logging.INFO,
-        format="[%(filename)s:%(lineno)d] %(levelname)s: %(message)s",
+        format="[%(filename)12s:%(lineno)-3d] %(levelname)s: %(message)s",
     )
 
 

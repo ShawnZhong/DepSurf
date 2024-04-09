@@ -1,5 +1,4 @@
 import logging
-from collections import defaultdict
 
 from .kind import Kind
 from .raw import load_btf_json, RawBTF
