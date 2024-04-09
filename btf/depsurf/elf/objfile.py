@@ -2,13 +2,15 @@ from pathlib import Path
 
 from depsurf.utils import system
 
-from elftools.elf.elffile import ELFFile
+from elftools.elf.elffile import ELFFile, SymbolTableSection
+from .utils import get_cstr
+from functools import cached_property
 
 
 def get_symbol_info(elffile: ELFFile):
     import pandas as pd
 
-    symtab = elffile.get_section_by_name(".symtab")
+    symtab: SymbolTableSection = elffile.get_section_by_name(".symtab")
     if symtab is None:
         raise ValueError("No symbol table found. Perhaps this is a stripped binary?")
 
@@ -25,7 +27,8 @@ def get_symbol_info(elffile: ELFFile):
                 ),
                 **sym.entry.st_info,
                 **sym.entry.st_other,
-                "value": f"{sym.entry.st_value:x}",
+                "value": sym.entry.st_value,
+                # "value": f"{sym.entry.st_value:x}",
                 "size": sym.entry.st_size,
                 # **{k: v for k, v in sym.entry.items() if k not in ("st_info", "st_other", "st_name", "st_shndx")},
             }
@@ -51,12 +54,13 @@ def get_section_info(elffile: ELFFile):
                     for k, v in s.header.items()
                     if k not in ("sh_name", "sh_addr")
                 },
-                "addr": f"{s.header.sh_addr:x}",
+                # "addr": f"{s.header.sh_addr:x}",
+                "addr": s.header.sh_addr,
                 "data": s.data()[:15],
             }
             for s in elffile.iter_sections()
         ]
-    )
+    ).set_index("name")
     return df
 
 
@@ -81,11 +85,66 @@ class ObjectFile:
     def __del__(self):
         self.file.close()
 
-    def get_symbol_info(self):
+    @cached_property
+    def symbol_info(self):
         return get_symbol_info(self.elf)
 
-    def get_section_info(self):
+    @cached_property
+    def section_info(self):
         return get_section_info(self.elf)
+
+    def get_symbols_by_name(self, name):
+        return self.symbol_info[self.symbol_info["name"] == name]
+
+    def get_symbols_by_value(self, value):
+        return self.symbol_info[self.symbol_info["value"] == value]
+
+    def get_value_by_name(self, name):
+        symbols = self.get_symbols_by_name(name)
+        if len(symbols) != 1:
+            raise ValueError(f"Invalid name {name}: {symbols}")
+        return symbols.iloc[0]["value"]
+
+    def get_name_by_value(self, value):
+        symbols = self.get_symbols_by_value(value)
+        if len(symbols) != 1:
+            raise ValueError(f"Invalid value {value}: {symbols}")
+        return symbols.iloc[0]["name"]
+
+    @cached_property
+    def data_sections(self):
+        return list(
+            self.section_info.loc[
+                [".data", ".text", ".init.data", ".rodata"], ["addr", "size", "offset"]
+            ].itertuples(index=False, name=None)
+        )
+
+    def addr_to_offset(self, addr):
+        for base, size, file_offset in self.data_sections:
+            if base <= addr < base + size:
+                return file_offset + addr - base
+
+        raise ValueError(f"Invalid address {addr}")
+
+    def get_bytes(self, addr, size=8) -> bytes:
+        offset = self.addr_to_offset(addr)
+        self.file.seek(offset)
+        return self.file.read(size)
+
+    def get_int64(self, addr) -> int:
+        return int.from_bytes(self.get_bytes(addr, 8), "little")
+
+    def get_int32(self, addr) -> int:
+        return int.from_bytes(self.get_bytes(addr, 4), "little")
+
+    def get_range(self, start, stop) -> bytes:
+        return self.get_bytes(start, stop - start)
+
+    def get_cstr(self, addr):
+        offset = self.addr_to_offset(addr)
+        self.file.seek(offset)
+        data = self.file.read(512)
+        return get_cstr(data, 0)
 
     def objdump(self):
         system(

@@ -2,6 +2,7 @@ import logging
 
 from .kind import Kind
 from .raw import load_btf_json, RawBTF
+from depsurf.utils import check_result_path
 
 
 class BTFNormalizer(RawBTF):
@@ -132,7 +133,7 @@ class BTFNormalizer(RawBTF):
             self.normalize_int(elem)
         elif kind == Kind.ARRAY:
             del elem["index_type_id"]
-        elif kind == Kind.ENUM:
+        elif kind in (Kind.ENUM, Kind.ENUM64):
             self.normalize_enum(elem, recurse)
         elif kind == Kind.FUNC:
             assert elem["linkage"] == "static"
@@ -148,27 +149,37 @@ class BTFNormalizer(RawBTF):
 
     def get_results_by_kind(self):
         results_by_kind = {}
-        for i in range(1, len(self.data) + 1):
+
+        anon_enum_values = []
+        for i in range(1, len(self.raw_types) + 1):
             t = self.normalize(i, recurse=True)
 
             name = t.get("name")
-            if name is None or name == "(anon)":
+            if name is None:
+                continue
+
+            if name == "(anon)":
+                if t["kind"] == Kind.ENUM.value:
+                    anon_enum_values += t["values"]
                 continue
 
             kind = t["kind"]
             group = results_by_kind.get(kind)
             if group is None:
-                results_by_kind[kind] = {t}
+                results_by_kind[kind] = {name: t}
             else:
-                group.add(t)
+                group[name] = t
+        results_by_kind[Kind.ENUM.value]["(anon)"] = {
+            "kind": "ENUM",
+            "name": "(anon)",
+            "size": 4,
+            "values": anon_enum_values,
+        }
         return results_by_kind
 
 
-def normalize_btf(json_path, result_path, overwrite):
-    if result_path.exists() and not overwrite:
-        logging.info(f"Using {result_path}")
-        return result_path
-
+@check_result_path
+def normalize_btf(json_path, result_path):
     import pickle
 
     normalizer = BTFNormalizer.from_json_path(json_path)

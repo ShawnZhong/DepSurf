@@ -25,15 +25,19 @@ class BuildVersion:
 
     @classmethod
     def from_path(cls, path: Path):
+        return cls.from_str(path.name)
+
+    @classmethod
+    def from_str(cls, name: str):
         name = (
-            path.name.removeprefix("linux-image-")
+            name.removeprefix("linux-image-")
             .removeprefix("unsigned-")
             .removesuffix(".deb")
             .removesuffix(".ddeb")
             .replace("_", "-")
         )
-        version, revision, flavor, *others, arch = name.split("-")
 
+        version, revision, flavor, *others, arch = name.split("-")
         return cls(
             version=tuple(map(int, version.split("."))),
             revision=int(revision),
@@ -71,20 +75,25 @@ class BuildVersion:
 
     @property
     def btf_path(self):
-        return DATA_PATH / "btf" / f"{self.full_name}.btf"
+        return DATA_PATH / "btf" / f"{self.full_name}"
 
     @property
     def btf_json_path(self):
-        return self.btf_path.with_suffix(".json")
+        return DATA_PATH / "btf_json" / f"{self.full_name}.json"
 
     @property
     def btf_header_path(self):
-        return self.btf_path.with_suffix(".h")
+        return DATA_PATH / "btf_header" / f"{self.full_name}.h"
 
     @property
     def btf_txt_path(self):
-        return self.btf_path.with_suffix(".txt")
+        return DATA_PATH / "btf_txt" / f"{self.full_name}.txt"
 
     @property
     def btf_normalized_path(self):
-        return self.btf_path.with_suffix(".pkl")
+        return DATA_PATH / "btf_norm" / f"{self.full_name}.pkl"
+
+    def get_img(self):
+        from depsurf.linux import LinuxImage
+
+        return LinuxImage(self)

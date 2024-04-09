@@ -4,6 +4,7 @@ from enum import Enum
 from depsurf.btf import Kind, dump_btf, RawBTF
 from elftools.elf.elffile import ELFFile
 
+from .utils import get_cstr
 from .objfile import ObjectFile
 from .structs import (
     bpf_core_relo_t,
@@ -28,8 +29,7 @@ class BTFStrtab:
         self.strtab = data[off : off + header.str_len]
 
     def get(self, off):
-        end = self.strtab.find(b"\x00", off)
-        return self.strtab[off:end].decode()
+        return get_cstr(self.strtab, off)
 
 
 class BTFCoreReloKind(Enum):

@@ -8,3 +8,8 @@ def disable_dwarf_cache():
         return DIE(cu=self, stream=top_die_stream, offset=offset)
 
     CompileUnit._get_cached_DIE = _get_cached_DIE
+
+
+def get_cstr(data, off):
+    end = data.find(b"\x00", off)
+    return data[off:end].decode()

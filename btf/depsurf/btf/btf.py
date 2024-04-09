@@ -1,7 +1,7 @@
 from pathlib import Path
 import logging
 
-from depsurf.linux.version import get_linux_version_short, get_linux_version_tuple
+# from depsurf.linux.version import get_linux_version_short, get_linux_version_tuple
 
 
 class BTF:
@@ -24,11 +24,13 @@ class BTF:
 
     @property
     def short_version(self):
-        return get_linux_version_short(self.path.stem)
+        pass
+        # return get_linux_version_short(self.path.stem)
 
     @property
     def version(self):
-        return get_linux_version_tuple(self.path.stem)
+        pass
+        # return get_linux_version_tuple(self.path.stem)
 
     def filter(self, kind, name_filter_fn=None):
         if not name_filter_fn:
