@@ -31,7 +31,6 @@ class BTFNormalizer(RawBTF):
         del elem["bits_offset"]
         del elem["encoding"]
         del elem["nr_bits"]
-        del elem["size"]
 
     @staticmethod
     def uint2sint(u, nbytes):

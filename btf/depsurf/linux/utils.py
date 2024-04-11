@@ -5,14 +5,6 @@ from depsurf.utils import system, check_result_path
 
 
 @check_result_path
-def download(url: str, result_path: Path):
-    import urllib.request
-
-    logging.info(f"Downloading {url} to {result_path}")
-    urllib.request.urlretrieve(url, result_path)
-
-
-@check_result_path
 def unzip_gz(gz_path: Path, result_path: Path):
     import gzip
 
@@ -40,6 +32,10 @@ def extract_btf(vmlinux_path: Path, result_path: Path):
     with open(vmlinux_path, "rb") as f:
         elf = ELFFile(f)
 
+        if elf.has_dwarf_info():
+            system(f"pahole --btf_encode_detached {result_path} {vmlinux_path}")
+            return
+
         btf = elf.get_section_by_name(".BTF")
         if btf:
             logging.info(f"Extracting .BTF from {vmlinux_path} to {result_path}")
@@ -50,11 +46,7 @@ def extract_btf(vmlinux_path: Path, result_path: Path):
             # )
             return
 
-        if elf.has_dwarf_info():
-            system(f"pahole --btf_encode_detached {result_path} {vmlinux_path}")
-            return
-
-        logging.warning(f"No BTF or DWARF in {vmlinux_path}")
+        raise ValueError(f"No BTF or DWARF in {vmlinux_path}")
 
 
 @check_result_path

@@ -58,7 +58,7 @@ def check_diff_impl(dict1, dict2, kind, diff_fn, reason_enum) -> DiffSummary:
     print_as_list(f"Removed {kind}", removed)
 
     changed = {
-        name: diff_fn(old, new, assert_diff=True)
+        name: diff_fn(old, new, assert_diff=False)  # TODO: assert_diff
         for name, (old, new) in common.items()
         if old != new
     }

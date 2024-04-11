@@ -1,7 +1,8 @@
-from pathlib import Path
 import logging
+from functools import cached_property
+from pathlib import Path
 
-# from depsurf.linux.version import get_linux_version_short, get_linux_version_tuple
+from .kind import Kind
 
 
 class BTF:
@@ -12,7 +13,7 @@ class BTF:
         assert self.path.exists()
         assert self.path.suffix == ".pkl"
         with open(self.path, "rb") as f:
-            logging.info(f"Loading {self.path}")
+            logging.info(f"Loading BTF from {self.path}")
             self.data = pickle.load(f)
 
     def __repr__(self):
@@ -22,31 +23,24 @@ class BTF:
             result += f"\t{kind:10} ({len(d):5}): {list(d.values())[0]}\n"
         return result
 
-    @property
-    def short_version(self):
-        pass
-        # return get_linux_version_short(self.path.stem)
+    def get(self, kind, name):
+        return self.data[kind].get(name)
 
-    @property
-    def version(self):
-        pass
-        # return get_linux_version_tuple(self.path.stem)
+    def get_all_kind(self, kind: Kind):
+        return self.data[kind]
 
-    def filter(self, kind, name_filter_fn=None):
-        if not name_filter_fn:
-            return self.data[kind]
-        else:
-            return {k: v for k, v in self.data[kind].items() if name_filter_fn(k)}
+    def get_func(self, name: str):
+        return self.data[Kind.FUNC].get(name)
 
-    def get(self, arg1, arg2=None):
-        if isinstance(arg1, tuple):
-            assert arg2 is None
-            kind, name = arg1
-        else:
-            kind = arg1
-            name = arg2
+    def get_struct(self, name: str):
+        return self.data[Kind.STRUCT].get(name)
 
-        if name is None:
-            return self.data[kind]
-        else:
-            return self.data[kind].get(name, None)
+    def get_enum(self, name: str):
+        return self.data[Kind.ENUM].get(name)
+
+    def get_union(self, name: str):
+        return self.data[Kind.UNION].get(name)
+
+    @cached_property
+    def enum_values(self):
+        return {e["name"]: e["val"] for e in self.get(Kind.ENUM, "(anon)")["values"]}

@@ -1,5 +1,7 @@
 import logging
 
+from pathlib import Path
+
 
 def check_result_path(fn: callable):
     def wrapper(*args, **kwargs):
@@ -9,7 +11,7 @@ def check_result_path(fn: callable):
             assert kwarg in kwargs, f"Missing '{kwarg}' in kwargs for {fn_name}"
 
         overwrite = kwargs.pop("overwrite")
-        result_path = kwargs["result_path"]
+        result_path = Path(kwargs["result_path"])
 
         if not overwrite and result_path.exists():
             logging.info(f"{fn_name:<16} Using {result_path}")

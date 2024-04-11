@@ -54,6 +54,7 @@ def diff_func(old, new, assert_diff=False):
         result.add(FuncChange.RETURN, [(old_ret, new_ret)])
 
     if assert_diff:
-        assert result, f"\n{old}\n{new}"
+        # allow name changes
+        assert result or old["name"] != new["name"], f"\n{old}\n{new}"
 
     return result

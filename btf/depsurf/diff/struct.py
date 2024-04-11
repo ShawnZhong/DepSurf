@@ -48,5 +48,7 @@ def diff_struct(old, new, assert_diff=False):
         offset_changed = True
 
     if assert_diff:
-        assert changes or offset_changed, f"\n{old}\n{new}"
+        assert (
+            changes or offset_changed or old["name"] != new["name"]
+        ), f"\n{old}\n{new}"
     return changes
