@@ -90,7 +90,15 @@ class ObjectFile:
             elf = ELFFile(f)
 
             if elf.has_dwarf_info():
-                system(f"pahole --btf_encode_detached {result_path} {self.path}")
+                # Ref: https://github.com/torvalds/linux/blob/master/scripts/Makefile.btf
+                system(
+                    f"pahole "
+                    # f"--btf_gen_floats "
+                    f"--lang_exclude=rust "
+                    # f"--btf_gen_optimized "
+                    f"--btf_encode_detached {result_path} "
+                    f"{self.path}"
+                )
                 return
 
             btf = elf.get_section_by_name(".BTF")
