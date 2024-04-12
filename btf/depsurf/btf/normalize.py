@@ -167,7 +167,10 @@ class BTFNormalizer(RawBTF):
             if group is None:
                 results_by_kind[kind] = {name: t}
             else:
-                group[name] = t
+                if name in group:
+                    logging.warning(f"Duplicate type {name}")
+                else:
+                    group[name] = t
         results_by_kind[Kind.ENUM.value]["(anon)"] = {
             "kind": "ENUM",
             "name": "(anon)",

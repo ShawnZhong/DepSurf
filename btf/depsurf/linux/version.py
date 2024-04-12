@@ -1,5 +1,8 @@
 from dataclasses import dataclass
+from functools import cache, cached_property
 from pathlib import Path
+
+from typing import Literal
 
 from depsurf.paths import DATA_PATH
 
@@ -33,11 +36,18 @@ class BuildVersion:
             arch=arch,
         )
 
+    @cache
+    @staticmethod
+    def all() -> list["BuildVersion"]:
+        return sorted(BuildVersion.from_path(p) for p in (DATA_PATH / "deb").iterdir())
+
     @staticmethod
     def iter(
         flavor: str = None,
         arch: str = None,
         version: str | tuple = None,
+        is_lts: bool = None,
+        revision: Literal["first", "last", "all"] = "first",
     ) -> list["BuildVersion"]:
         if isinstance(version, str):
             version_tuple = BuildVersion.version_to_tuple(version)
@@ -45,17 +55,30 @@ class BuildVersion:
             version_tuple = version
 
         results = []
-        for deb_path in (DATA_PATH / "deb").iterdir():
-            bv = BuildVersion.from_path(deb_path)
+        for bv in BuildVersion.all():
             if flavor is not None and bv.flavor != flavor:
                 continue
             if arch is not None and bv.arch != arch:
                 continue
             if version_tuple is not None and bv.version_tuple != version_tuple:
                 continue
+            if is_lts is not None and bv.is_lts != is_lts:
+                continue
             results.append(bv)
 
-        return sorted(results)
+        if revision == "all":
+            return results
+
+        revisions = {}
+        for bv in results:
+            key = (bv.version_tuple, bv.flavor, bv.arch)
+            if key not in revisions:
+                revisions[key] = bv
+            elif revision == "first" and bv.revision < revisions[key].revision:
+                revisions[key] = bv
+            elif revision == "last" and bv.revision > revisions[key].revision:
+                revisions[key] = bv
+        return list(revisions.values())
 
     @staticmethod
     def version_to_str(version_tuple: tuple) -> str:
@@ -73,6 +96,16 @@ class BuildVersion:
     def short_version(self):
         assert self.version_tuple[-1] == 0
         return self.version_to_str(self.version_tuple[:-1])
+
+    @property
+    def is_lts(self):
+        return self.version_tuple in [
+            (4, 4, 0),
+            (4, 15, 0),
+            (5, 4, 0),
+            (5, 15, 0),
+            (6, 8, 0),
+        ]
 
     @property
     def name(self):
@@ -119,7 +152,8 @@ class BuildVersion:
     def __str__(self):
         return self.name
 
-    def get_img(self):
+    @cached_property
+    def img(self):
         from depsurf.linux import LinuxImage
 
         return LinuxImage(self)

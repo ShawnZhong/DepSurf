@@ -81,4 +81,4 @@ class Tracepoints:
         return (name, func, struct)
 
     def __repr__(self):
-        return f"Tracepoints: {list(self.tracepoints.keys())}"
+        return f"Tracepoints: {list(self.funcs.keys())}"
