@@ -47,17 +47,3 @@ def extract_btf(vmlinux_path: Path, result_path: Path):
             return
 
         raise ValueError(f"No BTF or DWARF in {vmlinux_path}")
-
-
-@check_result_path
-def extract_vmlinux(vmlinuz_path: Path, result_path: Path):
-    from vmlinux_to_elf.vmlinuz_decompressor import obtain_raw_kernel_from_file
-
-    logging.info(f"Extracting {vmlinuz_path} to {result_path}")
-    # system(f"zcat {vmlinuz_path} > {vmlinux_path}")
-    # system(f"extract-vmlinux {vmlinuz_path} > {vmlinux_path}")
-    with open(vmlinuz_path, "rb") as fin, open(result_path, "wb") as fout:
-        fout.write(obtain_raw_kernel_from_file(fin.read()))
-    if result_path.stat().st_size == 0:
-        logging.warning(f"Failing to extract {vmlinuz_path} to {result_path}")
-        result_path.unlink()
