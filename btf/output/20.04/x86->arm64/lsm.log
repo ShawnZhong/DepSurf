@@ -1,4 +1,0 @@
-Added Kind.FUNC (0): []
-Removed Kind.FUNC (0): []
-Changed Kind.FUNC (0): []
-Reasons Kind.FUNC (5): [('Param added', 0), ('Param removed', 0), ('Param type changed', 0), ('Param reordered', 0), ('Return type changed', 0)]
