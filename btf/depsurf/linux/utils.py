@@ -4,16 +4,6 @@ from pathlib import Path
 from depsurf.utils import system, check_result_path
 
 
-@check_result_path
-def unzip_gz(gz_path: Path, result_path: Path):
-    import gzip
-
-    logging.info(f"Unzipping {gz_path} to {result_path}")
-    with gzip.open(gz_path, "rb") as f_in:
-        with open(result_path, "wb") as f_out:
-            f_out.write(f_in.read())
-
-
 def list_deb(deb_path: Path):
     system(f"dpkg -c {deb_path}")
 
