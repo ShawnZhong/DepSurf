@@ -1,3 +1,3 @@
 from .image import *
 from .version import *
-from .utils import *
+from .deb import *

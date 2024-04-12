@@ -1,11 +1,12 @@
+import logging
 from functools import cached_property
 from pathlib import Path
 
-from depsurf.utils import system
+from depsurf.utils import check_result_path, system
 from elftools.elf.elffile import ELFFile
 
-from .utils import get_cstr
 from .symtab import SymbolInfo
+from .utils import get_cstr
 
 
 class SectionInfo:
@@ -53,18 +54,6 @@ class SectionInfo:
         return self.data._repr_html_()
 
 
-def get_objdump_path():
-    import shutil
-
-    canidates = ["llvm-objdump-18", "llvm-objdump", "objdump"]
-    for prog in canidates:
-        path = shutil.which(prog)
-        if path:
-            return path
-    else:
-        raise FileNotFoundError(f"None of {canidates} found")
-
-
 class ObjectFile:
     def __init__(self, path):
         self.path = Path(path)
@@ -94,10 +83,49 @@ class ObjectFile:
         data = self.get_bytes(addr, size)
         return get_cstr(data, 0)
 
+    def extract_btf(self, result_path: Path):
+        from elftools.elf.elffile import ELFFile
+
+        with open(self.path, "rb") as f:
+            elf = ELFFile(f)
+
+            if elf.has_dwarf_info():
+                system(f"pahole --btf_encode_detached {result_path} {self.path}")
+                return
+
+            btf = elf.get_section_by_name(".BTF")
+            if btf:
+                logging.info(f"Extracting .BTF from {self.path} to {result_path}")
+                with open(result_path, "wb") as f:
+                    f.write(btf.data())
+                # system(
+                #     f"objcopy -I elf64-little {self.path} --dump-section .BTF={btf_path}"
+                # )
+                return
+
+            raise ValueError(f"No BTF or DWARF in {self.path}")
+
+    @staticmethod
+    def get_objdump_path():
+        import shutil
+
+        canidates = ["llvm-objdump-18", "llvm-objdump", "objdump"]
+        for prog in canidates:
+            path = shutil.which(prog)
+            if path:
+                return path
+        else:
+            raise FileNotFoundError(f"None of {canidates} found")
+
     def objdump(self):
         system(
-            f"{get_objdump_path()} --disassemble --reloc --source {self.path}",
+            f"{self.get_objdump_path()} --disassemble --reloc --source {self.path}",
         )
 
     def hexdump(self):
         system(f"hexdump -C {self.path}")
+
+
+@check_result_path
+def extract_btf(vmlinux_path: Path, result_path: Path):
+    ObjectFile(vmlinux_path).extract_btf(result_path)
