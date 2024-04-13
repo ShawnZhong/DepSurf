@@ -94,7 +94,7 @@ int main() {
   // std::thread t3([bpf]() { print_ringbuf(bpf.skel->maps.rb); });
   // t3.detach();
 
-  std::thread t2([]() { system("sh"); });
+  std::thread t2([]() { system("bash"); });
   t2.join();
 
   // for (int i = 0;; i++) {

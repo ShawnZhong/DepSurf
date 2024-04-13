@@ -5,7 +5,7 @@ from .version import BuildVersion
 from functools import cached_property
 
 
-class Struct:
+class StructInstance:
     def __init__(self, img: "LinuxImage", name: str, ptr: int):
         self.img = img
         self.name = name
@@ -38,19 +38,36 @@ class Struct:
 
         return self.img.get_int(addr, size)
 
+    def __getitem__(self, name):
+        return self.get(name)
+
 
 class LinuxImage(ObjectFile):
+    cache = {}
+
     def __init__(self, version: BuildVersion):
+        if version in self.cache:
+            raise ValueError(f"Please use LinuxImage.from_* to get an instance")
         self.version = version
         super().__init__(version.vmlinux_path)
 
     @classmethod
+    def from_version(cls, version: BuildVersion):
+        if version not in cls.cache:
+            cls.cache[version] = cls(version)
+        return cls.cache[version]
+
+    @classmethod
     def from_path(cls, path):
-        return cls(BuildVersion.from_path(path))
+        return cls.from_version(BuildVersion.from_path(path))
 
     @classmethod
     def from_str(cls, name):
-        return cls(BuildVersion.from_str(name))
+        return cls.from_version(BuildVersion.from_str(name))
+
+    @staticmethod
+    def clear_cache():
+        LinuxImage.cache.clear()
 
     @cached_property
     def btf(self) -> BTF:
@@ -74,6 +91,9 @@ class LinuxImage(ObjectFile):
         }
         all_funcs = self.btf.get_all_kind(Kind.FUNC)
         return {k: v for k, v in all_funcs.items() if k in func_names}
+
+    def get_struct_instance(self, name, ptr) -> StructInstance:
+        return StructInstance(self, name, ptr)
 
     def __repr__(self):
         return f"LinuxImage({self.version.name})"

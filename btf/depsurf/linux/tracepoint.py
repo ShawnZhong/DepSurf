@@ -1,8 +1,7 @@
 import logging
 from functools import cached_property
 
-from .image import LinuxImage, Struct
-from depsurf.btf import Kind
+from .image import LinuxImage
 
 
 class Tracepoints:
@@ -24,20 +23,14 @@ class Tracepoints:
     def TRACE_EVENT_FL_TRACEPOINT(self):
         return self.img.btf.enum_values["TRACE_EVENT_FL_TRACEPOINT"]
 
-    def is_tracepoint(self, trace_event_call: Struct):
-        assert trace_event_call.name == "trace_event_call"
-        flags = trace_event_call.get("flags")
-        return flags & self.TRACE_EVENT_FL_TRACEPOINT
-
     def get_tp_name(self, tp_ptr: int):
-        tp = Struct(self.img, "tracepoint", tp_ptr)
-        name = tp.get("name")
-        return self.img.get_cstr(name)
+        tp = self.img.get_struct_instance("tracepoint", tp_ptr)
+        return self.img.get_cstr(tp["name"])
 
-    def get_event(self, trace_event_class_ptr: int):
-        trace_event_class = Struct(self.img, "trace_event_class", trace_event_class_ptr)
+    def get_event(self, ptr: int):
+        event_class = self.img.get_struct_instance("trace_event_class", ptr)
 
-        probe = trace_event_class.get("probe")
+        probe = event_class["probe"]
         probe_name = self.img.symtab.get_name_by_value(probe)
         func = self.img.btf.get_func(probe_name)
 
@@ -65,14 +58,15 @@ class Tracepoints:
 
         logging.warning(f"Could not find function for {name}")
 
-    def get_tracepoint(self, trace_event_call_ptr: int):
-        trace_event_call = Struct(self.img, "trace_event_call", trace_event_call_ptr)
+    def get_tracepoint(self, ptr: int):
+        event = self.img.get_struct_instance("trace_event_call", ptr)
 
-        if not self.is_tracepoint(trace_event_call):
+        # Skip non-tracepoint events
+        if not (event["flags"] & self.TRACE_EVENT_FL_TRACEPOINT):
             return
 
-        name = self.get_tp_name(trace_event_call.get("tp"))
-        func, struct = self.get_event(trace_event_call.get("class"))
+        name = self.get_tp_name(event["tp"])
+        func, struct = self.get_event(event["class"])
         if func is None:
             func = self.get_tp_func(name)
         if func is None:

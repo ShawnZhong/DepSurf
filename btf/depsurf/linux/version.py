@@ -1,7 +1,6 @@
 from dataclasses import dataclass
-from functools import cache, cached_property
+from functools import cached_property
 from pathlib import Path
-
 from typing import Literal
 
 from depsurf.paths import DATA_PATH
@@ -36,13 +35,12 @@ class BuildVersion:
             arch=arch,
         )
 
-    @cache
     @staticmethod
     def all() -> list["BuildVersion"]:
         return sorted(BuildVersion.from_path(p) for p in (DATA_PATH / "deb").iterdir())
 
     @staticmethod
-    def iter(
+    def filter(
         flavor: str = None,
         arch: str = None,
         version: str | tuple = None,
@@ -153,10 +151,10 @@ class BuildVersion:
         return self.name
 
     @cached_property
-    def img(self):
+    def img(self) -> "LinuxImage":
         from depsurf.linux import LinuxImage
 
-        return LinuxImage(self)
+        return LinuxImage.from_version(self)
 
     # @property
     # def vmlinuz_deb_path(self):
