@@ -11,8 +11,10 @@ def dump_symtab(vmlinux_path, result_path):
 
 
 class SymbolInfo:
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, data: "pd.DataFrame"):
+        import pandas as pd
+
+        self.data: pd.DataFrame = data
 
     @classmethod
     def from_elf_path(cls, path):
@@ -37,7 +39,7 @@ class SymbolInfo:
         logging.info(f"Saved symbol table to {result_path}")
 
     @staticmethod
-    def get_symbol_info(elffile: ELFFile):
+    def get_symbol_info(elffile: ELFFile) -> "pd.DataFrame":
         import pandas as pd
 
         symtab: SymbolTableSection = elffile.get_section_by_name(".symtab")
@@ -74,10 +76,10 @@ class SymbolInfo:
 
         return df
 
-    def get_symbols_by_name(self, name: str):
+    def get_symbols_by_name(self, name: str) -> "pd.DataFrame":
         return self.data[self.data["name"] == name]
 
-    def get_symbols_by_value(self, value: int):
+    def get_symbols_by_value(self, value: int) -> "pd.DataFrame":
         return self.data[self.data["value"] == value]
 
     def get_value_by_name(self, name: str) -> int:
@@ -93,20 +95,20 @@ class SymbolInfo:
         return symbols.iloc[0]["name"]
 
     @cached_property
-    def funcs(self):
+    def funcs(self) -> "pd.DataFrame":
         return self.data[self.data["type"] == "STT_FUNC"]
 
     @cached_property
-    def funcs_local(self):
+    def funcs_local(self) -> "pd.DataFrame":
         return self.funcs[self.funcs["bind"] == "STB_LOCAL"]
 
     @cached_property
-    def funcs_nonlocal(self):
+    def funcs_nonlocal(self) -> "pd.DataFrame":
         # STB_GLOBAL and STB_WEAK
         return self.funcs[self.funcs["bind"] != "STB_LOCAL"]
 
     @cached_property
-    def funcs_renamed(self):
+    def funcs_renamed(self) -> "pd.DataFrame":
         res = self.funcs[self.funcs["name"].str.contains(r"\.")]
         assert (res["bind"] == "STB_LOCAL").all()
         return res
