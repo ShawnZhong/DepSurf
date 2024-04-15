@@ -24,6 +24,7 @@ def setup_pandas():
 
     pd.set_option("display.min_rows", 300)
     pd.set_option("display.max_rows", 300)
+    pd.set_option("display.max_columns", 100)
     pd.set_option("display.width", 1000)
     pd.set_option("display.max_colwidth", 1000)
 

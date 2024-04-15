@@ -147,7 +147,7 @@ class BuildVersion:
     def symtab_path(self):
         return DATA_PATH / "symtab" / f"{self.name}.pkl"
 
-    def __str__(self):
+    def __repr__(self):
         return self.name
 
     @cached_property
