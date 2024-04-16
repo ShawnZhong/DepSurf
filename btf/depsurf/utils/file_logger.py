@@ -5,16 +5,20 @@ from pathlib import Path
 
 class FileLogger:
     def __init__(self, path, print=False):
-        self.path = Path(path)
-        self.path.parent.mkdir(parents=True, exist_ok=True)
+        if path is None:
+            self.log = None
+        elif isinstance(path, (str, Path)):
+            Path(path).parent.mkdir(parents=True, exist_ok=True)
+            self.log = open(path, "w")
+
         self.print = print
         self.stdout = sys.stdout
-        self.log = open(path, "w")
 
         logging.debug(f"Logging to {path}")
 
     def write(self, message):
-        self.log.write(message)
+        if self.log:
+            self.log.write(message)
         if self.print:
             self.stdout.write(message)
 
@@ -24,4 +28,5 @@ class FileLogger:
 
     def __exit__(self, exc_type, exc_value, traceback):
         sys.stdout = self.stdout
-        self.log.close()
+        if self.log:
+            self.log.close()

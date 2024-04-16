@@ -16,7 +16,7 @@ class DiffChanges:
     def reasons(self):
         return [reason for reason, _ in self.changes]
 
-    def repr(self, nindent=0):
+    def str(self, nindent=0):
         indent = "\t" * nindent
         result = ""
         for reason, detail in self.changes:
@@ -55,10 +55,13 @@ class DiffChanges:
         return result
 
     def print(self, nindent=0):
-        print(self.repr(nindent), end="")
+        print(self.str(nindent), end="")
+
+    def __str__(self):
+        return self.str()
 
     def __repr__(self):
-        return self.repr()
+        return ", ".join(self.reasons)
 
     def __iter__(self):
         return iter(self.changes)

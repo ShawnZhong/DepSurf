@@ -44,7 +44,7 @@ class BuildVersion:
         flavor: str = None,
         arch: str = None,
         version: str | tuple = None,
-        is_lts: bool = None,
+        lts: bool = None,
         revision: Literal["first", "last", "all"] = "first",
     ) -> list["BuildVersion"]:
         if isinstance(version, str):
@@ -60,7 +60,7 @@ class BuildVersion:
                 continue
             if version_tuple is not None and bv.version_tuple != version_tuple:
                 continue
-            if is_lts is not None and bv.is_lts != is_lts:
+            if lts is not None and bv.lts != lts:
                 continue
             results.append(bv)
 
@@ -96,7 +96,7 @@ class BuildVersion:
         return self.version_to_str(self.version_tuple[:-1])
 
     @property
-    def is_lts(self):
+    def lts(self):
         return self.version_tuple in [
             (4, 4, 0),
             (4, 15, 0),

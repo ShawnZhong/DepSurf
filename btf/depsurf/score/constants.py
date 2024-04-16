@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class Category(str, Enum):
+class Category(StrEnum):
     BLOCK = "block dev"
     CPU = "cpu"
     FILESYSTEM = "filesystem"

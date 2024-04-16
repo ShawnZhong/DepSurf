@@ -1,7 +1,7 @@
-from enum import Enum
+from enum import StrEnum
 
 
-class Kind(str, Enum):
+class Kind(StrEnum):
     VOID = "VOID"
     INT = "INT"
     PTR = "PTR"

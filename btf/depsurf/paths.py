@@ -12,3 +12,5 @@ BCC_PATH = PROJ_PATH.parent / "bcc"
 assert BCC_PATH.exists(), f"{BCC_PATH} does not exist"
 
 BCC_OUTPUT_PATH = BCC_PATH / "libbpf-tools" / ".output"
+
+FIG_PATH = PROJ_PATH.parent / "paper" / "figs"
