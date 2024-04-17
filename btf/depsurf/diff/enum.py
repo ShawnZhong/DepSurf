@@ -1,7 +1,7 @@
 from depsurf.btf import Kind
 from .utils import diff_dict
 from .changes import DiffChanges
-from depsurf.cause import EnumChange
+from depsurf.cause import EnumCause
 
 
 def diff_enum(old, new, assert_diff=False):
@@ -18,14 +18,14 @@ def diff_enum(old, new, assert_diff=False):
     # added value
     if added:
         result.add(
-            EnumChange.ADD,
+            EnumCause.VAL_ADD,
             [(name, value["val"]) for name, value in added.items()],
         )
 
     # removed value
     if removed:
         result.add(
-            EnumChange.REMOVE,
+            EnumCause.VAL_REMOVE,
             [(name, value["val"]) for name, value in removed.items()],
         )
 
@@ -36,7 +36,7 @@ def diff_enum(old, new, assert_diff=False):
         if old_value["val"] != new_value["val"]
     ]
     if changed_values:
-        result.add(EnumChange.VALUE, changed_values)
+        result.add(EnumCause.VAL_CHANGE, changed_values)
 
     if assert_diff:
         assert result, f"\n{old}\n{new}"

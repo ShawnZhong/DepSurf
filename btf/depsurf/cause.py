@@ -8,7 +8,7 @@ class Consequence(StrEnum):
     CORE = "CO-RE"
 
 
-class GenericChange(StrEnum):
+class GenericCause(StrEnum):
     ADD = "Added"
     REMOVE = "Removed"
     FUNC_ADD = "Function added"
@@ -43,21 +43,23 @@ class GenericChange(StrEnum):
         }[self]
 
 
-class FuncChange(StrEnum):
-    ADD = "Param added"
-    REMOVE = "Param removed"
-    TYPE = "Param type changed"
-    REORDER = "Param reordered"
-    RETURN = "Return type changed"
+class FuncCause(StrEnum):
+    FUNC_ADD = "Function added"
+    FUNC_REMOVE = "Function removed"
+    PARAM_ADD = "Param added"
+    PARAM_REMOVE = "Param removed"
+    PARAM_TYPE = "Param type changed"
+    PARAM_REORDER = "Param reordered"
+    FUNC_RETURN = "Return type changed"
 
     @property
     def consequence(self):
         return {
-            FuncChange.ADD: Consequence.SLIENT,
-            FuncChange.REMOVE: Consequence.SLIENT,
-            FuncChange.TYPE: Consequence.SLIENT,
-            FuncChange.REORDER: Consequence.SLIENT,
-            FuncChange.RETURN: Consequence.SLIENT,
+            FuncCause.PARAM_ADD: Consequence.SLIENT,
+            FuncCause.PARAM_REMOVE: Consequence.SLIENT,
+            FuncCause.PARAM_TYPE: Consequence.SLIENT,
+            FuncCause.PARAM_REORDER: Consequence.SLIENT,
+            FuncCause.FUNC_RETURN: Consequence.SLIENT,
         }[self]
 
     @property
@@ -66,27 +68,29 @@ class FuncChange(StrEnum):
 
         cmap = cm.Greens
         return {
-            self.ADD: cmap(0.3),
-            self.REMOVE: cmap(0.45),
-            self.TYPE: cmap(0.6),
-            self.REORDER: cmap(0.75),
-            self.RETURN: cmap(0.9),
+            self.PARAM_ADD: cmap(0.3),
+            self.PARAM_REMOVE: cmap(0.45),
+            self.PARAM_TYPE: cmap(0.6),
+            self.PARAM_REORDER: cmap(0.75),
+            self.FUNC_RETURN: cmap(0.9),
         }[self]
 
 
-class StructChange(StrEnum):
-    ADD = "Field added"
-    REMOVE = "Field removed"
-    TYPE = "Field type changed"
-    LAYOUT = "Layout changed"
+class StructCause(StrEnum):
+    STRUCT_ADD = "Struct added"
+    STRUCT_REMOVE = "Struct removed"
+    FIELD_ADD = "Field added"
+    FIELD_REMOVE = "Field removed"
+    FIELD_TYPE = "Field type changed"
+    # LAYOUT = "Layout changed"
 
     @property
     def consequence(self):
         return {
-            StructChange.ADD: Consequence.COMPILER,
-            StructChange.REMOVE: Consequence.COMPILER,
-            StructChange.TYPE: Consequence.SLIENT,
-            StructChange.LAYOUT: Consequence.CORE,
+            StructCause.FIELD_ADD: Consequence.COMPILER,
+            StructCause.FIELD_REMOVE: Consequence.COMPILER,
+            StructCause.FIELD_TYPE: Consequence.SLIENT,
+            # StructChange.LAYOUT: Consequence.CORE,
         }[self]
 
     @property
@@ -95,21 +99,23 @@ class StructChange(StrEnum):
 
         cmap = cm.Purples
         return {
-            self.ADD: cmap(0.3),
-            self.REMOVE: cmap(0.5),
-            self.TYPE: cmap(0.7),
+            self.FIELD_ADD: cmap(0.3),
+            self.FIELD_REMOVE: cmap(0.5),
+            self.FIELD_TYPE: cmap(0.7),
         }[self]
 
 
-class EnumChange(StrEnum):
-    ADD = "Elem added"
-    REMOVE = "Elem removed"
-    VALUE = "Value changed"
+class EnumCause(StrEnum):
+    ENUM_ADD = "Enum added"
+    ENUM_REMOVE = "Enum removed"
+    VAL_ADD = "Value added"
+    VAL_REMOVE = "Value removed"
+    VAL_CHANGE = "Value changed"
 
     @property
     def consequence(self):
         return {
-            EnumChange.ADD: Consequence.COMPILER,
-            EnumChange.REMOVE: Consequence.COMPILER,
-            EnumChange.VALUE: Consequence.CORE,
+            EnumCause.VAL_ADD: Consequence.COMPILER,
+            EnumCause.VAL_REMOVE: Consequence.COMPILER,
+            EnumCause.VAL_CHANGE: Consequence.CORE,
         }[self]

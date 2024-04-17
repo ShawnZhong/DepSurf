@@ -1,5 +1,5 @@
 from depsurf.btf import Kind
-from depsurf.cause import StructChange
+from depsurf.cause import StructCause
 
 from .changes import DiffChanges
 from .utils import diff_dict
@@ -19,14 +19,14 @@ def diff_struct(old, new, assert_diff=False):
     # added field
     if added:
         changes.add(
-            StructChange.ADD,
+            StructCause.FIELD_ADD,
             [(name, value["type"]) for name, value in added.items()],
         )
 
     # removed field
     if removed:
         changes.add(
-            StructChange.REMOVE,
+            StructCause.FIELD_REMOVE,
             [(name, value["type"]) for name, value in removed.items()],
         )
 
@@ -37,7 +37,7 @@ def diff_struct(old, new, assert_diff=False):
         if old_value["type"] != new_value["type"]
     ]
     if changed_types:
-        changes.add(StructChange.TYPE, changed_types)
+        changes.add(StructCause.FIELD_TYPE, changed_types)
 
     # fields changed offset
     offset_changed = False
@@ -48,7 +48,5 @@ def diff_struct(old, new, assert_diff=False):
         offset_changed = True
 
     if assert_diff:
-        assert (
-            changes or offset_changed or old["name"] != new["name"]
-        ), f"\n{old}\n{new}"
+        assert changes or offset_changed, f"\n{old}\n{new}"
     return changes

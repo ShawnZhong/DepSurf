@@ -1,7 +1,7 @@
 from depsurf.btf import Kind
 from .utils import diff_dict
 from .changes import DiffChanges
-from depsurf.cause import FuncChange
+from depsurf.cause import FuncCause
 
 
 def diff_func(old, new, assert_diff=False):
@@ -18,14 +18,14 @@ def diff_func(old, new, assert_diff=False):
     # params added
     if added:
         result.add(
-            FuncChange.ADD,
+            FuncCause.PARAM_ADD,
             [(name, value["type"]) for name, value in added.items()],
         )
 
     # params removed
     if removed:
         result.add(
-            FuncChange.REMOVE,
+            FuncCause.PARAM_REMOVE,
             [(name, value["type"]) for name, value in removed.items()],
         )
 
@@ -34,7 +34,7 @@ def diff_func(old, new, assert_diff=False):
     new_idx = {n: i for i, n in enumerate(new_params) if n in common}
     if old_idx != new_idx:
         result.add(
-            FuncChange.REORDER,
+            FuncCause.PARAM_REORDER,
             [(list(old_params), list(new_params))],
         )
 
@@ -45,16 +45,15 @@ def diff_func(old, new, assert_diff=False):
         if old_value["type"] != new_value["type"]
     ]
     if changed_types:
-        result.add(FuncChange.TYPE, changed_types)
+        result.add(FuncCause.PARAM_TYPE, changed_types)
 
     # changed return value
     old_ret = old["type"]["ret_type"]
     new_ret = new["type"]["ret_type"]
     if old_ret != new_ret:
-        result.add(FuncChange.RETURN, [(old_ret, new_ret)])
+        result.add(FuncCause.FUNC_RETURN, [(old_ret, new_ret)])
 
     if assert_diff:
-        # allow name changes
-        assert result or old["name"] != new["name"], f"\n{old}\n{new}"
+        assert result, f"\n{old}\n{new}"
 
     return result

@@ -2,7 +2,7 @@ from typing import List, Tuple
 
 from depsurf.diff import DiffChanges, get_diff_fn
 from depsurf.btf import Kind, BTF
-from depsurf.cause import GenericChange
+from depsurf.cause import GenericCause
 
 
 class KernelImages:

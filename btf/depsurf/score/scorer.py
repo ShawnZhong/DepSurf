@@ -1,7 +1,7 @@
 from collections import defaultdict
 
 from .images import KernelImages
-from depsurf.cause import GenericChange
+from depsurf.cause import GenericCause
 
 
 from depsurf.btf import Kind
@@ -98,8 +98,8 @@ class Scorer:
                 versions_str += "✅"
             else:
                 c = {
-                    Kind.FUNC: GenericChange.FUNC_UNAVAIL,
-                    Kind.STRUCT: GenericChange.STRUCT_UNAVAIL,
+                    Kind.FUNC: GenericCause.FUNC_UNAVAIL,
+                    Kind.STRUCT: GenericCause.STRUCT_UNAVAIL,
                 }[kind]
                 self.causes.add(c)
                 versions_str += "❌"
@@ -125,7 +125,7 @@ class Scorer:
             print(f"{indent}Linkage: Non-static ✅")
         else:
             print(f"{indent}Linkage: Static 💥")
-            self.causes.add(GenericChange.STATIC_FN)
+            self.causes.add(GenericCause.STATIC_FN)
 
         def make_str(l):
             # return "\n\t\t\t\t" + "\n\t\t\t\t".join(l)
@@ -138,11 +138,11 @@ class Scorer:
                 print(f"{indent}Inline: Partial 💥")
                 print(f"{indent}\tInline callers: {caller_inline}")
                 print(f"{indent}\tFunc callers: {caller_func}")
-                self.causes.add(GenericChange.PARTIAL_INLINE)
+                self.causes.add(GenericCause.PARTIAL_INLINE)
             else:
                 print(f"{indent}Inline: Full 💥")
                 print(f"{indent}\tInline callers: {caller_inline}")
-                self.causes.add(GenericChange.FULL_INLINE)
+                self.causes.add(GenericCause.FULL_INLINE)
         else:
             print(f"{indent}Inline: None ✅")
             if info.caller_func:
