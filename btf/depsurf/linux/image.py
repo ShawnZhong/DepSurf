@@ -89,7 +89,7 @@ class LinuxImage(ObjectFile):
             f"security_{e['name']}"
             for e in self.btf.get_struct("security_hook_heads")["members"]
         }
-        all_funcs = self.btf.get_all_kind(Kind.FUNC)
+        all_funcs = self.btf.funcs
         return {k: v for k, v in all_funcs.items() if k in func_names}
 
     def get_struct_instance(self, name, ptr) -> StructInstance:

@@ -26,20 +26,33 @@ class BTF:
     def get(self, kind, name):
         return self.data[kind].get(name)
 
-    def get_all_kind(self, kind: Kind):
-        return self.data[kind]
+    @property
+    def funcs(self):
+        return self.data[Kind.FUNC]
+
+    @property
+    def structs(self):
+        return self.data[Kind.STRUCT]
+
+    @property
+    def enums(self):
+        return self.data[Kind.ENUM]
+
+    @property
+    def unions(self):
+        return self.data[Kind.UNION]
 
     def get_func(self, name: str):
-        return self.data[Kind.FUNC].get(name)
+        return self.funcs.get(name)
 
     def get_struct(self, name: str):
-        return self.data[Kind.STRUCT].get(name)
+        return self.structs.get(name)
 
     def get_enum(self, name: str):
-        return self.data[Kind.ENUM].get(name)
+        return self.enums.get(name)
 
     def get_union(self, name: str):
-        return self.data[Kind.UNION].get(name)
+        return self.unions.get(name)
 
     @cached_property
     def enum_values(self):
