@@ -5,6 +5,10 @@ from typing import Literal
 
 from depsurf.paths import DATA_PATH
 
+from . import LinuxImage
+
+DEB_PATH = DATA_PATH / "deb"
+
 
 @dataclass(order=True, frozen=True)
 class BuildVersion:
@@ -37,7 +41,7 @@ class BuildVersion:
 
     @staticmethod
     def all() -> list["BuildVersion"]:
-        return sorted(BuildVersion.from_path(p) for p in (DATA_PATH / "deb").iterdir())
+        return sorted(BuildVersion.from_path(p) for p in DEB_PATH.iterdir())
 
     @staticmethod
     def filter(
@@ -111,7 +115,7 @@ class BuildVersion:
 
     @property
     def deb_path(self):
-        return DATA_PATH / "deb" / f"{self.name}.deb"
+        return DEB_PATH / f"{self.name}.deb"
 
     @property
     def vmlinux_deb_path(self):
@@ -151,9 +155,7 @@ class BuildVersion:
         return self.name
 
     @cached_property
-    def img(self) -> "LinuxImage":
-        from depsurf.linux import LinuxImage
-
+    def img(self) -> LinuxImage:
         return LinuxImage.from_version(self)
 
     # @property

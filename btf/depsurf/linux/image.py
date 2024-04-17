@@ -1,8 +1,13 @@
+from functools import cached_property
+from typing import TYPE_CHECKING
+
 from depsurf.btf import BTF, Kind
 from depsurf.elf import ObjectFile, SymbolInfo
-from .version import BuildVersion
 
-from functools import cached_property
+from .tracepoint import Tracepoints
+
+if TYPE_CHECKING:
+    from .version import BuildVersion
 
 
 class StructInstance:
@@ -45,24 +50,28 @@ class StructInstance:
 class LinuxImage(ObjectFile):
     cache = {}
 
-    def __init__(self, version: BuildVersion):
+    def __init__(self, version: "BuildVersion"):
         if version in self.cache:
             raise ValueError(f"Please use LinuxImage.from_* to get an instance")
         self.version = version
         super().__init__(version.vmlinux_path)
 
     @classmethod
-    def from_version(cls, version: BuildVersion):
+    def from_version(cls, version: "BuildVersion"):
         if version not in cls.cache:
             cls.cache[version] = cls(version)
         return cls.cache[version]
 
     @classmethod
     def from_path(cls, path):
+        from .version import BuildVersion
+
         return cls.from_version(BuildVersion.from_path(path))
 
     @classmethod
     def from_str(cls, name):
+        from .version import BuildVersion
+
         return cls.from_version(BuildVersion.from_str(name))
 
     @staticmethod
@@ -78,9 +87,7 @@ class LinuxImage(ObjectFile):
         return SymbolInfo.from_dump(self.version.symtab_path)
 
     @cached_property
-    def tracepoints(self) -> "Tracepoints":
-        from .tracepoint import Tracepoints
-
+    def tracepoints(self) -> Tracepoints:
         return Tracepoints(self)
 
     @cached_property

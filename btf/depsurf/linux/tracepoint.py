@@ -1,11 +1,13 @@
 import logging
 from functools import cached_property
+from typing import TYPE_CHECKING
 
-from .image import LinuxImage
+if TYPE_CHECKING:
+    from .image import LinuxImage
 
 
 class Tracepoints:
-    def __init__(self, img: LinuxImage):
+    def __init__(self, img: "LinuxImage"):
         self.img = img
         self.funcs = {}
         self.events = {}
