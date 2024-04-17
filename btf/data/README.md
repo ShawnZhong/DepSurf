@@ -1,2 +1,0 @@
-- https://github.com/aquasecurity/btfhub/blob/main/docs/supported-distros.md
-- https://github.com/aquasecurity/btfhub-archive/tree/main/ubuntu
