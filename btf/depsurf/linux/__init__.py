@@ -1,3 +1,4 @@
-from .image import *
-from .version import *
 from .deb import *
+from .image import *
+from .tracepoint import *
+from .version import *

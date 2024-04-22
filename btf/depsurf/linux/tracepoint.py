@@ -1,39 +1,76 @@
+import dataclasses
 import logging
+from dataclasses import dataclass
 from functools import cached_property
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Iterator
+from pathlib import Path
+import json
+
+from depsurf.utils import check_result_path
 
 if TYPE_CHECKING:
     from .image import LinuxImage
 
 
-class Tracepoints:
+@dataclass
+class TracepointInfo:
+    event_name: str
+    func_name: str
+    struct_name: str
+    fmt_str: str
+    func: dict
+    struct: dict
+
+
+class TracepointsExtractor:
     def __init__(self, img: "LinuxImage"):
         self.img = img
-        self.funcs = {}
-        self.events = {}
 
-        ptr_size = img.ptr_size
-        for ptr in range(self.start_ftrace_events, self.stop_ftrace_events, ptr_size):
-            event_ptr = img.get_int(ptr, ptr_size)
+    def iter_event_ptrs(self) -> Iterator[int]:
+        ptr_size = self.img.ptr_size
+        start_ftrace_events = self.img.symtab.get_value_by_name("__start_ftrace_events")
+        stop_ftrace_events = self.img.symtab.get_value_by_name("__stop_ftrace_events")
+        for ptr in range(start_ftrace_events, stop_ftrace_events, ptr_size):
+            event_ptr = self.img.get_int(ptr, ptr_size)
             if event_ptr == 0:
                 logging.warning(f"Invalid event pointer: {ptr:x} -> {event_ptr:x}")
                 continue
-            res = self.get_tracepoint(event_ptr)
-            if res is not None:
-                name, func, struct = res
-                self.funcs[name] = func
-                self.events[name] = struct
+            yield event_ptr
 
-    @property
-    def start_ftrace_events(self):
-        return self.img.symtab.get_value_by_name("__start_ftrace_events")
+    def iter_tracepoints(self) -> Iterator[TracepointInfo]:
+        for ptr in self.iter_event_ptrs():
+            event = self.img.get_struct_instance("trace_event_call", ptr)
 
-    @property
-    def stop_ftrace_events(self):
-        return self.img.symtab.get_value_by_name("__stop_ftrace_events")
+            # Skip non-tracepoint events
+            if not (event["flags"] & self.TRACEPOINT_FLAG):
+                continue
+
+            event_class_name = self.event_class_val_to_name[event["class"]]
+
+            func_name = f"trace_event_raw_event_{event_class_name}"
+            struct_name = f"trace_event_raw_{event_class_name}"
+
+            func = self.img.btf.get_func(func_name)
+            struct = self.img.btf.get_struct(struct_name)
+
+            if func is None:
+                logging.warning(f"Could not find function for {func_name}")
+                continue
+            if struct is None:
+                logging.warning(f"Could not find struct for {struct_name}")
+                continue
+
+            yield TracepointInfo(
+                event_name=self.event_val_to_name[ptr],
+                func_name=func_name,
+                struct_name=struct_name,
+                func=func,
+                struct=struct,
+                fmt_str=self.img.get_cstr(event["print_fmt"]),
+            )
 
     @cached_property
-    def TRACE_EVENT_FL_TRACEPOINT(self):
+    def TRACEPOINT_FLAG(self):
         return self.img.btf.enum_values["TRACE_EVENT_FL_TRACEPOINT"]
 
     @cached_property
@@ -54,56 +91,57 @@ class Tracepoints:
             ].iterrows()
         }
 
-    def get_tp_func(self, name: str):
-        btf = self.img.btf
-        for func_prefix in ["trace_event_raw_event_", "perf_trace_", "__traceiter_"]:
-            func = btf.get_func(f"{func_prefix}{name}")
-            if func:
-                return func
+    # tp = self.img.get_struct_instance("tracepoint", event["tp"])
+    # name = self.img.get_cstr(tp["name"])
 
-        logging.warning(f"Could not find function for {name}")
+    # event_class = self.img.get_struct_instance("trace_event_class", event_class_ptr)
 
-        # typedef = btf.get(Kind.TYPEDEF, f"btf_trace_{name}")
-        # if typedef is not None:
-        #     func = typedef["type"].copy()
-        #     assert func["kind"] == Kind.PTR
-        #     assert func["type"]["kind"] == Kind.FUNC_PROTO
-        #     func["kind"] = Kind.FUNC.name
-        #     return func
+    # def get_tp_func(self, name: str):
+    #     btf = self.img.btf
+    #     for func_prefix in ["trace_event_raw_event_", "perf_trace_", "__traceiter_"]:
+    #         func = btf.get_func(f"{func_prefix}{name}")
+    #         if func:
+    #             return func
 
-    def get_tracepoint(self, ptr: int):
-        event = self.img.get_struct_instance("trace_event_call", ptr)
+    #     logging.warning(f"Could not find function for {name}")
 
-        # Skip non-tracepoint events
-        if not (event["flags"] & self.TRACE_EVENT_FL_TRACEPOINT):
-            return
+    #     typedef = btf.get(Kind.TYPEDEF, f"btf_trace_{name}")
+    #     if typedef is not None:
+    #         func = typedef["type"].copy()
+    #         assert func["kind"] == Kind.PTR
+    #         assert func["type"]["kind"] == Kind.FUNC_PROTO
+    #         func["kind"] = Kind.FUNC.name
+    #         return func
 
-        event_name = self.event_val_to_name[ptr]
-        event_class_name = self.event_class_val_to_name[event["class"]]
 
-        func_name = f"trace_event_raw_event_{event_class_name}"
-        struct_name = f"trace_event_raw_{event_class_name}"
+@check_result_path
+def dump_tracepoints(img, result_path):
 
-        func = self.img.btf.get_func(func_name)
-        struct = self.img.btf.get_struct(struct_name)
+    extractor = TracepointsExtractor(img)
+    with open(result_path, "w") as f:
+        for info in extractor.iter_tracepoints():
+            json.dump(dataclasses.asdict(info), f)
+            f.write("\n")
+    logging.info(f"Saved tracepoints to {result_path}")
 
-        if func is None:
-            logging.warning(f"Could not find function {func_name}")
-            return None
-        if struct is None:
-            logging.warning(f"Could not find struct {struct_name}")
-            return None
 
-        return (event_name, func, struct)
+@dataclass
+class Tracepoints:
+    funcs: dict[str, dict]
+    events: dict[str, dict]
 
-        # fmt_ptr = event["print_fmt"]
-        # fmt = self.img.get_cstr(fmt_ptr)
-        # print(fmt_ptr)
+    @classmethod
+    def from_dump(cls, path: Path):
+        funcs = {}
+        events = {}
+        with open(path) as f:
+            for line in f:
+                info = json.loads(line)
+                event_name = info["event_name"]
+                funcs[event_name] = info["func"]
+                events[event_name] = info["struct"]
 
-        # tp = self.img.get_struct_instance("tracepoint", event["tp"])
-        # name = self.img.get_cstr(tp["name"])
-
-        # event_class = self.img.get_struct_instance("trace_event_class", event_class_ptr)
+        return cls(funcs=funcs, events=events)
 
     def __repr__(self):
         return f"Tracepoints ({len(self.funcs)}): {list(self.funcs.keys())}"
