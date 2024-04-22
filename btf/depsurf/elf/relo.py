@@ -245,7 +245,7 @@ class BPFObjectFile(ObjectFile):
 
     def get_relo(self):
         return BTFReloInfo(
-            BTFExtSection.from_elf(self.elf).relo_info,
-            BTFStrtab(self.elf),
+            BTFExtSection.from_elf(self.elffile).relo_info,
+            BTFStrtab(self.elffile),
             RawBTF.load(self.path.with_suffix(".json")),
         )

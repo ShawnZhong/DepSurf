@@ -4,6 +4,7 @@ from pathlib import Path
 
 from depsurf.utils import check_result_path, system
 from elftools.elf.elffile import ELFFile
+from elftools.elf.relocation import RelocationSection
 
 from .symtab import SymbolInfo
 from .utils import get_cstr
@@ -11,6 +12,7 @@ from .utils import get_cstr
 
 class SectionInfo:
     def __init__(self, elffile: ELFFile):
+        self.elffile = elffile
         self.data = self.get_section_info(elffile)
 
     @staticmethod
@@ -26,7 +28,6 @@ class SectionInfo:
                         for k, v in s.header.items()
                         if k not in ("sh_name", "sh_addr")
                     },
-                    # "addr": f"{s.header.sh_addr:x}",
                     "addr": s.header.sh_addr,
                     # "data": s.data()[:15],
                 }
@@ -35,49 +36,100 @@ class SectionInfo:
         ).set_index("name")
         return df
 
-    @cached_property
-    def data_sections(self):
-        return list(
-            self.data.loc[
-                [".data", ".text", ".init.data", ".rodata"], ["addr", "size", "offset"]
-            ].itertuples(index=False, name=None)
-        )
-
-    def addr_to_offset(self, addr):
-        for base, size, file_offset in self.data_sections:
-            if base <= addr < base + size:
-                return file_offset + addr - base
-
-        raise ValueError(f"Invalid address {addr}")
-
     def _repr_html_(self):
-        return self.data._repr_html_()
+        return self.data.to_html(formatters={"addr": hex, "offset": hex, "size": hex})
 
 
 class ObjectFile:
     def __init__(self, path):
         self.path = Path(path)
         self.file = open(path, "rb")
-        self.elf = ELFFile(self.file)
+        self.elffile = ELFFile(self.file)
+        self.ptr_size = self.elffile.elfclass // 8
+        self.byteorder = "little" if self.elffile.little_endian else "big"
 
     def __del__(self):
         self.file.close()
 
     @cached_property
     def symtab(self) -> SymbolInfo:
-        return SymbolInfo.from_elffile(self.elf)
+        return SymbolInfo.from_elffile(self.elffile)
 
     @cached_property
     def sections(self) -> SectionInfo:
-        return SectionInfo(self.elf)
+        return SectionInfo(self.elffile)
 
-    def get_bytes(self, addr, size=8) -> bytes:
-        offset = self.sections.addr_to_offset(addr)
+    @cached_property
+    def relocations(self):
+        arch = self.elffile["e_machine"]
+        if arch not in ("EM_AARCH64", "EM_S390"):
+            return {}
+
+        from elftools.elf.dynamic import DynamicSection
+
+        relo_sec: RelocationSection = self.elffile.get_section_by_name(".rela.dyn")
+        if not relo_sec:
+            logging.warning("No .rela.dyn found")
+            return {}
+
+        if arch == "EM_S390":
+            dynsym: DynamicSection = self.elffile.get_section_by_name(".dynsym")
+            if not dynsym:
+                logging.warning("No .dynsym found")
+                return {}
+
+        constant = 1 << self.elffile.elfclass
+
+        result = {}
+        for r in relo_sec.iter_relocations():
+            info_type = r["r_info_type"]
+            if info_type == 0:
+                continue
+            elif arch == "EM_AARCH64" and info_type == 1027:
+                # R_AARCH64_RELATIVE
+                # Ref: https://github.com/torvalds/linux/blob/a2c63a3f3d687ac4f63bf4ffa04d7458a2db350b/arch/arm64/kernel/pi/relocate.c#L15
+                val = constant + r["r_addend"]
+            elif arch == "EM_S390" and info_type in (12, 22):
+                # R_390_RELATIVE and R_390_64
+                # Ref:
+                # - https://github.com/torvalds/linux/blob/a2c63a3f3d687ac4f63bf4ffa04d7458a2db350b/arch/s390/boot/startup.c#L145
+                # - https://github.com/torvalds/linux/blob/a2c63a3f3d687ac4f63bf4ffa04d7458a2db350b/arch/s390/kernel/machine_kexec_reloc.c#L5
+                val = r["r_addend"]
+                info = r["r_info"]
+                sym_idx = info >> 32
+                if sym_idx != 0:
+                    sym = dynsym.get_symbol(sym_idx)
+                    val += sym["st_value"]
+            else:
+                raise ValueError(f"Unknown relocation type {r}")
+            addr = r["r_offset"]
+            result[addr] = val.to_bytes(8, self.byteorder)
+
+        return result
+
+    def addr_to_offset(self, addr):
+        offsets = list(self.elffile.address_offsets(addr))
+        if len(offsets) == 1:
+            return offsets[0]
+        elif len(offsets) == 0:
+            raise ValueError(f"Address {addr:x} not found")
+        else:
+            raise ValueError(f"Multiple offsets found for address {addr:x}")
+
+    def get_bytes_fileoff(self, offset, size=8) -> bytes:
         self.file.seek(offset)
         return self.file.read(size)
 
+    def get_bytes(self, addr, size=8) -> bytes:
+        if addr in self.relocations:
+            assert size == 8
+            return self.relocations[addr]
+        offset = self.addr_to_offset(addr)
+        return self.get_bytes_fileoff(offset, size)
+
     def get_int(self, addr, size) -> int:
-        return int.from_bytes(self.get_bytes(addr, size), "little")
+        b = self.get_bytes(addr, size)
+        return int.from_bytes(b, self.byteorder)
 
     def get_cstr(self, addr, size=512) -> str:
         data = self.get_bytes(addr, size)

@@ -19,6 +19,7 @@ class StructInstance:
         t = img.btf.get_struct(name)
         assert t is not None, f"Could not find struct {name}"
 
+        self.size = t["size"]
         self.members = {m["name"]: m for m in t["members"]}
 
     def get_offset(self, member_name):
@@ -26,7 +27,7 @@ class StructInstance:
         assert bits_offset % 8 == 0
         return bits_offset // 8
 
-    def get(self, name, size=None):
+    def get(self, name, size=None) -> int:
         m = self.members[name]
         t = m["type"]
         kind = t["kind"]
@@ -35,29 +36,38 @@ class StructInstance:
 
         if size is None:
             if kind == Kind.PTR:
-                size = 8
+                size = self.img.ptr_size
             elif kind == Kind.INT:
-                size = t["size"]
+                size = self.img.btf.data[Kind.INT][t["name"]]["size"]
             else:
                 raise NotImplementedError
 
         return self.img.get_int(addr, size)
 
-    def __getitem__(self, name):
+    def __getitem__(self, name) -> int:
         return self.get(name)
+
+    def get_bytes(self):
+        return self.img.get_bytes(self.ptr, self.size)
+
+    def __repr__(self):
+        return f"StructInstance({self.name}, {self.ptr:x}): {self.get_bytes().hex()}"
 
 
 class LinuxImage(ObjectFile):
+    cache_enabled = True
     cache = {}
 
     def __init__(self, version: "BuildVersion"):
-        if version in self.cache:
+        if LinuxImage.cache_enabled and version in self.cache:
             raise ValueError(f"Please use LinuxImage.from_* to get an instance")
         self.version = version
         super().__init__(version.vmlinux_path)
 
     @classmethod
     def from_version(cls, version: "BuildVersion"):
+        if not cls.cache_enabled:
+            return cls(version)
         if version not in cls.cache:
             cls.cache[version] = cls(version)
         return cls.cache[version]
@@ -75,8 +85,13 @@ class LinuxImage(ObjectFile):
         return cls.from_version(BuildVersion.from_str(name))
 
     @staticmethod
-    def clear_cache():
+    def disable_cache():
+        LinuxImage.cache_enabled = False
         LinuxImage.cache.clear()
+
+    @staticmethod
+    def enable_cache():
+        LinuxImage.cache_enabled = True
 
     @cached_property
     def btf(self) -> BTF:

@@ -1,8 +1,12 @@
 import logging
 from functools import cached_property
+from typing import TYPE_CHECKING
 
 from depsurf.utils import check_result_path
 from elftools.elf.elffile import ELFFile, SymbolTableSection
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 
 @check_result_path
@@ -30,13 +34,13 @@ class SymbolInfo:
     def from_dump(cls, path):
         import pandas as pd
 
-        logging.info(f"Loading symbol table from {path}")
+        logging.info(f"Loading symtab from {path}")
         data = pd.read_pickle(path)
         return cls(data)
 
     def dump(self, result_path):
         self.data.to_pickle(result_path)
-        logging.info(f"Saved symbol table to {result_path}")
+        logging.info(f"Saved symtab to {result_path}")
 
     @staticmethod
     def get_symbol_info(elffile: ELFFile) -> "pd.DataFrame":
@@ -76,23 +80,15 @@ class SymbolInfo:
 
         return df
 
-    def get_symbols_by_name(self, name: str) -> "pd.DataFrame":
-        return self.data[self.data["name"] == name]
-
-    def get_symbols_by_value(self, value: int) -> "pd.DataFrame":
-        return self.data[self.data["value"] == value]
-
     def get_value_by_name(self, name: str) -> int:
-        symbols = self.get_symbols_by_name(name)
+        symbols = self.data[self.data["name"] == name]
         if len(symbols) != 1:
             raise ValueError(f"Invalid name {name}: {symbols}")
-        return symbols.iloc[0]["value"]
+        return int(symbols.iloc[0]["value"])
 
-    def get_name_by_value(self, value: int) -> str:
-        symbols = self.get_symbols_by_value(value)
-        if len(symbols) != 1:
-            raise ValueError(f"Invalid value {value}: {symbols}")
-        return symbols.iloc[0]["name"]
+    @cached_property
+    def objects(self) -> "pd.DataFrame":
+        return self.data[self.data["type"] == "STT_OBJECT"]
 
     @cached_property
     def funcs(self) -> "pd.DataFrame":

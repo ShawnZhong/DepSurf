@@ -26,11 +26,13 @@ class BTFNormalizer(RawBTF):
         Kind.ARRAY,
     }
 
-    def normalize_int(self, elem):
+    def normalize_int(self, elem, recurse):
         assert elem["bits_offset"] == 0
         del elem["bits_offset"]
         del elem["encoding"]
         del elem["nr_bits"]
+        if not recurse:
+            del elem["size"]
 
     @staticmethod
     def uint2sint(u, nbytes):
@@ -129,7 +131,7 @@ class BTFNormalizer(RawBTF):
         del elem["id"]
 
         if kind == Kind.INT:
-            self.normalize_int(elem)
+            self.normalize_int(elem, recurse)
         elif kind == Kind.ARRAY:
             del elem["index_type_id"]
         elif kind in (Kind.ENUM, Kind.ENUM64):

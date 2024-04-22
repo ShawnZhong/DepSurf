@@ -37,15 +37,11 @@ class DiffSummary:
     reasons: dict[str, int]
 
 
-def print_as_list(s, name):
-    l = list(s)
-    print(f"{name} ({len(l)}): {l}")
-
-
 def check_diff(dict1, dict2) -> DiffSummary:
     kind1 = next(iter(dict1.values()))["kind"]
-    kind2 = next(iter(dict2.values()))["kind"]
-    assert kind1 == kind2
+    if len(dict2) != 0:
+        kind2 = next(iter(dict2.values()))["kind"]
+        assert kind1 == kind2
     kind = Kind(kind1)
     diff_fn = get_diff_fn(kind)
     reason_enum = get_reason_enum(kind)
@@ -66,29 +62,27 @@ def compare_eq(t1, t2):
 
 
 def check_diff_impl(dict1, dict2, kind, diff_fn, reason_enum) -> DiffSummary:
-    # print_as_list(f"Old {kind}", dict1.keys())
-    # print_as_list(f"New {kind}", dict2.keys())
-
     added, removed, common = diff_dict(dict1, dict2)
-    # print_as_list(f"Common {kind}", common)
-    print_as_list(added, f"Added {kind}")
-    print_as_list(removed, f"Removed {kind}")
+    print(f"Added {kind} ({len(added)}): {list(added)}")
+    print(f"Removed {kind} ({len(removed)}): {list(removed)}")
 
     changed: Dict[str, DiffChanges] = {
         name: diff_fn(old, new, assert_diff=False)  # TODO: assert_diff
         for name, (old, new) in common.items()
         if not compare_eq(old, new)
     }
-    print_as_list(changed.keys(), f"Changed {kind}")
+    print(f"Changed {kind} ({len(changed)}): {list(changed)}")
 
     reasons = {r: 0 for r in reason_enum}
     for changes in changed.values():
         for reason in changes.reasons:
             reasons[reason] += 1
-    print_as_list(reasons.items(), f"Reasons {kind}")
+    print(f"Reasons: {[(str(r), v) for (r, v) in reasons.items() if v != 0]}")
 
     for name, changes in changed.items():
         print(name)
+        # print(f"\tOld: {dict1[name]}")
+        # print(f"\tNew: {dict2[name]}")
         changes.print(1)
 
     return DiffSummary(added, removed, common, changed, reasons)
