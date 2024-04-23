@@ -1,9 +1,11 @@
+import re
 from functools import cached_property
 from typing import TYPE_CHECKING
 
 from depsurf.btf import BTF
 from depsurf.elf import ObjectFile, SymbolInfo
 
+from .dwarf import DWARF
 from .struct import StructInstance
 from .tracepoint import Tracepoints
 
@@ -63,6 +65,10 @@ class LinuxImage(ObjectFile):
         return Tracepoints.from_dump(self.version.tracepoints_path)
 
     @cached_property
+    def dwarf(self):
+        return DWARF(self.elffile)
+
+    @cached_property
     def lsm_hooks(self):
         func_names = {
             f"security_{e['name']}"
@@ -70,6 +76,10 @@ class LinuxImage(ObjectFile):
         }
         all_funcs = self.btf.funcs
         return {k: v for k, v in all_funcs.items() if k in func_names}
+
+    @property
+    def gcc_version(self):
+        return re.search(r"Ubuntu (\d+\.\d+\.\d+)", self.comment).group(1)
 
     def get_struct_instance(self, name, ptr) -> StructInstance:
         return StructInstance(self, name, ptr)

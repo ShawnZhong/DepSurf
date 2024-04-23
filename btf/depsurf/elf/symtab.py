@@ -92,7 +92,9 @@ class SymbolInfo:
 
     @cached_property
     def funcs(self) -> "pd.DataFrame":
-        return self.data[self.data["type"] == "STT_FUNC"]
+        funcs = self.data[self.data["type"] == "STT_FUNC"]
+        # Ref: https://github.com/torvalds/linux/commit/9f2899fe36a623885d8576604cb582328ad32b3c
+        return funcs[~funcs["name"].str.startswith("__pfx")]
 
     @cached_property
     def funcs_local(self) -> "pd.DataFrame":

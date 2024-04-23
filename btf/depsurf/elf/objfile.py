@@ -7,37 +7,8 @@ from elftools.elf.elffile import ELFFile
 from elftools.elf.relocation import RelocationSection
 
 from .symtab import SymbolInfo
+from .sections import Sections
 from .utils import get_cstr
-
-
-class SectionInfo:
-    def __init__(self, elffile: ELFFile):
-        self.elffile = elffile
-        self.data = self.get_section_info(elffile)
-
-    @staticmethod
-    def get_section_info(elffile: ELFFile):
-        import pandas as pd
-
-        df = pd.DataFrame(
-            [
-                {
-                    "name": s.name,
-                    **{
-                        k.removeprefix("sh_"): v
-                        for k, v in s.header.items()
-                        if k not in ("sh_name", "sh_addr")
-                    },
-                    "addr": s.header.sh_addr,
-                    # "data": s.data()[:15],
-                }
-                for s in elffile.iter_sections()
-            ]
-        ).set_index("name")
-        return df
-
-    def _repr_html_(self):
-        return self.data.to_html(formatters={"addr": hex, "offset": hex, "size": hex})
 
 
 class ObjectFile:
@@ -51,13 +22,17 @@ class ObjectFile:
     def __del__(self):
         self.file.close()
 
+    @property
+    def comment(self):
+        return self.elffile.get_section_by_name(".comment").data().decode()
+
     @cached_property
     def symtab(self) -> SymbolInfo:
         return SymbolInfo.from_elffile(self.elffile)
 
     @cached_property
-    def sections(self) -> SectionInfo:
-        return SectionInfo(self.elffile)
+    def sections(self) -> Sections:
+        return Sections(self.elffile)
 
     @cached_property
     def relocations(self):

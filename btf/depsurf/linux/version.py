@@ -45,8 +45,8 @@ class BuildVersion:
 
     @staticmethod
     def filter(
-        flavor: str = None,
-        arch: str = None,
+        flavor: str = "generic",
+        arch: str = "amd64",
         version: str | tuple = None,
         lts: bool = None,
         revision: Literal["first", "last", "all"] = "first",
@@ -88,7 +88,10 @@ class BuildVersion:
 
     @staticmethod
     def version_to_tuple(version: str) -> tuple:
-        return tuple(map(int, version.split(".")))
+        t = tuple(map(int, version.split(".")))
+        if len(t) == 2:
+            return t + (0,)
+        return t
 
     @property
     def version(self):
