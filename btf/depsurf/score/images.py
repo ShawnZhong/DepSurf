@@ -2,25 +2,26 @@ from typing import List, Tuple
 
 from depsurf.diff import DiffChanges, get_diff_fn
 from depsurf.btf import Kind, BTF
+from depsurf.linux import LinuxImage
 from depsurf.cause import GenericCause
 
 
 class KernelImages:
-    def __init__(self, btfs: List[BTF]):
-        self.btfs = btfs
+    def __init__(self, imgs: List[LinuxImage]):
+        self.imgs = imgs
 
     @property
     def all_versions(self):
-        return [btf.short_version for btf in self.btfs]
+        return [img.version.short_version for img in self.imgs]
 
     def __len__(self):
-        return len(self.all_versions)
+        return len(self.imgs)
 
     def get_changes(self, kind, name) -> List[Tuple[str, str, DiffChanges]]:
         result = []
-        for btf1, btf2 in zip(self.btfs, self.btfs[1:]):
-            t1 = btf1.get(kind, name)
-            t2 = btf2.get(kind, name)
+        for img1, img2 in zip(self.imgs, self.imgs[1:]):
+            t1 = img1.btf.get(kind, name)
+            t2 = img2.btf.get(kind, name)
             if t1 is None or t2 is None:
                 continue
             # if t1 is None and t2 is not None:
@@ -41,13 +42,15 @@ class KernelImages:
             #     continue
             changes = get_diff_fn(kind)(t1, t2)
             if changes:
-                result.append((btf1.short_version, btf2.short_version, changes))
+                result.append(
+                    (img1.version.short_version, img2.version.short_version, changes)
+                )
         return result
 
     def get_versions(self, kind, name):
         result = []
-        for btf in self.btfs:
-            t = btf.get(kind, name)
+        for img in self.imgs:
+            t = img.btf.get(kind, name)
             if t is not None:
-                result.append(btf.short_version)
+                result.append(img.version.short_version)
         return result

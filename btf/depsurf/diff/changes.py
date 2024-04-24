@@ -61,7 +61,7 @@ class DiffChanges:
         return self.str()
 
     def __repr__(self):
-        return map(str, self.changes)
+        return str(list(map(str, self.changes)))
 
     def __iter__(self):
         return iter(self.changes)

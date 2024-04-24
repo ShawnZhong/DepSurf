@@ -1,3 +1,5 @@
+import logging
+
 from collections import defaultdict
 
 from .images import KernelImages
@@ -41,9 +43,9 @@ class Causes:
 
 
 class Scorer:
-    def __init__(self, imgs: KernelImages, subroutine_info):
+    def __init__(self, imgs: KernelImages):
         self.imgs = imgs
-        self.subroutine_info = subroutine_info
+        # self.subroutine_info = subroutine_info
         self.causes = Causes()
 
     def analyze(self, hooks, structs, nindent=1):
@@ -76,8 +78,8 @@ class Scorer:
         if not versions:
             return
 
-        if t == "kprobe":
-            self.analyze_func(name, nindent=nindent + 1)
+        # if t == "kprobe":
+        #     self.analyze_func(name, nindent=nindent + 1)
 
         self.analyze_changes(kind, name, nindent=nindent + 1)
 
@@ -89,7 +91,7 @@ class Scorer:
             if name.startswith("dummy") or name == "foo":
                 print(f"\t\tFunction {name} is a dummy function")
                 return
-            assert False, f"Function {name} not found in any version"
+            logging.warning(f"Function {name} not found in any version")
 
         versions_str = ""
 

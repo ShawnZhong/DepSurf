@@ -28,6 +28,7 @@ class TracepointsExtractor:
 
     def iter_event_ptrs(self) -> Iterator[int]:
         ptr_size = self.img.ptr_size
+        # Ref: https://github.com/torvalds/linux/blob/49668688dd5a5f46c72f965835388ed16c596055/kernel/module.c#L2317
         start_ftrace_events = self.img.symtab.get_value_by_name("__start_ftrace_events")
         stop_ftrace_events = self.img.symtab.get_value_by_name("__stop_ftrace_events")
         for ptr in range(start_ftrace_events, stop_ftrace_events, ptr_size):
@@ -39,6 +40,7 @@ class TracepointsExtractor:
 
     def iter_tracepoints(self) -> Iterator[TracepointInfo]:
         for ptr in self.iter_event_ptrs():
+            # Ref: https://github.com/torvalds/linux/blob/2425bcb9240f8c97d793cb31c8e8d8d0a843fa29/include/linux/trace_events.h#L272
             event = self.img.get_struct_instance("trace_event_call", ptr)
 
             # Skip non-tracepoint events
