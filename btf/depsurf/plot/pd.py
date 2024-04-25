@@ -1,6 +1,8 @@
-import pandas as pd
 import logging
+from pathlib import Path
+import json
 
+import pandas as pd
 from depsurf.paths import OUTPUT_PATH
 
 
@@ -17,20 +19,19 @@ setup_pandas()
 
 
 def save_df(df: pd.DataFrame, name, path=None):
+    assert isinstance(name, str)
     if path is None:
         path = OUTPUT_PATH
+    else:
+        assert isinstance(path, Path)
 
     filepath = path / f"{name}.pkl"
     df.to_pickle(filepath)
-    logging.info(f"Saved df to {filepath}")
+    logging.info(f"Saved dataframe to {filepath}")
 
     filepath = path / f"{name}.txt"
     df.to_string(filepath)
-    logging.info(f"Saved df to {filepath}")
-
-    filepath = path / f"{name}.json"
-    df.to_json(filepath, indent=4)
-    logging.info(f"Saved df to {filepath}")
+    logging.info(f"Saved dataframe to {filepath}")
 
     return df
 
