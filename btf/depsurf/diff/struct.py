@@ -7,7 +7,7 @@ from .utils import diff_dict
 
 def diff_struct(old, new, assert_diff=False):
     assert old["kind"] == new["kind"]
-    assert old["kind"] in (Kind.STRUCT, Kind.UNION)
+    assert old["kind"] in (Kind.STRUCT, Kind.UNION), f"{old['kind']}"
 
     changes = DiffChanges()
 

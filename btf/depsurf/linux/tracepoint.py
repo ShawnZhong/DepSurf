@@ -118,7 +118,6 @@ class TracepointsExtractor:
 
 @check_result_path
 def dump_tracepoints(img, result_path):
-
     extractor = TracepointsExtractor(img)
     with open(result_path, "w") as f:
         for info in extractor.iter_tracepoints():
@@ -129,21 +128,25 @@ def dump_tracepoints(img, result_path):
 
 @dataclass
 class Tracepoints:
-    funcs: dict[str, dict]
-    events: dict[str, dict]
+    data: dict[str, TracepointInfo]
 
     @classmethod
     def from_dump(cls, path: Path):
-        funcs = {}
-        events = {}
+        data = {}
         with open(path) as f:
             for line in f:
                 info = json.loads(line)
-                event_name = info["event_name"]
-                funcs[event_name] = info["func"]
-                events[event_name] = info["struct"]
+                data[info["event_name"]] = TracepointInfo(**info)
 
-        return cls(funcs=funcs, events=events)
+        return cls(data=data)
+
+    @property
+    def funcs(self):
+        return {name: info.func for name, info in self.data.items()}
+
+    @property
+    def structs(self):
+        return {name: info.struct for name, info in self.data.items()}
 
     def __repr__(self):
         return f"Tracepoints ({len(self.funcs)}): {list(self.funcs.keys())}"

@@ -1,8 +1,10 @@
 import logging
+import pickle
+
+from depsurf.utils import check_result_path
 
 from .kind import Kind
-from .raw import load_btf_json, RawBTF
-from depsurf.utils import check_result_path
+from .raw import RawBTF, load_btf_json
 
 
 class BTFNormalizer(RawBTF):
@@ -149,7 +151,7 @@ class BTFNormalizer(RawBTF):
         return elem
 
     def get_results_by_kind(self):
-        results_by_kind = {}
+        results = {k.value: {} for k in Kind}
 
         anon_enum_values = []
         for i in range(1, len(self.raw_types) + 1):
@@ -165,35 +167,29 @@ class BTFNormalizer(RawBTF):
                 continue
 
             kind = t["kind"]
-            group = results_by_kind.get(kind)
+            group = results.get(kind)
             if group is None:
-                results_by_kind[kind] = {name: t}
+                results[kind] = {name: t}
             else:
                 if name in group:
                     logging.warning(f"Duplicate type {name}")
                 else:
                     group[name] = t
 
-        if Kind.ENUM.value not in results_by_kind:
-            results_by_kind[Kind.ENUM.value] = {}
-        results_by_kind[Kind.ENUM.value]["(anon)"] = {
-            "kind": "ENUM",
-            "name": "(anon)",
-            "size": 4,
-            "values": anon_enum_values,
-        }
-        return results_by_kind
+        if anon_enum_values:
+            results[Kind.ENUM.value]["(anon)"] = {
+                "kind": "ENUM",
+                "name": "(anon)",
+                "size": 4,
+                "values": anon_enum_values,
+            }
+        return results
 
 
 @check_result_path
 def normalize_btf(json_path, result_path):
-    import pickle
+    logging.info(f"Normalizing {json_path} to {result_path}")
 
-    normalizer = BTFNormalizer.from_json_path(json_path)
-    results = normalizer.get_results_by_kind()
-
-    logging.info(f"Writing {result_path}")
+    data = BTFNormalizer.from_json_path(json_path).get_results_by_kind()
     with open(result_path, "wb") as f:
-        pickle.dump(results, f)
-
-    return result_path
+        pickle.dump(data, f)

@@ -7,8 +7,24 @@ class Consequence(StrEnum):
     SLIENT = "Silent error"
     CORE = "CO-RE"
 
+    def __repr__(self):
+        return f"'{self.value}'"
 
-class GenericCause(StrEnum):
+
+class BaseCause(StrEnum):
+    @property
+    def consequence(self):
+        raise NotImplementedError
+
+    @property
+    def color(self):
+        raise NotImplementedError
+
+    def __repr__(self):
+        return f"'{self.value}'"
+
+
+class GenericCause(BaseCause):
     ADD = "Added"
     REMOVE = "Removed"
     FUNC_ADD = "Function added"
@@ -43,13 +59,13 @@ class GenericCause(StrEnum):
         }[self]
 
 
-class FuncCause(StrEnum):
+class FuncCause(BaseCause):
     FUNC_ADD = "Function added"
     FUNC_REMOVE = "Function removed"
     PARAM_ADD = "Param added"
     PARAM_REMOVE = "Param removed"
-    PARAM_TYPE = "Param type changed"
     PARAM_REORDER = "Param reordered"
+    PARAM_TYPE = "Param type changed"
     FUNC_RETURN = "Return type changed"
 
     @property
@@ -70,13 +86,13 @@ class FuncCause(StrEnum):
         return {
             self.PARAM_ADD: cmap(0.3),
             self.PARAM_REMOVE: cmap(0.45),
-            self.PARAM_TYPE: cmap(0.6),
-            self.PARAM_REORDER: cmap(0.75),
+            self.PARAM_REORDER: cmap(0.6),
+            self.PARAM_TYPE: cmap(0.75),
             self.FUNC_RETURN: cmap(0.9),
         }[self]
 
 
-class StructCause(StrEnum):
+class StructCause(BaseCause):
     STRUCT_ADD = "Struct added"
     STRUCT_REMOVE = "Struct removed"
     FIELD_ADD = "Field added"
@@ -105,7 +121,7 @@ class StructCause(StrEnum):
         }[self]
 
 
-class EnumCause(StrEnum):
+class EnumCause(BaseCause):
     ENUM_ADD = "Enum added"
     ENUM_REMOVE = "Enum removed"
     VAL_ADD = "Value added"
@@ -119,3 +135,14 @@ class EnumCause(StrEnum):
             EnumCause.VAL_REMOVE: Consequence.COMPILER,
             EnumCause.VAL_CHANGE: Consequence.CORE,
         }[self]
+
+
+def cause_sort_key(cause):
+    type_weight = {
+        str: 0,
+        GenericCause: 1,
+        StructCause: 2,
+        FuncCause: 3,
+        EnumCause: 4,
+    }[type(cause)]
+    return type_weight, cause

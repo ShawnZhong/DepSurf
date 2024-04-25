@@ -2,7 +2,6 @@ import logging
 
 from collections import defaultdict
 
-from .images import KernelImages
 from depsurf.cause import GenericCause
 
 
@@ -43,8 +42,8 @@ class Causes:
 
 
 class Scorer:
-    def __init__(self, imgs: KernelImages):
-        self.imgs = imgs
+    def __init__(self):
+        self.imgs = None
         # self.subroutine_info = subroutine_info
         self.causes = Causes()
 

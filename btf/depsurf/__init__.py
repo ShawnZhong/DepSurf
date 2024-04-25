@@ -1,10 +1,15 @@
+import logging
+
+from .bpf import *
 from .btf import *
+from .cause import *
 from .diff import *
 from .elf import *
 from .linux import *
 from .paths import *
-from .score import *
-from .setup import *
 from .utils import *
 
-setup_logging()
+logging.basicConfig(
+    level=logging.INFO,
+    format="[%(filename)12s:%(lineno)-3d] %(levelname)s: %(message)s",
+)

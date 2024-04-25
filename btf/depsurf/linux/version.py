@@ -147,7 +147,7 @@ class BuildVersion:
         return DATA_PATH / "btf_txt" / f"{self.name}.txt"
 
     @property
-    def btf_normalized_path(self):
+    def btf_norm_path(self):
         return DATA_PATH / "btf_norm" / f"{self.name}.pkl"
 
     @property

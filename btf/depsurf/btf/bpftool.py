@@ -1,6 +1,7 @@
 import logging
 from pathlib import Path
 from typing import Tuple, Optional
+from functools import partial
 
 from depsurf.utils import system, check_result_path
 
@@ -22,37 +23,11 @@ def get_bpftool_path():
     return path
 
 
-def gen_min_btf(obj_file, overwrite=False):
-    btf_file = obj_file.with_suffix(".min.btf")
-    if btf_file.exists() and not overwrite:
-        logging.info(f"{btf_file} already exists")
-        return btf_file
-
-    kernel_btf = "/sys/kernel/btf/vmlinux"
-    system(
-        f"{get_bpftool_path()} -d gen min_core_btf {kernel_btf} {btf_file} {obj_file}"
-    )
-    return btf_file
-
-
 @check_result_path
 def dump_btf_impl(btf_path: Path, cmd: str, result_path: Path):
     system(f"{get_bpftool_path()} btf dump file {btf_path} {cmd} > {result_path}")
 
 
-def dump_btf(
-    btf_path: Path, overwrite: bool, result_paths: Optional[Tuple[Path]] = None
-):
-    cmd_map = {
-        ".h": "format c",
-        ".txt": "format raw",
-        ".json": "--json",
-    }
-
-    if result_paths is None:
-        result_paths = (btf_path.with_suffix(suffix) for suffix in cmd_map.keys())
-
-    for result_path in result_paths:
-        cmd = cmd_map.get(result_path.suffix)
-        assert cmd is not None, f"Unknown suffix: {result_path.suffix}"
-        dump_btf_impl(btf_path, cmd=cmd, result_path=result_path, overwrite=overwrite)
+dump_btf_header = partial(dump_btf_impl, cmd="format c")
+dump_btf_txt = partial(dump_btf_impl, cmd="format raw")
+dump_btf_json = partial(dump_btf_impl, cmd="--json")

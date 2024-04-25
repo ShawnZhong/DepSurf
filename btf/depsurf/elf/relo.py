@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from enum import Enum
 
-from depsurf.btf import Kind, dump_btf, RawBTF
+from depsurf.btf import Kind, RawBTF
 from elftools.elf.elffile import ELFFile
 
 from .utils import get_cstr
@@ -240,8 +240,8 @@ class BPFObjectFile(ObjectFile):
     def __init__(self, path):
         super().__init__(path)
 
-    def dump_btf(self, overwrite=False):
-        dump_btf(self.path, overwrite=overwrite)
+    # def dump_btf(self, overwrite=False):
+    #     dump_btf(self.path, overwrite=overwrite)
 
     def get_relo(self):
         return BTFReloInfo(

@@ -4,6 +4,19 @@ from depsurf.paths import FIG_PATH
 from matplotlib import pyplot as plt
 
 
+def setup_matplotlib():
+    # https://matplotlib.org/stable/api/matplotlib_configuration_api.html#default-values-and-styling
+    plt.rcParams["figure.dpi"] = 200
+    plt.rcParams["figure.figsize"] = (10, 5)
+    plt.rcParams["axes.xmargin"] = 0.01
+    plt.rcParams["axes.spines.top"] = False
+    plt.rcParams["axes.spines.right"] = False
+    plt.rcParams["legend.frameon"] = False
+
+
+setup_matplotlib()
+
+
 def bold(text):
     return f"$\\mathbf{{{text}}}$"
 

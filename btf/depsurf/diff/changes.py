@@ -16,6 +16,11 @@ class DiffChanges:
     def reasons(self):
         return [reason for reason, _ in self.changes]
 
+    def __add__(self, other: "DiffChanges"):
+        result = DiffChanges()
+        result.changes = self.changes + other.changes
+        return result
+
     def str(self, nindent=0):
         indent = "\t" * nindent
         result = ""

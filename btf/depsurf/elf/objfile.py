@@ -4,7 +4,7 @@ from pathlib import Path
 
 from depsurf.utils import check_result_path, system
 from elftools.elf.elffile import ELFFile
-from elftools.elf.relocation import RelocationSection
+
 
 from .symtab import SymbolInfo
 from .sections import Sections
@@ -12,7 +12,7 @@ from .utils import get_cstr
 
 
 class ObjectFile:
-    def __init__(self, path):
+    def __init__(self, path: Path):
         self.path = Path(path)
         self.file = open(path, "rb")
         self.elffile = ELFFile(self.file)
@@ -22,10 +22,6 @@ class ObjectFile:
     def __del__(self):
         self.file.close()
 
-    @property
-    def comment(self):
-        return self.elffile.get_section_by_name(".comment").data().decode()
-
     @cached_property
     def symtab(self) -> SymbolInfo:
         return SymbolInfo.from_elffile(self.elffile)
@@ -33,54 +29,6 @@ class ObjectFile:
     @cached_property
     def sections(self) -> Sections:
         return Sections(self.elffile)
-
-    @cached_property
-    def relocations(self):
-        arch = self.elffile["e_machine"]
-        if arch not in ("EM_AARCH64", "EM_S390"):
-            return {}
-
-        from elftools.elf.dynamic import DynamicSection
-
-        relo_sec: RelocationSection = self.elffile.get_section_by_name(".rela.dyn")
-        if not relo_sec:
-            logging.warning("No .rela.dyn found")
-            return {}
-
-        if arch == "EM_S390":
-            dynsym: DynamicSection = self.elffile.get_section_by_name(".dynsym")
-            if not dynsym:
-                logging.warning("No .dynsym found")
-                return {}
-
-        constant = 1 << self.elffile.elfclass
-
-        result = {}
-        for r in relo_sec.iter_relocations():
-            info_type = r["r_info_type"]
-            if info_type == 0:
-                continue
-            elif arch == "EM_AARCH64" and info_type == 1027:
-                # R_AARCH64_RELATIVE
-                # Ref: https://github.com/torvalds/linux/blob/a2c63a3f3d687ac4f63bf4ffa04d7458a2db350b/arch/arm64/kernel/pi/relocate.c#L15
-                val = constant + r["r_addend"]
-            elif arch == "EM_S390" and info_type in (12, 22):
-                # R_390_RELATIVE and R_390_64
-                # Ref:
-                # - https://github.com/torvalds/linux/blob/a2c63a3f3d687ac4f63bf4ffa04d7458a2db350b/arch/s390/boot/startup.c#L145
-                # - https://github.com/torvalds/linux/blob/a2c63a3f3d687ac4f63bf4ffa04d7458a2db350b/arch/s390/kernel/machine_kexec_reloc.c#L5
-                val = r["r_addend"]
-                info = r["r_info"]
-                sym_idx = info >> 32
-                if sym_idx != 0:
-                    sym = dynsym.get_symbol(sym_idx)
-                    val += sym["st_value"]
-            else:
-                raise ValueError(f"Unknown relocation type {r}")
-            addr = r["r_offset"]
-            result[addr] = val.to_bytes(8, self.byteorder)
-
-        return result
 
     def addr_to_offset(self, addr):
         offsets = list(self.elffile.address_offsets(addr))
@@ -91,16 +39,10 @@ class ObjectFile:
         else:
             raise ValueError(f"Multiple offsets found for address {addr:x}")
 
-    def get_bytes_fileoff(self, offset, size=8) -> bytes:
+    def get_bytes(self, addr, size=8) -> bytes:
+        offset = self.addr_to_offset(addr)
         self.file.seek(offset)
         return self.file.read(size)
-
-    def get_bytes(self, addr, size=8) -> bytes:
-        if addr in self.relocations:
-            assert size == 8
-            return self.relocations[addr]
-        offset = self.addr_to_offset(addr)
-        return self.get_bytes_fileoff(offset, size)
 
     def get_int(self, addr, size) -> int:
         b = self.get_bytes(addr, size)
