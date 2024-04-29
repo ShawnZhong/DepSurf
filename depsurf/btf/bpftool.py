@@ -1,6 +1,7 @@
 from pathlib import Path
 from functools import partial
 
+from depsurf.paths import PROJ_PATH
 from depsurf.utils import system, check_result_path
 
 
@@ -14,7 +15,10 @@ def get_linux_tools_path():
 
 
 def get_bpftool_path():
-    # return "/Users/szhong/Downloads/bpf-study/bcc/libbpf-tools/bpftool/src/bpftool"
+    bpftool_path = PROJ_PATH / "csrc" / "bpftool" / "src" / "bpftool"
+    if bpftool_path.exists():
+        return bpftool_path
+
     path = get_linux_tools_path() / "bpftool"
     if not path.exists():
         raise Exception("bpftool not found")

@@ -13,9 +13,10 @@ from depsurf.diff import (
     diff_enum,
     diff_func,
     diff_struct,
+    diff_struct_field,
     diff_tracepoint,
 )
-from depsurf.linux import LinuxImage, BuildVersion
+from depsurf.linux import BuildVersion, LinuxImage
 
 if TYPE_CHECKING:
     import pandas as pd
@@ -76,8 +77,44 @@ class ImageDiffResult:
             self.print(f)
 
 
+def get_struct(img: LinuxImage, name: str):
+    return img.btf.structs.get(name)
+
+
+def get_struct_field(img: LinuxImage, name: Tuple[str, str]):
+    struct_name, field_name = name
+    struct = get_struct(img, struct_name)
+    if struct is None:
+        return None
+    for field in struct["members"]:
+        if field["name"] == field_name:
+            return field
+    return None
+
+
+def get_func(img: LinuxImage, name: str):
+    return img.btf.funcs.get(name)
+
+
+def get_tracepoint(img: LinuxImage, name: str):
+    return img.tracepoints.data.get(name)
+
+
+def get_lsm(img: LinuxImage, name: str):
+    return img.lsm_hooks.get(name)
+
+
+def get_union(img: LinuxImage, name: str):
+    return img.btf.unions.get(name)
+
+
+def get_enum(img: LinuxImage, name: str):
+    return img.btf.enums.get(name)
+
+
 class DepKind(StrEnum):
     STRUCT = "Struct"
+    STRUCT_FIELD = "Struct Field"
     FUNC = "Function"
     TRACEPOINT = "Tracepoint"
     LSM = "LSM"
@@ -111,23 +148,23 @@ class DepKind(StrEnum):
             "perf_event": DepKind.PERF_EVENT,
         }[prefix]
 
-    def get_dict(self, img: LinuxImage) -> Dict[str, dict]:
+    @property
+    def getter(self):
         return {
-            DepKind.STRUCT: img.btf.structs,
-            DepKind.FUNC: img.btf.funcs,
-            DepKind.TRACEPOINT: img.tracepoints.data,
-            DepKind.LSM: img.lsm_hooks,
-            DepKind.UNION: img.btf.unions,
-            DepKind.ENUM: img.btf.enums,
+            DepKind.STRUCT: get_struct,
+            DepKind.STRUCT_FIELD: get_struct_field,
+            DepKind.FUNC: get_func,
+            DepKind.TRACEPOINT: get_tracepoint,
+            DepKind.LSM: get_lsm,
+            DepKind.UNION: get_union,
+            DepKind.ENUM: get_enum,
         }[self]
 
-    def is_available(self, img: LinuxImage, name: str):
-        return name in self.get_dict(img)
-
     @property
-    def diff_fn(self):
+    def differ(self):
         return {
             DepKind.STRUCT: diff_struct,
+            DepKind.STRUCT_FIELD: diff_struct_field,
             DepKind.FUNC: diff_func,
             DepKind.TRACEPOINT: diff_tracepoint,
             DepKind.LSM: diff_func,
@@ -135,14 +172,17 @@ class DepKind(StrEnum):
             DepKind.ENUM: diff_enum,
         }[self]
 
+    def is_available(self, img: LinuxImage, name: str):
+        return self.getter(img, name) is not None
+
     def is_changed(
         self, img1: LinuxImage, img2: LinuxImage, name: str
     ) -> Optional[bool]:
-        t1 = self.get_dict(img1).get(name)
-        t2 = self.get_dict(img2).get(name)
+        t1 = self.getter(img1, name)
+        t2 = self.getter(img2, name)
         if t1 is None or t2 is None:
             return None
-        return bool(self.diff_fn(t1, t2))
+        return bool(self.differ(t1, t2))
 
     def diff_img(self, img1: LinuxImage, img2: LinuxImage) -> ImageDiffResult:
         dict1 = self.get_dict(img1)
@@ -150,7 +190,7 @@ class DepKind(StrEnum):
         added, removed, common = diff_dict(dict1, dict2)
 
         changed: Dict[str, List[BaseCause]] = {
-            name: self.diff_fn(old, new, assert_diff=False)  # TODO: assert_diff
+            name: self.differ(old, new, assert_diff=False)  # TODO: assert_diff
             for name, (old, new) in common.items()
             if not compare_eq(old, new)
         }

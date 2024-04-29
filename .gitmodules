@@ -1,5 +1,5 @@
 [submodule "ebpf/libbpf-bootstrap"]
-	path = csrc/ebpf/libbpf-bootstrap
+	path = csrc/test-bpf/libbpf-bootstrap
 	url = git@github.com:libbpf/libbpf-bootstrap.git
 [submodule "paper"]
 	path = paper
@@ -7,3 +7,6 @@
 [submodule "bcc"]
 	path = csrc/bcc
 	url = git@github.com:iovisor/bcc.git
+[submodule "csrc/bpftool"]
+	path = csrc/bpftool
+	url = https://github.com/libbpf/bpftool.git

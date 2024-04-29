@@ -16,7 +16,7 @@ class BTF:
         assert path.exists()
         assert path.suffix == ".pkl"
         with open(path, "rb") as f:
-            logging.debug(f"Loading BTF from {path}")
+            logging.info(f"Loading BTF from {path}")
             return cls(pickle.load(f))
 
     @classmethod
@@ -39,19 +39,19 @@ class BTF:
         return self.data[kind].get(name)
 
     @property
-    def funcs(self):
+    def funcs(self) -> dict:
         return self.data[Kind.FUNC]
 
     @property
-    def structs(self):
+    def structs(self) -> dict:
         return self.data[Kind.STRUCT]
 
     @property
-    def enums(self):
+    def enums(self) -> dict:
         return self.data[Kind.ENUM]
 
     @property
-    def unions(self):
+    def unions(self) -> dict:
         return self.data[Kind.UNION]
 
     def get_func(self, name: str):

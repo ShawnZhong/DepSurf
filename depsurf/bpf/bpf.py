@@ -1,16 +1,14 @@
-from depsurf.btf import BTF, dump_btf_json, get_bpftool_path, dump_btf_header
+from depsurf.btf import BTF, dump_btf_json, dump_btf_txt, get_bpftool_path
 from depsurf.deps import DepKind
 from depsurf.elf import ObjectFile
 from depsurf.utils import check_result_path, system
 
-from .relo import BTFReloInfo, BTFExtSection, BTFStrtab, RawBTF
-
 
 @check_result_path
-def gen_min_btf(obj_file, result_path):
-    kernel_btf = "/sys/kernel/btf/vmlinux"
+def gen_min_btf(obj_file, result_path, debug=False):
+    debug_arg = "-d" if debug else ""
     system(
-        f"/Users/szhong/Downloads/bpf-study/bcc/libbpf-tools/bpftool/src/bpftool -d gen min_core_btf {kernel_btf} {result_path} {obj_file}"
+        f"{get_bpftool_path()} {debug_arg} gen min_core_btf {obj_file} {result_path} {obj_file}"
     )
 
 
@@ -45,52 +43,49 @@ class BPFObject(ObjectFile):
         )
 
     @property
-    def min_btf_file(self):
+    def btf_file(self):
         return self.path.with_suffix(".min.btf")
 
     @property
-    def min_btf_json_file(self):
+    def btf_json_file(self):
         return self.path.with_suffix(".min.btf.json")
 
     @property
-    def min_btf_header_file(self):
-        return self.path.with_suffix(".min.btf.h")
-
-    @property
-    def btf_json_file(self):
-        return self.path.with_suffix(".btf.json")
+    def btf_txt_file(self):
+        return self.path.with_suffix(".min.btf.txt")
 
     @property
     def deps_struct(self) -> list[tuple[DepKind, str]]:
-        gen_min_btf(self.path, result_path=self.min_btf_file, overwrite=True)
-        dump_btf_json(
-            self.min_btf_file, result_path=self.min_btf_json_file, overwrite=True
-        )
-        dump_btf_header(
-            self.min_btf_file, result_path=self.min_btf_header_file, overwrite=True
-        )
-        print(self.min_btf_header_file)
-        btf = BTF.from_raw_json(self.min_btf_json_file)
-        d = sorted(
-            [(name, m["name"]) for name, e in btf.structs.items() for m in e["members"]]
-        )
-        for e in d:
-            print(e)
+        gen_min_btf(self.path, result_path=self.btf_file, overwrite=False)
+        dump_btf_json(self.btf_file, result_path=self.btf_json_file, overwrite=False)
+        dump_btf_txt(self.btf_file, result_path=self.btf_txt_file, overwrite=False)
+        btf = BTF.from_raw_json(self.btf_json_file)
 
-        # for name, e in btf.structs.items():
-        #     for m in e["members"]:
-        #         print(name, m["name"])
-        return [(DepKind.STRUCT, e) for e in btf.structs]
+        return sorted(
+            set(
+                [
+                    (DepKind.STRUCT_FIELD, (name.split("___")[0], member["name"]))
+                    for name, struct in btf.structs.items()
+                    for member in struct["members"]
+                ]
+            )
+        )
 
     @property
     def deps(self) -> list[tuple[DepKind, str]]:
         return self.deps_hook + self.deps_struct
 
-    @property
-    def deps_struct_field(self):
-        dump_btf_json(self.path, result_path=self.btf_json_file, overwrite=False)
-        return BTFReloInfo(
-            BTFExtSection.from_elf(self.elffile).relo_info,
-            BTFStrtab(self.elffile),
-            RawBTF.load(self.btf_json_file),
-        ).get_deps()
+    # @property
+    # def btf_json_file(self):
+    #     return self.path.with_suffix(".btf.json")
+
+    # @property
+    # def deps_struct_field(self):
+    #     from .relo import BTFReloInfo, BTFExtSection, BTFStrtab, RawBTF
+
+    #     dump_btf_json(self.path, result_path=self.btf_json_file, overwrite=False)
+    #     return BTFReloInfo(
+    #         BTFExtSection.from_elf(self.elffile).relo_info,
+    #         BTFStrtab(self.elffile),
+    #         RawBTF.load(self.btf_json_file),
+    #     ).get_deps()

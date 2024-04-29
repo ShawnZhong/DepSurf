@@ -20,8 +20,8 @@ char LICENSE[] SEC("license") = "GPL";
 
 // SEC("kprobe/close_fd")
 // int prog(struct pt_regs* ctx) {
-//   struct task_struct___foo* t = (void*)PT_REGS_PARM1(ctx);  // get the 1st arg
-//   return t->__state;
+//   struct task_struct___foo* t = (void*)PT_REGS_PARM1(ctx);  // get the 1st
+//   arg return t->__state;
 // }
 
 // static __always_inline int strncmp(const char *s1, const char *s2,
@@ -86,18 +86,21 @@ char LICENSE[] SEC("license") = "GPL";
 //   bpf_printk("execve: %s", name);
 // }
 
-
-SEC("fentry/do_unlinkat")
-int BPF_PROG(bar)
-{
-
-  void*** arg1 = (void*)ctx[0] + 10000;
-
-
-  bpf_printk("arg1 = %pK, *arg1 = %pK (%s)", arg1, *arg1, *arg1);
-
-
-    // bpf_printk("filename = %p", *((void **)ctx[1] + 1000));
-    return 0;
+SEC("kprobe/do_unlinkat")
+int prog(struct pt_regs *ctx) {
+  struct filename *f = (void *)PT_REGS_PARM1(ctx);
+  const char *str;
+  bpf_probe_read(&str, sizeof(str), &f->name);
+  bpf_printk("unlinkat: %s", str);
+  return 0;
 }
 
+// SEC("fentry/do_unlinkat")
+// int BPF_PROG(bar) {
+//   void*** arg1 = (void*)ctx[0];
+
+//   bpf_printk("arg1 = %pK, *arg1 = %pK (%s)", arg1, *arg1, *arg1);
+
+//   // bpf_printk("filename = %p", *((void **)ctx[1] + 1000));
+//   return 0;
+// }
