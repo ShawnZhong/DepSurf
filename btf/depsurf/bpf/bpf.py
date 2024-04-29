@@ -31,7 +31,7 @@ class BPFObject(ObjectFile):
         ]
 
     @property
-    def deps_hook(self):
+    def deps_hook(self) -> list[tuple[DepKind, str]]:
         return sorted(
             set(
                 (
@@ -43,7 +43,7 @@ class BPFObject(ObjectFile):
         )
 
     @property
-    def deps_struct(self):
+    def deps_struct(self) -> list[tuple[DepKind, str]]:
         btf_file = self.path.with_suffix(".min.btf")
         gen_min_btf(self.path, result_path=btf_file, overwrite=False)
 
@@ -54,5 +54,5 @@ class BPFObject(ObjectFile):
         return [(DepKind.STRUCT, e) for e in btf.structs]
 
     @property
-    def deps(self):
+    def deps(self) -> list[tuple[DepKind, str]]:
         return self.deps_hook + self.deps_struct

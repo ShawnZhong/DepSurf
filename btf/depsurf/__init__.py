@@ -2,7 +2,7 @@ import logging
 
 from .bpf import *
 from .btf import *
-from .cause import *
+from .deps import *
 from .diff import *
 from .elf import *
 from .linux import *
