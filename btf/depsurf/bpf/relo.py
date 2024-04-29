@@ -2,16 +2,57 @@ from dataclasses import dataclass
 from enum import Enum
 
 from depsurf.btf import Kind, RawBTF
+from elftools.construct import Struct, ULInt8, ULInt16, ULInt32
 from elftools.elf.elffile import ELFFile
 
-from .utils import get_cstr
-from .objfile import ObjectFile
-from .structs import (
-    bpf_core_relo_t,
-    btf_ext_header_t,
-    btf_ext_info_sec_t,
-    btf_header_t,
-    rec_size_t,
+from ..elf.objfile import ObjectFile
+from ..elf.utils import get_cstr
+
+btf_header_t = Struct(
+    "btf_header",
+    ULInt16("magic"),
+    ULInt8("version"),
+    ULInt8("flags"),
+    ULInt32("hdr_len"),
+    # type
+    ULInt32("type_off"),
+    ULInt32("type_len"),
+    # string
+    ULInt32("str_off"),
+    ULInt32("str_len"),
+)
+
+btf_ext_header_t = Struct(
+    "btf_ext_header",
+    ULInt16("magic"),
+    ULInt8("version"),
+    ULInt8("flags"),
+    ULInt32("hdr_len"),
+    # func
+    ULInt32("func_info_off"),
+    ULInt32("func_info_len"),
+    # line
+    ULInt32("line_info_off"),
+    ULInt32("line_info_len"),
+    # core
+    ULInt32("core_relo_off"),
+    ULInt32("core_relo_len"),
+)
+
+rec_size_t = ULInt32("rec_size")
+
+btf_ext_info_sec_t = Struct(
+    "btf_ext_info_sec",
+    ULInt32("sec_name_off"),
+    ULInt32("num_info"),
+)
+
+bpf_core_relo_t = Struct(
+    "bpf_core_relo",
+    ULInt32("insn_off"),
+    ULInt32("type_id"),
+    ULInt32("access_str_off"),
+    ULInt32("kind"),
 )
 
 
@@ -233,19 +274,4 @@ class BTFExtSection:
             get_slice(header.func_info_off, header.func_info_len),
             get_slice(header.line_info_off, header.line_info_len),
             get_slice(header.core_relo_off, header.core_relo_len),
-        )
-
-
-class BPFObjectFile(ObjectFile):
-    def __init__(self, path):
-        super().__init__(path)
-
-    # def dump_btf(self, overwrite=False):
-    #     dump_btf(self.path, overwrite=overwrite)
-
-    def get_relo(self):
-        return BTFReloInfo(
-            BTFExtSection.from_elf(self.elffile).relo_info,
-            BTFStrtab(self.elffile),
-            RawBTF.load(self.path.with_suffix(".json")),
         )

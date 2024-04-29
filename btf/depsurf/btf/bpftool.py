@@ -1,6 +1,4 @@
-import logging
 from pathlib import Path
-from typing import Tuple, Optional
 from functools import partial
 
 from depsurf.utils import system, check_result_path

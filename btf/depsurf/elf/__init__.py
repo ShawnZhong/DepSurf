@@ -1,6 +1,5 @@
 from .description import *
 from .objfile import *
-from .relo import *
 from .sections import *
 from .traverser import *
 from .utils import *
