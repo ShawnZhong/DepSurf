@@ -72,6 +72,8 @@ def diff_struct_field(old, new, assert_diff=False) -> List[BaseCause]:
     if assert_diff:
         assert False, f"\n{old}\n{new}"
 
+    return []
+
 
 def diff_struct(old, new, assert_diff=False) -> List[BaseCause]:
     assert old["kind"] == new["kind"]

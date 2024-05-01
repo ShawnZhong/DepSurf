@@ -2,6 +2,11 @@ from depsurf.btf import BTF, dump_btf_json, dump_btf_txt, get_bpftool_path
 from depsurf.deps import DepKind
 from depsurf.elf import ObjectFile
 from depsurf.utils import check_result_path, system
+from depsurf.linux import BuildVersion
+
+from pathlib import Path
+
+from functools import cached_property
 
 
 @check_result_path
@@ -19,6 +24,18 @@ class BPFObject(ObjectFile):
     @property
     def name(self):
         return self.path.name.removesuffix(".o").removesuffix(".bpf")
+
+    @property
+    def btf_file(self):
+        return self.path.with_suffix(".min.btf")
+
+    @property
+    def btf_json_file(self):
+        return self.path.with_suffix(".min.btf.json")
+
+    @property
+    def btf_txt_file(self):
+        return self.path.with_suffix(".min.btf.txt")
 
     @property
     def hook_names(self):
@@ -43,18 +60,6 @@ class BPFObject(ObjectFile):
         )
 
     @property
-    def btf_file(self):
-        return self.path.with_suffix(".min.btf")
-
-    @property
-    def btf_json_file(self):
-        return self.path.with_suffix(".min.btf.json")
-
-    @property
-    def btf_txt_file(self):
-        return self.path.with_suffix(".min.btf.txt")
-
-    @property
     def deps_struct(self) -> list[tuple[DepKind, str]]:
         gen_min_btf(self.path, result_path=self.btf_file, overwrite=False)
         dump_btf_json(self.btf_file, result_path=self.btf_json_file, overwrite=False)
@@ -63,15 +68,13 @@ class BPFObject(ObjectFile):
 
         return sorted(
             set(
-                [
-                    (DepKind.STRUCT_FIELD, (name.split("___")[0], member["name"]))
-                    for name, struct in btf.structs.items()
-                    for member in struct["members"]
-                ]
+                (DepKind.STRUCT_FIELD, f'{name.split("___")[0]}::{member["name"]}')
+                for name, struct in btf.structs.items()
+                for member in struct["members"]
             )
         )
 
-    @property
+    @cached_property
     def deps(self) -> list[tuple[DepKind, str]]:
         return self.deps_hook + self.deps_struct
 

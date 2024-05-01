@@ -2,13 +2,12 @@ import logging
 from functools import cached_property
 from pathlib import Path
 
-from depsurf.utils import check_result_path, system
+from depsurf.utils import check_result_path, system, get_cstr
 from elftools.elf.elffile import ELFFile
 
 
 from .symtab import SymbolInfo
 from .sections import Sections
-from .utils import get_cstr
 
 
 class ObjectFile:
@@ -52,36 +51,6 @@ class ObjectFile:
         data = self.get_bytes(addr, size)
         return get_cstr(data, 0)
 
-    def extract_btf(self, result_path: Path):
-        from elftools.elf.elffile import ELFFile
-
-        with open(self.path, "rb") as f:
-            elf = ELFFile(f)
-
-            if elf.has_dwarf_info():
-                # Ref: https://github.com/torvalds/linux/blob/master/scripts/Makefile.btf
-                system(
-                    f"pahole "
-                    # f"--btf_gen_floats "
-                    f"--lang_exclude=rust "
-                    # f"--btf_gen_optimized "
-                    f"--btf_encode_detached {result_path} "
-                    f"{self.path}"
-                )
-                return
-
-            btf = elf.get_section_by_name(".BTF")
-            if btf:
-                logging.info(f"Extracting .BTF from {self.path} to {result_path}")
-                with open(result_path, "wb") as f:
-                    f.write(btf.data())
-                # system(
-                #     f"objcopy -I elf64-little {self.path} --dump-section .BTF={btf_path}"
-                # )
-                return
-
-            raise ValueError(f"No BTF or DWARF in {self.path}")
-
     @staticmethod
     def get_objdump_path():
         import shutil
@@ -105,4 +74,29 @@ class ObjectFile:
 
 @check_result_path
 def extract_btf(vmlinux_path: Path, result_path: Path):
-    ObjectFile(vmlinux_path).extract_btf(result_path)
+    with open(vmlinux_path, "rb") as f:
+        elf = ELFFile(f)
+
+        if elf.has_dwarf_info():
+            # Ref: https://github.com/torvalds/linux/blob/master/scripts/Makefile.btf
+            system(
+                f"pahole "
+                # f"--btf_gen_floats "
+                f"--lang_exclude=rust "
+                # f"--btf_gen_optimized "
+                f"--btf_encode_detached {result_path} "
+                f"{vmlinux_path}"
+            )
+            return
+
+        btf = elf.get_section_by_name(".BTF")
+        if btf:
+            logging.info(f"Extracting .BTF from {vmlinux_path} to {result_path}")
+            with open(result_path, "wb") as f:
+                f.write(btf.data())
+            # system(
+            #     f"objcopy -I elf64-little {self.path} --dump-section .BTF={btf_path}"
+            # )
+            return
+
+        raise ValueError(f"No BTF or DWARF in {vmlinux_path}")

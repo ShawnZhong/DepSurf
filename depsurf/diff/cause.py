@@ -18,6 +18,9 @@ class BaseCause:
     def format(self):
         raise NotImplementedError
 
+    def __str__(self):
+        return f"{self.enum:24}{self.format()}"
+
 
 class BaseCauseEnum(StrEnum):
     def __init_subclass__(cls, sort_idx):

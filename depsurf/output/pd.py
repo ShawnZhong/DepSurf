@@ -1,6 +1,5 @@
 import logging
 from pathlib import Path
-import json
 
 import pandas as pd
 from depsurf.paths import OUTPUT_PATH
@@ -18,25 +17,31 @@ def setup_pandas():
 setup_pandas()
 
 
-def save_df(df: pd.DataFrame, name, path=None):
-    assert isinstance(name, str)
-    if path is None:
-        path = OUTPUT_PATH
-    else:
-        assert isinstance(path, Path)
+def save_df_pkl(df: pd.DataFrame, path: Path):
+    path.parent.mkdir(parents=True, exist_ok=True)
 
-    filepath = path / f"{name}.pkl"
-    df.to_pickle(filepath)
-    logging.info(f"Saved dataframe to {filepath}")
-
-    filepath = path / f"{name}.txt"
-    df.to_string(filepath)
-    logging.info(f"Saved dataframe to {filepath}")
+    df.to_pickle(path)
+    logging.info(f"Saved dataframe to {path}")
 
     return df
 
 
-def load_df(name, path=None):
+def save_df_txt(df: pd.DataFrame, path: Path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    df.to_string(path)
+    logging.info(f"Saved dataframe to {path}")
+
+    return df
+
+
+def save_df(df: pd.DataFrame, name: str, path: Path = OUTPUT_PATH):
+    save_df_pkl(df, path=path / f"{name}.pkl")
+    save_df_txt(df, path=path / f"{name}.txt")
+    return df
+
+
+def load_df(name, path=None) -> pd.DataFrame:
     if path is None:
         path = OUTPUT_PATH
 

@@ -3,7 +3,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path
-from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
+from typing import TYPE_CHECKING, Dict, List, Optional, Tuple, Callable
 
 from depsurf.diff import (
     BaseCause,
@@ -61,7 +61,7 @@ class ImageDiffResult:
         for name, changes in self.changed.items():
             print(name, file=file)
             for change in changes:
-                print(f"\t{change.enum:24}{change.format()}", file=file)
+                print(f"\t{change}", file=file)
 
         print_header("Added", self.added)
         for name in self.added:
@@ -77,44 +77,9 @@ class ImageDiffResult:
             self.print(f)
 
 
-def get_struct(img: LinuxImage, name: str):
-    return img.btf.structs.get(name)
-
-
-def get_struct_field(img: LinuxImage, name: Tuple[str, str]):
-    struct_name, field_name = name
-    struct = get_struct(img, struct_name)
-    if struct is None:
-        return None
-    for field in struct["members"]:
-        if field["name"] == field_name:
-            return field
-    return None
-
-
-def get_func(img: LinuxImage, name: str):
-    return img.btf.funcs.get(name)
-
-
-def get_tracepoint(img: LinuxImage, name: str):
-    return img.tracepoints.data.get(name)
-
-
-def get_lsm(img: LinuxImage, name: str):
-    return img.lsm_hooks.get(name)
-
-
-def get_union(img: LinuxImage, name: str):
-    return img.btf.unions.get(name)
-
-
-def get_enum(img: LinuxImage, name: str):
-    return img.btf.enums.get(name)
-
-
 class DepKind(StrEnum):
     STRUCT = "Struct"
-    STRUCT_FIELD = "Struct Field"
+    STRUCT_FIELD = "Field"
     FUNC = "Function"
     TRACEPOINT = "Tracepoint"
     LSM = "LSM"
@@ -148,20 +113,31 @@ class DepKind(StrEnum):
             "perf_event": DepKind.PERF_EVENT,
         }[prefix]
 
-    @property
-    def getter(self):
+    def get_kinds(self, img: LinuxImage) -> Dict[str, Dict]:
         return {
-            DepKind.STRUCT: get_struct,
-            DepKind.STRUCT_FIELD: get_struct_field,
-            DepKind.FUNC: get_func,
-            DepKind.TRACEPOINT: get_tracepoint,
-            DepKind.LSM: get_lsm,
-            DepKind.UNION: get_union,
-            DepKind.ENUM: get_enum,
+            DepKind.STRUCT: img.btf.structs,
+            DepKind.FUNC: img.btf.funcs,
+            DepKind.TRACEPOINT: img.tracepoints.data,
+            DepKind.LSM: img.lsm_hooks,
+            DepKind.UNION: img.btf.unions,
+            DepKind.ENUM: img.btf.enums,
         }[self]
 
+    def get_kind(self, img: LinuxImage, name: str) -> Dict:
+        if self == DepKind.STRUCT_FIELD:
+            struct_name, field_name = name.split("::")
+            struct = img.btf.structs.get(struct_name)
+            if struct is None:
+                return None
+            for field in struct["members"]:
+                if field["name"] == field_name:
+                    return field
+            return None
+        else:
+            return self.get_kinds(img).get(name)
+
     @property
-    def differ(self):
+    def differ(self) -> Callable[[Dict, Dict], List[BaseCause]]:
         return {
             DepKind.STRUCT: diff_struct,
             DepKind.STRUCT_FIELD: diff_struct_field,
@@ -172,21 +148,21 @@ class DepKind(StrEnum):
             DepKind.ENUM: diff_enum,
         }[self]
 
-    def is_available(self, img: LinuxImage, name: str):
-        return self.getter(img, name) is not None
+    def status(self, img: LinuxImage, name: str):
+        return self.get_kind(img, name) is not None
 
-    def is_changed(
+    def diff_kind(
         self, img1: LinuxImage, img2: LinuxImage, name: str
     ) -> Optional[bool]:
-        t1 = self.getter(img1, name)
-        t2 = self.getter(img2, name)
+        t1 = self.get_kind(img1, name)
+        t2 = self.get_kind(img2, name)
         if t1 is None or t2 is None:
             return None
-        return bool(self.differ(t1, t2))
+        return self.differ(t1, t2)
 
-    def diff_img(self, img1: LinuxImage, img2: LinuxImage) -> ImageDiffResult:
-        dict1 = self.get_dict(img1)
-        dict2 = self.get_dict(img2)
+    def diff_kinds(self, img1: LinuxImage, img2: LinuxImage) -> ImageDiffResult:
+        dict1 = self.get_kinds(img1)
+        dict2 = self.get_kinds(img2)
         added, removed, common = diff_dict(dict1, dict2)
 
         changed: Dict[str, List[BaseCause]] = {
@@ -212,7 +188,7 @@ def diff_img(img1: LinuxImage, img2: LinuxImage, result_path: Path) -> "pd.DataF
 
     results = {}
     for dep_kind in [DepKind.FUNC, DepKind.STRUCT, DepKind.TRACEPOINT, DepKind.LSM]:
-        result = dep_kind.diff_img(img1, img2)
+        result = dep_kind.diff_kinds(img1, img2)
         result.save_txt(result_path / f"{dep_kind}.log")
         results[dep_kind] = result.df
 

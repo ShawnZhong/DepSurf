@@ -5,8 +5,7 @@ from depsurf.btf import Kind, RawBTF
 from elftools.construct import Struct, ULInt8, ULInt16, ULInt32
 from elftools.elf.elffile import ELFFile
 
-from ..elf.objfile import ObjectFile
-from ..elf.utils import get_cstr
+from depsurf.utils import get_cstr
 
 btf_header_t = Struct(
     "btf_header",
