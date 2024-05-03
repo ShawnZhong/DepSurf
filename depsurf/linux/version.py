@@ -159,8 +159,12 @@ class BuildVersion:
         return DATA_PATH / "tracepoints" / f"{self.name}.jsonl"
 
     @property
-    def dwarf_path(self):
-        return DATA_PATH / "dwarf" / f"{self.name}.pkl"
+    def func_pkl_path(self):
+        return DATA_PATH / "func_pkl" / f"{self.name}.pkl"
+
+    @property
+    def func_jsonl_path(self):
+        return DATA_PATH / "func_jsonl" / f"{self.name}.jsonl"
 
     def __repr__(self):
         return self.name

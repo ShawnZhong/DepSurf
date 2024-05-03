@@ -6,6 +6,7 @@ from typing import Callable
 from elftools.dwarf.dwarfinfo import DWARFInfo
 from elftools.dwarf.compileunit import CompileUnit
 from elftools.dwarf.die import DIE
+from elftools.dwarf.lineprogram import LineProgram
 from elftools.dwarf.enums import ENUM_DW_TAG
 
 
@@ -45,21 +46,20 @@ KERNEL_DIR = {
 }
 
 
-def normalize_compile_path(s: str) -> Path:
+def normalize_compile_path(s: str) -> str:
     d = Path(s)
     if not d.is_absolute():
         if d.parts[0] not in KERNEL_DIR:
             logging.warning(f"Suspicious path {d}")
-        return d
+        return str(d)
 
     d = d.resolve()
-
     if len(d.parts) >= 4 and d.parts[3].startswith("linux-"):
-        return Path(*d.parts[4:])
+        return str(Path(*d.parts[4:]))
     else:
         if d.parts[1] not in ("usr", "tmp"):
             logging.warning(f"Suspicious path {d}")
-        return d
+        return str(d)
 
 
 @dataclass(frozen=True)
@@ -69,18 +69,18 @@ class DIEHandler:
 
 
 class Traverser:
-    def __init__(self, cu: CompileUnit, handler_map: dict[str, DIEHandler]):
-        self.cu = cu
-        self.top_die = self.cu.get_top_DIE()
-        assert self.top_die.tag == "DW_TAG_compile_unit"
+    def __init__(self, top_die: DIE, handler_map: dict[str, DIEHandler]):
+        assert top_die.tag == "DW_TAG_compile_unit"
+        self.top_die = top_die
+
+        for tag in handler_map:
+            assert tag in ENUM_DW_TAG, tag
+        self.handler_map = handler_map
+
         self.path = normalize_compile_path(self.top_die.get_full_path())
         self.lang = self.top_die.attributes["DW_AT_language"].value
 
-        if self.lang == 0x001C:  # ignore DW_LANG_Rust
-            self.handler_map = {}
-            return
-
-        line_prog = cu.dwarfinfo.line_program_for_CU(cu)
+        line_prog = top_die.dwarfinfo.line_program_for_CU(top_die.cu)
         self.version = line_prog.header.version
         self.file_entry = line_prog.header.file_entry
         self.include_directory = [
@@ -88,9 +88,6 @@ class Traverser:
             for b in line_prog.header.include_directory
         ]
 
-        for tag in handler_map:
-            assert tag in ENUM_DW_TAG, tag
-        self.handler_map = handler_map
         self.num_indent = 0
 
     def traverse(self):
@@ -164,8 +161,8 @@ class Traverser:
         directory = self.include_directory[dir_idx]
         name = entry.name.decode("ascii")
 
-        return f"{directory}/{name}"
+        # return f"{directory}/{name}"
 
-        # line = die.attributes["DW_AT_decl_line"].value
+        line = die.attributes["DW_AT_decl_line"].value
         # column = die.attributes["DW_AT_decl_column"].value
-        # return f"{directory}/{name}:{line}:{column}"
+        return f"{directory}/{name}:{line}"
