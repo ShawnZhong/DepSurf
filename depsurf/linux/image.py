@@ -12,21 +12,21 @@ from .struct import StructInstance
 from .tracepoint import Tracepoints
 
 if TYPE_CHECKING:
-    from .version import BuildVersion
+    from .version import Version
 
 
 class LinuxImage(ObjectFile):
     cache_enabled = True
     cache = {}
 
-    def __init__(self, version: "BuildVersion"):
+    def __init__(self, version: "Version"):
         if LinuxImage.cache_enabled and version in self.cache:
             raise ValueError(f"Please use LinuxImage.from_* to get an instance")
         self.version = version
         super().__init__(version.vmlinux_path)
 
     @classmethod
-    def from_version(cls, version: "BuildVersion"):
+    def from_version(cls, version: "Version"):
         if not cls.cache_enabled:
             return cls(version)
         if version not in cls.cache:
@@ -35,15 +35,15 @@ class LinuxImage(ObjectFile):
 
     @classmethod
     def from_path(cls, path):
-        from .version import BuildVersion
+        from .version import Version
 
-        return cls.from_version(BuildVersion.from_path(path))
+        return cls.from_version(Version.from_path(path))
 
     @classmethod
     def from_str(cls, name):
-        from .version import BuildVersion
+        from .version import Version
 
-        return cls.from_version(BuildVersion.from_str(name))
+        return cls.from_version(Version.from_str(name))
 
     @staticmethod
     def disable_cache():

@@ -16,7 +16,7 @@ from depsurf.diff import (
     diff_struct_field,
     diff_tracepoint,
 )
-from depsurf.linux import BuildVersion, LinuxImage
+from depsurf.linux import Version, LinuxImage
 
 if TYPE_CHECKING:
     import pandas as pd
@@ -199,7 +199,7 @@ def diff_img(img1: LinuxImage, img2: LinuxImage, result_path: Path) -> "pd.DataF
 
 def diff_img_pairs(
     group: str,
-    pairs: List[Tuple[BuildVersion, BuildVersion]],
+    pairs: List[Tuple[Version, Version]],
     result_path: Path,
 ) -> "pd.DataFrame":
     import pandas as pd

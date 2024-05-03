@@ -2,6 +2,7 @@ import logging
 
 from depsurf.paths import FIG_PATH
 from matplotlib import pyplot as plt
+from matplotlib import transforms
 
 
 def setup_matplotlib():
@@ -49,6 +50,24 @@ def plot_yticks(ax: plt.Axes):
     else:
         fn = lambda x, _: f"{x:.0f}"
     ax.yaxis.set_major_formatter(plt.FuncFormatter(fn))
+
+
+def label_multiline_text(ax: plt.Axes, x, y, lines, colors=None, fontsize=8):
+    if colors is None:
+        colors = [None for _ in lines]
+    for i, (line, color) in enumerate(zip(lines, colors)):
+        ax.text(
+            x,
+            y,
+            line,
+            color=color,
+            fontsize=fontsize,
+            ha="center",
+            va="top",
+            transform=transforms.offset_copy(
+                ax.transData, y=-fontsize * i, units="dots"
+            ),
+        )
 
 
 def save_fig(fig: plt.Figure, name: str):

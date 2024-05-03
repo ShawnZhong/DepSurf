@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
-from typing import Literal
+from typing import List, Literal
 
 from depsurf.paths import DATA_PATH
 
@@ -11,7 +11,7 @@ DEB_PATH = DATA_PATH / "deb"
 
 
 @dataclass(order=True, frozen=True)
-class BuildVersion:
+class Version:
     version_tuple: tuple[int, int, int]
     revision: int
     flavor: str
@@ -40,49 +40,6 @@ class BuildVersion:
         )
 
     @staticmethod
-    def all() -> list["BuildVersion"]:
-        return sorted(BuildVersion.from_path(p) for p in DEB_PATH.iterdir())
-
-    @staticmethod
-    def filter(
-        flavor: str = "generic",
-        arch: str = "amd64",
-        version: str | tuple = None,
-        lts: bool = None,
-        revision: Literal["first", "last", "all"] = "first",
-    ) -> list["BuildVersion"]:
-        if isinstance(version, str):
-            version_tuple = BuildVersion.version_to_tuple(version)
-        else:
-            version_tuple = version
-
-        results = []
-        for bv in BuildVersion.all():
-            if flavor is not None and bv.flavor != flavor:
-                continue
-            if arch is not None and bv.arch != arch:
-                continue
-            if version_tuple is not None and bv.version_tuple != version_tuple:
-                continue
-            if lts is not None and bv.lts != lts:
-                continue
-            results.append(bv)
-
-        if revision == "all":
-            return results
-
-        revisions = {}
-        for bv in results:
-            key = (bv.version_tuple, bv.flavor, bv.arch)
-            if key not in revisions:
-                revisions[key] = bv
-            elif revision == "first" and bv.revision < revisions[key].revision:
-                revisions[key] = bv
-            elif revision == "last" and bv.revision > revisions[key].revision:
-                revisions[key] = bv
-        return list(revisions.values())
-
-    @staticmethod
     def version_to_str(version_tuple: tuple) -> str:
         return ".".join(map(str, version_tuple))
 
@@ -101,6 +58,27 @@ class BuildVersion:
     def short_version(self):
         assert self.version_tuple[-1] == 0
         return self.version_to_str(self.version_tuple[:-1])
+
+    @property
+    def flavor_name(self):
+        return {
+            "generic": "Generic",
+            "lowlatency": "Lat.",
+            "aws": "AWS",
+            "azure": "Azure",
+            "gcp": "GCP",
+            "oracle": "Oracle",
+        }[self.flavor]
+
+    @property
+    def arch_name(self):
+        return {
+            "amd64": "x64",
+            "arm64": "arm",
+            "armhf": "armhf",
+            "ppc64el": "ppc",
+            "s390x": "s390x",
+        }[self.arch]
 
     @property
     def lts(self):
@@ -159,12 +137,8 @@ class BuildVersion:
         return DATA_PATH / "tracepoints" / f"{self.name}.jsonl"
 
     @property
-    def func_pkl_path(self):
-        return DATA_PATH / "func_pkl" / f"{self.name}.pkl"
-
-    @property
-    def func_jsonl_path(self):
-        return DATA_PATH / "func_jsonl" / f"{self.name}.jsonl"
+    def funcs_path(self):
+        return DATA_PATH / "funcs" / f"{self.name}.jsonl"
 
     def __repr__(self):
         return self.name
@@ -180,3 +154,53 @@ class BuildVersion:
     # @property
     # def vmlinuz_path(self):
     #     return DATA_PATH / "vmlinuz" / self.name
+
+
+def filter_version(
+    flavor: str = "generic",
+    arch: str = "amd64",
+    version: str | tuple = None,
+    lts: bool = None,
+    revision: Literal["first", "last", "all"] = "first",
+) -> List[Version]:
+    if isinstance(version, str):
+        version_tuple = Version.version_to_tuple(version)
+    else:
+        version_tuple = version
+
+    results: List[Version] = []
+    for bv in VERSIONS_ALL:
+        if flavor is not None and bv.flavor != flavor:
+            continue
+        if arch is not None and bv.arch != arch:
+            continue
+        if version_tuple is not None and bv.version_tuple != version_tuple:
+            continue
+        if lts is not None and bv.lts != lts:
+            continue
+        results.append(bv)
+
+    if revision == "all":
+        return results
+
+    revisions = {}
+    for bv in results:
+        key = (bv.version_tuple, bv.flavor, bv.arch)
+        if key not in revisions:
+            revisions[key] = bv
+        elif revision == "first" and bv.revision < revisions[key].revision:
+            revisions[key] = bv
+        elif revision == "last" and bv.revision > revisions[key].revision:
+            revisions[key] = bv
+    return list(revisions.values())
+
+
+VERSIONS_ALL = sorted(Version.from_path(p) for p in DEB_PATH.iterdir())
+VERSIONS_LTS = filter_version(lts=True)
+VERSIONS_REGULAR = filter_version()
+VERSIONS_REV = filter_version(revision="all", version="5.4.0")
+VERSIONS_ARCH = [v for v in VERSIONS_ALL if v.arch not in ("amd64", "s390x")]
+VERSIONS_FLAVOR = [v for v in VERSIONS_ALL if v.flavor not in ("generic", "oracle")]
+VERSION_54 = filter_version(version="5.4.0")[0]
+VERSION_FIRST = VERSIONS_ALL[0]
+VERSION_LAST = VERSIONS_ALL[-1]

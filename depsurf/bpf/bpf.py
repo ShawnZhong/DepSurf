@@ -2,7 +2,7 @@ from depsurf.btf import BTF, dump_btf_json, dump_btf_txt, get_bpftool_path
 from depsurf.deps import DepKind
 from depsurf.elf import ObjectFile
 from depsurf.utils import check_result_path, system
-from depsurf.linux import BuildVersion
+from depsurf.linux import Version
 
 from pathlib import Path
 
