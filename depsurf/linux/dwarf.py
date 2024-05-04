@@ -21,9 +21,3 @@ class DWARF:
     @property
     def flags(self):
         return self.producer.split(" ")[3:]
-
-    def dump_name(self, name):
-        system(f"llvm-dwarfdump {self.elffile.name} --name {name} -p")
-
-    def dump_offset(self, offset):
-        system(f"llvm-dwarfdump {self.elffile.name} --debug-info={offset} -p")

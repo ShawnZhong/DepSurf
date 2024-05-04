@@ -1,11 +1,15 @@
 from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
-from typing import List, Literal
+from typing import Callable, Dict, TYPE_CHECKING
+from enum import StrEnum
 
 from depsurf.paths import DATA_PATH
 
-from . import LinuxImage
+from .linux import LinuxImage
+
+if TYPE_CHECKING:
+    import pandas as pd
 
 DEB_PATH = DATA_PATH / "deb"
 
@@ -156,51 +160,78 @@ class Version:
     #     return DATA_PATH / "vmlinuz" / self.name
 
 
-def filter_version(
-    flavor: str = "generic",
-    arch: str = "amd64",
-    version: str | tuple = None,
-    lts: bool = None,
-    revision: Literal["first", "last", "all"] = "first",
-) -> List[Version]:
-    if isinstance(version, str):
-        version_tuple = Version.version_to_tuple(version)
-    else:
-        version_tuple = version
-
-    results: List[Version] = []
-    for bv in VERSIONS_ALL:
-        if flavor is not None and bv.flavor != flavor:
-            continue
-        if arch is not None and bv.arch != arch:
-            continue
-        if version_tuple is not None and bv.version_tuple != version_tuple:
-            continue
-        if lts is not None and bv.lts != lts:
-            continue
-        results.append(bv)
-
-    if revision == "all":
-        return results
-
-    revisions = {}
-    for bv in results:
-        key = (bv.version_tuple, bv.flavor, bv.arch)
-        if key not in revisions:
-            revisions[key] = bv
-        elif revision == "first" and bv.revision < revisions[key].revision:
-            revisions[key] = bv
-        elif revision == "last" and bv.revision > revisions[key].revision:
-            revisions[key] = bv
-    return list(revisions.values())
-
-
 VERSIONS_ALL = sorted(Version.from_path(p) for p in DEB_PATH.iterdir())
-VERSIONS_LTS = filter_version(lts=True)
-VERSIONS_REGULAR = filter_version()
-VERSIONS_REV = filter_version(revision="all", version="5.4.0")
+VERSIONS_REV = [
+    v
+    for v in VERSIONS_ALL
+    if v.version == "5.4.0" and v.arch == "amd64" and v.flavor == "generic"
+]
+VERSION_DEFAULT = VERSIONS_REV[0]
+VERSIONS_REGULAR = sorted(
+    [
+        v
+        for v in VERSIONS_ALL
+        if v.arch == "amd64" and v.flavor == "generic" and v.version != "5.4.0"
+    ]
+    + [VERSION_DEFAULT]
+)
+VERSIONS_LTS = [v for v in VERSIONS_REGULAR if v.lts]
 VERSIONS_ARCH = [v for v in VERSIONS_ALL if v.arch not in ("amd64", "s390x")]
 VERSIONS_FLAVOR = [v for v in VERSIONS_ALL if v.flavor not in ("generic", "oracle")]
-VERSION_54 = filter_version(version="5.4.0")[0]
 VERSION_FIRST = VERSIONS_ALL[0]
 VERSION_LAST = VERSIONS_ALL[-1]
+
+
+class VersionGroup(StrEnum):
+    REG = "reg"
+    ARCH = "arch"
+    FLAVOR = "flavor"
+
+    @property
+    def versions(self):
+        return {
+            VersionGroup.REG: VERSIONS_REGULAR,
+            VersionGroup.ARCH: VERSIONS_ARCH,
+            VersionGroup.FLAVOR: VERSIONS_FLAVOR,
+        }[self]
+
+    @property
+    def version_str(self):
+        from depsurf.output import bold
+
+        return {
+            VersionGroup.REG: lambda v: (
+                bold(v.short_version) if v.lts else v.short_version
+            ),
+            VersionGroup.ARCH: lambda v: v.arch_name,
+            VersionGroup.FLAVOR: lambda v: v.flavor_name,
+        }[self]
+
+    @property
+    def caption(self):
+        return {
+            VersionGroup.REG: "Linux Kernel Version",
+            VersionGroup.ARCH: "Arch for Linux 5.4",
+            VersionGroup.FLAVOR: "Flavor for Linux 5.4",
+        }[self]
+
+    @staticmethod
+    def apply(fn: Callable[[Version], Dict], groups=None) -> "pd.DataFrame":
+        import pandas as pd
+
+        if groups is None:
+            groups = list(VersionGroup)
+
+        results = {}
+        for group in groups:
+            for v in group.versions:
+                results[(group, v)] = fn(v)
+
+        df = pd.DataFrame(results).T
+        return df
+
+    @staticmethod
+    def num_versions(groups=None):
+        if groups is None:
+            groups = list(VersionGroup)
+        return [len(g.versions) for g in groups]

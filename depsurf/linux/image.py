@@ -12,7 +12,7 @@ from .struct import StructInstance
 from .tracepoint import Tracepoints
 
 if TYPE_CHECKING:
-    from .version import Version
+    from depsurf.version import Version
 
 
 class LinuxImage(ObjectFile):
@@ -35,13 +35,13 @@ class LinuxImage(ObjectFile):
 
     @classmethod
     def from_path(cls, path):
-        from .version import Version
+        from depsurf.version import Version
 
         return cls.from_version(Version.from_path(path))
 
     @classmethod
     def from_str(cls, name):
-        from .version import Version
+        from depsurf.version import Version
 
         return cls.from_version(Version.from_str(name))
 

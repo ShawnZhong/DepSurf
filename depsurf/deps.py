@@ -16,7 +16,8 @@ from depsurf.diff import (
     diff_struct_field,
     diff_tracepoint,
 )
-from depsurf.linux import Version, LinuxImage
+from depsurf.linux import LinuxImage
+from depsurf.version import Version
 
 if TYPE_CHECKING:
     import pandas as pd

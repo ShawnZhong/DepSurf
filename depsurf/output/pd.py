@@ -17,15 +17,6 @@ def setup_pandas():
 setup_pandas()
 
 
-def save_df_pkl(df: pd.DataFrame, path: Path):
-    path.parent.mkdir(parents=True, exist_ok=True)
-
-    df.to_pickle(path)
-    logging.info(f"Saved dataframe to {path}")
-
-    return df
-
-
 def save_df_txt(df: pd.DataFrame, path: Path):
     path.parent.mkdir(parents=True, exist_ok=True)
 
@@ -35,9 +26,18 @@ def save_df_txt(df: pd.DataFrame, path: Path):
     return df
 
 
+def save_df_pkl(df: pd.DataFrame, path: Path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+    df.to_pickle(path)
+    logging.info(f"Saved dataframe to {path}")
+
+    return df
+
+
 def save_df(df: pd.DataFrame, name: str, path: Path = OUTPUT_PATH):
-    save_df_pkl(df, path=path / f"{name}.pkl")
     save_df_txt(df, path=path / f"{name}.txt")
+    save_df_pkl(df, path=path / f"{name}.pkl")
     return df
 
 

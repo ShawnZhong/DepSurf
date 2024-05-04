@@ -1,6 +1,3 @@
-import dataclasses
-from dataclasses import dataclass
-import json
 import logging
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -9,69 +6,12 @@ from elftools.dwarf.compileunit import CompileUnit
 from elftools.dwarf.die import DIE
 from elftools.elf.elffile import ELFFile
 
-from .dwarf_traverse import DIEHandler, Traverser, get_name
+from .traverser import DIEHandler, Traverser
+from depsurf.utils import check_result_path
 
-
-@dataclass
-class FuncEntry:
-    name: str
-    external: bool
-    inline: int = -1
-    decl_loc: str = None
-    file: str = None
-    caller_inline: List[Tuple[str, str]] = dataclasses.field(default_factory=list)
-    caller_func: List[Tuple[str, str]] = dataclasses.field(default_factory=list)
-
-    @classmethod
-    def from_json(cls, s: str):
-        return cls(**json.loads(s))
-
-    def to_dict(self) -> Dict:
-        return dataclasses.asdict(self)
-
-    def to_json(self) -> str:
-        return json.dumps(self.to_dict())
-
-    @property
-    def inline_declared(self) -> bool:
-        return self.inline in (2, 3)
-
-    @property
-    def inline_actual(self) -> bool:
-        return self.inline in (1, 3)
-
-    @property
-    def inline_status(self) -> str:
-        return {
-            -1: "unknown",
-            0: "not declared and not inlined",
-            1: "not declared, but inlined",
-            2: "declared, but not inlined",
-            3: "declared and inlined",
-        }[self.inline]
-
-    @property
-    def has_inline_caller(self) -> bool:
-        return bool(self.caller_inline)
-
-    @property
-    def has_func_caller(self) -> bool:
-        return bool(self.caller_func)
-
-    def print(self, file=None):
-        lines = (
-            f"{self.name}",
-            f"\tExternal: {self.external}",
-            f"\tInline: {self.inline_status}",
-            f"\tLoc: {self.decl_loc}",
-            f"\tFile: {self.file}",
-            f"\tCaller Inline",
-            *(f"\t\t{':'.join(caller)}" for caller in self.caller_inline),
-            f"\tCaller Func",
-            *(f"\t\t{':'.join(caller)}" for caller in self.caller_func),
-        )
-
-        print("\n".join(lines), file=file)
+from .utils import get_name
+from .func_entry import FuncEntry, InlineStatus
+from .utils import disable_dwarf_cache
 
 
 class FunctionRecorder:
@@ -82,6 +22,8 @@ class FunctionRecorder:
     def iter_funcs(self):
         for name, group in self.data.items():
             for loc, func in group.items():
+                if func.name.startswith("__compiletime_assert_"):
+                    continue
                 yield func
 
     def dump_jsonl(self, path: Path):
@@ -102,12 +44,12 @@ class FunctionRecorder:
         external = False if external is None else external.value == 1
 
         if external:
-            (decl_loc, file) = (None, None)
+            (loc, file) = (None, None)
         else:
-            decl_loc = traverser.get_decl_location(die)
+            loc = traverser.get_decl_location(die)
             file = traverser.path
 
-        key = (decl_loc, file)
+        key = (loc, file)
 
         entry = group.get(key)
         if entry is not None:
@@ -116,7 +58,7 @@ class FunctionRecorder:
         entry = FuncEntry(
             name=name,
             external=external,
-            decl_loc=decl_loc,
+            loc=loc,
             file=file,
         )
         group[key] = entry
@@ -145,10 +87,18 @@ class FunctionRecorder:
 
         # set inline attribute
         inline = die.attributes.get("DW_AT_inline")
-        entry.inline = inline.value if inline is not None else 0
 
-        if entry.decl_loc is None and entry.file is None:
-            entry.decl_loc = traverser.get_decl_location(die)
+        if entry.inline in (InlineStatus.NOT_SEEN, InlineStatus.SEEN):
+            entry.inline = inline.value if inline is not None else InlineStatus.SEEN
+        else:
+            if inline is not None and entry.inline != inline.value:
+                logging.warning(
+                    f"Conflicting inline status: {entry.inline} vs {inline.value} at {die.offset:#x}"
+                )
+
+        if entry.loc is None:
+            entry.loc = traverser.get_decl_location(die)
+        if entry.file is None:
             entry.file = traverser.path
 
     def record_call_gnu(self, die: DIE, traverser: Traverser):
@@ -180,7 +130,7 @@ class FunctionRecorder:
         if caller_name is None:
             return
 
-        caller_loc = (traverser.path, caller_name)
+        caller_loc = f"{traverser.path}:{caller_name}"
 
         if is_inline:
             assert entry.name != caller_name, f"{entry.offset:#x}"
@@ -231,3 +181,11 @@ class FunctionRecorder:
             del dwarfinfo
             del elffile
         return obj
+
+
+@check_result_path
+def dump_funcs(path: Path, result_path: Path):
+    disable_dwarf_cache()
+
+    obj = FunctionRecorder.from_path(path)
+    obj.dump_jsonl(result_path)
