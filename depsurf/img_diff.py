@@ -6,9 +6,8 @@ from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
 
 from depsurf.dep import Dep, DepKind
 from depsurf.diff import BaseCause, GenericCauses, compare_eq, diff_dict
+from depsurf.img import LinuxImage
 from depsurf.version import Version
-
-from .img import LinuxImage
 
 if TYPE_CHECKING:
     import pandas as pd

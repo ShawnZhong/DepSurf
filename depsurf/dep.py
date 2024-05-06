@@ -86,19 +86,19 @@ class DepStatus:
         if self.collision:
             result += {
                 CollisionType.UNIQUE_GLOBAL: "",
-                CollisionType.UNIQUE_STATIC: "🟣 Static",
-                CollisionType.INCLUDE: f"🟣 {self.collision}",
-                CollisionType.STATIC: f"🟣 {self.collision}",
-                CollisionType.MIXED: f"🟣 {self.collision}",
+                CollisionType.UNIQUE_STATIC: "🟣Static ",
+                CollisionType.INCLUDE: f"🟣{self.collision} ",
+                CollisionType.STATIC: f"🟣{self.collision} ",
+                CollisionType.MIXED: f"🟣{self.collision} ",
             }[self.collision]
         if self.inline:
             result += {
                 InlineType.NOT: "",
-                InlineType.FULL: f"🟠 {self.inline}",
-                InlineType.PARTIAL: f"🟡 {self.inline}",
+                InlineType.FULL: f"🟠{self.inline} ",
+                InlineType.PARTIAL: f"🟡{self.inline} ",
             }[self.inline]
         if self.suffix:
-            result += f"🔵 Suffix"
+            result += f"🔵Suffix "
         if not result:
             result = "✅"
         return result

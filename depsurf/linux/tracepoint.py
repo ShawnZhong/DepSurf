@@ -9,7 +9,7 @@ import json
 from depsurf.utils import check_result_path
 
 if TYPE_CHECKING:
-    from ..img import LinuxImage
+    from depsurf.img import LinuxImage
 
 
 @dataclass
@@ -28,10 +28,10 @@ class TracepointsExtractor:
         self.event_names = {}
         self.event_class_names = {}
         for sym in self.img.symtab:
-            # Ref: https://github.com/torvalds/linux/blob/49668688dd5a5f46c72f965835388ed16c596055/kernel/module.c#L2317
             t = sym["type"]
             name = sym["name"]
             if t == "STT_NOTYPE":
+                # Ref: https://github.com/torvalds/linux/blob/49668688dd5a5f46c72f965835388ed16c596055/kernel/module.c#L2317
                 if name == "__start_ftrace_events":
                     self.start_ftrace_events = sym["value"]
                 elif name == "__stop_ftrace_events":

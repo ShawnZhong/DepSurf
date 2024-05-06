@@ -74,6 +74,8 @@ class BPFObject:
         results = []
         for name, struct in btf.structs.items():
             name = name.split("___")[0]
+            if name == "user_pt_regs":
+                continue
             results.append(Dep(DepKind.STRUCT, name))
             for member in struct["members"]:
                 results.append(Dep(DepKind.STRUCT_FIELD, f"{name}::{member['name']}"))

@@ -5,6 +5,8 @@ from .btf import *
 from .dep import *
 from .diff import *
 from .dwarf import *
+from .img import *
+from .img_diff import *
 from .linux import *
 from .paths import *
 from .prep import *
