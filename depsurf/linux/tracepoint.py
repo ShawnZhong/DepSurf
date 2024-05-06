@@ -9,7 +9,7 @@ import json
 from depsurf.utils import check_result_path
 
 if TYPE_CHECKING:
-    from .image import LinuxImage
+    from ..img import LinuxImage
 
 
 @dataclass
@@ -25,13 +25,28 @@ class TracepointInfo:
 class TracepointsExtractor:
     def __init__(self, img: "LinuxImage"):
         self.img = img
+        self.event_names = {}
+        self.event_class_names = {}
+        for sym in self.img.symtab:
+            # Ref: https://github.com/torvalds/linux/blob/49668688dd5a5f46c72f965835388ed16c596055/kernel/module.c#L2317
+            t = sym["type"]
+            name = sym["name"]
+            if t == "STT_NOTYPE":
+                if name == "__start_ftrace_events":
+                    self.start_ftrace_events = sym["value"]
+                elif name == "__stop_ftrace_events":
+                    self.stop_ftrace_events = sym["value"]
+            elif t == "STT_OBJECT":
+                if name.startswith("event_class_"):
+                    self.event_class_names[sym["value"]] = name.removeprefix(
+                        "event_class_"
+                    )
+                elif name.startswith("event_"):
+                    self.event_names[sym["value"]] = name.removeprefix("event_")
 
     def iter_event_ptrs(self) -> Iterator[int]:
         ptr_size = self.img.ptr_size
-        # Ref: https://github.com/torvalds/linux/blob/49668688dd5a5f46c72f965835388ed16c596055/kernel/module.c#L2317
-        start_ftrace_events = self.img.symtab.get_value_by_name("__start_ftrace_events")
-        stop_ftrace_events = self.img.symtab.get_value_by_name("__stop_ftrace_events")
-        for ptr in range(start_ftrace_events, stop_ftrace_events, ptr_size):
+        for ptr in range(self.start_ftrace_events, self.stop_ftrace_events, ptr_size):
             event_ptr = self.img.get_int(ptr, ptr_size)
             if event_ptr == 0:
                 logging.warning(f"Invalid event pointer: {ptr:x} -> {event_ptr:x}")
@@ -47,7 +62,7 @@ class TracepointsExtractor:
             if not (event["flags"] & self.TRACEPOINT_FLAG):
                 continue
 
-            event_class_name = self.event_class_val_to_name[event["class"]]
+            event_class_name = self.event_class_names[event["class"]]
 
             func_name = f"trace_event_raw_event_{event_class_name}"
             struct_name = f"trace_event_raw_{event_class_name}"
@@ -63,7 +78,7 @@ class TracepointsExtractor:
                 continue
 
             yield TracepointInfo(
-                event_name=self.event_val_to_name[ptr],
+                event_name=self.event_names[ptr],
                 func_name=func_name,
                 struct_name=struct_name,
                 func=func,
@@ -74,24 +89,6 @@ class TracepointsExtractor:
     @cached_property
     def TRACEPOINT_FLAG(self):
         return self.img.btf.enum_values["TRACE_EVENT_FL_TRACEPOINT"]
-
-    @cached_property
-    def event_val_to_name(self):
-        objects = self.img.symtab.objects
-        return {
-            row["value"]: row["name"].removeprefix("event_")
-            for _, row in objects[objects.name.str.startswith("event_")].iterrows()
-        }
-
-    @cached_property
-    def event_class_val_to_name(self):
-        objects = self.img.symtab.objects
-        return {
-            row["value"]: row["name"].removeprefix("event_class_")
-            for _, row in objects[
-                objects.name.str.startswith("event_class_")
-            ].iterrows()
-        }
 
     # tp = self.img.get_struct_instance("tracepoint", event["tp"])
     # name = self.img.get_cstr(tp["name"])

@@ -3,6 +3,8 @@ import pickle
 from functools import cached_property
 from pathlib import Path
 
+from typing import Dict
+
 from .kind import Kind
 
 
@@ -35,35 +37,35 @@ class BTF:
             if d
         )
 
-    def get(self, kind, name):
+    def get(self, kind, name) -> Dict:
         return self.data[kind].get(name)
 
     @property
-    def funcs(self) -> dict:
+    def funcs(self) -> Dict[str, Dict]:
         return self.data[Kind.FUNC]
 
     @property
-    def structs(self) -> dict:
+    def structs(self) -> Dict[str, Dict]:
         return self.data[Kind.STRUCT]
 
     @property
-    def enums(self) -> dict:
+    def enums(self) -> Dict[str, Dict]:
         return self.data[Kind.ENUM]
 
     @property
-    def unions(self) -> dict:
+    def unions(self) -> Dict[str, Dict]:
         return self.data[Kind.UNION]
 
-    def get_func(self, name: str):
+    def get_func(self, name: str) -> Dict:
         return self.funcs.get(name)
 
-    def get_struct(self, name: str):
+    def get_struct(self, name: str) -> Dict:
         return self.structs.get(name)
 
-    def get_enum(self, name: str):
+    def get_enum(self, name: str) -> Dict:
         return self.enums.get(name)
 
-    def get_union(self, name: str):
+    def get_union(self, name: str) -> Dict:
         return self.unions.get(name)
 
     @cached_property

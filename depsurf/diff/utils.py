@@ -1,5 +1,3 @@
-from depsurf.linux import TracepointInfo
-
 from typing import Tuple, Dict
 
 
@@ -13,6 +11,8 @@ def diff_dict(
 
 
 def compare_eq(t1, t2):
+    from depsurf.linux import TracepointInfo
+
     if isinstance(t1, TracepointInfo) and isinstance(t2, TracepointInfo):
         return compare_eq(t1.struct, t2.struct) and compare_eq(t1.func, t2.func)
 

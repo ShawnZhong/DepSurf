@@ -1,12 +1,12 @@
-from depsurf.btf import BTF, dump_btf_json, dump_btf_txt, get_bpftool_path
-from depsurf.deps import DepKind
-from depsurf.elf import ObjectFile
-from depsurf.utils import check_result_path, system
-from depsurf.version import Version
-
+from functools import cached_property
+from typing import List
 from pathlib import Path
 
-from functools import cached_property
+from elftools.elf.elffile import ELFFile
+
+from depsurf.btf import BTF, dump_btf_json, dump_btf_txt, get_bpftool_path
+from depsurf.dep import Dep, DepKind
+from depsurf.utils import check_result_path, system
 
 
 @check_result_path
@@ -17,9 +17,14 @@ def gen_min_btf(obj_file, result_path, debug=False):
     )
 
 
-class BPFObject(ObjectFile):
-    def __init__(self, path):
-        super().__init__(path)
+class BPFObject:
+    def __init__(self, path: Path):
+        self.path = path
+        self.file = open(path, "rb")
+        self.elffile = ELFFile(self.file)
+
+    def __del__(self):
+        self.file.close()
 
     @property
     def name(self):
@@ -48,10 +53,10 @@ class BPFObject(ObjectFile):
         ]
 
     @property
-    def deps_hook(self) -> list[tuple[DepKind, str]]:
+    def deps_hook(self) -> List[Dep]:
         return sorted(
             set(
-                (
+                Dep(
                     DepKind.from_hook_name(hook_name),
                     "" if "/" not in hook_name else hook_name.rsplit("/", 1)[-1],
                 )
@@ -60,22 +65,23 @@ class BPFObject(ObjectFile):
         )
 
     @property
-    def deps_struct(self) -> list[tuple[DepKind, str]]:
+    def deps_struct(self) -> list[Dep]:
         gen_min_btf(self.path, result_path=self.btf_file, overwrite=False)
         dump_btf_json(self.btf_file, result_path=self.btf_json_file, overwrite=False)
         dump_btf_txt(self.btf_file, result_path=self.btf_txt_file, overwrite=False)
         btf = BTF.from_raw_json(self.btf_json_file)
 
-        return sorted(
-            set(
-                (DepKind.STRUCT_FIELD, f'{name.split("___")[0]}::{member["name"]}')
-                for name, struct in btf.structs.items()
-                for member in struct["members"]
-            )
-        )
+        results = []
+        for name, struct in btf.structs.items():
+            name = name.split("___")[0]
+            results.append(Dep(DepKind.STRUCT, name))
+            for member in struct["members"]:
+                results.append(Dep(DepKind.STRUCT_FIELD, f"{name}::{member['name']}"))
+
+        return sorted(set(results))
 
     @cached_property
-    def deps(self) -> list[tuple[DepKind, str]]:
+    def deps(self) -> list[Dep]:
         return self.deps_hook + self.deps_struct
 
     # @property

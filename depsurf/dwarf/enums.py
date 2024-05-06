@@ -2,17 +2,19 @@ from enum import StrEnum
 
 
 class CollisionType(StrEnum):
-    UNIQUE = "Unique"
-    HEADER = "Include Duplication"
+    UNIQUE_GLOBAL = "Unique Global"
+    UNIQUE_STATIC = "Unique Static"
+    INCLUDE = "Duplication with #include"
     STATIC = "Static-Static Collision"
     MIXED = "Static-Global Collision"
 
     @property
     def color(self):
         return {
-            CollisionType.UNIQUE: "tab:blue",
-            CollisionType.HEADER: "tab:orange",
-            CollisionType.STATIC: "darkslateblue",
+            # CollisionType.UNIQUE_GLOBAL: "tab:blue",
+            # CollisionType.UNIQUE_STATIC: "tab:red",
+            CollisionType.INCLUDE: "tab:blue",
+            CollisionType.STATIC: "tab:red",
             CollisionType.MIXED: "tab:green",
         }[self]
 
@@ -25,7 +27,7 @@ class InlineType(StrEnum):
     @property
     def color(self):
         return {
-            InlineType.FULL: "slateblue",
+            InlineType.FULL: "tab:blue",
             InlineType.NOT: "tab:green",
             InlineType.PARTIAL: "tab:red",
         }[self]

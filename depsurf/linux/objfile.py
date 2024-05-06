@@ -1,13 +1,8 @@
 import logging
-from functools import cached_property
 from pathlib import Path
 
-from depsurf.utils import check_result_path, system, get_cstr
+from depsurf.utils import system, get_cstr
 from elftools.elf.elffile import ELFFile
-
-
-from .symtab import SymbolInfo
-from .sections import Sections
 
 
 class ObjectFile:
@@ -20,14 +15,6 @@ class ObjectFile:
 
     def __del__(self):
         self.file.close()
-
-    @cached_property
-    def symtab(self) -> SymbolInfo:
-        return SymbolInfo.from_elffile(self.elffile)
-
-    @cached_property
-    def sections(self) -> Sections:
-        return Sections(self.elffile)
 
     def addr_to_offset(self, addr):
         offsets = list(self.elffile.address_offsets(addr))
@@ -70,33 +57,3 @@ class ObjectFile:
 
     def hexdump(self):
         system(f"hexdump -C {self.path}")
-
-
-@check_result_path
-def extract_btf(vmlinux_path: Path, result_path: Path):
-    with open(vmlinux_path, "rb") as f:
-        elf = ELFFile(f)
-
-        if elf.has_dwarf_info():
-            # Ref: https://github.com/torvalds/linux/blob/master/scripts/Makefile.btf
-            system(
-                f"pahole "
-                # f"--btf_gen_floats "
-                f"--lang_exclude=rust "
-                # f"--btf_gen_optimized "
-                f"--btf_encode_detached {result_path} "
-                f"{vmlinux_path}"
-            )
-            return
-
-        btf = elf.get_section_by_name(".BTF")
-        if btf:
-            logging.info(f"Extracting .BTF from {vmlinux_path} to {result_path}")
-            with open(result_path, "wb") as f:
-                f.write(btf.data())
-            # system(
-            #     f"objcopy -I elf64-little {self.path} --dump-section .BTF={btf_path}"
-            # )
-            return
-
-        raise ValueError(f"No BTF or DWARF in {vmlinux_path}")

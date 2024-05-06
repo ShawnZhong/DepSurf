@@ -26,7 +26,7 @@ class FunctionRecorder:
                     continue
                 yield func
 
-    def dump_jsonl(self, path: Path):
+    def dump(self, path: Path):
         path.parent.mkdir(parents=True, exist_ok=True)
         with open(path, "w") as f:
             for func in self.iter_funcs():
@@ -184,8 +184,7 @@ class FunctionRecorder:
 
 
 @check_result_path
-def dump_funcs(path: Path, result_path: Path):
+def dump_dwarf_funcs(path: Path, result_path: Path):
     disable_dwarf_cache()
 
-    obj = FunctionRecorder.from_path(path)
-    obj.dump_jsonl(result_path)
+    FunctionRecorder.from_path(path).dump(result_path)

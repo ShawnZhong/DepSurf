@@ -1,13 +1,13 @@
-from depsurf.version import Version
-from depsurf.btf import (
-    dump_btf_json,
-    dump_btf_txt,
-    dump_btf_header,
-    normalize_btf,
+from depsurf.btf import dump_btf_header, dump_btf_json, dump_btf_txt, normalize_btf
+from depsurf.dwarf import dump_dwarf_funcs
+from depsurf.linux import (
+    dump_symtab,
+    dump_tracepoints,
+    extract_btf,
+    extract_deb,
 )
-from depsurf.linux import extract_deb, dump_tracepoints, LinuxImage
-from depsurf.elf import dump_symtab, extract_btf
-from depsurf.dwarf import dump_funcs
+from depsurf.version import Version
+from depsurf.img import LinuxImage
 
 
 def prep(v: Version, overwrite: bool = False):
@@ -57,8 +57,8 @@ def prep(v: Version, overwrite: bool = False):
 
 
 def prep_dwarf(v: Version, overwrite: bool = False):
-    dump_funcs(
+    dump_dwarf_funcs(
         v.vmlinux_path,
-        result_path=v.funcs_path,
+        result_path=v.dwarf_funcs_path,
         overwrite=overwrite,
     )

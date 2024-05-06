@@ -1,6 +1,7 @@
 from pathlib import Path
 
 PROJ_PATH = Path(__file__).parent.parent
+assert PROJ_PATH.exists(), f"{PROJ_PATH} does not exist"
 
 DATA_PATH = PROJ_PATH / "data"
 assert DATA_PATH.exists(), f"{DATA_PATH} does not exist"

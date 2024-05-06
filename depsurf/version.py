@@ -6,10 +6,10 @@ from enum import StrEnum
 
 from depsurf.paths import DATA_PATH
 
-from .linux import LinuxImage
 
 if TYPE_CHECKING:
     import pandas as pd
+    from depsurf.linux import LinuxImage
 
 DEB_PATH = DATA_PATH / "deb"
 
@@ -134,21 +134,23 @@ class Version:
 
     @property
     def symtab_path(self):
-        return DATA_PATH / "symtab" / f"{self.name}.pkl"
+        return DATA_PATH / "symtab" / f"{self.name}.jsonl"
 
     @property
     def tracepoints_path(self):
         return DATA_PATH / "tracepoints" / f"{self.name}.jsonl"
 
     @property
-    def funcs_path(self):
-        return DATA_PATH / "funcs" / f"{self.name}.jsonl"
+    def dwarf_funcs_path(self):
+        return DATA_PATH / "dwarf_funcs" / f"{self.name}.jsonl"
 
     def __repr__(self):
         return self.name
 
     @cached_property
-    def img(self) -> LinuxImage:
+    def img(self) -> "LinuxImage":
+        from depsurf.img import LinuxImage
+
         return LinuxImage.from_version(self)
 
     # @property
