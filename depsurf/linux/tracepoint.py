@@ -9,7 +9,7 @@ import json
 from depsurf.utils import check_result_path
 
 if TYPE_CHECKING:
-    from depsurf.img import LinuxImage
+    from depsurf.image import LinuxImage
 
 
 @dataclass

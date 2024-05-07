@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 from depsurf.btf import Kind
 
 if TYPE_CHECKING:
-    from depsurf.img import LinuxImage
+    from depsurf.image import LinuxImage
 
 
 class StructInstance:

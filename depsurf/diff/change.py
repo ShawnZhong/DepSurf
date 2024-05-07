@@ -11,7 +11,7 @@ class Consequence(StrEnum):
         return f"'{self.value}'"
 
 
-class BaseCause:
+class BaseChange:
     def __init_subclass__(cls, enum):
         cls.enum = enum
 
@@ -22,7 +22,7 @@ class BaseCause:
         return f"{self.enum:24}{self.format()}"
 
 
-class BaseCauseEnum(StrEnum):
+class BaseChangeEnum(StrEnum):
     def __init_subclass__(cls, sort_idx):
         cls.sort_idx = sort_idx
 
@@ -38,7 +38,7 @@ class BaseCauseEnum(StrEnum):
         return f"'{self.value}'"
 
 
-class GenericCauses(BaseCauseEnum, sort_idx=1):
+class GenericChanges(BaseChangeEnum, sort_idx=1):
     ADD = "Added"
     REMOVE = "Removed"
     FUNC_ADD = "Function added"

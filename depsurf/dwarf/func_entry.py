@@ -42,7 +42,7 @@ class FuncEntry:
         return self.inline in (InlineStatus.NOT_DECL_INLINE, InlineStatus.DECL_INLINE)
 
     @property
-    def inline_status(self) -> str:
+    def inline_str(self) -> str:
         return {
             -2: "not seen",
             -1: "not declared and not inlined",
@@ -65,7 +65,7 @@ class FuncEntry:
             f"{self.name}",
             f"\tLoc: {self.loc}",
             f"\tFile: {self.file}",
-            f"\tInline: {self.inline_status}",
+            f"\tInline: {self.inline_str}",
             f"\tExternal: {self.external}",
             f"\tCaller Inline ({len(self.caller_inline)})",
             *(f"\t\t{caller}" for caller in self.caller_inline),

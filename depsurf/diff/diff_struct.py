@@ -3,11 +3,11 @@ from typing import List
 
 from depsurf.btf import Kind, get_btf_type_str
 
-from .cause import BaseCause, BaseCauseEnum, Consequence
+from .change import BaseChange, BaseChangeEnum, Consequence
 from .utils import diff_dict
 
 
-class StructCauseEnum(BaseCauseEnum, sort_idx=2):
+class StructChangeEnum(BaseChangeEnum, sort_idx=2):
     STRUCT_ADD = "Struct added"
     STRUCT_REMOVE = "Struct removed"
     FIELD_ADD = "Field added"
@@ -17,9 +17,9 @@ class StructCauseEnum(BaseCauseEnum, sort_idx=2):
     @property
     def consequence(self):
         return {
-            StructCauseEnum.FIELD_ADD: Consequence.COMPILER,
-            StructCauseEnum.FIELD_REMOVE: Consequence.COMPILER,
-            StructCauseEnum.FIELD_TYPE: Consequence.SLIENT,
+            StructChangeEnum.FIELD_ADD: Consequence.COMPILER,
+            StructChangeEnum.FIELD_REMOVE: Consequence.COMPILER,
+            StructChangeEnum.FIELD_TYPE: Consequence.SLIENT,
         }[self]
 
     @property
@@ -35,7 +35,7 @@ class StructCauseEnum(BaseCauseEnum, sort_idx=2):
 
 
 @dataclass
-class FieldAdd(BaseCause, enum=StructCauseEnum.FIELD_ADD):
+class FieldAdd(BaseChange, enum=StructChangeEnum.FIELD_ADD):
     name: str
     type: dict
 
@@ -44,7 +44,7 @@ class FieldAdd(BaseCause, enum=StructCauseEnum.FIELD_ADD):
 
 
 @dataclass
-class FieldRemove(BaseCause, enum=StructCauseEnum.FIELD_REMOVE):
+class FieldRemove(BaseChange, enum=StructChangeEnum.FIELD_REMOVE):
     name: str
     type: dict
 
@@ -53,7 +53,7 @@ class FieldRemove(BaseCause, enum=StructCauseEnum.FIELD_REMOVE):
 
 
 @dataclass
-class FieldType(BaseCause, enum=StructCauseEnum.FIELD_TYPE):
+class FieldType(BaseChange, enum=StructChangeEnum.FIELD_TYPE):
     name: str
     old: dict
     new: dict
@@ -62,7 +62,7 @@ class FieldType(BaseCause, enum=StructCauseEnum.FIELD_TYPE):
         return f"{get_btf_type_str(self.old)} {self.name} -> {get_btf_type_str(self.new)} {self.name}"
 
 
-def diff_struct_field(old, new, assert_diff=False) -> List[BaseCause]:
+def diff_struct_field(old, new, assert_diff=False) -> List[BaseChange]:
     assert old["name"] == new["name"]
     name = old["name"]
 
@@ -75,7 +75,7 @@ def diff_struct_field(old, new, assert_diff=False) -> List[BaseCause]:
     return []
 
 
-def diff_struct(old, new, assert_diff=False) -> List[BaseCause]:
+def diff_struct(old, new, assert_diff=False) -> List[BaseChange]:
     assert old["kind"] == new["kind"]
     assert old["kind"] in (Kind.STRUCT, Kind.UNION), f"{old['kind']}"
 

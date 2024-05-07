@@ -44,7 +44,6 @@ class LinuxImage(ObjectFile):
         LinuxImage.cache_enabled = True
 
     def get_all_by_kind(self, kind: DepKind) -> Dict:
-        assert isinstance(kind, DepKind), kind
         return {
             DepKind.STRUCT: self.btf.structs,
             DepKind.FUNC: self.btf.funcs,
@@ -54,7 +53,7 @@ class LinuxImage(ObjectFile):
             DepKind.ENUM: self.btf.enums,
         }[kind]
 
-    def get_dep(self, dep: Dep):
+    def get_dep(self, dep: Dep) -> Dict:
         if dep.kind == DepKind.STRUCT_FIELD:
             struct_name, field_name = dep.name.split("::")
             struct = self.btf.structs.get(struct_name)
@@ -76,6 +75,7 @@ class LinuxImage(ObjectFile):
             sym_group = self.symtab.func_sym_groups.get(dep.name)
             return DepStatus(
                 exists=True,
+                group=group,
                 collision=group.get_collision_type(),
                 inline=group.get_inline_type(in_symtab=sym_group is not None),
                 suffix=sym_group.has_suffix if sym_group else False,
@@ -109,8 +109,7 @@ class LinuxImage(ObjectFile):
             f"security_{e['name']}"
             for e in self.btf.get_struct("security_hook_heads")["members"]
         }
-        all_funcs = self.btf.funcs
-        return {k: v for k, v in all_funcs.items() if k in func_names}
+        return {k: v for k, v in self.btf.funcs.items() if k in func_names}
 
     @property
     def comment(self):

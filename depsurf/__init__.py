@@ -5,13 +5,15 @@ from .btf import *
 from .dep import *
 from .diff import *
 from .dwarf import *
-from .img import *
-from .img_diff import *
+from .image import *
+from .images import *
 from .linux import *
 from .paths import *
 from .prep import *
+from .report import *
 from .utils import *
 from .version import *
+from .versions import *
 
 logging.basicConfig(
     level=logging.INFO,

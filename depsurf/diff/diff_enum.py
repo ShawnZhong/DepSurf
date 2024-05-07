@@ -3,11 +3,11 @@ from typing import List
 
 from depsurf.btf import Kind
 
-from .cause import BaseCause, BaseCauseEnum, Consequence
+from .change import BaseChange, BaseChangeEnum, Consequence
 from .utils import diff_dict
 
 
-class EnumCauseEnum(BaseCauseEnum, sort_idx=4):
+class EnumChangeEnum(BaseChangeEnum, sort_idx=4):
     ENUM_ADD = "Enum added"
     ENUM_REMOVE = "Enum removed"
     VAL_ADD = "Value added"
@@ -17,14 +17,14 @@ class EnumCauseEnum(BaseCauseEnum, sort_idx=4):
     @property
     def consequence(self):
         return {
-            EnumCauseEnum.VAL_ADD: Consequence.COMPILER,
-            EnumCauseEnum.VAL_REMOVE: Consequence.COMPILER,
-            EnumCauseEnum.VAL_CHANGE: Consequence.CORE,
+            EnumChangeEnum.VAL_ADD: Consequence.COMPILER,
+            EnumChangeEnum.VAL_REMOVE: Consequence.COMPILER,
+            EnumChangeEnum.VAL_CHANGE: Consequence.CORE,
         }[self]
 
 
 @dataclass
-class EnumValAdd(BaseCause, enum=EnumCauseEnum.VAL_ADD):
+class EnumValAdd(BaseChange, enum=EnumChangeEnum.VAL_ADD):
     name: str
     val: int
 
@@ -33,7 +33,7 @@ class EnumValAdd(BaseCause, enum=EnumCauseEnum.VAL_ADD):
 
 
 @dataclass
-class EnumValRemove(BaseCause, enum=EnumCauseEnum.VAL_REMOVE):
+class EnumValRemove(BaseChange, enum=EnumChangeEnum.VAL_REMOVE):
     name: str
     val: int
 
@@ -42,7 +42,7 @@ class EnumValRemove(BaseCause, enum=EnumCauseEnum.VAL_REMOVE):
 
 
 @dataclass
-class EnumValChange(BaseCause, enum=EnumCauseEnum.VAL_CHANGE):
+class EnumValChange(BaseChange, enum=EnumChangeEnum.VAL_CHANGE):
     name: str
     old_val: int
     new_val: int
@@ -51,7 +51,7 @@ class EnumValChange(BaseCause, enum=EnumCauseEnum.VAL_CHANGE):
         return f"{self.name} = {self.old_val} -> {self.new_val}"
 
 
-def diff_enum(old, new, assert_diff=False) -> List[BaseCause]:
+def diff_enum(old, new, assert_diff=False) -> List[BaseChange]:
     assert old["kind"] == Kind.ENUM
     assert new["kind"] == Kind.ENUM
 

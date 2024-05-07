@@ -1,4 +1,4 @@
-from .cause import *
+from .change import *
 from .diff_enum import *
 from .diff_func import *
 from .diff_other import *

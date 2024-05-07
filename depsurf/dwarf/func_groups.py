@@ -36,7 +36,7 @@ class FuncGroups:
         for group in sorted(
             self.data.values(), key=lambda x: x.num_funcs, reverse=True
         ):
-            group.print(file)
+            group.print_group(file)
 
     def print_funcs(self, file=None):
         for func in self.iter_funcs():

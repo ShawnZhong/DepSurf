@@ -3,11 +3,11 @@ from typing import List
 
 from depsurf.btf import Kind, get_btf_type_str
 
-from .cause import BaseCause, BaseCauseEnum, Consequence
+from .change import BaseChange, BaseChangeEnum, Consequence
 from .utils import diff_dict
 
 
-class FuncCauseEnum(BaseCauseEnum, sort_idx=3):
+class FuncChangeEnum(BaseChangeEnum, sort_idx=3):
     FUNC_ADD = "Function added"
     FUNC_REMOVE = "Function removed"
     PARAM_ADD = "Param added"
@@ -19,11 +19,11 @@ class FuncCauseEnum(BaseCauseEnum, sort_idx=3):
     @property
     def consequence(self):
         return {
-            FuncCauseEnum.PARAM_ADD: Consequence.SLIENT,
-            FuncCauseEnum.PARAM_REMOVE: Consequence.SLIENT,
-            FuncCauseEnum.PARAM_TYPE: Consequence.SLIENT,
-            FuncCauseEnum.PARAM_REORDER: Consequence.SLIENT,
-            FuncCauseEnum.FUNC_RETURN: Consequence.SLIENT,
+            FuncChangeEnum.PARAM_ADD: Consequence.SLIENT,
+            FuncChangeEnum.PARAM_REMOVE: Consequence.SLIENT,
+            FuncChangeEnum.PARAM_TYPE: Consequence.SLIENT,
+            FuncChangeEnum.PARAM_REORDER: Consequence.SLIENT,
+            FuncChangeEnum.FUNC_RETURN: Consequence.SLIENT,
         }[self]
 
     @property
@@ -41,7 +41,7 @@ class FuncCauseEnum(BaseCauseEnum, sort_idx=3):
 
 
 @dataclass
-class FuncReturn(BaseCause, enum=FuncCauseEnum.FUNC_RETURN):
+class FuncReturn(BaseChange, enum=FuncChangeEnum.FUNC_RETURN):
     old: str
     new: str
 
@@ -50,7 +50,7 @@ class FuncReturn(BaseCause, enum=FuncCauseEnum.FUNC_RETURN):
 
 
 @dataclass
-class ParamRemove(BaseCause, enum=FuncCauseEnum.PARAM_REMOVE):
+class ParamRemove(BaseChange, enum=FuncChangeEnum.PARAM_REMOVE):
     name: str
     type: dict
 
@@ -59,7 +59,7 @@ class ParamRemove(BaseCause, enum=FuncCauseEnum.PARAM_REMOVE):
 
 
 @dataclass
-class ParamAdd(BaseCause, enum=FuncCauseEnum.PARAM_ADD):
+class ParamAdd(BaseChange, enum=FuncChangeEnum.PARAM_ADD):
     name: str
     type: dict
 
@@ -68,7 +68,7 @@ class ParamAdd(BaseCause, enum=FuncCauseEnum.PARAM_ADD):
 
 
 @dataclass
-class ParamReorder(BaseCause, enum=FuncCauseEnum.PARAM_REORDER):
+class ParamReorder(BaseChange, enum=FuncChangeEnum.PARAM_REORDER):
     old: dict
     new: dict
 
@@ -81,7 +81,7 @@ class ParamReorder(BaseCause, enum=FuncCauseEnum.PARAM_REORDER):
 
 
 @dataclass
-class ParamType(BaseCause, enum=FuncCauseEnum.PARAM_TYPE):
+class ParamType(BaseChange, enum=FuncChangeEnum.PARAM_TYPE):
     name: str
     old: dict
     new: dict
@@ -90,7 +90,7 @@ class ParamType(BaseCause, enum=FuncCauseEnum.PARAM_TYPE):
         return f"{get_btf_type_str(self.old)} {self.name} -> {get_btf_type_str(self.new)} {self.name}"
 
 
-def diff_func(old, new, assert_diff=False) -> List[BaseCause]:
+def diff_func(old, new, assert_diff=False) -> List[BaseChange]:
     assert old["kind"] == Kind.FUNC
     assert new["kind"] == Kind.FUNC
 

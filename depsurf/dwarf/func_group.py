@@ -89,7 +89,12 @@ class FuncGroup:
                 assert all(not func.external for func in self.funcs)
         self.funcs.append(func)
 
-    def print(self, file=None):
+    def print_funcs(self, file=None, nindent=0):
+        indent = "\t" * nindent
+        for func in self.funcs:
+            print(f"{indent}{repr(func)}", file=file)
+
+    def print_group(self, file=None):
         loc = self.funcs[0].loc if self.same_loc else None
         header = f"{self.name}"
         if self.num_funcs > 1:

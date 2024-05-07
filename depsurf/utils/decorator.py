@@ -11,10 +11,12 @@ def check_result_path(fn: callable):
             assert kwarg in kwargs, f"Missing '{kwarg}' in kwargs for {fn_name}"
 
         overwrite = kwargs.pop("overwrite")
+        slient = kwargs.pop("slient", False)
         result_path = Path(kwargs["result_path"])
 
         if not overwrite and result_path.exists():
-            logging.info(f"{fn_name:<16} Using {result_path}")
+            if not slient:
+                logging.info(f"{fn_name:<16} Using {result_path}")
             return
         result_path.parent.mkdir(parents=True, exist_ok=True)
         return fn(*args, **kwargs)

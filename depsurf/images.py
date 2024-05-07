@@ -4,9 +4,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
 
-from depsurf.dep import Dep, DepKind
-from depsurf.diff import BaseCause, GenericCauses, compare_eq, diff_dict
-from depsurf.img import LinuxImage
+from depsurf.dep import Dep, DepKind, DepDelta
+from depsurf.diff import BaseChange, GenericChanges, compare_eq, diff_dict
 from depsurf.version import Version
 
 if TYPE_CHECKING:
@@ -19,10 +18,10 @@ class ImageDiffResult:
     new_len: int
     added: Dict[str, Dict]
     removed: Dict[str, Dict]
-    changed: Dict[str, List[BaseCause]]
+    changed: Dict[str, List[BaseChange]]
 
     @property
-    def reasons(self) -> List[Tuple[BaseCause, int]]:
+    def reasons(self) -> List[Tuple[BaseChange, int]]:
         reasons = defaultdict(int)
         for changes in self.changed.values():
             for change in changes:
@@ -36,8 +35,8 @@ class ImageDiffResult:
 
         result = {}
         result["Old"] = self.old_len
-        result[GenericCauses.ADD] = len(self.added)
-        result[GenericCauses.REMOVE] = len(self.removed)
+        result[GenericChanges.ADD] = len(self.added)
+        result[GenericChanges.REMOVE] = len(self.removed)
         for cause, count in self.reasons:
             result[cause] = count
 
@@ -68,44 +67,53 @@ class ImageDiffResult:
             self.print(f)
 
 
-def diff_img_by_kind(
-    img1: LinuxImage, img2: LinuxImage, kind: DepKind
-) -> ImageDiffResult:
-    dict1 = img1.get_all_by_kind(kind)
-    dict2 = img2.get_all_by_kind(kind)
-    added, removed, common = diff_dict(dict1, dict2)
+class ImagePair:
+    def __init__(self, v1: Version, v2: Version):
+        self.v1 = v1
+        self.v2 = v2
+        self.img1 = v1.img
+        self.img2 = v2.img
 
-    changed: Dict[str, List[BaseCause]] = {
-        name: kind.differ(old, new, assert_diff=False)  # TODO: assert_diff
-        for name, (old, new) in common.items()
-        if not compare_eq(old, new)
-    }
+    def diff(self, result_path: Path = None) -> "pd.DataFrame":
+        import pandas as pd
 
-    return ImageDiffResult(
-        old_len=len(dict1),
-        new_len=len(dict2),
-        added=added,
-        removed=removed,
-        changed=changed,
-    )
+        results = {}
+        for kind in [DepKind.FUNC, DepKind.STRUCT, DepKind.TRACEPOINT, DepKind.LSM]:
+            result = self.diff_kind(self.img1, self.img2, kind)
+            if result_path:
+                result.save_txt(result_path / f"{kind}.log")
+            results[kind] = result.df
 
-
-def diff_img(
-    img1: LinuxImage, img2: LinuxImage, result_path: Path = None
-) -> "pd.DataFrame":
-    import pandas as pd
-
-    results = {}
-    for dep_kind in [DepKind.FUNC, DepKind.STRUCT, DepKind.TRACEPOINT, DepKind.LSM]:
-        result = diff_img_by_kind(img1, img2, dep_kind)
+        df = pd.concat(results, axis=0)
         if result_path:
-            result.save_txt(result_path / f"{dep_kind}.log")
-        results[dep_kind] = result.df
+            df.to_string(result_path / "Summary.txt")
+        return df
 
-    df = pd.concat(results, axis=0)
-    if result_path:
-        df.to_string(result_path / "Summary.txt")
-    return df
+    def diff_kind(self, kind: DepKind) -> ImageDiffResult:
+        dict1 = self.img1.get_all_by_kind(kind)
+        dict2 = self.img2.get_all_by_kind(kind)
+        added, removed, common = diff_dict(dict1, dict2)
+
+        changed: Dict[str, List[BaseChange]] = {
+            name: kind.differ(old, new, assert_diff=False)  # TODO: assert_diff
+            for name, (old, new) in common.items()
+            if not compare_eq(old, new)
+        }
+
+        return ImageDiffResult(
+            old_len=len(dict1),
+            new_len=len(dict2),
+            added=added,
+            removed=removed,
+            changed=changed,
+        )
+
+    def diff_dep(self, dep: Dep) -> DepDelta:
+        t1 = self.img1.get_dep(dep)
+        t2 = self.img2.get_dep(dep)
+        if t1 is None or t2 is None:
+            return DepDelta()
+        return DepDelta(dep.kind.differ(t1, t2))
 
 
 def diff_img_pairs(
@@ -121,17 +129,9 @@ def diff_img_pairs(
     for v1, v2 in pairs:
         path = result_path / f"{v1}_{v2}"
         logging.info(f"Comparing {v1} and {v2} to {path}")
-        results[(group, (v1.name, v2.name))] = diff_img(v1.img, v2.img, path)
+        results[(group, (v1.name, v2.name))] = ImagePair(v1, v2).diff(path)
 
     df = pd.concat(results, axis=1)
     df.columns = df.columns.droplevel(-1)
     df.to_string(result_path / "Summary.txt")
     return df
-
-
-def diff_dep(img1: "LinuxImage", img2: "LinuxImage", dep: Dep) -> Optional[bool]:
-    t1 = img1.get_dep(dep)
-    t2 = img2.get_dep(dep)
-    if t1 is None or t2 is None:
-        return None
-    return dep.kind.differ(t1, t2)

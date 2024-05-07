@@ -1,14 +1,12 @@
+import dataclasses
 from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
-from typing import Callable, Dict, TYPE_CHECKING
-from enum import StrEnum
+from typing import TYPE_CHECKING
 
 from depsurf.paths import DATA_PATH
 
-
 if TYPE_CHECKING:
-    import pandas as pd
     from depsurf.linux import LinuxImage
 
 DEB_PATH = DATA_PATH / "deb"
@@ -144,14 +142,21 @@ class Version:
     def dwarf_funcs_path(self):
         return DATA_PATH / "dwarf_funcs" / f"{self.name}.jsonl"
 
+    @cached_property
+    def img(self) -> "LinuxImage":
+        from depsurf.image import LinuxImage
+
+        return LinuxImage.from_version(self)
+
     def __repr__(self):
         return self.name
 
-    @cached_property
-    def img(self) -> "LinuxImage":
-        from depsurf.img import LinuxImage
+    def __getstate__(self):
+        # avioid pickling the img attribute
+        return dataclasses.asdict(self)
 
-        return LinuxImage.from_version(self)
+    def __setstate__(self, state):
+        self.__dict__.update(state)
 
     # @property
     # def vmlinuz_deb_path(self):
@@ -160,80 +165,3 @@ class Version:
     # @property
     # def vmlinuz_path(self):
     #     return DATA_PATH / "vmlinuz" / self.name
-
-
-VERSIONS_ALL = sorted(Version.from_path(p) for p in DEB_PATH.iterdir())
-VERSIONS_REV = [
-    v
-    for v in VERSIONS_ALL
-    if v.version == "5.4.0" and v.arch == "amd64" and v.flavor == "generic"
-]
-VERSION_DEFAULT = VERSIONS_REV[0]
-VERSIONS_REGULAR = sorted(
-    [
-        v
-        for v in VERSIONS_ALL
-        if v.arch == "amd64" and v.flavor == "generic" and v.version != "5.4.0"
-    ]
-    + [VERSION_DEFAULT]
-)
-VERSIONS_LTS = [v for v in VERSIONS_REGULAR if v.lts]
-VERSIONS_ARCH = [v for v in VERSIONS_ALL if v.arch not in ("amd64", "s390x")]
-VERSIONS_FLAVOR = [v for v in VERSIONS_ALL if v.flavor not in ("generic", "oracle")]
-VERSION_FIRST = VERSIONS_ALL[0]
-VERSION_LAST = VERSIONS_ALL[-1]
-
-
-class VersionGroup(StrEnum):
-    REG = "reg"
-    ARCH = "arch"
-    FLAVOR = "flavor"
-
-    @property
-    def versions(self):
-        return {
-            VersionGroup.REG: VERSIONS_REGULAR,
-            VersionGroup.ARCH: VERSIONS_ARCH,
-            VersionGroup.FLAVOR: VERSIONS_FLAVOR,
-        }[self]
-
-    @property
-    def version_str(self):
-        from depsurf.output import bold
-
-        return {
-            VersionGroup.REG: lambda v: (
-                bold(v.short_version) if v.lts else v.short_version
-            ),
-            VersionGroup.ARCH: lambda v: v.arch_name,
-            VersionGroup.FLAVOR: lambda v: v.flavor_name,
-        }[self]
-
-    @property
-    def caption(self):
-        return {
-            VersionGroup.REG: "Linux Kernel Version",
-            VersionGroup.ARCH: "Arch for Linux 5.4",
-            VersionGroup.FLAVOR: "Flavor for Linux 5.4",
-        }[self]
-
-    @staticmethod
-    def apply(fn: Callable[[Version], Dict], groups=None) -> "pd.DataFrame":
-        import pandas as pd
-
-        if groups is None:
-            groups = list(VersionGroup)
-
-        results = {}
-        for group in groups:
-            for v in group.versions:
-                results[(group, v)] = fn(v)
-
-        df = pd.DataFrame(results).T
-        return df
-
-    @staticmethod
-    def num_versions(groups=None):
-        if groups is None:
-            groups = list(VersionGroup)
-        return [len(g.versions) for g in groups]

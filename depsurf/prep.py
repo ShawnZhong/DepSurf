@@ -7,7 +7,7 @@ from depsurf.linux import (
     extract_deb,
 )
 from depsurf.version import Version
-from depsurf.img import LinuxImage
+from depsurf.image import LinuxImage
 
 
 def prep(v: Version, overwrite: bool = False):

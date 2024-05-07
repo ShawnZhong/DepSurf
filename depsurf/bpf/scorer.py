@@ -2,13 +2,13 @@ import logging
 
 from collections import defaultdict
 
-from depsurf.diff import GenericCauses
+from depsurf.diff import GenericChanges
 
 
 from depsurf.btf import Kind
 
 
-class Causes:
+class Changes:
     def __init__(self):
         self.nums = defaultdict(int)
         self.counts = defaultdict(int)
@@ -45,7 +45,7 @@ class Scorer:
     def __init__(self):
         self.imgs = None
         # self.subroutine_info = subroutine_info
-        self.causes = Causes()
+        self.causes = Changes()
 
     def analyze(self, hooks, structs, nindent=1):
         self.causes.clear()
@@ -99,8 +99,8 @@ class Scorer:
                 versions_str += "✅"
             else:
                 c = {
-                    Kind.FUNC: GenericCauses.FUNC_UNAVAIL,
-                    Kind.STRUCT: GenericCauses.STRUCT_UNAVAIL,
+                    Kind.FUNC: GenericChanges.FUNC_UNAVAIL,
+                    Kind.STRUCT: GenericChanges.STRUCT_UNAVAIL,
                 }[kind]
                 self.causes.add(c)
                 versions_str += "❌"
@@ -126,7 +126,7 @@ class Scorer:
             print(f"{indent}Linkage: Non-static ✅")
         else:
             print(f"{indent}Linkage: Static 💥")
-            self.causes.add(GenericCauses.STATIC_FN)
+            self.causes.add(GenericChanges.STATIC_FN)
 
         def make_str(l):
             # return "\n\t\t\t\t" + "\n\t\t\t\t".join(l)
@@ -139,11 +139,11 @@ class Scorer:
                 print(f"{indent}Inline: Partial 💥")
                 print(f"{indent}\tInline callers: {caller_inline}")
                 print(f"{indent}\tFunc callers: {caller_func}")
-                self.causes.add(GenericCauses.PARTIAL_INLINE)
+                self.causes.add(GenericChanges.PARTIAL_INLINE)
             else:
                 print(f"{indent}Inline: Full 💥")
                 print(f"{indent}\tInline callers: {caller_inline}")
-                self.causes.add(GenericCauses.FULL_INLINE)
+                self.causes.add(GenericChanges.FULL_INLINE)
         else:
             print(f"{indent}Inline: None ✅")
             if info.caller_func:
