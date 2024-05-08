@@ -3,47 +3,12 @@ from typing import List
 
 from depsurf.btf import Kind, get_btf_type_str
 
-from .change import BaseChange, BaseChangeEnum, Consequence
+from .change import BaseChange, ChangeEnum
 from .utils import diff_dict
 
 
-class StructChangeEnum(BaseChangeEnum, sort_idx=2):
-    STRUCT_ADD = "Struct added"
-    STRUCT_REMOVE = "Struct removed"
-    FIELD_ADD = "Field added"
-    FIELD_REMOVE = "Field removed"
-    FIELD_TYPE = "Field type changed"
-
-    @property
-    def consequence(self):
-        return {
-            StructChangeEnum.FIELD_ADD: Consequence.COMPILER,
-            StructChangeEnum.FIELD_REMOVE: Consequence.COMPILER,
-            StructChangeEnum.FIELD_TYPE: Consequence.SLIENT,
-        }[self]
-
-    @property
-    def color(self):
-        from matplotlib import cm
-
-        cmap = cm.Purples
-        return {
-            self.FIELD_ADD: cmap(0.3),
-            self.FIELD_REMOVE: cmap(0.5),
-            self.FIELD_TYPE: cmap(0.7),
-        }[self]
-
-    @property
-    def short(self):
-        return {
-            self.FIELD_ADD: "F+",
-            self.FIELD_REMOVE: "F-",
-            self.FIELD_TYPE: "FT",
-        }[self]
-
-
 @dataclass
-class FieldAdd(BaseChange, enum=StructChangeEnum.FIELD_ADD):
+class FieldAdd(BaseChange, enum=ChangeEnum.FIELD_ADD):
     name: str
     type: dict
 
@@ -52,7 +17,7 @@ class FieldAdd(BaseChange, enum=StructChangeEnum.FIELD_ADD):
 
 
 @dataclass
-class FieldRemove(BaseChange, enum=StructChangeEnum.FIELD_REMOVE):
+class FieldRemove(BaseChange, enum=ChangeEnum.FIELD_REMOVE):
     name: str
     type: dict
 
@@ -61,7 +26,7 @@ class FieldRemove(BaseChange, enum=StructChangeEnum.FIELD_REMOVE):
 
 
 @dataclass
-class FieldType(BaseChange, enum=StructChangeEnum.FIELD_TYPE):
+class FieldType(BaseChange, enum=ChangeEnum.FIELD_TYPE):
     name: str
     old: dict
     new: dict

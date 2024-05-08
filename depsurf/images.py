@@ -1,15 +1,10 @@
-import logging
-from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 from depsurf.dep import Dep, DepKind, DepDelta
-from depsurf.diff import BaseChange, GenericChanges, compare_eq, diff_dict
+from depsurf.diff import BaseChange, ChangeEnum, compare_eq, diff_dict
 from depsurf.version import Version
-
-if TYPE_CHECKING:
-    import pandas as pd
 
 
 @dataclass(frozen=True)
@@ -21,26 +16,23 @@ class ImageDiffResult:
     changed: Dict[str, List[BaseChange]]
 
     @property
-    def reasons(self) -> List[Tuple[BaseChange, int]]:
-        reasons = defaultdict(int)
+    def reasons(self) -> Dict[BaseChange, int]:
+        reasons = {change: 0 for change in ChangeEnum}
         for changes in self.changed.values():
             for change in changes:
                 reasons[change.enum] += 1
-        reasons = sorted(reasons.items(), key=lambda x: x[0].sort_idx)
         return reasons
 
     @property
-    def df(self) -> "pd.DataFrame":
-        import pandas as pd
-
-        result = {}
-        result["Old"] = self.old_len
-        result[GenericChanges.ADD] = len(self.added)
-        result[GenericChanges.REMOVE] = len(self.removed)
-        for cause, count in self.reasons:
-            result[cause] = count
-
-        return pd.DataFrame(result, index=["Count"]).T
+    def summary(self) -> Dict[str, int]:
+        return {
+            "Old": self.old_len,
+            "New": self.new_len,
+            **self.reasons,
+            ChangeEnum.ADD: len(self.added),
+            ChangeEnum.REMOVE: len(self.removed),
+            ChangeEnum.CHANGE: len(self.changed),
+        }
 
     def print(self, file=None):
         def print_header(name, items):
@@ -72,20 +64,23 @@ class ImagePair:
     v1: Version
     v2: Version
 
-    def diff(self, result_path: Path = None) -> "pd.DataFrame":
-        import pandas as pd
-
+    def diff(self, result_path: Path = None) -> Dict[Tuple, int]:
         results = {}
         for kind in [DepKind.FUNC, DepKind.STRUCT, DepKind.TRACEPOINT, DepKind.LSM]:
             result = self.diff_kind(kind)
             if result_path:
                 result.save_txt(result_path / f"{kind}.log")
-            results[kind] = result.df
+            summary = result.summary
+            for name, count in summary.items():
+                results[kind, name] = count
 
-        df = pd.concat(results, axis=0)
-        if result_path:
-            df.to_string(result_path / "Summary.txt")
-        return df
+        file = open(result_path / "Summary.txt", "w") if result_path else None
+        for (kind, name), count in results.items():
+            if count != 0:
+                print(f"{kind} {name}: {count}", file=file)
+        if file:
+            file.close()
+        return results
 
     def diff_kind(self, kind: DepKind) -> ImageDiffResult:
         dict1 = self.v1.img.get_all_by_kind(kind)
@@ -115,24 +110,3 @@ class ImagePair:
 
     def __repr__(self):
         return f"({self.v1}, {self.v2})"
-
-
-def diff_img_pairs(
-    group: str,
-    pairs: List[ImagePair],
-    result_path: Path,
-) -> "pd.DataFrame":
-    import pandas as pd
-
-    logging.info(f"Diffing {group}")
-
-    results = {}
-    for pair in pairs:
-        path = result_path / f"{pair.v1}_{pair.v2}"
-        logging.info(f"Comparing {pair.v1} and {pair.v2} to {path}")
-        results[(group, pair)] = pair.diff(path)
-
-    df = pd.concat(results, axis=1)
-    df.columns = df.columns.droplevel(-1)
-    df.to_string(result_path / "Summary.txt")
-    return df

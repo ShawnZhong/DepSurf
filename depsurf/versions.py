@@ -1,8 +1,9 @@
+import logging
 from enum import StrEnum
 from typing import TYPE_CHECKING, Callable, Dict, Iterator, List
 
-from .images import ImagePair
-from .version import DEB_PATH, Version
+from depsurf.images import ImagePair
+from depsurf.version import DEB_PATH, Version
 
 if TYPE_CHECKING:
     import pandas as pd
@@ -36,6 +37,7 @@ class Versions(StrEnum):
     REV = "Revision"
     ARCH = "Arch"
     FLAVOR = "Flavor"
+    TEST = "Test"
     # Single-version groups
     FIRST = "First"
     LAST = "Last"
@@ -54,6 +56,7 @@ class Versions(StrEnum):
             Versions.REV: VERSIONS_REV,
             Versions.ARCH: VERSIONS_ARCH,
             Versions.FLAVOR: VERSIONS_FLAVOR,
+            Versions.TEST: [VERSIONS_LTS[0], VERSIONS_LTS[1]],
             Versions.FIRST: [VERSION_FIRST],
             Versions.LAST: [VERSION_LAST],
             Versions.DEFAULT: [VERSION_DEFAULT],
@@ -81,17 +84,6 @@ class Versions(StrEnum):
     def __radd__(self, other) -> List[Version]:
         return other + self.versions
 
-    @property
-    def pairs(self) -> List[ImagePair]:
-        if self in (Versions.REGULAR, Versions.LTS, Versions.REV):
-            return [ImagePair(*p) for p in zip(self.versions, self.versions[1:])]
-
-        if len(self) == 1:
-            return []
-
-        assert VERSION_DEFAULT not in self.versions
-        return [ImagePair(VERSION_DEFAULT, v) for v in self.versions]
-
     def pair_to_str(self, p: ImagePair):
         return f"{self.version_to_str(p.v1)} → {self.version_to_str(p.v2)}"
 
@@ -114,6 +106,36 @@ class Versions(StrEnum):
             return [bold(v.short_version) if v.lts else v.short_version for v in self]
 
         return [self.version_to_str(v) for v in self.versions]
+
+    @property
+    def pairs(self) -> List[ImagePair]:
+        if self in (Versions.REGULAR, Versions.LTS, Versions.REV):
+            return [ImagePair(*p) for p in zip(self.versions, self.versions[1:])]
+
+        if len(self) == 1:
+            return []
+
+        if len(self) == 2:
+            return [ImagePair(self[0], self[1])]
+
+        assert VERSION_DEFAULT not in self.versions
+        return [ImagePair(VERSION_DEFAULT, v) for v in self.versions]
+
+    def diff_pairs(self, result_path=None) -> "pd.DataFrame":
+        import pandas as pd
+
+        logging.info(f"Diffing {self}")
+
+        results = {}
+        for pair in self.pairs:
+            path = result_path / f"{pair.v1}_{pair.v2}" if result_path else None
+            logging.info(f"Comparing {pair.v1} and {pair.v2} to {path}")
+            results[(self, pair)] = pair.diff(path)
+
+        df = pd.DataFrame(results, index=next(iter(results.values())))
+        if result_path:
+            df.to_string(result_path / "Summary.txt")
+        return df
 
     @staticmethod
     def apply(

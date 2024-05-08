@@ -3,55 +3,12 @@ from typing import List
 
 from depsurf.btf import Kind, get_btf_type_str
 
-from .change import BaseChange, BaseChangeEnum, Consequence
+from .change import BaseChange, ChangeEnum
 from .utils import diff_dict
 
 
-class FuncChangeEnum(BaseChangeEnum, sort_idx=3):
-    FUNC_ADD = "Function added"
-    FUNC_REMOVE = "Function removed"
-    PARAM_ADD = "Param added"
-    PARAM_REMOVE = "Param removed"
-    PARAM_REORDER = "Param reordered"
-    PARAM_TYPE = "Param type changed"
-    FUNC_RETURN = "Return type changed"
-
-    @property
-    def consequence(self):
-        return {
-            FuncChangeEnum.PARAM_ADD: Consequence.SLIENT,
-            FuncChangeEnum.PARAM_REMOVE: Consequence.SLIENT,
-            FuncChangeEnum.PARAM_TYPE: Consequence.SLIENT,
-            FuncChangeEnum.PARAM_REORDER: Consequence.SLIENT,
-            FuncChangeEnum.FUNC_RETURN: Consequence.SLIENT,
-        }[self]
-
-    @property
-    def color(self):
-        from matplotlib import cm
-
-        cmap = cm.Greens
-        return {
-            self.PARAM_ADD: cmap(0.3),
-            self.PARAM_REMOVE: cmap(0.45),
-            self.PARAM_REORDER: cmap(0.6),
-            self.PARAM_TYPE: cmap(0.75),
-            self.FUNC_RETURN: cmap(0.9),
-        }[self]
-
-    @property
-    def short(self):
-        return {
-            self.PARAM_ADD: "P+",
-            self.PARAM_REMOVE: "P-",
-            self.PARAM_REORDER: "PR",
-            self.PARAM_TYPE: "PT",
-            self.FUNC_RETURN: "RT",
-        }[self]
-
-
 @dataclass
-class FuncReturn(BaseChange, enum=FuncChangeEnum.FUNC_RETURN):
+class FuncReturn(BaseChange, enum=ChangeEnum.FUNC_RETURN):
     old: str
     new: str
 
@@ -60,7 +17,7 @@ class FuncReturn(BaseChange, enum=FuncChangeEnum.FUNC_RETURN):
 
 
 @dataclass
-class ParamRemove(BaseChange, enum=FuncChangeEnum.PARAM_REMOVE):
+class ParamRemove(BaseChange, enum=ChangeEnum.PARAM_REMOVE):
     name: str
     type: dict
 
@@ -69,7 +26,7 @@ class ParamRemove(BaseChange, enum=FuncChangeEnum.PARAM_REMOVE):
 
 
 @dataclass
-class ParamAdd(BaseChange, enum=FuncChangeEnum.PARAM_ADD):
+class ParamAdd(BaseChange, enum=ChangeEnum.PARAM_ADD):
     name: str
     type: dict
 
@@ -78,7 +35,7 @@ class ParamAdd(BaseChange, enum=FuncChangeEnum.PARAM_ADD):
 
 
 @dataclass
-class ParamReorder(BaseChange, enum=FuncChangeEnum.PARAM_REORDER):
+class ParamReorder(BaseChange, enum=ChangeEnum.PARAM_REORDER):
     old: dict
     new: dict
 
@@ -91,7 +48,7 @@ class ParamReorder(BaseChange, enum=FuncChangeEnum.PARAM_REORDER):
 
 
 @dataclass
-class ParamType(BaseChange, enum=FuncChangeEnum.PARAM_TYPE):
+class ParamType(BaseChange, enum=ChangeEnum.PARAM_TYPE):
     name: str
     old: dict
     new: dict

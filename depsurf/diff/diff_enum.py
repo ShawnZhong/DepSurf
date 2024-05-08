@@ -3,28 +3,12 @@ from typing import List
 
 from depsurf.btf import Kind
 
-from .change import BaseChange, BaseChangeEnum, Consequence
+from .change import BaseChange, ChangeEnum
 from .utils import diff_dict
 
 
-class EnumChangeEnum(BaseChangeEnum, sort_idx=4):
-    ENUM_ADD = "Enum added"
-    ENUM_REMOVE = "Enum removed"
-    VAL_ADD = "Value added"
-    VAL_REMOVE = "Value removed"
-    VAL_CHANGE = "Value changed"
-
-    @property
-    def consequence(self):
-        return {
-            EnumChangeEnum.VAL_ADD: Consequence.COMPILER,
-            EnumChangeEnum.VAL_REMOVE: Consequence.COMPILER,
-            EnumChangeEnum.VAL_CHANGE: Consequence.CORE,
-        }[self]
-
-
 @dataclass
-class EnumValAdd(BaseChange, enum=EnumChangeEnum.VAL_ADD):
+class EnumValAdd(BaseChange, enum=ChangeEnum.VAL_ADD):
     name: str
     val: int
 
@@ -33,7 +17,7 @@ class EnumValAdd(BaseChange, enum=EnumChangeEnum.VAL_ADD):
 
 
 @dataclass
-class EnumValRemove(BaseChange, enum=EnumChangeEnum.VAL_REMOVE):
+class EnumValRemove(BaseChange, enum=ChangeEnum.VAL_REMOVE):
     name: str
     val: int
 
@@ -42,7 +26,7 @@ class EnumValRemove(BaseChange, enum=EnumChangeEnum.VAL_REMOVE):
 
 
 @dataclass
-class EnumValChange(BaseChange, enum=EnumChangeEnum.VAL_CHANGE):
+class EnumValChange(BaseChange, enum=ChangeEnum.VAL_CHANGE):
     name: str
     old_val: int
     new_val: int
