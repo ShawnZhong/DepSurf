@@ -39,6 +39,16 @@ class FuncChangeEnum(BaseChangeEnum, sort_idx=3):
             self.FUNC_RETURN: cmap(0.9),
         }[self]
 
+    @property
+    def short(self):
+        return {
+            self.PARAM_ADD: "P+",
+            self.PARAM_REMOVE: "P-",
+            self.PARAM_REORDER: "PR",
+            self.PARAM_TYPE: "PT",
+            self.FUNC_RETURN: "RT",
+        }[self]
+
 
 @dataclass
 class FuncReturn(BaseChange, enum=FuncChangeEnum.FUNC_RETURN):

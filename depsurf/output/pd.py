@@ -35,10 +35,13 @@ def save_df_pkl(df: pd.DataFrame, path: Path):
     return df
 
 
-def save_df(df: pd.DataFrame, name: str, path: Path = OUTPUT_PATH):
+def save_df(
+    df: pd.DataFrame, name: str, path: Path = OUTPUT_PATH, return_df=True
+) -> pd.DataFrame:
     save_df_txt(df, path=path / f"{name}.txt")
     save_df_pkl(df, path=path / f"{name}.pkl")
-    return df
+    if return_df:
+        return df
 
 
 def load_df(name, path=None) -> pd.DataFrame:

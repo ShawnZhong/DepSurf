@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from collections import defaultdict
 from enum import StrEnum
 from typing import Callable, Dict, List, Optional
 
@@ -11,7 +12,6 @@ from depsurf.diff import (
     diff_tracepoint,
 )
 from depsurf.dwarf import CollisionType, FuncGroup, InlineType
-from depsurf.version import Version
 
 
 class DepKind(StrEnum):
@@ -62,6 +62,9 @@ class DepKind(StrEnum):
             DepKind.ENUM: diff_enum,
         }[self]
 
+    def __call__(self, name):
+        return Dep(self, name)
+
     def __repr__(self):
         return self.value
 
@@ -72,20 +75,34 @@ class Dep:
     name: str
 
 
-NUM_EMOJI = ["0️⃣", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣", "9️⃣"]
-
-
 @dataclass
 class DepDelta:
+    in_v1: bool = True
+    in_v2: bool = True
     changes: Optional[List[BaseChange]] = None
 
     def __str__(self):
-        if self.changes is None:
+        if not self.in_v1 and not self.in_v2:
             return ""
+        if not self.in_v1 and self.in_v2:
+            return "🔺"
+        if self.in_v1 and not self.in_v2:
+            return "🔻"
+        assert self.changes is not None, repr(self)
         num_changes = len(self.changes)
         if num_changes == 0:
             return "."
-        return "".join([NUM_EMOJI[int(digit)] for digit in str(num_changes)])
+        change_enums = defaultdict(int)
+        for change in self.changes:
+            change_enums[change.enum] += 1
+
+        result = ""
+        for k, v in change_enums.items():
+            if v == 1:
+                result += f"{k.short} "
+            else:
+                result += f"{k.short}⨉{v} "
+        return result
 
     def __bool__(self):
         return bool(self.changes)
@@ -127,9 +144,9 @@ class DepStatus:
             s = {
                 CollisionType.UNIQUE_GLOBAL: None,
                 CollisionType.UNIQUE_STATIC: "🟣S",
-                CollisionType.INCLUDE: f"🟣{self.collision}",
-                CollisionType.STATIC: f"🟣{self.collision}",
-                CollisionType.MIXED: f"🟣{self.collision}",
+                CollisionType.INCLUDE: f"🟣D",
+                CollisionType.STATIC: f"🟣SS",
+                CollisionType.MIXED: f"🟣SG",
             }[self.collision]
             if s is not None:
                 results[self.collision] = s

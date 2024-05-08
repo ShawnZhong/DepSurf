@@ -110,8 +110,8 @@ class ImagePair:
         t1 = self.v1.img.get_dep(dep)
         t2 = self.v2.img.get_dep(dep)
         if t1 is None or t2 is None:
-            return DepDelta()
-        return DepDelta(dep.kind.differ(t1, t2))
+            return DepDelta(in_v1=t1 is not None, in_v2=t2 is not None)
+        return DepDelta(changes=dep.kind.differ(t1, t2))
 
     def __repr__(self):
         return f"({self.v1}, {self.v2})"

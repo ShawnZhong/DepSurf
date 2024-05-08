@@ -33,6 +33,14 @@ class StructChangeEnum(BaseChangeEnum, sort_idx=2):
             self.FIELD_TYPE: cmap(0.7),
         }[self]
 
+    @property
+    def short(self):
+        return {
+            self.FIELD_ADD: "F+",
+            self.FIELD_REMOVE: "F-",
+            self.FIELD_TYPE: "FT",
+        }[self]
+
 
 @dataclass
 class FieldAdd(BaseChange, enum=StructChangeEnum.FIELD_ADD):

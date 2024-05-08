@@ -6,12 +6,11 @@ from elftools.dwarf.compileunit import CompileUnit
 from elftools.dwarf.die import DIE
 from elftools.elf.elffile import ELFFile
 
-from .traverser import DIEHandler, Traverser
 from depsurf.utils import check_result_path
 
-from .utils import get_name
 from .func_entry import FuncEntry, InlineStatus
-from .utils import disable_dwarf_cache
+from .traverser import DIEHandler, Traverser
+from .utils import disable_dwarf_cache, get_name
 
 
 class FunctionRecorder:
@@ -27,7 +26,6 @@ class FunctionRecorder:
                 yield func
 
     def dump(self, path: Path):
-        path.parent.mkdir(parents=True, exist_ok=True)
         with open(path, "w") as f:
             for func in self.iter_funcs():
                 print(func.to_json(), file=f)
@@ -125,7 +123,6 @@ class FunctionRecorder:
         entry = self.get_or_create_entry(die, traverser)
 
         caller_name = self.curr_prog
-
         # this may happen when a subprogram has abstract_origin
         if caller_name is None:
             return

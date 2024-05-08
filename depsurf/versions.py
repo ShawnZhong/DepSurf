@@ -22,6 +22,9 @@ VERSIONS_REGULAR = sorted(
     ]
     + [VERSION_DEFAULT]
 )
+VERSIONS_LTS = [v for v in VERSIONS_REGULAR if v.lts]
+VERSIONS_ARCH = [v for v in VERSIONS_ALL if v.arch != "amd64"]
+VERSIONS_FLAVOR = [v for v in VERSIONS_ALL if v.flavor != "generic"]
 VERSION_FIRST = VERSIONS_ALL[0]
 VERSION_LAST = VERSIONS_ALL[-1]
 
@@ -46,15 +49,19 @@ class Versions(StrEnum):
     def versions(self) -> List[Version]:
         return {
             Versions.ALL: VERSIONS_ALL,
-            Versions.LTS: [v for v in VERSIONS_REGULAR if v.lts],
+            Versions.LTS: VERSIONS_LTS,
             Versions.REGULAR: VERSIONS_REGULAR,
             Versions.REV: VERSIONS_REV,
-            Versions.ARCH: [v for v in VERSIONS_ALL if v.arch != "amd64"],
-            Versions.FLAVOR: [v for v in VERSIONS_ALL if v.flavor != "generic"],
+            Versions.ARCH: VERSIONS_ARCH,
+            Versions.FLAVOR: VERSIONS_FLAVOR,
             Versions.FIRST: [VERSION_FIRST],
             Versions.LAST: [VERSION_LAST],
             Versions.DEFAULT: [VERSION_DEFAULT],
         }[self]
+
+    @property
+    def num_versions(self) -> int:
+        return len(self.versions)
 
     def __iter__(self) -> Iterator[Version]:
         return iter(self.versions)
@@ -78,39 +85,35 @@ class Versions(StrEnum):
     def pairs(self) -> List[ImagePair]:
         if self in (Versions.REGULAR, Versions.LTS, Versions.REV):
             return [ImagePair(*p) for p in zip(self.versions, self.versions[1:])]
-        else:
-            assert VERSION_DEFAULT not in self.versions
-            return [ImagePair(VERSION_DEFAULT, v) for v in self.versions]
+
+        if len(self) == 1:
+            return []
+
+        assert VERSION_DEFAULT not in self.versions
+        return [ImagePair(VERSION_DEFAULT, v) for v in self.versions]
 
     def pair_to_str(self, p: ImagePair):
         return f"{self.version_to_str(p.v1)} → {self.version_to_str(p.v2)}"
 
     def version_to_str(self, v: Version):
-        return {
-            Versions.ARCH: v.arch_name,
-            Versions.FLAVOR: v.flavor_name,
-            Versions.REV: v.revision,
-            Versions.REGULAR: v.short_version,
-            Versions.LTS: v.short_version,
-        }[self]
-
-    def get_labels(self, bold=True):
-        if self in (Versions.REGULAR, Versions.LTS) and bold:
-            from depsurf.output import bold as bold_fn
-
-            return [
-                bold_fn(v.short_version) if v.lts else v.short_version for v in self
-            ]
-
-        return [self.version_to_str(v) for v in self.versions]
+        if self == Versions.ARCH:
+            return v.arch_name
+        if self == Versions.FLAVOR:
+            return v.flavor_name
+        if self == Versions.REV:
+            return v.revision
+        if self in (Versions.REGULAR, Versions.LTS):
+            return v.short_version
+        return str(v)
 
     @property
-    def caption(self):
-        return {
-            Versions.REGULAR: "Linux Kernel Version",
-            Versions.ARCH: "Arch for Linux 5.4",
-            Versions.FLAVOR: "Flavor for Linux 5.4",
-        }[self]
+    def labels(self):
+        if self in (Versions.REGULAR, Versions.LTS):
+            from depsurf.output import bold
+
+            return [bold(v.short_version) if v.lts else v.short_version for v in self]
+
+        return [self.version_to_str(v) for v in self.versions]
 
     @staticmethod
     def apply(
@@ -125,7 +128,3 @@ class Versions(StrEnum):
 
         df = pd.DataFrame(results).T
         return df
-
-    @staticmethod
-    def num_versions(groups: List["Versions"]) -> List[int]:
-        return [len(g.versions) for g in groups]

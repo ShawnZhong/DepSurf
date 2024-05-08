@@ -11,17 +11,6 @@ class Consequence(StrEnum):
         return f"'{self.value}'"
 
 
-class BaseChange:
-    def __init_subclass__(cls, enum):
-        cls.enum = enum
-
-    def format(self):
-        raise NotImplementedError
-
-    def __str__(self):
-        return f"{self.enum:24}{self.format()}"
-
-
 class BaseChangeEnum(StrEnum):
     def __init_subclass__(cls, sort_idx):
         cls.sort_idx = sort_idx
@@ -36,6 +25,17 @@ class BaseChangeEnum(StrEnum):
 
     def __repr__(self):
         return f"'{self.value}'"
+
+
+class BaseChange:
+    def __init_subclass__(cls, enum: BaseChangeEnum):
+        cls.enum = enum
+
+    def format(self):
+        raise NotImplementedError
+
+    def __str__(self):
+        return f"{self.enum:24}{self.format()}"
 
 
 class GenericChanges(BaseChangeEnum, sort_idx=1):

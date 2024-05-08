@@ -22,7 +22,7 @@ def gen_report(
     if isinstance(version_groups, Versions):
         version_groups = [version_groups]
 
-    file = path.open("w") if path else None
+    file = open(path, "w") if path else None
 
     result = {}
     for dep in deps:
@@ -31,7 +31,7 @@ def gen_report(
             print("\tSkipped", file=file)
             continue
 
-        result[dep] = report_dep(dep, version_groups, file)
+        result[(dep.kind, dep.name)] = report_dep(dep, version_groups, file)
 
     if path:
         file.close()
