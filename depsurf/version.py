@@ -75,7 +75,7 @@ class Version:
     @property
     def arch_name(self):
         return {
-            "amd64": "x64",
+            "amd64": "x86",
             "arm64": "arm",
             "armhf": "armhf",
             "ppc64el": "ppc",
