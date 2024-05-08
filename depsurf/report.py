@@ -17,6 +17,11 @@ REPORT_KINDS = [
 def gen_report(
     deps: List[Dep], version_groups: List[Versions], path: Path = None
 ) -> Dict[Dep, Dict[Tuple[str, str], Union[DepStatus, DepDelta]]]:
+    if isinstance(deps, Dep):
+        deps = [deps]
+    if isinstance(version_groups, Versions):
+        version_groups = [version_groups]
+
     file = path.open("w") if path else None
 
     result = {}
@@ -40,7 +45,7 @@ def report_dep(dep: Dep, version_groups: List[Versions], file=None):
     status: Dict[Tuple, DepStatus] = {}
     for versions in version_groups:
         status |= {
-            ("Status", versions, versions.to_str(v)): v.img.get_dep_status(dep)
+            ("Status", versions, versions.version_to_str(v)): v.img.get_dep_status(dep)
             for v in versions
         }
     status_str = "|".join(map(str, status.values()))
@@ -57,7 +62,7 @@ def report_dep(dep: Dep, version_groups: List[Versions], file=None):
     delta: Dict[Tuple, DepDelta] = {}
     for versions in version_groups:
         delta |= {
-            ("Delta", versions, versions.to_str(p)): p.diff_dep(dep)
+            ("Delta", versions, versions.pair_to_str(p)): p.diff_dep(dep)
             for p in versions.pairs
         }
     for (_, _, v), d in delta.items():
