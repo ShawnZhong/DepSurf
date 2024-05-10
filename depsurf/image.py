@@ -54,7 +54,7 @@ class LinuxImage(ObjectFile):
         }[kind]
 
     def get_dep(self, dep: Dep) -> Dict:
-        if dep.kind == DepKind.STRUCT_FIELD:
+        if dep.kind == DepKind.FIELD:
             struct_name, field_name = dep.name.split("::")
             struct = self.btf.structs.get(struct_name)
             if struct is None:

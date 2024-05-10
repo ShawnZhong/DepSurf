@@ -9,7 +9,7 @@ REPORT_KINDS = [
     DepKind.FUNC,
     DepKind.TRACEPOINT,
     DepKind.LSM,
-    DepKind.STRUCT_FIELD,
+    DepKind.FIELD,
     DepKind.STRUCT,
 ]
 

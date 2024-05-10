@@ -35,14 +35,14 @@ class FuncGroup:
         # Those are the functions that are declared in single header
         # but defined in multiple files
         if self.same_loc:
-            return CollisionType.INCLUDE
+            return CollisionType.INCLUDE_DUP
 
         if self.all_static:
             # Static functions have name collision with other static functions
-            return CollisionType.STATIC
+            return CollisionType.STATIC_STATIC
         else:
             # External functions have name collision with static functions
-            return CollisionType.MIXED
+            return CollisionType.STATIC_GLOBAL
 
     @property
     def any_inline(self):
@@ -112,3 +112,6 @@ class FuncGroup:
 
     def __getitem__(self, index):
         return self.funcs[index]
+
+    def __repr__(self):
+        return f"FuncGroup({self.name}, {self.num_funcs})"

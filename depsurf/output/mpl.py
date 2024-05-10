@@ -9,6 +9,7 @@ def setup_matplotlib():
     # https://matplotlib.org/stable/api/matplotlib_configuration_api.html#default-values-and-styling
     plt.rcParams["figure.dpi"] = 200
     plt.rcParams["figure.figsize"] = (10, 5)
+    plt.rcParams["figure.autolayout"] = True
     plt.rcParams["axes.xmargin"] = 0.01
     plt.rcParams["axes.spines.top"] = False
     plt.rcParams["axes.spines.right"] = False
@@ -70,8 +71,10 @@ def label_multiline_text(ax: plt.Axes, x, y, lines, colors=None, fontsize=8):
         )
 
 
-def save_fig(fig: plt.Figure, name: str):
+def save_fig(fig: plt.Figure, name: str, close=True):
     path = FIG_PATH / f"{name}.pdf"
+    path.unlink(missing_ok=True)
     fig.savefig(path, bbox_inches="tight", pad_inches=0)
     logging.info(f"Saved figure to {path}")
-    plt.close(fig)
+    if close:
+        plt.close(fig)

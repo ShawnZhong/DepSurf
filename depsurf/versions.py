@@ -85,7 +85,7 @@ class Versions(StrEnum):
         return other + self.versions
 
     def pair_to_str(self, p: ImagePair):
-        return f"{self.version_to_str(p.v1)} → {self.version_to_str(p.v2)}"
+        return f"{self.version_to_str(p.v1)}→{self.version_to_str(p.v2)}"
 
     def version_to_str(self, v: Version):
         if self == Versions.ARCH:

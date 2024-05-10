@@ -145,9 +145,9 @@ class BPFObject:
             name = name.split("___")[0]
             if name == "user_pt_regs":
                 continue
-            results.append(Dep(DepKind.STRUCT, name))
+            results.append(DepKind.STRUCT(name))
             for member in struct["members"]:
-                results.append(Dep(DepKind.STRUCT_FIELD, f"{name}::{member['name']}"))
+                results.append(DepKind.FIELD(f"{name}::{member['name']}"))
 
         return sorted(set(results))
 
