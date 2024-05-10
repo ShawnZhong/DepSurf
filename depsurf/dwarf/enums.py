@@ -1,5 +1,4 @@
 from enum import StrEnum
-from dataclasses import dataclass
 
 
 class CollisionType(StrEnum):

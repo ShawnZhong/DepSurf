@@ -119,6 +119,7 @@ class DepDeltaEnum(Enum):
             DepDeltaEnum.ADD: "Add",
             DepDeltaEnum.REMOVE: "Remove",
             DepDeltaEnum.CHANGE: "Change",
+            DepDeltaEnum.NO_CHANGE: "No Change",
         }[self]
 
     @property
@@ -126,7 +127,7 @@ class DepDeltaEnum(Enum):
         return {
             DepDeltaEnum.ADD: "+",
             DepDeltaEnum.REMOVE: "−",
-            DepDeltaEnum.NO_CHANGE: ".",
+            DepDeltaEnum.NO_CHANGE: "·",
             DepDeltaEnum.CHANGE: "42",
             DepDeltaEnum.NOT_EXIST: "",
         }[self]
@@ -136,7 +137,7 @@ class DepDeltaEnum(Enum):
         return {
             DepDeltaEnum.ADD: "🔺",
             DepDeltaEnum.REMOVE: "🔻",
-            DepDeltaEnum.NO_CHANGE: ".",
+            DepDeltaEnum.NO_CHANGE: "·",
             DepDeltaEnum.NOT_EXIST: "",
         }[self]
 
@@ -260,7 +261,7 @@ class DepStatusEnum(Enum):
             DepStatusEnum.RENAME: "Rename",
             DepStatusEnum.PARTIAL_INLINE: "Partial Inline",
             DepStatusEnum.FULL_INLINE: "Full Inline",
-            DepStatusEnum.STATIC: "Static Func",
+            DepStatusEnum.STATIC: "Static",
         }[self]
 
 
@@ -278,11 +279,6 @@ class DepStatus(BaseDepCell):
         if not self.exists:
             result.append(DepStatusEnum.ABSENT)
 
-        if self.inline == InlineType.FULL:
-            result.append(DepStatusEnum.FULL_INLINE)
-        elif self.inline == InlineType.PARTIAL:
-            result.append(DepStatusEnum.PARTIAL_INLINE)
-
         if self.collision == CollisionType.UNIQUE_STATIC:
             result.append(DepStatusEnum.STATIC)
         elif self.collision in (
@@ -291,6 +287,11 @@ class DepStatus(BaseDepCell):
             CollisionType.STATIC_GLOBAL,
         ):
             result.append(DepStatusEnum.DUPLICATE)
+
+        if self.inline == InlineType.FULL:
+            result.append(DepStatusEnum.FULL_INLINE)
+        elif self.inline == InlineType.PARTIAL:
+            result.append(DepStatusEnum.PARTIAL_INLINE)
 
         if self.suffix:
             result.append(DepStatusEnum.RENAME)
