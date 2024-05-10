@@ -1,5 +1,5 @@
 from depsurf.btf import dump_btf_header, dump_btf_json, dump_btf_txt, normalize_btf
-from depsurf.dwarf import dump_dwarf_funcs
+from depsurf.funcs import dump_dwarf_funcs
 from depsurf.linux import (
     dump_symtab,
     dump_tracepoints,

@@ -5,7 +5,7 @@ from typing import Dict
 from depsurf.btf import BTF
 from depsurf.dep import DepKind, Dep, DepStatus
 from depsurf.version import Version
-from depsurf.dwarf import FuncGroups
+from depsurf.funcs import FuncGroups
 from depsurf.linux import (
     get_relocation,
     StructInstance,

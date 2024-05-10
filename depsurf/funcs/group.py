@@ -1,7 +1,7 @@
 from typing import List, Set
 import logging
 
-from .func_entry import FuncEntry
+from .entry import FuncEntry
 from .enums import CollisionType, InlineType
 
 

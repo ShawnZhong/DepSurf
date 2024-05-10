@@ -2,8 +2,8 @@ import logging
 from pathlib import Path
 from typing import Dict
 
-from .func_entry import FuncEntry
-from .func_group import FuncGroup
+from .entry import FuncEntry
+from .group import FuncGroup
 
 
 class FuncGroups:

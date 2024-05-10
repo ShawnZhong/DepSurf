@@ -3,13 +3,14 @@ import logging
 from depsurf.paths import FIG_PATH
 from matplotlib import pyplot as plt
 from matplotlib import transforms
+import pandas as pd
+import numpy as np
 
 
 def setup_matplotlib():
     # https://matplotlib.org/stable/api/matplotlib_configuration_api.html#default-values-and-styling
     plt.rcParams["figure.dpi"] = 200
     plt.rcParams["figure.figsize"] = (10, 5)
-    plt.rcParams["figure.autolayout"] = True
     plt.rcParams["axes.xmargin"] = 0.01
     plt.rcParams["axes.spines.top"] = False
     plt.rcParams["axes.spines.right"] = False
@@ -78,3 +79,13 @@ def save_fig(fig: plt.Figure, name: str, close=True):
     logging.info(f"Saved figure to {path}")
     if close:
         plt.close(fig)
+
+
+def plot_bar(ax: plt.Axes, df: pd.DataFrame, columns=None):
+    xs = np.arange(len(df))
+    bottom = np.zeros(len(df))
+    for col in df.columns if columns is None else columns:
+        ax.bar(xs, df[col], bottom=bottom, label=col, color=col.color)
+        bottom += df[col]
+
+    return bottom

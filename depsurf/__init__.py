@@ -4,7 +4,7 @@ from .bpf import *
 from .btf import *
 from .dep import *
 from .diff import *
-from .dwarf import *
+from .funcs import *
 from .image import *
 from .images import *
 from .linux import *

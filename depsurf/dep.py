@@ -12,7 +12,7 @@ from depsurf.diff import (
     diff_struct_field,
     diff_tracepoint,
 )
-from depsurf.dwarf import CollisionType, FuncGroup, InlineType
+from depsurf.funcs import CollisionType, FuncGroup, InlineType
 
 
 class DepKind(StrEnum):

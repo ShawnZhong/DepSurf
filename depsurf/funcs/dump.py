@@ -8,8 +8,8 @@ from elftools.elf.elffile import ELFFile
 
 from depsurf.utils import check_result_path
 
-from .func_entry import FuncEntry, InlineStatus
-from .traverser import DIEHandler, Traverser
+from .entry import FuncEntry, InlineStatus
+from .dwarf import DIEHandler, Traverser
 from .utils import disable_dwarf_cache, get_name
 
 
