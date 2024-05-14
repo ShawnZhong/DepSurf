@@ -84,10 +84,10 @@ class Versions(StrEnum):
     def __radd__(self, other) -> List[Version]:
         return other + self.versions
 
-    def pair_to_str(self, p: ImagePair):
-        return f"{self.version_to_str(p.v1)}→{self.version_to_str(p.v2)}"
+    def pair_to_str(self, p: ImagePair, sep="→"):
+        return f"{self.version_to_str(p.v1)}{sep}{self.version_to_str(p.v2)}"
 
-    def version_to_str(self, v: Version):
+    def version_to_str(self, v: Version, bold=False):
         if self == Versions.ARCH:
             return v.arch_name
         if self == Versions.FLAVOR:
@@ -95,17 +95,16 @@ class Versions(StrEnum):
         if self == Versions.REV:
             return v.revision
         if self in (Versions.REGULAR, Versions.LTS):
+            if bold and v.lts:
+                from depsurf.output import bold as bold_fn
+
+                return bold_fn(v.short_version)
             return v.short_version
         return str(v)
 
     @property
     def labels(self):
-        if self in (Versions.REGULAR, Versions.LTS):
-            from depsurf.output import bold
-
-            return [bold(v.short_version) if v.lts else v.short_version for v in self]
-
-        return [self.version_to_str(v) for v in self.versions]
+        return [self.version_to_str(v, bold=True) for v in self]
 
     @property
     def pairs(self) -> List[ImagePair]:
@@ -128,10 +127,11 @@ class Versions(StrEnum):
 
         results = {}
         for pair in self.pairs:
-            path = result_path / f"{pair.v1}_{pair.v2}" if result_path else None
+            name = self.pair_to_str(pair, sep="_")
+            path = result_path / name if result_path else None
+            logging.info(f"Comparing {name} to {path}")
 
             name = self.pair_to_str(pair)
-            logging.info(f"Comparing {name} to {path}")
             results[(self, name)] = pair.diff(path)
 
         df = pd.DataFrame(results, index=next(iter(results.values())))

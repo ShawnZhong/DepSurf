@@ -72,7 +72,10 @@ class FuncGroup:
 
         if not in_symtab:
             if self.any_func_caller:
-                logging.warning(f"{name} has func caller but no sym entry. ")
+                logging.warning(
+                    f"{name} has func caller but no sym entry. "
+                    f"It is likely a builtin function or a ELF-related function."
+                )
             return InlineType.FULL
 
         if self.any_inline:

@@ -243,7 +243,7 @@ class DepStatusEnum(Enum):
     @property
     def symbol(self):
         return {
-            DepStatusEnum.OK: "✓",
+            DepStatusEnum.OK: "",
             DepStatusEnum.ABSENT: "✗",
             DepStatusEnum.DUPLICATE: "D",
             DepStatusEnum.RENAME: "R",
