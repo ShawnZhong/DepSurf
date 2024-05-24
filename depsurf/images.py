@@ -70,8 +70,7 @@ class ImagePair:
             result = self.diff_kind(kind)
             if result_path:
                 result.save_txt(result_path / f"{kind}.log")
-            summary = result.summary
-            for name, count in summary.items():
+            for name, count in result.summary.items():
                 results[kind, name] = count
 
         file = open(result_path / "Summary.txt", "w") if result_path else None

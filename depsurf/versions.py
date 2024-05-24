@@ -129,9 +129,9 @@ class Versions(StrEnum):
         for pair in self.pairs:
             name = self.pair_to_str(pair, sep="_")
             path = result_path / name if result_path else None
-            logging.info(f"Comparing {name} to {path}")
 
             name = self.pair_to_str(pair)
+            logging.info(f"Comparing {name} to {path}")
             results[(self, name)] = pair.diff(path)
 
         df = pd.DataFrame(results, index=next(iter(results.values())))

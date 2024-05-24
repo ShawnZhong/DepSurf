@@ -65,7 +65,7 @@ class Version:
     def flavor_name(self):
         return {
             "generic": "Generic",
-            "lowlatency": "Lat.",
+            "lowlatency": "Lat",
             "aws": "AWS",
             "azure": "Azure",
             "gcp": "GCP",
