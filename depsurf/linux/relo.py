@@ -30,9 +30,10 @@ def get_relocation(elffile: ELFFile) -> dict[int, bytes]:
         info_type = r["r_info_type"]
         if info_type == 0:
             continue
-        elif arch == "EM_AARCH64" and info_type == 1027:
-            # R_AARCH64_RELATIVE
-            # Ref: https://github.com/torvalds/linux/blob/a2c63a3f3d687ac4f63bf4ffa04d7458a2db350b/arch/arm64/kernel/pi/relocate.c#L15
+        elif arch == "EM_AARCH64":
+            # Ref: https://github.com/torvalds/linux/blob/a2c63a3f3d687ac4f63bf4ffa04d7458a2db350b/arch/arm64/kernel/pi/relocate.c#L19-L23
+            if info_type != 1027:  # R_AARCH64_RELATIVE
+                continue
             val = constant + r["r_addend"]
         elif arch == "EM_S390" and info_type in (12, 22):
             # R_390_RELATIVE and R_390_64
@@ -46,7 +47,7 @@ def get_relocation(elffile: ELFFile) -> dict[int, bytes]:
                 sym = dynsym.get_symbol(sym_idx)
                 val += sym["st_value"]
         else:
-            raise ValueError(f"Unknown relocation type {r}")
+            raise ValueError(f"Unknown relocation type {r} for arch {arch}")
         addr = r["r_offset"]
         result[addr] = val.to_bytes(8, byteorder)
 

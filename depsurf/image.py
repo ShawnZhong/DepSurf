@@ -12,6 +12,7 @@ from depsurf.linux import (
     Sections,
     SymbolTable,
     Tracepoints,
+    TracepointsExtractor,
     ObjectFile,
 )
 
@@ -102,6 +103,10 @@ class LinuxImage(ObjectFile):
     @cached_property
     def tracepoints(self) -> Tracepoints:
         return Tracepoints.from_dump(self.version.tracepoints_path)
+
+    @property
+    def tracepoints_extractor(self) -> TracepointsExtractor:
+        return TracepointsExtractor(self)
 
     @cached_property
     def lsm_hooks(self):

@@ -8,6 +8,7 @@ from depsurf.version import DEB_PATH, Version
 if TYPE_CHECKING:
     import pandas as pd
 
+
 VERSIONS_ALL = sorted(Version.from_path(p) for p in DEB_PATH.iterdir())
 VERSIONS_REV = [
     v
@@ -19,13 +20,23 @@ VERSIONS_REGULAR = sorted(
     [
         v
         for v in VERSIONS_ALL
-        if v.arch == "amd64" and v.flavor == "generic" and v.version != "5.4.0"
+        if v.arch == VERSION_DEFAULT.arch
+        and v.flavor == VERSION_DEFAULT.flavor
+        and v.version != VERSION_DEFAULT.version
     ]
     + [VERSION_DEFAULT]
 )
 VERSIONS_LTS = [v for v in VERSIONS_REGULAR if v.lts]
-VERSIONS_ARCH = [v for v in VERSIONS_ALL if v.arch != "amd64"]
-VERSIONS_FLAVOR = [v for v in VERSIONS_ALL if v.flavor != "generic"]
+VERSIONS_ARCH = [
+    v
+    for v in VERSIONS_ALL
+    if v.arch != VERSION_DEFAULT.arch and v.version == VERSION_DEFAULT.version
+]
+VERSIONS_FLAVOR = [
+    v
+    for v in VERSIONS_ALL
+    if v.flavor != VERSION_DEFAULT.flavor and v.version == VERSION_DEFAULT.version
+]
 VERSION_FIRST = VERSIONS_ALL[0]
 VERSION_LAST = VERSIONS_ALL[-1]
 

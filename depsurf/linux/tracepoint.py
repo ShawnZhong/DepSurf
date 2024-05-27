@@ -14,6 +14,8 @@ if TYPE_CHECKING:
 
 @dataclass
 class TracepointInfo:
+    flags: int
+    class_name: str
     event_name: str
     func_name: str
     struct_name: str
@@ -26,7 +28,7 @@ class TracepointsExtractor:
     def __init__(self, img: "LinuxImage"):
         self.img = img
         self.event_names = {}
-        self.event_class_names = {}
+        self.class_names = {}
         for sym in self.img.symtab:
             t = sym["type"]
             name = sym["name"]
@@ -38,9 +40,7 @@ class TracepointsExtractor:
                     self.stop_ftrace_events = sym["value"]
             elif t == "STT_OBJECT":
                 if name.startswith("event_class_"):
-                    self.event_class_names[sym["value"]] = name.removeprefix(
-                        "event_class_"
-                    )
+                    self.class_names[sym["value"]] = name.removeprefix("event_class_")
                 elif name.startswith("event_"):
                     self.event_names[sym["value"]] = name.removeprefix("event_")
 
@@ -53,42 +53,68 @@ class TracepointsExtractor:
                 continue
             yield event_ptr
 
-    def iter_tracepoints(self) -> Iterator[TracepointInfo]:
-        for ptr in self.iter_event_ptrs():
-            # Ref: https://github.com/torvalds/linux/blob/2425bcb9240f8c97d793cb31c8e8d8d0a843fa29/include/linux/trace_events.h#L272
-            event = self.img.get_struct_instance("trace_event_call", ptr)
+    def get_tracepoint(self, ptr: int) -> TracepointInfo:
+        # Ref: https://github.com/torvalds/linux/blob/2425bcb9240f8c97d793cb31c8e8d8d0a843fa29/include/linux/trace_events.h#L272
+        event = self.img.get_struct_instance("trace_event_call", ptr)
+        class_name = self.class_names[event["class"]]
+        flags = event["flags"]
 
-            # Skip non-tracepoint events
-            if not (event["flags"] & self.TRACEPOINT_FLAG):
-                continue
+        if flags & self.FLAG_IGNORE_ENABLE:
+            # Ref: https://github.com/torvalds/linux/blob/6fbf71854e2ddea7c99397772fbbb3783bfe15b5/kernel/trace/trace_export.c#L172-L189
+            logging.debug(f"Ignoring event {class_name}")
+            return
 
-            event_class_name = self.event_class_names[event["class"]]
-
-            func_name = f"trace_event_raw_event_{event_class_name}"
-            struct_name = f"trace_event_raw_{event_class_name}"
-
-            func = self.img.btf.get_func(func_name)
-            struct = self.img.btf.get_struct(struct_name)
-
-            if func is None:
-                logging.warning(f"Could not find function for {func_name}")
-                continue
-            if struct is None:
-                logging.warning(f"Could not find struct for {struct_name}")
-                continue
-
-            yield TracepointInfo(
-                event_name=self.event_names[ptr],
-                func_name=func_name,
-                struct_name=struct_name,
-                func=func,
-                struct=struct,
-                fmt_str=self.img.get_cstr(event["print_fmt"]),
+        if not (flags & self.FLAG_TRACEPOINT):
+            # Ref: https://github.com/torvalds/linux/blob/6fbf71854e2ddea7c99397772fbbb3783bfe15b5/include/linux/syscalls.h#L144
+            event_name = self.img.get_cstr(event["name"])
+            return TracepointInfo(
+                flags=flags,
+                class_name=class_name,
+                event_name=event_name,
+                func_name=None,
+                struct_name=None,
+                func=None,
+                struct=None,
+                fmt_str=None,
             )
 
+        func_name = f"trace_event_raw_event_{class_name}"
+        struct_name = f"trace_event_raw_{class_name}"
+
+        func = self.img.btf.get_func(func_name)
+        struct = self.img.btf.get_struct(struct_name)
+
+        if func is None:
+            logging.warning(f"Could not find function for {func_name}")
+            return
+        if struct is None:
+            logging.warning(f"Could not find struct for {struct_name}")
+            return
+
+        return TracepointInfo(
+            flags=flags,
+            class_name=class_name,
+            event_name=self.event_names[ptr],
+            func_name=func_name,
+            struct_name=struct_name,
+            func=func,
+            struct=struct,
+            fmt_str=self.img.get_cstr(event["print_fmt"]),
+        )
+
+    def iter_tracepoints(self) -> Iterator[TracepointInfo]:
+        for ptr in self.iter_event_ptrs():
+            info = self.get_tracepoint(ptr)
+            if info:
+                yield info
+
     @cached_property
-    def TRACEPOINT_FLAG(self):
+    def FLAG_TRACEPOINT(self):
         return self.img.btf.enum_values["TRACE_EVENT_FL_TRACEPOINT"]
+
+    @cached_property
+    def FLAG_IGNORE_ENABLE(self):
+        return self.img.btf.enum_values["TRACE_EVENT_FL_IGNORE_ENABLE"]
 
     # tp = self.img.get_struct_instance("tracepoint", event["tp"])
     # name = self.img.get_cstr(tp["name"])
@@ -139,11 +165,19 @@ class Tracepoints:
 
     @property
     def funcs(self):
-        return {name: info.func for name, info in self.data.items()}
+        return {name: info.func for name, info in self.data.items() if info.func}
 
     @property
     def structs(self):
-        return {name: info.struct for name, info in self.data.items()}
+        return {name: info.struct for name, info in self.data.items() if info.struct}
+
+    @property
+    def syscalls(self):
+        return {
+            info.event_name.removeprefix("sys_enter_")
+            for name, info in self.data.items()
+            if info.event_name.startswith("sys_enter_")
+        }
 
     def __repr__(self):
         return f"Tracepoints ({len(self.funcs)}): {list(self.funcs.keys())}"
