@@ -31,7 +31,7 @@ class TracepointsExtractor:
         self.class_names = {}
         for sym in self.img.symtab:
             t = sym["type"]
-            name = sym["name"]
+            name: str = sym["name"]
             if t == "STT_NOTYPE":
                 # Ref: https://github.com/torvalds/linux/blob/49668688dd5a5f46c72f965835388ed16c596055/kernel/module.c#L2317
                 if name == "__start_ftrace_events":
@@ -45,9 +45,9 @@ class TracepointsExtractor:
                     self.event_names[sym["value"]] = name.removeprefix("event_")
 
     def iter_event_ptrs(self) -> Iterator[int]:
-        ptr_size = self.img.ptr_size
+        ptr_size = self.img.filebytes.ptr_size
         for ptr in range(self.start_ftrace_events, self.stop_ftrace_events, ptr_size):
-            event_ptr = self.img.get_int(ptr, ptr_size)
+            event_ptr = self.img.filebytes.get_int(ptr, ptr_size)
             if event_ptr == 0:
                 logging.warning(f"Invalid event pointer: {ptr:x} -> {event_ptr:x}")
                 continue
@@ -66,7 +66,7 @@ class TracepointsExtractor:
 
         if not (flags & self.FLAG_TRACEPOINT):
             # Ref: https://github.com/torvalds/linux/blob/6fbf71854e2ddea7c99397772fbbb3783bfe15b5/include/linux/syscalls.h#L144
-            event_name = self.img.get_cstr(event["name"])
+            event_name = self.img.filebytes.get_cstr(event["name"])
             return TracepointInfo(
                 flags=flags,
                 class_name=class_name,
@@ -99,7 +99,7 @@ class TracepointsExtractor:
             struct_name=struct_name,
             func=func,
             struct=struct,
-            fmt_str=self.img.get_cstr(event["print_fmt"]),
+            fmt_str=self.img.filebytes.get_cstr(event["print_fmt"]),
         )
 
     def iter_tracepoints(self) -> Iterator[TracepointInfo]:
@@ -117,7 +117,7 @@ class TracepointsExtractor:
         return self.img.btf.enum_values["TRACE_EVENT_FL_IGNORE_ENABLE"]
 
     # tp = self.img.get_struct_instance("tracepoint", event["tp"])
-    # name = self.img.get_cstr(tp["name"])
+    # name = self.img.filebytes.get_cstr(tp["name"])
 
     # event_class = self.img.get_struct_instance("trace_event_class", event_class_ptr)
 
@@ -170,14 +170,6 @@ class Tracepoints:
     @property
     def structs(self):
         return {name: info.struct for name, info in self.data.items() if info.struct}
-
-    @property
-    def syscalls(self):
-        return {
-            info.event_name.removeprefix("sys_enter_")
-            for name, info in self.data.items()
-            if info.event_name.startswith("sys_enter_")
-        }
 
     def __repr__(self):
         return f"Tracepoints ({len(self.funcs)}): {list(self.funcs.keys())}"

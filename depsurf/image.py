@@ -1,23 +1,26 @@
 import re
 from functools import cached_property
+from pathlib import Path
 from typing import Dict
 
+from elftools.elf.elffile import ELFFile
+
 from depsurf.btf import BTF
-from depsurf.dep import DepKind, Dep, DepStatus
-from depsurf.version import Version
+from depsurf.dep import Dep, DepKind, DepStatus
 from depsurf.funcs import FuncGroups
 from depsurf.linux import (
-    get_relocation,
-    StructInstance,
+    FileBytes,
     Sections,
+    StructInstance,
     SymbolTable,
+    Syscalls,
     Tracepoints,
     TracepointsExtractor,
-    ObjectFile,
 )
+from depsurf.version import Version
 
 
-class LinuxImage(ObjectFile):
+class LinuxImage:
     cache_enabled = True
     cache = {}
 
@@ -25,7 +28,12 @@ class LinuxImage(ObjectFile):
         if LinuxImage.cache_enabled and version in self.cache:
             raise ValueError(f"Please use LinuxImage.from_* to get an instance")
         self.version = version
-        super().__init__(version.vmlinux_path)
+        self.path = Path(version.vmlinux_path)
+        self.file = open(version.vmlinux_path, "rb")
+        self.elffile = ELFFile(self.file)
+
+    def __del__(self):
+        self.file.close()
 
     @classmethod
     def from_version(cls, version: Version):
@@ -85,12 +93,20 @@ class LinuxImage(ObjectFile):
             return DepStatus(exists=self.get_dep(dep) is not None)
 
     @cached_property
-    def func_groups(self) -> FuncGroups:
-        return FuncGroups.from_dump(self.version.dwarf_funcs_path)
+    def filebytes(self):
+        return FileBytes(self.elffile)
 
     @cached_property
     def sections(self) -> Sections:
         return Sections(self.elffile)
+
+    @cached_property
+    def syscalls(self) -> Syscalls:
+        return Syscalls(self.symtab, self.filebytes)
+
+    @cached_property
+    def func_groups(self) -> FuncGroups:
+        return FuncGroups.from_dump(self.version.dwarf_funcs_path)
 
     @cached_property
     def btf(self) -> BTF:
@@ -135,17 +151,7 @@ class LinuxImage(ObjectFile):
         return main_cu.get_top_DIE().attributes["DW_AT_producer"].value.decode()
 
     def get_struct_instance(self, name, ptr) -> StructInstance:
-        return StructInstance(self, name, ptr)
-
-    def get_bytes(self, addr, size=8) -> bytes:
-        if addr in self.relocations:
-            assert size == 8
-            return self.relocations[addr]
-        return super().get_bytes(addr, size)
-
-    @cached_property
-    def relocations(self):
-        return get_relocation(self.elffile)
+        return StructInstance(self.btf, self.filebytes, name, ptr)
 
     def __repr__(self):
         return f"LinuxImage({self.version.name})"

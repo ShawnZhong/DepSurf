@@ -85,6 +85,12 @@ class SymbolTable:
 
         return result
 
+    def get_symbols_by_name(self, name: str):
+        return [sym for sym in self.data if sym["name"] == name]
+
+    def get_symbols_by_addr(self, addr: int):
+        return [sym for sym in self.data if sym["value"] == addr]
+
     def iter_funcs(self):
         for sym in self.data:
             # Ref: https://github.com/torvalds/linux/commit/9f2899fe36a623885d8576604cb582328ad32b3c

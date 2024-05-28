@@ -1,18 +1,16 @@
-from typing import TYPE_CHECKING
+from depsurf.btf import BTF, Kind
 
-from depsurf.btf import Kind
-
-if TYPE_CHECKING:
-    from depsurf.image import LinuxImage
+from .filebytes import FileBytes
 
 
 class StructInstance:
-    def __init__(self, img: "LinuxImage", name: str, ptr: int):
-        self.img = img
+    def __init__(self, btf: BTF, filebytes: FileBytes, name: str, ptr: int):
+        self.btf = btf
+        self.filebytes = filebytes
         self.name = name
         self.ptr = ptr
 
-        t = img.btf.get_struct(name)
+        t = self.btf.get_struct(name)
         assert t is not None, f"Could not find struct {name}"
 
         self.size = t["size"]
@@ -32,19 +30,19 @@ class StructInstance:
 
         if size is None:
             if kind == Kind.PTR:
-                size = self.img.ptr_size
+                size = self.filebytes.ptr_size
             elif kind == Kind.INT:
-                size = self.img.btf.data[Kind.INT][t["name"]]["size"]
+                size = self.btf.data[Kind.INT][t["name"]]["size"]
             else:
                 raise NotImplementedError
 
-        return self.img.get_int(addr, size)
+        return self.filebytes.get_int(addr, size)
 
     def __getitem__(self, name) -> int:
         return self.get(name)
 
     def get_bytes(self):
-        return self.img.get_bytes(self.ptr, self.size)
+        return self.filebytes.get_bytes(self.ptr, self.size)
 
     def __repr__(self):
         return f"StructInstance({self.name}, {self.ptr:x}): {self.get_bytes().hex()}"

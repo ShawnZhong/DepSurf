@@ -15,10 +15,17 @@ def prep(v: Version, overwrite: bool = False):
 
     extract_deb(
         deb_path=v.deb_path,
-        file_path=v.vmlinux_deb_path,
+        file_path=v.vmlinux_abs_path,
         result_path=v.vmlinux_path,
         overwrite=overwrite,
     )
+    if v.buildinfo_path.exists():
+        extract_deb(
+            deb_path=v.buildinfo_path,
+            file_path=v.config_abs_path,
+            result_path=v.config_path,
+            overwrite=False,
+        )
     extract_btf(
         vmlinux_path=v.vmlinux_path,
         result_path=v.btf_path,

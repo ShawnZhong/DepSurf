@@ -9,7 +9,7 @@ from depsurf.paths import DATA_PATH
 if TYPE_CHECKING:
     from depsurf.linux import LinuxImage
 
-DEB_PATH = DATA_PATH / "deb"
+DEB_PATH = DATA_PATH / "ddeb"
 
 
 @dataclass(order=True, frozen=True)
@@ -62,6 +62,14 @@ class Version:
         return self.version_to_str(self.version_tuple[:-1])
 
     @property
+    def name(self):
+        return f"{self.version}-{self.revision}-{self.flavor}-{self.arch}"
+
+    @property
+    def short_name(self):
+        return f"{self.version}-{self.revision}-{self.flavor}"
+
+    @property
     def flavor_name(self):
         return {
             "generic": "Generic",
@@ -93,22 +101,28 @@ class Version:
         ]
 
     @property
-    def name(self):
-        return f"{self.version}-{self.revision}-{self.flavor}-{self.arch}"
-
-    @property
     def deb_path(self):
         return DEB_PATH / f"{self.name}.deb"
 
     @property
-    def vmlinux_deb_path(self):
-        return (
-            f"./usr/lib/debug/boot/vmlinux-{self.version}-{self.revision}-{self.flavor}"
-        )
+    def buildinfo_path(self):
+        return DATA_PATH / "buildinfo" / f"{self.name}.deb"
+
+    @property
+    def config_path(self):
+        return DATA_PATH / "config" / f"{self.name}.config"
+
+    @property
+    def config_abs_path(self):
+        return f"/usr/lib/linux/{self.short_name}/config"
 
     @property
     def vmlinux_path(self):
         return DATA_PATH / "vmlinux" / self.name
+
+    @property
+    def vmlinux_abs_path(self):
+        return f"/usr/lib/debug/boot/vmlinux-{self.short_name}"
 
     @property
     def btf_path(self):
@@ -159,8 +173,8 @@ class Version:
         self.__dict__.update(state)
 
     # @property
-    # def vmlinuz_deb_path(self):
-    #     return f"./boot/vmlinuz-{self.version_str}-{self.revision}-{self.flavor}"
+    # def vmlinuz_abs_path(self):
+    #     return f"./boot/vmlinuz-{self.short_name}"
 
     # @property
     # def vmlinuz_path(self):
