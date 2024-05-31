@@ -150,16 +150,21 @@ class Versions(StrEnum):
             df.to_string(result_path / "Summary.txt")
         return df
 
-    @staticmethod
-    def apply(
-        fn: Callable[[Version], Dict], groups: List["Versions"]
-    ) -> "pd.DataFrame":
+
+class VersionGroups:
+    def __init__(self, *groups: Versions):
+        self.groups = groups
+
+    def apply(self, fn: Callable[[Version], Dict]) -> "pd.DataFrame":
         import pandas as pd
 
         results = {}
-        for group in groups:
+        for group in self.groups:
             for v in group.versions:
                 results[(group, v)] = fn(v)
 
         df = pd.DataFrame(results).T
         return df
+
+    def __repr__(self):
+        return f"VersionGroups({self.groups})"

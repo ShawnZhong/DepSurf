@@ -1,9 +1,11 @@
 import logging
+from typing import Iterable
+from functools import cached_property
 
 from .filebytes import FileBytes
 from .symtab import SymbolTable
 
-SYSCALL_PREFIXES = ["sys_", "ppc_"]
+SYSCALL_PREFIXES = ["sys_", "ppc_", "ppc64_"]
 
 
 class Syscalls:
@@ -13,8 +15,8 @@ class Syscalls:
 
         self.table_addr = None
         self.table_size = None
-
         self.addr_to_name = {}
+
         for sym in self.symtab.data:
             if sym["name"] == "sys_call_table":
                 assert self.table_addr is None
@@ -38,9 +40,7 @@ class Syscalls:
         assert self.table_addr is not None
         assert self.table_size is not None
 
-    def get_syscalls(self):
-        result = []
-
+    def iter_syscall(self) -> Iterable[str]:
         for i, ptr in enumerate(
             range(
                 self.table_addr,
@@ -56,9 +56,8 @@ class Syscalls:
                 for prefix in SYSCALL_PREFIXES:
                     name = name.split(prefix, 1)[-1]
                 logging.debug(f"{i}: {ptr:x} -> {val:x} -> {name}")
-                result.append(name)
+                yield name, i
 
-        return result
-
-    def __iter__(self):
-        return iter(self.get_syscalls())
+    @cached_property
+    def syscalls(self):
+        return {name: 0 for name, i in self.iter_syscall()}

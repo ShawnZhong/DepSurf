@@ -11,7 +11,6 @@ from depsurf.funcs import FuncGroups
 from depsurf.linux import (
     FileBytes,
     Sections,
-    StructInstance,
     SymbolTable,
     Syscalls,
     Tracepoints,
@@ -60,6 +59,7 @@ class LinuxImage:
             DepKind.LSM: self.lsm_hooks,
             DepKind.UNION: self.btf.unions,
             DepKind.ENUM: self.btf.enums,
+            DepKind.SYSCALL: self.syscalls.syscalls,
         }[kind]
 
     def get_dep(self, dep: Dep) -> Dict:
@@ -149,9 +149,6 @@ class LinuxImage:
             if cu.get_top_DIE().get_full_path().endswith("main.c")
         )
         return main_cu.get_top_DIE().attributes["DW_AT_producer"].value.decode()
-
-    def get_struct_instance(self, name, ptr) -> StructInstance:
-        return StructInstance(self.btf, self.filebytes, name, ptr)
 
     def __repr__(self):
         return f"LinuxImage({self.version.name})"

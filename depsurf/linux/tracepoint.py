@@ -1,15 +1,17 @@
 import dataclasses
+import json
 import logging
 from dataclasses import dataclass
 from functools import cached_property
-from typing import TYPE_CHECKING, Iterator
 from pathlib import Path
-import json
+from typing import Iterator
 
+from depsurf.btf import BTF
 from depsurf.utils import check_result_path
 
-if TYPE_CHECKING:
-    from depsurf.image import LinuxImage
+from .filebytes import FileBytes
+from .struct import StructInstance
+from .symtab import SymbolTable
 
 
 @dataclass
@@ -25,11 +27,14 @@ class TracepointInfo:
 
 
 class TracepointsExtractor:
-    def __init__(self, img: "LinuxImage"):
-        self.img = img
+    def __init__(self, btf: BTF, filebytes: FileBytes, symtab: SymbolTable):
+        self.btf = btf
+        self.filebytes = filebytes
+        self.symtab = symtab
+
         self.event_names = {}
         self.class_names = {}
-        for sym in self.img.symtab:
+        for sym in self.symtab:
             t = sym["type"]
             name: str = sym["name"]
             if t == "STT_NOTYPE":
@@ -45,9 +50,9 @@ class TracepointsExtractor:
                     self.event_names[sym["value"]] = name.removeprefix("event_")
 
     def iter_event_ptrs(self) -> Iterator[int]:
-        ptr_size = self.img.filebytes.ptr_size
+        ptr_size = self.filebytes.ptr_size
         for ptr in range(self.start_ftrace_events, self.stop_ftrace_events, ptr_size):
-            event_ptr = self.img.filebytes.get_int(ptr, ptr_size)
+            event_ptr = self.filebytes.get_int(ptr, ptr_size)
             if event_ptr == 0:
                 logging.warning(f"Invalid event pointer: {ptr:x} -> {event_ptr:x}")
                 continue
@@ -55,7 +60,7 @@ class TracepointsExtractor:
 
     def get_tracepoint(self, ptr: int) -> TracepointInfo:
         # Ref: https://github.com/torvalds/linux/blob/2425bcb9240f8c97d793cb31c8e8d8d0a843fa29/include/linux/trace_events.h#L272
-        event = self.img.get_struct_instance("trace_event_call", ptr)
+        event = StructInstance(self.btf, self.filebytes, "trace_event_call", ptr)
         class_name = self.class_names[event["class"]]
         flags = event["flags"]
 
@@ -66,7 +71,7 @@ class TracepointsExtractor:
 
         if not (flags & self.FLAG_TRACEPOINT):
             # Ref: https://github.com/torvalds/linux/blob/6fbf71854e2ddea7c99397772fbbb3783bfe15b5/include/linux/syscalls.h#L144
-            event_name = self.img.filebytes.get_cstr(event["name"])
+            event_name = self.filebytes.get_cstr(event["name"])
             return TracepointInfo(
                 flags=flags,
                 class_name=class_name,
@@ -81,8 +86,8 @@ class TracepointsExtractor:
         func_name = f"trace_event_raw_event_{class_name}"
         struct_name = f"trace_event_raw_{class_name}"
 
-        func = self.img.btf.get_func(func_name)
-        struct = self.img.btf.get_struct(struct_name)
+        func = self.btf.get_func(func_name)
+        struct = self.btf.get_struct(struct_name)
 
         if func is None:
             logging.warning(f"Could not find function for {func_name}")
@@ -99,7 +104,7 @@ class TracepointsExtractor:
             struct_name=struct_name,
             func=func,
             struct=struct,
-            fmt_str=self.img.filebytes.get_cstr(event["print_fmt"]),
+            fmt_str=self.filebytes.get_cstr(event["print_fmt"]),
         )
 
     def iter_tracepoints(self) -> Iterator[TracepointInfo]:
@@ -110,19 +115,19 @@ class TracepointsExtractor:
 
     @cached_property
     def FLAG_TRACEPOINT(self):
-        return self.img.btf.enum_values["TRACE_EVENT_FL_TRACEPOINT"]
+        return self.btf.enum_values["TRACE_EVENT_FL_TRACEPOINT"]
 
     @cached_property
     def FLAG_IGNORE_ENABLE(self):
-        return self.img.btf.enum_values["TRACE_EVENT_FL_IGNORE_ENABLE"]
+        return self.btf.enum_values["TRACE_EVENT_FL_IGNORE_ENABLE"]
 
     # tp = self.img.get_struct_instance("tracepoint", event["tp"])
-    # name = self.img.filebytes.get_cstr(tp["name"])
+    # name = self.filebytes.get_cstr(tp["name"])
 
     # event_class = self.img.get_struct_instance("trace_event_class", event_class_ptr)
 
     # def get_tp_func(self, name: str):
-    #     btf = self.img.btf
+    #     btf = self.btf
     #     for func_prefix in ["trace_event_raw_event_", "perf_trace_", "__traceiter_"]:
     #         func = btf.get_func(f"{func_prefix}{name}")
     #         if func:
@@ -141,7 +146,7 @@ class TracepointsExtractor:
 
 @check_result_path
 def dump_tracepoints(img, result_path):
-    extractor = TracepointsExtractor(img)
+    extractor = TracepointsExtractor(img.btf, img.filebytes, img.symtab)
     with open(result_path, "w") as f:
         for info in extractor.iter_tracepoints():
             json.dump(dataclasses.asdict(info), f)

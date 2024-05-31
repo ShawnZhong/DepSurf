@@ -66,7 +66,13 @@ class ImagePair:
 
     def diff(self, result_path: Path = None) -> Dict[Tuple, int]:
         results = {}
-        for kind in [DepKind.FUNC, DepKind.STRUCT, DepKind.TRACEPOINT, DepKind.LSM]:
+        for kind in [
+            DepKind.FUNC,
+            DepKind.STRUCT,
+            DepKind.TRACEPOINT,
+            DepKind.LSM,
+            DepKind.SYSCALL,
+        ]:
             result = self.diff_kind(kind)
             if result_path:
                 result.save_txt(result_path / f"{kind}.log")

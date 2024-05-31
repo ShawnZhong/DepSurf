@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 from depsurf.paths import DATA_PATH
 
 if TYPE_CHECKING:
-    from depsurf.linux import LinuxImage
+    from .image import LinuxImage
 
 DEB_PATH = DATA_PATH / "ddeb"
 
