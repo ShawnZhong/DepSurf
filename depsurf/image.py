@@ -138,12 +138,9 @@ class LinuxImage:
         return {k: v for k, v in self.btf.funcs.items() if k in func_names}
 
     @property
-    def comment(self):
-        return self.elffile.get_section_by_name(".comment").data().decode()
-
-    @property
     def gcc_version(self):
-        return re.search(r"Ubuntu (\d+\.\d+\.\d+)", self.comment).group(1)
+        comment = self.elffile.get_section_by_name(".comment").data().decode()
+        return re.search(r"Ubuntu (\d+\.\d+\.\d+)", comment).group(1)
 
     @cached_property
     def flags(self):
