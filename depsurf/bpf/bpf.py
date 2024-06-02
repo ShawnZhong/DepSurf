@@ -110,6 +110,11 @@ class BPFObject:
             else:
                 name = ""
 
+            for prefix in ["sys_enter_", "sys_exit_"]:
+                if name.startswith(prefix):
+                    assert kind == DepKind.SYSCALL
+                    name = name[len(prefix) :]
+
             if name in DUMMY_HOOK_MAPPING:
                 for dep_name in DUMMY_HOOK_MAPPING[name]:
                     results.append(Dep(kind, dep_name))

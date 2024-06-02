@@ -11,6 +11,7 @@ REPORT_KINDS = [
     DepKind.LSM,
     DepKind.FIELD,
     DepKind.STRUCT,
+    DepKind.SYSCALL,
 ]
 
 

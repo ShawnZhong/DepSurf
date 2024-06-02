@@ -5,7 +5,7 @@ from functools import cached_property
 from .filebytes import FileBytes
 from .symtab import SymbolTable
 
-SYSCALL_PREFIXES = ["sys_", "ppc_", "ppc64_"]
+SYSCALL_PREFIXES = ["stub_", "sys_", "ppc_", "ppc64_"]
 
 
 class Syscalls:
@@ -29,7 +29,7 @@ class Syscalls:
                     self.table_size = 436 * self.filebytes.ptr_size
 
             if (
-                sym["type"] == "STT_FUNC"
+                sym["type"] in ("STT_FUNC", "STT_NOTYPE")
                 and any(p in sym["name"] for p in SYSCALL_PREFIXES)
                 and (
                     sym["value"] not in self.addr_to_name or sym["bind"] == "STB_GLOBAL"

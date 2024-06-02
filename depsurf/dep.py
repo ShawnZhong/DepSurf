@@ -11,6 +11,7 @@ from depsurf.diff import (
     diff_struct,
     diff_struct_field,
     diff_tracepoint,
+    diff_syscall,
 )
 from depsurf.funcs import CollisionType, FuncGroup, InlineType
 
@@ -61,6 +62,7 @@ class DepKind(StrEnum):
             DepKind.LSM: diff_func,
             DepKind.UNION: diff_struct,
             DepKind.ENUM: diff_enum,
+            DepKind.SYSCALL: diff_syscall,
         }[self]
 
     def __call__(self, name):

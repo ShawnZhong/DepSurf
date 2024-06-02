@@ -52,15 +52,20 @@ class LinuxImage:
         LinuxImage.cache_enabled = True
 
     def get_all_by_kind(self, kind: DepKind) -> Dict:
-        return {
-            DepKind.STRUCT: self.btf.structs,
-            DepKind.FUNC: self.btf.funcs,
-            DepKind.TRACEPOINT: self.tracepoints.data,
-            DepKind.LSM: self.lsm_hooks,
-            DepKind.UNION: self.btf.unions,
-            DepKind.ENUM: self.btf.enums,
-            DepKind.SYSCALL: self.syscalls.syscalls,
-        }[kind]
+        if kind == DepKind.STRUCT:
+            return self.btf.structs
+        elif kind == DepKind.FUNC:
+            return self.btf.funcs
+        elif kind == DepKind.TRACEPOINT:
+            return self.tracepoints.data
+        elif kind == DepKind.LSM:
+            return self.lsm_hooks
+        elif kind == DepKind.UNION:
+            return self.btf.unions
+        elif kind == DepKind.ENUM:
+            return self.btf.enums
+        elif kind == DepKind.SYSCALL:
+            return self.syscalls.syscalls
 
     def get_dep(self, dep: Dep) -> Dict:
         if dep.kind == DepKind.FIELD:

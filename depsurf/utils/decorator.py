@@ -14,7 +14,9 @@ def check_result_path(fn: callable):
         slient = kwargs.pop("slient", False)
         result_path = Path(kwargs["result_path"])
 
-        if not overwrite and result_path.exists() and result_path.stat().st_size > 0:
+        if not overwrite and result_path.exists():
+            # if result_path.stat().st_size == 0:
+            # logging.warning(f"{fn_name:<16} {result_path} is empty")
             if not slient:
                 logging.info(f"{fn_name:<16} Using {result_path}")
             return
