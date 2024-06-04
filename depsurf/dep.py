@@ -24,9 +24,9 @@ class DepKind(StrEnum):
     LSM = "LSM"
     UNION = "Union"
     ENUM = "Enum"
+    SYSCALL = "Syscall"
 
     # other kinds of hooks supported by BPF
-    SYSCALL = "Syscall"
     UPROBE = "uprobe"
     USDT = "USDT"
     PERF_EVENT = "Perf Event"
