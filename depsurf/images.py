@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 
 from depsurf.dep import Dep, DepKind, DepDelta
 from depsurf.diff import BaseChange, ChangeEnum, compare_eq, diff_dict
@@ -64,7 +64,7 @@ class ImagePair:
     v1: Version
     v2: Version
 
-    def diff(self, result_path: Path = None) -> Dict[Tuple, int]:
+    def diff(self, result_path: Optional[Path] = None) -> Dict[Tuple, int]:
         results = {}
         for kind in [
             DepKind.FUNC,
