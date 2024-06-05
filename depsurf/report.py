@@ -100,6 +100,6 @@ def gen_report(
             },
         )
         report.print(file=file)
-        result[(dep.kind, dep.name)] = report
+        result[dep] = report
 
     return result
