@@ -3,12 +3,13 @@ from typing import List
 
 from depsurf.btf import Kind, get_btf_type_str
 
-from .change import BaseChange, ChangeEnum
+from depsurf.issues import IssueEnum
+from .change import BaseChange
 from .utils import diff_dict
 
 
 @dataclass
-class FuncReturn(BaseChange, enum=ChangeEnum.FUNC_RETURN):
+class FuncReturn(BaseChange, enum=IssueEnum.RETURN_TYPE):
     old: str
     new: str
 
@@ -17,7 +18,7 @@ class FuncReturn(BaseChange, enum=ChangeEnum.FUNC_RETURN):
 
 
 @dataclass
-class ParamRemove(BaseChange, enum=ChangeEnum.PARAM_REMOVE):
+class ParamRemove(BaseChange, enum=IssueEnum.PARAM_REMOVE):
     name: str
     type: dict
 
@@ -26,7 +27,7 @@ class ParamRemove(BaseChange, enum=ChangeEnum.PARAM_REMOVE):
 
 
 @dataclass
-class ParamAdd(BaseChange, enum=ChangeEnum.PARAM_ADD):
+class ParamAdd(BaseChange, enum=IssueEnum.PARAM_ADD):
     name: str
     type: dict
 
@@ -35,7 +36,7 @@ class ParamAdd(BaseChange, enum=ChangeEnum.PARAM_ADD):
 
 
 @dataclass
-class ParamReorder(BaseChange, enum=ChangeEnum.PARAM_REORDER):
+class ParamReorder(BaseChange, enum=IssueEnum.PARAM_REORDER):
     old: dict
     new: dict
 
@@ -48,7 +49,7 @@ class ParamReorder(BaseChange, enum=ChangeEnum.PARAM_REORDER):
 
 
 @dataclass
-class ParamType(BaseChange, enum=ChangeEnum.PARAM_TYPE):
+class ParamType(BaseChange, enum=IssueEnum.PARAM_TYPE):
     name: str
     old: dict
     new: dict

@@ -2,13 +2,14 @@ from dataclasses import dataclass
 from typing import List
 
 from depsurf.btf import Kind, get_btf_type_str
+from depsurf.issues import IssueEnum
 
-from .change import BaseChange, ChangeEnum
+from .change import BaseChange
 from .utils import diff_dict
 
 
 @dataclass
-class FieldAdd(BaseChange, enum=ChangeEnum.FIELD_ADD):
+class FieldAdd(BaseChange, enum=IssueEnum.FIELD_ADD):
     name: str
     type: dict
 
@@ -17,7 +18,7 @@ class FieldAdd(BaseChange, enum=ChangeEnum.FIELD_ADD):
 
 
 @dataclass
-class FieldRemove(BaseChange, enum=ChangeEnum.FIELD_REMOVE):
+class FieldRemove(BaseChange, enum=IssueEnum.FIELD_REMOVE):
     name: str
     type: dict
 
@@ -26,7 +27,7 @@ class FieldRemove(BaseChange, enum=ChangeEnum.FIELD_REMOVE):
 
 
 @dataclass
-class FieldType(BaseChange, enum=ChangeEnum.FIELD_TYPE):
+class FieldType(BaseChange, enum=IssueEnum.FIELD_TYPE):
     name: str
     old: dict
     new: dict

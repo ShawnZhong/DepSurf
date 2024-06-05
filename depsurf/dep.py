@@ -1,10 +1,11 @@
 import dataclasses
 from dataclasses import dataclass
 from collections import defaultdict
-from enum import StrEnum, Enum, auto
+from enum import StrEnum
 from typing import Callable, Dict, List, Optional
 
 from depsurf.diff import (
+    IssueEnum,
     BaseChange,
     diff_enum,
     diff_func,
@@ -98,88 +99,38 @@ class BaseDepCell:
         return "white"
 
 
-class DepDeltaEnum(Enum):
-    ADD = auto()
-    REMOVE = auto()
-    CHANGE = auto()
-    NO_CHANGE = auto()
-    NOT_EXIST = auto()
-
-    @property
-    def color(self):
-        return {
-            DepDeltaEnum.ADD: "tab:blue",
-            DepDeltaEnum.REMOVE: "tab:red",
-            DepDeltaEnum.CHANGE: "tab:orange",
-            DepDeltaEnum.NO_CHANGE: "whitesmoke",
-            DepDeltaEnum.NOT_EXIST: "white",
-        }[self]
-
-    @property
-    def name(self):
-        return {
-            DepDeltaEnum.ADD: "Add",
-            DepDeltaEnum.REMOVE: "Remove",
-            DepDeltaEnum.CHANGE: "Change",
-            DepDeltaEnum.NO_CHANGE: "No Change",
-        }[self]
-
-    @property
-    def symbol(self):
-        return {
-            DepDeltaEnum.ADD: "+",
-            DepDeltaEnum.REMOVE: "−",
-            DepDeltaEnum.NO_CHANGE: "·",
-            DepDeltaEnum.CHANGE: "42",
-            DepDeltaEnum.NOT_EXIST: "",
-        }[self]
-
-    @property
-    def emoji(self):
-        return {
-            DepDeltaEnum.ADD: "🔺",
-            DepDeltaEnum.REMOVE: "🔻",
-            DepDeltaEnum.NO_CHANGE: "·",
-            DepDeltaEnum.NOT_EXIST: "",
-        }[self]
-
-    @property
-    def text_color(self):
-        return "black" if self == DepDeltaEnum.NO_CHANGE else "white"
-
-
 @dataclass
 class DepDelta(BaseDepCell):
     in_v1: bool = True
     in_v2: bool = True
-    changes: Optional[List[BaseChange]] = None
+    changes: List[BaseChange] = dataclasses.field(default_factory=list)
 
     @property
-    def enum(self):
+    def enum(self) -> IssueEnum:
         if not self.in_v1 and not self.in_v2:
-            return DepDeltaEnum.NOT_EXIST
+            return IssueEnum.BOTH_ABSENT
         if not self.in_v1 and self.in_v2:
-            return DepDeltaEnum.ADD
+            return IssueEnum.ADD
         if self.in_v1 and not self.in_v2:
-            return DepDeltaEnum.REMOVE
+            return IssueEnum.REMOVE
         if self.changes:
-            return DepDeltaEnum.CHANGE
-        return DepDeltaEnum.NO_CHANGE
+            return IssueEnum.CHANGE
+        return IssueEnum.NO_CHANGE
 
     def __str__(self):
-        if self.enum != DepDeltaEnum.CHANGE:
-            return self.enum.emoji
+        if self.enum != IssueEnum.CHANGE:
+            return self.enum.get_symbol(emoji=True)
 
-        change_enums = defaultdict(int)
+        change_enums: Dict[IssueEnum, int] = defaultdict(int)
         for change in self.changes:
             change_enums[change.enum] += 1
 
         result = ""
         for k, v in change_enums.items():
             if v == 1:
-                result += f"{k.short} "
+                result += f"{k.get_symbol()} "
             else:
-                result += f"{k.short}⨉{v} "
+                result += f"{k.get_symbol()}⨉{v} "
         return result
 
     def __bool__(self):
@@ -191,13 +142,13 @@ class DepDelta(BaseDepCell):
 
     @property
     def text(self):
-        if self.enum == DepDeltaEnum.CHANGE:
+        if self.enum == IssueEnum.CHANGE:
             return str(len(self.changes))
-        return self.enum.symbol
+        return self.enum.get_symbol()
 
     @property
     def text_color(self):
-        return self.enum.text_color
+        return "black" if self.enum == IssueEnum.NO_CHANGE else "white"
 
     def print(self, file=None, nindent=0):
         if not self:
@@ -209,117 +160,59 @@ class DepDelta(BaseDepCell):
             print(f"{indent}{change}", file=file)
 
 
-class DepStatusEnum(Enum):
-    OK = auto()
-    ABSENT = auto()
-    STATIC = auto()
-    PARTIAL_INLINE = auto()
-    FULL_INLINE = auto()
-    RENAME = auto()
-    DUPLICATE = auto()
-
-    @property
-    def color(self):
-        return {
-            DepStatusEnum.OK: "tab:green",
-            DepStatusEnum.ABSENT: "tab:red",
-            DepStatusEnum.DUPLICATE: "black",
-            DepStatusEnum.RENAME: "blue",
-            DepStatusEnum.PARTIAL_INLINE: "tab:blue",
-            DepStatusEnum.FULL_INLINE: "darkblue",
-            DepStatusEnum.STATIC: "gray",
-        }[self]
-
-    @property
-    def emoji(self):
-        return {
-            DepStatusEnum.OK: "✅",
-            DepStatusEnum.ABSENT: "❌",
-            DepStatusEnum.DUPLICATE: "🟣D",
-            DepStatusEnum.RENAME: "🔵R",
-            DepStatusEnum.PARTIAL_INLINE: "🟡P",
-            DepStatusEnum.FULL_INLINE: "🟠F",
-            DepStatusEnum.STATIC: "🟣S",
-        }[self]
-
-    @property
-    def symbol(self):
-        return {
-            DepStatusEnum.OK: "",
-            DepStatusEnum.ABSENT: "✗",
-            DepStatusEnum.DUPLICATE: "D",
-            DepStatusEnum.RENAME: "R",
-            DepStatusEnum.PARTIAL_INLINE: "P",
-            DepStatusEnum.FULL_INLINE: "F",
-            DepStatusEnum.STATIC: "S",
-        }[self]
-
-    @property
-    def name(self):
-        return {
-            DepStatusEnum.OK: "OK",
-            DepStatusEnum.ABSENT: "Absent",
-            DepStatusEnum.DUPLICATE: "Duplicate",
-            DepStatusEnum.RENAME: "Rename",
-            DepStatusEnum.PARTIAL_INLINE: "Partial Inline",
-            DepStatusEnum.FULL_INLINE: "Full Inline",
-            DepStatusEnum.STATIC: "Static",
-        }[self]
-
-
 @dataclass
 class DepStatus(BaseDepCell):
     exists: bool = True
-    group: FuncGroup = None
-    inline: InlineType = None
-    collision: CollisionType = None
+    group: Optional[FuncGroup] = None
+    inline: Optional[InlineType] = None
+    collision: Optional[CollisionType] = None
     suffix: bool = False
 
     @property
-    def enums(self) -> List[DepStatusEnum]:
+    def enums(self) -> List[IssueEnum]:
         result = []
         if not self.exists:
-            result.append(DepStatusEnum.ABSENT)
+            result.append(IssueEnum.ABSENT)
 
         if self.collision == CollisionType.UNIQUE_STATIC:
-            result.append(DepStatusEnum.STATIC)
+            result.append(IssueEnum.STATIC)
         elif self.collision in (
             CollisionType.INCLUDE_DUP,
             CollisionType.STATIC_STATIC,
             CollisionType.STATIC_GLOBAL,
         ):
-            result.append(DepStatusEnum.DUPLICATE)
+            result.append(IssueEnum.DUPLICATE)
 
         if self.inline == InlineType.FULL:
-            result.append(DepStatusEnum.FULL_INLINE)
+            result.append(IssueEnum.FULL_INLINE)
         elif self.inline == InlineType.PARTIAL:
-            result.append(DepStatusEnum.PARTIAL_INLINE)
+            result.append(IssueEnum.PARTIAL_INLINE)
 
         if self.suffix:
-            result.append(DepStatusEnum.RENAME)
+            result.append(IssueEnum.RENAME)
 
         if not result:
-            result.append(DepStatusEnum.OK)
+            result.append(IssueEnum.OK)
 
         return result
 
     def __str__(self):
-        return " ".join([e.emoji for e in self.enums])
+        return " ".join([e.get_symbol(emoji=True) for e in self.enums])
 
     @property
     def text(self):
-        return "".join([e.symbol for e in self.enums])
+        return "".join([e.get_symbol() for e in self.enums])
 
     @property
     def background_color_name(self):
-        if self.enums == [DepStatusEnum.STATIC]:
-            return DepStatusEnum.OK.color
-        for enum in list(DepStatusEnum)[::-1]:
+        if self.enums == [IssueEnum.STATIC]:
+            return IssueEnum.OK.color
+        for enum in list(IssueEnum)[::-1]:
             if enum in self.enums:
                 return enum.color
 
     def __bool__(self):
-        return self.enums == [DepStatusEnum.OK]
+        return self.enums == [IssueEnum.OK]
 
     def print(self, file=None, nindent=0):
         if not self:

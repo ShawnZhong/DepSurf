@@ -87,7 +87,7 @@ class Versions(StrEnum):
         return self.versions[key]
 
     def __repr__(self):
-        return f"Versions({self.name}, {self.versions})"
+        return f"Versions({self.name})"
 
     def __add__(self, other) -> List[Version]:
         return self.versions + other.versions
@@ -95,16 +95,16 @@ class Versions(StrEnum):
     def __radd__(self, other) -> List[Version]:
         return other + self.versions
 
-    def pair_to_str(self, p: ImagePair, sep="→"):
+    def pair_to_str(self, p: ImagePair, sep="→") -> str:
         return f"{self.version_to_str(p.v1)}{sep}{self.version_to_str(p.v2)}"
 
-    def version_to_str(self, v: Version, bold=False):
+    def version_to_str(self, v: Version, bold=False) -> str:
         if self == Versions.ARCH:
             return v.arch_name
         if self == Versions.FLAVOR:
             return v.flavor_name
         if self == Versions.REV:
-            return v.revision
+            return str(v.revision)
         if self in (Versions.REGULAR, Versions.LTS):
             if bold and v.lts:
                 from depsurf.output import bold as bold_fn

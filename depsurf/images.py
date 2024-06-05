@@ -3,8 +3,9 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 
 from depsurf.dep import Dep, DepKind, DepDelta
-from depsurf.diff import BaseChange, ChangeEnum, compare_eq, diff_dict
+from depsurf.diff import BaseChange, compare_eq, diff_dict
 from depsurf.version import Version
+from depsurf.issues import IssueEnum
 
 
 @dataclass(frozen=True)
@@ -16,8 +17,8 @@ class ImageDiffResult:
     changed: Dict[str, List[BaseChange]]
 
     @property
-    def reasons(self) -> Dict[BaseChange, int]:
-        reasons = {change: 0 for change in ChangeEnum}
+    def reasons(self) -> Dict[IssueEnum, int]:
+        reasons = {change: 0 for change in IssueEnum}
         for changes in self.changed.values():
             for change in changes:
                 reasons[change.enum] += 1
@@ -29,9 +30,9 @@ class ImageDiffResult:
             "Old": self.old_len,
             "New": self.new_len,
             **self.reasons,
-            ChangeEnum.ADD: len(self.added),
-            ChangeEnum.REMOVE: len(self.removed),
-            ChangeEnum.CHANGE: len(self.changed),
+            IssueEnum.ADD: len(self.added),
+            IssueEnum.REMOVE: len(self.removed),
+            IssueEnum.CHANGE: len(self.changed),
         }
 
     def print(self, file=None):

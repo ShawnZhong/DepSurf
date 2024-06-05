@@ -2,13 +2,14 @@ from dataclasses import dataclass
 from typing import List
 
 from depsurf.btf import Kind
+from depsurf.issues import IssueEnum
 
-from .change import BaseChange, ChangeEnum
+from .change import BaseChange
 from .utils import diff_dict
 
 
 @dataclass
-class EnumValAdd(BaseChange, enum=ChangeEnum.VAL_ADD):
+class EnumValAdd(BaseChange, enum=IssueEnum.VAL_ADD):
     name: str
     val: int
 
@@ -17,7 +18,7 @@ class EnumValAdd(BaseChange, enum=ChangeEnum.VAL_ADD):
 
 
 @dataclass
-class EnumValRemove(BaseChange, enum=ChangeEnum.VAL_REMOVE):
+class EnumValRemove(BaseChange, enum=IssueEnum.VAL_REMOVE):
     name: str
     val: int
 
@@ -26,7 +27,7 @@ class EnumValRemove(BaseChange, enum=ChangeEnum.VAL_REMOVE):
 
 
 @dataclass
-class EnumValChange(BaseChange, enum=ChangeEnum.VAL_CHANGE):
+class EnumValChange(BaseChange, enum=IssueEnum.VAL_CHANGE):
     name: str
     old_val: int
     new_val: int
