@@ -18,16 +18,16 @@ from depsurf.funcs import CollisionType, FuncGroup, InlineType
 
 
 class DepKind(StrEnum):
+    FUNC = "Function"
     STRUCT = "Struct"
     FIELD = "Field"
-    FUNC = "Function"
     TRACEPOINT = "Tracepoint"
     LSM = "LSM"
-    UNION = "Union"
-    ENUM = "Enum"
     SYSCALL = "Syscall"
 
-    # other kinds of hooks supported by BPF
+    UNION = "Union"
+    ENUM = "Enum"
+
     UPROBE = "uprobe"
     USDT = "USDT"
     PERF_EVENT = "Perf Event"
@@ -72,11 +72,25 @@ class DepKind(StrEnum):
     def __repr__(self):
         return self.value
 
+    def __lt__(self, other):
+        order = [
+            DepKind.FUNC,
+            DepKind.STRUCT,
+            DepKind.FIELD,
+            DepKind.TRACEPOINT,
+            DepKind.SYSCALL,
+        ]
+
+        return order.index(self) < order.index(other)
+
 
 @dataclass(frozen=True, order=True)
 class Dep:
     kind: DepKind
     name: str
+
+    def __str__(self):
+        return f"{self.kind.value}({self.name})"
 
 
 class BaseDepCell:

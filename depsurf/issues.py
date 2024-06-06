@@ -118,7 +118,7 @@ class IssueEnum(StrEnum):
             self.REMOVE: "-" if not emoji else "🔻",
             self.NO_CHANGE: ".",
             self.CHANGE: "42",
-            self.ABSENT: "",
+            self.BOTH_ABSENT: "",
             # Fuction status
             self.STATIC: "S" if not emoji else "🟣S",
             self.PARTIAL_INLINE: "P" if not emoji else "🟡P",

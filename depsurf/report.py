@@ -48,6 +48,32 @@ class DepReport:
                 for c in delta.changes:
                     assert c.enum == IssueEnum.FIELD_TYPE
 
+    @property
+    def keys(self):
+        raw_keys = list(self.status.keys()) + list(self.delta.keys())
+        return [versions.to_str(x) for versions, x in raw_keys]
+
+    @property
+    def values(self):
+        return list(self.status.values()) + list(self.delta.values())
+
+    @property
+    def df(self):
+        import pandas as pd
+
+        key = (self.dep.kind, self.dep.name)
+
+        results = {}
+        results[key] = {
+            ("Status", versions, versions.to_str(v)): d
+            for (versions, v), d in self.status.items()
+        }
+        results[key] |= {
+            ("Delta", versions, versions.to_str(p)): d
+            for (versions, p), d in self.delta.items()
+        }
+        return pd.DataFrame(results).T
+
     def print(self, file=None):
         self.print_status(file=file)
         self.print_delta(file=file)

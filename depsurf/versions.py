@@ -113,6 +113,13 @@ class Versions(StrEnum):
             return v.short_version
         return str(v)
 
+    def to_str(self, x) -> str:
+        if isinstance(x, Version):
+            return self.version_to_str(x)
+        if isinstance(x, ImagePair):
+            return self.pair_to_str(x)
+        return str(x)
+
     @property
     def labels(self):
         return [self.version_to_str(v, bold=True) for v in self]
