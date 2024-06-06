@@ -14,10 +14,11 @@ from depsurf.diff import (
     diff_tracepoint,
     diff_syscall,
 )
+from depsurf.utils import OrderedEnum
 from depsurf.funcs import CollisionType, FuncGroup, InlineType
 
 
-class DepKind(StrEnum):
+class DepKind(OrderedEnum, StrEnum):
     FUNC = "Function"
     STRUCT = "Struct"
     FIELD = "Field"
@@ -71,17 +72,6 @@ class DepKind(StrEnum):
 
     def __repr__(self):
         return self.value
-
-    def __lt__(self, other):
-        order = [
-            DepKind.FUNC,
-            DepKind.STRUCT,
-            DepKind.FIELD,
-            DepKind.TRACEPOINT,
-            DepKind.SYSCALL,
-        ]
-
-        return order.index(self) < order.index(other)
 
 
 @dataclass(frozen=True, order=True)

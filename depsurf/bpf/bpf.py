@@ -158,7 +158,7 @@ class BPFObject:
 
     @cached_property
     def deps(self) -> list[Dep]:
-        return self.deps_hook + self.deps_struct
+        return sorted(self.deps_hook + self.deps_struct)
 
     # @property
     # def deps_struct_field(self):

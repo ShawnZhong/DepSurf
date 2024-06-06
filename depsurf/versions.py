@@ -138,6 +138,10 @@ class Versions(StrEnum):
         assert VERSION_DEFAULT not in self.versions
         return [ImagePair(VERSION_DEFAULT, v) for v in self.versions]
 
+    @property
+    def num_pairs(self) -> int:
+        return len(self.pairs)
+
     def diff_pairs(self, result_path=None) -> "pd.DataFrame":
         import pandas as pd
 
