@@ -121,8 +121,12 @@ class Versions(StrEnum):
         return str(x)
 
     @property
-    def labels(self):
+    def version_labels(self):
         return [self.version_to_str(v, bold=True) for v in self]
+
+    @property
+    def pair_labels(self):
+        return [self.pair_to_str(p) for p in self.pairs]
 
     @property
     def pairs(self) -> List[ImagePair]:

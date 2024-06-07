@@ -49,11 +49,6 @@ class DepReport:
                     assert c.enum == IssueEnum.FIELD_TYPE
 
     @property
-    def keys(self):
-        raw_keys = list(self.status.keys()) + list(self.delta.keys())
-        return [versions.to_str(x) for versions, x in raw_keys]
-
-    @property
     def values(self):
         return list(self.status.values()) + list(self.delta.values())
 
