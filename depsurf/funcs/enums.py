@@ -4,7 +4,7 @@ from enum import StrEnum
 class CollisionType(StrEnum):
     UNIQUE_GLOBAL = "Unique Global"
     UNIQUE_STATIC = "Unique Static"
-    INCLUDE_DUP = "Duplication with #include"
+    INCLUDE_DUP = "Static Dup. with #include"
     STATIC_STATIC = "Static-Static Collision"
     STATIC_GLOBAL = "Static-Global Collision"
 

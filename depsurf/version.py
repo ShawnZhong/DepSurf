@@ -84,10 +84,10 @@ class Version:
     def arch_name(self):
         return {
             "amd64": "x86",
-            "arm64": "arm",
-            "armhf": "armhf",
+            "arm64": "arm64",
+            "armhf": "arm",
             "ppc64el": "ppc",
-            "s390x": "s390x",
+            "s390x": "s390",
         }[self.arch]
 
     @property

@@ -61,6 +61,12 @@ DUMMY_HOOK_MAPPING = {
     "dummy_fexit": [],
     "dummy_kprobe": [],
     "dummy_kretprobe": [],
+    # Used by readahead
+    # https://github.com/iovisor/bcc/blob/1d8daaa395f066b328a56a36fbd40a0de3a7b3c1/libbpf-tools/readahead.c#L79
+    "do_page_cache_ra": [
+        "do_page_cache_ra",
+        "__do_page_cache_readahead",
+    ],
 }
 
 
