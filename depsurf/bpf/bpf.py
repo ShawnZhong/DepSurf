@@ -165,14 +165,3 @@ class BPFObject:
     @cached_property
     def deps(self) -> list[Dep]:
         return sorted(self.deps_hook + self.deps_struct)
-
-    # @property
-    # def deps_struct_field(self):
-    #     from .relo import BTFReloInfo, BTFExtSection, BTFStrtab, RawBTF
-
-    #     dump_btf_json(self.path, result_path=self.btf_json_file, overwrite=False)
-    #     return BTFReloInfo(
-    #         BTFExtSection.from_elf(self.elffile).relo_info,
-    #         BTFStrtab(self.elffile),
-    #         RawBTF.load(self.btf_json_file),
-    #     ).get_deps()
