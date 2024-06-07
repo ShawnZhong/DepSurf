@@ -17,7 +17,7 @@ def gen_min_btf(obj_file, result_path, debug=False):
     )
 
 
-DUMMY_HOOK_MAPPING = {
+HOOK_MAPPING = {
     # Used by fsdist and fsslower
     # Note that only ext4 is built in the kernel by default
     # Ref: https://github.com/iovisor/bcc/blob/fef9003e2e2f29c893543d49b762dd413a352f05/libbpf-tools/fsdist.c#L42-L81
@@ -121,8 +121,8 @@ class BPFObject:
                     assert kind == DepKind.SYSCALL
                     name = name[len(prefix) :]
 
-            if name in DUMMY_HOOK_MAPPING:
-                for dep_name in DUMMY_HOOK_MAPPING[name]:
+            if name in HOOK_MAPPING:
+                for dep_name in HOOK_MAPPING[name]:
                     results.append(Dep(kind, dep_name))
             else:
                 results.append(Dep(kind, name))
