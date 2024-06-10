@@ -13,7 +13,3 @@ BCC_PATH = PROJ_PATH / "csrc" / "bcc"
 assert BCC_PATH.exists(), f"{BCC_PATH} does not exist"
 
 BCC_OBJ_PATH = BCC_PATH / "libbpf-tools" / ".output"
-
-PAPER_PATH = PROJ_PATH / "paper"
-FIG_PATH = PAPER_PATH / "figs"
-TAB_PATH = PAPER_PATH / "tabs"

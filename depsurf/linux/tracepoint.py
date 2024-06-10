@@ -4,7 +4,7 @@ import logging
 from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
-from typing import Iterator
+from typing import Iterator, Optional
 
 from depsurf.btf import BTF
 from depsurf.utils import check_result_path
@@ -58,7 +58,7 @@ class TracepointsExtractor:
                 continue
             yield event_ptr
 
-    def get_tracepoint(self, ptr: int) -> TracepointInfo:
+    def get_tracepoint(self, ptr: int) -> Optional[TracepointInfo]:
         # Ref: https://github.com/torvalds/linux/blob/2425bcb9240f8c97d793cb31c8e8d8d0a843fa29/include/linux/trace_events.h#L272
         event = StructInstance(self.btf, self.filebytes, "trace_event_call", ptr)
         class_name = self.class_names[event["class"]]
@@ -72,16 +72,17 @@ class TracepointsExtractor:
         if not (flags & self.FLAG_TRACEPOINT):
             # Ref: https://github.com/torvalds/linux/blob/6fbf71854e2ddea7c99397772fbbb3783bfe15b5/include/linux/syscalls.h#L144
             event_name = self.filebytes.get_cstr(event["name"])
-            return TracepointInfo(
-                flags=flags,
-                class_name=class_name,
-                event_name=event_name,
-                func_name=None,
-                struct_name=None,
-                func=None,
-                struct=None,
-                fmt_str=None,
-            )
+            return
+            # TracepointInfo(
+            #     flags=flags,
+            #     class_name=class_name,
+            #     event_name=event_name,
+            #     func_name=None,
+            #     struct_name=None,
+            #     func=None,
+            #     struct=None,
+            #     fmt_str=None,
+            # )
 
         func_name = f"trace_event_raw_event_{class_name}"
         struct_name = f"trace_event_raw_{class_name}"

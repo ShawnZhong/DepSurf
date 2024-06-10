@@ -12,7 +12,8 @@ from depsurf.diff import (
     diff_struct,
     diff_struct_field,
     diff_tracepoint,
-    diff_syscall,
+    diff_nop,
+    diff_config,
 )
 from depsurf.utils import OrderedEnum
 from depsurf.funcs import CollisionType, FuncGroup, InlineType
@@ -23,7 +24,7 @@ class DepKind(OrderedEnum, StrEnum):
     STRUCT = "Struct"
     FIELD = "Field"
     TRACEPOINT = "Tracepoint"
-    LSM = "LSM"
+    LSM = "LSM Hook"
     SYSCALL = "Syscall"
 
     UNION = "Union"
@@ -32,6 +33,8 @@ class DepKind(OrderedEnum, StrEnum):
     UPROBE = "uprobe"
     USDT = "USDT"
     PERF_EVENT = "Perf Event"
+
+    CONFIG = "Config"
 
     @staticmethod
     def from_hook_name(name: str):
@@ -64,7 +67,8 @@ class DepKind(OrderedEnum, StrEnum):
             DepKind.LSM: diff_func,
             DepKind.UNION: diff_struct,
             DepKind.ENUM: diff_enum,
-            DepKind.SYSCALL: diff_syscall,
+            DepKind.SYSCALL: diff_nop,
+            DepKind.CONFIG: diff_config,
         }[self]
 
     def __call__(self, name):

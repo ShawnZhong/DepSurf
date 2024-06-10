@@ -1,9 +1,10 @@
 import logging
 from enum import StrEnum
-from typing import TYPE_CHECKING, Callable, Dict, Iterator, List
+from typing import TYPE_CHECKING, Callable, Dict, Iterator, List, Tuple
 
-from depsurf.images import ImagePair
+from depsurf.image_pair import ImagePair
 from depsurf.version import DEB_PATH, Version
+from depsurf.dep import DepKind
 
 if TYPE_CHECKING:
     import pandas as pd
@@ -32,13 +33,18 @@ VERSIONS_ARCH = [
     for v in VERSIONS_ALL
     if v.arch != VERSION_DEFAULT.arch and v.version == VERSION_DEFAULT.version
 ]
-VERSIONS_FLAVOR = [
-    v
-    for v in VERSIONS_ALL
-    if v.flavor != VERSION_DEFAULT.flavor and v.version == VERSION_DEFAULT.version
-]
+VERSIONS_FLAVOR = sorted(
+    [
+        v
+        for v in VERSIONS_ALL
+        if v.flavor != VERSION_DEFAULT.flavor and v.version == VERSION_DEFAULT.version
+    ],
+    key=lambda x: x.flavor_index,
+)
 VERSION_FIRST = VERSIONS_ALL[0]
 VERSION_LAST = VERSIONS_ALL[-1]
+
+DiffResult = Dict[Tuple["Versions", ImagePair], Dict[Tuple[DepKind, str], int]]
 
 
 class Versions(StrEnum):
@@ -77,28 +83,10 @@ class Versions(StrEnum):
     def num_versions(self) -> int:
         return len(self.versions)
 
-    def __iter__(self) -> Iterator[Version]:
-        return iter(self.versions)
-
-    def __len__(self) -> int:
-        return len(self.versions)
-
-    def __getitem__(self, key) -> Version:
-        return self.versions[key]
-
-    def __repr__(self):
-        return f"Versions({self.name})"
-
-    def __add__(self, other) -> List[Version]:
-        return self.versions + other.versions
-
-    def __radd__(self, other) -> List[Version]:
-        return other + self.versions
-
     def pair_to_str(self, p: ImagePair, sep="→") -> str:
         return f"{self.version_to_str(p.v1)}{sep}{self.version_to_str(p.v2)}"
 
-    def version_to_str(self, v: Version, bold=False) -> str:
+    def version_to_str(self, v: Version) -> str:
         if self == Versions.ARCH:
             return v.arch_name
         if self == Versions.FLAVOR:
@@ -106,10 +94,6 @@ class Versions(StrEnum):
         if self == Versions.REV:
             return str(v.revision)
         if self in (Versions.REGULAR, Versions.LTS):
-            if bold and v.lts:
-                from depsurf.output import bold as bold_fn
-
-                return bold_fn(v.short_version)
             return v.short_version
         return str(v)
 
@@ -122,7 +106,7 @@ class Versions(StrEnum):
 
     @property
     def version_labels(self):
-        return [self.version_to_str(v, bold=True) for v in self]
+        return [self.version_to_str(v) for v in self]
 
     @property
     def pair_labels(self):
@@ -146,24 +130,34 @@ class Versions(StrEnum):
     def num_pairs(self) -> int:
         return len(self.pairs)
 
-    def diff_pairs(self, result_path=None) -> "pd.DataFrame":
-        import pandas as pd
-
+    def diff_pairs(self, kinds: List[DepKind], result_path=None) -> DiffResult:
         logging.info(f"Diffing {self}")
 
-        results = {}
+        results: DiffResult = {}
         for pair in self.pairs:
             name = self.pair_to_str(pair, sep="_")
             path = result_path / name if result_path else None
-
-            name = self.pair_to_str(pair)
             logging.info(f"Comparing {name} to {path}")
-            results[(self, name)] = pair.diff(path)
+            results[(self, pair)] = pair.diff(result_path=path, kinds=kinds)
+        return results
 
-        df = pd.DataFrame(results, index=next(iter(results.values())))
-        if result_path:
-            df.to_string(result_path / "Summary.txt")
-        return df
+    def __iter__(self) -> Iterator[Version]:
+        return iter(self.versions)
+
+    def __len__(self) -> int:
+        return len(self.versions)
+
+    def __getitem__(self, key) -> Version:
+        return self.versions[key]
+
+    def __repr__(self):
+        return f"Versions({self.name})"
+
+    def __add__(self, other) -> List[Version]:
+        return self.versions + other.versions
+
+    def __radd__(self, other) -> List[Version]:
+        return other + self.versions
 
 
 class VersionGroups:

@@ -1,7 +1,7 @@
 import re
 from functools import cached_property
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Optional
 
 from elftools.elf.elffile import ELFFile
 
@@ -15,6 +15,7 @@ from depsurf.linux import (
     Syscalls,
     Tracepoints,
     TracepointsExtractor,
+    get_configs,
 )
 from depsurf.version import Version
 
@@ -66,8 +67,11 @@ class LinuxImage:
             return self.btf.enums
         elif kind == DepKind.SYSCALL:
             return self.syscalls.syscalls
+        elif kind == DepKind.CONFIG:
+            return self.configs
+        raise ValueError(f"Unknown DepKind: {kind}")
 
-    def get_dep(self, dep: Dep) -> Dict:
+    def get_dep(self, dep: Dep) -> Optional[Dict]:
         if dep.kind == DepKind.FIELD:
             struct_name, field_name = dep.name.split("::")
             struct = self.btf.structs.get(struct_name)
@@ -127,7 +131,7 @@ class LinuxImage:
 
     @property
     def tracepoints_extractor(self) -> TracepointsExtractor:
-        return TracepointsExtractor(self)
+        return TracepointsExtractor(self.btf, self.filebytes, self.symtab)
 
     @cached_property
     def lsm_hooks(self):
@@ -136,6 +140,10 @@ class LinuxImage:
             for e in self.btf.get_struct("security_hook_heads")["members"]
         }
         return {k: v for k, v in self.btf.funcs.items() if k in func_names}
+
+    @cached_property
+    def configs(self):
+        return get_configs(self.version.config_path)
 
     @property
     def gcc_version(self):

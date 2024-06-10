@@ -3,13 +3,14 @@ from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 
 from depsurf.dep import Dep, DepKind, DepDelta
-from depsurf.diff import BaseChange, compare_eq, diff_dict
+from depsurf.diff import BaseChange, diff_dict
 from depsurf.version import Version
 from depsurf.issues import IssueEnum
 
 
 @dataclass(frozen=True)
-class ImageDiffResult:
+class DiffKindResult:
+    kind: DepKind
     old_len: int
     new_len: int
     added: Dict[str, Dict]
@@ -20,8 +21,11 @@ class ImageDiffResult:
     def reasons(self) -> Dict[IssueEnum, int]:
         reasons = {change: 0 for change in IssueEnum}
         for changes in self.changed.values():
-            for change in changes:
-                reasons[change.enum] += 1
+            for change in set(change.enum for change in changes):
+                reasons[change] += 1
+            # for change in changes:
+            #     reasons[change.enum] += 1
+
         return reasons
 
     @property
@@ -65,15 +69,11 @@ class ImagePair:
     v1: Version
     v2: Version
 
-    def diff(self, result_path: Optional[Path] = None) -> Dict[Tuple, int]:
+    def diff(
+        self, kinds: List[DepKind], result_path: Optional[Path] = None
+    ) -> Dict[Tuple[DepKind, str], int]:
         results = {}
-        for kind in [
-            DepKind.FUNC,
-            DepKind.STRUCT,
-            DepKind.TRACEPOINT,
-            DepKind.LSM,
-            DepKind.SYSCALL,
-        ]:
+        for kind in kinds:
             result = self.diff_kind(kind)
             if result_path:
                 result.save_txt(result_path / f"{kind}.log")
@@ -88,18 +88,20 @@ class ImagePair:
             file.close()
         return results
 
-    def diff_kind(self, kind: DepKind) -> ImageDiffResult:
+    def diff_kind(self, kind: DepKind) -> DiffKindResult:
         dict1 = self.v1.img.get_all_by_kind(kind)
         dict2 = self.v2.img.get_all_by_kind(kind)
         added, removed, common = diff_dict(dict1, dict2)
 
-        changed: Dict[str, List[BaseChange]] = {
-            name: kind.differ(old, new, assert_diff=False)  # TODO: assert_diff
-            for name, (old, new) in common.items()
-            if not compare_eq(old, new)
-        }
+        changed: Dict[str, List[BaseChange]] = {}
 
-        return ImageDiffResult(
+        for name, (old, new) in common.items():
+            changes = kind.differ(old, new)
+            if changes:
+                changed[name] = changes
+
+        return DiffKindResult(
+            kind=kind,
             old_len=len(dict1),
             new_len=len(dict2),
             added=added,

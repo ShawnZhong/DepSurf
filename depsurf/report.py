@@ -4,7 +4,7 @@ from typing import List, Dict, Tuple, Union
 from dataclasses import dataclass
 
 from depsurf.dep import DepStatus, Dep, DepKind, DepDelta
-from depsurf.images import ImagePair
+from depsurf.image_pair import ImagePair
 from depsurf.version import Version
 from depsurf.versions import Versions
 from depsurf.issues import IssueEnum

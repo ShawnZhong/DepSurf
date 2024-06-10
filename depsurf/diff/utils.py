@@ -19,10 +19,11 @@ def compare_eq(t1, t2):
     if t1 == t2:
         return True
 
-    if "name" in t1:
-        t1 = t1.copy()
-        del t1["name"]
-    if "name" in t2:
-        t2 = t2.copy()
-        del t2["name"]
+    if isinstance(t1, dict) and isinstance(t2, dict):
+        if "name" in t1:
+            t1 = t1.copy()
+            del t1["name"]
+        if "name" in t2:
+            t2 = t2.copy()
+            del t2["name"]
     return t1 == t2

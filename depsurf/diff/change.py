@@ -6,7 +6,7 @@ class BaseChange:
         cls.enum = enum
 
     def format(self):
-        raise NotImplementedError
+        return str(self.enum)
 
     def __str__(self):
         return f"{self.enum:24}{self.format()}"

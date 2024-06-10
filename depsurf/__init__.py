@@ -6,7 +6,7 @@ from .dep import *
 from .diff import *
 from .funcs import *
 from .image import *
-from .images import *
+from .image_pair import *
 from .linux import *
 from .paths import *
 from .prep import *

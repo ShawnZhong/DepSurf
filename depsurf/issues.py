@@ -46,7 +46,7 @@ class IssueEnum(StrEnum):
     STRUCT_CHANGE = "Struct changed"
     FIELD_ADD = "Field added"
     FIELD_REMOVE = "Field removed"
-    FIELD_TYPE = "Field changed"
+    FIELD_TYPE = "Field type changed"
 
     # Enum changes
     ENUM_ADD = "Enum added"
@@ -55,6 +55,13 @@ class IssueEnum(StrEnum):
     VAL_ADD = "Value added"
     VAL_REMOVE = "Value removed"
     VAL_CHANGE = "Value changed"
+
+    # Tracepoint changes
+    TRACE_EVENT_CHANGE = "Event changed"
+    TRACE_FUNC_CHANGE = "Func changed"
+
+    # Config changes
+    CONFIG_CHANGE = "Config changed"
 
     @property
     def consequence(self):

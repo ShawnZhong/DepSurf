@@ -11,13 +11,30 @@ if TYPE_CHECKING:
 
 DEB_PATH = DATA_PATH / "ddeb"
 
+FLAVOR_NAMES = {
+    "generic": "Generic",
+    "lowlatency": "Lat",
+    "aws": "AWS",
+    "azure": "Azure",
+    "gcp": "GCP",
+    "oracle": "Oracle",
+}
+
+ARCH_NAMES = {
+    "amd64": "x86",
+    "arm64": "arm64",
+    "armhf": "arm32",
+    "ppc64el": "ppc",
+    "s390x": "s390",
+}
+
 
 @dataclass(order=True, frozen=True)
 class Version:
     version_tuple: tuple[int, int, int]
-    revision: int
     flavor: str
     arch: str
+    revision: int
 
     @classmethod
     def from_path(cls, path: Path | str):
@@ -71,24 +88,15 @@ class Version:
 
     @property
     def flavor_name(self):
-        return {
-            "generic": "Generic",
-            "lowlatency": "Lat",
-            "aws": "AWS",
-            "azure": "Azure",
-            "gcp": "GCP",
-            "oracle": "Oracle",
-        }[self.flavor]
+        return FLAVOR_NAMES[self.flavor]
+
+    @property
+    def flavor_index(self):
+        return list(FLAVOR_NAMES.keys()).index(self.flavor)
 
     @property
     def arch_name(self):
-        return {
-            "amd64": "x86",
-            "arm64": "arm64",
-            "armhf": "arm",
-            "ppc64el": "ppc",
-            "s390x": "s390",
-        }[self.arch]
+        return ARCH_NAMES[self.arch]
 
     @property
     def lts(self):
