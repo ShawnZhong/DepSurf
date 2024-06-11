@@ -84,10 +84,10 @@ class DepReport:
             logging.warning(f"Dependency {self.dep} does not exist in any version")
 
     def print_delta(self, file=None):
-        for (versions, v), d in self.delta.items():
+        for (group, p), d in self.delta.items():
             if not d:
                 continue
-            print("\t" + versions.pair_to_str(v), end="", file=file)
+            print(f"\t{group.to_str(p.v1)}->{group.to_str(p.v2)}", end="", file=file)
             d.print(file=file, nindent=1)
 
 

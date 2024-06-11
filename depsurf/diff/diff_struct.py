@@ -72,9 +72,10 @@ def diff_struct(old, new) -> List[BaseChange]:
                 FieldType(name=name, old=old_value["type"], new=new_value["type"])
             )
 
-    old_offset = {name: old_members[name]["bits_offset"] for name in old_members}
-    new_offset = {name: new_members[name]["bits_offset"] for name in new_members}
-    if old_offset != new_offset or old["size"] != new["size"]:
+    def offsets(members):
+        return [(name, member["bits_offset"]) for name, member in members.items()]
+
+    if offsets(old_members) != offsets(new_members) or old["size"] != new["size"]:
         changes.append(StructLayoutChange())
 
     return changes

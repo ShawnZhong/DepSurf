@@ -32,9 +32,9 @@ class DiffKindResult:
     @property
     def summary(self) -> Dict[IssueEnum, int]:
         return {
+            **self.reasons,
             IssueEnum.OLD: self.old_len,
             IssueEnum.NEW: self.new_len,
-            **self.reasons,
             IssueEnum.ADD: len(self.added),
             IssueEnum.REMOVE: len(self.removed),
             IssueEnum.CHANGE: len(self.changed),

@@ -83,9 +83,6 @@ class VersionGroup(StrEnum):
     def num_versions(self) -> int:
         return len(self.versions)
 
-    def pair_to_str(self, p: VersionPair, sep="→") -> str:
-        return f"{self.version_to_str(p.v1)}{sep}{self.version_to_str(p.v2)}"
-
     def version_to_str(self, v: Version) -> str:
         if self == VersionGroup.ARCH:
             return v.arch_name
@@ -98,19 +95,11 @@ class VersionGroup(StrEnum):
         return str(v)
 
     def to_str(self, x) -> str:
-        if isinstance(x, Version):
-            return self.version_to_str(x)
-        if isinstance(x, VersionPair):
-            return self.pair_to_str(x)
-        return str(x)
+        return self.version_to_str(x)
 
     @property
     def version_labels(self):
         return [self.version_to_str(v) for v in self]
-
-    @property
-    def pair_labels(self):
-        return [self.pair_to_str(p) for p in self.pairs]
 
     @property
     def pairs(self) -> List[VersionPair]:
@@ -135,7 +124,7 @@ class VersionGroup(StrEnum):
 
         results: DiffResult = {}
         for pair in self.pairs:
-            name = self.pair_to_str(pair, sep="_")
+            name = f"{self.to_str(pair.v1)}_{self.to_str(pair.v2)}"
             path = result_path / name if result_path else None
             logging.info(f"Comparing {name} to {path}")
             results[(self, pair)] = pair.diff(result_path=path, kinds=kinds)
