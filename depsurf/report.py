@@ -1,13 +1,12 @@
 import logging
-from typing import List, Dict, Tuple, Union
-
 from dataclasses import dataclass
+from typing import Dict, List, Tuple
 
-from depsurf.dep import DepStatus, Dep, DepKind, DepDelta
-from depsurf.version_pair import VersionPair
+from depsurf.dep import Dep, DepDelta, DepKind, DepStatus
+from depsurf.issues import IssueEnum
 from depsurf.version import Version
 from depsurf.version_group import VersionGroup
-from depsurf.issues import IssueEnum
+from depsurf.version_pair import VersionPair
 
 REPORT_KINDS = [
     DepKind.FUNC,
