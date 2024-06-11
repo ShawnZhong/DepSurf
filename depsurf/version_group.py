@@ -1,13 +1,10 @@
 import logging
 from enum import StrEnum
-from typing import TYPE_CHECKING, Callable, Dict, Iterator, List, Tuple
+from typing import TYPE_CHECKING, Dict, Iterator, List, Tuple
 
 from depsurf.version_pair import VersionPair
 from depsurf.version import DEB_PATH, Version
 from depsurf.dep import DepKind
-
-if TYPE_CHECKING:
-    import pandas as pd
 
 
 VERSIONS_ALL = sorted(Version.from_path(p) for p in DEB_PATH.iterdir())
@@ -158,22 +155,3 @@ class VersionGroup(StrEnum):
 
     def __radd__(self, other) -> List[Version]:
         return other + self.versions
-
-
-class VersionGroups:
-    def __init__(self, *groups: VersionGroup):
-        self.groups = groups
-
-    def apply(self, fn: Callable[[Version], Dict]) -> "pd.DataFrame":
-        import pandas as pd
-
-        results = {}
-        for group in self.groups:
-            for v in group.versions:
-                results[(group, v)] = fn(v)
-
-        df = pd.DataFrame(results).T
-        return df
-
-    def __repr__(self):
-        return f"VersionGroups({self.groups})"
