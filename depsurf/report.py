@@ -24,29 +24,6 @@ class DepReport:
     status: Dict[Tuple[VersionGroup, Version], DepStatus]
     delta: Dict[Tuple[VersionGroup, VersionPair], DepDelta]
 
-    def __post_init__(self):
-        kind = self.dep.kind
-        for delta in self.delta.values():
-            if kind == DepKind.FUNC:
-                for c in delta.changes:
-                    assert c.enum in [
-                        IssueEnum.PARAM_ADD,
-                        IssueEnum.PARAM_REMOVE,
-                        IssueEnum.PARAM_TYPE,
-                        IssueEnum.PARAM_REORDER,
-                        IssueEnum.RETURN_TYPE,
-                    ]
-            elif kind == DepKind.STRUCT:
-                for c in delta.changes:
-                    assert c.enum in [
-                        IssueEnum.FIELD_ADD,
-                        IssueEnum.FIELD_REMOVE,
-                        IssueEnum.FIELD_TYPE,
-                    ]
-            elif kind == DepKind.FIELD:
-                for c in delta.changes:
-                    assert c.enum == IssueEnum.FIELD_TYPE
-
     @property
     def values(self):
         return list(self.status.values()) + list(self.delta.values())

@@ -13,6 +13,10 @@ def remove_double_rules(latex: str):
     return latex.replace("\\midrule\n\\bottomrule", "\\bottomrule")
 
 
+def rotate(text: str, origin="r"):
+    return f"\\rotatebox[origin={origin}]{{90}}{{{text}}}"
+
+
 def rotate_multirow(latex: str):
     return re.sub(
         r"\\multirow\[t\]{(\d+)}{\*}{(.*?)}",
