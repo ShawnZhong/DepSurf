@@ -30,10 +30,10 @@ class DiffKindResult:
         return reasons
 
     @property
-    def summary(self) -> Dict[str, int]:
+    def summary(self) -> Dict[IssueEnum, int]:
         return {
-            "Old": self.old_len,
-            "New": self.new_len,
+            IssueEnum.OLD: self.old_len,
+            IssueEnum.NEW: self.new_len,
             **self.reasons,
             IssueEnum.ADD: len(self.added),
             IssueEnum.REMOVE: len(self.removed),
@@ -72,7 +72,7 @@ class VersionPair:
 
     def diff(
         self, kinds: List[DepKind], result_path: Optional[Path] = None
-    ) -> Dict[Tuple[DepKind, str], int]:
+    ) -> Dict[Tuple[DepKind, IssueEnum], int]:
         results = {}
         for kind in kinds:
             result = self.diff_kind(kind)

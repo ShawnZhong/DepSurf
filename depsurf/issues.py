@@ -12,6 +12,10 @@ class Consequence(StrEnum):
 
 
 class IssueEnum(StrEnum):
+    # Not really an issue, defined for convenience
+    OLD = "Old"
+    NEW = "New"
+
     # Generic status
     OK = "OK"
     ABSENT = "Absent"

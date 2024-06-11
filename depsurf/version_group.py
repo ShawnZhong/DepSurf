@@ -1,10 +1,11 @@
 import logging
 from enum import StrEnum
-from typing import TYPE_CHECKING, Dict, Iterator, List, Tuple
+from typing import Dict, Iterator, List, Tuple
 
 from depsurf.version_pair import VersionPair
 from depsurf.version import DEB_PATH, Version
 from depsurf.dep import DepKind
+from depsurf.issues import IssueEnum
 
 
 VERSIONS_ALL = sorted(Version.from_path(p) for p in DEB_PATH.iterdir())
@@ -41,7 +42,9 @@ VERSIONS_FLAVOR = sorted(
 VERSION_FIRST = VERSIONS_ALL[0]
 VERSION_LAST = VERSIONS_ALL[-1]
 
-DiffResult = Dict[Tuple["VersionGroup", VersionPair], Dict[Tuple[DepKind, str], int]]
+DiffResult = Dict[
+    Tuple["VersionGroup", VersionPair], Dict[Tuple[DepKind, IssueEnum], int]
+]
 
 
 class VersionGroup(StrEnum):
