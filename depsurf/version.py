@@ -4,11 +4,12 @@ from functools import cached_property
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-from depsurf.paths import DATA_PATH
 
 if TYPE_CHECKING:
     from .image import LinuxImage
 
+PROJ_PATH = Path(__file__).parent.parent
+DATA_PATH = PROJ_PATH / "data"
 DEB_PATH = DATA_PATH / "ddeb"
 
 FLAVOR_NAMES = {

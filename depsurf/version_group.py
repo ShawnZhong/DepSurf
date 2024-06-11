@@ -2,7 +2,7 @@ import logging
 from enum import StrEnum
 from typing import TYPE_CHECKING, Callable, Dict, Iterator, List, Tuple
 
-from depsurf.image_pair import ImagePair
+from depsurf.version_pair import VersionPair
 from depsurf.version import DEB_PATH, Version
 from depsurf.dep import DepKind
 
@@ -44,10 +44,10 @@ VERSIONS_FLAVOR = sorted(
 VERSION_FIRST = VERSIONS_ALL[0]
 VERSION_LAST = VERSIONS_ALL[-1]
 
-DiffResult = Dict[Tuple["Versions", ImagePair], Dict[Tuple[DepKind, str], int]]
+DiffResult = Dict[Tuple["VersionGroup", VersionPair], Dict[Tuple[DepKind, str], int]]
 
 
-class Versions(StrEnum):
+class VersionGroup(StrEnum):
     ALL = "All"
     LTS = "LTS"
     REGULAR = "Regular"
@@ -67,40 +67,40 @@ class Versions(StrEnum):
     @property
     def versions(self) -> List[Version]:
         return {
-            Versions.ALL: VERSIONS_ALL,
-            Versions.LTS: VERSIONS_LTS,
-            Versions.REGULAR: VERSIONS_REGULAR,
-            Versions.REV: VERSIONS_REV,
-            Versions.ARCH: VERSIONS_ARCH,
-            Versions.FLAVOR: VERSIONS_FLAVOR,
-            Versions.TEST: [VERSIONS_LTS[0], VERSIONS_LTS[1]],
-            Versions.FIRST: [VERSION_FIRST],
-            Versions.LAST: [VERSION_LAST],
-            Versions.DEFAULT: [VERSION_DEFAULT],
+            VersionGroup.ALL: VERSIONS_ALL,
+            VersionGroup.LTS: VERSIONS_LTS,
+            VersionGroup.REGULAR: VERSIONS_REGULAR,
+            VersionGroup.REV: VERSIONS_REV,
+            VersionGroup.ARCH: VERSIONS_ARCH,
+            VersionGroup.FLAVOR: VERSIONS_FLAVOR,
+            VersionGroup.TEST: [VERSIONS_LTS[0], VERSIONS_LTS[1]],
+            VersionGroup.FIRST: [VERSION_FIRST],
+            VersionGroup.LAST: [VERSION_LAST],
+            VersionGroup.DEFAULT: [VERSION_DEFAULT],
         }[self]
 
     @property
     def num_versions(self) -> int:
         return len(self.versions)
 
-    def pair_to_str(self, p: ImagePair, sep="→") -> str:
+    def pair_to_str(self, p: VersionPair, sep="→") -> str:
         return f"{self.version_to_str(p.v1)}{sep}{self.version_to_str(p.v2)}"
 
     def version_to_str(self, v: Version) -> str:
-        if self == Versions.ARCH:
+        if self == VersionGroup.ARCH:
             return v.arch_name
-        if self == Versions.FLAVOR:
+        if self == VersionGroup.FLAVOR:
             return v.flavor_name
-        if self == Versions.REV:
+        if self == VersionGroup.REV:
             return str(v.revision)
-        if self in (Versions.REGULAR, Versions.LTS):
+        if self in (VersionGroup.REGULAR, VersionGroup.LTS):
             return v.short_version
         return str(v)
 
     def to_str(self, x) -> str:
         if isinstance(x, Version):
             return self.version_to_str(x)
-        if isinstance(x, ImagePair):
+        if isinstance(x, VersionPair):
             return self.pair_to_str(x)
         return str(x)
 
@@ -113,18 +113,18 @@ class Versions(StrEnum):
         return [self.pair_to_str(p) for p in self.pairs]
 
     @property
-    def pairs(self) -> List[ImagePair]:
-        if self in (Versions.REGULAR, Versions.LTS, Versions.REV):
-            return [ImagePair(*p) for p in zip(self.versions, self.versions[1:])]
+    def pairs(self) -> List[VersionPair]:
+        if self in (VersionGroup.REGULAR, VersionGroup.LTS, VersionGroup.REV):
+            return [VersionPair(*p) for p in zip(self.versions, self.versions[1:])]
 
         if len(self) == 1:
             return []
 
         if len(self) == 2:
-            return [ImagePair(self[0], self[1])]
+            return [VersionPair(self[0], self[1])]
 
         assert VERSION_DEFAULT not in self.versions
-        return [ImagePair(VERSION_DEFAULT, v) for v in self.versions]
+        return [VersionPair(VERSION_DEFAULT, v) for v in self.versions]
 
     @property
     def num_pairs(self) -> int:
@@ -161,7 +161,7 @@ class Versions(StrEnum):
 
 
 class VersionGroups:
-    def __init__(self, *groups: Versions):
+    def __init__(self, *groups: VersionGroup):
         self.groups = groups
 
     def apply(self, fn: Callable[[Version], Dict]) -> "pd.DataFrame":

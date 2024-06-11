@@ -4,9 +4,9 @@ from typing import List, Dict, Tuple, Union
 from dataclasses import dataclass
 
 from depsurf.dep import DepStatus, Dep, DepKind, DepDelta
-from depsurf.image_pair import ImagePair
+from depsurf.version_pair import VersionPair
 from depsurf.version import Version
-from depsurf.versions import Versions
+from depsurf.version_group import VersionGroup
 from depsurf.issues import IssueEnum
 
 REPORT_KINDS = [
@@ -22,8 +22,8 @@ REPORT_KINDS = [
 @dataclass(frozen=True)
 class DepReport:
     dep: Dep
-    status: Dict[Tuple[Versions, Version], DepStatus]
-    delta: Dict[Tuple[Versions, ImagePair], DepDelta]
+    status: Dict[Tuple[VersionGroup, Version], DepStatus]
+    delta: Dict[Tuple[VersionGroup, VersionPair], DepDelta]
 
     def __post_init__(self):
         kind = self.dep.kind
@@ -93,11 +93,11 @@ class DepReport:
 
 
 def gen_report(
-    deps: List[Dep], version_groups: List[Versions], file=None
+    deps: List[Dep], version_groups: List[VersionGroup], file=None
 ) -> Dict[Dep, DepReport]:
     if isinstance(deps, Dep):
         deps = [deps]
-    if isinstance(version_groups, Versions):
+    if isinstance(version_groups, VersionGroup):
         version_groups = [version_groups]
 
     result = {}

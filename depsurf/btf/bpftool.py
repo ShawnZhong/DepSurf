@@ -1,8 +1,10 @@
 from pathlib import Path
 from functools import partial
 
-from depsurf.paths import PROJ_PATH
 from depsurf.utils import system, check_result_path
+
+
+PROJ_PATH = Path(__file__).parent.parent.parent
 
 
 def get_linux_tools_path():

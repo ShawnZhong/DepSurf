@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
+import logging
 
 from depsurf.dep import Dep, DepKind, DepDelta
 from depsurf.diff import BaseChange, diff_dict
@@ -65,7 +66,7 @@ class DiffKindResult:
 
 
 @dataclass(frozen=True, order=True)
-class ImagePair:
+class VersionPair:
     v1: Version
     v2: Version
 
@@ -96,7 +97,19 @@ class ImagePair:
         changed: Dict[str, List[BaseChange]] = {}
 
         for name, (old, new) in common.items():
+            if old == new:
+                continue
+
             changes = kind.differ(old, new)
+            if len(changes) == 0:
+                if kind == DepKind.TRACEPOINT:
+                    continue
+                logging.error(f"Diff found but no changes: {name}")
+                logging.error(f"Old: {old}")
+                logging.error(f"New: {new}")
+                continue
+
+            changes = [c for c in changes if c.enum != IssueEnum.STRUCT_LAYOUT]
             if changes:
                 changed[name] = changes
 

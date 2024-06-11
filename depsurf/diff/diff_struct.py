@@ -4,8 +4,12 @@ from typing import List
 from depsurf.btf import Kind, get_btf_type_str
 from depsurf.issues import IssueEnum
 
-from .change import BaseChange
-from .utils import diff_dict
+from .common import BaseChange, diff_dict
+
+
+@dataclass
+class StructLayoutChange(BaseChange, enum=IssueEnum.STRUCT_LAYOUT):
+    pass
 
 
 @dataclass
@@ -36,20 +40,16 @@ class FieldType(BaseChange, enum=IssueEnum.FIELD_TYPE):
         return f"{get_btf_type_str(self.old)} {self.name} -> {get_btf_type_str(self.new)} {self.name}"
 
 
-def diff_struct_field(old, new, assert_diff=False) -> List[BaseChange]:
+def diff_struct_field(old, new) -> List[BaseChange]:
     assert old["name"] == new["name"]
-    name = old["name"]
 
     if old["type"] != new["type"]:
-        return [FieldType(name=name, old=old["type"], new=new["type"])]
-
-    if assert_diff:
-        assert False, f"\n{old}\n{new}"
+        return [FieldType(name=old["name"], old=old["type"], new=new["type"])]
 
     return []
 
 
-def diff_struct(old, new, assert_diff=False) -> List[BaseChange]:
+def diff_struct(old, new) -> List[BaseChange]:
     assert old["kind"] == new["kind"]
     assert old["kind"] in (Kind.STRUCT, Kind.UNION), f"{old['kind']}"
 
@@ -72,13 +72,9 @@ def diff_struct(old, new, assert_diff=False) -> List[BaseChange]:
                 FieldType(name=name, old=old_value["type"], new=new_value["type"])
             )
 
-    # fields changed offset
-    offset_changed = False
     old_offset = {name: old_members[name]["bits_offset"] for name in old_members}
     new_offset = {name: new_members[name]["bits_offset"] for name in new_members}
     if old_offset != new_offset or old["size"] != new["size"]:
-        offset_changed = True
+        changes.append(StructLayoutChange())
 
-    if assert_diff:
-        assert changes or offset_changed, f"\n{old}\n{new}"
     return changes

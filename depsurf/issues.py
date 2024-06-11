@@ -44,6 +44,7 @@ class IssueEnum(StrEnum):
     STRUCT_ADD = "Struct added"
     STRUCT_REMOVE = "Struct removed"
     STRUCT_CHANGE = "Struct changed"
+    STRUCT_LAYOUT = "Struct layout changed"
     FIELD_ADD = "Field added"
     FIELD_REMOVE = "Field removed"
     FIELD_TYPE = "Field type changed"
@@ -58,6 +59,7 @@ class IssueEnum(StrEnum):
 
     # Tracepoint changes
     TRACE_EVENT_CHANGE = "Event changed"
+    TRACE_FMT_CHANGE = "Format changed"
     TRACE_FUNC_CHANGE = "Func changed"
 
     # Config changes

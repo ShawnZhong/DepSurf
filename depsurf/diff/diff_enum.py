@@ -4,8 +4,7 @@ from typing import List
 from depsurf.btf import Kind
 from depsurf.issues import IssueEnum
 
-from .change import BaseChange
-from .utils import diff_dict
+from .common import BaseChange, diff_dict
 
 
 @dataclass
@@ -36,7 +35,7 @@ class EnumValChange(BaseChange, enum=IssueEnum.VAL_CHANGE):
         return f"{self.name} = {self.old_val} -> {self.new_val}"
 
 
-def diff_enum(old, new, assert_diff=False) -> List[BaseChange]:
+def diff_enum(old, new) -> List[BaseChange]:
     assert old["kind"] == Kind.ENUM
     assert new["kind"] == Kind.ENUM
 
@@ -61,6 +60,4 @@ def diff_enum(old, new, assert_diff=False) -> List[BaseChange]:
     for name, old_val, new_val in changed_values:
         result.append(EnumValChange(name=name, old_val=old_val, new_val=new_val))
 
-    if assert_diff:
-        assert result, f"\n{old}\n{new}"
     return result

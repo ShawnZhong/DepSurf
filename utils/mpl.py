@@ -1,23 +1,11 @@
 import logging
-import pickle
-import re
-from pathlib import Path
-from typing import Optional
 
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib import transforms
 
-from depsurf.paths import OUTPUT_PATH, PROJ_PATH
-
-FIG_PATH = PROJ_PATH / "paper" / "figs"
-TAB_PATH = PROJ_PATH / "paper" / "tabs"
-
-
-#
-# Matplotlib
-#
+from .paths import FIG_PATH
 
 
 def setup_matplotlib():
@@ -58,7 +46,7 @@ def get_legend_handles_labels(arg):
     return handles, labels
 
 
-def plot_yticks(ax: plt.Axes):
+def format_yticks(ax: plt.Axes):
     locator = plt.MaxNLocator(nbins="auto", steps=[1, 2, 4, 5, 10])
     ax.yaxis.set_major_locator(locator)
     yticks = ax.get_yticks()
@@ -106,102 +94,3 @@ def plot_bar(ax: plt.Axes, df: pd.DataFrame, columns=None):
         bottom += df[col]
 
     return bottom
-
-
-#
-# Pandas
-#
-
-
-def setup_pandas():
-    # https://pandas.pydata.org/docs/reference/api/pandas.set_option.html
-    pd.set_option("display.min_rows", 500)
-    pd.set_option("display.max_rows", 500)
-    pd.set_option("display.max_columns", 100)
-    pd.set_option("display.width", 1000)
-    pd.set_option("display.max_colwidth", 1000)
-
-
-setup_pandas()
-
-
-def save_df_txt(df: pd.DataFrame, path: Path):
-    path.parent.mkdir(parents=True, exist_ok=True)
-
-    df.to_string(path)
-    logging.info(f"Saved dataframe to {path}")
-
-    return df
-
-
-def save_df_pkl(df: pd.DataFrame, path: Path):
-    path.parent.mkdir(parents=True, exist_ok=True)
-
-    df.to_pickle(path)
-    logging.info(f"Saved dataframe to {path}")
-
-    return df
-
-
-def save_df(
-    df: pd.DataFrame, name: str, path: Path = OUTPUT_PATH, return_df=True
-) -> Optional[pd.DataFrame]:
-    save_df_txt(df, path=path / f"{name}.txt")
-    save_df_pkl(df, path=path / f"{name}.pkl")
-    if return_df:
-        return df
-
-
-def load_df(name, path=None) -> pd.DataFrame:
-    if path is None:
-        path = OUTPUT_PATH
-
-    filepath = path / f"{name}.pkl"
-    df = pd.read_pickle(filepath)
-    logging.info(f"Loaded df from {filepath}")
-
-    return df
-
-
-def dump_pkl(obj, name: str, path: Path = OUTPUT_PATH):
-    path.mkdir(parents=True, exist_ok=True)
-    filepath = path / f"{name}.pkl"
-    with open(filepath, "wb") as f:
-        pickle.dump(obj, f)
-    logging.info(f"Saved {name} to {filepath}")
-
-
-def load_pkl(name: str, path: Path = OUTPUT_PATH):
-    filepath = path / f"{name}.pkl"
-    logging.info(f"Loding {name} from {filepath}")
-    with open(filepath, "rb") as f:
-        return pickle.load(f)
-
-
-#
-# LaTeX
-#
-
-
-def save_latex(text: str, name: str, path: Path = TAB_PATH):
-    text = text.replace("\\midrule\n\\bottomrule", "\\bottomrule")
-    path.mkdir(parents=True, exist_ok=True)
-    filepath = path / f"{name}.tex"
-    with open(filepath, "w") as f:
-        f.write(text)
-    logging.info(f"Saved {name} to {filepath}")
-
-
-def rotate_multirow(text: str):
-    return re.sub(
-        r"\\multirow\[t\]{(\d+)}{\*}{(.*?)}",
-        r"\\multirow{\1}{*}{\\rotatebox[origin=c]{90}{\2}}",
-        text,
-    )
-
-
-def replace_cline(text: str):
-    return re.sub(r"\\cline{.*?}", r"\\midrule", text)
-
-
-GRAY_DASH = r"\color{lightgray}{-}"

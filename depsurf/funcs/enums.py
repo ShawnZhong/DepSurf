@@ -1,4 +1,5 @@
 from enum import StrEnum
+from depsurf.utils import OrderedEnum
 
 
 class CollisionType(StrEnum):
@@ -9,25 +10,17 @@ class CollisionType(StrEnum):
     STATIC_GLOBAL = "Static-Global Collision"
 
 
-class InlineType(StrEnum):
-    FULL = "Fully inlined"
+class InlineType(OrderedEnum, StrEnum):
     NOT = "Not inlined"
+    FULL = "Fully inlined"
     PARTIAL = "Partially inlined"
-
-    @property
-    def color(self):
-        return {
-            InlineType.FULL: "tab:blue",
-            InlineType.NOT: "tab:green",
-            InlineType.PARTIAL: "tab:red",
-        }[self]
 
 
 class RenameType(StrEnum):
-    ISRA = "ISRA"
-    CONSTPROP = "Const Propagation"
-    PART = "Part"
-    COLD = "Cold"
+    ISRA = "isra"
+    CONSTPROP = "constprop"
+    PART = "part"
+    COLD = "cold"
     MULTIPLE = "≥2"
 
     @classmethod
@@ -40,13 +33,3 @@ class RenameType(StrEnum):
             "part": cls.PART,
             "cold": cls.COLD,
         }[suffix]
-
-    @property
-    def color(self):
-        return {
-            RenameType.ISRA: "C0",
-            RenameType.PART: "C1",
-            RenameType.COLD: "C2",
-            RenameType.CONSTPROP: "C3",
-            RenameType.MULTIPLE: "C4",
-        }[self]

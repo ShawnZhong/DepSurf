@@ -4,8 +4,7 @@ from typing import List
 from depsurf.btf import Kind, get_btf_type_str
 
 from depsurf.issues import IssueEnum
-from .change import BaseChange
-from .utils import diff_dict
+from .common import BaseChange, diff_dict
 
 
 @dataclass
@@ -58,7 +57,7 @@ class ParamType(BaseChange, enum=IssueEnum.PARAM_TYPE):
         return f"{get_btf_type_str(self.old)} {self.name} -> {get_btf_type_str(self.new)} {self.name}"
 
 
-def diff_func(old, new, assert_diff=False) -> List[BaseChange]:
+def diff_func(old, new) -> List[BaseChange]:
     assert old["kind"] == Kind.FUNC
     assert new["kind"] == Kind.FUNC
 
@@ -97,8 +96,5 @@ def diff_func(old, new, assert_diff=False) -> List[BaseChange]:
     new_ret = new["type"]["ret_type"]
     if old_ret != new_ret:
         result.append(FuncReturn(old_ret, new_ret))
-
-    if assert_diff:
-        assert result, f"\n{old}\n{new}"
 
     return result
