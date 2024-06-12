@@ -26,7 +26,6 @@ def rotate_multirow(latex: str):
 
 
 def center_multirow(latex: str):
-    # replace \multirow[t] to \multirow[c]
     return latex.replace("\\multirow[t]", "\\multirow[c]")
 
 
