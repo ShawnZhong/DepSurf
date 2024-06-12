@@ -25,6 +25,11 @@ def rotate_multirow(latex: str):
     )
 
 
+def center_multirow(latex: str):
+    # replace \multirow[t] to \multirow[c]
+    return latex.replace("\\multirow[t]", "\\multirow[c]")
+
+
 def fix_multicolumn_sep(latex: str):
     return re.sub(r"{c\|}{([^{}]+)} \\\\", r"{c}{\1} \\\\", latex)
 
@@ -33,15 +38,18 @@ def use_midrule(latex: str):
     return re.sub(r"\\cline{.*?}", r"\\midrule", latex)
 
 
-def save_latex(latex: str, name: str, path: Path = TAB_PATH):
+def save_latex(latex: str, name: str, path: Path = TAB_PATH, rotate=True):
     path.mkdir(parents=True, exist_ok=True)
     filepath = path / f"{name}.tex"
 
     latex = latex.replace("#", "\\#")
-    latex = remove_double_rules(latex)
-    latex = rotate_multirow(latex)
-    latex = fix_multicolumn_sep(latex)
     latex = use_midrule(latex)
+    latex = remove_double_rules(latex)
+    if rotate:
+        latex = rotate_multirow(latex)
+    else:
+        latex = center_multirow(latex)
+    latex = fix_multicolumn_sep(latex)
 
     with open(filepath, "w") as f:
         f.write(latex)

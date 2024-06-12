@@ -2,13 +2,22 @@ from enum import StrEnum
 
 
 class Consequence(StrEnum):
-    COMPILER = "Compiler error"
-    RUNTIME = "Runtime error"
-    SLIENT = "Silent error"
-    CORE = "CO-RE"
+    # Rank by severity, don't change the order
+    MISS = "Missing invocation"
+    STRAY = "Stray read"
+    ERROR = "Error"
+    OK = "OK"
+    UNKNOWN = "Unknown"
 
-    def __repr__(self):
-        return f"'{self.value}'"
+    @property
+    def color(self):
+        return {
+            self.MISS: "tab:red",
+            self.STRAY: "tab:orange",
+            self.ERROR: "tab:blue",
+            self.OK: "tab:green",
+            self.UNKNOWN: "white",
+        }[self]
 
 
 class IssueEnum(StrEnum):
@@ -71,25 +80,27 @@ class IssueEnum(StrEnum):
 
     @property
     def consequence(self):
-        return {
-            # Function
-            self.PARAM_ADD: Consequence.SLIENT,
-            self.PARAM_REMOVE: Consequence.SLIENT,
-            self.PARAM_TYPE: Consequence.SLIENT,
-            self.PARAM_REORDER: Consequence.SLIENT,
-            self.RETURN_TYPE: Consequence.SLIENT,
-            # Struct
-            self.FIELD_ADD: Consequence.COMPILER,
-            self.FIELD_REMOVE: Consequence.COMPILER,
-            self.FIELD_TYPE: Consequence.SLIENT,
-            # Enum
-            self.VAL_ADD: Consequence.COMPILER,
-            self.VAL_REMOVE: Consequence.COMPILER,
-            self.VAL_CHANGE: Consequence.CORE,
-        }[self]
+        d = {
+            self.OK: Consequence.OK,
+            self.ABSENT: Consequence.ERROR,
+            self.PARAM_ADD: Consequence.STRAY,
+            self.PARAM_REMOVE: Consequence.STRAY,
+            self.PARAM_TYPE: Consequence.STRAY,
+            self.PARAM_REORDER: Consequence.STRAY,
+            self.RETURN_TYPE: Consequence.STRAY,
+            self.PARTIAL_INLINE: Consequence.MISS,
+            self.FULL_INLINE: Consequence.ERROR,
+            self.RENAME: Consequence.ERROR,
+            self.STATIC: Consequence.OK,
+            self.DUPLICATE: Consequence.MISS,
+            self.FIELD_TYPE: Consequence.STRAY,
+        }
+        return d.get(self, Consequence.UNKNOWN)
 
     @property
     def color(self):
+        return self.consequence.color
+
         from matplotlib import cm
 
         fn_cmap = cm.Greens
@@ -99,10 +110,10 @@ class IssueEnum(StrEnum):
             self.OK: "tab:green",
             self.ABSENT: "tab:red",
             # Generic changes
-            self.ADD: "tab:blue",
-            self.REMOVE: "tab:red",
+            self.ADD: "white",  # "tab:blue",
+            self.REMOVE: "white",  # "tab:red",
             self.CHANGE: "tab:orange",
-            self.NO_CHANGE: "whitesmoke",
+            self.NO_CHANGE: "white",  # "whitesmoke",
             self.BOTH_ABSENT: "white",
             # Function status
             self.STATIC: "gray",
@@ -126,10 +137,10 @@ class IssueEnum(StrEnum):
         return {
             # Generic
             self.OK: "" if not emoji else "✅",
-            self.ABSENT: "✗" if not emoji else "❌",
-            self.ADD: "+" if not emoji else "🔺",
-            self.REMOVE: "-" if not emoji else "🔻",
-            self.NO_CHANGE: ".",
+            self.ABSENT: "✗" if not emoji else "❌",  # "✗"
+            self.ADD: "" if not emoji else "🔺",  # "+"
+            self.REMOVE: "" if not emoji else "🔻",  # "-"
+            self.NO_CHANGE: "",  # ".",
             self.CHANGE: "42",
             self.BOTH_ABSENT: "",
             # Fuction status

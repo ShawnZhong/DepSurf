@@ -1,9 +1,8 @@
 import logging
 from dataclasses import dataclass
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Union
 
 from depsurf.dep import Dep, DepDelta, DepKind, DepStatus
-from depsurf.issues import IssueEnum
 from depsurf.version import Version
 from depsurf.version_group import VersionGroup
 from depsurf.version_pair import VersionPair
@@ -53,7 +52,7 @@ class DepReport:
         status_str = "|".join(map(str, self.status.values()))
         print(f"\tStatus: {status_str}", file=file)
         for (versions, v), s in self.status.items():
-            if not s:
+            if s.is_ok:
                 continue
             print("\t" + versions.version_to_str(v), end="", file=file)
             s.print(file=file, nindent=1)
@@ -69,7 +68,9 @@ class DepReport:
 
 
 def gen_report(
-    deps: List[Dep], version_groups: List[VersionGroup], file=None
+    deps: Union[List[Dep], Dep],
+    version_groups: Union[List[VersionGroup], VersionGroup],
+    file=None,
 ) -> Dict[Dep, DepReport]:
     if isinstance(deps, Dep):
         deps = [deps]

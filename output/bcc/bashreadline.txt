@@ -1,4 +1,0 @@
-================================= bashreadline =================================
-uprobe: readline
-		Unsupported hook type: uprobe
-

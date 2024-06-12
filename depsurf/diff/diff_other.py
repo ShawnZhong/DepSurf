@@ -46,8 +46,8 @@ def diff_tracepoint(old: TracepointInfo, new: TracepointInfo) -> List[BaseChange
     for r in result_func:
         result.append(r)
 
-    if old.fmt_str != new.fmt_str:
-        result.append(TraceFormatChange(old.fmt_str, new.fmt_str))
+    # if old.fmt_str != new.fmt_str:
+    #     result.append(TraceFormatChange(old.fmt_str, new.fmt_str))
 
     return result
 
