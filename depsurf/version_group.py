@@ -39,8 +39,8 @@ VERSIONS_FLAVOR = sorted(
     ],
     key=lambda x: x.flavor_index,
 )
-VERSION_FIRST = VERSIONS_ALL[0]
-VERSION_LAST = VERSIONS_ALL[-1]
+VERSION_FIRST = VERSIONS_REGULAR[0]
+VERSION_LAST = VERSIONS_REGULAR[-1]
 
 DiffResult = Dict[
     Tuple["VersionGroup", VersionPair], Dict[Tuple[DepKind, IssueEnum], int]
@@ -55,6 +55,7 @@ class VersionGroup(StrEnum):
     ARCH = "Arch"
     FLAVOR = "Flavor"
     TEST = "Test"
+    FIRST_LAST = "FirstLast"
     # Single-version groups
     FIRST = "First"
     LAST = "Last"
@@ -73,6 +74,7 @@ class VersionGroup(StrEnum):
             VersionGroup.REV: VERSIONS_REV,
             VersionGroup.ARCH: VERSIONS_ARCH,
             VersionGroup.FLAVOR: VERSIONS_FLAVOR,
+            VersionGroup.FIRST_LAST: [VERSION_FIRST, VERSION_LAST],
             VersionGroup.TEST: [VERSIONS_LTS[0], VERSIONS_LTS[1]],
             VersionGroup.FIRST: [VERSION_FIRST],
             VersionGroup.LAST: [VERSION_LAST],
@@ -83,23 +85,20 @@ class VersionGroup(StrEnum):
     def num_versions(self) -> int:
         return len(self.versions)
 
-    def version_to_str(self, v: Version) -> str:
+    def to_str(self, v: Version) -> str:
         if self == VersionGroup.ARCH:
             return v.arch_name
         if self == VersionGroup.FLAVOR:
             return v.flavor_name
         if self == VersionGroup.REV:
             return str(v.revision)
-        if self in (VersionGroup.REGULAR, VersionGroup.LTS):
+        if self in (VersionGroup.REGULAR, VersionGroup.LTS, VersionGroup.FIRST_LAST):
             return v.short_version
         return str(v)
 
-    def to_str(self, x) -> str:
-        return self.version_to_str(x)
-
     @property
     def version_labels(self):
-        return [self.version_to_str(v) for v in self]
+        return [self.to_str(v) for v in self]
 
     @property
     def pairs(self) -> List[VersionPair]:

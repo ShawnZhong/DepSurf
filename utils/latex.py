@@ -43,6 +43,7 @@ def save_latex(latex: str, name: str, path: Path = TAB_PATH, rotate=True):
     filepath = path / f"{name}.tex"
 
     latex = latex.replace("#", "\\#")
+    latex = latex.replace("%", "\\%")
     latex = use_midrule(latex)
     latex = remove_double_rules(latex)
     if rotate:

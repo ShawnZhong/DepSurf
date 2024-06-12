@@ -54,7 +54,7 @@ class DepReport:
         for (versions, v), s in self.status.items():
             if s.is_ok:
                 continue
-            print("\t" + versions.version_to_str(v), end="", file=file)
+            print("\t" + versions.to_str(v), end="", file=file)
             s.print(file=file, nindent=1)
         if all(not s.exists for s in self.status.values()):
             logging.warning(f"Dependency {self.dep} does not exist in any version")
