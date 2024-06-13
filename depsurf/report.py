@@ -132,9 +132,10 @@ def gen_report(
             for v in group.versions:
                 dep_status = v.img.get_dep_status(dep)
                 issues[(group, v)] = dep_status.issues
+                print(f"\tExist in {group.to_str(v)}: {dep_status.exists}", file=file)
                 if dep_status.exists:
+                    dep_status.print(file=file, nindent=2)
                     versions.append(v)
-                print(f"\t{group.to_str(v)}, {dep_status.exists}", file=file)
 
             if group == VersionGroup.ARCH:
                 anchor = VERSION_DEFAULT
@@ -147,7 +148,13 @@ def gen_report(
             for p in pairs:
                 dep_diff = p.diff_dep(dep)
                 if dep_diff.in_v1 and dep_diff.in_v2:
-                    if len(dep_diff.changes) != 0:
+                    changed = len(dep_diff.changes) != 0
+                    print(
+                        f"\tChanged from {group.to_str(p.v1)} to {group.to_str(p.v2)}: {changed}",
+                        file=file,
+                    )
+                    if changed:
+                        dep_diff.print(file=file, nindent=2)
                         issues[(group, p.v2)] += IssueList(IssueEnum.CHANGE)
 
         result[dep] = issues

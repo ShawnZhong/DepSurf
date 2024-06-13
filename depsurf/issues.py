@@ -184,8 +184,6 @@ class IssueList:
 
     @property
     def text(self):
-        # if IssueEnum.ABSENT in self.issues:
-        # return ""
         issues = set(e for e in self.issues if e != IssueEnum.STATIC)
         return "".join([e.get_symbol() for e in issues])
 
@@ -201,6 +199,3 @@ class IssueList:
 
     def __repr__(self):
         return repr([e for e in self.issues])
-
-    def __str__(self):
-        return " ".join([e for e in self.issues])

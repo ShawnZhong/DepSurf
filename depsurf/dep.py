@@ -135,7 +135,7 @@ class DepStatus:
 
     def print(self, file=None, nindent=0):
         indent = "\t" * nindent
-        print(indent + " ".join([e.name for e in self.issues]), file=file)
+        print(f"{indent}Issues: {self.issues}", file=file)
 
         if self.group:
             self.group.print_funcs(file=file, nindent=nindent + 1)
@@ -177,7 +177,5 @@ class DepDelta:
         if not self:
             return
         indent = "\t" * nindent
-        print(f"{indent}{len(self.changes)} changes", file=file)
-        indent = "\t" * (nindent + 1)
         for change in self.changes:
             print(f"{indent}{change}", file=file)
