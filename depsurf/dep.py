@@ -1,6 +1,5 @@
 import dataclasses
 from dataclasses import dataclass
-from collections import defaultdict
 from enum import StrEnum
 from typing import Callable, Dict, List, Optional
 
@@ -15,7 +14,7 @@ from depsurf.diff import (
     diff_nop,
     diff_config,
 )
-from depsurf.issues import Consequence
+from depsurf.issues import IssueList
 from depsurf.utils import OrderedEnum
 from depsurf.funcs import CollisionType, FuncGroup, InlineType
 
@@ -88,56 +87,77 @@ class Dep:
         return f"{self.kind.value}({self.name})"
 
 
-class BaseDepCell:
-    @property
-    def issues(self) -> List[IssueEnum]:
-        raise NotImplementedError
+@dataclass
+class DepStatus:
+    exists: bool = True
+    group: Optional[FuncGroup] = None
+    inline: Optional[InlineType] = None
+    collision: Optional[CollisionType] = None
+    suffix: bool = False
 
     @property
-    def color(self):
-        consequences = [e.consequence for e in self.issues]
-        for c in Consequence:
-            if c in consequences:
-                return c.color
+    def issues(self) -> IssueList:
+        result = IssueList()
+        if not self.exists:
+            result.append(IssueEnum.ABSENT)
+
+        # if self.collision == CollisionType.UNIQUE_STATIC:
+        # result.append(IssueEnum.STATIC)
+        # el
+
+        if self.collision in (
+            CollisionType.INCLUDE_DUP,
+            CollisionType.STATIC_STATIC,
+            CollisionType.STATIC_GLOBAL,
+        ):
+            result.append(IssueEnum.DUPLICATE)
+
+        if self.inline == InlineType.FULL:
+            result.append(IssueEnum.FULL_INLINE)
+        elif self.inline == InlineType.PARTIAL:
+            result.append(IssueEnum.PARTIAL_INLINE)
+
+        if self.suffix:
+            result.append(IssueEnum.RENAME)
+
+        return result
+
+    def __str__(self):
+        return " ".join([e.get_symbol(emoji=True) for e in self.issues])
 
     @property
     def text(self):
-        raise NotImplementedError
+        return "".join([e.get_symbol() for e in self.issues])
+
+    @property
+    def is_ok(self) -> bool:
+        return len(self.issues) == 0
+
+    def print(self, file=None, nindent=0):
+        indent = "\t" * nindent
+        print(indent + " ".join([e.name for e in self.issues]), file=file)
+
+        if self.group:
+            self.group.print_funcs(file=file, nindent=nindent + 1)
 
 
 @dataclass
-class DepDelta(BaseDepCell):
+class DepDelta:
     in_v1: bool = True
     in_v2: bool = True
     changes: List[BaseChange] = dataclasses.field(default_factory=list)
 
     @property
-    def issues(self) -> List[IssueEnum]:
+    def issues(self) -> IssueList:
         if not self.in_v1 and not self.in_v2:
-            return [IssueEnum.BOTH_ABSENT]
+            return IssueList(IssueEnum.BOTH_ABSENT)
         if not self.in_v1 and self.in_v2:
-            return [IssueEnum.ADD]
+            return IssueList(IssueEnum.ADD)
         if self.in_v1 and not self.in_v2:
-            return [IssueEnum.REMOVE]
+            return IssueList(IssueEnum.REMOVE)
         if self.changes:
-            return [e.enum for e in self.changes]
-        return [IssueEnum.NO_CHANGE]
-
-    # def __str__(self):
-    #     if self.issues != IssueEnum.CHANGE:
-    #         return self.issues.get_symbol(emoji=True)
-
-    #     change_enums: Dict[IssueEnum, int] = defaultdict(int)
-    #     for change in self.changes:
-    #         change_enums[change.enum] += 1
-
-    #     result = ""
-    #     for k, v in change_enums.items():
-    #         if v == 1:
-    #             result += f"{k.get_symbol()} "
-    #         else:
-    #             result += f"{k.get_symbol()}⨉{v} "
-    #     return result
+            return IssueList(*[e.enum for e in self.changes])
+        return IssueList()
 
     def __bool__(self):
         return bool(self.changes)
@@ -161,58 +181,3 @@ class DepDelta(BaseDepCell):
         indent = "\t" * (nindent + 1)
         for change in self.changes:
             print(f"{indent}{change}", file=file)
-
-
-@dataclass
-class DepStatus(BaseDepCell):
-    exists: bool = True
-    group: Optional[FuncGroup] = None
-    inline: Optional[InlineType] = None
-    collision: Optional[CollisionType] = None
-    suffix: bool = False
-
-    @property
-    def issues(self) -> List[IssueEnum]:
-        result = []
-        if not self.exists:
-            result.append(IssueEnum.ABSENT)
-
-        if self.collision == CollisionType.UNIQUE_STATIC:
-            result.append(IssueEnum.STATIC)
-        elif self.collision in (
-            CollisionType.INCLUDE_DUP,
-            CollisionType.STATIC_STATIC,
-            CollisionType.STATIC_GLOBAL,
-        ):
-            result.append(IssueEnum.DUPLICATE)
-
-        if self.inline == InlineType.FULL:
-            result.append(IssueEnum.FULL_INLINE)
-        elif self.inline == InlineType.PARTIAL:
-            result.append(IssueEnum.PARTIAL_INLINE)
-
-        if self.suffix:
-            result.append(IssueEnum.RENAME)
-
-        if not result:
-            result.append(IssueEnum.OK)
-
-        return result
-
-    def __str__(self):
-        return " ".join([e.get_symbol(emoji=True) for e in self.issues])
-
-    @property
-    def text(self):
-        return "".join([e.get_symbol() for e in self.issues])
-
-    @property
-    def is_ok(self) -> bool:
-        return self.issues == [IssueEnum.OK]
-
-    def print(self, file=None, nindent=0):
-        indent = "\t" * nindent
-        print(indent + " ".join([e.name for e in self.issues]), file=file)
-
-        if self.group:
-            self.group.print_funcs(file=file, nindent=nindent + 1)

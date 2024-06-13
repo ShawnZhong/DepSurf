@@ -1,4 +1,5 @@
 from enum import StrEnum
+from typing import List
 
 
 class Consequence(StrEnum):
@@ -137,11 +138,11 @@ class IssueEnum(StrEnum):
         return {
             # Generic
             self.OK: "" if not emoji else "✅",
-            self.ABSENT: "✗" if not emoji else "❌",  # "✗"
+            self.ABSENT: "" if not emoji else "❌",  # "✗"
             self.ADD: "" if not emoji else "🔺",  # "+"
             self.REMOVE: "" if not emoji else "🔻",  # "-"
             self.NO_CHANGE: "",  # ".",
-            self.CHANGE: "42",
+            self.CHANGE: r"$\Delta$",
             self.BOTH_ABSENT: "",
             # Fuction status
             self.STATIC: "S" if not emoji else "🟣S",
@@ -163,3 +164,43 @@ class IssueEnum(StrEnum):
 
     def __repr__(self):
         return f"'{self.value}'"
+
+
+class IssueList:
+    def __init__(self, *issues: IssueEnum):
+        self.issues: List[IssueEnum] = list(e for e in issues if e != IssueEnum.STATIC)
+
+    def append(self, issue: IssueEnum):
+        self.issues.append(issue)
+
+    @property
+    def color(self):
+        issues = set(e for e in self.issues if e != IssueEnum.STATIC)
+        if len(issues) == 0:
+            return "tab:green"
+        if IssueEnum.ABSENT in self.issues:
+            return "lightgray"
+        return "tab:red"
+
+    @property
+    def text(self):
+        # if IssueEnum.ABSENT in self.issues:
+        # return ""
+        issues = set(e for e in self.issues if e != IssueEnum.STATIC)
+        return "".join([e.get_symbol() for e in issues])
+
+    def __iter__(self):
+        return iter(self.issues)
+
+    def __len__(self):
+        return len(self.issues)
+
+    def __iadd__(self, other):
+        self.issues += other.issues
+        return self
+
+    def __repr__(self):
+        return repr([e for e in self.issues])
+
+    def __str__(self):
+        return " ".join([e for e in self.issues])

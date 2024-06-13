@@ -4,8 +4,9 @@ from typing import Dict, List, Tuple, Union
 
 from depsurf.dep import Dep, DepDelta, DepKind, DepStatus
 from depsurf.version import Version
-from depsurf.version_group import VersionGroup
+from depsurf.version_group import VersionGroup, VERSION_DEFAULT
 from depsurf.version_pair import VersionPair
+from depsurf.issues import IssueList, IssueEnum
 
 REPORT_KINDS = [
     DepKind.FUNC,
@@ -67,37 +68,88 @@ class DepReport:
             d.print(file=file, nindent=1)
 
 
+# def gen_report(
+#     deps: Union[List[Dep], Dep],
+#     version_groups: Union[List[VersionGroup], VersionGroup],
+#     file=None,
+# ) -> Dict[Dep, DepReport]:
+#     if isinstance(deps, Dep):
+#         deps = [deps]
+#     if isinstance(version_groups, VersionGroup):
+#         version_groups = [version_groups]
+
+#     result = {}
+#     for dep in deps:
+#         print(f"{dep.kind:12}{dep.name}", file=file)
+#         if dep.kind not in REPORT_KINDS:
+#             print("\tSkipped", file=file)
+#             continue
+
+#         report = DepReport(
+#             dep,
+#             {
+#                 (versions, v): v.img.get_dep_status(dep)
+#                 for versions in version_groups
+#                 for v in versions
+#             },
+#             {
+#                 (versions, p): p.diff_dep(dep)
+#                 for versions in version_groups
+#                 for p in versions.pairs
+#             },
+#         )
+#         report.print(file=file)
+#         result[dep] = report
+
+#     return result
+
+
+Report = Dict[Tuple[VersionGroup, Version], IssueList]
+ReportDict = Dict[Dep, Report]
+
+
 def gen_report(
     deps: Union[List[Dep], Dep],
     version_groups: Union[List[VersionGroup], VersionGroup],
     file=None,
-) -> Dict[Dep, DepReport]:
+) -> ReportDict:
     if isinstance(deps, Dep):
         deps = [deps]
     if isinstance(version_groups, VersionGroup):
         version_groups = [version_groups]
 
-    result = {}
+    result: ReportDict = {}
     for dep in deps:
         print(f"{dep.kind:12}{dep.name}", file=file)
         if dep.kind not in REPORT_KINDS:
             print("\tSkipped", file=file)
             continue
 
-        report = DepReport(
-            dep,
-            {
-                (versions, v): v.img.get_dep_status(dep)
-                for versions in version_groups
-                for v in versions
-            },
-            {
-                (versions, p): p.diff_dep(dep)
-                for versions in version_groups
-                for p in versions.pairs
-            },
-        )
-        report.print(file=file)
-        result[dep] = report
+        issues: Report = {}
+        for group in version_groups:
+            anchor = None
+            versions = []
+            for v in group.versions:
+                dep_status = v.img.get_dep_status(dep)
+                issues[(group, v)] = dep_status.issues
+                if dep_status.exists:
+                    versions.append(v)
+                print(f"\t{group.to_str(v)}, {dep_status.exists}", file=file)
+
+            if group == VersionGroup.ARCH:
+                anchor = VERSION_DEFAULT
+                versions = group.versions
+            else:
+                anchor = versions[0]
+
+            pairs = [VersionPair(anchor, v) for v in versions]
+
+            for p in pairs:
+                dep_diff = p.diff_dep(dep)
+                if dep_diff.in_v1 and dep_diff.in_v2:
+                    if len(dep_diff.changes) != 0:
+                        issues[(group, p.v2)] += IssueList(IssueEnum.CHANGE)
+
+        result[dep] = issues
 
     return result

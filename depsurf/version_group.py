@@ -97,7 +97,7 @@ class VersionGroup(StrEnum):
         return str(v)
 
     @property
-    def version_labels(self):
+    def labels(self):
         return [self.to_str(v) for v in self]
 
     @property

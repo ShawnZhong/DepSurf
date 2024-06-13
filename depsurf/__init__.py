@@ -6,6 +6,7 @@ from .dep import *
 from .diff import *
 from .funcs import *
 from .image import *
+from .issues import *
 from .linux import *
 from .prep import *
 from .report import *
