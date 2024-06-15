@@ -199,3 +199,6 @@ class IssueList:
 
     def __repr__(self):
         return repr([e for e in self.issues])
+
+    def __contains__(self, item):
+        return item in self.issues
