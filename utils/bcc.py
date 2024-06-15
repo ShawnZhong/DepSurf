@@ -2,33 +2,18 @@ from enum import StrEnum
 
 
 class Category(StrEnum):
-    BLOCK = "block dev"
-    CPU = "cpu"
-    FILESYSTEM = "filesystem"
-    GENERIC = "generic"
-    MEMORY = "memory"
-    NETWORK = "network"
-    OTHER = "other"
-    PROC = "proc"
-    USERSPACE = "userspace"
-
-    @property
-    def color(self):
-        return {
-            Category.BLOCK: "tab:blue",
-            Category.CPU: "tab:orange",
-            Category.FILESYSTEM: "tab:green",
-            Category.GENERIC: "tab:red",
-            Category.MEMORY: "tab:purple",
-            Category.NETWORK: "tab:brown",
-            Category.OTHER: "tab:pink",
-            Category.PROC: "tab:gray",
-            Category.USERSPACE: "tab:olive",
-        }[self]
+    CPU = "CPU"
+    PROC = "Process"
+    MEMORY = "Memory"
+    BLOCK = "Block Device"
+    FILESYSTEM = "Filesystem"
+    NETWORK = "Network"
+    USERSPACE = "Userspace"
+    OTHER = "Other"
 
 
-category_map = {
-    "argdist": Category.GENERIC,
+BCC_CATEGORY = {
+    "argdist": Category.OTHER,
     "bashreadline": Category.USERSPACE,
     "bindsnoop": Category.NETWORK,
     "biolatency": Category.BLOCK,
@@ -61,13 +46,13 @@ category_map = {
     "filelife": Category.FILESYSTEM,
     "fileslower": Category.FILESYSTEM,
     "filetop": Category.FILESYSTEM,
-    "funccount": Category.GENERIC,
-    "funcinterval": Category.GENERIC,
-    "funclatency": Category.GENERIC,
-    "funcslower": Category.GENERIC,
-    "gethostlatency": Category.NETWORK,
+    "funccount": Category.OTHER,
+    "funcinterval": Category.OTHER,
+    "funclatency": Category.OTHER,
+    "funcslower": Category.OTHER,
+    "gethostlatency": Category.USERSPACE,
     "hardirqs": Category.CPU,
-    "inject": Category.GENERIC,
+    "inject": Category.OTHER,
     "killsnoop": Category.PROC,
     "klockstat": Category.OTHER,
     "kvmexit": Category.PROC,
@@ -96,7 +81,7 @@ category_map = {
     "softirqs": Category.CPU,
     "solisten": Category.NETWORK,
     "sslsniff": Category.NETWORK,
-    "stackcount": Category.GENERIC,
+    "stackcount": Category.OTHER,
     "statsnoop": Category.FILESYSTEM,
     "swapin": Category.MEMORY,
     "syncsnoop": Category.FILESYSTEM,
@@ -115,7 +100,7 @@ category_map = {
     "tcptop": Category.NETWORK,
     "tcptracer": Category.NETWORK,
     "threadsnoop": Category.PROC,
-    "trace": Category.GENERIC,
+    "trace": Category.OTHER,
     "ttysnoop": Category.OTHER,
     "vfscount": Category.FILESYSTEM,
     "vfsstat": Category.FILESYSTEM,

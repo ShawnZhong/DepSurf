@@ -3,13 +3,25 @@ from pathlib import Path
 PROJ_PATH = Path(__file__).parent.parent
 
 OUTPUT_PATH = PROJ_PATH / "output"
-assert OUTPUT_PATH.exists(), f"{OUTPUT_PATH} does not exist"
+BCC_OUTPUT_PATH = OUTPUT_PATH / "bcc"
+
+OUTPUT_PATH.mkdir(exist_ok=True, parents=True)
+BCC_OUTPUT_PATH.mkdir(exist_ok=True, parents=True)
+
+PAPER_PATH = PROJ_PATH / "paper"
+if not PAPER_PATH.exists():
+    PAPER_PATH = OUTPUT_PATH
+TAB_PATH = PAPER_PATH / "tabs"
+FIG_PATH = PAPER_PATH / "figs"
 
 BCC_PATH = PROJ_PATH / "csrc" / "bcc"
-assert BCC_PATH.exists(), f"{BCC_PATH} does not exist"
-
 BCC_OBJ_PATH = BCC_PATH / "libbpf-tools" / ".output"
 
 
-TAB_PATH = PROJ_PATH / "paper" / "tabs"
-FIG_PATH = PROJ_PATH / "paper" / "figs"
+def iter_bcc_objects():
+    if not BCC_PATH.exists():
+        raise FileNotFoundError(f"{BCC_PATH} does not exist")
+    if not BCC_OBJ_PATH.exists():
+        raise FileNotFoundError(f"{BCC_OBJ_PATH} does not exist")
+    for obj in BCC_OBJ_PATH.glob("*.bpf.o"):
+        yield obj
