@@ -5,7 +5,7 @@ from depsurf.utils import OrderedEnum
 class CollisionType(StrEnum):
     UNIQUE_GLOBAL = "Unique Global"
     UNIQUE_STATIC = "Unique Static"
-    INCLUDE_DUP = "Static Dup. with #include"
+    INCLUDE_DUP = "Static Duplication"
     STATIC_STATIC = "Static-Static Collision"
     STATIC_GLOBAL = "Static-Global Collision"
 
