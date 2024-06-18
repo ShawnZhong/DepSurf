@@ -68,42 +68,6 @@ class DepReport:
             d.print(file=file, nindent=1)
 
 
-# def gen_report(
-#     deps: Union[List[Dep], Dep],
-#     version_groups: Union[List[VersionGroup], VersionGroup],
-#     file=None,
-# ) -> Dict[Dep, DepReport]:
-#     if isinstance(deps, Dep):
-#         deps = [deps]
-#     if isinstance(version_groups, VersionGroup):
-#         version_groups = [version_groups]
-
-#     result = {}
-#     for dep in deps:
-#         print(f"{dep.kind:12}{dep.name}", file=file)
-#         if dep.kind not in REPORT_KINDS:
-#             print("\tSkipped", file=file)
-#             continue
-
-#         report = DepReport(
-#             dep,
-#             {
-#                 (versions, v): v.img.get_dep_status(dep)
-#                 for versions in version_groups
-#                 for v in versions
-#             },
-#             {
-#                 (versions, p): p.diff_dep(dep)
-#                 for versions in version_groups
-#                 for p in versions.pairs
-#             },
-#         )
-#         report.print(file=file)
-#         result[dep] = report
-
-#     return result
-
-
 Report = Dict[Tuple[VersionGroup, Version], IssueList]
 ReportDict = Dict[Dep, Report]
 

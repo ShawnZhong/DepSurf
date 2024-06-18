@@ -38,7 +38,6 @@ class IssueEnum(StrEnum):
     BOTH_ABSENT = "Both absent"
 
     # Function status
-    STATIC = "Static"
     PARTIAL_INLINE = "Par. Inline"
     FULL_INLINE = "Full Inline"
     RENAME = "Renamed"
@@ -92,7 +91,6 @@ class IssueEnum(StrEnum):
             self.PARTIAL_INLINE: Consequence.MISS,
             self.FULL_INLINE: Consequence.ERROR,
             self.RENAME: Consequence.ERROR,
-            self.STATIC: Consequence.OK,
             self.DUPLICATE: Consequence.MISS,
             self.FIELD_TYPE: Consequence.STRAY,
         }
@@ -117,7 +115,6 @@ class IssueEnum(StrEnum):
             self.NO_CHANGE: "white",  # "whitesmoke",
             self.BOTH_ABSENT: "white",
             # Function status
-            self.STATIC: "gray",
             self.DUPLICATE: "black",
             self.RENAME: "blue",
             self.PARTIAL_INLINE: "tab:blue",
@@ -145,7 +142,6 @@ class IssueEnum(StrEnum):
             self.CHANGE: r"$\Delta$",
             self.BOTH_ABSENT: "",
             # Fuction status
-            self.STATIC: "S" if not emoji else "🟣S",
             self.PARTIAL_INLINE: "P" if not emoji else "🟡P",
             self.FULL_INLINE: "F" if not emoji else "🟠F",
             self.RENAME: "R" if not emoji else "🔵R",
@@ -168,15 +164,14 @@ class IssueEnum(StrEnum):
 
 class IssueList:
     def __init__(self, *issues: IssueEnum):
-        self.issues: List[IssueEnum] = list(e for e in issues if e != IssueEnum.STATIC)
+        self.issues: List[IssueEnum] = list(issues)
 
     def append(self, issue: IssueEnum):
         self.issues.append(issue)
 
     @property
     def color(self):
-        issues = set(e for e in self.issues if e != IssueEnum.STATIC)
-        if len(issues) == 0:
+        if len(self.issues) == 0:
             return "tab:green"
         if IssueEnum.ABSENT in self.issues:
             return "lightgray"
@@ -184,8 +179,7 @@ class IssueList:
 
     @property
     def text(self):
-        issues = set(e for e in self.issues if e != IssueEnum.STATIC)
-        return "".join([e.get_symbol() for e in issues])
+        return "".join([e.get_symbol() for e in self.issues])
 
     def __iter__(self):
         return iter(self.issues)

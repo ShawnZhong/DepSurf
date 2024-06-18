@@ -101,10 +101,6 @@ class DepStatus:
         if not self.exists:
             result.append(IssueEnum.ABSENT)
 
-        # if self.collision == CollisionType.UNIQUE_STATIC:
-        # result.append(IssueEnum.STATIC)
-        # el
-
         if self.collision in (
             CollisionType.INCLUDE_DUP,
             CollisionType.STATIC_STATIC,

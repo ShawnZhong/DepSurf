@@ -25,3 +25,6 @@ def iter_bcc_objects():
         raise FileNotFoundError(f"{BCC_OBJ_PATH} does not exist")
     for obj in BCC_OBJ_PATH.glob("*.bpf.o"):
         yield obj
+
+
+FONT_PATH = Path(__file__).parent / "Inconsolata_ExtraCondensed-Medium.ttf"
