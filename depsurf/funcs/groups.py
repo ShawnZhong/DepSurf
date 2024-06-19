@@ -36,11 +36,11 @@ class FuncGroups:
         for group in sorted(
             self.data.values(), key=lambda x: x.num_funcs, reverse=True
         ):
-            group.print_group(file)
+            group.print_long(file=file)
 
     def print_funcs(self, file=None):
         for func in self.iter_funcs():
-            print(func, file=file)
+            func.print_long(file=file)
 
     def save_groups(self, path: Path):
         self.save_impl(path, self.print_groups)

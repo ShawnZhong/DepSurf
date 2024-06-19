@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Union
 
-from depsurf.dep import Dep, DepDelta, DepKind, DepStatus
+from depsurf.dep import Dep, DepKind
 from depsurf.issues import IssueEnum, IssueList
 from depsurf.version import Version
 from depsurf.version_group import VERSION_DEFAULT, VersionGroup

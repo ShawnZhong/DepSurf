@@ -1,7 +1,7 @@
 import dataclasses
 import json
 from dataclasses import dataclass
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Optional
 
 
 class InlineStatus:
@@ -15,11 +15,12 @@ class InlineStatus:
 
 @dataclass
 class FuncEntry:
+    addr: int
     name: str
     external: bool
+    loc: Optional[str] = None
+    file: Optional[str] = None
     inline: InlineStatus = InlineStatus.NOT_SEEN
-    loc: str = None
-    file: str = None
     caller_inline: List[Tuple[str, str]] = dataclasses.field(default_factory=list)
     caller_func: List[Tuple[str, str]] = dataclasses.field(default_factory=list)
 
@@ -60,7 +61,7 @@ class FuncEntry:
     def has_func_caller(self) -> bool:
         return bool(self.caller_func)
 
-    def __str__(self):
+    def print_long(self, file=None):
         lines = (
             f"{self.name}",
             f"\tLoc: {self.loc}",
@@ -72,4 +73,20 @@ class FuncEntry:
             f"\tCaller Func ({len(self.caller_func)})",
             *(f"\t\t{caller}" for caller in self.caller_func),
         )
-        return "\n".join(lines)
+        print("\n".join(lines), file=file)
+
+    def print_short(self, file=None, nindent=0):
+        indent = "\t" * nindent
+        print(
+            f"{indent}FuncEntry("
+            f"addr={hex(self.addr)}, "
+            f"name={self.name}, "
+            f"loc={self.loc}, "
+            f"file={self.file}, "
+            f"external={self.external}, "
+            f"caller_func={self.caller_func}, "
+            f"caller_inline={self.caller_inline}, "
+            f"inline={self.inline}"
+            f")",
+            file=file,
+        )

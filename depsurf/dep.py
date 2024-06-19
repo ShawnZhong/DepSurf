@@ -143,7 +143,8 @@ class DepStatus:
         print(f"{indent}In {self.version}: {self.issues}", file=file)
 
         if self.func_group:
-            self.func_group.print_funcs(file=file, nindent=nindent + 1)
+            for func in self.func_group:
+                func.print_short(file=file, nindent=nindent + 1)
 
         if self.sym_group:
             self.sym_group.print(file=file, nindent=nindent + 1)

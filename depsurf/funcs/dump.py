@@ -13,6 +13,15 @@ from .dwarf import DIEHandler, Traverser
 from .utils import disable_dwarf_cache, get_name
 
 
+def get_pc(die: DIE) -> int:
+    attrs = ["DW_AT_low_pc", "DW_AT_entry_pc", "DW_AT_high_pc"]
+    for attr in attrs:
+        val = die.attributes.get(attr)
+        if val is not None:
+            return val.value
+    return 0
+
+
 class FunctionRecorder:
     def __init__(self):
         self.data: Dict[str, Dict[Tuple[str, str], FuncEntry]] = {}
@@ -54,6 +63,7 @@ class FunctionRecorder:
             return entry
 
         entry = FuncEntry(
+            addr=0,
             name=name,
             external=external,
             loc=loc,
@@ -71,6 +81,10 @@ class FunctionRecorder:
             assert "DW_AT_inline" not in die.attributes
             assert "DW_AT_name" not in die.attributes
             self.curr_prog = None
+            origin_die = die.get_DIE_from_attribute("DW_AT_abstract_origin")
+            entry = self.get_or_create_entry(origin_die, traverser)
+            if entry.addr == 0:
+                entry.addr = get_pc(die)
             return
 
         entry = self.get_or_create_entry(die, traverser)
@@ -99,6 +113,9 @@ class FunctionRecorder:
         if entry.file is None:
             entry.file = traverser.path
 
+        if entry.addr == 0:
+            entry.addr = get_pc(die)
+
     def record_call_gnu(self, die: DIE, traverser: Traverser):
         if "DW_AT_abstract_origin" not in die.attributes:
             return  # indirect call
@@ -116,8 +133,10 @@ class FunctionRecorder:
         self.record_call_impl(die, traverser, is_inline=False)
 
     def record_inline(self, die: DIE, traverser: Traverser):
-        die = die.get_DIE_from_attribute("DW_AT_abstract_origin")
-        self.record_call_impl(die, traverser, is_inline=True)
+        fn_die = die.get_DIE_from_attribute("DW_AT_abstract_origin")
+        entry = self.record_call_impl(fn_die, traverser, is_inline=True)
+        if entry.addr == 0:
+            entry.addr = get_pc(die)
 
     def record_call_impl(self, die: DIE, traverser: Traverser, is_inline: bool):
         entry = self.get_or_create_entry(die, traverser)
@@ -125,7 +144,7 @@ class FunctionRecorder:
         caller_name = self.curr_prog
         # this may happen when a subprogram has abstract_origin
         if caller_name is None:
-            return
+            return entry
 
         caller_loc = f"{traverser.path}:{caller_name}"
 
@@ -135,6 +154,8 @@ class FunctionRecorder:
         else:
             # it is possible that entry.name == caller_name (e.g., recursive call)
             entry.caller_func.append(caller_loc)
+
+        return entry
 
     @classmethod
     def from_cus(cls, cus: List[CompileUnit], debug=False):
