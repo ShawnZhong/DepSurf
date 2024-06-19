@@ -1,7 +1,7 @@
 import json
 import logging
 from functools import cached_property
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from elftools.elf.elffile import ELFFile, SymbolTableSection
 
@@ -13,11 +13,12 @@ def dump_symtab(vmlinux_path, result_path):
     with open(vmlinux_path, "rb") as fin:
         elffile = ELFFile(fin)
 
-        symtab: SymbolTableSection = elffile.get_section_by_name(".symtab")
+        symtab = elffile.get_section_by_name(".symtab")
         if symtab is None:
             raise ValueError(
                 "No symbol table found. Perhaps this is a stripped binary?"
             )
+        assert type(symtab) == SymbolTableSection
 
         sections = [s.name for s in elffile.iter_sections()]
 
@@ -41,7 +42,7 @@ def dump_symtab(vmlinux_path, result_path):
 
 
 class FuncSymbolGroup:
-    def __init__(self, name: str, symbols: List[Dict] = None):
+    def __init__(self, name: str, symbols: Optional[List[Dict]] = None):
         self.name = name
         self.symbols = symbols if symbols is not None else []
 
@@ -58,6 +59,21 @@ class FuncSymbolGroup:
 
     def __iter__(self):
         return iter(self.symbols)
+
+    def print(self, file=None, nindent=0):
+        indent = "\t" * nindent
+        for sym in self.symbols:
+            print(
+                f"{indent}"
+                f"FuncSymbol("
+                f"name='{sym['name']}', "
+                f"section='{sym['section']}', "
+                f"bind='{sym['bind']}', "
+                f"addr={hex(sym['value'])}, "
+                f"size={sym['size']}"
+                f")",
+                file=file,
+            )
 
 
 class SymbolTable:

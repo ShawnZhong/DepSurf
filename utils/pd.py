@@ -1,7 +1,11 @@
-import pandas as pd
+import os
 
 
 def setup_pandas():
+    os.environ["NUMEXPR_NUM_THREADS"] = "1"
+
+    import pandas as pd
+
     # https://pandas.pydata.org/docs/reference/api/pandas.set_option.html
     pd.set_option("display.min_rows", 500)
     pd.set_option("display.max_rows", 500)

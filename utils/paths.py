@@ -3,10 +3,10 @@ from pathlib import Path
 PROJ_PATH = Path(__file__).parent.parent
 
 OUTPUT_PATH = PROJ_PATH / "output"
-BCC_OUTPUT_PATH = OUTPUT_PATH / "bcc"
+REPORT_PATH = OUTPUT_PATH / "report"
 
 OUTPUT_PATH.mkdir(exist_ok=True, parents=True)
-BCC_OUTPUT_PATH.mkdir(exist_ok=True, parents=True)
+REPORT_PATH.mkdir(exist_ok=True, parents=True)
 
 PAPER_PATH = PROJ_PATH / "paper"
 if not PAPER_PATH.exists():

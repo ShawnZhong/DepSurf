@@ -86,20 +86,19 @@ class LinuxImage:
 
     def get_dep_status(self, dep: Dep) -> DepStatus:
         if dep.kind == DepKind.FUNC:
-            group = self.func_groups.get_group(dep.name)
-            if group is None:
-                return DepStatus(exists=False)
+            func_group = self.func_groups.get_group(dep.name)
+            if func_group is None:
+                return DepStatus(version=self.version, exists=False)
 
             sym_group = self.symtab.func_sym_groups.get(dep.name)
             return DepStatus(
+                version=self.version,
                 exists=True,
-                group=group,
-                collision=group.get_collision_type(),
-                inline=group.get_inline_type(in_symtab=sym_group is not None),
-                suffix=sym_group.has_suffix if sym_group else False,
+                func_group=func_group,
+                sym_group=sym_group,
             )
         else:
-            return DepStatus(exists=self.get_dep(dep) is not None)
+            return DepStatus(version=self.version, exists=self.get_dep(dep) is not None)
 
     @cached_property
     def filebytes(self):

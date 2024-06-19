@@ -14,9 +14,11 @@ from depsurf.diff import (
     diff_nop,
     diff_config,
 )
+from depsurf.version import Version
 from depsurf.issues import IssueList
 from depsurf.utils import OrderedEnum
 from depsurf.funcs import CollisionType, FuncGroup, InlineType
+from depsurf.linux import FuncSymbolGroup
 
 
 class DepKind(OrderedEnum, StrEnum):
@@ -33,6 +35,7 @@ class DepKind(OrderedEnum, StrEnum):
     UPROBE = "uprobe"
     USDT = "USDT"
     PERF_EVENT = "Perf Event"
+    CGROUP = "cgroup"
 
     CONFIG = "Config"
 
@@ -49,12 +52,14 @@ class DepKind(OrderedEnum, StrEnum):
             "fexit": DepKind.FUNC,
             "tp_btf": DepKind.TRACEPOINT,
             "raw_tp": DepKind.TRACEPOINT,
+            "raw_tracepoint": DepKind.TRACEPOINT,
             "tracepoint": DepKind.TRACEPOINT,
             "lsm": DepKind.LSM,
             "uprobe": DepKind.UPROBE,
             "uretprobe": DepKind.UPROBE,
             "usdt": DepKind.USDT,
             "perf_event": DepKind.PERF_EVENT,
+            "cgroup_skb": DepKind.CGROUP,
         }[prefix]
 
     @property
@@ -89,11 +94,10 @@ class Dep:
 
 @dataclass
 class DepStatus:
+    version: Version
     exists: bool = True
-    group: Optional[FuncGroup] = None
-    inline: Optional[InlineType] = None
-    collision: Optional[CollisionType] = None
-    suffix: bool = False
+    func_group: Optional[FuncGroup] = None
+    sym_group: Optional[FuncSymbolGroup] = None
 
     @property
     def issues(self) -> IssueList:
@@ -101,19 +105,28 @@ class DepStatus:
         if not self.exists:
             result.append(IssueEnum.ABSENT)
 
-        if self.collision in (
-            CollisionType.INCLUDE_DUP,
-            CollisionType.STATIC_STATIC,
-            CollisionType.STATIC_GLOBAL,
-        ):
-            result.append(IssueEnum.DUPLICATE)
+        if self.func_group:
+            # collision
+            collision = self.func_group.get_collision_type()
+            if collision == CollisionType.INCLUDE_DUP:
+                result.append(IssueEnum.DUPLICATE)
+            elif collision in (
+                CollisionType.STATIC_STATIC,
+                CollisionType.STATIC_GLOBAL,
+            ):
+                result.append(IssueEnum.COLLISSION)
 
-        if self.inline == InlineType.FULL:
-            result.append(IssueEnum.FULL_INLINE)
-        elif self.inline == InlineType.PARTIAL:
-            result.append(IssueEnum.PARTIAL_INLINE)
+            # inline
+            inline = self.func_group.get_inline_type(
+                in_symtab=self.sym_group is not None
+            )
+            if inline == InlineType.FULL:
+                result.append(IssueEnum.FULL_INLINE)
+            elif inline == InlineType.PARTIAL:
+                result.append(IssueEnum.PARTIAL_INLINE)
 
-        if self.suffix:
+        # rename
+        if self.sym_group and self.sym_group.has_suffix:
             result.append(IssueEnum.RENAME)
 
         return result
@@ -122,56 +135,51 @@ class DepStatus:
         return " ".join([e.get_symbol(emoji=True) for e in self.issues])
 
     @property
-    def text(self):
-        return "".join([e.get_symbol() for e in self.issues])
-
-    @property
     def is_ok(self) -> bool:
         return len(self.issues) == 0
 
     def print(self, file=None, nindent=0):
         indent = "\t" * nindent
-        print(f"{indent}Issues: {self.issues}", file=file)
+        print(f"{indent}In {self.version}: {self.issues}", file=file)
 
-        if self.group:
-            self.group.print_funcs(file=file, nindent=nindent + 1)
+        if self.func_group:
+            self.func_group.print_funcs(file=file, nindent=nindent + 1)
+
+        if self.sym_group:
+            self.sym_group.print(file=file, nindent=nindent + 1)
 
 
 @dataclass
 class DepDelta:
+    v1: Version
+    v2: Version
     in_v1: bool = True
     in_v2: bool = True
     changes: List[BaseChange] = dataclasses.field(default_factory=list)
 
     @property
-    def issues(self) -> IssueList:
-        if not self.in_v1 and not self.in_v2:
-            return IssueList(IssueEnum.BOTH_ABSENT)
-        if not self.in_v1 and self.in_v2:
-            return IssueList(IssueEnum.ADD)
-        if self.in_v1 and not self.in_v2:
-            return IssueList(IssueEnum.REMOVE)
-        if self.changes:
-            return IssueList(*[e.enum for e in self.changes])
-        return IssueList()
-
-    def __bool__(self):
-        return bool(self.changes)
+    def has_changes(self) -> bool:
+        return len(self.changes) > 0
 
     @property
-    def text(self):
-        for issue in [IssueEnum.ADD, IssueEnum.REMOVE, IssueEnum.NO_CHANGE]:
-            if issue in self.issues:
-                assert len(self.issues) == 1
-                return ""
-        num = len(self.changes)
-        if num == 0:
-            return ""
-        return str(num)
+    def status_str(self) -> str:
+        if not self.in_v1 and not self.in_v2:
+            return "Both absent"
+        if not self.in_v1:
+            return f"Added"
+        if not self.in_v2:
+            return f"Removed"
+        if self.has_changes:
+            return "Changed"
+        return "No changes"
 
     def print(self, file=None, nindent=0):
-        if not self:
-            return
         indent = "\t" * nindent
+
+        print(
+            f"{indent}From {self.v1} to {self.v2}: {self.status_str}",
+            file=file,
+        )
+
         for change in self.changes:
-            print(f"{indent}{change}", file=file)
+            change.print(file=file, nindent=nindent + 1)

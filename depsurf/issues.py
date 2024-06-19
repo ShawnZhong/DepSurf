@@ -42,6 +42,7 @@ class IssueEnum(StrEnum):
     FULL_INLINE = "Full Inline"
     RENAME = "Renamed"
     DUPLICATE = "Duplicate"
+    COLLISSION = "Collission"
 
     # Function changes
     FUNC_ADD = "Function added"

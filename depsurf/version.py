@@ -14,7 +14,7 @@ DEB_PATH = DATA_PATH / "ddeb"
 
 FLAVOR_NAMES = {
     "generic": "Generic",
-    "lowlatency": "Lat",
+    "lowlatency": "low-lat",
     "aws": "AWS",
     "azure": "Azure",
     "gcp": "GCP",
