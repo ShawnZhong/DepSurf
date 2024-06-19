@@ -128,10 +128,6 @@ class LinuxImage:
     def tracepoints(self) -> Tracepoints:
         return Tracepoints.from_dump(self.version.tracepoints_path)
 
-    @property
-    def tracepoints_extractor(self) -> TracepointsExtractor:
-        return TracepointsExtractor(self.btf, self.filebytes, self.symtab)
-
     @cached_property
     def lsm_hooks(self):
         func_names = {

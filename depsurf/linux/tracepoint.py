@@ -16,7 +16,7 @@ from .symtab import SymbolTable
 
 @dataclass
 class TracepointInfo:
-    flags: int
+    # flags: int
     class_name: str
     event_name: str
     func_name: str
@@ -98,7 +98,7 @@ class TracepointsExtractor:
             return
 
         return TracepointInfo(
-            flags=flags,
+            # flags=flags,
             class_name=class_name,
             event_name=self.event_names[ptr],
             func_name=func_name,

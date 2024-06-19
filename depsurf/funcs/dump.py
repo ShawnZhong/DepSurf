@@ -34,13 +34,6 @@ class FunctionRecorder:
                     continue
                 yield func
 
-    def dump(self, path: Path):
-        with open(path, "w") as f:
-            for func in self.iter_funcs():
-                print(func.to_json(), file=f)
-
-        logging.info(f"Dumped to {path}")
-
     def get_or_create_entry(self, die: DIE, traverser: Traverser) -> FuncEntry:
         name = get_name(die)
         assert name is not None, f"{die.offset:#x}"
@@ -189,6 +182,7 @@ class FunctionRecorder:
 
     @classmethod
     def from_path(cls, path: Path, cus_mapper=None, debug=False):
+        logging.info(f"Dumping functions from {path}")
         with path.open("rb") as f:
             elffile = ELFFile(f)
             dwarfinfo = elffile.get_dwarf_info(relocate_dwarf_sections=False)
@@ -199,6 +193,13 @@ class FunctionRecorder:
             del dwarfinfo
             del elffile
         return obj
+
+    def dump(self, path: Path):
+        with open(path, "w") as f:
+            for func in self.iter_funcs():
+                print(func.to_json(), file=f)
+
+        logging.info(f"Dumped to {path}")
 
 
 @check_result_path

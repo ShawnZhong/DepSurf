@@ -61,9 +61,6 @@ def prep(v: Version, overwrite: bool = False):
         result_path=v.tracepoints_path,
         overwrite=overwrite,
     )
-
-
-def prep_dwarf(v: Version, overwrite: bool = False):
     dump_dwarf_funcs(
         v.vmlinux_path,
         result_path=v.dwarf_funcs_path,
