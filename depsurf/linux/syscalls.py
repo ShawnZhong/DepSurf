@@ -1,14 +1,16 @@
+import json
 import logging
-from typing import Iterable
-from functools import cached_property
+from typing import Iterable, Tuple
+
+from depsurf.utils import check_result_path
 
 from .filebytes import FileBytes
 from .symtab import SymbolTable
 
-SYSCALL_PREFIXES = ["stub_", "sys_", "ppc_", "ppc64_"]
+SYSCALL_PREFIXES = ["stub_", "sys_", "ppc_", "ppc64_", "sys32_"]
 
 
-class Syscalls:
+class SyscallExtracter:
     def __init__(self, symtab: SymbolTable, filebytes: FileBytes):
         self.symtab = symtab
         self.filebytes = filebytes
@@ -37,10 +39,10 @@ class Syscalls:
             ):
                 self.addr_to_name[sym["value"]] = sym["name"]
 
+    def iter_syscall(self) -> Iterable[Tuple[str, int]]:
         assert self.table_addr is not None
         assert self.table_size is not None
 
-    def iter_syscall(self) -> Iterable[str]:
         for i, ptr in enumerate(
             range(
                 self.table_addr,
@@ -58,6 +60,11 @@ class Syscalls:
                 logging.debug(f"{i}: {ptr:x} -> {val:x} -> {name}")
                 yield name, i
 
-    @cached_property
-    def syscalls(self):
-        return {name: 0 for name, i in self.iter_syscall()}
+
+@check_result_path
+def dump_syscalls(img, result_path):
+    extractor = SyscallExtracter(img.symtab, img.filebytes)
+    syscalls = {name: i for name, i in extractor.iter_syscall()}
+    with open(result_path, "w") as f:
+        json.dump(syscalls, f)
+    logging.info(f"Saved syscalls to {result_path}")

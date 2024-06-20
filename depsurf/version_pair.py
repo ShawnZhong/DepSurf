@@ -102,7 +102,7 @@ class VersionPair:
 
             changes = kind.differ(old, new)
             if len(changes) == 0:
-                if kind == DepKind.TRACEPOINT:
+                if kind in (DepKind.TRACEPOINT, DepKind.SYSCALL):
                     continue
                 logging.error(f"Diff found but no changes: {name}")
                 logging.error(f"Old: {old}")

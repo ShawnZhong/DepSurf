@@ -165,6 +165,10 @@ class Version:
     def dwarf_funcs_path(self):
         return DATA_PATH / "dwarf_funcs" / f"{self.name}.jsonl"
 
+    @property
+    def syscalls_path(self):
+        return DATA_PATH / "syscalls" / f"{self.name}.json"
+
     @cached_property
     def img(self) -> "LinuxImage":
         from depsurf.linux_image import LinuxImage

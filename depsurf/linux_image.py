@@ -1,3 +1,4 @@
+import json
 import re
 from functools import cached_property
 from pathlib import Path
@@ -12,7 +13,6 @@ from depsurf.linux import (
     FileBytes,
     Sections,
     SymbolTable,
-    Syscalls,
     Tracepoints,
     get_configs,
 )
@@ -65,7 +65,7 @@ class LinuxImage:
         elif kind == DepKind.ENUM:
             return self.btf.enums
         elif kind == DepKind.SYSCALL:
-            return self.syscalls.syscalls
+            return self.syscalls
         elif kind == DepKind.CONFIG:
             return self.configs
         raise ValueError(f"Unknown DepKind: {kind}")
@@ -108,8 +108,9 @@ class LinuxImage:
         return Sections(self.elffile)
 
     @cached_property
-    def syscalls(self) -> Syscalls:
-        return Syscalls(self.symtab, self.filebytes)
+    def syscalls(self) -> Dict[str, int]:
+        with open(self.version.syscalls_path) as f:
+            return json.load(f)
 
     @cached_property
     def func_groups(self) -> FuncGroups:

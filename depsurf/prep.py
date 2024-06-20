@@ -5,6 +5,7 @@ from depsurf.linux import (
     dump_tracepoints,
     extract_btf,
     extract_deb,
+    dump_syscalls,
 )
 from depsurf.version import Version
 from depsurf.linux_image import LinuxImage
@@ -64,5 +65,10 @@ def prep(v: Version, overwrite: bool = False):
     dump_dwarf_funcs(
         v.vmlinux_path,
         result_path=v.dwarf_funcs_path,
+        overwrite=overwrite,
+    )
+    dump_syscalls(
+        img=v.img,
+        result_path=v.syscalls_path,
         overwrite=overwrite,
     )
