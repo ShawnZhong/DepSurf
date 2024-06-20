@@ -72,8 +72,8 @@ DEP_MAPPING: Dict[Dep, List[Dep]] = {
     DepKind.TRACEPOINT("sys_exit_init"): [],
     DepKind.TRACEPOINT("sys_enter_submit"): [],
     DepKind.TRACEPOINT("sys_exit_submit"): [],
-    DepKind.TRACEPOINT("sys_enter"): [],
-    DepKind.TRACEPOINT("sys_exit"): [],
+    # DepKind.TRACEPOINT("sys_enter"): [],
+    # DepKind.TRACEPOINT("sys_exit"): [],
     DepKind.TRACEPOINT("trace_sys_enter"): [],
     DepKind.TRACEPOINT("trace_sys_exit"): [
         DepKind.SYSCALL("read"),

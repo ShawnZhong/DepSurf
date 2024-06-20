@@ -140,7 +140,8 @@ class DepStatus:
 
     def print(self, file=None, nindent=0):
         indent = "\t" * nindent
-        print(f"{indent}In {self.version}: {self.issues}", file=file)
+        issues_str = str(self.issues) if self.issues else "No issues"
+        print(f"{indent}In {self.version}: {issues_str}", file=file)
 
         if self.func_group:
             for func in self.func_group:

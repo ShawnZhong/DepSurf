@@ -27,4 +27,5 @@ def iter_bcc_objects():
         yield obj
 
 
-FONT_PATH = Path(__file__).parent / "Inconsolata_ExtraCondensed-Medium.ttf"
+FONT_MONO = Path(__file__).parent / "Inconsolata_ExtraCondensed-Medium.ttf"
+FONT_SANS = Path(__file__).parent / "NotoSans-SemiBold.ttf"
