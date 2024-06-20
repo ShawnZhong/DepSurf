@@ -126,26 +126,12 @@ class Version:
         return DATA_PATH / "config" / f"{self.name}.config"
 
     @property
-    def config_abs_path(self):
-        return f"/usr/lib/linux/{self.short_name}/config"
-
-    @property
     def vmlinux_path(self):
         return DATA_PATH / "vmlinux" / self.name
 
     @property
-    def vmlinux_abs_path(self):
-        return f"/usr/lib/debug/boot/vmlinux-{self.short_name}"
-
-    @property
     def vmlinuz_path(self):
         return DATA_PATH / "vmlinuz" / self.name
-
-    @property
-    def vmlinuz_abs_path(self):
-        if self.arch == "ppc64el":
-            return f"/boot/vmlinux-{self.short_name}"
-        return f"/boot/vmlinuz-{self.short_name}"
 
     @property
     def btf_path(self):

@@ -8,7 +8,7 @@ from depsurf.dep import DepKind
 from depsurf.issues import IssueEnum
 
 
-VERSIONS_ALL = sorted(Version.from_path(p) for p in DDEB_PATH.iterdir())
+VERSIONS_ALL = sorted(Version.from_path(p) for p in DDEB_PATH.glob("*.deb"))
 VERSIONS_REV = [
     v
     for v in VERSIONS_ALL
