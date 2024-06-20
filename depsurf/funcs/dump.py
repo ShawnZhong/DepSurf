@@ -203,7 +203,7 @@ class FunctionRecorder:
 
 
 @check_result_path
-def dump_dwarf_funcs(path: Path, result_path: Path):
+def dump_funcs(path: Path, result_path: Path):
     disable_dwarf_cache()
 
     FunctionRecorder.from_path(path).dump(result_path)

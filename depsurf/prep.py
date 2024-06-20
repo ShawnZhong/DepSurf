@@ -1,5 +1,5 @@
 from depsurf.btf import dump_btf_header, dump_btf_json, dump_btf_txt, normalize_btf
-from depsurf.funcs import dump_dwarf_funcs
+from depsurf.funcs import dump_funcs
 from depsurf.linux import (
     dump_symtab,
     dump_tracepoints,
@@ -62,7 +62,7 @@ def prep(v: Version, overwrite: bool = False):
         result_path=v.tracepoints_path,
         overwrite=overwrite,
     )
-    dump_dwarf_funcs(
+    dump_funcs(
         v.vmlinux_path,
         result_path=v.funcs_path,
         overwrite=overwrite,
