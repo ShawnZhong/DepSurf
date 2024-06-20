@@ -3,12 +3,12 @@ from enum import StrEnum
 from typing import Dict, Iterator, List, Tuple
 
 from depsurf.version_pair import VersionPair
-from depsurf.version import DEB_PATH, Version
+from depsurf.version import DDEB_PATH, Version
 from depsurf.dep import DepKind
 from depsurf.issues import IssueEnum
 
 
-VERSIONS_ALL = sorted(Version.from_path(p) for p in DEB_PATH.iterdir())
+VERSIONS_ALL = sorted(Version.from_path(p) for p in DDEB_PATH.iterdir())
 VERSIONS_REV = [
     v
     for v in VERSIONS_ALL

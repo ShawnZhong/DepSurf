@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 
 PROJ_PATH = Path(__file__).parent.parent
 DATA_PATH = PROJ_PATH / "data"
-DEB_PATH = DATA_PATH / "ddeb"
+DDEB_PATH = DATA_PATH / "ddeb"
 
 FLAVOR_NAMES = {
     "generic": "Generic",
@@ -110,8 +110,12 @@ class Version:
         ]
 
     @property
-    def deb_path(self):
-        return DEB_PATH / f"{self.name}.deb"
+    def dbgsym_deb_path(self):
+        return DDEB_PATH / f"{self.name}.deb"
+
+    @property
+    def image_deb_path(self):
+        return DATA_PATH / "deb" / f"{self.name}.deb"
 
     @property
     def buildinfo_path(self):
@@ -132,6 +136,16 @@ class Version:
     @property
     def vmlinux_abs_path(self):
         return f"/usr/lib/debug/boot/vmlinux-{self.short_name}"
+
+    @property
+    def vmlinuz_path(self):
+        return DATA_PATH / "vmlinuz" / self.name
+
+    @property
+    def vmlinuz_abs_path(self):
+        if self.arch == "ppc64el":
+            return f"/boot/vmlinux-{self.short_name}"
+        return f"/boot/vmlinuz-{self.short_name}"
 
     @property
     def btf_path(self):
@@ -184,11 +198,3 @@ class Version:
 
     def __setstate__(self, state):
         self.__dict__.update(state)
-
-    # @property
-    # def vmlinuz_abs_path(self):
-    #     return f"./boot/vmlinuz-{self.short_name}"
-
-    # @property
-    # def vmlinuz_path(self):
-    #     return DATA_PATH / "vmlinuz" / self.name

@@ -14,12 +14,23 @@ from depsurf.linux_image import LinuxImage
 def prep(v: Version, overwrite: bool = False):
     LinuxImage.disable_cache()
 
+    # Extract the Linux image with debug info
     extract_deb(
-        deb_path=v.deb_path,
+        deb_path=v.dbgsym_deb_path,
         file_path=v.vmlinux_abs_path,
         result_path=v.vmlinux_path,
         overwrite=overwrite,
     )
+
+    # Extract the boot image
+    extract_deb(
+        deb_path=v.image_deb_path,
+        file_path=v.vmlinuz_abs_path,
+        result_path=v.vmlinuz_path,
+        overwrite=overwrite,
+    )
+
+    # Extract the config file
     if v.buildinfo_path.exists():
         extract_deb(
             deb_path=v.buildinfo_path,
@@ -27,6 +38,7 @@ def prep(v: Version, overwrite: bool = False):
             result_path=v.config_path,
             overwrite=False,
         )
+
     extract_btf(
         vmlinux_path=v.vmlinux_path,
         result_path=v.btf_path,
