@@ -14,7 +14,6 @@ from depsurf.linux import (
     SymbolTable,
     Syscalls,
     Tracepoints,
-    TracepointsExtractor,
     get_configs,
 )
 from depsurf.version import Version

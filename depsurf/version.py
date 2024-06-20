@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 
 
 if TYPE_CHECKING:
-    from .image import LinuxImage
+    from .linux_image import LinuxImage
 
 PROJ_PATH = Path(__file__).parent.parent
 DATA_PATH = PROJ_PATH / "data"
@@ -167,7 +167,7 @@ class Version:
 
     @cached_property
     def img(self) -> "LinuxImage":
-        from depsurf.image import LinuxImage
+        from depsurf.linux_image import LinuxImage
 
         return LinuxImage.from_version(self)
 
