@@ -1,6 +1,7 @@
 from pathlib import Path
 
-PROJ_PATH = Path(__file__).parent.parent
+UTILS_PATH = Path(__file__).parent
+PROJ_PATH = UTILS_PATH.parent
 
 OUTPUT_PATH = PROJ_PATH / "output"
 REPORT_PATH = OUTPUT_PATH / "report"
@@ -27,5 +28,6 @@ def iter_bcc_objects():
         yield obj
 
 
-FONT_MONO = Path(__file__).parent / "Inconsolata_ExtraCondensed-Medium.ttf"
-FONT_SANS = Path(__file__).parent / "NotoSans-SemiBold.ttf"
+FONTS_PATH = UTILS_PATH / "fonts"
+FONT_MONO = FONTS_PATH / "Inconsolata_ExtraCondensed-Medium.ttf"
+FONT_SANS = FONTS_PATH / "NotoSans-SemiBold.ttf"
