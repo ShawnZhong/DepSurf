@@ -64,7 +64,7 @@ def prep(v: Version, overwrite: bool = False):
     )
     dump_dwarf_funcs(
         v.vmlinux_path,
-        result_path=v.dwarf_funcs_path,
+        result_path=v.funcs_path,
         overwrite=overwrite,
     )
     dump_syscalls(

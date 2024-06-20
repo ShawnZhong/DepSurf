@@ -162,8 +162,8 @@ class Version:
         return DATA_PATH / "tracepoints" / f"{self.name}.jsonl"
 
     @property
-    def dwarf_funcs_path(self):
-        return DATA_PATH / "dwarf_funcs" / f"{self.name}.jsonl"
+    def funcs_path(self):
+        return DATA_PATH / "funcs" / f"{self.name}.jsonl"
 
     @property
     def syscalls_path(self):

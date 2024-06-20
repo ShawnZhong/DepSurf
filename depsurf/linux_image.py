@@ -110,11 +110,12 @@ class LinuxImage:
     @cached_property
     def syscalls(self) -> Dict[str, int]:
         with open(self.version.syscalls_path) as f:
-            return json.load(f)
+            syscalls = json.load(f)
+            return {v: 0 for v in syscalls.values()}
 
     @cached_property
     def func_groups(self) -> FuncGroups:
-        return FuncGroups.from_dump(self.version.dwarf_funcs_path)
+        return FuncGroups.from_dump(self.version.funcs_path)
 
     @cached_property
     def btf(self) -> BTF:

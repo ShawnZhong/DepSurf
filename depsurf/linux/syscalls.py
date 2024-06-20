@@ -7,7 +7,7 @@ from depsurf.utils import check_result_path
 from .filebytes import FileBytes
 from .symtab import SymbolTable
 
-SYSCALL_PREFIXES = ["stub_", "sys_", "ppc_", "ppc64_", "sys32_"]
+SYSCALL_PREFIXES = ["stub_", "sys_", "ppc_", "ppc64_", "sys32_x32_"]
 
 
 class SyscallExtracter:
@@ -64,7 +64,7 @@ class SyscallExtracter:
 @check_result_path
 def dump_syscalls(img, result_path):
     extractor = SyscallExtracter(img.symtab, img.filebytes)
-    syscalls = {name: i for name, i in extractor.iter_syscall()}
+    syscalls = {i: name for name, i in extractor.iter_syscall()}
     with open(result_path, "w") as f:
-        json.dump(syscalls, f)
+        json.dump(syscalls, f, indent=2)
     logging.info(f"Saved syscalls to {result_path}")
