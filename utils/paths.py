@@ -30,4 +30,3 @@ def iter_bcc_objects():
 
 FONTS_PATH = UTILS_PATH / "fonts"
 FONT_MONO = FONTS_PATH / "Inconsolata_ExtraCondensed-Medium.ttf"
-FONT_SANS = FONTS_PATH / "NotoSans-SemiBold.ttf"
