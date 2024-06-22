@@ -140,7 +140,7 @@ class IssueEnum(StrEnum):
             self.ADD: "" if not emoji else "🔺",  # "+"
             self.REMOVE: "" if not emoji else "🔻",  # "-"
             self.NO_CHANGE: "",  # ".",
-            self.CHANGE: r"$\Delta$",
+            self.CHANGE: r"$\Delta$" if not emoji else "Δ",
             self.BOTH_ABSENT: "",
             # Fuction status
             self.PARTIAL_INLINE: "P" if not emoji else "🟡P",
@@ -178,9 +178,8 @@ class IssueList:
             return "lightgray"
         return "tab:red"
 
-    @property
-    def text(self):
-        return "".join([e.get_symbol() for e in self.issues])
+    def get_symbol(self, emoji=False):
+        return "".join([e.get_symbol(emoji=emoji) for e in self.issues])
 
     def __iter__(self):
         return iter(self.issues)
