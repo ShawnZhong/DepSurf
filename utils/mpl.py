@@ -23,10 +23,6 @@ def setup_matplotlib():
 setup_matplotlib()
 
 
-def bold(text):
-    return f"$\\mathbf{{{text}}}$"
-
-
 def get_text_height(ax: Axes):
     text = Text(text="0", figure=ax.figure)
     return text.get_window_extent().height

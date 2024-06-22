@@ -9,6 +9,18 @@ from .paths import TAB_PATH
 GRAY_DASH = r"\color{lightgray}{-}"
 
 
+def underline(text: str):
+    return f"\\underline{{{text}}}"
+
+
+def text_color(text: str, color: str):
+    return f"\\textcolor{{{color}}}{{{text}}}"
+
+
+def bold(text: str):
+    return f"\\textbf{{{text}}}"
+
+
 def remove_double_rules(latex: str):
     return latex.replace("\\midrule\n\\bottomrule", "\\bottomrule")
 
