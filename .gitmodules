@@ -10,3 +10,6 @@
 [submodule "csrc/bpftool"]
 	path = csrc/bpftool
 	url = https://github.com/libbpf/bpftool.git
+[submodule "csrc/tracee"]
+	path = csrc/tracee
+	url = git@github.com:aquasecurity/tracee.git
