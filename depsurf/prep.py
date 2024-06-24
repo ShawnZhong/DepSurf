@@ -50,6 +50,13 @@ def prep(v: Version, overwrite: bool = False):
             result_path=v.config_path,
             overwrite=False,
         )
+    else:
+        extract_deb(
+            deb_path=v.modules_deb_path,
+            file_path=f"/boot/config-{v.short_name}",
+            result_path=v.config_path,
+            overwrite=overwrite,
+        )
 
     extract_btf(
         vmlinux_path=v.vmlinux_path,
