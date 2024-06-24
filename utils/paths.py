@@ -16,7 +16,8 @@ TAB_PATH = PAPER_PATH / "tabs"
 FIG_PATH = PAPER_PATH / "figs"
 
 BCC_PATH = PROJ_PATH / "csrc" / "bcc"
-BCC_OBJ_PATH = BCC_PATH / "libbpf-tools" / ".output"
+BCC_TOOLS_PATH = BCC_PATH / "libbpf-tools"
+BCC_OBJ_PATH = BCC_TOOLS_PATH / ".output"
 
 
 def iter_bcc_objects():

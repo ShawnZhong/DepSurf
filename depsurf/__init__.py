@@ -1,13 +1,13 @@
 import logging
 
-from .bpf import *
+from .bpf_program import *
 from .btf import *
 from .dep import *
 from .diff import *
 from .funcs import *
-from .linux_image import *
 from .issues import *
 from .linux import *
+from .linux_image import *
 from .prep import *
 from .report import *
 from .utils import *

@@ -1,14 +1,15 @@
-from depsurf.btf import dump_btf_header, dump_btf_json, dump_btf_txt, normalize_btf
+from depsurf.btf import normalize_btf
 from depsurf.funcs import dump_funcs
 from depsurf.linux import (
     dump_symtab,
+    dump_syscalls,
     dump_tracepoints,
     extract_btf,
     extract_deb,
-    dump_syscalls,
 )
-from depsurf.version import Version
 from depsurf.linux_image import LinuxImage
+from depsurf.utils import dump_btf_header, dump_btf_json, dump_btf_txt
+from depsurf.version import Version
 
 
 def prep(v: Version, overwrite: bool = False):

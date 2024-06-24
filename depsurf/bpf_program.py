@@ -1,25 +1,115 @@
 from functools import cached_property
-from typing import List, Dict
 from pathlib import Path
+from typing import Dict, List
 
 from elftools.elf.elffile import ELFFile
 
-from depsurf.btf import BTF, dump_btf_json, dump_btf_txt, get_bpftool_path
+from depsurf.btf import BTF
 from depsurf.dep import Dep, DepKind
-from depsurf.utils import check_result_path, system
+from depsurf.utils import dump_btf_json, dump_btf_txt, gen_min_btf
 
 
-@check_result_path
-def gen_min_btf(obj_file, result_path, debug=False):
-    debug_arg = "-d" if debug else ""
-    system(
-        f"{get_bpftool_path()} {debug_arg} gen min_core_btf {obj_file} {result_path} {obj_file}"
-    )
+class BPFProgram:
+    DEP_MAPPING: Dict[Dep, List[Dep]] = {}
+
+    def __init__(self, path: Path):
+        self.path = path
+        self.file = open(path, "rb")
+        self.elffile = ELFFile(self.file)
+
+    def __del__(self):
+        self.file.close()
+
+    @property
+    def name(self):
+        return self.path.name.removesuffix(".o").removesuffix(".bpf")
+
+    @property
+    def btf_file(self):
+        return self.path.with_suffix(".min.btf")
+
+    @property
+    def btf_json_file(self):
+        return self.path.with_suffix(".min.btf.json")
+
+    @property
+    def btf_txt_file(self):
+        return self.path.with_suffix(".min.btf.txt")
+
+    @property
+    def hook_names(self):
+        return [
+            section.name
+            for section in self.elffile.iter_sections()
+            if not section.name.startswith(".")
+            and section.name != "license"
+            and section.header.sh_type == "SHT_PROGBITS"
+        ]
+
+    @property
+    def deps_hook(self) -> List[Dep]:
+        results = []
+        for hook_name in self.hook_names:
+            kind = DepKind.from_hook_name(hook_name)
+            if "/" in hook_name:
+                name = hook_name.rsplit("/", 1)[-1]
+            else:
+                name = ""
+
+            for prefix in ["sys_enter_", "sys_exit_"]:
+                if kind == DepKind.SYSCALL and name.startswith(prefix):
+                    name = name[len(prefix) :]
+
+            results.append(Dep(kind, name))
+
+        return results
+
+    @property
+    def deps_struct(self) -> list[Dep]:
+        gen_min_btf(
+            self.path,
+            result_path=self.btf_file,
+            overwrite=False,
+            slient=True,
+        )
+        dump_btf_json(
+            self.btf_file,
+            result_path=self.btf_json_file,
+            overwrite=False,
+            slient=True,
+        )
+        dump_btf_txt(
+            self.btf_file,
+            result_path=self.btf_txt_file,
+            overwrite=False,
+            slient=True,
+        )
+        btf = BTF.from_raw_json(self.btf_json_file)
+
+        results = []
+        for name, struct in btf.structs.items():
+            name = name.split("___")[0]
+            if name == "user_pt_regs":
+                continue
+            results.append(DepKind.STRUCT(name))
+            for member in struct["members"]:
+                results.append(DepKind.FIELD(f"{name}::{member['name']}"))
+
+        return results
+
+    @cached_property
+    def deps(self) -> list[Dep]:
+        deps = []
+        for dep in set(self.deps_hook + self.deps_struct):
+            if dep in BPFProgram.DEP_MAPPING:
+                deps.extend(BPFProgram.DEP_MAPPING[dep])
+            else:
+                deps.append(dep)
+        return sorted(deps)
 
 
-DEP_MAPPING: Dict[Dep, List[Dep]] = {
+BPFProgram.DEP_MAPPING = {
     # Used by fsdist and fsslower
-    # Note that only ext4 is built in the kernel by default
     # Ref: https://github.com/iovisor/bcc/blob/fef9003e2e2f29c893543d49b762dd413a352f05/libbpf-tools/fsdist.c#L42-L81
     DepKind.FUNC("dummy_file_read"): [DepKind.FUNC("ext4_file_read_iter")],
     DepKind.FUNC("dummy_file_write"): [DepKind.FUNC("ext4_file_write_iter")],
@@ -524,100 +614,3 @@ DEP_MAPPING: Dict[Dep, List[Dep]] = {
         DepKind.SYSCALL("sched_rr_get_interval_time32"),
     ],
 }
-
-
-class BPFObject:
-    def __init__(self, path: Path):
-        self.path = path
-        self.file = open(path, "rb")
-        self.elffile = ELFFile(self.file)
-
-    def __del__(self):
-        self.file.close()
-
-    @property
-    def name(self):
-        return self.path.name.removesuffix(".o").removesuffix(".bpf")
-
-    @property
-    def btf_file(self):
-        return self.path.with_suffix(".min.btf")
-
-    @property
-    def btf_json_file(self):
-        return self.path.with_suffix(".min.btf.json")
-
-    @property
-    def btf_txt_file(self):
-        return self.path.with_suffix(".min.btf.txt")
-
-    @property
-    def hook_names(self):
-        return [
-            section.name
-            for section in self.elffile.iter_sections()
-            if not section.name.startswith(".")
-            and section.name != "license"
-            and section.header.sh_type == "SHT_PROGBITS"
-        ]
-
-    @property
-    def deps_hook(self) -> List[Dep]:
-        results = []
-        for hook_name in self.hook_names:
-            kind = DepKind.from_hook_name(hook_name)
-            if "/" in hook_name:
-                name = hook_name.rsplit("/", 1)[-1]
-            else:
-                name = ""
-
-            for prefix in ["sys_enter_", "sys_exit_"]:
-                if kind == DepKind.SYSCALL and name.startswith(prefix):
-                    name = name[len(prefix) :]
-
-            results.append(Dep(kind, name))
-
-        return results
-
-    @property
-    def deps_struct(self) -> list[Dep]:
-        gen_min_btf(
-            self.path,
-            result_path=self.btf_file,
-            overwrite=False,
-            slient=True,
-        )
-        dump_btf_json(
-            self.btf_file,
-            result_path=self.btf_json_file,
-            overwrite=False,
-            slient=True,
-        )
-        dump_btf_txt(
-            self.btf_file,
-            result_path=self.btf_txt_file,
-            overwrite=False,
-            slient=True,
-        )
-        btf = BTF.from_raw_json(self.btf_json_file)
-
-        results = []
-        for name, struct in btf.structs.items():
-            name = name.split("___")[0]
-            if name == "user_pt_regs":
-                continue
-            results.append(DepKind.STRUCT(name))
-            for member in struct["members"]:
-                results.append(DepKind.FIELD(f"{name}::{member['name']}"))
-
-        return results
-
-    @cached_property
-    def deps(self) -> list[Dep]:
-        deps = []
-        for dep in set(self.deps_hook + self.deps_struct):
-            if dep in DEP_MAPPING:
-                deps.extend(DEP_MAPPING[dep])
-            else:
-                deps.append(dep)
-        return sorted(deps)
