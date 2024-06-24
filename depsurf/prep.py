@@ -36,28 +36,29 @@ def prep(v: Version, overwrite: bool = False):
     )
 
     # Extract the config file
-    if v.buildinfo_path.exists():
+    if v.buildinfo_path.exists():  # from buildinfo
         extract_deb(
             deb_path=v.buildinfo_path,
             file_path=f"/usr/lib/linux/{v.short_name}/config",
             result_path=v.config_path,
             overwrite=False,
         )
-    elif v.version_tuple not in [(4, 15, 0), (4, 18, 0)]:
-        extract_deb(
-            deb_path=v.image_deb_path,
-            file_path=f"/boot/config-{v.short_name}",
-            result_path=v.config_path,
-            overwrite=False,
-        )
-    else:
+    elif v.modules_deb_path.exists():  # from modules
         extract_deb(
             deb_path=v.modules_deb_path,
             file_path=f"/boot/config-{v.short_name}",
             result_path=v.config_path,
             overwrite=overwrite,
         )
+    else:  # from image
+        extract_deb(
+            deb_path=v.image_deb_path,
+            file_path=f"/boot/config-{v.short_name}",
+            result_path=v.config_path,
+            overwrite=False,
+        )
 
+    # Extract the raw BTF
     extract_btf(
         vmlinux_path=v.vmlinux_path,
         result_path=v.btf_path,
@@ -78,6 +79,8 @@ def prep(v: Version, overwrite: bool = False):
         result_path=v.btf_header_path,
         overwrite=overwrite,
     )
+
+    # Dump the normalized BTF, symbol table, tracepoints, functions, and syscalls
     normalize_btf(
         v.btf_json_path,
         result_path=v.btf_norm_path,
