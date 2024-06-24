@@ -10,7 +10,6 @@ if TYPE_CHECKING:
 
 PROJ_PATH = Path(__file__).parent.parent
 DATA_PATH = PROJ_PATH / "data"
-DDEB_PATH = DATA_PATH / "ddeb"
 
 FLAVOR_NAMES = {
     "generic": "Generic",
@@ -111,11 +110,15 @@ class Version:
 
     @property
     def dbgsym_deb_path(self):
-        return DDEB_PATH / f"{self.name}.deb"
+        return DATA_PATH / "image_dbgsym" / f"{self.name}.deb"
 
     @property
     def image_deb_path(self):
-        return DATA_PATH / "deb" / f"{self.name}.deb"
+        return DATA_PATH / "image" / f"{self.name}.deb"
+
+    @property
+    def modules_deb_path(self):
+        return DATA_PATH / "modules" / f"{self.name}.deb"
 
     @property
     def buildinfo_path(self):
