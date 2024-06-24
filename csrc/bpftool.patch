@@ -1,0 +1,13 @@
+diff --git a/src/gen.c b/src/gen.c
+index b3979dd..5eaeb1c 100644
+--- a/src/gen.c
++++ b/src/gen.c
+@@ -2355,8 +2355,6 @@ static int btfgen_record_obj(struct btfgen_info *info, const char *obj_path)
+ 
+ 			err = bpf_core_calc_relo_insn(sec_name, relo, relo_idx, btf, cands,
+ 						      specs_scratch, &targ_res);
+-			if (err)
+-				goto out;
+ 
+ 			/* specs_scratch[2] is the target spec */
+ 			err = btfgen_record_reloc(info, &specs_scratch[2]);
