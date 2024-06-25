@@ -49,13 +49,14 @@ def use_midrule(latex: str):
     return re.sub(r"\\cline{.*?}", r"\\midrule", latex)
 
 
-def save_latex(latex: str, name: str, path: Path = TAB_PATH, rotate=True):
+def save_latex(latex: str, name: str, path: Path = TAB_PATH, rotate=True, midrule=True):
     path.mkdir(parents=True, exist_ok=True)
     filepath = path / f"{name}.tex"
 
     latex = latex.replace("#", "\\#")
     latex = latex.replace("%", "\\%")
-    latex = use_midrule(latex)
+    if midrule:
+        latex = use_midrule(latex)
     latex = remove_double_rules(latex)
     if rotate:
         latex = rotate_multirow(latex)
