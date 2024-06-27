@@ -110,19 +110,19 @@ class Version:
 
     @property
     def dbgsym_deb_path(self):
-        return DATA_PATH / "image_dbgsym" / f"{self.name}.deb"
+        return DATA_PATH / "deb_dbgsym" / f"{self.name}.deb"
 
     @property
     def image_deb_path(self):
-        return DATA_PATH / "image" / f"{self.name}.deb"
+        return DATA_PATH / "deb_image" / f"{self.name}.deb"
 
     @property
     def modules_deb_path(self):
-        return DATA_PATH / "modules" / f"{self.name}.deb"
+        return DATA_PATH / "deb_modules" / f"{self.name}.deb"
 
     @property
     def buildinfo_path(self):
-        return DATA_PATH / "buildinfo" / f"{self.name}.deb"
+        return DATA_PATH / "deb_buildinfo" / f"{self.name}.deb"
 
     @property
     def config_path(self):
