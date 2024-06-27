@@ -41,7 +41,7 @@ def prep(v: Version, overwrite: bool = False):
             deb_path=v.buildinfo_path,
             file_path=f"/usr/lib/linux/{v.short_name}/config",
             result_path=v.config_path,
-            overwrite=False,
+            overwrite=overwrite,
         )
     elif v.modules_deb_path.exists():  # from modules
         extract_deb(
@@ -55,7 +55,7 @@ def prep(v: Version, overwrite: bool = False):
             deb_path=v.image_deb_path,
             file_path=f"/boot/config-{v.short_name}",
             result_path=v.config_path,
-            overwrite=False,
+            overwrite=overwrite,
         )
 
     # Extract the raw BTF
