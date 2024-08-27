@@ -132,21 +132,22 @@ class IssueEnum(StrEnum):
             self.FIELD_TYPE: struct_cmap(0.7),
         }[self]
 
-    def get_symbol(self, emoji=False):
+    def get_symbol(self):
         return {
             # Generic
-            self.OK: "" if not emoji else "✅",
-            self.ABSENT: "" if not emoji else "❌",  # "✗"
-            self.ADD: "" if not emoji else "🔺",  # "+"
-            self.REMOVE: "" if not emoji else "🔻",  # "-"
-            self.NO_CHANGE: "",  # ".",
-            self.CHANGE: r"$\Delta$" if not emoji else "Δ",
+            self.OK: "",
+            self.ABSENT: "",
+            self.ADD: "",
+            self.REMOVE: "",
+            self.NO_CHANGE: "",
+            self.CHANGE: r"$\Delta$",
             self.BOTH_ABSENT: "",
             # Fuction status
-            self.PARTIAL_INLINE: "P" if not emoji else "🟡P",
-            self.FULL_INLINE: "F" if not emoji else "🟠F",
-            self.RENAME: "R" if not emoji else "🔵R",
-            self.DUPLICATE: "D" if not emoji else "🟣D",
+            self.PARTIAL_INLINE: "P",
+            self.FULL_INLINE: "F",
+            self.RENAME: "R",
+            self.DUPLICATE: "D",
+            self.COLLISSION: "C",
             # Function changes
             self.PARAM_ADD: "P+",
             self.PARAM_REMOVE: "P-",
@@ -178,8 +179,8 @@ class IssueList:
             return "lightgray"
         return "tab:red"
 
-    def get_symbol(self, emoji=False):
-        return "".join([e.get_symbol(emoji=emoji) for e in self.issues])
+    def get_symbol(self):
+        return "".join([e.get_symbol() for e in self.issues])
 
     def __iter__(self):
         return iter(self.issues)
