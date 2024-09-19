@@ -75,7 +75,7 @@ class FuncGroups:
 
 
 @check_result_path
-def dump_funcs_groups(funcs_path: Path, symtab_path: Path, result_path: Path):
+def dump_func_groups(funcs_path: Path, symtab_path: Path, result_path: Path):
     functions: Dict[str, List[FuncEntry]] = defaultdict(list)
 
     with open(funcs_path, "r") as f:
