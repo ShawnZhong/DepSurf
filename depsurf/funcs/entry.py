@@ -28,11 +28,8 @@ class FuncEntry:
     def from_json(cls, s: str):
         return cls(**json.loads(s))
 
-    def to_dict(self) -> Dict:
-        return dataclasses.asdict(self)
-
     def to_json(self) -> str:
-        return json.dumps(self.to_dict())
+        return json.dumps(dataclasses.asdict(self))
 
     @property
     def inline_declared(self) -> bool:

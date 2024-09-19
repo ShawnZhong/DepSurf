@@ -89,12 +89,10 @@ class LinuxImage:
             if func_group is None:
                 return DepStatus(version=self.version, exists=False)
 
-            sym_group = self.symtab.func_sym_groups.get(dep.name)
             return DepStatus(
                 version=self.version,
                 exists=True,
                 func_group=func_group,
-                sym_group=sym_group,
             )
         else:
             return DepStatus(version=self.version, exists=self.get_dep(dep) is not None)
@@ -115,7 +113,7 @@ class LinuxImage:
 
     @cached_property
     def func_groups(self) -> FuncGroups:
-        return FuncGroups.from_dump(self.version.funcs_path)
+        return FuncGroups.from_dump(self.version.func_groups_path)
 
     @cached_property
     def btf(self) -> BTF:

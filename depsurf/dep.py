@@ -18,7 +18,6 @@ from depsurf.version import Version
 from depsurf.issues import IssueList
 from depsurf.utils import OrderedEnum
 from depsurf.funcs import CollisionType, FuncGroup, InlineType
-from depsurf.linux import FuncSymbolGroup
 
 
 class DepKind(OrderedEnum, StrEnum):
@@ -97,7 +96,6 @@ class DepStatus:
     version: Version
     exists: bool = True
     func_group: Optional[FuncGroup] = None
-    sym_group: Optional[FuncSymbolGroup] = None
 
     @property
     def issues(self) -> IssueList:
@@ -107,7 +105,7 @@ class DepStatus:
 
         if self.func_group:
             # collision
-            collision = self.func_group.get_collision_type()
+            collision = self.func_group.collision_type
             if collision == CollisionType.INCLUDE_DUP:
                 result.append(IssueEnum.DUPLICATE)
             elif collision in (
@@ -117,17 +115,15 @@ class DepStatus:
                 result.append(IssueEnum.COLLISSION)
 
             # inline
-            inline = self.func_group.get_inline_type(
-                in_symtab=self.sym_group is not None
-            )
+            inline = self.func_group.inline_type
             if inline == InlineType.FULL:
                 result.append(IssueEnum.FULL_INLINE)
             elif inline == InlineType.PARTIAL:
                 result.append(IssueEnum.PARTIAL_INLINE)
 
-        # rename
-        if self.sym_group and self.sym_group.has_suffix:
-            result.append(IssueEnum.RENAME)
+            # rename
+            if self.func_group.has_suffix:
+                result.append(IssueEnum.RENAME)
 
         return result
 
@@ -146,9 +142,6 @@ class DepStatus:
         if self.func_group:
             for func in self.func_group:
                 func.print_short(file=file, nindent=nindent + 1)
-
-        if self.sym_group:
-            self.sym_group.print(file=file, nindent=nindent + 1)
 
 
 @dataclass

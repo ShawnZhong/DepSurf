@@ -1,14 +1,19 @@
 import logging
+from collections import defaultdict
 from pathlib import Path
-from typing import Dict
+from typing import Dict, List
+
+from depsurf.utils import check_result_path
+from depsurf.linux import SymbolTable
 
 from .entry import FuncEntry
 from .group import FuncGroup
+from .symbol import get_func_symbols
 
 
 class FuncGroups:
-    def __init__(self, data=None):
-        self.data: Dict[str, FuncGroup] = data or {}
+    def __init__(self, data: Dict[str, FuncGroup]):
+        self.data: Dict[str, FuncGroup] = data
 
     @property
     def num_funcs(self):
@@ -55,26 +60,38 @@ class FuncGroups:
             print_func(f)
         logging.info(f"Saved {self} to {path}")
 
-    def get_df(self):
-        import pandas as pd
-
-        return pd.DataFrame([f.to_dict() for f in self.iter_funcs()])
-
     def __str__(self):
         return f"FuncGroups({self.num_groups} groups, {self.num_funcs} functions)"
 
     @classmethod
-    def from_dump(cls, path):
+    def from_dump(cls, path: Path):
         logging.info(f"Loading funcs from {path}")
         result: Dict[str, FuncGroup] = {}
         with open(path, "r") as f:
             for line in f:
-                func = FuncEntry.from_json(line)
-                group = result.get(func.name)
-                if group is None:
-                    group = FuncGroup([func])
-                    result[func.name] = group
-                else:
-                    group.add_func(func)
+                group = FuncGroup.from_json(line)
+                result[group.name] = group
+        return cls(data=result)
 
-        return cls(result)
+
+@check_result_path
+def dump_funcs_groups(funcs_path: Path, symtab_path: Path, result_path: Path):
+    functions: Dict[str, List[FuncEntry]] = defaultdict(list)
+
+    with open(funcs_path, "r") as f:
+        for line in f:
+            func = FuncEntry.from_json(line)
+            functions[func.name].append(func)
+
+    func_symbols = get_func_symbols(SymbolTable.from_dump(symtab_path))
+
+    data = {
+        name: FuncGroup.from_funcs(funcs, func_symbols.get(name) or [])
+        for name, funcs in functions.items()
+    }
+
+    with open(result_path, "w") as f:
+        for group in data.values():
+            print(group.to_json(), file=f)
+
+    logging.info(f"Dumped to {result_path}")

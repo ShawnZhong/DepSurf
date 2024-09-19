@@ -1,20 +1,4 @@
 from enum import StrEnum
-from depsurf.utils import OrderedEnum
-
-
-class CollisionType(StrEnum):
-    UNIQUE_GLOBAL = "Unique Global"
-    UNIQUE_STATIC = "Unique Static"
-    INCLUDE_DUP = "Static Duplication"
-    STATIC_STATIC = "Static-Static Collision"
-    STATIC_GLOBAL = "Static-Global Collision"
-
-
-class InlineType(OrderedEnum, StrEnum):
-    NOT = "Not inlined"
-    FULL = "Fully inlined"
-    PARTIAL = "Partially inlined"
-
 
 class RenameType(StrEnum):
     ISRA = "isra"

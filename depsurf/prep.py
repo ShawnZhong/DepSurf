@@ -1,5 +1,5 @@
 from depsurf.btf import normalize_btf
-from depsurf.funcs import dump_funcs
+from depsurf.funcs import dump_funcs, dump_funcs_groups
 from depsurf.linux import (
     dump_symtab,
     dump_syscalls,
@@ -91,14 +91,20 @@ def prep(v: Version, overwrite: bool = False):
         result_path=v.symtab_path,
         overwrite=overwrite,
     )
-    dump_tracepoints(
-        img=v.img,
-        result_path=v.tracepoints_path,
-        overwrite=overwrite,
-    )
     dump_funcs(
         v.vmlinux_path,
         result_path=v.funcs_path,
+        overwrite=overwrite,
+    )
+    dump_funcs_groups(
+        funcs_path=v.funcs_path,
+        symtab_path=v.symtab_path,
+        result_path=v.func_groups_path,
+        overwrite=overwrite,
+    )
+    dump_tracepoints(
+        img=v.img,
+        result_path=v.tracepoints_path,
         overwrite=overwrite,
     )
     dump_syscalls(

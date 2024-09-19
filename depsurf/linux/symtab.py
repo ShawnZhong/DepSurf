@@ -1,16 +1,16 @@
 import json
 import logging
-from functools import cached_property
-from typing import Dict, List, Optional
+from typing import Dict, List
+from pathlib import Path
 
-from elftools.elf.elffile import ELFFile, SymbolTableSection
+from elftools.elf.sections import SymbolTableSection
+from elftools.elf.elffile import ELFFile
 
 from depsurf.utils import check_result_path
-from depsurf.funcs import FuncSymbolGroup
 
 
 @check_result_path
-def dump_symtab(vmlinux_path, result_path):
+def dump_symtab(vmlinux_path: Path, result_path: Path):
     with open(vmlinux_path, "rb") as fin:
         elffile = ELFFile(fin)
 
@@ -55,29 +55,11 @@ class SymbolTable:
                 data.append(json.loads(line))
         return cls(data)
 
-    @cached_property
-    def func_sym_groups(self) -> Dict[str, FuncSymbolGroup]:
-        result = {}
-        for sym in self.iter_funcs():
-            name = sym["name"]
-            group_name = name.split(".")[0]
-            if group_name not in result:
-                result[group_name] = FuncSymbolGroup(group_name)
-            result[group_name].add(sym)
-
-        return result
-
     def get_symbols_by_name(self, name: str):
         return [sym for sym in self.data if sym["name"] == name]
 
     def get_symbols_by_addr(self, addr: int):
         return [sym for sym in self.data if sym["value"] == addr]
-
-    def iter_funcs(self):
-        for sym in self.data:
-            # Ref: https://github.com/torvalds/linux/commit/9f2899fe36a623885d8576604cb582328ad32b3c
-            if sym["type"] == "STT_FUNC" and not sym["name"].startswith("__pfx"):
-                yield sym
 
     def __repr__(self):
         return f"SymbolTable({len(self.data)} symbols)"

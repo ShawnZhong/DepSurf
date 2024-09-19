@@ -169,6 +169,10 @@ class Version:
         return DATA_PATH / "funcs" / f"{self.name}.jsonl"
 
     @property
+    def func_groups_path(self):
+        return DATA_PATH / "func_groups" / f"{self.name}.jsonl"
+
+    @property
     def syscalls_path(self):
         return DATA_PATH / "syscalls" / f"{self.name}.json"
 
