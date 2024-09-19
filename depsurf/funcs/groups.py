@@ -23,8 +23,8 @@ class FuncGroups:
     def num_groups(self):
         return len(self.data)
 
-    def add_group(self, name, group):
-        self.data[name] = group
+    def add_group(self, group: FuncGroup):
+        self.data[group.name] = group
 
     def get_group(self, name):
         return self.data.get(name)
@@ -43,18 +43,10 @@ class FuncGroups:
             for symbol in group.symbols:
                 yield symbol
 
-    def print_groups(self, file=None):
-        for group in sorted(
-            self.data.values(), key=lambda x: x.num_funcs, reverse=True
-        ):
-            group.print_long(file=file)
-
     def print_funcs(self, file=None):
         for func in self.iter_funcs():
             func.print_long(file=file)
 
-    def save_groups(self, path: Path):
-        self.save_impl(path, self.print_groups)
 
     def save_funcs(self, path: Path):
         self.save_impl(path, self.print_funcs)
