@@ -1,12 +1,11 @@
-from dataclasses import dataclass
-
-from collections import defaultdict
-from typing import Dict, List
 import logging
+from collections import defaultdict
+from dataclasses import dataclass
+from enum import StrEnum
+from typing import Dict, List
 
 from depsurf.linux import SymbolTable
 
-from enum import StrEnum
 
 class RenameType(StrEnum):
     ISRA = "isra"
