@@ -6,8 +6,6 @@ from typing import Callable
 from elftools.dwarf.die import DIE
 from elftools.dwarf.enums import ENUM_DW_TAG
 
-from .utils import get_name
-
 
 KERNEL_DIR = {
     "arch",
@@ -27,6 +25,12 @@ KERNEL_DIR = {
     "virt",
     "rust",
 }
+
+def get_name(die: DIE):
+    name = die.attributes.get("DW_AT_name")
+    if name is None:
+        return None
+    return name.value.decode("ascii")
 
 
 def normalize_compile_path(s: str) -> str:

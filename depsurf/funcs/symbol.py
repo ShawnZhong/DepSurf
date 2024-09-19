@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from collections import defaultdict
-from typing import Dict, List, Optional
+from typing import Dict, List
 import logging
 
 from depsurf.linux import SymbolTable

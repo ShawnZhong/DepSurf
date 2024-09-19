@@ -1,7 +1,7 @@
 import logging
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List, Iterator
+from typing import Dict, List, Iterator, Optional
 
 from depsurf.utils import check_result_path
 from depsurf.linux import SymbolTable
@@ -16,17 +16,10 @@ class FuncGroups:
         self.data: Dict[str, FuncGroup] = data
 
     @property
-    def num_funcs(self):
-        return sum(group.num_funcs for group in self.data.values())
-
-    @property
-    def num_groups(self):
+    def num_groups(self) -> int:
         return len(self.data)
 
-    def add_group(self, group: FuncGroup):
-        self.data[group.name] = group
-
-    def get_group(self, name):
+    def get_group(self, name) -> Optional[FuncGroup]:
         return self.data.get(name)
 
     def iter_groups(self) -> Iterator[FuncGroup]:
@@ -43,23 +36,8 @@ class FuncGroups:
             for symbol in group.symbols:
                 yield symbol
 
-    def print_funcs(self, file=None):
-        for func in self.iter_funcs():
-            func.print_long(file=file)
-
-
-    def save_funcs(self, path: Path):
-        self.save_impl(path, self.print_funcs)
-
-    def save_impl(self, path: Path, print_func):
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, "w") as f:
-            print(f"{self}", file=f)
-            print_func(f)
-        logging.info(f"Saved {self} to {path}")
-
     def __str__(self):
-        return f"FuncGroups({self.num_groups} groups, {self.num_funcs} functions)"
+        return f"FuncGroups({self.num_groups} groups)"
 
     @classmethod
     def from_dump(cls, path: Path):
