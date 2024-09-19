@@ -13,3 +13,6 @@
 [submodule "csrc/tracee"]
 	path = csrc/tracee
 	url = git@github.com:aquasecurity/tracee.git
+[submodule "html"]
+	path = html
+	url = git@github.com:ShawnZhong/linux-data.git
