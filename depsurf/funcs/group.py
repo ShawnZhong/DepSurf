@@ -5,7 +5,6 @@ from dataclasses import dataclass
 from enum import StrEnum
 from typing import List
 
-from depsurf.utils import OrderedEnum
 from depsurf.issues import IssueEnum
 from .entry import FuncEntry
 from .symbol import FuncSymbol
@@ -39,7 +38,7 @@ def get_collision_type(funcs: List[FuncEntry]) -> CollisionType:
         return CollisionType.STATIC_GLOBAL
 
 
-class InlineType(OrderedEnum, StrEnum):
+class InlineType(StrEnum):
     NOT = "Not inlined"
     FULL = "Fully inlined"
     PARTIAL = "Partially inlined"
