@@ -6,7 +6,7 @@ from enum import StrEnum
 from typing import List
 
 from depsurf.utils import OrderedEnum
-
+from depsurf.issues import IssueEnum
 from .entry import FuncEntry
 from .symbol import FuncSymbol
 
@@ -98,7 +98,7 @@ def get_inline_type(funcs: List[FuncEntry], in_symtab: bool) -> InlineType:
         return InlineType.NOT
 
 
-@dataclass
+@dataclass(frozen=True)
 class FuncGroup:
     name: str
     collision_type: CollisionType
@@ -145,6 +145,31 @@ class FuncGroup:
     @property
     def has_suffix(self):
         return any(sym.has_suffix for sym in self.symbols)
+
+    @property
+    def issues(self) -> List[IssueEnum]:
+        result = []
+
+        # collision
+        if self.collision_type == CollisionType.INCLUDE_DUP:
+            result.append(IssueEnum.DUPLICATE)
+        elif self.collision_type in (
+            CollisionType.STATIC_STATIC,
+            CollisionType.STATIC_GLOBAL,
+        ):
+            result.append(IssueEnum.COLLISSION)
+
+        # inline
+        if self.inline_type == InlineType.FULL:
+            result.append(IssueEnum.FULL_INLINE)
+        elif self.inline_type == InlineType.PARTIAL:
+            result.append(IssueEnum.PARTIAL_INLINE)
+
+        # rename
+        if self.has_suffix:
+            result.append(IssueEnum.RENAME)
+
+        return result
 
     def print_long(self, file=None):
         header = f"{self.name}"

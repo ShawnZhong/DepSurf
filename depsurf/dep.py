@@ -4,7 +4,6 @@ from enum import StrEnum
 from typing import Callable, Dict, List, Optional
 
 from depsurf.diff import (
-    IssueEnum,
     BaseChange,
     diff_enum,
     diff_func,
@@ -14,10 +13,11 @@ from depsurf.diff import (
     diff_nop,
     diff_config,
 )
+from depsurf.issues import IssueEnum
 from depsurf.version import Version
 from depsurf.issues import IssueList
 from depsurf.utils import OrderedEnum
-from depsurf.funcs import CollisionType, FuncGroup, InlineType
+from depsurf.funcs import FuncGroup
 
 
 class DepKind(OrderedEnum, StrEnum):
@@ -99,36 +99,16 @@ class DepStatus:
 
     @property
     def issues(self) -> IssueList:
-        result = IssueList()
         if not self.exists:
-            result.append(IssueEnum.ABSENT)
+            return IssueList(IssueEnum.ABSENT)
 
         if self.func_group:
-            # collision
-            collision = self.func_group.collision_type
-            if collision == CollisionType.INCLUDE_DUP:
-                result.append(IssueEnum.DUPLICATE)
-            elif collision in (
-                CollisionType.STATIC_STATIC,
-                CollisionType.STATIC_GLOBAL,
-            ):
-                result.append(IssueEnum.COLLISSION)
+            return IssueList(*self.func_group.issues)
 
-            # inline
-            inline = self.func_group.inline_type
-            if inline == InlineType.FULL:
-                result.append(IssueEnum.FULL_INLINE)
-            elif inline == InlineType.PARTIAL:
-                result.append(IssueEnum.PARTIAL_INLINE)
-
-            # rename
-            if self.func_group.has_suffix:
-                result.append(IssueEnum.RENAME)
-
-        return result
+        return IssueList()
 
     def __str__(self):
-        return " ".join([e.get_symbol(emoji=True) for e in self.issues])
+        return " ".join([e.get_symbol() for e in self.issues])
 
     @property
     def is_ok(self) -> bool:

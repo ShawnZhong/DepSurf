@@ -2,6 +2,7 @@ import logging
 from collections import defaultdict
 from pathlib import Path
 from typing import Dict, List, Iterator, Optional
+from dataclasses import dataclass
 
 from depsurf.utils import check_result_path
 from depsurf.linux import SymbolTable
@@ -11,9 +12,9 @@ from .group import FuncGroup
 from .symbol import get_func_symbols, FuncSymbol
 
 
+@dataclass(frozen=True)
 class FuncGroups:
-    def __init__(self, data: Dict[str, FuncGroup]):
-        self.data: Dict[str, FuncGroup] = data
+    data: Dict[str, FuncGroup]
 
     @property
     def num_groups(self) -> int:
@@ -53,7 +54,6 @@ class FuncGroups:
 @check_result_path
 def dump_func_groups(funcs_path: Path, symtab_path: Path, result_path: Path):
     functions: Dict[str, List[FuncEntry]] = defaultdict(list)
-
     with open(funcs_path, "r") as f:
         for line in f:
             func = FuncEntry.from_json(line)
