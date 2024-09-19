@@ -26,6 +26,7 @@ ARCH_NAMES = {
     "armhf": "arm32",
     "ppc64el": "ppc",
     "s390x": "s390",
+    "riscv64": "riscv",
 }
 
 

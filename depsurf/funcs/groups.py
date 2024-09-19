@@ -1,14 +1,14 @@
 import logging
 from collections import defaultdict
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Iterator
 
 from depsurf.utils import check_result_path
 from depsurf.linux import SymbolTable
 
 from .entry import FuncEntry
 from .group import FuncGroup
-from .symbol import get_func_symbols
+from .symbol import get_func_symbols, FuncSymbol
 
 
 class FuncGroups:
@@ -29,13 +29,19 @@ class FuncGroups:
     def get_group(self, name):
         return self.data.get(name)
 
-    def iter_groups(self):
-        return self.data.items()
+    def iter_groups(self) -> Iterator[FuncGroup]:
+        for group in self.data.values():
+            yield group
 
-    def iter_funcs(self):
+    def iter_funcs(self) -> Iterator[FuncEntry]:
         for group in self.data.values():
             for func in group.funcs:
                 yield func
+
+    def iter_symbols(self) -> Iterator[FuncSymbol]:
+        for group in self.data.values():
+            for symbol in group.symbols:
+                yield symbol
 
     def print_groups(self, file=None):
         for group in sorted(

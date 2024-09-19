@@ -3,7 +3,7 @@ import json
 import logging
 from dataclasses import dataclass
 from enum import StrEnum
-from typing import Dict, List, Optional
+from typing import List
 
 from depsurf.utils import OrderedEnum
 
@@ -144,7 +144,7 @@ class FuncGroup:
 
     @property
     def has_suffix(self):
-        return any("." in sym.name for sym in self.symbols)
+        return any(sym.has_suffix for sym in self.symbols)
 
     def print_long(self, file=None):
         header = f"{self.name}"
