@@ -144,15 +144,5 @@ class LinuxImage:
         comment = self.elffile.get_section_by_name(".comment").data().decode()
         return re.search(r"Ubuntu (\d+\.\d+\.\d+)", comment).group(1)
 
-    @cached_property
-    def flags(self):
-        dwarfinfo = self.elffile.get_dwarf_info(relocate_dwarf_sections=False)
-        main_cu = next(
-            cu
-            for cu in dwarfinfo.iter_CUs()
-            if cu.get_top_DIE().get_full_path().endswith("main.c")
-        )
-        return main_cu.get_top_DIE().attributes["DW_AT_producer"].value.decode()
-
     def __repr__(self):
         return f"LinuxImage({self.version.name})"
