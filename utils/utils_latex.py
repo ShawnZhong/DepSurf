@@ -9,6 +9,14 @@ from .paths import TAB_PATH
 GRAY_DASH = r"\color{lightgray}{-}"
 
 
+def texttt(text: str):
+    return f"\\texttt{{{text}}}"
+
+
+def footnotesize(text: str):
+    return f"\\footnotesize{{{text}}}"
+
+
 def underline(text: str):
     return f"\\underline{{{text}}}"
 

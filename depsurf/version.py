@@ -11,24 +11,6 @@ if TYPE_CHECKING:
 PROJ_PATH = Path(__file__).parent.parent
 DATA_PATH = PROJ_PATH / "data"
 
-FLAVOR_NAMES = {
-    "generic": "Generic",
-    "lowlatency": "low-lat",
-    "aws": "AWS",
-    "azure": "Azure",
-    "gcp": "GCP",
-    "oracle": "Oracle",
-}
-
-ARCH_NAMES = {
-    "amd64": "x86",
-    "arm64": "arm64",
-    "armhf": "arm32",
-    "ppc64el": "ppc",
-    "s390x": "s390",
-    "riscv64": "riscv",
-}
-
 
 @dataclass(order=True, frozen=True)
 class Version:
@@ -86,18 +68,6 @@ class Version:
     @property
     def short_name(self):
         return f"{self.version}-{self.revision}-{self.flavor}"
-
-    @property
-    def flavor_name(self):
-        return FLAVOR_NAMES[self.flavor]
-
-    @property
-    def flavor_index(self):
-        return list(FLAVOR_NAMES.keys()).index(self.flavor)
-
-    @property
-    def arch_name(self):
-        return ARCH_NAMES[self.arch]
 
     @property
     def lts(self):

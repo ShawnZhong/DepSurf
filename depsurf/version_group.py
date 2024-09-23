@@ -31,14 +31,11 @@ VERSIONS_ARCH = [
     for v in VERSIONS_ALL
     if v.arch != VERSION_DEFAULT.arch and v.version == VERSION_DEFAULT.version
 ]
-VERSIONS_FLAVOR = sorted(
-    [
-        v
-        for v in VERSIONS_ALL
-        if v.flavor != VERSION_DEFAULT.flavor and v.version == VERSION_DEFAULT.version
-    ],
-    key=lambda x: x.flavor_index,
-)
+VERSIONS_FLAVOR = [
+    v
+    for v in VERSIONS_ALL
+    if v.flavor != VERSION_DEFAULT.flavor and v.version == VERSION_DEFAULT.version
+]
 VERSION_FIRST = VERSIONS_REGULAR[0]
 VERSION_LAST = VERSIONS_REGULAR[-1]
 
@@ -87,18 +84,14 @@ class VersionGroup(StrEnum):
 
     def to_str(self, v: Version) -> str:
         if self == VersionGroup.ARCH:
-            return v.arch_name
+            return v.arch
         if self == VersionGroup.FLAVOR:
-            return v.flavor_name
+            return v.flavor
         if self == VersionGroup.REV:
             return str(v.revision)
         if self in (VersionGroup.REGULAR, VersionGroup.LTS, VersionGroup.FIRST_LAST):
             return v.short_version
         return str(v)
-
-    @property
-    def labels(self):
-        return [self.to_str(v) for v in self]
 
     @property
     def pairs(self) -> List[VersionPair]:
