@@ -13,6 +13,30 @@ def texttt(text: str):
     return f"\\texttt{{{text}}}"
 
 
+def makebox(text: str, width: str, align: str = "r") -> str:
+    return f"\\makebox[{{{width}}}][{align}]{{{text}}}"
+
+
+def colorbox(text: str, color: str) -> str:
+    return f"\\colorbox{{{color}}}{{{text}}}"
+
+
+def mini_bar(
+    text: str, percent: float, total_width: float, color: str, bg_color: str
+) -> str:
+    bg_width = f"{(1 - percent) * total_width:.2f}cm"
+    fg_width = f"{percent * total_width:.2f}cm"
+
+    bg = colorbox(makebox(r"\phantom{0}", width=bg_width), color=bg_color)
+    fg = colorbox(makebox(text, width=fg_width), color=color)
+
+    return bg + fg
+
+
+def multicolumn(s, n=2, format="c"):
+    return f"\\multicolumn{{{n}}}{{{format}}}{{{s}}}"
+
+
 def footnotesize(text: str):
     return f"\\footnotesize{{{text}}}"
 

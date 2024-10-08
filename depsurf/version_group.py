@@ -1,8 +1,10 @@
 import logging
 from enum import StrEnum
 from typing import Dict, Iterator, List, Tuple
+from pathlib import Path
+from dataclasses import dataclass
 
-from depsurf.version_pair import VersionPair
+from depsurf.version_pair import VersionPair, DiffImgResult
 from depsurf.version import DATA_PATH, Version
 from depsurf.dep import DepKind
 from depsurf.issues import IssueEnum
@@ -39,9 +41,22 @@ VERSIONS_FLAVOR = [
 VERSION_FIRST = VERSIONS_REGULAR[0]
 VERSION_LAST = VERSIONS_REGULAR[-1]
 
-DiffResult = Dict[
-    Tuple["VersionGroup", VersionPair], Dict[Tuple[DepKind, IssueEnum], int]
-]
+
+@dataclass(frozen=True)
+class DiffGroupResult:
+    group: "VersionGroup"
+    data: Dict[VersionPair, DiffImgResult]
+
+    def iter_pairs(self) -> Iterator[Tuple[VersionPair, DiffImgResult]]:
+        return iter(self.data.items())
+
+
+@dataclass(frozen=True)
+class DiffResult:
+    data: Dict["VersionGroup", DiffGroupResult]
+
+    def iter_groups(self) -> Iterator[Tuple["VersionGroup", DiffGroupResult]]:
+        return iter(self.data.items())
 
 
 class VersionGroup(StrEnum):
@@ -111,16 +126,18 @@ class VersionGroup(StrEnum):
     def num_pairs(self) -> int:
         return len(self.pairs)
 
-    def diff_pairs(self, kinds: List[DepKind], result_path=None) -> DiffResult:
+    def diff_pairs(self, kinds: List[DepKind], result_path: Path) -> DiffGroupResult:
         logging.info(f"Diffing {self}")
-
-        results: DiffResult = {}
-        for pair in self.pairs:
-            name = f"{self.to_str(pair.v1)}_{self.to_str(pair.v2)}"
-            path = result_path / name if result_path else None
-            logging.info(f"Comparing {name} to {path}")
-            results[(self, pair)] = pair.diff(result_path=path, kinds=kinds)
-        return results
+        return DiffGroupResult(
+            self,
+            {
+                pair: pair.diff(
+                    kinds,
+                    result_path / f"{self.to_str(pair.v1)}_{self.to_str(pair.v2)}",
+                )
+                for pair in self.pairs
+            },
+        )
 
     def __iter__(self) -> Iterator[Version]:
         return iter(self.versions)

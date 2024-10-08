@@ -1,6 +1,6 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Iterator
 import logging
 
 from depsurf.dep import Dep, DepKind, DepDelta
@@ -19,26 +19,24 @@ class DiffKindResult:
     changed: Dict[str, List[BaseChange]]
 
     @property
-    def reasons(self) -> Dict[IssueEnum, int]:
-        reasons = {change: 0 for change in IssueEnum}
+    def issues(self) -> Dict[IssueEnum, int]:
+        issues = {change: 0 for change in IssueEnum}
         for changes in self.changed.values():
-            for change in set(change.enum for change in changes):
-                reasons[change] += 1
+            for issue in set(change.enum for change in changes):
+                issues[issue] += 1
             # for change in changes:
             #     reasons[change.enum] += 1
 
-        return reasons
+        issues[IssueEnum.OLD] = self.old_len
+        issues[IssueEnum.NEW] = self.new_len
+        issues[IssueEnum.ADD] = len(self.added)
+        issues[IssueEnum.REMOVE] = len(self.removed)
+        issues[IssueEnum.CHANGE] = len(self.changed)
 
-    @property
-    def summary(self) -> Dict[IssueEnum, int]:
-        return {
-            **self.reasons,
-            IssueEnum.OLD: self.old_len,
-            IssueEnum.NEW: self.new_len,
-            IssueEnum.ADD: len(self.added),
-            IssueEnum.REMOVE: len(self.removed),
-            IssueEnum.CHANGE: len(self.changed),
-        }
+        return issues
+
+    def iter_issues(self) -> Iterator[Tuple[IssueEnum, int]]:
+        return iter(self.issues.items())
 
     def print(self, file=None):
         def print_header(name, items):
@@ -59,10 +57,28 @@ class DiffKindResult:
         for name in self.removed:
             print(f"\t{name}", file=file)
 
-    def save_txt(self, path):
+    def save_txt(self, path: Path):
         path.parent.mkdir(parents=True, exist_ok=True)
         with open(path, "w") as f:
             self.print(f)
+
+
+@dataclass(frozen=True)
+class DiffImgResult:
+    v1: Version
+    v2: Version
+    data: Dict[DepKind, DiffKindResult] = field(default_factory=dict)
+
+    def iter_kinds(self) -> Iterator[Tuple[DepKind, "DiffKindResult"]]:
+        return iter(self.data.items())
+
+    def save_summary(self, path: Path):
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with open(path, "w") as f:
+            for kind, result in self.iter_kinds():
+                for issue, count in result.iter_issues():
+                    if count != 0:
+                        print(f"{kind} {issue}: {count}", file=f)
 
 
 @dataclass(frozen=True, order=True)
@@ -72,22 +88,17 @@ class VersionPair:
 
     def diff(
         self, kinds: List[DepKind], result_path: Optional[Path] = None
-    ) -> Dict[Tuple[DepKind, IssueEnum], int]:
-        results = {}
-        for kind in kinds:
-            result = self.diff_kind(kind)
-            if result_path:
-                result.save_txt(result_path / f"{kind}.log")
-            for name, count in result.summary.items():
-                results[kind, name] = count
+    ) -> DiffImgResult:
+        img_result = DiffImgResult(
+            self.v1, self.v2, {kind: self.diff_kind(kind) for kind in kinds}
+        )
 
-        file = open(result_path / "Summary.txt", "w") if result_path else None
-        for (kind, name), count in results.items():
-            if count != 0:
-                print(f"{kind} {name}: {count}", file=file)
-        if file:
-            file.close()
-        return results
+        if result_path:
+            logging.info(f"Saving to {result_path}")
+            img_result.save_summary(result_path / "Summary.txt")
+            for kind, result in img_result.iter_kinds():
+                result.save_txt(result_path / f"{kind}.log")
+        return img_result
 
     def diff_kind(self, kind: DepKind) -> DiffKindResult:
         dict1 = self.v1.img.get_all_by_kind(kind)
@@ -100,8 +111,8 @@ class VersionPair:
             if old == new:
                 continue
 
-            changes = kind.differ(old, new)
-            if len(changes) == 0:
+            result = kind.differ(old, new)
+            if len(result) == 0:
                 if kind in (DepKind.TRACEPOINT, DepKind.SYSCALL):
                     continue
                 logging.error(f"Diff found but no changes: {name}")
@@ -109,9 +120,9 @@ class VersionPair:
                 logging.error(f"New: {new}")
                 continue
 
-            changes = [c for c in changes if c.enum != IssueEnum.STRUCT_LAYOUT]
-            if changes:
-                changed[name] = changes
+            result = [c for c in result if c.enum != IssueEnum.STRUCT_LAYOUT]
+            if result:
+                changed[name] = result
 
         return DiffKindResult(
             kind=kind,
