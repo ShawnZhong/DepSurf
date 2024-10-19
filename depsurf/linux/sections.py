@@ -1,10 +1,11 @@
+from pathlib import Path
 from elftools.elf.elffile import ELFFile
 
 
 class Sections:
-    def __init__(self, elffile: ELFFile):
-        self.elffile = elffile
-        self.data = self.get_section_info(elffile)
+    def __init__(self, path: Path):
+        with open(path, "rb") as fin:
+            self.data = self.get_section_info(ELFFile(fin))
 
     @staticmethod
     def get_section_info(elffile: ELFFile):
@@ -26,9 +27,6 @@ class Sections:
             ]
         ).set_index("name")
         return df
-
-    def __getitem__(self, name):
-        return self.elffile.get_section_by_name(name)
 
     def _repr_html_(self):
         return self.data.to_html(formatters={"addr": hex, "offset": hex, "size": hex})

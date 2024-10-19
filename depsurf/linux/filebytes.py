@@ -2,7 +2,7 @@ import logging
 import shutil
 from functools import cached_property
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Literal
 
 from elftools.elf.dynamic import DynamicSection
 from elftools.elf.elffile import ELFFile
@@ -37,14 +37,16 @@ def get_cstr(data: bytes, off: int) -> str:
 
 
 class FileBytes:
-    def __init__(self, elffile: ELFFile):
-        self.elffile = elffile
-        self.stream = elffile.stream
-        self.ptr_size = elffile.elfclass // 8
-        self.byteorder = "little" if elffile.little_endian else "big"
+    def __init__(self, elf: ELFFile):
+        self.elf = elf
+        self.stream = elf.stream
+        self.ptr_size = elf.elfclass // 8
+        self.byteorder: Literal["little", "big"] = (
+            "little" if self.elf.little_endian else "big"
+        )
 
     def addr_to_offset(self, addr):
-        offsets = list(self.elffile.address_offsets(addr))
+        offsets = list(self.elf.address_offsets(addr))
         if len(offsets) == 1:
             return offsets[0]
         elif len(offsets) == 0:
@@ -70,22 +72,22 @@ class FileBytes:
 
     @cached_property
     def relocations(self) -> Dict[int, bytes]:
-        arch = self.elffile["e_machine"]
+        arch = self.elf["e_machine"]
         if arch not in ("EM_AARCH64", "EM_S390"):
             return {}
 
-        relo_sec: RelocationSection = self.elffile.get_section_by_name(".rela.dyn")
-        if not relo_sec:
+        relo_sec = self.elf.get_section_by_name(".rela.dyn")
+        if not isinstance(relo_sec, RelocationSection):
             logging.warning("No .rela.dyn found")
             return {}
 
         if arch == "EM_S390":
-            dynsym: DynamicSection = self.elffile.get_section_by_name(".dynsym")
-            if not dynsym:
+            dynsym = self.elf.get_section_by_name(".dynsym")
+            if not isinstance(dynsym, DynamicSection):
                 logging.warning("No .dynsym found")
                 return {}
 
-        constant = 1 << self.elffile.elfclass
+        constant = 1 << self.elf.elfclass
 
         result = {}
         for r in relo_sec.iter_relocations():

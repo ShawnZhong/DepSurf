@@ -1,10 +1,9 @@
 import logging
 import re
 from pathlib import Path
-
+from typing import Optional
 
 from .paths import TAB_PATH
-
 
 GRAY_DASH = r"\color{lightgray}{-}"
 
@@ -22,19 +21,33 @@ def colorbox(text: str, color: str) -> str:
 
 
 def mini_bar(
-    text: str, percent: float, total_width: float, color: str, bg_color: str
+    text: str,
+    percent: float,
+    total_width: float,
+    color: str,
+    bg_color: Optional[str] = None,
 ) -> str:
     bg_width = f"{(1 - percent) * total_width:.2f}cm"
     fg_width = f"{percent * total_width:.2f}cm"
 
-    bg = colorbox(makebox(r"\phantom{0}", width=bg_width), color=bg_color)
-    fg = colorbox(makebox(text, width=fg_width), color=color)
+    result = ""
+    if bg_color:
+        result += colorbox(makebox(r"\phantom{0}", width=bg_width), color=bg_color)
+    result += colorbox(makebox(text, width=fg_width), color=color)
 
-    return bg + fg
+    return result
 
 
-def multicolumn(s, n=2, format="c"):
+def multicolumn(s: str, n: int = 2, format: str = "c"):
     return f"\\multicolumn{{{n}}}{{{format}}}{{{s}}}"
+
+
+def multirow(s: str, n: int = 2, format: str = "c"):
+    return f"\\multirow[{{{format}}}]{{{n}}}{{*}}{{{s}}}"
+
+
+def shortstack(*s: str, align: str = "l"):
+    return f"\\shortstack[{{{align}}}]{{{'\\\\'.join(s)}}}"
 
 
 def footnotesize(text: str):
@@ -51,10 +64,6 @@ def text_color(text: str, color: str):
 
 def bold(text: str):
     return f"\\textbf{{{text}}}"
-
-
-def remove_double_rules(latex: str):
-    return latex.replace("\\midrule\n\\bottomrule", "\\bottomrule")
 
 
 def rotate(text: str, origin="r"):
@@ -77,19 +86,23 @@ def fix_multicolumn_sep(latex: str):
     return re.sub(r"{c\|}{([^{}]+)} \\\\", r"{c}{\1} \\\\", latex)
 
 
-def use_midrule(latex: str):
-    return re.sub(r"\\cline{.*?}", r"\\midrule", latex)
-
-
 def save_latex(latex: str, name: str, path: Path = TAB_PATH, rotate=True, midrule=True):
     path.mkdir(parents=True, exist_ok=True)
     filepath = path / f"{name}.tex"
 
     latex = latex.replace("#", "\\#")
     latex = latex.replace("%", "\\%")
+
+    # Remove double rules
+    latex = re.sub(r"\\cline{.*?}\n\\bottomrule", r"\\bottomrule", latex)
+
+    # Replace \cline with \midrule or \hline
     if midrule:
-        latex = use_midrule(latex)
-    latex = remove_double_rules(latex)
+        latex = re.sub(r"\\cline{.*?}", r"\\midrule", latex)
+    else:
+        latex = re.sub(r"\\cline{.*?}", r"\\hline", latex)
+
+    # Rotate or center multirow
     if rotate:
         latex = rotate_multirow(latex)
     else:

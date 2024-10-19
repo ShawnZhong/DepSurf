@@ -27,7 +27,6 @@ class LinuxImage:
         if LinuxImage.cache_enabled and version in self.cache:
             raise ValueError(f"Please use LinuxImage.from_* to get an instance")
         self.version = version
-        self.path = Path(version.vmlinux_path)
         self.file = open(version.vmlinux_path, "rb")
         self.elffile = ELFFile(self.file)
 
@@ -102,10 +101,6 @@ class LinuxImage:
         return FileBytes(self.elffile)
 
     @cached_property
-    def sections(self) -> Sections:
-        return Sections(self.elffile)
-
-    @cached_property
     def syscalls(self) -> Dict[str, int]:
         with open(self.version.syscalls_path) as f:
             syscalls = json.load(f)
@@ -143,6 +138,10 @@ class LinuxImage:
     def gcc_version(self):
         comment = self.elffile.get_section_by_name(".comment").data().decode()
         return re.search(r"Ubuntu (\d+\.\d+\.\d+)", comment).group(1)
+
+    @property
+    def sections(self) -> Sections:
+        return Sections(self.version.vmlinux_path)
 
     def __repr__(self):
         return f"LinuxImage({self.version.name})"
