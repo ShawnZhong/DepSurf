@@ -38,6 +38,8 @@ class DepKind(OrderedEnum, StrEnum):
 
     CONFIG = "Config"
 
+    REGISTER = "Register"
+
     @staticmethod
     def from_hook_name(name: str):
         if name.startswith("tracepoint/syscalls/"):

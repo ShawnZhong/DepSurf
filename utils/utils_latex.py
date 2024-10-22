@@ -42,6 +42,10 @@ def multicolumn(s: str, n: int = 2, format: str = "c"):
     return f"\\multicolumn{{{n}}}{{{format}}}{{{s}}}"
 
 
+def center_cell(s: str):
+    return multicolumn(s, 1, "c")
+
+
 def multirow(s: str, n: int = 2, format: str = "c"):
     return f"\\multirow[{{{format}}}]{{{n}}}{{*}}{{{s}}}"
 
