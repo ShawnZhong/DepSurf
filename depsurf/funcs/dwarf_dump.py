@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
 from elftools.dwarf.compileunit import CompileUnit
 from elftools.dwarf.die import DIE
@@ -24,7 +24,7 @@ def get_pc(die: DIE) -> int:
 
 class FunctionRecorder:
     def __init__(self):
-        self.data: Dict[str, Dict[Tuple[str, str], FuncEntry]] = {}
+        self.data: Dict[str, Dict[Tuple[Optional[str], Optional[str]], FuncEntry]] = {}
         self.curr_prog = None
 
     def iter_funcs(self):
@@ -92,11 +92,13 @@ class FunctionRecorder:
 
         # set inline attribute
         inline = die.attributes.get("DW_AT_inline")
-
-        if entry.inline in (InlineStatus.NOT_SEEN, InlineStatus.SEEN):
-            entry.inline = inline.value if inline is not None else InlineStatus.SEEN
+        if entry.inline in (InlineStatus.UNSEEN, InlineStatus.SEEN_UNKNOWN):
+            if inline is not None:
+                entry.inline = InlineStatus.from_num(inline.value)
+            else:
+                entry.inline = InlineStatus.SEEN_UNKNOWN
         else:
-            if inline is not None and entry.inline != inline.value:
+            if inline is not None and entry.inline.num != inline.value:
                 logging.warning(
                     f"Conflicting inline status: {entry.inline} vs {inline.value} at {die.offset:#x}"
                 )
@@ -142,7 +144,7 @@ class FunctionRecorder:
         caller_loc = f"{traverser.path}:{caller_name}"
 
         if is_inline:
-            assert entry.name != caller_name, f"{entry.offset:#x}"
+            assert entry.name != caller_name, f"{entry.addr:#x}"
             entry.caller_inline.append(caller_loc)
         else:
             # it is possible that entry.name == caller_name (e.g., recursive call)
@@ -212,7 +214,7 @@ def disable_dwarf_cache():
 
 
 @check_result_path
-def dump_funcs(path: Path, result_path: Path):
+def dump_func_entries(path: Path, result_path: Path):
     disable_dwarf_cache()
 
     FunctionRecorder.from_path(path).dump(result_path)

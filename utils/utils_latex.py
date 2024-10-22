@@ -47,7 +47,7 @@ def center_cell(s: str):
 
 
 def multirow(s: str, n: int = 2, format: str = "c"):
-    return f"\\multirow[{{{format}}}]{{{n}}}{{*}}{{{s}}}"
+    return f"\\multirow[{format}]{{{n}}}{{*}}{{{s}}}"
 
 
 def shortstack(*s: str, align: str = "l"):

@@ -1,7 +1,7 @@
 import logging
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable
+from typing import Callable, Optional
 
 from elftools.dwarf.die import DIE
 from elftools.dwarf.enums import ENUM_DW_TAG
@@ -25,6 +25,7 @@ KERNEL_DIR = {
     "virt",
     "rust",
 }
+
 
 def get_name(die: DIE):
     name = die.attributes.get("DW_AT_name")
@@ -52,7 +53,7 @@ def normalize_compile_path(s: str) -> str:
 @dataclass(frozen=True)
 class DIEHandler:
     rec: bool
-    fn: Callable[[DIE, int], None] = None
+    fn: Optional[Callable[[DIE, "Traverser"], None]] = None
 
 
 class Traverser:

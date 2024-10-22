@@ -123,7 +123,7 @@ class DepStatus:
 
         if self.func_group:
             for func in self.func_group:
-                func.print_short(file=file, nindent=nindent + 1)
+                print(f"{indent}{func.to_json()}", file=file)
 
 
 @dataclass

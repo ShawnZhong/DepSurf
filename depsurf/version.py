@@ -136,8 +136,8 @@ class Version:
         return DATA_PATH / "tracepoints" / f"{self.name}.jsonl"
 
     @property
-    def funcs_path(self):
-        return DATA_PATH / "funcs" / f"{self.name}.jsonl"
+    def func_entries_path(self):
+        return DATA_PATH / "func_entries" / f"{self.name}.jsonl"
 
     @property
     def func_groups_path(self):

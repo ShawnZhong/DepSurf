@@ -27,22 +27,22 @@ class FuncSymbol:
     @property
     def stem(self) -> str:
         return self.name.split(".")[0]
-    
+
     @property
     def has_suffix(self) -> bool:
         return "." in self.name
-    
+
     @property
-    def suffix(self) -> List[str]:
+    def suffixes(self) -> List[str]:
         return [s for s in self.name.split(".")[1:] if not s.isdigit()]
-    
+
     @property
     def rename_type(self) -> RenameType:
         assert self.has_suffix, "Symbol has no suffix"
-        suffix = self.suffix
-        if len(suffix) > 1:
+        suffixes = self.suffixes
+        if len(suffixes) > 1:
             return RenameType.MULTIPLE
-        return RenameType(suffix[0])
+        return RenameType(suffixes[0])
 
 
 def get_func_symbols(symtab: SymbolTable) -> Dict[str, List[FuncSymbol]]:

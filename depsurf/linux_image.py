@@ -135,9 +135,15 @@ class LinuxImage:
         return get_configs(self.version.config_path)
 
     @property
-    def gcc_version(self):
-        comment = self.elffile.get_section_by_name(".comment").data().decode()
-        return re.search(r"Ubuntu (\d+\.\d+\.\d+)", comment).group(1)
+    def gcc_version(self) -> Optional[str]:
+        comment_section = self.elffile.get_section_by_name(".comment")
+        if comment_section is None:
+            return None
+        comment = comment_section.data().decode()
+        match = re.search(r"Ubuntu (\d+\.\d+\.\d+)", comment)
+        if match is None:
+            return None
+        return match.group(1)
 
     @property
     def sections(self) -> Sections:
