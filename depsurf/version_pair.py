@@ -64,13 +64,13 @@ class DiffKindResult:
 
 
 @dataclass(frozen=True)
-class DiffImgResult:
+class DiffPairResult:
     v1: Version
     v2: Version
-    data: Dict[DepKind, DiffKindResult] = field(default_factory=dict)
+    kind_results: Dict[DepKind, DiffKindResult] = field(default_factory=dict)
 
     def iter_kinds(self) -> Iterator[Tuple[DepKind, "DiffKindResult"]]:
-        return iter(self.data.items())
+        return iter(self.kind_results.items())
 
     def save_summary(self, path: Path):
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -88,8 +88,8 @@ class VersionPair:
 
     def diff(
         self, kinds: List[DepKind], result_path: Optional[Path] = None
-    ) -> DiffImgResult:
-        img_result = DiffImgResult(
+    ) -> DiffPairResult:
+        img_result = DiffPairResult(
             self.v1, self.v2, {kind: self.diff_kind(kind) for kind in kinds}
         )
 

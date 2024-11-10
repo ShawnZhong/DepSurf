@@ -4,7 +4,7 @@ from typing import Dict, Iterator, List, Tuple
 from pathlib import Path
 from dataclasses import dataclass
 
-from depsurf.version_pair import VersionPair, DiffImgResult
+from depsurf.version_pair import VersionPair, DiffPairResult
 from depsurf.version import DATA_PATH, Version
 from depsurf.dep import DepKind
 from depsurf.issues import IssueEnum
@@ -45,18 +45,18 @@ VERSION_LAST = VERSIONS_REGULAR[-1]
 @dataclass(frozen=True)
 class DiffGroupResult:
     group: "VersionGroup"
-    data: Dict[VersionPair, DiffImgResult]
+    pair_results: Dict[VersionPair, DiffPairResult]
 
-    def iter_pairs(self) -> Iterator[Tuple[VersionPair, DiffImgResult]]:
-        return iter(self.data.items())
+    def iter_pairs(self) -> Iterator[Tuple[VersionPair, DiffPairResult]]:
+        return iter(self.pair_results.items())
 
 
 @dataclass(frozen=True)
 class DiffResult:
-    data: Dict["VersionGroup", DiffGroupResult]
+    group_results: Dict["VersionGroup", DiffGroupResult]
 
     def iter_groups(self) -> Iterator[Tuple["VersionGroup", DiffGroupResult]]:
-        return iter(self.data.items())
+        return iter(self.group_results.items())
 
 
 class VersionGroup(StrEnum):
