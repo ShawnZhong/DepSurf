@@ -67,6 +67,8 @@ class LinuxImage:
             return self.syscalls
         elif kind == DepKind.CONFIG:
             return self.configs
+        elif kind == DepKind.KFUNC:
+            return self.kfuncs
         raise ValueError(f"Unknown DepKind: {kind}")
 
     def get_dep(self, dep: Dep) -> Optional[Dict]:
@@ -128,6 +130,17 @@ class LinuxImage:
             f"security_{e['name']}"
             for e in self.btf.get_struct("security_hook_heads")["members"]
         }
+        return {k: v for k, v in self.btf.funcs.items() if k in func_names}
+
+    @cached_property
+    def kfuncs(self):
+        prefix = "__BTF_ID__func__"
+        func_names = [
+            sym["name"].removeprefix(prefix).rsplit("__", 1)[0]
+            for sym in self.symtab.data
+            if sym["name"].startswith(prefix)
+            if "bpf_lsm_" not in sym["name"]
+        ]
         return {k: v for k, v in self.btf.funcs.items() if k in func_names}
 
     @cached_property

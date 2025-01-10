@@ -26,6 +26,7 @@ class DepKind(OrderedEnum, StrEnum):
     FIELD = "Field"
     TRACEPOINT = "Tracepoint"
     LSM = "LSM Hook"
+    KFUNC = "kfunc"
     SYSCALL = "Syscall"
 
     UNION = "Union"
@@ -71,6 +72,7 @@ class DepKind(OrderedEnum, StrEnum):
             DepKind.FUNC: diff_func,
             DepKind.TRACEPOINT: diff_tracepoint,
             DepKind.LSM: diff_func,
+            DepKind.KFUNC: diff_func,
             DepKind.UNION: diff_struct,
             DepKind.ENUM: diff_enum,
             DepKind.SYSCALL: diff_nop,
