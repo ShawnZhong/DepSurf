@@ -8,6 +8,29 @@ from typing import Dict
 from .kind import Kind
 
 
+def get_btf_type_str(obj):
+    assert "kind" in obj, obj
+    kind = obj["kind"]
+
+    if kind in (Kind.STRUCT, Kind.UNION, Kind.ENUM, Kind.VOLATILE, Kind.CONST):
+        return f"{kind.lower()} {obj['name']}"
+    elif kind in (Kind.TYPEDEF, Kind.INT, Kind.VOID):
+        return obj["name"]
+    elif kind == Kind.PTR:
+        if obj["type"]["kind"] == Kind.FUNC_PROTO:
+            return get_btf_type_str(obj["type"])
+        else:
+            return f"{get_btf_type_str(obj['type'])} *"
+    elif kind == Kind.ARRAY:
+        return f"{get_btf_type_str(obj['type'])}[{obj['nr_elems']}]"
+    elif kind == Kind.FUNC_PROTO:
+        return f"{get_btf_type_str(obj['ret_type'])} (*)({', '.join(get_btf_type_str(a['type']) for a in obj['params'])})"
+    elif kind == Kind.FWD:
+        return f"{obj['fwd_kind']} {obj['name']}"
+    else:
+        raise ValueError(f"Unknown kind: {obj}")
+
+
 class BTF:
     def __init__(self, data: dict):
         assert isinstance(data, dict)
@@ -22,12 +45,12 @@ class BTF:
             return cls(pickle.load(f))
 
     @classmethod
-    def from_raw_json(cls, path: Path):
+    def from_raw_btf_json(cls, path: Path):
         assert path.exists()
         assert path.suffix == ".json"
         from .normalize import BTFNormalizer
 
-        data = BTFNormalizer.from_json_path(path).get_results_by_kind()
+        data = BTFNormalizer(path).get_results_by_kind()
         return cls(data)
 
     def __str__(self):

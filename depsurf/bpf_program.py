@@ -84,7 +84,7 @@ class BPFProgram:
             overwrite=False,
             slient=True,
         )
-        btf = BTF.from_raw_json(self.btf_json_file)
+        btf = BTF.from_raw_btf_json(self.btf_json_file)
 
         results = []
         for name, struct in btf.structs.items():

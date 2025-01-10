@@ -70,16 +70,6 @@ class Version:
         return f"{self.version}-{self.revision}-{self.flavor}"
 
     @property
-    def lts(self):
-        return self.version_tuple in [
-            (4, 4, 0),
-            (4, 15, 0),
-            (5, 4, 0),
-            (5, 15, 0),
-            (6, 8, 0),
-        ]
-
-    @property
     def dbgsym_deb_path(self):
         return DATA_PATH / "deb_dbgsym" / f"{self.name}.deb"
 
@@ -109,19 +99,19 @@ class Version:
 
     @property
     def btf_path(self):
-        return DATA_PATH / "btf" / f"{self.name}"
+        return DATA_PATH / "raw_btf" / f"{self.name}"
 
     @property
     def btf_json_path(self):
-        return DATA_PATH / "btf_json" / f"{self.name}.json"
+        return DATA_PATH / "raw_btf" / f"{self.name}.json"
 
     @property
     def btf_header_path(self):
-        return DATA_PATH / "btf_header" / f"{self.name}.h"
+        return DATA_PATH / "raw_btf" / f"{self.name}.h"
 
     @property
     def btf_txt_path(self):
-        return DATA_PATH / "btf_txt" / f"{self.name}.txt"
+        return DATA_PATH / "raw_btf" / f"{self.name}.txt"
 
     @property
     def btf_norm_path(self):

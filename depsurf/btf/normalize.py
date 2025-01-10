@@ -1,22 +1,26 @@
+import json
 import logging
 import pickle
+from pathlib import Path
+from typing import Dict
 
 from depsurf.utils import check_result_path
 
 from .kind import Kind
-from .raw import RawBTF, load_btf_json
 
 
-class BTFNormalizer(RawBTF):
-    def __init__(self, raw_types):
-        super().__init__(raw_types)
-
-    @classmethod
-    def from_json_path(cls, file):
+class BTFNormalizer:
+    def __init__(self, file: Path):
         assert file.suffix == ".json"
         assert file.exists()
 
-        return cls(load_btf_json(file))
+        with open(file) as f:
+            self.raw_types = json.load(f)["types"]
+
+    def get_raw(self, type_id):
+        elem = self.raw_types[type_id - 1]
+        assert elem["id"] == type_id
+        return elem
 
     RECURSE_KINDS = {
         Kind.CONST,
@@ -172,7 +176,7 @@ class BTFNormalizer(RawBTF):
                 results[kind] = {name: t}
             else:
                 if name in group:
-                    logging.warning(f"Duplicate type {name}")
+                    logging.debug(f"Duplicate type {name}")
                 else:
                     group[name] = t
 
@@ -190,6 +194,6 @@ class BTFNormalizer(RawBTF):
 def normalize_btf(json_path, result_path):
     logging.info(f"Normalizing {json_path} to {result_path}")
 
-    data = BTFNormalizer.from_json_path(json_path).get_results_by_kind()
+    data = BTFNormalizer(json_path).get_results_by_kind()
     with open(result_path, "wb") as f:
         pickle.dump(data, f)

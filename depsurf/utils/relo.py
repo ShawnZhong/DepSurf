@@ -1,11 +1,34 @@
+import json
 from dataclasses import dataclass
 from enum import Enum
 
-from depsurf.btf import Kind, RawBTF
 from elftools.construct import Struct, ULInt8, ULInt16, ULInt32
 from elftools.elf.elffile import ELFFile
 
+from depsurf.btf import Kind
 from depsurf.linux import get_cstr
+
+
+class RawBTF:
+    def __init__(self, raw_types):
+        self.raw_types = raw_types
+
+    @classmethod
+    def load(cls, path):
+        with open(path) as f:
+            return cls(json.load(f)["types"])
+
+    def get_raw(self, type_id):
+        elem = self.raw_types[type_id - 1]
+        assert elem["id"] == type_id
+        return elem
+
+    def __len__(self):
+        return len(self.raw_types)
+
+    def __repr__(self):
+        return f"RawBTF({len(self.raw_types)} types)"
+
 
 btf_header_t = Struct(
     "btf_header",

@@ -27,7 +27,18 @@ VERSIONS_REGULAR = sorted(
     ]
     + [VERSION_DEFAULT]
 )
-VERSIONS_LTS = [v for v in VERSIONS_REGULAR if v.lts]
+VERSIONS_LTS = [
+    v
+    for v in VERSIONS_REGULAR
+    if v.version_tuple
+    in [
+        (4, 4, 0),
+        (4, 15, 0),
+        (5, 4, 0),
+        (5, 15, 0),
+        (6, 8, 0),
+    ]
+]
 VERSIONS_ARCH = [
     v
     for v in VERSIONS_ALL
