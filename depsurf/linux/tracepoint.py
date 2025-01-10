@@ -16,7 +16,6 @@ from .symtab import SymbolTable
 
 @dataclass
 class TracepointInfo:
-    # flags: int
     class_name: str
     event_name: str
     func_name: str
@@ -71,18 +70,7 @@ class TracepointsExtractor:
 
         if not (flags & self.FLAG_TRACEPOINT):
             # Ref: https://github.com/torvalds/linux/blob/6fbf71854e2ddea7c99397772fbbb3783bfe15b5/include/linux/syscalls.h#L144
-            event_name = self.filebytes.get_cstr(event["name"])
             return
-            # TracepointInfo(
-            #     flags=flags,
-            #     class_name=class_name,
-            #     event_name=event_name,
-            #     func_name=None,
-            #     struct_name=None,
-            #     func=None,
-            #     struct=None,
-            #     fmt_str=None,
-            # )
 
         func_name = f"trace_event_raw_event_{class_name}"
         struct_name = f"trace_event_raw_{class_name}"
@@ -98,7 +86,6 @@ class TracepointsExtractor:
             return
 
         return TracepointInfo(
-            # flags=flags,
             class_name=class_name,
             event_name=self.event_names[ptr],
             func_name=func_name,
@@ -121,28 +108,6 @@ class TracepointsExtractor:
     @cached_property
     def FLAG_IGNORE_ENABLE(self):
         return self.btf.enum_values["TRACE_EVENT_FL_IGNORE_ENABLE"]
-
-    # tp = self.img.get_struct_instance("tracepoint", event["tp"])
-    # name = self.filebytes.get_cstr(tp["name"])
-
-    # event_class = self.img.get_struct_instance("trace_event_class", event_class_ptr)
-
-    # def get_tp_func(self, name: str):
-    #     btf = self.btf
-    #     for func_prefix in ["trace_event_raw_event_", "perf_trace_", "__traceiter_"]:
-    #         func = btf.get_func(f"{func_prefix}{name}")
-    #         if func:
-    #             return func
-
-    #     logging.warning(f"Could not find function for {name}")
-
-    #     typedef = btf.get(Kind.TYPEDEF, f"btf_trace_{name}")
-    #     if typedef is not None:
-    #         func = typedef["type"].copy()
-    #         assert func["kind"] == Kind.PTR
-    #         assert func["type"]["kind"] == Kind.FUNC_PROTO
-    #         func["kind"] = Kind.FUNC.name
-    #         return func
 
 
 @check_result_path
