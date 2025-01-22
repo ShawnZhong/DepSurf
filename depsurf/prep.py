@@ -4,11 +4,11 @@ from depsurf.linux import (
     dump_symtab,
     dump_syscalls,
     dump_tracepoints,
-    extract_btf,
+    extract_raw_btf,
     extract_deb,
 )
 from depsurf.linux_image import LinuxImage
-from depsurf.utils import dump_btf_header, dump_btf_json, dump_btf_txt
+from depsurf.utils import dump_raw_btf_header, dump_raw_btf_json, dump_raw_btf_txt
 from depsurf.version import Version
 
 
@@ -59,31 +59,31 @@ def prep(v: Version, overwrite: bool = False):
         )
 
     # Extract the raw BTF
-    extract_btf(
+    extract_raw_btf(
         vmlinux_path=v.vmlinux_path,
-        result_path=v.btf_path,
+        result_path=v.raw_btf_path,
         overwrite=overwrite,
     )
-    dump_btf_json(
-        btf_path=v.btf_path,
-        result_path=v.btf_json_path,
+    dump_raw_btf_json(
+        raw_btf_path=v.raw_btf_path,
+        result_path=v.raw_btf_json_path,
         overwrite=overwrite,
     )
-    dump_btf_txt(
-        btf_path=v.btf_path,
-        result_path=v.btf_txt_path,
+    dump_raw_btf_txt(
+        raw_btf_path=v.raw_btf_path,
+        result_path=v.raw_btf_txt_path,
         overwrite=overwrite,
     )
-    dump_btf_header(
-        btf_path=v.btf_path,
-        result_path=v.btf_header_path,
+    dump_raw_btf_header(
+        raw_btf_path=v.raw_btf_path,
+        result_path=v.raw_btf_header_path,
         overwrite=overwrite,
     )
 
     # Dump the normalized BTF, symbol table, tracepoints, functions, and syscalls
     normalize_btf(
-        v.btf_json_path,
-        result_path=v.btf_norm_path,
+        v.raw_btf_json_path,
+        result_path=v.btf_path,
         overwrite=overwrite,
     )
     dump_symtab(

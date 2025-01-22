@@ -98,24 +98,28 @@ class Version:
         return DATA_PATH / "vmlinuz" / self.name
 
     @property
-    def btf_path(self):
+    def raw_btf_path(self):
         return DATA_PATH / "raw_btf" / f"{self.name}"
 
     @property
-    def btf_json_path(self):
+    def raw_btf_json_path(self):
         return DATA_PATH / "raw_btf" / f"{self.name}.json"
 
     @property
-    def btf_header_path(self):
+    def raw_btf_header_path(self):
         return DATA_PATH / "raw_btf" / f"{self.name}.h"
 
     @property
-    def btf_txt_path(self):
+    def raw_btf_txt_path(self):
         return DATA_PATH / "raw_btf" / f"{self.name}.txt"
 
     @property
-    def btf_norm_path(self):
-        return DATA_PATH / "btf_norm" / f"{self.name}.pkl"
+    def btf_path(self):
+        return DATA_PATH / "btf" / f"{self.name}.pkl"
+
+    @property
+    def btf_funcs_path(self):
+        return DATA_PATH / "btf_funcs" / f"{self.name}.jsonl"
 
     @property
     def symtab_path(self):

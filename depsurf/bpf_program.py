@@ -6,7 +6,7 @@ from elftools.elf.elffile import ELFFile
 
 from depsurf.btf import BTF
 from depsurf.dep import Dep, DepKind
-from depsurf.utils import dump_btf_json, dump_btf_txt, gen_min_btf
+from depsurf.utils import dump_raw_btf_json, dump_raw_btf_txt, gen_min_btf
 
 
 class BPFProgram:
@@ -72,13 +72,13 @@ class BPFProgram:
             overwrite=False,
             slient=True,
         )
-        dump_btf_json(
+        dump_raw_btf_json(
             self.btf_file,
             result_path=self.btf_json_file,
             overwrite=False,
             slient=True,
         )
-        dump_btf_txt(
+        dump_raw_btf_txt(
             self.btf_file,
             result_path=self.btf_txt_file,
             overwrite=False,

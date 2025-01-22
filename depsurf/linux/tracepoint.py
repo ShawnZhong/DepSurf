@@ -75,8 +75,8 @@ class TracepointsExtractor:
         func_name = f"trace_event_raw_event_{class_name}"
         struct_name = f"trace_event_raw_{class_name}"
 
-        func = self.btf.get_func(func_name)
-        struct = self.btf.get_struct(struct_name)
+        func = self.btf.funcs.get(func_name)
+        struct = self.btf.structs.get(struct_name)
 
         if func is None:
             logging.warning(f"Could not find function for {func_name}")

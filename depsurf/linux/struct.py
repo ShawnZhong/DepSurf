@@ -10,7 +10,7 @@ class StructInstance:
         self.name = name
         self.ptr = ptr
 
-        t = self.btf.get_struct(name)
+        t = self.btf.structs.get(name)
         assert t is not None, f"Could not find struct {name}"
 
         self.size = t["size"]

@@ -18,7 +18,7 @@ def extract_deb(deb_path: Path, file_path: str, result_path: Path):
 
 
 @check_result_path
-def extract_btf(vmlinux_path: Path, result_path: Path):
+def extract_raw_btf(vmlinux_path: Path, result_path: Path):
     with open(vmlinux_path, "rb") as f:
         elf = ELFFile(f)
 

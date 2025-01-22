@@ -128,7 +128,7 @@ class LinuxImage:
     def lsm_hooks(self):
         func_names = {
             f"security_{e['name']}"
-            for e in self.btf.get_struct("security_hook_heads")["members"]
+            for e in self.btf.structs["security_hook_heads"]["members"]
         }
         return {k: v for k, v in self.btf.funcs.items() if k in func_names}
 

@@ -154,7 +154,7 @@ class BTFNormalizer:
 
         return elem
 
-    def get_results_by_kind(self):
+    def get_results(self):
         results = {k.value: {} for k in Kind}
 
         anon_enum_values = []
@@ -192,8 +192,6 @@ class BTFNormalizer:
 
 @check_result_path
 def normalize_btf(json_path, result_path):
-    logging.info(f"Normalizing {json_path} to {result_path}")
-
-    data = BTFNormalizer(json_path).get_results_by_kind()
+    data = BTFNormalizer(json_path).get_results()
     with open(result_path, "wb") as f:
         pickle.dump(data, f)

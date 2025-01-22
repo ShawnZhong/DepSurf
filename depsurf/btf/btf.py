@@ -50,7 +50,7 @@ class BTF:
         assert path.suffix == ".json"
         from .normalize import BTFNormalizer
 
-        data = BTFNormalizer(path).get_results_by_kind()
+        data = BTFNormalizer(path).get_results()
         return cls(data)
 
     def __str__(self):
@@ -59,9 +59,6 @@ class BTF:
             for kind, d in self.data.items()
             if d
         )
-
-    def get(self, kind, name) -> Dict:
-        return self.data[kind].get(name)
 
     @property
     def funcs(self) -> Dict[str, Dict]:
@@ -79,18 +76,6 @@ class BTF:
     def unions(self) -> Dict[str, Dict]:
         return self.data[Kind.UNION]
 
-    def get_func(self, name: str) -> Dict:
-        return self.funcs.get(name)
-
-    def get_struct(self, name: str) -> Dict:
-        return self.structs.get(name)
-
-    def get_enum(self, name: str) -> Dict:
-        return self.enums.get(name)
-
-    def get_union(self, name: str) -> Dict:
-        return self.unions.get(name)
-
     @cached_property
     def enum_values(self):
-        return {e["name"]: e["val"] for e in self.get(Kind.ENUM, "(anon)")["values"]}
+        return {e["name"]: e["val"] for e in self.enums["(anon)"]["values"]}
