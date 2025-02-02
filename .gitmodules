@@ -5,13 +5,13 @@
 	path = paper
 	url = https://git.overleaf.com/65d75bc228ad6eadf9e46c42
 [submodule "bcc"]
-	path = csrc/bcc
+	path = software/bcc
 	url = git@github.com:iovisor/bcc.git
 [submodule "csrc/bpftool"]
-	path = csrc/bpftool
+	path = thrid_party/bpftool
 	url = https://github.com/libbpf/bpftool.git
 [submodule "csrc/tracee"]
-	path = csrc/tracee
+	path = software/tracee
 	url = git@github.com:aquasecurity/tracee.git
 [submodule "html"]
 	path = html

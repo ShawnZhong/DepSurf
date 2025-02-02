@@ -6,7 +6,8 @@ from .system import system
 
 
 PROJ_PATH = Path(__file__).parent.parent.parent
-BPFTOOL_SRC_PATH = PROJ_PATH / "csrc" / "bpftool" / "src"
+BPFTOOL_SRC_PATH = PROJ_PATH / "third_party" / "bpftool" / "src"
+BPFTOOL_PATCH_PATH = PROJ_PATH / "third_party" / "bpftool.patch"
 BPFTOOL_EXE_PATH = BPFTOOL_SRC_PATH / "bpftool"
 
 
@@ -26,23 +27,3 @@ def gen_min_btf(obj_file, result_path, debug=False):
 dump_raw_btf_header = partial(dump_raw_btf_impl, cmd="format c")
 dump_raw_btf_txt = partial(dump_raw_btf_impl, cmd="format raw")
 dump_raw_btf_json = partial(dump_raw_btf_impl, cmd="--json")
-
-
-# def get_linux_tools_path():
-#     parent = Path("/usr/lib/linux-tools")
-#     versions = [x for x in parent.iterdir() if x.is_dir()]
-#     if len(versions) == 0:
-#         raise Exception("No linux-tools found")
-#     versions.sort()
-#     return parent / versions[-1]
-
-
-# def get_bpftool_path():
-#     bpftool_path = BPFTOOL_SRC_PATH / "bpftool"
-#     if bpftool_path.exists():
-#         return bpftool_path
-
-#     path = get_linux_tools_path() / "bpftool"
-#     if not path.exists():
-#         raise Exception("bpftool not found")
-#     return path

@@ -15,9 +15,13 @@ if not PAPER_PATH.exists():
 TAB_PATH = PAPER_PATH / "tabs"
 FIG_PATH = PAPER_PATH / "figs"
 
-BCC_PATH = PROJ_PATH / "csrc" / "bcc"
+SOFTWARE_PATH = PROJ_PATH / "software"
+
+BCC_PATH = SOFTWARE_PATH / "bcc"
 BCC_TOOLS_PATH = BCC_PATH / "libbpf-tools"
 BCC_OBJ_PATH = BCC_TOOLS_PATH / ".output"
+
+TRACEE_PATH = SOFTWARE_PATH / "tracee"
 
 
 def iter_bcc_objects():
