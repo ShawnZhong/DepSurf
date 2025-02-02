@@ -1,5 +1,5 @@
 [submodule "ebpf/libbpf-bootstrap"]
-	path = csrc/test-bpf/libbpf-bootstrap
+	path = archive/test-bpf/libbpf-bootstrap
 	url = git@github.com:libbpf/libbpf-bootstrap.git
 [submodule "paper"]
 	path = paper
