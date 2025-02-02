@@ -24,16 +24,17 @@ def prep(v: Version, overwrite: bool = False):
     )
 
     # Extract the boot image
-    extract_deb(
-        deb_path=v.image_deb_path,
-        file_path=(
-            f"/boot/vmlinux-{v.short_name}"
-            if v.arch == "ppc64el"
-            else f"/boot/vmlinuz-{v.short_name}"
-        ),
-        result_path=v.vmlinuz_path,
-        overwrite=overwrite,
-    )
+    if v.image_deb_path.exists():
+        extract_deb(
+            deb_path=v.image_deb_path,
+            file_path=(
+                f"/boot/vmlinux-{v.short_name}"
+                if v.arch == "ppc64el"
+                else f"/boot/vmlinuz-{v.short_name}"
+            ),
+            result_path=v.vmlinuz_path,
+            overwrite=overwrite,
+        )
 
     # Extract the config file
     if v.buildinfo_path.exists():  # from buildinfo

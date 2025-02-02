@@ -7,7 +7,6 @@ from dataclasses import dataclass
 from depsurf.version_pair import VersionPair, DiffPairResult
 from depsurf.version import DATA_PATH, Version
 from depsurf.dep import DepKind
-from depsurf.issues import IssueEnum
 
 
 VERSIONS_ALL = sorted(set(Version.from_path(p) for p in DATA_PATH.rglob("*.deb")))
