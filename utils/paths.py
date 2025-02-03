@@ -10,8 +10,6 @@ OUTPUT_PATH.mkdir(exist_ok=True, parents=True)
 REPORT_PATH.mkdir(exist_ok=True, parents=True)
 
 PAPER_PATH = PROJ_PATH / "paper"
-if not PAPER_PATH.exists():
-    PAPER_PATH = OUTPUT_PATH
 TAB_PATH = PAPER_PATH / "tabs"
 FIG_PATH = PAPER_PATH / "figs"
 

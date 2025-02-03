@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 
 from matplotlib import pyplot as plt
 from matplotlib import transforms
@@ -73,10 +74,11 @@ def label_multiline_text(ax: Axes, x, y, lines, colors=None, fontsize=8):
         )
 
 
-def save_fig(fig: Figure, name: str, close=True):
-    path = FIG_PATH / f"{name}.pdf"
-    path.unlink(missing_ok=True)
-    fig.savefig(path, bbox_inches="tight", pad_inches=0)
-    logging.info(f"Saved figure to {path}")
+def save_fig(fig: Figure, name: str, path: Path = FIG_PATH, close=True):
+    path.mkdir(parents=True, exist_ok=True)
+    filepath = path / f"{name}.pdf"
+    filepath.unlink(missing_ok=True)
+    fig.savefig(filepath, bbox_inches="tight", pad_inches=0)
+    logging.info(f"Saved figure to {filepath}")
     if close:
         plt.close(fig)
