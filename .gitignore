@@ -2,5 +2,5 @@ __pycache__
 .DS_Store
 tmp.*
 /.vscode
-/.ipynb_checkpoints
+.ipynb_checkpoints
 /.venv
