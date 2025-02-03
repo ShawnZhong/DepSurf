@@ -22,14 +22,5 @@ BCC_OBJ_PATH = BCC_TOOLS_PATH / ".output"
 TRACEE_PATH = SOFTWARE_PATH / "tracee"
 
 
-def iter_bcc_objects():
-    if not BCC_PATH.exists():
-        raise FileNotFoundError(f"{BCC_PATH} does not exist")
-    if not BCC_OBJ_PATH.exists():
-        raise FileNotFoundError(f"{BCC_OBJ_PATH} does not exist")
-    for obj in BCC_OBJ_PATH.glob("*.bpf.o"):
-        yield obj
-
-
 FONTS_PATH = UTILS_PATH / "fonts"
 FONT_MONO = FONTS_PATH / "Inconsolata_ExtraCondensed-Medium.ttf"
