@@ -87,59 +87,55 @@ class Version:
 
     @property
     def config_path(self):
-        return DATA_PATH / "config" / f"{self.name}.config"
+        return DATA_PATH / "dataset" / "config" / f"{self.name}.config"
 
     @property
     def vmlinux_path(self):
-        return DATA_PATH / "vmlinux" / self.name
+        return DATA_PATH / "intermediate" / "vmlinux" / self.name
 
     @property
     def vmlinuz_path(self):
-        return DATA_PATH / "vmlinuz" / self.name
+        return DATA_PATH / "intermediate" / "vmlinuz" / self.name
 
     @property
     def raw_btf_path(self):
-        return DATA_PATH / "raw_btf" / f"{self.name}"
+        return DATA_PATH / "intermediate" / "raw_btf" / f"{self.name}"
 
     @property
     def raw_btf_json_path(self):
-        return DATA_PATH / "raw_btf" / f"{self.name}.json"
+        return DATA_PATH / "intermediate" / "raw_btf" / f"{self.name}.json"
 
     @property
     def raw_btf_header_path(self):
-        return DATA_PATH / "raw_btf" / f"{self.name}.h"
+        return DATA_PATH / "intermediate" / "raw_btf" / f"{self.name}.h"
 
     @property
     def raw_btf_txt_path(self):
-        return DATA_PATH / "raw_btf" / f"{self.name}.txt"
+        return DATA_PATH / "intermediate" / "raw_btf" / f"{self.name}.txt"
 
     @property
     def btf_path(self):
-        return DATA_PATH / "btf" / f"{self.name}.pkl"
-
-    @property
-    def btf_funcs_path(self):
-        return DATA_PATH / "btf_funcs" / f"{self.name}.jsonl"
+        return DATA_PATH / "dataset" / "btf" / f"{self.name}.pkl"
 
     @property
     def symtab_path(self):
-        return DATA_PATH / "symtab" / f"{self.name}.jsonl"
+        return DATA_PATH / "dataset" / "symtab" / f"{self.name}.jsonl"
 
     @property
     def tracepoints_path(self):
-        return DATA_PATH / "tracepoints" / f"{self.name}.jsonl"
+        return DATA_PATH / "dataset" / "tracepoints" / f"{self.name}.jsonl"
 
     @property
     def func_entries_path(self):
-        return DATA_PATH / "func_entries" / f"{self.name}.jsonl"
+        return DATA_PATH / "intermediate" / "func_entries" / f"{self.name}.jsonl"
 
     @property
     def func_groups_path(self):
-        return DATA_PATH / "func_groups" / f"{self.name}.jsonl"
+        return DATA_PATH / "dataset" / "func_groups" / f"{self.name}.jsonl"
 
     @property
     def syscalls_path(self):
-        return DATA_PATH / "syscalls" / f"{self.name}.json"
+        return DATA_PATH / "dataset" / "syscalls" / f"{self.name}.json"
 
     @cached_property
     def img(self) -> "LinuxImage":

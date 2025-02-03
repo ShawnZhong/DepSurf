@@ -13,3 +13,6 @@
 [submodule "html"]
 	path = html
 	url = git@github.com:ShawnZhong/linux-data.git
+[submodule "data/dataset"]
+	path = data/dataset
+	url = https://github.com/ShawnZhong/DepSurf-dataset.git
