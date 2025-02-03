@@ -1,0 +1,13 @@
+[project]
+name = "depsurf"
+version = "0.1.0"
+description = "depsurf"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "launchpadlib>=2.1.0",
+    "matplotlib>=3.10.0",
+    "notebook>=7.3.2",
+    "pandas>=2.2.3",
+    "pyelftools>=0.31",
+]
