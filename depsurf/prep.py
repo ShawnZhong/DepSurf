@@ -17,16 +17,16 @@ def prep(v: Version, overwrite: bool = False):
 
     # Extract the Linux image with debug info
     extract_deb(
-        deb_path=v.dbgsym_deb_path,
+        deb_path=v.dbgsym_download_path,
         file_path=f"/usr/lib/debug/boot/vmlinux-{v.short_name}",
         result_path=v.vmlinux_path,
         overwrite=overwrite,
     )
 
     # Extract the boot image
-    if v.image_deb_path.exists():
+    if v.image_download_path.exists():
         extract_deb(
-            deb_path=v.image_deb_path,
+            deb_path=v.image_download_path,
             file_path=(
                 f"/boot/vmlinux-{v.short_name}"
                 if v.arch == "ppc64el"
@@ -37,23 +37,23 @@ def prep(v: Version, overwrite: bool = False):
         )
 
     # Extract the config file
-    if v.buildinfo_path.exists():  # from buildinfo
+    if v.buildinfo_download_path.exists():  # from buildinfo
         extract_deb(
-            deb_path=v.buildinfo_path,
+            deb_path=v.buildinfo_download_path,
             file_path=f"/usr/lib/linux/{v.short_name}/config",
             result_path=v.config_path,
             overwrite=overwrite,
         )
-    elif v.modules_deb_path.exists():  # from modules
+    elif v.modules_download_path.exists():  # from modules
         extract_deb(
-            deb_path=v.modules_deb_path,
+            deb_path=v.modules_download_path,
             file_path=f"/boot/config-{v.short_name}",
             result_path=v.config_path,
             overwrite=overwrite,
         )
     else:  # from image
         extract_deb(
-            deb_path=v.image_deb_path,
+            deb_path=v.image_download_path,
             file_path=f"/boot/config-{v.short_name}",
             result_path=v.config_path,
             overwrite=overwrite,

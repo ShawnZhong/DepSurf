@@ -114,7 +114,7 @@ class LinuxImage:
 
     @cached_property
     def btf(self) -> BTF:
-        return BTF.from_dump(self.version.btf_norm_path)
+        return BTF.from_dump(self.version.btf_path)
 
     @cached_property
     def symtab(self) -> SymbolTable:

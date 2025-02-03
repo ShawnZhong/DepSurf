@@ -70,20 +70,20 @@ class Version:
         return f"{self.version}-{self.revision}-{self.flavor}"
 
     @property
-    def dbgsym_deb_path(self):
-        return DATA_PATH / "deb_dbgsym" / f"{self.name}.deb"
+    def dbgsym_download_path(self):
+        return DATA_PATH / "download" / "dbgsym" / f"{self.name}.deb"
 
     @property
-    def image_deb_path(self):
-        return DATA_PATH / "deb_image" / f"{self.name}.deb"
+    def image_download_path(self):
+        return DATA_PATH / "download" / "image" / f"{self.name}.deb"
 
     @property
-    def modules_deb_path(self):
-        return DATA_PATH / "deb_modules" / f"{self.name}.deb"
+    def modules_download_path(self):
+        return DATA_PATH / "download" / "modules" / f"{self.name}.deb"
 
     @property
-    def buildinfo_path(self):
-        return DATA_PATH / "deb_buildinfo" / f"{self.name}.deb"
+    def buildinfo_download_path(self):
+        return DATA_PATH / "download" / "buildinfo" / f"{self.name}.deb"
 
     @property
     def config_path(self):

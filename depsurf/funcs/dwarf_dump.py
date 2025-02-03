@@ -174,7 +174,7 @@ class FunctionRecorder:
                 continue
 
             traverser = Traverser(top_die, handler_map)
-            logging.info(f"Traversing {i+1}/{len(cus)}: {traverser.path}")
+            logging.debug(f"Traversing {i+1}/{len(cus)}: {traverser.path}")
             if debug:
                 traverser.traverse_debug()
             else:
