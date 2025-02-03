@@ -6,17 +6,25 @@ Artifacts for EuroSys'25 paper "Revealing the Unstable Foundations of eBPF-Based
 
 ## Prerequisites
 
-DepSurf is written in Python. We recommend using [uv](https://astral.sh/uv/) for environment setup: 
+DepSurf is written with Python 3.11 or higher. Tested on Ubuntu 22.04 and 24.04.
+
+We recommend using [uv](https://astral.sh/uv/) for environment setup: 
 
 ```
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Then, you can run the following commands to start Jupyter Lab:
+Download the source code from GitHub:
 
 ```
 git clone git@github.com:ShawnZhong/DepSurf.git
 cd DepSurf
+git submodule update --init --recursive
+```
+
+Then, you can run the following commands to start Jupyter Lab:
+
+```
 uv run jupyter lab --ip 0.0.0.0
 ```
 

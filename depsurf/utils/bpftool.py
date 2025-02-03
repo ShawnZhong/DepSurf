@@ -8,19 +8,19 @@ from .system import system
 PROJ_PATH = Path(__file__).parent.parent.parent
 BPFTOOL_SRC_PATH = PROJ_PATH / "third_party" / "bpftool" / "src"
 BPFTOOL_PATCH_PATH = PROJ_PATH / "third_party" / "bpftool.patch"
-BPFTOOL_EXE_PATH = BPFTOOL_SRC_PATH / "bpftool"
+BPFTOOL_BIN_PATH = BPFTOOL_SRC_PATH / "bpftool"
 
 
 @check_result_path
 def dump_raw_btf_impl(raw_btf_path: Path, cmd: str, result_path: Path):
-    system(f"{BPFTOOL_EXE_PATH} btf dump file {raw_btf_path} {cmd} > {result_path}")
+    system(f"{BPFTOOL_BIN_PATH} btf dump file {raw_btf_path} {cmd} > {result_path}")
 
 
 @check_result_path
 def gen_min_btf(obj_file, result_path, debug=False):
     debug_arg = "-d" if debug else ""
     system(
-        f"{BPFTOOL_EXE_PATH} {debug_arg} gen min_core_btf {obj_file} {result_path} {obj_file}"
+        f"{BPFTOOL_BIN_PATH} {debug_arg} gen min_core_btf {obj_file} {result_path} {obj_file}"
     )
 
 
