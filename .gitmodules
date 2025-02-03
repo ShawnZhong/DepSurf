@@ -1,9 +1,6 @@
 [submodule "ebpf/libbpf-bootstrap"]
 	path = archive/test-bpf/libbpf-bootstrap
 	url = git@github.com:libbpf/libbpf-bootstrap.git
-[submodule "paper"]
-	path = paper
-	url = https://git.overleaf.com/65d75bc228ad6eadf9e46c42
 [submodule "bcc"]
 	path = software/bcc
 	url = git@github.com:iovisor/bcc.git
