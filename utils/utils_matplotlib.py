@@ -74,11 +74,9 @@ def label_multiline_text(ax: Axes, x, y, lines, colors=None, fontsize=8):
         )
 
 
-def save_fig(fig: Figure, name: str, path: Path = FIG_PATH, close=True):
+def save_fig(fig: Figure, name: str, path: Path = FIG_PATH):
     path.mkdir(parents=True, exist_ok=True)
     filepath = path / f"{name}.pdf"
     filepath.unlink(missing_ok=True)
     fig.savefig(filepath, bbox_inches="tight", pad_inches=0)
     logging.info(f"Saved figure to {filepath}")
-    if close:
-        plt.close(fig)
