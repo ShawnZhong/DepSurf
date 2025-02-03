@@ -1,7 +1,7 @@
 from pathlib import Path
 from functools import partial
 
-from .decorator import check_result_path
+from .decorator import manage_result_path
 from .system import system
 
 
@@ -11,7 +11,7 @@ BPFTOOL_PATCH_PATH = PROJ_PATH / "third_party" / "bpftool.patch"
 BPFTOOL_BIN_PATH = BPFTOOL_SRC_PATH / "bpftool"
 
 
-@check_result_path
+@manage_result_path
 def gen_min_btf(obj_file, result_path, debug=False):
     debug_arg = "-d" if debug else ""
     system(
@@ -19,7 +19,7 @@ def gen_min_btf(obj_file, result_path, debug=False):
     )
 
 
-@check_result_path
+@manage_result_path
 def dump_raw_btf(raw_btf_path: Path, cmd: str, result_path: Path):
     system(f"{BPFTOOL_BIN_PATH} btf dump file {raw_btf_path} {cmd} > {result_path}")
 

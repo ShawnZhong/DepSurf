@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Iterator, Optional
 
 from depsurf.btf import BTF
-from depsurf.utils import check_result_path
+from depsurf.utils import manage_result_path
 
 from .filebytes import FileBytes
 from .struct import StructInstance
@@ -110,7 +110,7 @@ class TracepointsExtractor:
         return self.btf.enum_values["TRACE_EVENT_FL_IGNORE_ENABLE"]
 
 
-@check_result_path
+@manage_result_path
 def dump_tracepoints(img, result_path):
     extractor = TracepointsExtractor(img.btf, img.filebytes, img.symtab)
     with open(result_path, "w") as f:

@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Dict, List, Iterator, Optional
 from dataclasses import dataclass
 
-from depsurf.utils import check_result_path
+from depsurf.utils import manage_result_path
 from depsurf.linux import SymbolTable
 
 from .entry import FuncEntry
@@ -51,7 +51,7 @@ class FuncGroups:
         return cls(data=result)
 
 
-@check_result_path
+@manage_result_path
 def dump_func_groups(funcs_path: Path, symtab_path: Path, result_path: Path):
     functions: Dict[str, List[FuncEntry]] = defaultdict(list)
     with open(funcs_path, "r") as f:

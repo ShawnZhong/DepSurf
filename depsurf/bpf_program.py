@@ -69,19 +69,16 @@ class BPFProgram:
         gen_min_btf(
             self.path,
             result_path=self.btf_file,
-            overwrite=False,
             slient=True,
         )
         dump_raw_btf_json(
             self.btf_file,
             result_path=self.btf_json_file,
-            overwrite=False,
             slient=True,
         )
         dump_raw_btf_txt(
             self.btf_file,
             result_path=self.btf_txt_file,
-            overwrite=False,
             slient=True,
         )
         btf = BTF.from_raw_btf_json(self.btf_json_file)
