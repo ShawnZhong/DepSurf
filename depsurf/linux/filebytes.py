@@ -37,13 +37,17 @@ def get_cstr(data: bytes, off: int) -> str:
 
 
 class FileBytes:
-    def __init__(self, elf: ELFFile):
-        self.elf = elf
-        self.stream = elf.stream
-        self.ptr_size = elf.elfclass // 8
+    def __init__(self, vmlinux_path: Path):
+        self.file = open(vmlinux_path, "rb")
+        self.elf = ELFFile(self.file)
+        self.stream = self.elf.stream
+        self.ptr_size = self.elf.elfclass // 8
         self.byteorder: Literal["little", "big"] = (
             "little" if self.elf.little_endian else "big"
         )
+
+    def __del__(self):
+        self.file.close()
 
     def addr_to_offset(self, addr):
         offsets = list(self.elf.address_offsets(addr))

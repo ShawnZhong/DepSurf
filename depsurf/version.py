@@ -21,15 +21,13 @@ class Version:
 
     @classmethod
     def from_path(cls, path: Path | str):
-        return cls.from_str(Path(path).name)
+        return cls.from_str(Path(path).stem)
 
     @classmethod
     def from_str(cls, name: str):
         name = (
             name.removeprefix("linux-image-")
             .removeprefix("unsigned-")
-            .removesuffix(".deb")
-            .removesuffix(".ddeb")
             .replace("_", "-")
         )
 

@@ -11,7 +11,7 @@ from depsurf.dep import DepKind
 VERSION_DEFAULT = Version(
     version_tuple=(5, 4, 0), flavor="generic", arch="amd64", revision=26
 )
-VERSIONS_ALL = sorted(set(Version.from_path(p) for p in DATA_PATH.rglob("*.deb")))
+VERSIONS_ALL = sorted(set(Version.from_path(p) for p in DATA_PATH.rglob("*.jsonl")))
 VERSIONS_REV = [
     v
     for v in VERSIONS_ALL

@@ -26,11 +26,6 @@ class LinuxImage:
         if LinuxImage.cache_enabled and version in self.cache:
             raise ValueError("Please use LinuxImage.from_* to get an instance")
         self.version = version
-        self.file = open(version.vmlinux_path, "rb")
-        self.elffile = ELFFile(self.file)
-
-    def __del__(self):
-        self.file.close()
 
     @classmethod
     def from_version(cls, version: Version):
@@ -99,7 +94,7 @@ class LinuxImage:
 
     @cached_property
     def filebytes(self):
-        return FileBytes(self.elffile)
+        return FileBytes(self.version.vmlinux_path)
 
     @cached_property
     def syscalls(self) -> Dict[str, int]:
@@ -148,7 +143,8 @@ class LinuxImage:
 
     @property
     def gcc_version(self) -> Optional[str]:
-        comment_section = self.elffile.get_section_by_name(".comment")
+        with open(self.version.vmlinux_path) as f:
+            comment_section = ELFFile(f).get_section_by_name(".comment")
         if comment_section is None:
             return None
         comment = comment_section.data().decode()
