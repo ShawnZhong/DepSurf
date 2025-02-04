@@ -2,7 +2,7 @@ import json
 import logging
 from typing import Iterable, Tuple
 
-from depsurf.utils import check_result_path
+from depsurf.utils import manage_result_path
 
 from .filebytes import FileBytes
 from .symtab import SymbolTable
@@ -61,7 +61,7 @@ class SyscallExtracter:
                 yield name, i
 
 
-@check_result_path
+@manage_result_path
 def dump_syscalls(img, result_path):
     extractor = SyscallExtracter(img.symtab, img.filebytes)
     syscalls = {i: name for name, i in extractor.iter_syscall()}

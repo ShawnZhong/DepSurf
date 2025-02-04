@@ -2,9 +2,8 @@ import json
 import logging
 import pickle
 from pathlib import Path
-from typing import Dict
 
-from depsurf.utils import check_result_path
+from depsurf.utils import manage_result_path
 
 from .kind import Kind
 
@@ -190,7 +189,7 @@ class BTFNormalizer:
         return results
 
 
-@check_result_path
+@manage_result_path
 def normalize_btf(json_path, result_path):
     data = BTFNormalizer(json_path).get_results()
     with open(result_path, "wb") as f:

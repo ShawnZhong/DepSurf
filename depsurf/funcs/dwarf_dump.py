@@ -7,7 +7,7 @@ from elftools.dwarf.die import DIE
 from elftools.dwarf.dwarfinfo import DWARFInfo
 from elftools.elf.elffile import ELFFile
 
-from depsurf.utils import check_result_path
+from depsurf.utils import manage_result_path
 
 from .dwarf import DIEHandler, Traverser, get_name
 from .entry import FuncEntry, InlineStatus
@@ -170,11 +170,11 @@ class FunctionRecorder:
             top_die = cu.get_top_DIE()
             lang = top_die.attributes["DW_AT_language"].value
             if lang == 0x001C:  #  # ignore DW_LANG_Rust
-                logging.info(f"Ignoring {i+1}/{len(cus)}: {traverser.path}")
+                logging.info(f"Ignoring {i + 1}/{len(cus)}: {traverser.path}")
                 continue
 
             traverser = Traverser(top_die, handler_map)
-            logging.debug(f"Traversing {i+1}/{len(cus)}: {traverser.path}")
+            logging.debug(f"Traversing {i + 1}/{len(cus)}: {traverser.path}")
             if debug:
                 traverser.traverse_debug()
             else:
@@ -213,7 +213,7 @@ def disable_dwarf_cache():
     DWARFInfo._cached_CU_at_offset = DWARFInfo._parse_CU_at_offset
 
 
-@check_result_path
+@manage_result_path
 def dump_func_entries(path: Path, result_path: Path):
     disable_dwarf_cache()
 

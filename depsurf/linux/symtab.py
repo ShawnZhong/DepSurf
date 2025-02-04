@@ -6,10 +6,10 @@ from pathlib import Path
 from elftools.elf.sections import SymbolTableSection
 from elftools.elf.elffile import ELFFile
 
-from depsurf.utils import check_result_path
+from depsurf.utils import manage_result_path
 
 
-@check_result_path
+@manage_result_path
 def dump_symtab(vmlinux_path: Path, result_path: Path):
     with open(vmlinux_path, "rb") as fin:
         elffile = ELFFile(fin)

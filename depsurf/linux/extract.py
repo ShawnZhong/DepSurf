@@ -3,21 +3,21 @@ from pathlib import Path
 
 from elftools.elf.elffile import ELFFile
 
-from depsurf.utils import check_result_path, system
+from depsurf.utils import manage_result_path, system
 
 
 def list_deb(deb_path: Path):
     system(f"dpkg -c {deb_path}")
 
 
-@check_result_path
+@manage_result_path
 def extract_deb(deb_path: Path, file_path: str, result_path: Path):
     logging.info(f"Extracting {file_path} in {deb_path} to {result_path}")
     # system(f"dpkg -x {deb_path} {tmp_path}")
     system(f"dpkg --fsys-tarfile {deb_path} | tar -xO .{file_path} > {result_path}")
 
 
-@check_result_path
+@manage_result_path
 def extract_raw_btf(vmlinux_path: Path, result_path: Path):
     with open(vmlinux_path, "rb") as f:
         elf = ELFFile(f)
