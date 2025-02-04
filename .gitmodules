@@ -11,7 +11,7 @@
 	path = software/tracee
 	url = git@github.com:aquasecurity/tracee.git
 [submodule "html"]
-	path = html
+	path = data/html
 	url = git@github.com:ShawnZhong/linux-data.git
 [submodule "data/dataset"]
 	path = data/dataset

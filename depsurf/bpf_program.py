@@ -81,10 +81,10 @@ class BPFProgram:
             result_path=self.btf_txt_file,
             slient=True,
         )
-        btf = Types.from_raw_btf_json(self.btf_json_file)
+        types = Types.from_btf_json(self.btf_json_file)
 
         results = []
-        for name, struct in btf.structs.items():
+        for name, struct in types.structs.items():
             name = name.split("___")[0]
             if name == "user_pt_regs":
                 continue

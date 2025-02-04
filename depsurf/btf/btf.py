@@ -41,11 +41,11 @@ class Types:
         assert path.exists()
         assert path.suffix == ".json"
         with open(path, "r") as f:
-            logging.info(f"Loading BTF from {path}")
+            logging.info(f"Loading types from {path}")
             return cls(json.load(f))
 
     @classmethod
-    def from_raw_btf_json(cls, path: Path):
+    def from_btf_json(cls, path: Path):
         assert path.exists()
         assert path.suffix == ".json"
         from .normalize import BTFNormalizer
