@@ -6,7 +6,7 @@ from functools import cached_property
 from pathlib import Path
 from typing import Iterator, Optional
 
-from depsurf.btf import BTF
+from depsurf.btf import Types
 from depsurf.utils import manage_result_path
 
 from .filebytes import FileBytes
@@ -26,7 +26,7 @@ class TracepointInfo:
 
 
 class TracepointsExtractor:
-    def __init__(self, btf: BTF, filebytes: FileBytes, symtab: SymbolTable):
+    def __init__(self, btf: Types, filebytes: FileBytes, symtab: SymbolTable):
         self.btf = btf
         self.filebytes = filebytes
         self.symtab = symtab

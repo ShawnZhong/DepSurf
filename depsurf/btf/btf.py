@@ -1,5 +1,5 @@
+import json
 import logging
-import pickle
 from functools import cached_property
 from pathlib import Path
 
@@ -8,7 +8,7 @@ from typing import Dict
 from .kind import Kind
 
 
-def get_btf_type_str(obj):
+def get_type_str(obj):
     assert "kind" in obj, obj
     kind = obj["kind"]
 
@@ -18,20 +18,20 @@ def get_btf_type_str(obj):
         return obj["name"]
     elif kind == Kind.PTR:
         if obj["type"]["kind"] == Kind.FUNC_PROTO:
-            return get_btf_type_str(obj["type"])
+            return get_type_str(obj["type"])
         else:
-            return f"{get_btf_type_str(obj['type'])} *"
+            return f"{get_type_str(obj['type'])} *"
     elif kind == Kind.ARRAY:
-        return f"{get_btf_type_str(obj['type'])}[{obj['nr_elems']}]"
+        return f"{get_type_str(obj['type'])}[{obj['nr_elems']}]"
     elif kind == Kind.FUNC_PROTO:
-        return f"{get_btf_type_str(obj['ret_type'])} (*)({', '.join(get_btf_type_str(a['type']) for a in obj['params'])})"
+        return f"{get_type_str(obj['ret_type'])} (*)({', '.join(get_type_str(a['type']) for a in obj['params'])})"
     elif kind == Kind.FWD:
         return f"{obj['fwd_kind']} {obj['name']}"
     else:
         raise ValueError(f"Unknown kind: {obj}")
 
 
-class BTF:
+class Types:
     def __init__(self, data: dict):
         assert isinstance(data, dict)
         self.data = data
@@ -39,10 +39,10 @@ class BTF:
     @classmethod
     def from_dump(cls, path: Path):
         assert path.exists()
-        assert path.suffix == ".pkl"
-        with open(path, "rb") as f:
+        assert path.suffix == ".json"
+        with open(path, "r") as f:
             logging.info(f"Loading BTF from {path}")
-            return cls(pickle.load(f))
+            return cls(json.load(f))
 
     @classmethod
     def from_raw_btf_json(cls, path: Path):

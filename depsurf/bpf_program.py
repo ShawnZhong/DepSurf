@@ -4,9 +4,9 @@ from typing import Dict, List
 
 from elftools.elf.elffile import ELFFile
 
-from depsurf.btf import BTF
+from depsurf.btf import Types
 from depsurf.dep import Dep, DepKind
-from depsurf.utils import dump_raw_btf_json, dump_raw_btf_txt, gen_min_btf
+from depsurf.utils import dump_btf_json, dump_btf_txt, gen_min_btf
 
 
 class BPFProgram:
@@ -71,17 +71,17 @@ class BPFProgram:
             result_path=self.btf_file,
             slient=True,
         )
-        dump_raw_btf_json(
+        dump_btf_json(
             self.btf_file,
             result_path=self.btf_json_file,
             slient=True,
         )
-        dump_raw_btf_txt(
+        dump_btf_txt(
             self.btf_file,
             result_path=self.btf_txt_file,
             slient=True,
         )
-        btf = BTF.from_raw_btf_json(self.btf_json_file)
+        btf = Types.from_raw_btf_json(self.btf_json_file)
 
         results = []
         for name, struct in btf.structs.items():

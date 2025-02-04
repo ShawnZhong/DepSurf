@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-from depsurf.btf import Kind, get_btf_type_str
+from depsurf.btf import Kind, get_type_str
 
 from depsurf.issues import IssueEnum
 from .common import BaseChange, diff_dict
@@ -13,7 +13,7 @@ class FuncReturn(BaseChange, enum=IssueEnum.RETURN_TYPE):
     new: str
 
     def format(self):
-        return f"{get_btf_type_str(self.old)} -> {get_btf_type_str(self.new)}"
+        return f"{get_type_str(self.old)} -> {get_type_str(self.new)}"
 
 
 @dataclass
@@ -22,7 +22,7 @@ class ParamRemove(BaseChange, enum=IssueEnum.PARAM_REMOVE):
     type: dict
 
     def format(self):
-        return f"{get_btf_type_str(self.type)} {self.name}"
+        return f"{get_type_str(self.type)} {self.name}"
 
 
 @dataclass
@@ -31,7 +31,7 @@ class ParamAdd(BaseChange, enum=IssueEnum.PARAM_ADD):
     type: dict
 
     def format(self):
-        return f"{get_btf_type_str(self.type)} {self.name}"
+        return f"{get_type_str(self.type)} {self.name}"
 
 
 @dataclass
@@ -54,7 +54,7 @@ class ParamType(BaseChange, enum=IssueEnum.PARAM_TYPE):
     new: dict
 
     def format(self):
-        return f"{get_btf_type_str(self.old)} {self.name} -> {get_btf_type_str(self.new)} {self.name}"
+        return f"{get_type_str(self.old)} {self.name} -> {get_type_str(self.new)} {self.name}"
 
 
 def diff_func(old, new) -> List[BaseChange]:

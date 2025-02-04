@@ -18,7 +18,7 @@ def extract_deb(deb_path: Path, file_path: str, result_path: Path):
 
 
 @manage_result_path
-def extract_raw_btf(vmlinux_path: Path, result_path: Path):
+def extract_btf(vmlinux_path: Path, result_path: Path):
     with open(vmlinux_path, "rb") as f:
         elf = ELFFile(f)
 
@@ -40,7 +40,7 @@ def extract_raw_btf(vmlinux_path: Path, result_path: Path):
             with open(result_path, "wb") as f:
                 f.write(btf.data())
             # system(
-            #     f"objcopy -I elf64-little {self.path} --dump-section .BTF={btf_path}"
+            #     f"objcopy -I elf64-little {self.path} --dump-section .BTF={result_path}"
             # )
             return
 

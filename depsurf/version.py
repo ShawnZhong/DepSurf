@@ -98,24 +98,24 @@ class Version:
         return DATA_PATH / "intermediate" / "vmlinuz" / self.name
 
     @property
-    def raw_btf_path(self):
-        return DATA_PATH / "intermediate" / "raw_btf" / f"{self.name}"
-
-    @property
-    def raw_btf_json_path(self):
-        return DATA_PATH / "intermediate" / "raw_btf" / f"{self.name}.json"
-
-    @property
-    def raw_btf_header_path(self):
-        return DATA_PATH / "intermediate" / "raw_btf" / f"{self.name}.h"
-
-    @property
-    def raw_btf_txt_path(self):
-        return DATA_PATH / "intermediate" / "raw_btf" / f"{self.name}.txt"
-
-    @property
     def btf_path(self):
-        return DATA_PATH / "dataset" / "btf" / f"{self.name}.pkl"
+        return DATA_PATH / "intermediate" / "btf" / f"{self.name}"
+
+    @property
+    def btf_json_path(self):
+        return DATA_PATH / "intermediate" / "btf" / f"{self.name}.json"
+
+    @property
+    def btf_header_path(self):
+        return DATA_PATH / "intermediate" / "btf" / f"{self.name}.h"
+
+    @property
+    def btf_txt_path(self):
+        return DATA_PATH / "intermediate" / "btf" / f"{self.name}.txt"
+
+    @property
+    def types_path(self):
+        return DATA_PATH / "dataset" / "types" / f"{self.name}.json"
 
     @property
     def symtab_path(self):

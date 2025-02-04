@@ -20,10 +20,10 @@ def gen_min_btf(obj_file, result_path, debug=False):
 
 
 @manage_result_path
-def dump_raw_btf(raw_btf_path: Path, cmd: str, result_path: Path):
+def dump_btf(raw_btf_path: Path, cmd: str, result_path: Path):
     system(f"{BPFTOOL_BIN_PATH} btf dump file {raw_btf_path} {cmd} > {result_path}")
 
 
-dump_raw_btf_header = partial(dump_raw_btf, cmd="format c")
-dump_raw_btf_txt = partial(dump_raw_btf, cmd="format raw")
-dump_raw_btf_json = partial(dump_raw_btf, cmd="--json")
+dump_btf_header = partial(dump_btf, cmd="format c")
+dump_btf_txt = partial(dump_btf, cmd="format raw")
+dump_btf_json = partial(dump_btf, cmd="--json")

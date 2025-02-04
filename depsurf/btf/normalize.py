@@ -1,7 +1,7 @@
 import json
 import logging
-import pickle
 from pathlib import Path
+from typing import Dict
 
 from depsurf.utils import manage_result_path
 
@@ -154,7 +154,7 @@ class BTFNormalizer:
         return elem
 
     def get_results(self):
-        results = {k.value: {} for k in Kind}
+        results: Dict[str, Dict[str, Dict]] = {k.value: {} for k in Kind}
 
         anon_enum_values = []
         for i in range(1, len(self.raw_types) + 1):
@@ -190,7 +190,8 @@ class BTFNormalizer:
 
 
 @manage_result_path
-def normalize_btf(json_path, result_path):
+def dump_types(json_path, result_path):
+    logging.info(f"Dumping types to {result_path}")
     data = BTFNormalizer(json_path).get_results()
-    with open(result_path, "wb") as f:
-        pickle.dump(data, f)
+    with open(result_path, "w") as f:
+        json.dump(data, f)

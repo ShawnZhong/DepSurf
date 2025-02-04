@@ -1,10 +1,10 @@
-from depsurf.btf import BTF, Kind
+from depsurf.btf import Types, Kind
 
 from .filebytes import FileBytes
 
 
 class StructInstance:
-    def __init__(self, btf: BTF, filebytes: FileBytes, name: str, ptr: int):
+    def __init__(self, btf: Types, filebytes: FileBytes, name: str, ptr: int):
         self.btf = btf
         self.filebytes = filebytes
         self.name = name

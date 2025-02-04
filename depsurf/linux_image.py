@@ -1,12 +1,11 @@
 import json
 import re
 from functools import cached_property
-from pathlib import Path
 from typing import Dict, Optional
 
 from elftools.elf.elffile import ELFFile
 
-from depsurf.btf import BTF
+from depsurf.btf import Types
 from depsurf.dep import Dep, DepKind, DepStatus
 from depsurf.funcs import FuncGroups
 from depsurf.linux import (
@@ -25,7 +24,7 @@ class LinuxImage:
 
     def __init__(self, version: Version):
         if LinuxImage.cache_enabled and version in self.cache:
-            raise ValueError(f"Please use LinuxImage.from_* to get an instance")
+            raise ValueError("Please use LinuxImage.from_* to get an instance")
         self.version = version
         self.file = open(version.vmlinux_path, "rb")
         self.elffile = ELFFile(self.file)
@@ -52,17 +51,17 @@ class LinuxImage:
 
     def get_all_by_kind(self, kind: DepKind) -> Dict:
         if kind == DepKind.STRUCT:
-            return self.btf.structs
+            return self.types.structs
         elif kind == DepKind.FUNC:
-            return self.btf.funcs
+            return self.types.funcs
         elif kind == DepKind.TRACEPOINT:
             return self.tracepoints.data
         elif kind == DepKind.LSM:
             return self.lsm_hooks
         elif kind == DepKind.UNION:
-            return self.btf.unions
+            return self.types.unions
         elif kind == DepKind.ENUM:
-            return self.btf.enums
+            return self.types.enums
         elif kind == DepKind.SYSCALL:
             return self.syscalls
         elif kind == DepKind.CONFIG:
@@ -74,7 +73,7 @@ class LinuxImage:
     def get_dep(self, dep: Dep) -> Optional[Dict]:
         if dep.kind == DepKind.FIELD:
             struct_name, field_name = dep.name.split("::")
-            struct = self.btf.structs.get(struct_name)
+            struct = self.types.structs.get(struct_name)
             if struct is None:
                 return None
             for field in struct["members"]:
@@ -113,8 +112,8 @@ class LinuxImage:
         return FuncGroups.from_dump(self.version.func_groups_path)
 
     @cached_property
-    def btf(self) -> BTF:
-        return BTF.from_dump(self.version.btf_path)
+    def types(self) -> Types:
+        return Types.from_dump(self.version.types_path)
 
     @cached_property
     def symtab(self) -> SymbolTable:
@@ -128,9 +127,9 @@ class LinuxImage:
     def lsm_hooks(self):
         func_names = {
             f"security_{e['name']}"
-            for e in self.btf.structs["security_hook_heads"]["members"]
+            for e in self.types.structs["security_hook_heads"]["members"]
         }
-        return {k: v for k, v in self.btf.funcs.items() if k in func_names}
+        return {k: v for k, v in self.types.funcs.items() if k in func_names}
 
     @cached_property
     def kfuncs(self):
@@ -141,7 +140,7 @@ class LinuxImage:
             if sym["name"].startswith(prefix)
             if "bpf_lsm_" not in sym["name"]
         ]
-        return {k: v for k, v in self.btf.funcs.items() if k in func_names}
+        return {k: v for k, v in self.types.funcs.items() if k in func_names}
 
     @cached_property
     def configs(self):

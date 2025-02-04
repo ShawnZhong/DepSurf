@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-from depsurf.btf import Kind, get_btf_type_str
+from depsurf.btf import Kind, get_type_str
 from depsurf.issues import IssueEnum
 
 from .common import BaseChange, diff_dict
@@ -18,7 +18,7 @@ class FieldAdd(BaseChange, enum=IssueEnum.FIELD_ADD):
     type: dict
 
     def format(self):
-        return f"{get_btf_type_str(self.type)} {self.name}"
+        return f"{get_type_str(self.type)} {self.name}"
 
 
 @dataclass
@@ -27,7 +27,7 @@ class FieldRemove(BaseChange, enum=IssueEnum.FIELD_REMOVE):
     type: dict
 
     def format(self):
-        return f"{get_btf_type_str(self.type)} {self.name}"
+        return f"{get_type_str(self.type)} {self.name}"
 
 
 @dataclass
@@ -37,7 +37,7 @@ class FieldType(BaseChange, enum=IssueEnum.FIELD_TYPE):
     new: dict
 
     def format(self):
-        return f"{get_btf_type_str(self.old)} {self.name} -> {get_btf_type_str(self.new)} {self.name}"
+        return f"{get_type_str(self.old)} {self.name} -> {get_type_str(self.new)} {self.name}"
 
 
 def diff_struct_field(old, new) -> List[BaseChange]:
