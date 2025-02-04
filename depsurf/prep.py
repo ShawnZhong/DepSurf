@@ -1,4 +1,4 @@
-from depsurf.btf import dump_types
+from depsurf.btf import dump_types, dump_btf_header, dump_btf_json, dump_btf_txt
 from depsurf.funcs import dump_func_entries, dump_func_groups
 from depsurf.linux import (
     dump_symtab,
@@ -8,7 +8,6 @@ from depsurf.linux import (
     extract_deb,
 )
 from depsurf.linux_image import LinuxImage
-from depsurf.utils import dump_btf_header, dump_btf_json, dump_btf_txt
 from depsurf.version import Version
 
 

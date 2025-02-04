@@ -5,7 +5,7 @@
 	path = software/bcc
 	url = git@github.com:iovisor/bcc.git
 [submodule "csrc/bpftool"]
-	path = third_party/bpftool
+	path = depsurf/btf/bpftool
 	url = https://github.com/libbpf/bpftool.git
 [submodule "csrc/tracee"]
 	path = software/tracee

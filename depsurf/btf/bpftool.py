@@ -1,13 +1,12 @@
 from pathlib import Path
 from functools import partial
 
-from .decorator import manage_result_path
-from .system import system
+from depsurf.utils import manage_result_path, system
 
 
-PROJ_PATH = Path(__file__).parent.parent.parent
-BPFTOOL_SRC_PATH = PROJ_PATH / "third_party" / "bpftool" / "src"
-BPFTOOL_PATCH_PATH = PROJ_PATH / "third_party" / "bpftool.patch"
+CURR_PATH = Path(__file__).parent
+BPFTOOL_SRC_PATH = CURR_PATH / "bpftool" / "src"
+BPFTOOL_PATCH_PATH = CURR_PATH / "bpftool.patch"
 BPFTOOL_BIN_PATH = BPFTOOL_SRC_PATH / "bpftool"
 
 

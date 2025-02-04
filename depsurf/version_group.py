@@ -8,21 +8,24 @@ from depsurf.version_pair import VersionPair, DiffPairResult
 from depsurf.version import DATA_PATH, Version
 from depsurf.dep import DepKind
 
-
+VERSION_DEFAULT = Version(
+    version_tuple=(5, 4, 0), flavor="generic", arch="amd64", revision=26
+)
 VERSIONS_ALL = sorted(set(Version.from_path(p) for p in DATA_PATH.rglob("*.deb")))
 VERSIONS_REV = [
     v
     for v in VERSIONS_ALL
-    if v.version == "5.4.0" and v.arch == "amd64" and v.flavor == "generic"
+    if v.version_tuple == VERSION_DEFAULT.version_tuple
+    and v.arch == VERSION_DEFAULT.arch
+    and v.flavor == VERSION_DEFAULT.flavor
 ]
-VERSION_DEFAULT = VERSIONS_REV[0]
 VERSIONS_REGULAR = sorted(
     [
         v
         for v in VERSIONS_ALL
         if v.arch == VERSION_DEFAULT.arch
         and v.flavor == VERSION_DEFAULT.flavor
-        and v.version != VERSION_DEFAULT.version
+        and v.version_tuple != VERSION_DEFAULT.version_tuple
     ]
     + [VERSION_DEFAULT]
 )
@@ -41,15 +44,15 @@ VERSIONS_LTS = [
 VERSIONS_ARCH = [
     v
     for v in VERSIONS_ALL
-    if v.arch != VERSION_DEFAULT.arch and v.version == VERSION_DEFAULT.version
+    if v.arch != VERSION_DEFAULT.arch
+    and v.version_tuple == VERSION_DEFAULT.version_tuple
 ]
 VERSIONS_FLAVOR = [
     v
     for v in VERSIONS_ALL
-    if v.flavor != VERSION_DEFAULT.flavor and v.version == VERSION_DEFAULT.version
+    if v.flavor != VERSION_DEFAULT.flavor
+    and v.version_tuple == VERSION_DEFAULT.version_tuple
 ]
-VERSION_FIRST = VERSIONS_REGULAR[0]
-VERSION_LAST = VERSIONS_REGULAR[-1]
 
 
 @dataclass(frozen=True)
@@ -77,10 +80,6 @@ class VersionGroup(StrEnum):
     ARCH = "Arch"
     FLAVOR = "Flavor"
     TEST = "Test"
-    FIRST_LAST = "FirstLast"
-    # Single-version groups
-    FIRST = "First"
-    LAST = "Last"
     DEFAULT = "Default"
 
     @property
@@ -96,10 +95,6 @@ class VersionGroup(StrEnum):
             VersionGroup.REV: VERSIONS_REV,
             VersionGroup.ARCH: VERSIONS_ARCH,
             VersionGroup.FLAVOR: VERSIONS_FLAVOR,
-            VersionGroup.FIRST_LAST: [VERSION_FIRST, VERSION_LAST],
-            VersionGroup.TEST: [VERSIONS_LTS[0], VERSIONS_LTS[1]],
-            VersionGroup.FIRST: [VERSION_FIRST],
-            VersionGroup.LAST: [VERSION_LAST],
             VersionGroup.DEFAULT: [VERSION_DEFAULT],
         }[self]
 
@@ -114,7 +109,7 @@ class VersionGroup(StrEnum):
             return v.flavor
         if self == VersionGroup.REV:
             return str(v.revision)
-        if self in (VersionGroup.REGULAR, VersionGroup.LTS, VersionGroup.FIRST_LAST):
+        if self in (VersionGroup.REGULAR, VersionGroup.LTS):
             return v.short_version
         return str(v)
 
