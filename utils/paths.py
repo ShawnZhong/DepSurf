@@ -3,8 +3,8 @@ from pathlib import Path
 UTILS_PATH = Path(__file__).parent
 PROJ_PATH = UTILS_PATH.parent
 
+DATA_PATH = PROJ_PATH / "data"
 OUTPUT_PATH = PROJ_PATH / "output"
-REPORT_PATH = OUTPUT_PATH / "report"
 
 PAPER_PATH = PROJ_PATH / "paper"
 TAB_PATH = PAPER_PATH / "tabs"
