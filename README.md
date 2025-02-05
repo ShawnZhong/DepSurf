@@ -28,6 +28,8 @@ Then, you can run the following commands to start Jupyter Lab:
 uv run jupyter lab --ip 0.0.0.0
 ```
 
+## Overview
+
 Please follow the instructions in the Jupyter notebooks to run the experiments. In particular,
 
 - [`00_deps.ipynb`](./00_deps.ipynb) installs the dependencies.
@@ -42,7 +44,7 @@ Please follow the instructions in the Jupyter notebooks to run the experiments. 
 - [`42_dup.ipynb`](./42_dup.ipynb) generates Table 6.
 - [`50_programs.ipynb`](./50_programs.ipynb) analyzes the eBPF programs.
 - [`51_plot.ipynb`](./51_plot.ipynb) plots Figure 4.
-- [`52_table.ipynb`](./52_table.ipynb) generates Table 7 & 8.
+- [`52_summary.ipynb`](./52_summary.ipynb) generates Table 7 & 8.
 
 Feel free to skip `11_download.ipynb` and `20_dataset.ipynb` if you already have the dataset.
 
