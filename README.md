@@ -30,7 +30,7 @@ uv run jupyter lab --ip 0.0.0.0
 
 ## Overview
 
-Please follow the instructions in the Jupyter notebooks to run the experiments. In particular,
+Please follow the instructions in the Jupyter notebooks to reproduce the results in the paper. In particular,
 
 - [`00_deps.ipynb`](./00_deps.ipynb) installs the dependencies.
 - [`11_download.ipynb`](./11_download.ipynb) downloads the Linux kernel packages. 
@@ -49,3 +49,19 @@ Please follow the instructions in the Jupyter notebooks to run the experiments. 
 Feel free to skip `11_download.ipynb` and `20_dataset.ipynb` if you already have the dataset.
 
 Notebooks started with `9` are for testing, and feel free to skip them.
+
+## Project Structure
+
+The main structure of the project is as follows:
+
+- [data](./data): all the data files
+    - [data/dataset](./data/dataset): the repo of the dataset.
+    - [data/download](./data/download): all the downloaded kernel packages.
+- [output](./output): all the output files.
+- [depsurf](./depsurf): the source code of the DepSurf library.
+    - [depsurf/btf](./depsurf/btf): code for handling type information.
+    - [depsurf/diff](./depsurf/diff): code for diffing the dependency surface.
+    - [depsurf/funcs](./depsurf/funcs): code for analyzing functions.
+    - [depsurf/linux](./depsurf/linux): code for analyzing Linux kernel images.
+- [software](./software): the source code of the eBPF programs analyzed in the paper.
+- [utils](./utils): helper functions used by the notebooks.
