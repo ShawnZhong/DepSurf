@@ -1,5 +1,6 @@
 import json
 import logging
+from functools import cached_property
 from pathlib import Path
 from typing import Dict
 
@@ -12,10 +13,12 @@ class BTFNormalizer:
     def __init__(self, path: Path):
         assert path.suffix == ".json"
         assert path.exists()
-
         self.path = path
-        with open(path) as f:
-            self.raw_types = json.load(f)["types"]
+
+    @cached_property
+    def raw_types(self):
+        with open(self.path) as f:
+            return json.load(f)["types"]
 
     def get_raw(self, type_id):
         elem = self.raw_types[type_id - 1]
@@ -154,7 +157,8 @@ class BTFNormalizer:
 
         return elem
 
-    def get_data(self):
+    @cached_property
+    def data(self):
         logging.info(f"Normalizing types from {self.path}")
         results: Dict[str, Dict[str, Dict]] = {k.value: {} for k in Kind}
 
@@ -190,9 +194,14 @@ class BTFNormalizer:
             }
         return results
 
+    @manage_result_path
+    def dump_types(self, kind: Kind, result_path: Path):
+        with open(result_path, "w") as f:
+            for k, v in self.data[kind].items():
+                print(json.dumps(v), file=f)
 
-@manage_result_path
-def dump_types(data, kind: Kind, result_path: Path):
-    with open(result_path, "w") as f:
-        for k, v in data[kind].items():
-            print(json.dumps(v), file=f)
+
+def dump_types(btf_json_path: Path, result_paths: Dict[Kind, Path]):
+    normalizer = BTFNormalizer(btf_json_path)
+    for kind, path in result_paths.items():
+        normalizer.dump_types(kind, result_path=path)

@@ -67,4 +67,3 @@ def dump_syscalls(img, result_path):
     syscalls = {i: name for name, i in extractor.iter_syscall()}
     with open(result_path, "w") as f:
         json.dump(syscalls, f, indent=2)
-    logging.info(f"Saved syscalls to {result_path}")

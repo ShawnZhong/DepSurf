@@ -1,10 +1,10 @@
 import json
 import logging
-from typing import Dict, List
 from pathlib import Path
+from typing import Dict, List
 
-from elftools.elf.sections import SymbolTableSection
 from elftools.elf.elffile import ELFFile
+from elftools.elf.sections import SymbolTableSection
 
 from depsurf.utils import manage_result_path
 
@@ -38,8 +38,6 @@ def dump_symtab(vmlinux_path: Path, result_path: Path):
                     "size": sym.entry.st_size,
                 }
                 fout.write(json.dumps(entry) + "\n")
-
-        logging.info(f"Saved symtab to {result_path}")
 
 
 class SymbolTable:

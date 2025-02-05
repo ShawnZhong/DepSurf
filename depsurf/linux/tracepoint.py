@@ -123,7 +123,6 @@ def dump_tracepoints(img: "LinuxImage", result_path):
         for info in extractor.iter_tracepoints():
             json.dump(dataclasses.asdict(info), f)
             f.write("\n")
-    logging.info(f"Saved tracepoints to {result_path}")
 
 
 @dataclass

@@ -79,12 +79,16 @@ def prep(v: Version):
     )
 
     # Dump type info
-    data = BTFNormalizer(v.btf_json_path).get_data()
-    dump_types(data, Kind.FUNC, v.func_types_path)
-    dump_types(data, Kind.STRUCT, v.struct_types_path)
-    dump_types(data, Kind.UNION, v.union_types_path)
-    dump_types(data, Kind.ENUM, v.enum_types_path)
-    dump_types(data, Kind.INT, v.int_types_path)
+    dump_types(
+        btf_json_path=v.btf_json_path,
+        result_paths={
+            Kind.FUNC: v.func_types_path,
+            Kind.STRUCT: v.struct_types_path,
+            Kind.UNION: v.union_types_path,
+            Kind.ENUM: v.enum_types_path,
+            Kind.INT: v.int_types_path,
+        },
+    )
 
     # Dump symbol table, tracepoints, functions, and syscalls
     dump_symtab(

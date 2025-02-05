@@ -54,5 +54,5 @@ class Types:
         assert path.suffix == ".json"
         from .dump import BTFNormalizer
 
-        data = BTFNormalizer(path).get_data()
+        data = BTFNormalizer(path).data
         return cls(data[kind])
