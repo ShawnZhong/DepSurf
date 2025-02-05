@@ -10,13 +10,13 @@ DepSurf is written with Python 3.11 or higher. Tested on Ubuntu 22.04 and 24.04.
 
 We recommend using [uv](https://astral.sh/uv/) for environment setup: 
 
-```
+```sh
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 Download the source code from GitHub:
 
-```
+```sh
 git clone git@github.com:ShawnZhong/DepSurf.git
 cd DepSurf
 git submodule update --init --recursive
@@ -24,11 +24,11 @@ git submodule update --init --recursive
 
 Then, you can run the following commands to start Jupyter Lab:
 
-```
+```sh
 uv run jupyter lab --ip 0.0.0.0
 ```
 
-Please follow the instructions in the Jupyter notebook to run the experiments. In particular,
+Please follow the instructions in the Jupyter notebooks to run the experiments. In particular,
 
 - `00_deps.ipynb` installs the dependencies.
 - `11_download.ipynb` downloads the Linux kernel packages. 
@@ -45,4 +45,5 @@ Please follow the instructions in the Jupyter notebook to run the experiments. I
 - `52_table.ipynb` generates Table 7 & 8.
 
 Feel free to skip `11_download.ipynb` and `20_dataset.ipynb` if you already have the dataset.
-Notebooks starts with `9` are for testing, and feel free to skip them.
+
+Notebooks started with `9` are for testing, and feel free to skip them.
