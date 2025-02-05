@@ -54,14 +54,12 @@ Notebooks started with `9` are for testing, and feel free to skip them.
 
 The main structure of the project is as follows:
 
-- [data](./data): all the data files
-    - [data/dataset](./data/dataset): the repo of the dataset.
-    - [data/download](./data/download): all the downloaded kernel packages.
+- [data/dataset](https://github.com/ShawnZhong/DepSurf-dataset/tree/main): the dataset for kernel dependency surfaces.
 - [output](./output): all the output files.
 - [depsurf](./depsurf): the source code of the DepSurf library.
     - [depsurf/btf](./depsurf/btf): code for handling type information.
     - [depsurf/diff](./depsurf/diff): code for diffing the dependency surface.
     - [depsurf/funcs](./depsurf/funcs): code for analyzing functions.
     - [depsurf/linux](./depsurf/linux): code for analyzing Linux kernel images.
-- [software](./software): the source code of the eBPF programs analyzed in the paper.
+- [software](./software): eBPF programs analyzed in the paper.
 - [utils](./utils): helper functions used by the notebooks.
