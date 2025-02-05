@@ -6,7 +6,7 @@ Artifacts for EuroSys'25 paper "Revealing the Unstable Foundations of eBPF-Based
 
 ## Prerequisites
 
-DepSurf is written with Python 3.11 or higher. Tested on Ubuntu 22.04 and 24.04.
+DepSurf requires Python 3.11 or higher. It has been tested on Ubuntu 22.04 and Ubuntu 24.04.
 
 We recommend using [uv](https://astral.sh/uv/) for environment setup: 
 
