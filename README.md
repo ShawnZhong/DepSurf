@@ -33,8 +33,8 @@ uv run jupyter lab --ip 0.0.0.0
 Please follow the instructions in the Jupyter notebooks to reproduce the results in the paper. In particular,
 
 - [`00_deps.ipynb`](./00_deps.ipynb) installs the dependencies.
-- [`11_download.ipynb`](./11_download.ipynb) downloads the Linux kernel packages (10 min). 
-- [`20_dataset.ipynb`](./20_dataset.ipynb) generates the dataset (10 min). 
+- [`11_download.ipynb`](./11_download.ipynb) downloads the Linux kernel packages (10 min, 23 GB). 
+- [`20_dataset.ipynb`](./20_dataset.ipynb) generates the dataset (10 min, 20 GB). 
 - [`30_diff.ipynb`](./30_diff.ipynb) diffs the dependency surface (2 min).
 - [`35_src.ipynb`](./35_src.ipynb) generates Table 3. 
 - [`36_breakdown.ipynb`](./36_breakdown.ipynb) generates Table 4.
