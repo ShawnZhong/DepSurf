@@ -4,7 +4,6 @@ from functools import cached_property
 from pathlib import Path
 from typing import TYPE_CHECKING
 
-
 if TYPE_CHECKING:
     from .linux_image import LinuxImage
 
@@ -112,8 +111,24 @@ class Version:
         return DATA_PATH / "intermediate" / "btf" / f"{self.name}.txt"
 
     @property
-    def types_path(self):
-        return DATA_PATH / "dataset" / "types" / f"{self.name}.json"
+    def func_types_path(self):
+        return DATA_PATH / "dataset" / "types_func" / f"{self.name}.jsonl"
+
+    @property
+    def struct_types_path(self):
+        return DATA_PATH / "dataset" / "types_struct" / f"{self.name}.jsonl"
+
+    @property
+    def union_types_path(self):
+        return DATA_PATH / "dataset" / "types_union" / f"{self.name}.jsonl"
+
+    @property
+    def enum_types_path(self):
+        return DATA_PATH / "dataset" / "types_enum" / f"{self.name}.jsonl"
+
+    @property
+    def int_types_path(self):
+        return DATA_PATH / "dataset" / "types_int" / f"{self.name}.jsonl"
 
     @property
     def symtab_path(self):

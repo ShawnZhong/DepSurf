@@ -1,16 +1,23 @@
-from depsurf.btf import Types, Kind
+from depsurf.btf import Kind, Types
 
 from .filebytes import FileBytes
 
 
 class StructInstance:
-    def __init__(self, btf: Types, filebytes: FileBytes, name: str, ptr: int):
-        self.btf = btf
+    def __init__(
+        self,
+        struct_types: Types,
+        int_types: Types,
+        filebytes: FileBytes,
+        name: str,
+        ptr: int,
+    ):
+        self.int_types = int_types
         self.filebytes = filebytes
         self.name = name
         self.ptr = ptr
 
-        t = self.btf.structs.get(name)
+        t = struct_types.data.get(name)
         assert t is not None, f"Could not find struct {name}"
 
         self.size = t["size"]
@@ -32,7 +39,7 @@ class StructInstance:
             if kind == Kind.PTR:
                 size = self.filebytes.ptr_size
             elif kind == Kind.INT:
-                size = self.btf.data[Kind.INT][t["name"]]["size"]
+                size = self.int_types.data[t["name"]]["size"]
             else:
                 raise NotImplementedError
 

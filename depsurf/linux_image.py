@@ -8,13 +8,7 @@ from elftools.elf.elffile import ELFFile
 from depsurf.btf import Types
 from depsurf.dep import Dep, DepKind, DepStatus
 from depsurf.funcs import FuncGroups
-from depsurf.linux import (
-    FileBytes,
-    Sections,
-    SymbolTable,
-    Tracepoints,
-    get_configs,
-)
+from depsurf.linux import FileBytes, SymbolTable, Tracepoints, get_configs
 from depsurf.version import Version
 
 
@@ -46,17 +40,17 @@ class LinuxImage:
 
     def get_all_by_kind(self, kind: DepKind) -> Dict:
         if kind == DepKind.STRUCT:
-            return self.types.structs
+            return self.struct_types.data
         elif kind == DepKind.FUNC:
-            return self.types.funcs
+            return self.func_types.data
         elif kind == DepKind.TRACEPOINT:
             return self.tracepoints.data
         elif kind == DepKind.LSM:
             return self.lsm_hooks
         elif kind == DepKind.UNION:
-            return self.types.unions
+            return self.union_types.data
         elif kind == DepKind.ENUM:
-            return self.types.enums
+            return self.enum_types.data
         elif kind == DepKind.SYSCALL:
             return self.syscalls
         elif kind == DepKind.CONFIG:
@@ -68,7 +62,7 @@ class LinuxImage:
     def get_dep(self, dep: Dep) -> Optional[Dict]:
         if dep.kind == DepKind.FIELD:
             struct_name, field_name = dep.name.split("::")
-            struct = self.types.structs.get(struct_name)
+            struct = self.struct_types.data.get(struct_name)
             if struct is None:
                 return None
             for field in struct["members"]:
@@ -107,8 +101,24 @@ class LinuxImage:
         return FuncGroups.from_dump(self.version.func_groups_path)
 
     @cached_property
-    def types(self) -> Types:
-        return Types.from_dump(self.version.types_path)
+    def func_types(self) -> Types:
+        return Types.from_dump(self.version.func_types_path)
+
+    @cached_property
+    def struct_types(self) -> Types:
+        return Types.from_dump(self.version.struct_types_path)
+
+    @cached_property
+    def union_types(self) -> Types:
+        return Types.from_dump(self.version.union_types_path)
+
+    @cached_property
+    def enum_types(self) -> Types:
+        return Types.from_dump(self.version.enum_types_path)
+
+    @cached_property
+    def int_types(self) -> Types:
+        return Types.from_dump(self.version.int_types_path)
 
     @cached_property
     def symtab(self) -> SymbolTable:
@@ -122,9 +132,9 @@ class LinuxImage:
     def lsm_hooks(self):
         func_names = {
             f"security_{e['name']}"
-            for e in self.types.structs["security_hook_heads"]["members"]
+            for e in self.struct_types.data["security_hook_heads"]["members"]
         }
-        return {k: v for k, v in self.types.funcs.items() if k in func_names}
+        return {k: v for k, v in self.func_types.data.items() if k in func_names}
 
     @cached_property
     def kfuncs(self):
@@ -135,7 +145,7 @@ class LinuxImage:
             if sym["name"].startswith(prefix)
             if "bpf_lsm_" not in sym["name"]
         ]
-        return {k: v for k, v in self.types.funcs.items() if k in func_names}
+        return {k: v for k, v in self.func_types.data.items() if k in func_names}
 
     @cached_property
     def configs(self):
@@ -152,10 +162,6 @@ class LinuxImage:
         if match is None:
             return None
         return match.group(1)
-
-    @property
-    def sections(self) -> Sections:
-        return Sections(self.version.vmlinux_path)
 
     def __repr__(self):
         return f"LinuxImage({self.version.name})"

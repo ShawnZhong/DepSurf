@@ -1,8 +1,6 @@
 import json
 import logging
-from functools import cached_property
 from pathlib import Path
-
 from typing import Dict
 
 from .kind import Kind
@@ -34,48 +32,27 @@ def get_type_str(obj):
 class Types:
     def __init__(self, data: dict):
         assert isinstance(data, dict)
-        self.data = data
+        self.data: Dict[str, Dict] = data
 
     @classmethod
     def from_dump(cls, path: Path):
         assert path.exists()
-        assert path.suffix == ".json"
+        assert path.suffix == ".jsonl"
         with open(path, "r") as f:
             logging.info(f"Loading types from {path}")
-            return cls(json.load(f))
+
+            data = {}
+            for line in f:
+                info = json.loads(line)
+                data[info["name"]] = info
+
+            return cls(data)
 
     @classmethod
-    def from_btf_json(cls, path: Path):
+    def from_btf_json(cls, path: Path, kind: Kind):
         assert path.exists()
         assert path.suffix == ".json"
-        from .normalize import BTFNormalizer
+        from .dump import BTFNormalizer
 
-        data = BTFNormalizer(path).get_results()
-        return cls(data)
-
-    def __str__(self):
-        return "\n".join(
-            f"{kind:10} ({len(d):5}): {list(d.values())[0]}"
-            for kind, d in self.data.items()
-            if d
-        )
-
-    @property
-    def funcs(self) -> Dict[str, Dict]:
-        return self.data[Kind.FUNC]
-
-    @property
-    def structs(self) -> Dict[str, Dict]:
-        return self.data[Kind.STRUCT]
-
-    @property
-    def enums(self) -> Dict[str, Dict]:
-        return self.data[Kind.ENUM]
-
-    @property
-    def unions(self) -> Dict[str, Dict]:
-        return self.data[Kind.UNION]
-
-    @cached_property
-    def enum_values(self):
-        return {e["name"]: e["val"] for e in self.enums["(anon)"]["values"]}
+        data = BTFNormalizer(path).get_data()
+        return cls(data[kind])

@@ -4,7 +4,7 @@ from typing import Dict, List
 
 from elftools.elf.elffile import ELFFile
 
-from depsurf.btf import Types, dump_btf_json, dump_btf_txt, gen_min_btf
+from depsurf.btf import Kind, Types, dump_btf_json, dump_btf_txt, gen_min_btf
 from depsurf.dep import Dep, DepKind
 
 
@@ -80,10 +80,10 @@ class BPFProgram:
             result_path=self.btf_txt_file,
             slient=True,
         )
-        types = Types.from_btf_json(self.btf_json_file)
+        struct_types = Types.from_btf_json(self.btf_json_file, Kind.STRUCT)
 
         results = []
-        for name, struct in types.structs.items():
+        for name, struct in struct_types.data.items():
             name = name.split("___")[0]
             if name == "user_pt_regs":
                 continue

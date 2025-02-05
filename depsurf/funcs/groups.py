@@ -1,15 +1,15 @@
 import logging
 from collections import defaultdict
-from pathlib import Path
-from typing import Dict, List, Iterator, Optional
 from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, Iterator, List, Optional
 
-from depsurf.utils import manage_result_path
 from depsurf.linux import SymbolTable
+from depsurf.utils import manage_result_path
 
 from .entry import FuncEntry
 from .group import FuncGroup
-from .symbol import get_func_symbols, FuncSymbol
+from .symbol import FuncSymbol, get_func_symbols
 
 
 @dataclass(frozen=True)
@@ -52,9 +52,9 @@ class FuncGroups:
 
 
 @manage_result_path
-def dump_func_groups(funcs_path: Path, symtab_path: Path, result_path: Path):
+def dump_func_groups(func_entries_path: Path, symtab_path: Path, result_path: Path):
     functions: Dict[str, List[FuncEntry]] = defaultdict(list)
-    with open(funcs_path, "r") as f:
+    with open(func_entries_path, "r") as f:
         for line in f:
             func = FuncEntry.from_json(line)
             functions[func.name].append(func)

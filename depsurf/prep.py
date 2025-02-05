@@ -1,4 +1,11 @@
-from depsurf.btf import dump_types, dump_btf_header, dump_btf_json, dump_btf_txt
+from depsurf.btf import (
+    BTFNormalizer,
+    Kind,
+    dump_btf_header,
+    dump_btf_json,
+    dump_btf_txt,
+    dump_types,
+)
 from depsurf.funcs import dump_func_entries, dump_func_groups
 from depsurf.linux import (
     dump_symtab,
@@ -71,11 +78,15 @@ def prep(v: Version):
         result_path=v.btf_header_path,
     )
 
-    # Dump the types, symbol table, tracepoints, functions, and syscalls
-    dump_types(
-        v.btf_json_path,
-        result_path=v.types_path,
-    )
+    # Dump type info
+    data = BTFNormalizer(v.btf_json_path).get_data()
+    dump_types(data, Kind.FUNC, v.func_types_path)
+    dump_types(data, Kind.STRUCT, v.struct_types_path)
+    dump_types(data, Kind.UNION, v.union_types_path)
+    dump_types(data, Kind.ENUM, v.enum_types_path)
+    dump_types(data, Kind.INT, v.int_types_path)
+
+    # Dump symbol table, tracepoints, functions, and syscalls
     dump_symtab(
         vmlinux_path=v.vmlinux_path,
         result_path=v.symtab_path,
@@ -85,7 +96,7 @@ def prep(v: Version):
         result_path=v.func_entries_path,
     )
     dump_func_groups(
-        funcs_path=v.func_entries_path,
+        func_entries_path=v.func_entries_path,
         symtab_path=v.symtab_path,
         result_path=v.func_groups_path,
     )

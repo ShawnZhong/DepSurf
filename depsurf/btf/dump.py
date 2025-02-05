@@ -9,11 +9,12 @@ from .kind import Kind
 
 
 class BTFNormalizer:
-    def __init__(self, file: Path):
-        assert file.suffix == ".json"
-        assert file.exists()
+    def __init__(self, path: Path):
+        assert path.suffix == ".json"
+        assert path.exists()
 
-        with open(file) as f:
+        self.path = path
+        with open(path) as f:
             self.raw_types = json.load(f)["types"]
 
     def get_raw(self, type_id):
@@ -153,7 +154,8 @@ class BTFNormalizer:
 
         return elem
 
-    def get_results(self):
+    def get_data(self):
+        logging.info(f"Normalizing types from {self.path}")
         results: Dict[str, Dict[str, Dict]] = {k.value: {} for k in Kind}
 
         anon_enum_values = []
@@ -190,8 +192,7 @@ class BTFNormalizer:
 
 
 @manage_result_path
-def dump_types(json_path, result_path):
-    logging.info(f"Dumping types to {result_path}")
-    data = BTFNormalizer(json_path).get_results()
+def dump_types(data, kind: Kind, result_path: Path):
     with open(result_path, "w") as f:
-        json.dump(data, f)
+        for k, v in data[kind].items():
+            print(json.dumps(v), file=f)

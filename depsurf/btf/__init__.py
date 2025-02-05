@@ -1,4 +1,4 @@
 from .bpftool import *
-from .btf import *
+from .dump import *
 from .kind import *
-from .normalize import *
+from .types import *
