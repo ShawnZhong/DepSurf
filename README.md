@@ -30,19 +30,19 @@ uv run jupyter lab --ip 0.0.0.0
 
 Please follow the instructions in the Jupyter notebooks to run the experiments. In particular,
 
-- `00_deps.ipynb` installs the dependencies.
-- `11_download.ipynb` downloads the Linux kernel packages. 
-- `20_dataset.ipynb` generates the dataset. 
-- `30_diff.ipynb` diffs the dependency surface.
-- `35_src.ipynb` generates Table 3. 
-- `36_breakdown.ipynb` generates Table 4.
-- `39_config.ipynb` generates Table 5.
-- `40_inline.ipynb` plots Figure 5.
-- `41_rename.ipynb` plots Figure 6.
-- `42_dup.ipynb` generates Table 6.
-- `50_programs.ipynb` analyzes the eBPF programs.
-- `51_plot.ipynb` plots Figure 4.
-- `52_table.ipynb` generates Table 7 & 8.
+- [`00_deps.ipynb`](./00_deps.ipynb) installs the dependencies.
+- [`11_download.ipynb`](./11_download.ipynb) downloads the Linux kernel packages. 
+- [`20_dataset.ipynb`](./20_dataset.ipynb) generates the dataset. 
+- [`30_diff.ipynb`](./30_diff.ipynb) diffs the dependency surface.
+- [`35_src.ipynb`](./35_src.ipynb) generates Table 3. 
+- [`36_breakdown.ipynb`](./36_breakdown.ipynb) generates Table 4.
+- [`39_config.ipynb`](./39_config.ipynb) generates Table 5.
+- [`40_inline.ipynb`](./40_inline.ipynb) plots Figure 5.
+- [`41_rename.ipynb`](./41_rename.ipynb) plots Figure 6.
+- [`42_dup.ipynb`](./42_dup.ipynb) generates Table 6.
+- [`50_programs.ipynb`](./50_programs.ipynb) analyzes the eBPF programs.
+- [`51_plot.ipynb`](./51_plot.ipynb) plots Figure 4.
+- [`52_table.ipynb`](./52_table.ipynb) generates Table 7 & 8.
 
 Feel free to skip `11_download.ipynb` and `20_dataset.ipynb` if you already have the dataset.
 
