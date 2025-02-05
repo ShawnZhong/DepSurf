@@ -83,7 +83,7 @@ class BPFProgram:
         struct_types = Types.from_btf_json(self.btf_json_file, Kind.STRUCT)
 
         results = []
-        for name, struct in struct_types.data.items():
+        for name, struct in struct_types.items():
             name = name.split("___")[0]
             if name == "user_pt_regs":
                 continue

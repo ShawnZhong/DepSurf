@@ -50,7 +50,7 @@ class TracepointsExtractor:
                 elif name.startswith("event_"):
                     self.event_names[sym["value"]] = name.removeprefix("event_")
 
-        for e in img.enum_types.data["(anon)"]["values"]:
+        for e in img.enum_types["(anon)"]["values"]:
             if e["name"] == "TRACE_EVENT_FL_TRACEPOINT":
                 self.FLAG_TRACEPOINT = e["val"]
             elif e["name"] == "TRACE_EVENT_FL_IGNORE_ENABLE":
@@ -89,8 +89,8 @@ class TracepointsExtractor:
         func_name = f"trace_event_raw_event_{class_name}"
         struct_name = f"trace_event_raw_{class_name}"
 
-        func = self.func_types.data.get(func_name)
-        struct = self.struct_types.data.get(struct_name)
+        func = self.func_types.get(func_name)
+        struct = self.struct_types.get(struct_name)
 
         if func is None:
             logging.warning(f"Could not find function for {func_name}")

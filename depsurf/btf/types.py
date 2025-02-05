@@ -56,3 +56,15 @@ class Types:
 
         data = BTFNormalizer(path).data
         return cls(data[kind])
+
+    def __getitem__(self, name: str):
+        return self.data[name]
+
+    def get(self, name: str):
+        return self.data.get(name)
+
+    def items(self):
+        return self.data.items()
+
+    def __iter__(self):
+        return iter(self.data)

@@ -17,7 +17,7 @@ class StructInstance:
         self.name = name
         self.ptr = ptr
 
-        t = struct_types.data.get(name)
+        t = struct_types.get(name)
         assert t is not None, f"Could not find struct {name}"
 
         self.size = t["size"]
@@ -39,7 +39,7 @@ class StructInstance:
             if kind == Kind.PTR:
                 size = self.filebytes.ptr_size
             elif kind == Kind.INT:
-                size = self.int_types.data[t["name"]]["size"]
+                size = self.int_types[t["name"]]["size"]
             else:
                 raise NotImplementedError
 

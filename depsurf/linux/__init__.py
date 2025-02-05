@@ -1,3 +1,4 @@
+from .comment import *
 from .config import *
 from .extract import *
 from .filebytes import *

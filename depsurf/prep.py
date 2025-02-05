@@ -1,5 +1,4 @@
 from depsurf.btf import (
-    BTFNormalizer,
     Kind,
     dump_btf_header,
     dump_btf_json,
@@ -8,6 +7,7 @@ from depsurf.btf import (
 )
 from depsurf.funcs import dump_func_entries, dump_func_groups
 from depsurf.linux import (
+    dump_comment,
     dump_symtab,
     dump_syscalls,
     dump_tracepoints,
@@ -90,7 +90,7 @@ def prep(v: Version):
         },
     )
 
-    # Dump symbol table, tracepoints, functions, and syscalls
+    # Dump symbol table, tracepoints, functions, syscalls, and comment
     dump_symtab(
         vmlinux_path=v.vmlinux_path,
         result_path=v.symtab_path,
@@ -111,4 +111,8 @@ def prep(v: Version):
     dump_syscalls(
         img=v.img,
         result_path=v.syscalls_path,
+    )
+    dump_comment(
+        vmlinux_path=v.vmlinux_path,
+        result_path=v.comment_path,
     )

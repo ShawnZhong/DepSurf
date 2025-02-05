@@ -62,7 +62,7 @@ class LinuxImage:
     def get_dep(self, dep: Dep) -> Optional[Dict]:
         if dep.kind == DepKind.FIELD:
             struct_name, field_name = dep.name.split("::")
-            struct = self.struct_types.data.get(struct_name)
+            struct = self.struct_types.get(struct_name)
             if struct is None:
                 return None
             for field in struct["members"]:
@@ -132,9 +132,9 @@ class LinuxImage:
     def lsm_hooks(self):
         func_names = {
             f"security_{e['name']}"
-            for e in self.struct_types.data["security_hook_heads"]["members"]
+            for e in self.struct_types["security_hook_heads"]["members"]
         }
-        return {k: v for k, v in self.func_types.data.items() if k in func_names}
+        return {k: v for k, v in self.func_types.items() if k in func_names}
 
     @cached_property
     def kfuncs(self):
@@ -145,23 +145,16 @@ class LinuxImage:
             if sym["name"].startswith(prefix)
             if "bpf_lsm_" not in sym["name"]
         ]
-        return {k: v for k, v in self.func_types.data.items() if k in func_names}
+        return {k: v for k, v in self.func_types.items() if k in func_names}
 
     @cached_property
     def configs(self):
         return get_configs(self.version.config_path)
 
-    @property
-    def gcc_version(self) -> Optional[str]:
-        with open(self.version.vmlinux_path) as f:
-            comment_section = ELFFile(f).get_section_by_name(".comment")
-        if comment_section is None:
-            return None
-        comment = comment_section.data().decode()
-        match = re.search(r"Ubuntu (\d+\.\d+\.\d+)", comment)
-        if match is None:
-            return None
-        return match.group(1)
+    @cached_property
+    def comment(self):
+        with open(self.version.comment_path) as f:
+            return f.readline().strip()
 
     def __repr__(self):
         return f"LinuxImage({self.version.name})"

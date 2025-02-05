@@ -150,6 +150,10 @@ class Version:
     def syscalls_path(self):
         return DATA_PATH / "dataset" / "syscalls" / f"{self.name}.json"
 
+    @property
+    def comment_path(self):
+        return DATA_PATH / "dataset" / "comment" / f"{self.name}.txt"
+
     @cached_property
     def img(self) -> "LinuxImage":
         from depsurf.linux_image import LinuxImage
