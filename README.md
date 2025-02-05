@@ -2,7 +2,7 @@ DepSurf
 ===
 
 
-Artifacts for EuroSys'25 paper "Revealing the Unstable Foundations of eBPF-Based Kernel Extensions".
+Artifacts for [EuroSys'25](https://2025.eurosys.org/) paper "Revealing the Unstable Foundations of eBPF-Based Kernel Extensions".
 
 ## Prerequisites
 
