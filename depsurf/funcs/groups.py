@@ -69,5 +69,3 @@ def dump_func_groups(func_entries_path: Path, symtab_path: Path, result_path: Pa
     with open(result_path, "w") as f:
         for group in data.values():
             print(group.to_json(), file=f)
-
-    logging.info(f"Dumped to {result_path}")

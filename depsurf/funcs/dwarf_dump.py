@@ -201,8 +201,6 @@ class FunctionRecorder:
             for func in self.iter_funcs():
                 print(func.to_json(), file=f)
 
-        logging.info(f"Dumped to {path}")
-
 
 def disable_dwarf_cache():
     def _get_cached_DIE(self: CompileUnit, offset):
