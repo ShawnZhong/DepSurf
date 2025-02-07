@@ -6,6 +6,7 @@ from enum import StrEnum
 from typing import List
 
 from depsurf.issues import IssueEnum
+
 from .entry import FuncEntry
 from .symbol import FuncSymbol
 
@@ -41,7 +42,7 @@ def get_collision_type(funcs: List[FuncEntry]) -> CollisionType:
 class InlineType(StrEnum):
     NOT = "Not inlined"
     FULL = "Fully inlined"
-    PARTIAL = "Partially inlined"
+    SELECTIVE = "Partially inlined"
 
 
 def get_inline_type(funcs: List[FuncEntry], in_symtab: bool) -> InlineType:
@@ -92,7 +93,7 @@ def get_inline_type(funcs: List[FuncEntry], in_symtab: bool) -> InlineType:
 
     if any(func.inline_actual for func in funcs):
         # Any of the functions is inlined
-        return InlineType.PARTIAL
+        return InlineType.SELECTIVE
     else:
         return InlineType.NOT
 
@@ -161,12 +162,12 @@ class FuncGroup:
         # inline
         if self.inline_type == InlineType.FULL:
             result.append(IssueEnum.FULL_INLINE)
-        elif self.inline_type == InlineType.PARTIAL:
-            result.append(IssueEnum.PARTIAL_INLINE)
+        elif self.inline_type == InlineType.SELECTIVE:
+            result.append(IssueEnum.SELECTIVE_INLINE)
 
-        # rename
+        # transformation
         if self.has_suffix:
-            result.append(IssueEnum.RENAME)
+            result.append(IssueEnum.TRANSFORMATION)
 
         return result
 

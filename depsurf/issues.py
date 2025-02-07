@@ -10,16 +10,6 @@ class Consequence(StrEnum):
     OK = "OK"
     UNKNOWN = "Unknown"
 
-    @property
-    def color(self):
-        return {
-            self.MISS: "tab:red",
-            self.STRAY: "tab:orange",
-            self.ERROR: "tab:blue",
-            self.OK: "tab:green",
-            self.UNKNOWN: "white",
-        }[self]
-
 
 class IssueEnum(StrEnum):
     # Not really an issue, defined for convenience
@@ -38,9 +28,9 @@ class IssueEnum(StrEnum):
     BOTH_ABSENT = "Both absent"
 
     # Function status
-    PARTIAL_INLINE = "Par. Inline"
+    SELECTIVE_INLINE = "Par. Inline"
     FULL_INLINE = "Full Inline"
-    RENAME = "Renamed"
+    TRANSFORMATION = "Renamed"
     DUPLICATE = "Duplicate"
     COLLISSION = "Collission"
 
@@ -89,76 +79,13 @@ class IssueEnum(StrEnum):
             self.PARAM_TYPE: Consequence.STRAY,
             self.PARAM_REORDER: Consequence.STRAY,
             self.RETURN_TYPE: Consequence.STRAY,
-            self.PARTIAL_INLINE: Consequence.MISS,
+            self.SELECTIVE_INLINE: Consequence.MISS,
             self.FULL_INLINE: Consequence.ERROR,
-            self.RENAME: Consequence.ERROR,
+            self.TRANSFORMATION: Consequence.ERROR,
             self.DUPLICATE: Consequence.MISS,
             self.FIELD_TYPE: Consequence.STRAY,
         }
         return d.get(self, Consequence.UNKNOWN)
-
-    @property
-    def color(self):
-        return self.consequence.color
-
-        from matplotlib import cm
-
-        fn_cmap = cm.Greens
-        struct_cmap = cm.Purples
-        return {
-            # Generic status
-            self.OK: "tab:green",
-            self.ABSENT: "tab:red",
-            # Generic changes
-            self.ADD: "white",  # "tab:blue",
-            self.REMOVE: "white",  # "tab:red",
-            self.CHANGE: "tab:orange",
-            self.NO_CHANGE: "white",  # "whitesmoke",
-            self.BOTH_ABSENT: "white",
-            # Function status
-            self.DUPLICATE: "black",
-            self.RENAME: "blue",
-            self.PARTIAL_INLINE: "tab:blue",
-            self.FULL_INLINE: "darkblue",
-            # Function changes
-            self.PARAM_ADD: fn_cmap(0.3),
-            self.PARAM_REMOVE: fn_cmap(0.45),
-            self.PARAM_REORDER: fn_cmap(0.6),
-            self.PARAM_TYPE: fn_cmap(0.75),
-            self.RETURN_TYPE: fn_cmap(0.9),
-            # Struct changes
-            self.FIELD_ADD: struct_cmap(0.3),
-            self.FIELD_REMOVE: struct_cmap(0.5),
-            self.FIELD_TYPE: struct_cmap(0.7),
-        }[self]
-
-    def get_symbol(self):
-        return {
-            # Generic
-            self.OK: "",
-            self.ABSENT: "",
-            self.ADD: "",
-            self.REMOVE: "",
-            self.NO_CHANGE: "",
-            self.CHANGE: r"$\Delta$",
-            self.BOTH_ABSENT: "",
-            # Fuction status
-            self.PARTIAL_INLINE: "P",
-            self.FULL_INLINE: "F",
-            self.RENAME: "R",
-            self.DUPLICATE: "D",
-            self.COLLISSION: "C",
-            # Function changes
-            self.PARAM_ADD: "P+",
-            self.PARAM_REMOVE: "P-",
-            self.PARAM_REORDER: "PR",
-            self.PARAM_TYPE: "PT",
-            self.RETURN_TYPE: "RT",
-            # Struct changes
-            self.FIELD_ADD: "F+",
-            self.FIELD_REMOVE: "F-",
-            self.FIELD_TYPE: "FT",
-        }[self]
 
     def __repr__(self):
         return f"'{self.value}'"
@@ -170,17 +97,6 @@ class IssueList:
 
     def append(self, issue: IssueEnum):
         self.issues.append(issue)
-
-    @property
-    def color(self):
-        if len(self.issues) == 0:
-            return "tab:green"
-        if IssueEnum.ABSENT in self.issues:
-            return "lightgray"
-        return "tab:red"
-
-    def get_symbol(self):
-        return "".join([e.get_symbol() for e in self.issues])
 
     def __iter__(self):
         return iter(self.issues)

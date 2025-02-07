@@ -5,19 +5,18 @@ from typing import Callable, Dict, List, Optional
 
 from depsurf.diff import (
     BaseChange,
+    diff_config,
     diff_enum,
     diff_func,
+    diff_nop,
     diff_struct,
     diff_struct_field,
     diff_tracepoint,
-    diff_nop,
-    diff_config,
 )
-from depsurf.issues import IssueEnum
-from depsurf.version import Version
-from depsurf.issues import IssueList
-from depsurf.utils import OrderedEnum
 from depsurf.funcs import FuncGroup
+from depsurf.issues import IssueEnum, IssueList
+from depsurf.utils import OrderedEnum
+from depsurf.version import Version
 
 
 class DepKind(OrderedEnum, StrEnum):
@@ -110,13 +109,6 @@ class DepStatus:
             return IssueList(*self.func_group.issues)
 
         return IssueList()
-
-    def __str__(self):
-        return " ".join([e.get_symbol() for e in self.issues])
-
-    @property
-    def is_ok(self) -> bool:
-        return len(self.issues) == 0
 
     def print(self, file=None, nindent=0):
         indent = "\t" * nindent
