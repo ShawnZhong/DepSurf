@@ -87,6 +87,8 @@ class BPFProgram:
             name = name.split("___")[0]
             if name == "user_pt_regs":
                 continue
+            if name == "pt_regs":
+                continue
             results.append(DepKind.STRUCT(name))
             for member in struct["members"]:
                 results.append(DepKind.FIELD(f"{name}::{member['name']}"))
