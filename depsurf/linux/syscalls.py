@@ -1,11 +1,14 @@
 import json
 import logging
-from typing import Iterable, Tuple
+from typing import Iterable, Tuple, TYPE_CHECKING
 
 from depsurf.utils import manage_result_path
 
 from .filebytes import FileBytes
 from .symtab import SymbolTable
+
+if TYPE_CHECKING:
+    from ..linux_image import LinuxImage
 
 SYSCALL_PREFIXES = ["stub_", "sys_", "ppc_", "ppc64_", "sys32_x32_"]
 
@@ -62,7 +65,7 @@ class SyscallExtracter:
 
 
 @manage_result_path
-def dump_syscalls(img, result_path):
+def dump_syscalls(img: "LinuxImage", result_path):
     extractor = SyscallExtracter(img.symtab, img.filebytes)
     syscalls = {i: name for name, i in extractor.iter_syscall()}
     with open(result_path, "w") as f:

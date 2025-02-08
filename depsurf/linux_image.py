@@ -1,9 +1,6 @@
 import json
-import re
 from functools import cached_property
 from typing import Dict, Optional
-
-from elftools.elf.elffile import ELFFile
 
 from depsurf.btf import Types
 from depsurf.dep import Dep, DepKind, DepStatus
