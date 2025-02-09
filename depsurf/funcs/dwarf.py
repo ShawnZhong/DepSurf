@@ -6,7 +6,6 @@ from typing import Callable, Optional
 from elftools.dwarf.die import DIE
 from elftools.dwarf.enums import ENUM_DW_TAG
 
-
 KERNEL_DIR = {
     "arch",
     "block",
@@ -137,6 +136,7 @@ class Traverser:
             return self.path
 
         file_idx = die.attributes["DW_AT_decl_file"].value
+        # To handle the inconsistency between DWARF4 and DWARF5
         if self.version < 5:
             file_idx -= 1
 
