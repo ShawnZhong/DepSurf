@@ -12,7 +12,6 @@ from .kind import Kind
 class BTFNormalizer:
     def __init__(self, path: Path):
         assert path.suffix == ".json"
-        assert path.exists()
         self.path = path
 
     @cached_property
@@ -201,7 +200,7 @@ class BTFNormalizer:
                 print(json.dumps(v), file=f)
 
 
-def dump_types(btf_json_path: Path, result_paths: Dict[Kind, Path]):
+def dump_types(btf_json_path: Path, result_paths: Dict[Kind, Path], overwrite: bool = False):
     normalizer = BTFNormalizer(btf_json_path)
     for kind, path in result_paths.items():
-        normalizer.dump_types(kind, result_path=path)
+        normalizer.dump_types(kind, result_path=path, overwrite=overwrite)

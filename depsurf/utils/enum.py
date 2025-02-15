@@ -29,3 +29,6 @@ class OrderedEnum(Enum):
         if self.__class__ is other.__class__:
             return self._order < other._order
         return NotImplemented
+
+
+__all__ = ["OrderedEnum"]
