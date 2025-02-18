@@ -19,6 +19,10 @@ def setup_matplotlib():
     plt.rcParams["axes.spines.top"] = False
     plt.rcParams["axes.spines.right"] = False
     plt.rcParams["legend.frameon"] = False
+    plt.rcParams["pdf.fonttype"] = 42
+    plt.rcParams["ps.fonttype"] = 42
+
+    logging.getLogger("fontTools").setLevel(logging.WARNING)
 
 
 setup_matplotlib()
