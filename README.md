@@ -40,7 +40,7 @@ Please follow the instructions in the following Jupyter notebooks to reproduce t
 - [`36_breakdown.ipynb`](./36_breakdown.ipynb) generates Table 4.
 - [`39_config.ipynb`](./39_config.ipynb) generates Table 5.
 - [`40_inline.ipynb`](./40_inline.ipynb) plots Figure 5 (3 min).
-- [`41_rename.ipynb`](./41_rename.ipynb) plots Figure 6 (3 min).
+- [`41_transform.ipynb`](./41_transform.ipynb) plots Figure 6 (3 min).
 - [`42_dup.ipynb`](./42_dup.ipynb) generates Table 6 (30 sec).
 - [`50_programs.ipynb`](./50_programs.ipynb) analyzes the eBPF programs (5 min).
 - [`51_plot.ipynb`](./51_plot.ipynb) plots Figure 4.
