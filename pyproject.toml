@@ -3,6 +3,8 @@ name = "depsurf"
 version = "0.1.0"
 description = "depsurf"
 readme = "README.md"
+authors = [{ name = "Shawn Zhong", email = "me@shawnzhong.com" }]
+urls = { "Homepage" = "https://github.com/ShawnZhong/DepSurf" }
 requires-python = ">=3.11"
 dependencies = [
     "launchpadlib>=2.1.0",
