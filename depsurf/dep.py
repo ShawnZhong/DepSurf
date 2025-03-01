@@ -111,13 +111,12 @@ class DepStatus:
         return IssueList()
 
     def print(self, file=None, nindent=0):
-        indent = "\t" * nindent
         issues_str = str(self.issues) if self.issues else "No issues"
-        print(f"{indent}In {self.version}: {issues_str}", file=file)
+        print(f"{'\t' * nindent}In {self.version}: {issues_str}", file=file)
 
         if self.func_group:
             for func in self.func_group:
-                print(f"{indent}{func.to_json()}", file=file)
+                print(f"{'\t' * (nindent + 1)}{func}", file=file)
 
 
 @dataclass
@@ -137,9 +136,9 @@ class DepDelta:
         if not self.in_v1 and not self.in_v2:
             return "Both absent"
         if not self.in_v1:
-            return f"Added"
+            return "Added"
         if not self.in_v2:
-            return f"Removed"
+            return "Removed"
         if self.has_changes:
             return "Changed"
         return "No changes"
