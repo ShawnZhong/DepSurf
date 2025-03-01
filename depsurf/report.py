@@ -1,51 +1,71 @@
 import logging
 import sys
-from typing import Dict, List, Optional, TextIO, Tuple, Union
+from dataclasses import dataclass
+from typing import Dict, List, Optional, TextIO, Tuple
 
-from depsurf.dep import Dep
-from depsurf.issues import IssueEnum, IssueList
+from depsurf.dep import Dep, DepDelta, DepStatus
+from depsurf.issues import IssueEnum
 from depsurf.version import Version
 from depsurf.version_group import VERSION_DEFAULT, VersionGroup
 from depsurf.version_pair import VersionPair
 
-Report = Dict[Tuple[VersionGroup, Version], IssueList]
+IssueDict = Dict[Tuple[VersionGroup, Version], List[IssueEnum]]
 
 
-def gen_report(
-    dep: Dep,
-    version_groups: Union[List[VersionGroup], VersionGroup],
-    file: Optional[TextIO] = sys.stdout,
-) -> Report:
-    if isinstance(version_groups, VersionGroup):
-        version_groups = [version_groups]
+@dataclass(frozen=True)
+class DepReport:
+    dep: Dep
+    status_dict: Dict[Tuple[VersionGroup, Version], DepStatus]
+    diff_dict: Dict[Tuple[VersionGroup, Version, Version], DepDelta]
 
-    report: Report = {}
-    print(f"{dep.kind:12}{dep.name}", file=file)
-
-    for group in version_groups:
-        anchor = None
+    @staticmethod
+    def get_pairs(dep: Dep, group: VersionGroup) -> List[VersionPair]:
+        if group == VersionGroup.ARCH:
+            return [VersionPair(VERSION_DEFAULT, v) for v in group.versions]
         versions = []
         for v in group.versions:
-            dep_status = v.img.get_dep_status(dep)
-            dep_status.print(file=file, nindent=1)
-            report[(group, v)] = dep_status.issues
-            if dep_status.exists:
+            if v.img.get_dep_status(dep).exists:
                 versions.append(v)
+        if not versions:
+            logging.warning(f"Dependency {dep} does not exist in any {group}")
+            return []
+        anchor = versions[0]
+        return [VersionPair(anchor, v) for v in versions if v != anchor]
 
-        if group == VersionGroup.ARCH:
-            anchor = VERSION_DEFAULT
-            versions = group.versions
-        else:
-            if not versions:
-                logging.warning(f"Dependency {dep} does not exist in any {group}")
-                continue
-            anchor = versions[0]
+    @classmethod
+    def from_groups(cls, dep: Dep, groups: List[VersionGroup]) -> "DepReport":
+        return cls(
+            dep=dep,
+            status_dict={
+                (group, version): version.img.get_dep_status(dep)
+                for group in groups
+                for version in group.versions
+            },
+            diff_dict={
+                (group, pair.v1, pair.v2): pair.diff_dep(dep)
+                for group in groups
+                for pair in cls.get_pairs(dep, group)
+            },
+        )
 
-        pairs = [VersionPair(anchor, v) for v in versions if v != anchor]
-        for p in pairs:
-            dep_diff = p.diff_dep(dep)
-            dep_diff.print(file=file, nindent=1)
-            if dep_diff.has_changes:
-                report[(group, p.v2)] += IssueList(IssueEnum.CHANGE)
+    @property
+    def issue_dict(self) -> IssueDict:
+        issue_dict = {
+            (group, version): status.issues
+            for (group, version), status in self.status_dict.items()
+        }
+        for (group, v1, v2), diff in self.diff_dict.items():
+            if diff.has_changes:
+                issue_dict[(group, v2)].append(IssueEnum.CHANGE)
+        return issue_dict
 
-    return report
+    @classmethod
+    def from_group(cls, dep: Dep, group: VersionGroup) -> "DepReport":
+        return cls.from_groups(dep, [group])
+
+    def print(self, file: Optional[TextIO] = sys.stdout):
+        print(f"{self.dep.kind:12}{self.dep.name}", file=file)
+        for (group, version), status in self.status_dict.items():
+            status.print(file=file, nindent=1)
+        for (group, v1, v2), diff in self.diff_dict.items():
+            diff.print(file=file, nindent=1)

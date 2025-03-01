@@ -89,27 +89,3 @@ class IssueEnum(StrEnum):
 
     def __repr__(self):
         return f"'{self.value}'"
-
-
-class IssueList:
-    def __init__(self, *issues: IssueEnum):
-        self.issues: List[IssueEnum] = list(issues)
-
-    def append(self, issue: IssueEnum):
-        self.issues.append(issue)
-
-    def __iter__(self):
-        return iter(self.issues)
-
-    def __len__(self):
-        return len(self.issues)
-
-    def __iadd__(self, other):
-        self.issues += other.issues
-        return self
-
-    def __repr__(self):
-        return repr([e for e in self.issues])
-
-    def __contains__(self, item):
-        return item in self.issues

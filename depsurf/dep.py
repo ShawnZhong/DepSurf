@@ -14,7 +14,7 @@ from depsurf.diff import (
     diff_tracepoint,
 )
 from depsurf.funcs import FuncGroup
-from depsurf.issues import IssueEnum, IssueList
+from depsurf.issues import IssueEnum
 from depsurf.utils import OrderedEnum
 from depsurf.version import Version
 
@@ -101,14 +101,14 @@ class DepStatus:
     func_group: Optional[FuncGroup] = None
 
     @property
-    def issues(self) -> IssueList:
+    def issues(self) -> List[IssueEnum]:
         if not self.exists:
-            return IssueList(IssueEnum.ABSENT)
+            return [IssueEnum.ABSENT]
 
         if self.func_group:
-            return IssueList(*self.func_group.issues)
+            return self.func_group.issues
 
-        return IssueList()
+        return []
 
     def print(self, file=None, nindent=0):
         issues_str = str(self.issues) if self.issues else "No issues"
