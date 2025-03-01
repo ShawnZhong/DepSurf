@@ -91,7 +91,7 @@ class Dep:
     name: str
 
     def __str__(self):
-        return f"{self.kind.value}({self.name})"
+        return f"{self.kind.value} {self.name}"
 
 
 @dataclass
