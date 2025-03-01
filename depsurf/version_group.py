@@ -1,12 +1,8 @@
-import logging
 from enum import StrEnum
-from typing import Dict, Iterator, List, Tuple
-from pathlib import Path
-from dataclasses import dataclass
+from typing import Dict, Iterator, List
 
-from depsurf.version_pair import VersionPair, DiffPairResult
 from depsurf.version import DATA_PATH, Version
-from depsurf.dep import DepKind
+from depsurf.version_pair import DiffPairResult, VersionPair
 
 VERSION_DEFAULT = Version(
     version_tuple=(5, 4, 0), flavor="generic", arch="amd64", revision=26
@@ -55,23 +51,6 @@ VERSIONS_FLAVOR = [
 ]
 
 
-@dataclass(frozen=True)
-class DiffGroupResult:
-    group: "VersionGroup"
-    pair_results: Dict[VersionPair, DiffPairResult]
-
-    def iter_pairs(self) -> Iterator[Tuple[VersionPair, DiffPairResult]]:
-        return iter(self.pair_results.items())
-
-
-@dataclass(frozen=True)
-class DiffResult:
-    group_results: Dict["VersionGroup", DiffGroupResult]
-
-    def iter_groups(self) -> Iterator[Tuple["VersionGroup", DiffGroupResult]]:
-        return iter(self.group_results.items())
-
-
 class VersionGroup(StrEnum):
     ALL = "All"
     LTS = "LTS"
@@ -113,37 +92,6 @@ class VersionGroup(StrEnum):
             return v.short_version
         return str(v)
 
-    @property
-    def pairs(self) -> List[VersionPair]:
-        if self in (VersionGroup.REGULAR, VersionGroup.LTS, VersionGroup.REV):
-            return [VersionPair(*p) for p in zip(self.versions, self.versions[1:])]
-
-        if len(self) == 1:
-            return []
-
-        if len(self) == 2:
-            return [VersionPair(self[0], self[1])]
-
-        assert VERSION_DEFAULT not in self.versions
-        return [VersionPair(VERSION_DEFAULT, v) for v in self.versions]
-
-    @property
-    def num_pairs(self) -> int:
-        return len(self.pairs)
-
-    def diff_pairs(self, kinds: List[DepKind], result_path: Path) -> DiffGroupResult:
-        logging.info(f"Diffing {self}")
-        return DiffGroupResult(
-            self,
-            {
-                pair: pair.diff(
-                    kinds,
-                    result_path / f"{self.to_str(pair.v1)}_{self.to_str(pair.v2)}",
-                )
-                for pair in self.pairs
-            },
-        )
-
     def __iter__(self) -> Iterator[Version]:
         return iter(self.versions)
 
@@ -161,3 +109,7 @@ class VersionGroup(StrEnum):
 
     def __radd__(self, other) -> List[Version]:
         return other + self.versions
+
+
+DiffGroupResult = Dict[VersionPair, DiffPairResult]
+DiffResult = Dict[VersionGroup, DiffGroupResult]
