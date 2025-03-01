@@ -9,7 +9,6 @@ from depsurf.version_group import VERSION_DEFAULT, VersionGroup
 from depsurf.version_pair import VersionPair
 
 Report = Dict[Tuple[VersionGroup, Version], IssueList]
-ReportDict = Dict[Dep, Report]
 
 
 def gen_report(
