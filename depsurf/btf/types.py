@@ -25,13 +25,15 @@ def get_type_str(obj):
         return f"{get_type_str(obj['ret_type'])} (*)({', '.join(get_type_str(a['type']) for a in obj['params'])})"
     elif kind == Kind.FWD:
         return f"{obj['fwd_kind']} {obj['name']}"
+    elif kind == Kind.FUNC:
+        return f"{get_type_str(obj['type']['ret_type'])} {obj['name']}({', '.join(get_type_str(a['type']) for a in obj['type']['params'])})"
     else:
         raise ValueError(f"Unknown kind: {obj}")
 
 
 class Types:
-    def __init__(self, data: dict):
-        assert isinstance(data, dict)
+    def __init__(self, data: Dict):
+        assert isinstance(data, Dict)
         self.data: Dict[str, Dict] = data
 
     @classmethod

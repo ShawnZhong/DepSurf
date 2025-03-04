@@ -1,12 +1,11 @@
-from dataclasses import dataclass, field
-from pathlib import Path
-from typing import Dict, List, Tuple, Optional, Iterator
 import logging
+from dataclasses import dataclass, field
+from typing import Dict, Iterator, List, Tuple
 
-from depsurf.dep import Dep, DepKind, DepDelta
+from depsurf.dep import Dep, DepDelta, DepKind
 from depsurf.diff import BaseChange, diff_dict
-from depsurf.version import Version
 from depsurf.issues import IssueEnum
+from depsurf.version import Version
 
 
 @dataclass(frozen=True)
@@ -38,30 +37,6 @@ class DiffKindResult:
     def iter_issues(self) -> Iterator[Tuple[IssueEnum, int]]:
         return iter(self.issues.items())
 
-    def print(self, file=None):
-        def print_header(name, items):
-            title = f" {name} ({len(items)}) "
-            print(f"{title:*^80}", file=file)
-
-        print_header("Changed", self.changed)
-        for name, changes in self.changed.items():
-            print(name, file=file)
-            for change in changes:
-                print(f"\t{change}", file=file)
-
-        print_header("Added", self.added)
-        for name in self.added:
-            print(f"\t{name}", file=file)
-
-        print_header("Removed", self.removed)
-        for name in self.removed:
-            print(f"\t{name}", file=file)
-
-    def save_txt(self, path: Path):
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, "w") as f:
-            self.print(f)
-
 
 @dataclass(frozen=True)
 class DiffPairResult:
@@ -72,33 +47,16 @@ class DiffPairResult:
     def iter_kinds(self) -> Iterator[Tuple[DepKind, "DiffKindResult"]]:
         return iter(self.kind_results.items())
 
-    def save_summary(self, path: Path):
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, "w") as f:
-            for kind, result in self.iter_kinds():
-                for issue, count in result.iter_issues():
-                    if count != 0:
-                        print(f"{kind} {issue}: {count}", file=f)
-
 
 @dataclass(frozen=True, order=True)
 class VersionPair:
     v1: Version
     v2: Version
 
-    def diff(
-        self, kinds: List[DepKind], result_path: Optional[Path] = None
-    ) -> DiffPairResult:
-        img_result = DiffPairResult(
+    def diff(self, kinds: List[DepKind]) -> DiffPairResult:
+        return DiffPairResult(
             self.v1, self.v2, {kind: self.diff_kind(kind) for kind in kinds}
         )
-
-        if result_path:
-            logging.info(f"Saving to {result_path}")
-            img_result.save_summary(result_path / "Summary.txt")
-            for kind, result in img_result.iter_kinds():
-                result.save_txt(result_path / f"{kind}.log")
-        return img_result
 
     def diff_kind(self, kind: DepKind) -> DiffKindResult:
         dict1 = self.v1.img.get_all_by_kind(kind)
@@ -136,11 +94,13 @@ class VersionPair:
     def diff_dep(self, dep: Dep) -> DepDelta:
         t1 = self.v1.img.get_dep(dep)
         t2 = self.v2.img.get_dep(dep)
-        if t1 is None or t2 is None:
-            return DepDelta(
-                v1=self.v1, v2=self.v2, in_v1=t1 is not None, in_v2=t2 is not None
-            )
-        return DepDelta(v1=self.v1, v2=self.v2, changes=dep.kind.differ(t1, t2))
+        return DepDelta(
+            v1=self.v1,
+            v2=self.v2,
+            t1=t1,
+            t2=t2,
+            changes=dep.kind.differ(t1, t2) if (t1 and t2) else [],
+        )
 
     def __repr__(self):
         return f"({self.v1}, {self.v2})"

@@ -1,7 +1,6 @@
 import logging
-import sys
 from dataclasses import dataclass
-from typing import Dict, List, Optional, TextIO, Tuple
+from typing import Dict, List, Tuple
 
 from depsurf.dep import Dep, DepDelta, DepStatus
 from depsurf.issues import IssueEnum
@@ -53,6 +52,10 @@ class DepReport:
             },
         )
 
+    @classmethod
+    def from_group(cls, dep: Dep, group: VersionGroup) -> "DepReport":
+        return cls.from_groups(dep, [group])
+
     @property
     def issue_dict(self) -> IssueDict:
         issue_dict = {
@@ -63,18 +66,7 @@ class DepReport:
             has_changes = False
             for pair in self.get_pairs(self.dep, group):
                 diff = self.diff_dict[(group, pair.v1, pair.v2)]
-                has_changes = has_changes or diff.has_changes
-                if has_changes and diff.in_v2:
+                has_changes = has_changes or diff.changes
+                if has_changes and diff.t2 is not None:
                     issue_dict[(group, pair.v2)].append(IssueEnum.CHANGE)
         return issue_dict
-
-    @classmethod
-    def from_group(cls, dep: Dep, group: VersionGroup) -> "DepReport":
-        return cls.from_groups(dep, [group])
-
-    def print(self, file: Optional[TextIO] = sys.stdout):
-        print(f"{self.dep}", file=file)
-        for (group, version), status in self.status_dict.items():
-            status.print(file=file, nindent=1)
-        for (group, v1, v2), diff in self.diff_dict.items():
-            diff.print(file=file, nindent=1)

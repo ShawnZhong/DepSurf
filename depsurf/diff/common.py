@@ -10,14 +10,6 @@ class BaseChange:
     def format(self):
         return ""
 
-    def print(self, file=None, nindent=0):
-        indent = "\t" * nindent
-        format = self.format()
-        if format:
-            print(f"{indent}{self.enum:24}{format}", file=file)
-        else:
-            print(f"{indent}{self.enum}", file=file)
-
 
 def diff_dict(
     old: Dict, new: Dict

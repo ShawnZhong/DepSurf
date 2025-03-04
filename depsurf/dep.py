@@ -110,46 +110,19 @@ class DepStatus:
 
         return []
 
-    def print(self, file=None, nindent=0):
-        issues_str = str(self.issues) if self.issues else "No issues"
-        print(f"{'\t' * nindent}In {self.version}: {issues_str}", file=file)
-
-        if self.func_group:
-            for func in self.func_group:
-                print(f"{'\t' * (nindent + 1)}{func}", file=file)
-
 
 @dataclass
 class DepDelta:
     v1: Version
     v2: Version
-    in_v1: bool = True
-    in_v2: bool = True
-    changes: List[BaseChange] = dataclasses.field(default_factory=list)
+    t1: Optional[Dict]
+    t2: Optional[Dict]
+    changes: List[BaseChange]
 
     @property
-    def has_changes(self) -> bool:
-        return len(self.changes) > 0
+    def is_added(self) -> bool:
+        return self.t1 is None and self.t2 is not None
 
     @property
-    def status_str(self) -> str:
-        if not self.in_v1 and not self.in_v2:
-            return "Both absent"
-        if not self.in_v1:
-            return "Added"
-        if not self.in_v2:
-            return "Removed"
-        if self.has_changes:
-            return "Changed"
-        return "No changes"
-
-    def print(self, file=None, nindent=0):
-        indent = "\t" * nindent
-
-        print(
-            f"{indent}From {self.v1} to {self.v2}: {self.status_str}",
-            file=file,
-        )
-
-        for change in self.changes:
-            change.print(file=file, nindent=nindent + 1)
+    def is_removed(self) -> bool:
+        return self.t1 is not None and self.t2 is None
