@@ -1,8 +1,8 @@
 import dataclasses
 import json
 from dataclasses import dataclass
-from typing import List, Optional
 from enum import StrEnum
+from typing import List, Optional
 
 
 class InlineStatus(StrEnum):
@@ -42,13 +42,6 @@ class FuncEntry:
     inline: InlineStatus = InlineStatus.UNSEEN
     caller_inline: List[str] = dataclasses.field(default_factory=list)
     caller_func: List[str] = dataclasses.field(default_factory=list)
-
-    @classmethod
-    def from_json(cls, s: str):
-        return cls(**json.loads(s))
-
-    def to_json(self) -> str:
-        return json.dumps(dataclasses.asdict(self))
 
     @property
     def inline_declared(self) -> bool:

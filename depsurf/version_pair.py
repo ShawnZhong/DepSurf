@@ -94,12 +94,16 @@ class VersionPair:
     def diff_dep(self, dep: Dep) -> DepDelta:
         t1 = self.v1.img.get_dep(dep)
         t2 = self.v2.img.get_dep(dep)
+        changes = []
+        if t1 and t2:
+            changes = dep.kind.differ(t1, t2)
+        changes = [c for c in changes if c.enum != IssueEnum.STRUCT_LAYOUT]
         return DepDelta(
             v1=self.v1,
             v2=self.v2,
             t1=t1,
             t2=t2,
-            changes=dep.kind.differ(t1, t2) if (t1 and t2) else [],
+            changes=changes,
         )
 
     def __repr__(self):

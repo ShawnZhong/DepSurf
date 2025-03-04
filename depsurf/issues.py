@@ -1,5 +1,4 @@
 from enum import StrEnum
-from typing import List
 
 
 class Consequence(StrEnum):
@@ -28,11 +27,11 @@ class IssueEnum(StrEnum):
     BOTH_ABSENT = "Both absent"
 
     # Function status
-    SELECTIVE_INLINE = "Par. Inline"
+    SELECTIVE_INLINE = "Selective Inline"
     FULL_INLINE = "Full Inline"
-    TRANSFORMATION = "Renamed"
+    TRANSFORMATION = "Transformation"
     DUPLICATE = "Duplicate"
-    COLLISSION = "Collission"
+    COLLISION = "Collision"
 
     # Function changes
     FUNC_ADD = "Function added"

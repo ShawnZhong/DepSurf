@@ -6,11 +6,22 @@ from typing import Dict
 from .kind import Kind
 
 
-def get_type_str(obj):
+def get_type_str(obj, full=False):
     assert "kind" in obj, obj
     kind = obj["kind"]
 
-    if kind in (Kind.STRUCT, Kind.UNION, Kind.ENUM, Kind.VOLATILE, Kind.CONST):
+    if kind in (Kind.STRUCT, Kind.UNION):
+        result = f"{kind.lower()} {obj['name']}"
+        if not full:
+            return result
+
+        result += " {"
+        for field in obj["members"]:
+            result += f"\n    {get_type_str(field['type'])} {field['name']};"
+        result += "\n}"
+        return result
+
+    if kind in (Kind.ENUM, Kind.VOLATILE, Kind.CONST, Kind.RESTRICT):
         return f"{kind.lower()} {obj['name']}"
     elif kind in (Kind.TYPEDEF, Kind.INT, Kind.VOID):
         return obj["name"]

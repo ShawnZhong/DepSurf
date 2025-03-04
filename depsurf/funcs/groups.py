@@ -1,3 +1,5 @@
+import dataclasses
+import json
 import logging
 from collections import defaultdict
 from dataclasses import dataclass
@@ -56,7 +58,7 @@ def dump_func_groups(func_entries_path: Path, symtab_path: Path, result_path: Pa
     functions: Dict[str, List[FuncEntry]] = defaultdict(list)
     with open(func_entries_path, "r") as f:
         for line in f:
-            func = FuncEntry.from_json(line)
+            func = FuncEntry(**json.loads(line))
             functions[func.name].append(func)
 
     func_symbols = get_func_symbols(SymbolTable.from_dump(symtab_path))
@@ -68,4 +70,4 @@ def dump_func_groups(func_entries_path: Path, symtab_path: Path, result_path: Pa
 
     with open(result_path, "w") as f:
         for group in data.values():
-            print(group.to_json(), file=f)
+            print(json.dumps(dataclasses.asdict(group)), file=f)

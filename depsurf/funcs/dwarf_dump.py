@@ -1,3 +1,5 @@
+import dataclasses
+import json
 import logging
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -199,7 +201,7 @@ class FunctionRecorder:
     def dump(self, path: Path):
         with open(path, "w") as f:
             for func in self.iter_funcs():
-                print(func.to_json(), file=f)
+                print(json.dumps(dataclasses.asdict(func)), file=f)
 
 
 def disable_dwarf_cache():

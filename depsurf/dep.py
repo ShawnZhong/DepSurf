@@ -97,7 +97,7 @@ class Dep:
 @dataclass
 class DepStatus:
     version: Version
-    exists: bool = True
+    t: Optional[Dict]
     func_group: Optional[FuncGroup] = None
 
     @property
@@ -109,6 +109,10 @@ class DepStatus:
             return self.func_group.issues
 
         return []
+
+    @property
+    def exists(self) -> bool:
+        return self.t is not None
 
 
 @dataclass

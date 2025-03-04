@@ -1,4 +1,3 @@
-import dataclasses
 import json
 import logging
 from dataclasses import dataclass
@@ -40,9 +39,9 @@ def get_collision_type(funcs: List[FuncEntry]) -> CollisionType:
 
 
 class InlineType(StrEnum):
-    NOT = "Not inlined"
-    FULL = "Fully inlined"
-    SELECTIVE = "Partially inlined"
+    NO = "No"
+    FULL = "Full"
+    SELECTIVE = "Selective"
 
 
 def get_inline_type(funcs: List[FuncEntry], in_symtab: bool) -> InlineType:
@@ -95,7 +94,7 @@ def get_inline_type(funcs: List[FuncEntry], in_symtab: bool) -> InlineType:
         # Any of the functions is inlined
         return InlineType.SELECTIVE
     else:
-        return InlineType.NOT
+        return InlineType.NO
 
 
 @dataclass(frozen=True)
@@ -109,12 +108,12 @@ class FuncGroup:
     @classmethod
     def from_funcs(cls, funcs: List[FuncEntry], symbols: List[FuncSymbol]):
         assert len(funcs) > 0, "There must be at least one function in a group"
-        assert all(
-            func.name == funcs[0].name for func in funcs
-        ), "All functions must have the same name"
-        assert (
-            sum(func.external for func in funcs) <= 1
-        ), "There should be at most one external function in a group"
+        assert all(func.name == funcs[0].name for func in funcs), (
+            "All functions must have the same name"
+        )
+        assert sum(func.external for func in funcs) <= 1, (
+            "There should be at most one external function in a group"
+        )
 
         return cls(
             name=funcs[0].name,
@@ -135,9 +134,6 @@ class FuncGroup:
             symbols=[FuncSymbol(**sym) for sym in data["symbols"]],
         )
 
-    def to_json(self) -> str:
-        return json.dumps(dataclasses.asdict(self))
-
     @property
     def num_funcs(self):
         return len(self.funcs)
@@ -157,7 +153,7 @@ class FuncGroup:
             CollisionType.STATIC_STATIC,
             CollisionType.STATIC_GLOBAL,
         ):
-            result.append(IssueEnum.COLLISSION)
+            result.append(IssueEnum.COLLISION)
 
         # inline
         if self.inline_type == InlineType.FULL:

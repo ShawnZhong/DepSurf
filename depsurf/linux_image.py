@@ -73,15 +73,18 @@ class LinuxImage:
         if dep.kind == DepKind.FUNC:
             func_group = self.func_groups.get_group(dep.name)
             if func_group is None:
-                return DepStatus(version=self.version, exists=False)
+                return DepStatus(version=self.version, t=None)
 
             return DepStatus(
                 version=self.version,
-                exists=True,
+                t=self.get_dep(dep),
                 func_group=func_group,
             )
         else:
-            return DepStatus(version=self.version, exists=self.get_dep(dep) is not None)
+            return DepStatus(
+                version=self.version,
+                t=self.get_dep(dep),
+            )
 
     @cached_property
     def filebytes(self):
