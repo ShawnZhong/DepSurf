@@ -48,7 +48,7 @@ class FuncGroups:
         result: Dict[str, FuncGroup] = {}
         with open(path, "r") as f:
             for line in f:
-                group = FuncGroup.from_json(line)
+                group = FuncGroup.from_dict(json.loads(line))
                 result[group.name] = group
         return cls(data=result)
 
@@ -70,4 +70,4 @@ def dump_func_groups(func_entries_path: Path, symtab_path: Path, result_path: Pa
 
     with open(result_path, "w") as f:
         for group in data.values():
-            print(json.dumps(dataclasses.asdict(group)), file=f)
+            print(json.dumps(group.to_dict()), file=f)

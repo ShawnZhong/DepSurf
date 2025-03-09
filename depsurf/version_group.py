@@ -1,13 +1,13 @@
 from enum import StrEnum
 from typing import Dict, Iterator, List
 
-from depsurf.version import DATA_PATH, Version
+from depsurf.version import DATASET_PATH, Version
 from depsurf.version_pair import DiffPairResult, VersionPair
 
 VERSION_DEFAULT = Version(
     version_tuple=(5, 4, 0), flavor="generic", arch="amd64", revision=26
 )
-VERSIONS_ALL = sorted(set(Version.from_path(p) for p in DATA_PATH.rglob("*.jsonl")))
+VERSIONS_ALL = sorted(set(Version.from_path(p) for p in DATASET_PATH.rglob("*.jsonl")))
 VERSIONS_REV = [
     v
     for v in VERSIONS_ALL
@@ -58,8 +58,6 @@ class VersionGroup(StrEnum):
     REV = "Revision"
     ARCH = "Arch"
     FLAVOR = "Flavor"
-    TEST = "Test"
-    DEFAULT = "Default"
 
     @property
     def name(self):
@@ -74,12 +72,17 @@ class VersionGroup(StrEnum):
             VersionGroup.REV: VERSIONS_REV,
             VersionGroup.ARCH: VERSIONS_ARCH,
             VersionGroup.FLAVOR: VERSIONS_FLAVOR,
-            VersionGroup.DEFAULT: [VERSION_DEFAULT],
         }[self]
 
     @property
-    def num_versions(self) -> int:
-        return len(self.versions)
+    def pairs(self) -> List[VersionPair]:
+        if self in (VersionGroup.ARCH, VersionGroup.FLAVOR):
+            return [VersionPair(VERSION_DEFAULT, v) for v in self.versions]
+        if self in (VersionGroup.LTS, VersionGroup.REGULAR, VersionGroup.REV):
+            return [
+                VersionPair(v1, v2) for v1, v2 in zip(self.versions, self.versions[1:])
+            ]
+        raise ValueError(f"Unknown group: {self}")
 
     def to_str(self, v: Version) -> str:
         if self == VersionGroup.ARCH:

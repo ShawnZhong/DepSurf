@@ -1,4 +1,3 @@
-import dataclasses
 from dataclasses import dataclass
 from enum import StrEnum
 from typing import Callable, Dict, List, Optional
@@ -93,6 +92,10 @@ class Dep:
     def __str__(self):
         return f"{self.kind.value} {self.name}"
 
+    @classmethod
+    def from_dict(cls, data: Dict) -> "Dep":
+        return cls(DepKind(data["kind"]), data["name"])
+
 
 @dataclass
 class DepStatus:
@@ -114,6 +117,16 @@ class DepStatus:
     def exists(self) -> bool:
         return self.t is not None
 
+    @classmethod
+    def from_dict(cls, data: Dict) -> "DepStatus":
+        return cls(
+            version=Version(**data["version"]),
+            t=data["t"],
+            func_group=FuncGroup.from_dict(data["func_group"])
+            if data["func_group"]
+            else None,
+        )
+
 
 @dataclass
 class DepDelta:
@@ -130,3 +143,25 @@ class DepDelta:
     @property
     def is_removed(self) -> bool:
         return self.t1 is not None and self.t2 is None
+
+    @property
+    def is_both_absent(self) -> bool:
+        return self.t1 is None and self.t2 is None
+
+    @property
+    def is_changed(self) -> bool:
+        return bool(self.changes)
+
+    @property
+    def is_unchanged(self) -> bool:
+        return self.t1 is not None and self.t2 is not None and not self.changes
+
+    @classmethod
+    def from_dict(cls, data: Dict) -> "DepDelta":
+        return cls(
+            v1=Version(**data["v1"]),
+            v2=Version(**data["v2"]),
+            t1=data["t1"],
+            t2=data["t2"],
+            changes=[BaseChange.from_dict(change) for change in data["changes"]],
+        )

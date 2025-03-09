@@ -1,43 +1,15 @@
-from dataclasses import dataclass
 from typing import List
 
-from depsurf.btf import Kind, get_type_str
-from depsurf.issues import IssueEnum
+from depsurf.btf import Kind
 
-from .common import BaseChange, diff_dict
-
-
-@dataclass
-class StructLayoutChange(BaseChange, enum=IssueEnum.STRUCT_LAYOUT):
-    pass
-
-
-@dataclass
-class FieldAdd(BaseChange, enum=IssueEnum.FIELD_ADD):
-    name: str
-    type: dict
-
-    def format(self):
-        return f"{get_type_str(self.type)} {self.name}"
-
-
-@dataclass
-class FieldRemove(BaseChange, enum=IssueEnum.FIELD_REMOVE):
-    name: str
-    type: dict
-
-    def format(self):
-        return f"{get_type_str(self.type)} {self.name}"
-
-
-@dataclass
-class FieldType(BaseChange, enum=IssueEnum.FIELD_TYPE):
-    name: str
-    old: dict
-    new: dict
-
-    def format(self):
-        return f"{get_type_str(self.old)} {self.name} -> {get_type_str(self.new)} {self.name}"
+from .change import (
+    BaseChange,
+    FieldAdd,
+    FieldRemove,
+    FieldType,
+    StructLayoutChange,
+)
+from .diff_common import diff_dict
 
 
 def diff_struct_field(old, new) -> List[BaseChange]:

@@ -21,10 +21,10 @@ class DiffKindResult:
     def issues(self) -> Dict[IssueEnum, int]:
         issues = {change: 0 for change in IssueEnum}
         for changes in self.changed.values():
-            for issue in set(change.enum for change in changes):
+            for issue in set(change.issue for change in changes):
                 issues[issue] += 1
             # for change in changes:
-            #     reasons[change.enum] += 1
+            #     reasons[change.issue] += 1
 
         issues[IssueEnum.OLD] = self.old_len
         issues[IssueEnum.NEW] = self.new_len
@@ -78,7 +78,7 @@ class VersionPair:
                 logging.error(f"New: {new}")
                 continue
 
-            result = [c for c in result if c.enum != IssueEnum.STRUCT_LAYOUT]
+            result = [c for c in result if c.issue != IssueEnum.STRUCT_LAYOUT]
             if result:
                 changed[name] = result
 
@@ -97,7 +97,7 @@ class VersionPair:
         changes = []
         if t1 and t2:
             changes = dep.kind.differ(t1, t2)
-        changes = [c for c in changes if c.enum != IssueEnum.STRUCT_LAYOUT]
+        changes = [c for c in changes if c.issue != IssueEnum.STRUCT_LAYOUT]
         return DepDelta(
             v1=self.v1,
             v2=self.v2,

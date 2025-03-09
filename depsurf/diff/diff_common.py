@@ -1,14 +1,8 @@
 from typing import Dict, Tuple
 
-from depsurf.issues import IssueEnum
 
-
-class BaseChange:
-    def __init_subclass__(cls, enum: IssueEnum):
-        cls.enum = enum
-
-    def format(self):
-        return ""
+def diff_nop(old, new):
+    return []
 
 
 def diff_dict(

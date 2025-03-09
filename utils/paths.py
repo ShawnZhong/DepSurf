@@ -4,6 +4,8 @@ UTILS_PATH = Path(__file__).parent
 PROJ_PATH = UTILS_PATH.parent
 
 DATA_PATH = PROJ_PATH / "data"
+WEBSITE_PATH = DATA_PATH / "website"
+
 OUTPUT_PATH = PROJ_PATH / "output"
 
 PAPER_PATH = PROJ_PATH / "paper"

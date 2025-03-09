@@ -1,8 +1,8 @@
-import json
+import dataclasses
 import logging
 from dataclasses import dataclass
 from enum import StrEnum
-from typing import List
+from typing import Dict, List
 
 from depsurf.issues import IssueEnum
 
@@ -124,8 +124,7 @@ class FuncGroup:
         )
 
     @classmethod
-    def from_json(cls, json_str: str):
-        data = json.loads(json_str)
+    def from_dict(cls, data: Dict) -> "FuncGroup":
         return cls(
             name=data["name"],
             funcs=[FuncEntry(**func) for func in data["funcs"]],
@@ -133,6 +132,9 @@ class FuncGroup:
             inline_type=InlineType(data["inline_type"]),
             symbols=[FuncSymbol(**sym) for sym in data["symbols"]],
         )
+
+    def to_dict(self) -> Dict:
+        return dataclasses.asdict(self)
 
     @property
     def num_funcs(self):

@@ -158,7 +158,6 @@ class BTFNormalizer:
 
     @cached_property
     def data(self):
-        logging.info(f"Normalizing types from {self.path}")
         results: Dict[str, Dict[str, Dict]] = {k.value: {} for k in Kind}
 
         anon_enum_values = []
@@ -200,7 +199,9 @@ class BTFNormalizer:
                 print(json.dumps(v), file=f)
 
 
-def dump_types(btf_json_path: Path, result_paths: Dict[Kind, Path], overwrite: bool = False):
+def dump_types(
+    btf_json_path: Path, result_paths: Dict[Kind, Path], overwrite: bool = False
+):
     normalizer = BTFNormalizer(btf_json_path)
     for kind, path in result_paths.items():
         normalizer.dump_types(kind, result_path=path, overwrite=overwrite)

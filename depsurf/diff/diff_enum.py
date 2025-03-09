@@ -1,38 +1,9 @@
-from dataclasses import dataclass
 from typing import List
 
 from depsurf.btf import Kind
-from depsurf.issues import IssueEnum
+from depsurf.diff import BaseChange, EnumValAdd, EnumValChange, EnumValRemove
 
-from .common import BaseChange, diff_dict
-
-
-@dataclass
-class EnumValAdd(BaseChange, enum=IssueEnum.VAL_ADD):
-    name: str
-    val: int
-
-    def format(self):
-        return f"{self.name} = {self.val}"
-
-
-@dataclass
-class EnumValRemove(BaseChange, enum=IssueEnum.VAL_REMOVE):
-    name: str
-    val: int
-
-    def format(self):
-        return f"{self.name} = {self.val}"
-
-
-@dataclass
-class EnumValChange(BaseChange, enum=IssueEnum.VAL_CHANGE):
-    name: str
-    old_val: int
-    new_val: int
-
-    def format(self):
-        return f"{self.name} = {self.old_val} -> {self.new_val}"
+from .diff_common import diff_dict
 
 
 def diff_enum(old, new) -> List[BaseChange]:
