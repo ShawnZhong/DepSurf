@@ -1,8 +1,9 @@
 from enum import StrEnum
 from typing import Dict, Iterator, List
 
-from depsurf.version import DATASET_PATH, Version
-from depsurf.version_pair import DiffPairResult, VersionPair
+from .paths import DATASET_PATH
+from .version import Version
+from .version_pair import DiffPairResult, VersionPair
 
 VERSION_DEFAULT = Version(
     version_tuple=(5, 4, 0), flavor="generic", arch="amd64", revision=26

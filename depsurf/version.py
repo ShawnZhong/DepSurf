@@ -7,10 +7,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from .linux_image import LinuxImage
 
-PROJ_PATH = Path(__file__).parent.parent
-DOWNLOAD_PATH = PROJ_PATH / "data" / "download"
-DATASET_PATH = PROJ_PATH / "data" / "dataset"
-INTERMEDIATE_PATH = PROJ_PATH / "data" / "intermediate"
+from .paths import DATASET_PATH, DOWNLOAD_PATH, INTERMEDIATE_PATH
 
 
 @dataclass(order=True, frozen=True)

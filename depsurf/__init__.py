@@ -8,6 +8,7 @@ from .funcs import *
 from .issues import *
 from .linux import *
 from .linux_image import *
+from .paths import *
 from .prep import *
 from .report import *
 from .utils import *

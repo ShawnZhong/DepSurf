@@ -87,10 +87,15 @@ class DepReport:
         with path.open("r") as f:
             return cls.from_dict(json.load(f))
 
-    def dump(self, path: Path):
+    def dump_json(self, path: Path):
         path.parent.mkdir(exist_ok=True, parents=True)
         with path.open("w") as f:
             json.dump(self.to_dict(), f, indent=2)
+
+    def dump_md(self, path: Path):
+        path.parent.mkdir(exist_ok=True, parents=True)
+        with path.open("w") as f:
+            self.print(file=f)
 
     @property
     def issue_dict(self) -> IssueDict:
@@ -166,8 +171,10 @@ def type_to_str(obj, full=False) -> str:
         result += "\n}"
         return result
 
-    if kind in (Kind.ENUM, Kind.VOLATILE, Kind.CONST, Kind.RESTRICT):
+    if kind in (Kind.ENUM,):
         return f"{kind.lower()} {obj['name']}"
+    if kind in (Kind.VOLATILE, Kind.CONST, Kind.RESTRICT):
+        return f"{kind.lower()} {type_to_str(obj['type'])}"
     elif kind in (Kind.TYPEDEF, Kind.INT, Kind.VOID):
         return obj["name"]
     elif kind == Kind.PTR:

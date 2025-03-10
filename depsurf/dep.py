@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 from enum import StrEnum
+from pathlib import Path
 from typing import Callable, Dict, List, Optional
 
-from depsurf.diff import (
+from .diff import (
     BaseChange,
     diff_config,
     diff_enum,
@@ -12,10 +13,11 @@ from depsurf.diff import (
     diff_struct_field,
     diff_tracepoint,
 )
-from depsurf.funcs import FuncGroup
-from depsurf.issues import IssueEnum
-from depsurf.utils import OrderedEnum
-from depsurf.version import Version
+from .funcs import FuncGroup
+from .issues import IssueEnum
+from .paths import REPORT_PATH
+from .utils import OrderedEnum
+from .version import Version
 
 
 class DepKind(OrderedEnum, StrEnum):
@@ -95,6 +97,10 @@ class Dep:
     @classmethod
     def from_dict(cls, data: Dict) -> "Dep":
         return cls(DepKind(data["kind"]), data["name"])
+
+    @property
+    def report_path(self) -> Path:
+        return REPORT_PATH / self.kind / f"{self.name}.json"
 
 
 @dataclass
