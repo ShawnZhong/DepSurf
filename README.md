@@ -4,6 +4,11 @@ DepSurf
 
 Artifacts for [EuroSys'25](https://2025.eurosys.org/) paper "Revealing the Unstable Foundations of eBPF-Based Kernel Extensions".
 
+[Main repo](https://github.com/ShawnZhong/DepSurf) | 
+[Dataset repo](https://github.com/ShawnZhong/DepSurf-dataset) | 
+[Website repo](https://github.com/DepSurf/depsurf.github.io) | 
+[Website](https://depsurf.github.io/)
+
 ## Prerequisites
 
 DepSurf requires Python 3.11 or higher. It has been tested on Ubuntu 22.04 and Ubuntu 24.04.
