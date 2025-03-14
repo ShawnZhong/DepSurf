@@ -12,7 +12,7 @@
 	url = https://github.com/aquasecurity/tracee.git
 [submodule "html"]
 	path = data/website
-	url = https://github.com/ShawnZhong/DepSurf-website.git
+	url = https://github.com/DepSurf/depsurf.github.io.git
 [submodule "data/dataset"]
 	path = data/dataset
 	url = https://github.com/ShawnZhong/DepSurf-dataset.git

@@ -5,7 +5,7 @@ PROJ_PATH = UTILS_PATH.parent
 
 DATA_PATH = PROJ_PATH / "data"
 WEBSITE_PATH = DATA_PATH / "website"
-WEBSITE_URL = "https://shawnzhong.github.io/DepSurf-website"
+WEBSITE_URL = "https://depsurf.github.io"
 
 OUTPUT_PATH = PROJ_PATH / "output"
 

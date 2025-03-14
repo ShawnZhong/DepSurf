@@ -134,7 +134,11 @@ class LinuxImage:
             f"security_{e['name']}"
             for e in self.struct_types["security_hook_heads"]["members"]
         }
-        return {k: v for k, v in self.func_types.items() if k in func_names}
+        return {
+            k.removeprefix("security_"): v
+            for k, v in self.func_types.items()
+            if k in func_names
+        }
 
     @cached_property
     def kfuncs(self):

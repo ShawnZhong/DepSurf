@@ -25,7 +25,7 @@ class DepKind(OrderedEnum, StrEnum):
     STRUCT = "Struct"
     FIELD = "Field"
     TRACEPOINT = "Tracepoint"
-    LSM = "LSM Hook"
+    LSM = "LSM"
     KFUNC = "kfunc"
     SYSCALL = "Syscall"
 

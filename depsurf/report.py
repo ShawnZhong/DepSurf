@@ -90,7 +90,7 @@ class DepReport:
     def dump_json(self, path: Path):
         path.parent.mkdir(exist_ok=True, parents=True)
         with path.open("w") as f:
-            json.dump(self.to_dict(), f, indent=2)
+            json.dump(self.to_dict(), f)
 
     def dump_md(self, path: Path):
         path.parent.mkdir(exist_ok=True, parents=True)
