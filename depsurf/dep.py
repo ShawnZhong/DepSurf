@@ -15,7 +15,6 @@ from .diff import (
 )
 from .funcs import FuncGroup
 from .issues import IssueEnum
-from .paths import REPORT_PATH
 from .utils import OrderedEnum
 from .version import Version
 
@@ -97,10 +96,6 @@ class Dep:
     @classmethod
     def from_dict(cls, data: Dict) -> "Dep":
         return cls(DepKind(data["kind"]), data["name"])
-
-    @property
-    def report_path(self) -> Path:
-        return REPORT_PATH / self.kind / f"{self.name}.json"
 
 
 @dataclass

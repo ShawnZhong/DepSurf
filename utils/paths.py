@@ -7,7 +7,9 @@ DATA_PATH = PROJ_PATH / "data"
 WEBSITE_PATH = DATA_PATH / "website"
 WEBSITE_URL = "https://depsurf.github.io"
 
-OUTPUT_PATH = PROJ_PATH / "output"
+OUTPUT_PATH = DATA_PATH / "output"
+REPORT_PATH = DATA_PATH / "report"
+
 
 PAPER_PATH = PROJ_PATH / "paper"
 TAB_PATH = PAPER_PATH / "tabs"
