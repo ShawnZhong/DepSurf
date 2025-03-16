@@ -147,22 +147,11 @@ class DepReport:
         return output.getvalue()
 
 
-def type_name_to_str(obj) -> str:
-    t = obj["type"]
-    type_str = type_to_str(t)
-    if t["kind"] == Kind.PTR:
-        return f"{type_str}{obj['name']}"
-    else:
-        return f"{type_str} {obj['name']}"
-
-
 def type_to_str(obj) -> str:
     assert "kind" in obj, obj
     kind: str = obj["kind"]
 
-    if kind in (Kind.STRUCT, Kind.UNION):
-        return f"{kind.lower()} {obj['name']}"
-    if kind in (Kind.ENUM,):
+    if kind in (Kind.STRUCT, Kind.UNION, Kind.ENUM):
         return f"{kind.lower()} {obj['name']}"
     if kind in (Kind.VOLATILE, Kind.CONST, Kind.RESTRICT):
         return f"{kind.lower()} {type_to_str(obj['type'])}"
@@ -179,17 +168,37 @@ def type_to_str(obj) -> str:
     elif kind == Kind.ARRAY:
         return f"{type_to_str(obj['type'])}[{obj['nr_elems']}]"
     elif kind == Kind.FUNC_PROTO:
-        return f"{type_to_str(obj['ret_type'])} (*)({', '.join(type_to_str(a['type']) for a in obj['params'])})"
+        return f"{type_to_str(obj['ret_type'])}(*)({', '.join(type_to_str(a['type']) for a in obj['params'])})"
     elif kind == Kind.FWD:
         return f"{obj['fwd_kind']} {obj['name']}"
     elif kind == Kind.FUNC:
-        result = f"{type_to_str(obj['type']['ret_type'])} {obj['name']}"
+        result = type_name_to_str(obj["type"]["ret_type"], obj["name"])
         result += "("
-        result += ", ".join(type_name_to_str(param) for param in obj["type"]["params"])
+        result += ", ".join(
+            type_name_to_str(p["type"], p["name"]) for p in obj["type"]["params"]
+        )
         result += ");"
         return result
     else:
         raise ValueError(f"Unknown kind: {obj}")
+
+
+def type_name_to_str(t, name) -> str:
+    kind = t["kind"]
+    if kind == Kind.PTR:
+        if t["type"]["kind"] == Kind.FUNC_PROTO:
+            result = type_to_str(t["type"]["ret_type"])
+            result += f" (*{name})"
+            result += "("
+            result += ", ".join(type_to_str(a["type"]) for a in t["type"]["params"])
+            result += ")"
+            return result
+        else:
+            return f"{type_to_str(t)}{name}"
+    elif kind == Kind.ARRAY:
+        return f"{type_to_str(t['type'])} {name}[{t['nr_elems']}]"
+    else:
+        return f"{type_to_str(t)} {name}"
 
 
 def print_dep_val(val, file: TextIO):
@@ -203,7 +212,7 @@ def print_dep_val(val, file: TextIO):
         return
 
     if "kind" not in val:
-        print(f"{type_to_str(val['type'])} {val['name']}", file=file)
+        print(f"{type_to_str(val['type'])}{val['name']}", file=file)
         return
 
     kind: str = val["kind"]
@@ -211,7 +220,7 @@ def print_dep_val(val, file: TextIO):
         print("```c", file=file)
         print(type_to_str(val) + " {", file=file)
         for field in val["members"]:
-            print(f"    {type_to_str(field['type'])} {field['name']};", file=file)
+            print(f"    {type_name_to_str(field['type'], field['name'])};", file=file)
         print("};", file=file)
         print("```", file=file)
         return
@@ -276,12 +285,12 @@ def print_status(status: DepStatus, file: TextIO):
 
 def print_change(change: BaseChange, file: TextIO):
     if isinstance(change, (FieldAdd, FieldRemove)):
-        print(code_inline(f"{type_to_str(change.type)} {change.name}"), file=file)
+        print(code_inline(f"{type_name_to_str(change.type, change.name)}"), file=file)
     elif isinstance(change, (FieldType, ParamType)):
         print(
-            code_inline(f"{type_to_str(change.old)} {change.name}")
+            code_inline(f"{type_name_to_str(change.old, change.name)}")
             + " ➡️ "
-            + code_inline(f"{type_to_str(change.new)} {change.name}"),
+            + code_inline(f"{type_name_to_str(change.new, change.name)}"),
             file=file,
         )
     elif isinstance(change, FuncReturn):
@@ -292,7 +301,7 @@ def print_change(change: BaseChange, file: TextIO):
             file=file,
         )
     elif isinstance(change, (ParamRemove, ParamAdd)):
-        print(code_inline(f"{type_to_str(change.type)} {change.name}"), file=file)
+        print(code_inline(f"{type_name_to_str(change.type, change.name)}"), file=file)
     elif isinstance(change, ParamReorder):
         print(
             code_inline(", ".join(change.old.keys()))
