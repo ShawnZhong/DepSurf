@@ -7,7 +7,6 @@ from .change import (
     FieldAdd,
     FieldRemove,
     FieldType,
-    StructLayoutChange,
 )
 from .diff_common import diff_dict
 
@@ -44,10 +43,10 @@ def diff_struct(old, new) -> List[BaseChange]:
                 FieldType(name=name, old=old_value["type"], new=new_value["type"])
             )
 
-    def offsets(members):
-        return [(name, member["bits_offset"]) for name, member in members.items()]
+    # def offsets(members):
+    #     return [(name, member["bits_offset"]) for name, member in members.items()]
 
-    if offsets(old_members) != offsets(new_members) or old["size"] != new["size"]:
-        changes.append(StructLayoutChange())
+    # if offsets(old_members) != offsets(new_members) or old["size"] != new["size"]:
+    #     changes.append(StructLayoutChange())
 
     return changes

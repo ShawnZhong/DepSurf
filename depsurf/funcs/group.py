@@ -169,18 +169,6 @@ class FuncGroup:
 
         return result
 
-    def print_long(self, file=None):
-        header = f"{self.name}"
-        if self.num_funcs > 1:
-            header += f" ({self.num_funcs})"
-        print(header, file=file)
-        for func in self.funcs:
-            line = f"  {func.file}"
-            line += f" at {func.loc}"
-            line += " (global)" if func.external else " (static)"
-            line += " (inline)" if func.inline_actual else " (not inline)"
-            print(line, file=file)
-
     def __getitem__(self, index):
         return self.funcs[index]
 

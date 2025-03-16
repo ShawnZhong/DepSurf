@@ -7,7 +7,7 @@ from typing import Dict, List
 from depsurf.linux import SymbolTable
 
 
-class RenameType(StrEnum):
+class TransformType(StrEnum):
     ISRA = "isra"
     CONSTPROP = "constprop"
     PART = "part"
@@ -37,12 +37,12 @@ class FuncSymbol:
         return [s for s in self.name.split(".")[1:] if not s.isdigit()]
 
     @property
-    def rename_type(self) -> RenameType:
+    def transform_type(self) -> TransformType:
         assert self.has_suffix, "Symbol has no suffix"
         suffixes = self.suffixes
         if len(suffixes) > 1:
-            return RenameType.MULTIPLE
-        return RenameType(suffixes[0])
+            return TransformType.MULTIPLE
+        return TransformType(suffixes[0])
 
 
 def get_func_symbols(symtab: SymbolTable) -> Dict[str, List[FuncSymbol]]:

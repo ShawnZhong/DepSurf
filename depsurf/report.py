@@ -24,16 +24,13 @@ from depsurf.diff import (
     ParamType,
     TraceFormatChange,
 )
+from depsurf.funcs import FuncGroup
 from depsurf.issues import IssueEnum
 from depsurf.linux import TracepointInfo
 from depsurf.version import Version
 from depsurf.version_group import VersionGroup
 
 IssueDict = Dict[Tuple[VersionGroup, Version], List[IssueEnum]]
-
-
-def code_block(text, language: str = "") -> str:
-    return f"\n```{language}\n{text}\n```"
 
 
 def code_inline(text) -> str:
@@ -150,27 +147,21 @@ class DepReport:
         return output.getvalue()
 
 
-def type_to_str(obj, full=False) -> str:
-    if isinstance(obj, TracepointInfo):
-        return str(obj)
+def type_name_to_str(obj) -> str:
+    t = obj["type"]
+    type_str = type_to_str(t)
+    if t["kind"] == Kind.PTR:
+        return f"{type_str}{obj['name']}"
+    else:
+        return f"{type_str} {obj['name']}"
 
-    if "kind" not in obj:
-        return f"{type_to_str(obj['type'])} {obj['name']}"
 
+def type_to_str(obj) -> str:
     assert "kind" in obj, obj
     kind: str = obj["kind"]
 
     if kind in (Kind.STRUCT, Kind.UNION):
-        result = f"{kind.lower()} {obj['name']}"
-        if not full:
-            return result
-
-        result += " {"
-        for field in obj["members"]:
-            result += f"\n    {type_to_str(field['type'])} {field['name']};"
-        result += "\n}"
-        return result
-
+        return f"{kind.lower()} {obj['name']}"
     if kind in (Kind.ENUM,):
         return f"{kind.lower()} {obj['name']}"
     if kind in (Kind.VOLATILE, Kind.CONST, Kind.RESTRICT):
@@ -178,10 +169,13 @@ def type_to_str(obj, full=False) -> str:
     elif kind in (Kind.TYPEDEF, Kind.INT, Kind.VOID):
         return obj["name"]
     elif kind == Kind.PTR:
-        if obj["type"]["kind"] == Kind.FUNC_PROTO:
-            return type_to_str(obj["type"])
+        t = obj["type"]
+        if t["kind"] == Kind.FUNC_PROTO:
+            return type_to_str(t)
+        elif t["kind"] == Kind.PTR:
+            return f"{type_to_str(t)}*"
         else:
-            return f"{type_to_str(obj['type'])} *"
+            return f"{type_to_str(t)} *"
     elif kind == Kind.ARRAY:
         return f"{type_to_str(obj['type'])}[{obj['nr_elems']}]"
     elif kind == Kind.FUNC_PROTO:
@@ -191,17 +185,72 @@ def type_to_str(obj, full=False) -> str:
     elif kind == Kind.FUNC:
         result = f"{type_to_str(obj['type']['ret_type'])} {obj['name']}"
         result += "("
-        result += ", ".join(
-            f"{type_to_str(param['type'])} {param['name']}"
-            for param in obj["type"]["params"]
-        )
-        result += ")"
+        result += ", ".join(type_name_to_str(param) for param in obj["type"]["params"])
+        result += ");"
         return result
     else:
         raise ValueError(f"Unknown kind: {obj}")
 
 
-def print_status(status: DepStatus, file: TextIO = sys.stdout):
+def print_dep_val(val, file: TextIO):
+    print("", file=file)
+
+    if isinstance(val, int):
+        return
+
+    if isinstance(val, TracepointInfo):
+        print(str(val), file=file)
+        return
+
+    if "kind" not in val:
+        print(f"{type_to_str(val['type'])} {val['name']}", file=file)
+        return
+
+    kind: str = val["kind"]
+    if kind in (Kind.STRUCT, Kind.UNION):
+        print("```c", file=file)
+        print(type_to_str(val) + " {", file=file)
+        for field in val["members"]:
+            print(f"    {type_to_str(field['type'])} {field['name']};", file=file)
+        print("};", file=file)
+        print("```", file=file)
+        return
+
+    print("```c", file=file)
+    print(type_to_str(val), file=file)
+    print("```", file=file)
+
+
+def print_func_group(g: FuncGroup, file: TextIO):
+    print(f"**Collision:** {g.collision_type}\n", file=file)
+    print(f"**Inline:** {g.inline_type}\n", file=file)
+    print(f"**Transformation:** {g.has_suffix}\n", file=file)
+
+    print("**Instances:**\n", file=file)
+    for f in g.funcs:
+        print("```", file=file)
+        print(f"In {f.file} ({f.addr:x})", file=file)
+        print(f"Location: {f.loc}", file=file)
+        # print(f"External: {f.external}", file=file)
+        print(f"Inline: {f.inline_actual}", file=file)
+        if f.caller_inline:
+            print("Inline callers:", file=file)
+            for caller in f.caller_inline:
+                print(f"  - {caller}", file=file)
+        if f.caller_func:
+            print("Direct callers:", file=file)
+            for caller in f.caller_func:
+                print(f"  - {caller}", file=file)
+        print("```", file=file)
+
+    print("**Symbols:**\n", file=file)
+    print("```", file=file)
+    for s in g.symbols:
+        print(f"{s.addr:x}-{s.addr + s.size:x}: {s.name} ({s.bind})", file=file)
+    print("```", file=file)
+
+
+def print_status(status: DepStatus, file: TextIO):
     issues_str = (
         ", ".join([issue.value for issue in status.issues]) + " ❓"
         if status.issues
@@ -217,26 +266,15 @@ def print_status(status: DepStatus, file: TextIO = sys.stdout):
     print(f"<summary>{title}</summary>", file=file)
 
     if status.t:
-        print(
-            code_block(
-                type_to_str(status.t, full=True),
-                language="c",
-            ),
-            file=file,
-        )
+        print_dep_val(status.t, file=file)
 
     if status.func_group:
-        print(
-            code_block(
-                json.dumps(status.func_group.to_dict(), indent=2),
-                language="json",
-            ),
-            file=file,
-        )
+        print_func_group(status.func_group, file=file)
+
     print("</details>", file=file)
 
 
-def print_change(change: BaseChange, file: TextIO = sys.stdout):
+def print_change(change: BaseChange, file: TextIO):
     if isinstance(change, (FieldAdd, FieldRemove)):
         print(code_inline(f"{type_to_str(change.type)} {change.name}"), file=file)
     elif isinstance(change, (FieldType, ParamType)):
@@ -273,7 +311,7 @@ def print_change(change: BaseChange, file: TextIO = sys.stdout):
         print(f"{change.name} = {change.old_val} -> {change.new_val}", file=file)
 
 
-def print_delta(delta: DepDelta, file: TextIO = sys.stdout):
+def print_delta(delta: DepDelta, file: TextIO):
     if delta.is_unchanged:
         print(
             f"No changes between {code_inline(delta.v1)} and {code_inline(delta.v2)} ✅",
@@ -299,23 +337,11 @@ def print_delta(delta: DepDelta, file: TextIO = sys.stdout):
             f"<summary>Added between {code_inline(delta.v1)} and {code_inline(delta.v2)} ➕</summary>",
             file=file,
         )
-        print(
-            code_block(
-                type_to_str(delta.t2, full=True),
-                language="c",
-            ),
-            file=file,
-        )
+        print_dep_val(delta.t2, file=file)
     elif delta.is_removed:
         print(
             f"<summary>Removed between {code_inline(delta.v1)} and {code_inline(delta.v2)} ➖</summary>",
             file=file,
         )
-        print(
-            code_block(
-                type_to_str(delta.t1, full=True),
-                language="c",
-            ),
-            file=file,
-        )
+        print_dep_val(delta.t1, file=file)
     print("</details>", file=file)

@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from enum import StrEnum
-from pathlib import Path
 from typing import Callable, Dict, List, Optional
 
 from .diff import (

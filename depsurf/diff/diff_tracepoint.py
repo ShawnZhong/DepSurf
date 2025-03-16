@@ -1,6 +1,5 @@
 from typing import List
 
-from depsurf.issues import IssueEnum
 from depsurf.linux import TracepointInfo
 
 from .change import (
@@ -17,7 +16,7 @@ def diff_tracepoint(old: TracepointInfo, new: TracepointInfo) -> List[BaseChange
     result = []
 
     result_struct = diff_struct(old.struct, new.struct)
-    result_struct = [r for r in result_struct if r.issue != IssueEnum.STRUCT_LAYOUT]
+    # result_struct = [r for r in result_struct if r.issue != IssueEnum.STRUCT_LAYOUT]
     if result_struct:
         result.append(TraceEventChange())
     for r in result_struct:

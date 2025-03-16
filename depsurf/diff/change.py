@@ -23,9 +23,9 @@ class BaseChange:
 #######################
 # Struct changes
 #######################
-@dataclass
-class StructLayoutChange(BaseChange):
-    issue: IssueEnum = IssueEnum.STRUCT_LAYOUT
+# @dataclass
+# class StructLayoutChange(BaseChange):
+#     issue: IssueEnum = IssueEnum.STRUCT_LAYOUT
 
 
 @dataclass

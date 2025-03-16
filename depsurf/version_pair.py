@@ -70,15 +70,16 @@ class VersionPair:
                 continue
 
             result = kind.differ(old, new)
-            if len(result) == 0:
-                if kind in (DepKind.TRACEPOINT, DepKind.SYSCALL):
-                    continue
-                logging.error(f"Diff found but no changes: {name}")
-                logging.error(f"Old: {old}")
-                logging.error(f"New: {new}")
-                continue
+            # For debugging only
+            # if len(result) == 0:
+            #     if kind in (DepKind.TRACEPOINT, DepKind.SYSCALL):
+            #         continue
+            #     logging.error(f"Diff found but no changes: {name}")
+            #     logging.error(f"Old: {old}")
+            #     logging.error(f"New: {new}")
+            #     continue
 
-            result = [c for c in result if c.issue != IssueEnum.STRUCT_LAYOUT]
+            # result = [c for c in result if c.issue != IssueEnum.STRUCT_LAYOUT]
             if result:
                 changed[name] = result
 
@@ -97,7 +98,7 @@ class VersionPair:
         changes = []
         if t1 and t2:
             changes = dep.kind.differ(t1, t2)
-        changes = [c for c in changes if c.issue != IssueEnum.STRUCT_LAYOUT]
+        # changes = [c for c in changes if c.issue != IssueEnum.STRUCT_LAYOUT]
         return DepDelta(
             v1=self.v1,
             v2=self.v2,
