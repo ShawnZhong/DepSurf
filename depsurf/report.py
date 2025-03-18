@@ -119,7 +119,7 @@ class DepReport:
             print("<ul>", file=file)
             for status in status_list:
                 print("<li>", file=file)
-                print_status(status, file=file)
+                print_status(group, status, file=file)
                 print("</li>", file=file)
             print("</ul>", file=file)
 
@@ -136,7 +136,7 @@ class DepReport:
                 if delta.is_both_absent:
                     continue
                 print("<li>", file=file)
-                print_delta(delta, file=file)
+                print_delta(group, delta, file=file)
                 print("</li>", file=file)
             print("</ul>", file=file)
 
@@ -233,6 +233,7 @@ def print_dep_val(val, file: TextIO):
 
 
 def print_func_group(g: FuncGroup, file: TextIO):
+    print("", file=file)
     print(f"**Collision:** {g.collision_type}\n", file=file)
     print(f"**Inline:** {g.inline_type}\n", file=file)
     print(f"**Transformation:** {g.has_suffix}\n", file=file)
@@ -262,14 +263,15 @@ def print_func_group(g: FuncGroup, file: TextIO):
         print("```", file=file)
 
 
-def print_status(status: DepStatus, file: TextIO):
+def print_status(group: VersionGroup, status: DepStatus, file: TextIO):
     issues_str = (
         ", ".join([issue.value for issue in status.issues]) + " ⚠️"
         if status.issues
         else "✅"
     )
 
-    title = f"In {code_inline(status.version)}: {issues_str}"
+    v = code_inline(group.to_str(status.version))
+    title = f"In {v}: {issues_str}"
     if not status.t and not status.func_group:
         print(title, file=file)
         return
@@ -323,20 +325,25 @@ def print_change(change: BaseChange, file: TextIO):
         print(f"{change.name} = {change.old_val} -> {change.new_val}", file=file)
 
 
-def print_delta(delta: DepDelta, file: TextIO):
+def print_delta(group: VersionGroup, delta: DepDelta, file: TextIO):
+    v1 = code_inline(group.to_str(delta.v1))
+    v2 = code_inline(group.to_str(delta.v2))
+
     if delta.is_unchanged:
-        print(
-            f"No changes between {code_inline(delta.v1)} and {code_inline(delta.v2)} ✅",
-            file=file,
-        )
+        print(f"No changes between {v1} and {v2} ✅", file=file)
         return
+
+    if group in (VersionGroup.ARCH, VersionGroup.FLAVOR):
+        if delta.is_added:
+            print(f"Only exists in {v2} ➕", file=file)
+            return
+        elif delta.is_removed:
+            print(f"Does not exist in {v2} ➖", file=file)
+            return
 
     print("<details>", file=file)
     if delta.is_changed:
-        print(
-            f"<summary>Changed between {code_inline(delta.v1)} and {code_inline(delta.v2)} ⚠️</summary>",
-            file=file,
-        )
+        print(f"<summary>Changed between {v1} and {v2} ⚠️</summary>", file=file)
         print("<ul>", file=file)
         for change in delta.changes:
             print("<li>", file=file)
@@ -345,15 +352,9 @@ def print_delta(delta: DepDelta, file: TextIO):
             print("</li>", file=file)
         print("</ul>", file=file)
     elif delta.is_added:
-        print(
-            f"<summary>Added between {code_inline(delta.v1)} and {code_inline(delta.v2)} ➕</summary>",
-            file=file,
-        )
+        print(f"<summary>Added between {v1} and {v2} ➕</summary>", file=file)
         print_dep_val(delta.t2, file=file)
     elif delta.is_removed:
-        print(
-            f"<summary>Removed between {code_inline(delta.v1)} and {code_inline(delta.v2)} ➖</summary>",
-            file=file,
-        )
+        print(f"<summary>Removed between {v1} and {v2} ➖</summary>", file=file)
         print_dep_val(delta.t1, file=file)
     print("</details>", file=file)
