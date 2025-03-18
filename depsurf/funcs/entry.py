@@ -1,5 +1,4 @@
 import dataclasses
-import json
 from dataclasses import dataclass
 from enum import StrEnum
 from typing import List, Optional

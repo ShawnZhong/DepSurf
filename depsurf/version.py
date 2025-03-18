@@ -2,7 +2,7 @@ import dataclasses
 from dataclasses import dataclass
 from functools import cached_property
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict
 
 if TYPE_CHECKING:
     from .linux_image import LinuxImage
@@ -35,6 +35,15 @@ class Version:
             revision=int(revision),
             flavor=flavor,
             arch=arch,
+        )
+
+    @classmethod
+    def from_dict(cls, data: Dict) -> "Version":
+        return cls(
+            version_tuple=tuple(data["version_tuple"]),
+            revision=data["revision"],
+            flavor=data["flavor"],
+            arch=data["arch"],
         )
 
     @staticmethod

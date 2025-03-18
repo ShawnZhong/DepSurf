@@ -26,11 +26,10 @@ from depsurf.diff import (
 )
 from depsurf.funcs import FuncGroup
 from depsurf.issues import IssueEnum
-from depsurf.linux import TracepointInfo
 from depsurf.version import Version
 from depsurf.version_group import VersionGroup
 
-IssueDict = Dict[Tuple[VersionGroup, Version], List[IssueEnum]]
+IssuesDict = Dict[Tuple[VersionGroup, Version], List[IssueEnum]]
 
 
 def code_inline(text) -> str:
@@ -95,8 +94,8 @@ class DepReport:
             self.print(file=f)
 
     @property
-    def issue_dict(self) -> IssueDict:
-        issue_dict = {
+    def issues_dict(self) -> IssuesDict:
+        issues_dict = {
             (group, status.version): status.issues
             for group, status_list in self.status_dict.items()
             for status in status_list
@@ -107,8 +106,8 @@ class DepReport:
                 if delta.is_changed:
                     has_changes = True
                 if has_changes and delta.t2 is not None:
-                    issue_dict[(group, delta.v2)].append(IssueEnum.CHANGE)
-        return issue_dict
+                    issues_dict[(group, delta.v2)].append(IssueEnum.CHANGE)
+        return issues_dict
 
     def print(self, file: TextIO = sys.stdout):
         print(f"# {self.dep.kind}: {code_inline(self.dep.name)}\n", file=file)

@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import StrEnum
+from pathlib import Path
 from typing import Callable, Dict, List, Optional
 
 from .diff import (
@@ -14,6 +15,7 @@ from .diff import (
 )
 from .funcs import FuncGroup
 from .issues import IssueEnum
+from .paths import WEBSITE_PATH, WEBSITE_URL
 from .utils import OrderedEnum
 from .version import Version
 
@@ -96,6 +98,26 @@ class Dep:
     def from_dict(cls, data: Dict) -> "Dep":
         return cls(DepKind(data["kind"]), data["name"])
 
+    @classmethod
+    def from_report_path(cls, path: Path) -> "Dep":
+        return cls(DepKind(path.parent.parent.name), path.stem)
+
+    @property
+    def report_base_path(self) -> Path:
+        return Path(self.kind) / self.name.replace("_", "").lower()[0] / self.name
+
+    @property
+    def report_json_path(self) -> Path:
+        return WEBSITE_PATH / self.report_base_path / f"{self.name}.json"
+
+    @property
+    def report_md_path(self) -> Path:
+        return WEBSITE_PATH / self.report_base_path / f"{self.name}.md"
+
+    @property
+    def report_url(self) -> str:
+        return f"{WEBSITE_URL}/{self.report_base_path}.html"
+
 
 @dataclass
 class DepStatus:
@@ -120,7 +142,7 @@ class DepStatus:
     @classmethod
     def from_dict(cls, data: Dict) -> "DepStatus":
         return cls(
-            version=Version(**data["version"]),
+            version=Version.from_dict(data["version"]),
             t=data["t"],
             func_group=(
                 FuncGroup.from_dict(data["func_group"]) if data["func_group"] else None
@@ -159,8 +181,8 @@ class DepDelta:
     @classmethod
     def from_dict(cls, data: Dict) -> "DepDelta":
         return cls(
-            v1=Version(**data["v1"]),
-            v2=Version(**data["v2"]),
+            v1=Version.from_dict(data["v1"]),
+            v2=Version.from_dict(data["v2"]),
             t1=data["t1"],
             t2=data["t2"],
             changes=[BaseChange.from_dict(change) for change in data["changes"]],
