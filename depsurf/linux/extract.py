@@ -12,7 +12,10 @@ def list_deb(deb_path: Path):
 
 @manage_result_path
 def extract_deb(deb_path: Path, file_path: str, result_path: Path):
-    system(f"dpkg --fsys-tarfile {deb_path} | tar -xO .{file_path} > {result_path}")
+    system(
+        f"dpkg --fsys-tarfile {deb_path} | tar -xO .{file_path} > {result_path}",
+        linux=True,
+    )
 
 
 @manage_result_path

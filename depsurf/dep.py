@@ -115,16 +115,16 @@ class DepStatus:
 
     @property
     def exists(self) -> bool:
-        return self.t is not None
+        return self.t is not None or self.func_group is not None
 
     @classmethod
     def from_dict(cls, data: Dict) -> "DepStatus":
         return cls(
             version=Version(**data["version"]),
             t=data["t"],
-            func_group=FuncGroup.from_dict(data["func_group"])
-            if data["func_group"]
-            else None,
+            func_group=(
+                FuncGroup.from_dict(data["func_group"]) if data["func_group"] else None
+            ),
         )
 
 

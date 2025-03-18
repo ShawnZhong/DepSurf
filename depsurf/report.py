@@ -207,8 +207,11 @@ def print_dep_val(val, file: TextIO):
     if isinstance(val, int):
         return
 
-    if isinstance(val, TracepointInfo):
-        print(str(val), file=file)
+    if "struct" in val and "func" in val:
+        print("Event:", file=file)
+        print_dep_val(val["struct"], file=file)
+        print("Function:", file=file)
+        print_dep_val(val["func"], file=file)
         return
 
     if "kind" not in val:
@@ -252,16 +255,17 @@ def print_func_group(g: FuncGroup, file: TextIO):
                 print(f"  - {caller}", file=file)
         print("```", file=file)
 
-    print("**Symbols:**\n", file=file)
-    print("```", file=file)
-    for s in g.symbols:
-        print(f"{s.addr:x}-{s.addr + s.size:x}: {s.name} ({s.bind})", file=file)
-    print("```", file=file)
+    if g.symbols:
+        print("**Symbols:**\n", file=file)
+        print("```", file=file)
+        for s in g.symbols:
+            print(f"{s.addr:x}-{s.addr + s.size:x}: {s.name} ({s.bind})", file=file)
+        print("```", file=file)
 
 
 def print_status(status: DepStatus, file: TextIO):
     issues_str = (
-        ", ".join([issue.value for issue in status.issues]) + " ❓"
+        ", ".join([issue.value for issue in status.issues]) + " ⚠️"
         if status.issues
         else "✅"
     )
@@ -331,7 +335,7 @@ def print_delta(delta: DepDelta, file: TextIO):
     print("<details>", file=file)
     if delta.is_changed:
         print(
-            f"<summary>Changed between {code_inline(delta.v1)} and {code_inline(delta.v2)} ❓</summary>",
+            f"<summary>Changed between {code_inline(delta.v1)} and {code_inline(delta.v2)} ⚠️</summary>",
             file=file,
         )
         print("<ul>", file=file)

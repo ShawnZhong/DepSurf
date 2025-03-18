@@ -8,7 +8,7 @@ from .color import TermColor
 def system(cmd, linux=False):
     if linux:
         if sys.platform == "darwin":
-            cmd = f"orbctl run {cmd}"
+            cmd = f"orbctl run bash -c '{cmd}'"
         else:
             raise RuntimeError("Running linux command on non-Linux platform")
 

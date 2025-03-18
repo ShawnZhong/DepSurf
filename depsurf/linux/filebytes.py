@@ -70,7 +70,7 @@ class FileBytes:
         b = self.get_bytes(addr, size)
         return int.from_bytes(b, self.byteorder)
 
-    def get_cstr(self, addr, size=512) -> str:
+    def get_cstr(self, addr, size=4096) -> str:
         data = self.get_bytes(addr, size)
         return get_cstr(data, 0)
 
