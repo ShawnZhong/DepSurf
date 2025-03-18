@@ -86,20 +86,5 @@ class IssueEnum(StrEnum):
         }
         return d.get(self, Consequence.UNKNOWN)
 
-    @property
-    def symbol(self):
-        return ISSUE_SYMBOLS[self]
-
     def __repr__(self):
         return f"'{self.value}'"
-
-
-ISSUE_SYMBOLS = {
-    IssueEnum.ABSENT: r"$\varnothing$",
-    IssueEnum.CHANGE: r"$\Delta$",
-    IssueEnum.SELECTIVE_INLINE: "S",
-    IssueEnum.FULL_INLINE: "F",
-    IssueEnum.DUPLICATE: "D",
-    IssueEnum.COLLISION: "C",
-    IssueEnum.TRANSFORMATION: "T",
-}
