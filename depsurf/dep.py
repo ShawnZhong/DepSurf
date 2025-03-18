@@ -108,11 +108,11 @@ class Dep:
 
     @property
     def report_json_path(self) -> Path:
-        return WEBSITE_PATH / self.report_base_path / f"{self.name}.json"
+        return WEBSITE_PATH / self.report_base_path.with_suffix(".json")
 
     @property
     def report_md_path(self) -> Path:
-        return WEBSITE_PATH / self.report_base_path / f"{self.name}.md"
+        return WEBSITE_PATH / self.report_base_path.with_suffix(".md")
 
     @property
     def report_url(self) -> str:
