@@ -3,7 +3,7 @@ import json
 import logging
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, Iterator, Optional
+from typing import TYPE_CHECKING, Dict, Iterator, Optional
 
 from depsurf.utils import manage_result_path
 
@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 
 @dataclass
-class TracepointInfo:
+class Tracepoint:
     class_name: str
     event_name: str
     func_name: str
@@ -65,7 +65,7 @@ class TracepointsExtractor:
                 continue
             yield event_ptr
 
-    def get_tracepoint(self, ptr: int) -> Optional[TracepointInfo]:
+    def get_tracepoint(self, ptr: int) -> Optional[Tracepoint]:
         # Ref: https://github.com/torvalds/linux/blob/2425bcb9240f8c97d793cb31c8e8d8d0a843fa29/include/linux/trace_events.h#L272
         event = StructInstance(
             struct_types=self.struct_types,
@@ -99,7 +99,7 @@ class TracepointsExtractor:
             logging.warning(f"Could not find struct for {struct_name}")
             return
 
-        return TracepointInfo(
+        return Tracepoint(
             class_name=class_name,
             event_name=self.event_names[ptr],
             func_name=func_name,
@@ -109,7 +109,7 @@ class TracepointsExtractor:
             fmt_str=self.filebytes.get_cstr(event["print_fmt"]),
         )
 
-    def iter_tracepoints(self) -> Iterator[TracepointInfo]:
+    def iter_tracepoints(self) -> Iterator[Tracepoint]:
         for ptr in self.iter_event_ptrs():
             info = self.get_tracepoint(ptr)
             if info:
@@ -127,7 +127,7 @@ def dump_tracepoints(img: "LinuxImage", result_path):
 
 @dataclass
 class Tracepoints:
-    data: dict[str, TracepointInfo]
+    data: dict[str, Dict]
 
     @classmethod
     def from_dump(cls, path: Path):
@@ -135,17 +135,9 @@ class Tracepoints:
         with open(path) as f:
             for line in f:
                 info = json.loads(line)
-                data[info["event_name"]] = TracepointInfo(**info)
+                data[info["event_name"]] = info
 
         return cls(data=data)
 
-    @property
-    def funcs(self):
-        return {name: info.func for name, info in self.data.items() if info.func}
-
-    @property
-    def structs(self):
-        return {name: info.struct for name, info in self.data.items() if info.struct}
-
     def __repr__(self):
-        return f"Tracepoints ({len(self.funcs)}): {list(self.funcs.keys())}"
+        return f"Tracepoints ({len(self.data)}): {list(self.data.keys())}"

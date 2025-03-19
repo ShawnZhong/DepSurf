@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Dict, List, TextIO, Tuple
 
 from depsurf.btf import Kind
-from depsurf.dep import Dep, DepDelta, DepStatus
+from depsurf.dep import Dep, DepDelta, DepKind, DepStatus
 from depsurf.diff import (
     BaseChange,
     ConfigChange,
@@ -119,7 +119,7 @@ class DepReport:
             print("<ul>", file=file)
             for status in status_list:
                 print("<li>", file=file)
-                print_status(group, status, file=file)
+                print_status(group, self.dep, status, file=file)
                 print("</li>", file=file)
             print("</ul>", file=file)
 
@@ -136,7 +136,7 @@ class DepReport:
                 if delta.is_both_absent:
                     continue
                 print("<li>", file=file)
-                print_delta(group, delta, file=file)
+                print_delta(group, self.dep, delta, file=file)
                 print("</li>", file=file)
             print("</ul>", file=file)
 
@@ -200,25 +200,24 @@ def type_name_to_str(t, name) -> str:
         return f"{type_to_str(t)} {name}"
 
 
-def print_dep_val(val, file: TextIO):
+def print_dep_val(kind: DepKind, val, file: TextIO):
     print("", file=file)
 
     if isinstance(val, int):
         return
 
-    if "struct" in val and "func" in val:
+    if kind == DepKind.TRACEPOINT:
         print("Event:", file=file)
-        print_dep_val(val["struct"], file=file)
+        print_dep_val(DepKind.STRUCT, val["struct"], file=file)
         print("Function:", file=file)
-        print_dep_val(val["func"], file=file)
+        print_dep_val(DepKind.FUNC, val["func"], file=file)
         return
 
     if "kind" not in val:
         print(f"{type_to_str(val['type'])}{val['name']}", file=file)
         return
 
-    kind: str = val["kind"]
-    if kind in (Kind.STRUCT, Kind.UNION):
+    if kind in (DepKind.STRUCT, DepKind.UNION):
         print("```c", file=file)
         print(type_to_str(val) + " {", file=file)
         for field in val["members"]:
@@ -263,7 +262,7 @@ def print_func_group(g: FuncGroup, file: TextIO):
         print("```", file=file)
 
 
-def print_status(group: VersionGroup, status: DepStatus, file: TextIO):
+def print_status(group: VersionGroup, dep: Dep, status: DepStatus, file: TextIO):
     issues_str = (
         ", ".join([issue.value for issue in status.issues]) + " ⚠️"
         if status.issues
@@ -280,7 +279,7 @@ def print_status(group: VersionGroup, status: DepStatus, file: TextIO):
     print(f"<summary>{title}</summary>", file=file)
 
     if status.t:
-        print_dep_val(status.t, file=file)
+        print_dep_val(dep.kind, status.t, file=file)
 
     if status.func_group:
         print_func_group(status.func_group, file=file)
@@ -325,7 +324,7 @@ def print_change(change: BaseChange, file: TextIO):
         print(f"{change.name} = {change.old_val} -> {change.new_val}", file=file)
 
 
-def print_delta(group: VersionGroup, delta: DepDelta, file: TextIO):
+def print_delta(group: VersionGroup, dep: Dep, delta: DepDelta, file: TextIO):
     v1 = code_inline(group.to_str(delta.v1))
     v2 = code_inline(group.to_str(delta.v2))
 
@@ -353,8 +352,8 @@ def print_delta(group: VersionGroup, delta: DepDelta, file: TextIO):
         print("</ul>", file=file)
     elif delta.is_added:
         print(f"<summary>Added between {v1} and {v2} ➕</summary>", file=file)
-        print_dep_val(delta.t2, file=file)
+        print_dep_val(dep.kind, delta.t2, file=file)
     elif delta.is_removed:
         print(f"<summary>Removed between {v1} and {v2} ➖</summary>", file=file)
-        print_dep_val(delta.t1, file=file)
+        print_dep_val(dep.kind, delta.t1, file=file)
     print("</details>", file=file)
