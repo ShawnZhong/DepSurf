@@ -69,16 +69,13 @@ class BPFProgram:
             self.path,
             result_path=self.btf_file,
             slient=True,
+            overwrite=True,
         )
         dump_btf_json(
             self.btf_file,
             result_path=self.btf_json_file,
             slient=True,
-        )
-        dump_btf_txt(
-            self.btf_file,
-            result_path=self.btf_txt_file,
-            slient=True,
+            overwrite=True,
         )
         struct_types = Types.from_btf_json(self.btf_json_file, Kind.STRUCT)
 
