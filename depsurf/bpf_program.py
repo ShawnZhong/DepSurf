@@ -4,7 +4,7 @@ from typing import Dict, List
 
 from elftools.elf.elffile import ELFFile
 
-from depsurf.btf import Kind, Types, dump_btf_json, dump_btf_txt, gen_min_btf
+from depsurf.btf import Kind, Types, dump_btf_json, gen_min_btf
 from depsurf.dep import Dep, DepKind
 
 

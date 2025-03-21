@@ -10,10 +10,9 @@ BPFTOOL_BIN_PATH = BPFTOOL_SRC_PATH / "bpftool"
 
 
 @manage_result_path
-def gen_min_btf(obj_file, result_path, debug=False):
-    debug_arg = "-d" if debug else ""
+def gen_min_btf(obj_file, result_path):
     system(
-        f"{BPFTOOL_BIN_PATH} {debug_arg} gen min_core_btf {obj_file} {result_path} {obj_file}",
+        f"{BPFTOOL_BIN_PATH} gen min_core_btf {obj_file} {result_path} {obj_file}",
         linux=True,
     )
 
