@@ -158,26 +158,6 @@ class DepDelta:
     t2: Optional[Dict]
     changes: List[BaseChange]
 
-    @property
-    def is_added(self) -> bool:
-        return self.t1 is None and self.t2 is not None
-
-    @property
-    def is_removed(self) -> bool:
-        return self.t1 is not None and self.t2 is None
-
-    @property
-    def is_both_absent(self) -> bool:
-        return self.t1 is None and self.t2 is None
-
-    @property
-    def is_changed(self) -> bool:
-        return bool(self.changes)
-
-    @property
-    def is_unchanged(self) -> bool:
-        return self.t1 is not None and self.t2 is not None and not self.changes
-
     @classmethod
     def from_dict(cls, data: Dict) -> "DepDelta":
         return cls(

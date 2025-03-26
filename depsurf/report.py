@@ -103,7 +103,7 @@ class DepReport:
         for group, delta_list in self.delta_dict.items():
             has_changes = False
             for delta in delta_list:
-                if delta.is_changed:
+                if delta.changes:
                     has_changes = True
                 if has_changes and delta.t2 is not None:
                     issues_dict[(group, delta.v2)].append(IssueEnum.CHANGE)
@@ -128,16 +128,12 @@ class DepReport:
         print("## Differences", file=file)
 
         for group, delta_list in self.delta_dict.items():
-            if all(delta.is_both_absent for delta in delta_list):
+            if all(not delta.t1 and not delta.t2 for delta in delta_list):
                 continue
             print(f"<b>{group.name}</b>", file=file)
             print("<ul>", file=file)
             for delta in delta_list:
-                if delta.is_both_absent:
-                    continue
-                print("<li>", file=file)
                 print_delta(group, self.dep, delta, file=file)
-                print("</li>", file=file)
             print("</ul>", file=file)
 
     def _repr_markdown_(self):
@@ -328,32 +324,24 @@ def print_delta(group: VersionGroup, dep: Dep, delta: DepDelta, file: TextIO):
     v1 = code_inline(group.to_str(delta.v1))
     v2 = code_inline(group.to_str(delta.v2))
 
-    if delta.is_unchanged:
+    if delta.t1 and delta.t2 and not delta.changes:
+        print("<li>", file=file)
         print(f"No changes between {v1} and {v2} ✅", file=file)
+        print("</li>", file=file)
         return
 
-    if group in (VersionGroup.ARCH, VersionGroup.FLAVOR):
-        if delta.is_added:
-            print(f"Only exists in {v2} ➕", file=file)
-            return
-        elif delta.is_removed:
-            print(f"Does not exist in {v2} ➖", file=file)
-            return
+    if not delta.changes:
+        return
 
+    print("<li>", file=file)
     print("<details>", file=file)
-    if delta.is_changed:
-        print(f"<summary>Changed between {v1} and {v2} ⚠️</summary>", file=file)
-        print("<ul>", file=file)
-        for change in delta.changes:
-            print("<li>", file=file)
-            print(f"<b>{change.issue}. </b>", file=file)
-            print_change(change, file=file)
-            print("</li>", file=file)
-        print("</ul>", file=file)
-    elif delta.is_added:
-        print(f"<summary>Added between {v1} and {v2} ➕</summary>", file=file)
-        print_dep_val(dep.kind, delta.t2, file=file)
-    elif delta.is_removed:
-        print(f"<summary>Removed between {v1} and {v2} ➖</summary>", file=file)
-        print_dep_val(dep.kind, delta.t1, file=file)
+    print(f"<summary>Changed between {v1} and {v2} ⚠️</summary>", file=file)
+    print("<ul>", file=file)
+    for change in delta.changes:
+        print("<li>", file=file)
+        print(f"<b>{change.issue}. </b>", file=file)
+        print_change(change, file=file)
+        print("</li>", file=file)
+    print("</ul>", file=file)
     print("</details>", file=file)
+    print("</li>", file=file)
