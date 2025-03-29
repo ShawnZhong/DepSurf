@@ -1,6 +1,10 @@
 DepSurf
 ===
 
+<a href="https://depsurf.github.io" style="float: right">
+<img src="https://depsurf.github.io/logo.png" alt="DepSurf Logo" width="100">
+</a>
+
 Code for [EuroSys'25](https://2025.eurosys.org/) paper "Revealing the Unstable Foundations of eBPF-Based Kernel Extensions".
 
 [Paper](https://depsurf.github.io/paper.pdf) |
