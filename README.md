@@ -5,17 +5,49 @@ DepSurf
 <img src="https://depsurf.github.io/logo.png" alt="DepSurf Logo" width="100">
 </a>
 
-Code for [EuroSys'25](https://2025.eurosys.org/) paper "Revealing the Unstable Foundations of eBPF-Based Kernel Extensions".
+Code for [EuroSys'25](https://2025.eurosys.org/) paper "**Revealing the Unstable Foundations of eBPF-Based Kernel Extensions**" by Shawn (Wanxiang) Zhong, Jing Liu, Andrea Arpaci-Dusseau, and Remzi Arpaci-Dusseau.
 
 [Paper](https://depsurf.github.io/paper.pdf) |
 [Code](https://github.com/ShawnZhong/DepSurf) | 
 [Dataset](https://github.com/ShawnZhong/DepSurf-dataset) | 
 [Website](https://depsurf.github.io/) | 
-[Website source](https://github.com/DepSurf/depsurf.github.io) 
+[Website source](https://github.com/DepSurf/depsurf.github.io)
+
+<details>
+<summary>
+Abstract
+</summary>
+eBPF programs significantly enhance kernel capabilities, but encounter substantial compatibility challenges due to their deep integration with unstable kernel internals. We introduce DepSurf, a tool that identifies dependency mismatches between eBPF programs and kernel images. Our analysis of 25 kernel images spanning 8 years reveals that dependency mismatches are pervasive, stemming from kernel source code evolution, diverse configuration options, and intricate compilation processes. We apply DepSurf to 53 real-world eBPF programs, and find that 83% are impacted by dependency mismatches, underscoring the urgent need for systematic dependency analysis. By identifying these mismatches, DepSurf enables a more robust development and maintenance process for eBPF programs, enhancing their reliability across a wide range of kernels.
+</details>
+<details>
+<summary>
+Citation
+</summary>
+
+```
+@inproceedings{10.1145/3689031.3717497,
+    author = {Zhong, Shawn Wanxiang and Liu, Jing and Arpaci-Dusseau, Andrea and Arpaci-Dusseau, Remzi},
+    title = {Revealing the Unstable Foundations of eBPF-Based Kernel Extensions},
+    year = {2025},
+    isbn = {9798400711961},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3689031.3717497},
+    doi = {10.1145/3689031.3717497},
+    abstract = {eBPF programs significantly enhance kernel capabilities, but encounter substantial compatibility challenges due to their deep integration with unstable kernel internals. We introduce DepSurf, a tool that identifies dependency mismatches between eBPF programs and kernel images. Our analysis of 25 kernel images spanning 8 years reveals that dependency mismatches are pervasive, stemming from kernel source code evolution, diverse configuration options, and intricate compilation processes. We apply DepSurf to 53 real-world eBPF programs, and find that 83\% are impacted by dependency mismatches, underscoring the urgent need for systematic dependency analysis. By identifying these mismatches, DepSurf enables a more robust development and maintenance process for eBPF programs, enhancing their reliability across a wide range of kernels.},
+    booktitle = {Proceedings of the Twentieth European Conference on Computer Systems},
+    pages = {21–41},
+    numpages = {21},
+    location = {Rotterdam, Netherlands},
+    series = {EuroSys '25}
+}
+```
+
+</details>
 
 ## Prerequisites
 
-DepSurf requires Python 3.11 or higher. It has been tested on Ubuntu 22.04 and Ubuntu 24.04.
+DepSurf requires Python 3.11 or higher. Tested on Ubuntu 22.04 and Ubuntu 24.04.
 
 We recommend using [uv](https://astral.sh/uv/) for environment setup: 
 
