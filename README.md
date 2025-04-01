@@ -76,6 +76,9 @@ uv run jupyter lab
 
 Please follow the instructions in the following Jupyter notebooks to reproduce the results in the paper. 
 
+> [!NOTE]
+> We have pre-generated the dataset and made it available at [data/dataset](https://github.com/ShawnZhong/DepSurf-dataset). If you only wish to analyze the results, you may skip `11_download.ipynb` and `20_dataset.ipynb` to save time and disk space.
+
 - [`00_deps.ipynb`](./00_deps.ipynb) installs the dependencies (3 min)
 
 - [`11_download.ipynb`](./11_download.ipynb) downloads the Linux kernel packages (15 min, 23 GB)
@@ -102,8 +105,6 @@ Please follow the instructions in the following Jupyter notebooks to reproduce t
 
 - [`52_summary.ipynb`](./52_summary.ipynb) generates Table 7 & 8 for summary of dependency set analysis
 
-> [!NOTE]
-> We have pre-generated the dataset and made it available at [data/dataset](https://github.com/ShawnZhong/DepSurf-dataset). If you only wish to analyze the results, you may skip `11_download.ipynb` and `20_dataset.ipynb` to save time and disk space.
 
 ## Project Structure
 
