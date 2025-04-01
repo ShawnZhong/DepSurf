@@ -1,11 +1,9 @@
 DepSurf
 ===
 
-<div style="float: right">
 <a href="https://depsurf.github.io">
-<img src="https://depsurf.github.io/assets/logo-256.png" alt="DepSurf Logo" width="150">
+<img src="https://depsurf.github.io/assets/logo-256.png" alt="DepSurf Logo" width="150" align="right">
 </a>
-</div>
 
 Website for [EuroSys'25](https://dl.acm.org/doi/proceedings/10.1145/3689031) paper "**Revealing the Unstable Foundations of eBPF-Based Kernel Extensions**"
 
