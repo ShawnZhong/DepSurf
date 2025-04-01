@@ -110,20 +110,20 @@ Please follow the instructions in the following Jupyter notebooks to reproduce t
 
 - [depsurf](./depsurf): source code of the DepSurf library
 
-    - [depsurf/btf](./depsurf/btf): processing type information
+    - [btf](./depsurf/btf): processing type information
 
-    - [depsurf/diff](./depsurf/diff): diffing the dependency surface
+    - [diff](./depsurf/diff): diffing the dependency surface
 
-    - [depsurf/funcs](./depsurf/funcs): extracing kernel functions information
+    - [funcs](./depsurf/funcs): extracing kernel functions information
 
-    - [depsurf/linux](./depsurf/linux): analyzing Linux kernel images
+    - [linux](./depsurf/linux): analyzing Linux kernel images
 
 - [data](./data): data files used in the project
 
-    - [data/dataset](https://github.com/ShawnZhong/DepSurf-dataset): dataset for kernel dependency surfaces
+    - [dataset](https://github.com/ShawnZhong/DepSurf-dataset): dataset for kernel dependency surfaces
 
-    - [data/software](./data/software): eBPF programs analyzed
+    - [software](./data/software): eBPF programs analyzed
 
-    - [data/website](https://github.com/DepSurf/depsurf.github.io): website for DepSurf
+    - [website](https://github.com/DepSurf/depsurf.github.io): website for DepSurf
 
 - [utils](./utils): helper functions used by the notebooks
