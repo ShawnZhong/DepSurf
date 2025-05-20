@@ -102,22 +102,6 @@ class Dep:
     def from_report_path(cls, path: Path) -> "Dep":
         return cls(DepKind(path.parent.parent.name), path.stem)
 
-    @property
-    def report_base_path(self) -> Path:
-        return Path(self.kind) / self.name.replace("_", "").lower()[0] / self.name
-
-    @property
-    def report_json_path(self) -> Path:
-        return WEBSITE_PATH / self.report_base_path.with_suffix(".json")
-
-    @property
-    def report_md_path(self) -> Path:
-        return WEBSITE_PATH / self.report_base_path.with_suffix(".md")
-
-    @property
-    def report_url(self) -> str:
-        return f"{WEBSITE_URL}/{self.report_base_path}.html"
-
 
 @dataclass
 class DepStatus:

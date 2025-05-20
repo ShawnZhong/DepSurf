@@ -16,3 +16,15 @@
 [submodule "data/dataset"]
 	path = data/dataset
 	url = https://github.com/ShawnZhong/DepSurf-dataset.git
+[submodule "data/website-struct"]
+	path = data/website-struct
+	url = https://github.com/DepSurf/website-struct.git
+[submodule "data/website-function"]
+	path = data/website-function
+	url = https://github.com/DepSurf/website-function.git
+[submodule "data/website-lsm"]
+	path = data/website-lsm
+	url = https://github.com/DepSurf/website-lsm.git
+[submodule "data/website-tracepoint"]
+	path = data/website-tracepoint
+	url = https://github.com/DepSurf/website-tracepoint.git
