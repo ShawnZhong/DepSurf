@@ -15,7 +15,6 @@ from .diff import (
 )
 from .funcs import FuncGroup
 from .issues import IssueEnum
-from .paths import WEBSITE_PATH, WEBSITE_URL
 from .utils import OrderedEnum
 from .version import Version
 
